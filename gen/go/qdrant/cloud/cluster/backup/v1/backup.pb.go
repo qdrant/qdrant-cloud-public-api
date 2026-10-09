@@ -1635,10 +1635,22 @@ type Backup struct {
 	// Identity fields reflect the latest cluster state; configuration reflects the state at backup time.
 	// This is a read-only field and will be available after the backup is created.
 	ClusterInfo *ClusterInfo `protobuf:"bytes,12,opt,name=cluster_info,json=clusterInfo,proto3" json:"cluster_info,omitempty"`
-	// The human-readable name of the backup.
-	// Optional on create, or stamped from the backup schedule that produced it, and can be
-	// changed later with UpdateBackup. Never empty on a response: a backup created without
-	// a display name reports its generated `name`.
+	// The human-readable name of the backup. Optional on every request that writes it.
+	//
+	// CreateBackup takes it from the request. A backup taken by a schedule takes it from
+	// that schedule's name as the name stood when the backup was created. UpdateBackup
+	// replaces it, and an empty value clears it.
+	//
+	// This field is never empty on a response. A backup that has no name of its own
+	// reports its generated `name` here, so reading this field alone is enough to label
+	// any backup. A backup whose name was cleared goes back to reporting its generated
+	// `name` on GetBackup and ListBackups.
+	//
+	// The limit is 72 characters, the length of the longest generated `name`. A value this
+	// field returns is therefore always a legal value to send back, and sending one back
+	// unchanged leaves the backup unnamed instead of adopting the generated name as if a
+	// person had chosen it.
+	//
 	// Display names are labels, not identifiers: they are not unique.
 	DisplayName string `protobuf:"bytes,11,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
 	// What keeping this backup stored costs the account that owns it.
@@ -2131,10 +2143,16 @@ type BackupSchedule struct {
 	// The current status of the backup schedule.
 	// This is a read-only field.
 	Status BackupScheduleStatus `protobuf:"varint,8,opt,name=status,proto3,enum=qdrant.cloud.cluster.backup.v1.BackupScheduleStatus" json:"status,omitempty"`
-	// The name of the backup schedule, stamped onto every backup it produces from now on.
-	// Optional: unset or empty means the schedule has no name; supplying one on edit is allowed.
-	// Renaming affects future backups only.
-	// The format is checked on the requests that write it, like `Backup.display_name`.
+	// The human-readable name of the backup schedule. Optional on every request that
+	// writes it. UpdateBackupSchedule replaces it, and an empty value clears it.
+	//
+	// A schedule has no generated name, so this field stays unset when the schedule has no
+	// name. There is nothing to fall back to here, unlike `Backup.display_name`.
+	//
+	// The name is copied onto each backup this schedule takes, at the moment that backup
+	// is created. Renaming or clearing it therefore applies only to the backups taken from
+	// then on. Backups already taken keep the name they were given, and backups taken while
+	// the schedule had no name keep reporting their own generated name.
 	DisplayName   *string `protobuf:"bytes,9,opt,name=display_name,json=displayName,proto3,oneof" json:"display_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2368,17 +2386,17 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12%\n" +
 	"\tbackup_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bbackupId\"[\n" +
 	"\x11GetBackupResponse\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\x85\x06\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\x8e\x06\n" +
 	"\x13CreateBackupRequest\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xa5\x05\xbaH\xa1\x05\x1a\xcb\x03\n" +
-	"!create_backup.no_read_only_fields\x12\x8f\x01read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info, price) must not be set on create\x1a\x93\x02this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info) && !has(this.backup.price)\x1a\xd0\x01\n" +
-	"\x1fcreate_backup.display_name_rule\x12Pdisplay_name must be 4-64 characters of letters, digits, hyphens and underscores\x1a[this.backup.display_name == '' || this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')\"^\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xae\x05\xbaH\xaa\x05\x1a\xcb\x03\n" +
+	"!create_backup.no_read_only_fields\x12\x8f\x01read-only fields (id, created_at, name, status, deleted_at, backup_duration, backup_schedule_id, cluster_info, price) must not be set on create\x1a\x93\x02this.backup.id == '' && !has(this.backup.created_at) && this.backup.name == '' && this.backup.status == 0 && !has(this.backup.deleted_at) && !has(this.backup.backup_duration) && !has(this.backup.backup_schedule_id) && !has(this.backup.cluster_info) && !has(this.backup.price)\x1a\xd9\x01\n" +
+	"\x1fcreate_backup.display_name_rule\x12Ydisplay_name can be empty, or 4-72 characters of letters, digits, hyphens and underscores\x1a[this.backup.display_name == '' || this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,72}$')\"^\n" +
 	"\x14CreateBackupResponse\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\xec\x02\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\x97\x03\n" +
 	"\x13UpdateBackupRequest\x12F\n" +
-	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\x8c\x02\xbaH\x88\x02\x1aU\n" +
-	"\x18update_backup.id_present\x12#backup.id is required for an update\x1a\x14this.backup.id != ''\x1a\xae\x01\n" +
-	"\x1fupdate_backup.display_name_rule\x12Pdisplay_name must be 4-64 characters of letters, digits, hyphens and underscores\x1a9this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')\"^\n" +
+	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup:\xb7\x02\xbaH\xb3\x02\x1aU\n" +
+	"\x18update_backup.id_present\x12#backup.id is required for an update\x1a\x14this.backup.id != ''\x1a\xd9\x01\n" +
+	"\x1fupdate_backup.display_name_rule\x12Ydisplay_name can be empty, or 4-72 characters of letters, digits, hyphens and underscores\x1a[this.backup.display_name == '' || this.backup.display_name.matches('^[a-zA-Z0-9-_]{4,72}$')\"^\n" +
 	"\x14UpdateBackupResponse\x12F\n" +
 	"\x06backup\x18\x01 \x01(\v2&.qdrant.cloud.cluster.backup.v1.BackupB\x06\xbaH\x03\xc8\x01\x01R\x06backup\"\x8a\x01\n" +
 	"\x13DeleteBackupRequest\x12'\n" +
@@ -2444,18 +2462,19 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"cluster_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tclusterId\x126\n" +
 	"\x12backup_schedule_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\"|\n" +
 	"\x19GetBackupScheduleResponse\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\x89\x05\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\x92\x05\n" +
 	"\x1bCreateBackupScheduleRequest\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:\x88\x04\xbaH\x84\x04\x1a\x93\x02\n" +
-	"*create_backup_schedule.no_read_only_fields\x12Oread-only fields (id, created_at, deleted_at, status) must not be set on create\x1a\x93\x01this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0\x1a\xeb\x01\n" +
-	"(create_backup_schedule.display_name_rule\x12Pdisplay_name must be 4-64 characters of letters, digits, hyphens and underscores\x1amthis.backup_schedule.display_name == '' || this.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,64}$')\"\x7f\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule:\x91\x04\xbaH\x8d\x04\x1a\x93\x02\n" +
+	"*create_backup_schedule.no_read_only_fields\x12Oread-only fields (id, created_at, deleted_at, status) must not be set on create\x1a\x93\x01this.backup_schedule.id == '' && !has(this.backup_schedule.created_at) && !has(this.backup_schedule.deleted_at) && this.backup_schedule.status == 0\x1a\xf4\x01\n" +
+	"(create_backup_schedule.display_name_rule\x12Ydisplay_name can be empty, or 4-72 characters of letters, digits, hyphens and underscores\x1amthis.backup_schedule.display_name == '' || this.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,72}$')\"\x7f\n" +
 	"\x1cCreateBackupScheduleResponse\x12_\n" +
-	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xb2\x02\n" +
+	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xab\x04\n" +
 	"\x1bUpdateBackupScheduleRequest\x12_\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask:u\xbaHr\x1ap\n" +
-	"!update_backup_schedule.id_present\x12,backup_schedule.id is required for an update\x1a\x1dthis.backup_schedule.id != ''\"\x7f\n" +
+	"updateMask:\xed\x02\xbaH\xe9\x02\x1ap\n" +
+	"!update_backup_schedule.id_present\x12,backup_schedule.id is required for an update\x1a\x1dthis.backup_schedule.id != ''\x1a\xf4\x01\n" +
+	"(update_backup_schedule.display_name_rule\x12Ydisplay_name can be empty, or 4-72 characters of letters, digits, hyphens and underscores\x1amthis.backup_schedule.display_name == '' || this.backup_schedule.display_name.matches('^[a-zA-Z0-9-_]{4,72}$')\"\x7f\n" +
 	"\x1cUpdateBackupScheduleResponse\x12_\n" +
 	"\x0fbackup_schedule\x18\x01 \x01(\v2..qdrant.cloud.cluster.backup.v1.BackupScheduleB\x06\xbaH\x03\xc8\x01\x01R\x0ebackupSchedule\"\xbd\x01\n" +
 	"\x1bDeleteBackupScheduleRequest\x12'\n" +
