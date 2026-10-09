@@ -594,8 +594,6 @@ type UpdateBackupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The actual backup.
 	// Only `display_name` is applied; every other field is ignored.
-	// An empty `display_name` clears the custom name, after which the backup reports
-	// its generated `name` again.
 	Backup        *Backup `protobuf:"bytes,1,opt,name=backup,proto3" json:"backup,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1637,10 +1635,22 @@ type Backup struct {
 	// Identity fields reflect the latest cluster state; configuration reflects the state at backup time.
 	// This is a read-only field and will be available after the backup is created.
 	ClusterInfo *ClusterInfo `protobuf:"bytes,12,opt,name=cluster_info,json=clusterInfo,proto3" json:"cluster_info,omitempty"`
-	// The human-readable name of the backup.
-	// Optional on create, or stamped from the backup schedule that produced it, and can be
-	// changed later with UpdateBackup. Never empty on a response: a backup created without
-	// a display name reports its generated `name`.
+	// The human-readable name of the backup. Optional on every request that writes it.
+	//
+	// CreateBackup takes it from the request. A backup taken by a schedule takes it from
+	// that schedule's name as the name stood when the backup was created. UpdateBackup
+	// replaces it, and an empty value clears it.
+	//
+	// This field is never empty on a response. A backup that has no name of its own
+	// reports its generated `name` here, so reading this field alone is enough to label
+	// any backup. A backup whose name was cleared goes back to reporting its generated
+	// `name` on GetBackup and ListBackups.
+	//
+	// The limit is 72 characters, the length of the longest generated `name`. A value this
+	// field returns is therefore always a legal value to send back, and sending one back
+	// unchanged leaves the backup unnamed instead of adopting the generated name as if a
+	// person had chosen it.
+	//
 	// Display names are labels, not identifiers: they are not unique.
 	DisplayName string `protobuf:"bytes,11,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
 	// What keeping this backup stored costs the account that owns it.
@@ -2133,10 +2143,16 @@ type BackupSchedule struct {
 	// The current status of the backup schedule.
 	// This is a read-only field.
 	Status BackupScheduleStatus `protobuf:"varint,8,opt,name=status,proto3,enum=qdrant.cloud.cluster.backup.v1.BackupScheduleStatus" json:"status,omitempty"`
-	// The name of the backup schedule, stamped onto every backup it produces from now on.
-	// Optional: unset or empty means the schedule has no name; supplying one on edit is allowed.
-	// Renaming affects future backups only.
-	// The format is checked on the requests that write it, like `Backup.display_name`.
+	// The human-readable name of the backup schedule. Optional on every request that
+	// writes it. UpdateBackupSchedule replaces it, and an empty value clears it.
+	//
+	// A schedule has no generated name, so this field stays unset when the schedule has no
+	// name. There is nothing to fall back to here, unlike `Backup.display_name`.
+	//
+	// The name is copied onto each backup this schedule takes, at the moment that backup
+	// is created. Renaming or clearing it therefore applies only to the backups taken from
+	// then on. Backups already taken keep the name they were given, and backups taken while
+	// the schedule had no name keep reporting their own generated name.
 	DisplayName   *string `protobuf:"bytes,9,opt,name=display_name,json=displayName,proto3,oneof" json:"display_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

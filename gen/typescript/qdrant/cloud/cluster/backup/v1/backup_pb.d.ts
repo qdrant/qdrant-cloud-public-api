@@ -279,8 +279,6 @@ export declare type UpdateBackupRequest = Message<"qdrant.cloud.cluster.backup.v
   /**
    * The actual backup.
    * Only `display_name` is applied; every other field is ignored.
-   * An empty `display_name` clears the custom name, after which the backup reports
-   * its generated `name` again.
    *
    * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
    */
@@ -296,8 +294,6 @@ export declare type UpdateBackupRequestValid = Message<"qdrant.cloud.cluster.bac
   /**
    * The actual backup.
    * Only `display_name` is applied; every other field is ignored.
-   * An empty `display_name` clears the custom name, after which the backup reports
-   * its generated `name` again.
    *
    * @generated from field: qdrant.cloud.cluster.backup.v1.Backup backup = 1;
    */
@@ -1023,10 +1019,22 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
   clusterInfo?: ClusterInfo | undefined;
 
   /**
-   * The human-readable name of the backup.
-   * Optional on create, or stamped from the backup schedule that produced it, and can be
-   * changed later with UpdateBackup. Never empty on a response: a backup created without
-   * a display name reports its generated `name`.
+   * The human-readable name of the backup. Optional on every request that writes it.
+   *
+   * CreateBackup takes it from the request. A backup taken by a schedule takes it from
+   * that schedule's name as the name stood when the backup was created. UpdateBackup
+   * replaces it, and an empty value clears it.
+   *
+   * This field is never empty on a response. A backup that has no name of its own
+   * reports its generated `name` here, so reading this field alone is enough to label
+   * any backup. A backup whose name was cleared goes back to reporting its generated
+   * `name` on GetBackup and ListBackups.
+   *
+   * The limit is 72 characters, the length of the longest generated `name`. A value this
+   * field returns is therefore always a legal value to send back, and sending one back
+   * unchanged leaves the backup unnamed instead of adopting the generated name as if a
+   * person had chosen it.
+   *
    * Display names are labels, not identifiers: they are not unique.
    *
    * @generated from field: string display_name = 11;
@@ -1143,10 +1151,22 @@ export declare type BackupValid = Message<"qdrant.cloud.cluster.backup.v1.Backup
   clusterInfo?: ClusterInfoValid | undefined;
 
   /**
-   * The human-readable name of the backup.
-   * Optional on create, or stamped from the backup schedule that produced it, and can be
-   * changed later with UpdateBackup. Never empty on a response: a backup created without
-   * a display name reports its generated `name`.
+   * The human-readable name of the backup. Optional on every request that writes it.
+   *
+   * CreateBackup takes it from the request. A backup taken by a schedule takes it from
+   * that schedule's name as the name stood when the backup was created. UpdateBackup
+   * replaces it, and an empty value clears it.
+   *
+   * This field is never empty on a response. A backup that has no name of its own
+   * reports its generated `name` here, so reading this field alone is enough to label
+   * any backup. A backup whose name was cleared goes back to reporting its generated
+   * `name` on GetBackup and ListBackups.
+   *
+   * The limit is 72 characters, the length of the longest generated `name`. A value this
+   * field returns is therefore always a legal value to send back, and sending one back
+   * unchanged leaves the backup unnamed instead of adopting the generated name as if a
+   * person had chosen it.
+   *
    * Display names are labels, not identifiers: they are not unique.
    *
    * @generated from field: string display_name = 11;
@@ -1508,10 +1528,16 @@ export declare type BackupSchedule = Message<"qdrant.cloud.cluster.backup.v1.Bac
   status: BackupScheduleStatus;
 
   /**
-   * The name of the backup schedule, stamped onto every backup it produces from now on.
-   * Optional: unset or empty means the schedule has no name; supplying one on edit is allowed.
-   * Renaming affects future backups only.
-   * The format is checked on the requests that write it, like `Backup.display_name`.
+   * The human-readable name of the backup schedule. Optional on every request that
+   * writes it. UpdateBackupSchedule replaces it, and an empty value clears it.
+   *
+   * A schedule has no generated name, so this field stays unset when the schedule has no
+   * name. There is nothing to fall back to here, unlike `Backup.display_name`.
+   *
+   * The name is copied onto each backup this schedule takes, at the moment that backup
+   * is created. Renaming or clearing it therefore applies only to the backups taken from
+   * then on. Backups already taken keep the name they were given, and backups taken while
+   * the schedule had no name keep reporting their own generated name.
    *
    * @generated from field: optional string display_name = 9;
    */

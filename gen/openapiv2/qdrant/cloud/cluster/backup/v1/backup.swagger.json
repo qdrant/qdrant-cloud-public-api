@@ -631,7 +631,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The human-readable name of the backup.\nOptional on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created without\na display name reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+              "description": "The human-readable name of the backup. Optional on every request that writes it.\n\nCreateBackup takes it from the request. A backup taken by a schedule takes it from\nthat schedule's name as the name stood when the backup was created. UpdateBackup\nreplaces it, and an empty value clears it.\n\nThis field is never empty on a response. A backup that has no name of its own\nreports its generated `name` here, so reading this field alone is enough to label\nany backup. A backup whose name was cleared goes back to reporting its generated\n`name` on GetBackup and ListBackups.\n\nThe limit is 72 characters, the length of the longest generated `name`. A value this\nfield returns is therefore always a legal value to send back, and sending one back\nunchanged leaves the backup unnamed instead of adopting the generated name as if a\nperson had chosen it.\n\nDisplay names are labels, not identifiers: they are not unique."
             },
             "price": {
               "$ref": "#/definitions/v1BackupPrice",
@@ -687,7 +687,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nOptional: unset or empty means the schedule has no name; supplying one on edit is allowed.\nRenaming affects future backups only.\nThe format is checked on the requests that write it, like `Backup.display_name`."
+              "description": "The human-readable name of the backup schedule. Optional on every request that\nwrites it. UpdateBackupSchedule replaces it, and an empty value clears it.\n\nA schedule has no generated name, so this field stays unset when the schedule has no\nname. There is nothing to fall back to here, unlike `Backup.display_name`.\n\nThe name is copied onto each backup this schedule takes, at the moment that backup\nis created. Renaming or clearing it therefore applies only to the backups taken from\nthen on. Backups already taken keep the name they were given, and backups taken while\nthe schedule had no name keep reporting their own generated name."
             }
           },
           "description": "The actual backup schedule.",
@@ -749,7 +749,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The human-readable name of the backup.\nOptional on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created without\na display name reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+              "description": "The human-readable name of the backup. Optional on every request that writes it.\n\nCreateBackup takes it from the request. A backup taken by a schedule takes it from\nthat schedule's name as the name stood when the backup was created. UpdateBackup\nreplaces it, and an empty value clears it.\n\nThis field is never empty on a response. A backup that has no name of its own\nreports its generated `name` here, so reading this field alone is enough to label\nany backup. A backup whose name was cleared goes back to reporting its generated\n`name` on GetBackup and ListBackups.\n\nThe limit is 72 characters, the length of the longest generated `name`. A value this\nfield returns is therefore always a legal value to send back, and sending one back\nunchanged leaves the backup unnamed instead of adopting the generated name as if a\nperson had chosen it.\n\nDisplay names are labels, not identifiers: they are not unique."
             },
             "price": {
               "$ref": "#/definitions/v1BackupPrice",
@@ -757,7 +757,7 @@
               "readOnly": true
             }
           },
-          "description": "The actual backup.\nOnly `display_name` is applied; every other field is ignored.\nAn empty `display_name` clears the custom name, after which the backup reports\nits generated `name` again."
+          "description": "The actual backup.\nOnly `display_name` is applied; every other field is ignored."
         }
       },
       "description": "UpdateBackupRequest is the request for the UpdateBackup function."
@@ -799,7 +799,7 @@
             },
             "displayName": {
               "type": "string",
-              "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nOptional: unset or empty means the schedule has no name; supplying one on edit is allowed.\nRenaming affects future backups only.\nThe format is checked on the requests that write it, like `Backup.display_name`."
+              "description": "The human-readable name of the backup schedule. Optional on every request that\nwrites it. UpdateBackupSchedule replaces it, and an empty value clears it.\n\nA schedule has no generated name, so this field stays unset when the schedule has no\nname. There is nothing to fall back to here, unlike `Backup.display_name`.\n\nThe name is copied onto each backup this schedule takes, at the moment that backup\nis created. Renaming or clearing it therefore applies only to the backups taken from\nthen on. Backups already taken keep the name they were given, and backups taken while\nthe schedule had no name keep reporting their own generated name."
             }
           },
           "description": "The actual backup schedule.",
@@ -920,7 +920,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The human-readable name of the backup.\nOptional on create, or stamped from the backup schedule that produced it, and can be\nchanged later with UpdateBackup. Never empty on a response: a backup created without\na display name reports its generated `name`.\nDisplay names are labels, not identifiers: they are not unique."
+          "description": "The human-readable name of the backup. Optional on every request that writes it.\n\nCreateBackup takes it from the request. A backup taken by a schedule takes it from\nthat schedule's name as the name stood when the backup was created. UpdateBackup\nreplaces it, and an empty value clears it.\n\nThis field is never empty on a response. A backup that has no name of its own\nreports its generated `name` here, so reading this field alone is enough to label\nany backup. A backup whose name was cleared goes back to reporting its generated\n`name` on GetBackup and ListBackups.\n\nThe limit is 72 characters, the length of the longest generated `name`. A value this\nfield returns is therefore always a legal value to send back, and sending one back\nunchanged leaves the backup unnamed instead of adopting the generated name as if a\nperson had chosen it.\n\nDisplay names are labels, not identifiers: they are not unique."
         },
         "price": {
           "$ref": "#/definitions/v1BackupPrice",
@@ -1065,7 +1065,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The name of the backup schedule, stamped onto every backup it produces from now on.\nOptional: unset or empty means the schedule has no name; supplying one on edit is allowed.\nRenaming affects future backups only.\nThe format is checked on the requests that write it, like `Backup.display_name`."
+          "description": "The human-readable name of the backup schedule. Optional on every request that\nwrites it. UpdateBackupSchedule replaces it, and an empty value clears it.\n\nA schedule has no generated name, so this field stays unset when the schedule has no\nname. There is nothing to fall back to here, unlike `Backup.display_name`.\n\nThe name is copied onto each backup this schedule takes, at the moment that backup\nis created. Renaming or clearing it therefore applies only to the backups taken from\nthen on. Backups already taken keep the name they were given, and backups taken while\nthe schedule had no name keep reporting their own generated name."
         }
       },
       "description": "A BackupSchedule represents a recurring schedule for creating backups."
