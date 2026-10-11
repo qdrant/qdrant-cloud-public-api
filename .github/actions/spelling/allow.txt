@@ -45,3 +45,6 @@ imbalanced
 clusterdata
 versioning
 downscale
+azp
+CIMD
+qcloud
