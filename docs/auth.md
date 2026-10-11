@@ -55,6 +55,20 @@ rpc CreateManagementKey(CreateManagementKeyRequest) returns (CreateManagementKey
 
 When `interactive_only` is unset or `false`, any credential that passes actor-type and permission checks is allowed. The API gateway enforces this once it receives `credential_type` from IAM.
 
+### Credential types
+
+`CredentialType` (in `common.v1`) describes *how* the caller authenticated. It is shared by the public `Caller` message (e.g. on `event.v1.Event`) and by the internal IAM `AuthenticateResponse`, so audit and authorization use one enum:
+
+| Value | Meaning |
+| --- | --- |
+| `CREDENTIAL_TYPE_SESSION` | Interactive console / first-party JWT |
+| `CREDENTIAL_TYPE_MANAGEMENT_KEY` | Account management API key |
+| `CREDENTIAL_TYPE_PERSONAL_API_KEY` | User-owned personal API key |
+| `CREDENTIAL_TYPE_SERVICE` | Service-to-service credential |
+| `CREDENTIAL_TYPE_OAUTH_DELEGATED` | Short-lived delegated JWT after OAuth token exchange |
+
+`Caller` may also carry `credential_id`, `acting_client_id` (OAuth client / CIMD URL), and `scope` (`read-only` / `manage`) when relevant. These fields are optional so legacy events remain valid.
+
 ## Authorization
 
 The API uses a permission-based authorization system for RPC methods. Each method defines the required permissions that must be satisfied for access to be granted.

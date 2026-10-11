@@ -94,6 +94,36 @@ export declare type Caller = Message<"qdrant.cloud.common.v1.Caller"> & {
    * @generated from field: optional string user_agent = 3;
    */
   userAgent?: string | undefined;
+
+  /**
+   * How the actor authenticated. Omitted on legacy events; distinct from actor_type
+   * (e.g. USER + OAUTH_DELEGATED or USER + PERSONAL_API_KEY).
+   *
+   * @generated from field: optional qdrant.cloud.common.v1.CredentialType credential_type = 4;
+   */
+  credentialType?: CredentialType | undefined;
+
+  /**
+   * Identifier of the credential (personal API key id, OAuth grant id, management key id).
+   * Omitted for interactive sessions and when unknown.
+   *
+   * @generated from field: optional string credential_id = 5;
+   */
+  credentialId?: string | undefined;
+
+  /**
+   * Acting OAuth client id when credential_type is OAUTH_DELEGATED (Auth0 azp / CIMD URL).
+   *
+   * @generated from field: optional string acting_client_id = 6;
+   */
+  actingClientId?: string | undefined;
+
+  /**
+   * OAuth access-class scope when credential_type is OAUTH_DELEGATED ("read-only" or "manage").
+   *
+   * @generated from field: optional string scope = 7;
+   */
+  scope?: string | undefined;
 };
 
 export declare type CallerValid = Caller;
@@ -666,6 +696,62 @@ export enum ActorType {
  * Describes the enum qdrant.cloud.common.v1.ActorType.
  */
 export declare const ActorTypeSchema: GenEnum<ActorType>;
+
+/**
+ * CredentialType identifies how the caller authenticated. Distinct from ActorType:
+ * personal API keys and OAuth delegated tokens still authenticate as ACTOR_TYPE_USER.
+ * Used by IAM AuthenticateResponse, gateway interactive_only enforcement, and Event.caller.
+ *
+ * @generated from enum qdrant.cloud.common.v1.CredentialType
+ */
+export enum CredentialType {
+  /**
+   * Unspecified / unknown credential type (or omitted on legacy events).
+   *
+   * @generated from enum value: CREDENTIAL_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Interactive login session (first-party console JWT).
+   *
+   * @generated from enum value: CREDENTIAL_TYPE_SESSION = 1;
+   */
+  SESSION = 1,
+
+  /**
+   * Account management (programmatic access) key.
+   *
+   * @generated from enum value: CREDENTIAL_TYPE_MANAGEMENT_KEY = 2;
+   */
+  MANAGEMENT_KEY = 2,
+
+  /**
+   * Personal API key owned by a user.
+   *
+   * @generated from enum value: CREDENTIAL_TYPE_PERSONAL_API_KEY = 3;
+   */
+  PERSONAL_API_KEY = 3,
+
+  /**
+   * Service-to-service credential.
+   *
+   * @generated from enum value: CREDENTIAL_TYPE_SERVICE = 4;
+   */
+  SERVICE = 4,
+
+  /**
+   * Short-lived delegated JWT from OAuth token exchange (MCP, qcloud CLI, …).
+   *
+   * @generated from enum value: CREDENTIAL_TYPE_OAUTH_DELEGATED = 5;
+   */
+  OAUTH_DELEGATED = 5,
+}
+
+/**
+ * Describes the enum qdrant.cloud.common.v1.CredentialType.
+ */
+export declare const CredentialTypeSchema: GenEnum<CredentialType>;
 
 /**
  * StorageTierType defines type of storage performance tiers which maps to predefined IOPS and Throughput amount

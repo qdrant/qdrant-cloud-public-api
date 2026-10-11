@@ -83,6 +83,73 @@ func (ActorType) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{0}
 }
 
+// CredentialType identifies how the caller authenticated. Distinct from ActorType:
+// personal API keys and OAuth delegated tokens still authenticate as ACTOR_TYPE_USER.
+// Used by IAM AuthenticateResponse, gateway interactive_only enforcement, and Event.caller.
+type CredentialType int32
+
+const (
+	// Unspecified / unknown credential type (or omitted on legacy events).
+	CredentialType_CREDENTIAL_TYPE_UNSPECIFIED CredentialType = 0
+	// Interactive login session (first-party console JWT).
+	CredentialType_CREDENTIAL_TYPE_SESSION CredentialType = 1
+	// Account management (programmatic access) key.
+	CredentialType_CREDENTIAL_TYPE_MANAGEMENT_KEY CredentialType = 2
+	// Personal API key owned by a user.
+	CredentialType_CREDENTIAL_TYPE_PERSONAL_API_KEY CredentialType = 3
+	// Service-to-service credential.
+	CredentialType_CREDENTIAL_TYPE_SERVICE CredentialType = 4
+	// Short-lived delegated JWT from OAuth token exchange (MCP, qcloud CLI, …).
+	CredentialType_CREDENTIAL_TYPE_OAUTH_DELEGATED CredentialType = 5
+)
+
+// Enum value maps for CredentialType.
+var (
+	CredentialType_name = map[int32]string{
+		0: "CREDENTIAL_TYPE_UNSPECIFIED",
+		1: "CREDENTIAL_TYPE_SESSION",
+		2: "CREDENTIAL_TYPE_MANAGEMENT_KEY",
+		3: "CREDENTIAL_TYPE_PERSONAL_API_KEY",
+		4: "CREDENTIAL_TYPE_SERVICE",
+		5: "CREDENTIAL_TYPE_OAUTH_DELEGATED",
+	}
+	CredentialType_value = map[string]int32{
+		"CREDENTIAL_TYPE_UNSPECIFIED":      0,
+		"CREDENTIAL_TYPE_SESSION":          1,
+		"CREDENTIAL_TYPE_MANAGEMENT_KEY":   2,
+		"CREDENTIAL_TYPE_PERSONAL_API_KEY": 3,
+		"CREDENTIAL_TYPE_SERVICE":          4,
+		"CREDENTIAL_TYPE_OAUTH_DELEGATED":  5,
+	}
+)
+
+func (x CredentialType) Enum() *CredentialType {
+	p := new(CredentialType)
+	*p = x
+	return p
+}
+
+func (x CredentialType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CredentialType) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_cloud_common_v1_common_proto_enumTypes[1].Descriptor()
+}
+
+func (CredentialType) Type() protoreflect.EnumType {
+	return &file_qdrant_cloud_common_v1_common_proto_enumTypes[1]
+}
+
+func (x CredentialType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CredentialType.Descriptor instead.
+func (CredentialType) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{1}
+}
+
 // StorageTierType defines type of storage performance tiers which maps to predefined IOPS and Throughput amount
 type StorageTierType int32
 
@@ -124,11 +191,11 @@ func (x StorageTierType) String() string {
 }
 
 func (StorageTierType) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_common_v1_common_proto_enumTypes[1].Descriptor()
+	return file_qdrant_cloud_common_v1_common_proto_enumTypes[2].Descriptor()
 }
 
 func (StorageTierType) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_common_v1_common_proto_enumTypes[1]
+	return &file_qdrant_cloud_common_v1_common_proto_enumTypes[2]
 }
 
 func (x StorageTierType) Number() protoreflect.EnumNumber {
@@ -137,7 +204,7 @@ func (x StorageTierType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StorageTierType.Descriptor instead.
 func (StorageTierType) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{2}
 }
 
 // TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologySpreadConstraints.
@@ -178,11 +245,11 @@ func (x TopologySpreadConstraintWhenUnsatisfiable) String() string {
 }
 
 func (TopologySpreadConstraintWhenUnsatisfiable) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_common_v1_common_proto_enumTypes[2].Descriptor()
+	return file_qdrant_cloud_common_v1_common_proto_enumTypes[3].Descriptor()
 }
 
 func (TopologySpreadConstraintWhenUnsatisfiable) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_common_v1_common_proto_enumTypes[2]
+	return &file_qdrant_cloud_common_v1_common_proto_enumTypes[3]
 }
 
 func (x TopologySpreadConstraintWhenUnsatisfiable) Number() protoreflect.EnumNumber {
@@ -191,7 +258,7 @@ func (x TopologySpreadConstraintWhenUnsatisfiable) Number() protoreflect.EnumNum
 
 // Deprecated: Use TopologySpreadConstraintWhenUnsatisfiable.Descriptor instead.
 func (TopologySpreadConstraintWhenUnsatisfiable) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{2}
+	return file_qdrant_cloud_common_v1_common_proto_rawDescGZIP(), []int{3}
 }
 
 // PatchSource describes how to construct a Get request from an Update request,
@@ -289,7 +356,17 @@ type Caller struct {
 	ActorType ActorType `protobuf:"varint,2,opt,name=actor_type,json=actorType,proto3,enum=qdrant.cloud.common.v1.ActorType" json:"actor_type,omitempty"`
 	// HTTP User-Agent of the client that initiated the request, when available.
 	// Omitted for internal/service-initiated actions without a client User-Agent.
-	UserAgent     *string `protobuf:"bytes,3,opt,name=user_agent,json=userAgent,proto3,oneof" json:"user_agent,omitempty"`
+	UserAgent *string `protobuf:"bytes,3,opt,name=user_agent,json=userAgent,proto3,oneof" json:"user_agent,omitempty"`
+	// How the actor authenticated. Omitted on legacy events; distinct from actor_type
+	// (e.g. USER + OAUTH_DELEGATED or USER + PERSONAL_API_KEY).
+	CredentialType *CredentialType `protobuf:"varint,4,opt,name=credential_type,json=credentialType,proto3,enum=qdrant.cloud.common.v1.CredentialType,oneof" json:"credential_type,omitempty"`
+	// Identifier of the credential (personal API key id, OAuth grant id, management key id).
+	// Omitted for interactive sessions and when unknown.
+	CredentialId *string `protobuf:"bytes,5,opt,name=credential_id,json=credentialId,proto3,oneof" json:"credential_id,omitempty"`
+	// Acting OAuth client id when credential_type is OAUTH_DELEGATED (Auth0 azp / CIMD URL).
+	ActingClientId *string `protobuf:"bytes,6,opt,name=acting_client_id,json=actingClientId,proto3,oneof" json:"acting_client_id,omitempty"`
+	// OAuth access-class scope when credential_type is OAUTH_DELEGATED ("read-only" or "manage").
+	Scope         *string `protobuf:"bytes,7,opt,name=scope,proto3,oneof" json:"scope,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -341,6 +418,34 @@ func (x *Caller) GetActorType() ActorType {
 func (x *Caller) GetUserAgent() string {
 	if x != nil && x.UserAgent != nil {
 		return *x.UserAgent
+	}
+	return ""
+}
+
+func (x *Caller) GetCredentialType() CredentialType {
+	if x != nil && x.CredentialType != nil {
+		return *x.CredentialType
+	}
+	return CredentialType_CREDENTIAL_TYPE_UNSPECIFIED
+}
+
+func (x *Caller) GetCredentialId() string {
+	if x != nil && x.CredentialId != nil {
+		return *x.CredentialId
+	}
+	return ""
+}
+
+func (x *Caller) GetActingClientId() string {
+	if x != nil && x.ActingClientId != nil {
+		return *x.ActingClientId
+	}
+	return ""
+}
+
+func (x *Caller) GetScope() string {
+	if x != nil && x.Scope != nil {
+		return *x.Scope
 	}
 	return ""
 }
@@ -1417,15 +1522,24 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\x16request_resource_field\x18\x04 \x01(\tB0\xbaH-r+\x10\x012'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$R\x14requestResourceField\x1a?\n" +
 	"\x11FieldMappingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb7\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xed\x03\n" +
 	"\x06Caller\x12\"\n" +
 	"\bactor_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aactorId\x12L\n" +
 	"\n" +
 	"actor_type\x18\x02 \x01(\x0e2!.qdrant.cloud.common.v1.ActorTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\tactorType\x12,\n" +
 	"\n" +
-	"user_agent\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x18\x80\x04H\x00R\tuserAgent\x88\x01\x01B\r\n" +
-	"\v_user_agent\"\x85\x01\n" +
+	"user_agent\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x18\x80\x04H\x00R\tuserAgent\x88\x01\x01\x12`\n" +
+	"\x0fcredential_type\x18\x04 \x01(\x0e2&.qdrant.cloud.common.v1.CredentialTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x01R\x0ecredentialType\x88\x01\x01\x121\n" +
+	"\rcredential_id\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\fcredentialId\x88\x01\x01\x126\n" +
+	"\x10acting_client_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x03R\x0eactingClientId\x88\x01\x01\x12\"\n" +
+	"\x05scope\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x05scope\x88\x01\x01B\r\n" +
+	"\v_user_agentB\x12\n" +
+	"\x10_credential_typeB\x10\n" +
+	"\x0e_credential_idB\x13\n" +
+	"\x11_acting_client_idB\b\n" +
+	"\x06_scope\"\x85\x01\n" +
 	"\bLogField\x12-\n" +
 	"\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x01\x18@2\x0e^[a-z][a-z_]*$R\x04name\x12J\n" +
 	"\x10field_expression\x18\x02 \x01(\tB\x1f\xbaH\x1cr\x1a2\x18^(|[a-z_]+(\\.[a-z_]+)*)$R\x0ffieldExpression\"K\n" +
@@ -1492,7 +1606,14 @@ const file_qdrant_cloud_common_v1_common_proto_rawDesc = "" +
 	"\x16ACTOR_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fACTOR_TYPE_USER\x10\x01\x12\x1d\n" +
 	"\x19ACTOR_TYPE_MANAGEMENT_KEY\x10\x02\x12\x1e\n" +
-	"\x1aACTOR_TYPE_SERVICE_ACCOUNT\x10\x03*\x9d\x01\n" +
+	"\x1aACTOR_TYPE_SERVICE_ACCOUNT\x10\x03*\xda\x01\n" +
+	"\x0eCredentialType\x12\x1f\n" +
+	"\x1bCREDENTIAL_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
+	"\x17CREDENTIAL_TYPE_SESSION\x10\x01\x12\"\n" +
+	"\x1eCREDENTIAL_TYPE_MANAGEMENT_KEY\x10\x02\x12$\n" +
+	" CREDENTIAL_TYPE_PERSONAL_API_KEY\x10\x03\x12\x1b\n" +
+	"\x17CREDENTIAL_TYPE_SERVICE\x10\x04\x12#\n" +
+	"\x1fCREDENTIAL_TYPE_OAUTH_DELEGATED\x10\x05*\x9d\x01\n" +
 	"\x0fStorageTierType\x12!\n" +
 	"\x1dSTORAGE_TIER_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" STORAGE_TIER_TYPE_COST_OPTIMISED\x10\x01\x12\x1e\n" +
@@ -1529,64 +1650,66 @@ func file_qdrant_cloud_common_v1_common_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_common_v1_common_proto_rawDescData
 }
 
-var file_qdrant_cloud_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_qdrant_cloud_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_qdrant_cloud_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_qdrant_cloud_common_v1_common_proto_goTypes = []any{
 	(ActorType)(0),       // 0: qdrant.cloud.common.v1.ActorType
-	(StorageTierType)(0), // 1: qdrant.cloud.common.v1.StorageTierType
-	(TopologySpreadConstraintWhenUnsatisfiable)(0), // 2: qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
-	(*PatchSource)(nil),                            // 3: qdrant.cloud.common.v1.PatchSource
-	(*Caller)(nil),                                 // 4: qdrant.cloud.common.v1.Caller
-	(*LogField)(nil),                               // 5: qdrant.cloud.common.v1.LogField
-	(*Version)(nil),                                // 6: qdrant.cloud.common.v1.Version
-	(*SecretKeyRef)(nil),                           // 7: qdrant.cloud.common.v1.SecretKeyRef
-	(*KeyValue)(nil),                               // 8: qdrant.cloud.common.v1.KeyValue
-	(*TopologySpreadConstraint)(nil),               // 9: qdrant.cloud.common.v1.TopologySpreadConstraint
-	(*LabelSelectorRequirement)(nil),               // 10: qdrant.cloud.common.v1.LabelSelectorRequirement
-	(*LabelSelector)(nil),                          // 11: qdrant.cloud.common.v1.LabelSelector
-	(*IPBlock)(nil),                                // 12: qdrant.cloud.common.v1.IPBlock
-	(*PeerSelector)(nil),                           // 13: qdrant.cloud.common.v1.PeerSelector
-	(*NetworkPolicyPeer)(nil),                      // 14: qdrant.cloud.common.v1.NetworkPolicyPeer
-	(*NetworkPolicyPort)(nil),                      // 15: qdrant.cloud.common.v1.NetworkPolicyPort
-	(*NetworkPolicyIngressRule)(nil),               // 16: qdrant.cloud.common.v1.NetworkPolicyIngressRule
-	(*NetworkPolicyEgressRule)(nil),                // 17: qdrant.cloud.common.v1.NetworkPolicyEgressRule
-	nil,                                            // 18: qdrant.cloud.common.v1.PatchSource.FieldMappingEntry
-	(*descriptorpb.MethodOptions)(nil),             // 19: google.protobuf.MethodOptions
-	(*descriptorpb.ServiceOptions)(nil),            // 20: google.protobuf.ServiceOptions
+	(CredentialType)(0),  // 1: qdrant.cloud.common.v1.CredentialType
+	(StorageTierType)(0), // 2: qdrant.cloud.common.v1.StorageTierType
+	(TopologySpreadConstraintWhenUnsatisfiable)(0), // 3: qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
+	(*PatchSource)(nil),                            // 4: qdrant.cloud.common.v1.PatchSource
+	(*Caller)(nil),                                 // 5: qdrant.cloud.common.v1.Caller
+	(*LogField)(nil),                               // 6: qdrant.cloud.common.v1.LogField
+	(*Version)(nil),                                // 7: qdrant.cloud.common.v1.Version
+	(*SecretKeyRef)(nil),                           // 8: qdrant.cloud.common.v1.SecretKeyRef
+	(*KeyValue)(nil),                               // 9: qdrant.cloud.common.v1.KeyValue
+	(*TopologySpreadConstraint)(nil),               // 10: qdrant.cloud.common.v1.TopologySpreadConstraint
+	(*LabelSelectorRequirement)(nil),               // 11: qdrant.cloud.common.v1.LabelSelectorRequirement
+	(*LabelSelector)(nil),                          // 12: qdrant.cloud.common.v1.LabelSelector
+	(*IPBlock)(nil),                                // 13: qdrant.cloud.common.v1.IPBlock
+	(*PeerSelector)(nil),                           // 14: qdrant.cloud.common.v1.PeerSelector
+	(*NetworkPolicyPeer)(nil),                      // 15: qdrant.cloud.common.v1.NetworkPolicyPeer
+	(*NetworkPolicyPort)(nil),                      // 16: qdrant.cloud.common.v1.NetworkPolicyPort
+	(*NetworkPolicyIngressRule)(nil),               // 17: qdrant.cloud.common.v1.NetworkPolicyIngressRule
+	(*NetworkPolicyEgressRule)(nil),                // 18: qdrant.cloud.common.v1.NetworkPolicyEgressRule
+	nil,                                            // 19: qdrant.cloud.common.v1.PatchSource.FieldMappingEntry
+	(*descriptorpb.MethodOptions)(nil),             // 20: google.protobuf.MethodOptions
+	(*descriptorpb.ServiceOptions)(nil),            // 21: google.protobuf.ServiceOptions
 }
 var file_qdrant_cloud_common_v1_common_proto_depIdxs = []int32{
-	18, // 0: qdrant.cloud.common.v1.PatchSource.field_mapping:type_name -> qdrant.cloud.common.v1.PatchSource.FieldMappingEntry
+	19, // 0: qdrant.cloud.common.v1.PatchSource.field_mapping:type_name -> qdrant.cloud.common.v1.PatchSource.FieldMappingEntry
 	0,  // 1: qdrant.cloud.common.v1.Caller.actor_type:type_name -> qdrant.cloud.common.v1.ActorType
-	2,  // 2: qdrant.cloud.common.v1.TopologySpreadConstraint.when_unsatisfiable:type_name -> qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
-	8,  // 3: qdrant.cloud.common.v1.LabelSelector.match_labels:type_name -> qdrant.cloud.common.v1.KeyValue
-	10, // 4: qdrant.cloud.common.v1.LabelSelector.match_expressions:type_name -> qdrant.cloud.common.v1.LabelSelectorRequirement
-	11, // 5: qdrant.cloud.common.v1.PeerSelector.pod_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
-	11, // 6: qdrant.cloud.common.v1.PeerSelector.namespace_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
-	13, // 7: qdrant.cloud.common.v1.NetworkPolicyPeer.selector:type_name -> qdrant.cloud.common.v1.PeerSelector
-	12, // 8: qdrant.cloud.common.v1.NetworkPolicyPeer.ip_block:type_name -> qdrant.cloud.common.v1.IPBlock
-	15, // 9: qdrant.cloud.common.v1.NetworkPolicyIngressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
-	14, // 10: qdrant.cloud.common.v1.NetworkPolicyIngressRule.from:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
-	15, // 11: qdrant.cloud.common.v1.NetworkPolicyEgressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
-	14, // 12: qdrant.cloud.common.v1.NetworkPolicyEgressRule.to:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
-	19, // 13: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
-	19, // 14: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
-	19, // 15: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
-	19, // 16: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
-	19, // 17: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
-	19, // 18: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
-	19, // 19: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
-	20, // 20: qdrant.cloud.common.v1.api_version:extendee -> google.protobuf.ServiceOptions
-	19, // 21: qdrant.cloud.common.v1.patch_source:extendee -> google.protobuf.MethodOptions
-	19, // 22: qdrant.cloud.common.v1.interactive_only:extendee -> google.protobuf.MethodOptions
-	0,  // 23: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
-	5,  // 24: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
-	6,  // 25: qdrant.cloud.common.v1.api_version:type_name -> qdrant.cloud.common.v1.Version
-	3,  // 26: qdrant.cloud.common.v1.patch_source:type_name -> qdrant.cloud.common.v1.PatchSource
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	23, // [23:27] is the sub-list for extension type_name
-	13, // [13:23] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	1,  // 2: qdrant.cloud.common.v1.Caller.credential_type:type_name -> qdrant.cloud.common.v1.CredentialType
+	3,  // 3: qdrant.cloud.common.v1.TopologySpreadConstraint.when_unsatisfiable:type_name -> qdrant.cloud.common.v1.TopologySpreadConstraintWhenUnsatisfiable
+	9,  // 4: qdrant.cloud.common.v1.LabelSelector.match_labels:type_name -> qdrant.cloud.common.v1.KeyValue
+	11, // 5: qdrant.cloud.common.v1.LabelSelector.match_expressions:type_name -> qdrant.cloud.common.v1.LabelSelectorRequirement
+	12, // 6: qdrant.cloud.common.v1.PeerSelector.pod_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
+	12, // 7: qdrant.cloud.common.v1.PeerSelector.namespace_selector:type_name -> qdrant.cloud.common.v1.LabelSelector
+	14, // 8: qdrant.cloud.common.v1.NetworkPolicyPeer.selector:type_name -> qdrant.cloud.common.v1.PeerSelector
+	13, // 9: qdrant.cloud.common.v1.NetworkPolicyPeer.ip_block:type_name -> qdrant.cloud.common.v1.IPBlock
+	16, // 10: qdrant.cloud.common.v1.NetworkPolicyIngressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
+	15, // 11: qdrant.cloud.common.v1.NetworkPolicyIngressRule.from:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
+	16, // 12: qdrant.cloud.common.v1.NetworkPolicyEgressRule.ports:type_name -> qdrant.cloud.common.v1.NetworkPolicyPort
+	15, // 13: qdrant.cloud.common.v1.NetworkPolicyEgressRule.to:type_name -> qdrant.cloud.common.v1.NetworkPolicyPeer
+	20, // 14: qdrant.cloud.common.v1.permissions:extendee -> google.protobuf.MethodOptions
+	20, // 15: qdrant.cloud.common.v1.account_id_expression:extendee -> google.protobuf.MethodOptions
+	20, // 16: qdrant.cloud.common.v1.requires_authentication:extendee -> google.protobuf.MethodOptions
+	20, // 17: qdrant.cloud.common.v1.supported_actor_types:extendee -> google.protobuf.MethodOptions
+	20, // 18: qdrant.cloud.common.v1.requires_all_permissions:extendee -> google.protobuf.MethodOptions
+	20, // 19: qdrant.cloud.common.v1.max_message_size:extendee -> google.protobuf.MethodOptions
+	20, // 20: qdrant.cloud.common.v1.log_fields:extendee -> google.protobuf.MethodOptions
+	21, // 21: qdrant.cloud.common.v1.api_version:extendee -> google.protobuf.ServiceOptions
+	20, // 22: qdrant.cloud.common.v1.patch_source:extendee -> google.protobuf.MethodOptions
+	20, // 23: qdrant.cloud.common.v1.interactive_only:extendee -> google.protobuf.MethodOptions
+	0,  // 24: qdrant.cloud.common.v1.supported_actor_types:type_name -> qdrant.cloud.common.v1.ActorType
+	6,  // 25: qdrant.cloud.common.v1.log_fields:type_name -> qdrant.cloud.common.v1.LogField
+	7,  // 26: qdrant.cloud.common.v1.api_version:type_name -> qdrant.cloud.common.v1.Version
+	4,  // 27: qdrant.cloud.common.v1.patch_source:type_name -> qdrant.cloud.common.v1.PatchSource
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	24, // [24:28] is the sub-list for extension type_name
+	14, // [14:24] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_common_v1_common_proto_init() }
@@ -1610,7 +1733,7 @@ func file_qdrant_cloud_common_v1_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_common_v1_common_proto_rawDesc), len(file_qdrant_cloud_common_v1_common_proto_rawDesc)),
-			NumEnums:      3,
+			NumEnums:      4,
 			NumMessages:   16,
 			NumExtensions: 10,
 			NumServices:   0,

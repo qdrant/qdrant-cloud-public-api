@@ -16,6 +16,15 @@ class ActorType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     ACTOR_TYPE_MANAGEMENT_KEY: _ClassVar[ActorType]
     ACTOR_TYPE_SERVICE_ACCOUNT: _ClassVar[ActorType]
 
+class CredentialType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CREDENTIAL_TYPE_UNSPECIFIED: _ClassVar[CredentialType]
+    CREDENTIAL_TYPE_SESSION: _ClassVar[CredentialType]
+    CREDENTIAL_TYPE_MANAGEMENT_KEY: _ClassVar[CredentialType]
+    CREDENTIAL_TYPE_PERSONAL_API_KEY: _ClassVar[CredentialType]
+    CREDENTIAL_TYPE_SERVICE: _ClassVar[CredentialType]
+    CREDENTIAL_TYPE_OAUTH_DELEGATED: _ClassVar[CredentialType]
+
 class StorageTierType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     STORAGE_TIER_TYPE_UNSPECIFIED: _ClassVar[StorageTierType]
@@ -32,6 +41,12 @@ ACTOR_TYPE_UNSPECIFIED: ActorType
 ACTOR_TYPE_USER: ActorType
 ACTOR_TYPE_MANAGEMENT_KEY: ActorType
 ACTOR_TYPE_SERVICE_ACCOUNT: ActorType
+CREDENTIAL_TYPE_UNSPECIFIED: CredentialType
+CREDENTIAL_TYPE_SESSION: CredentialType
+CREDENTIAL_TYPE_MANAGEMENT_KEY: CredentialType
+CREDENTIAL_TYPE_PERSONAL_API_KEY: CredentialType
+CREDENTIAL_TYPE_SERVICE: CredentialType
+CREDENTIAL_TYPE_OAUTH_DELEGATED: CredentialType
 STORAGE_TIER_TYPE_UNSPECIFIED: StorageTierType
 STORAGE_TIER_TYPE_COST_OPTIMISED: StorageTierType
 STORAGE_TIER_TYPE_BALANCED: StorageTierType
@@ -80,14 +95,22 @@ class PatchSource(_message.Message):
     def __init__(self, get_method: _Optional[str] = ..., field_mapping: _Optional[_Mapping[str, str]] = ..., response_resource_field: _Optional[str] = ..., request_resource_field: _Optional[str] = ...) -> None: ...
 
 class Caller(_message.Message):
-    __slots__ = ("actor_id", "actor_type", "user_agent")
+    __slots__ = ("actor_id", "actor_type", "user_agent", "credential_type", "credential_id", "acting_client_id", "scope")
     ACTOR_ID_FIELD_NUMBER: _ClassVar[int]
     ACTOR_TYPE_FIELD_NUMBER: _ClassVar[int]
     USER_AGENT_FIELD_NUMBER: _ClassVar[int]
+    CREDENTIAL_TYPE_FIELD_NUMBER: _ClassVar[int]
+    CREDENTIAL_ID_FIELD_NUMBER: _ClassVar[int]
+    ACTING_CLIENT_ID_FIELD_NUMBER: _ClassVar[int]
+    SCOPE_FIELD_NUMBER: _ClassVar[int]
     actor_id: str
     actor_type: ActorType
     user_agent: str
-    def __init__(self, actor_id: _Optional[str] = ..., actor_type: _Optional[_Union[ActorType, str]] = ..., user_agent: _Optional[str] = ...) -> None: ...
+    credential_type: CredentialType
+    credential_id: str
+    acting_client_id: str
+    scope: str
+    def __init__(self, actor_id: _Optional[str] = ..., actor_type: _Optional[_Union[ActorType, str]] = ..., user_agent: _Optional[str] = ..., credential_type: _Optional[_Union[CredentialType, str]] = ..., credential_id: _Optional[str] = ..., acting_client_id: _Optional[str] = ..., scope: _Optional[str] = ...) -> None: ...
 
 class LogField(_message.Message):
     __slots__ = ("name", "field_expression")

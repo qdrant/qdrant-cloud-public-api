@@ -159,6 +159,24 @@ enum ActorType {
   ACTOR_TYPE_SERVICE_ACCOUNT = 3;
 }
 
+// CredentialType identifies how the caller authenticated. Distinct from ActorType:
+// personal API keys and OAuth delegated tokens still authenticate as ACTOR_TYPE_USER.
+// Used by IAM AuthenticateResponse, gateway interactive_only enforcement, and Event.caller.
+enum CredentialType {
+  // Unspecified / unknown credential type (or omitted on legacy events).
+  CREDENTIAL_TYPE_UNSPECIFIED = 0;
+  // Interactive login session (first-party console JWT).
+  CREDENTIAL_TYPE_SESSION = 1;
+  // Account management (programmatic access) key.
+  CREDENTIAL_TYPE_MANAGEMENT_KEY = 2;
+  // Personal API key owned by a user.
+  CREDENTIAL_TYPE_PERSONAL_API_KEY = 3;
+  // Service-to-service credential.
+  CREDENTIAL_TYPE_SERVICE = 4;
+  // Short-lived delegated JWT from OAuth token exchange (MCP, qcloud CLI, …).
+  CREDENTIAL_TYPE_OAUTH_DELEGATED = 5;
+}
+
 // Caller identifies the authenticated actor that performed an action on a resource.
 message Caller {
   // Unique identifier of the actor (user UUID, management-key id, service-account id, …).
@@ -171,6 +189,19 @@ message Caller {
   // HTTP User-Agent of the client that initiated the request, when available.
   // Omitted for internal/service-initiated actions without a client User-Agent.
   optional string user_agent = 3 [(buf.validate.field).string.max_len = 512];
+  // How the actor authenticated. Omitted on legacy events; distinct from actor_type
+  // (e.g. USER + OAUTH_DELEGATED or USER + PERSONAL_API_KEY).
+  optional CredentialType credential_type = 4 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Identifier of the credential (personal API key id, OAuth grant id, management key id).
+  // Omitted for interactive sessions and when unknown.
+  optional string credential_id = 5 [(buf.validate.field).string.min_len = 1];
+  // Acting OAuth client id when credential_type is OAUTH_DELEGATED (Auth0 azp / CIMD URL).
+  optional string acting_client_id = 6 [(buf.validate.field).string.min_len = 1];
+  // OAuth access-class scope when credential_type is OAUTH_DELEGATED ("read-only" or "manage").
+  optional string scope = 7 [(buf.validate.field).string.min_len = 1];
 }
 
 // LogField represents a field to log (in case of an error).
