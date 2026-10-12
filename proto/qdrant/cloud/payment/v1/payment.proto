@@ -15,7 +15,7 @@ service PaymentService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Lists all payment methods known by the system for the provided account.
@@ -61,6 +61,8 @@ service PaymentService {
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "payment_method.account_id";
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (qdrant.cloud.common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/payment/v1/accounts/{payment_method.account_id}/payment-methods"
@@ -88,6 +90,8 @@ service PaymentService {
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "payment_method.account_id";
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (qdrant.cloud.common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
       put: "/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}"
@@ -129,6 +133,8 @@ service PaymentService {
   rpc DeletePaymentMethod(DeletePaymentMethodRequest) returns (DeletePaymentMethodResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (qdrant.cloud.common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}"};
     // events
@@ -166,6 +172,8 @@ service PaymentService {
   rpc CreateStripeCheckoutSession(CreateStripeCheckoutSessionRequest) returns (CreateStripeCheckoutSessionResponse) {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (qdrant.cloud.common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/payment/v1/accounts/{account_id}/stripe-session"

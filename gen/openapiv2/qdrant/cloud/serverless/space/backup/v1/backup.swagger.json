@@ -1115,6 +1115,22 @@
         "userAgent": {
           "type": "string",
           "description": "HTTP User-Agent of the client that initiated the request, when available.\nOmitted for internal/service-initiated actions without a client User-Agent."
+        },
+        "credentialType": {
+          "$ref": "#/definitions/v1CredentialType",
+          "description": "How the actor authenticated. Omitted on legacy events; distinct from actor_type\n(e.g. USER + OAUTH_DELEGATED or USER + PERSONAL_API_KEY)."
+        },
+        "credentialId": {
+          "type": "string",
+          "description": "Identifier of the credential (personal API key id, OAuth grant id, management key id).\nOmitted for interactive sessions and when unknown."
+        },
+        "actingClientId": {
+          "type": "string",
+          "description": "Acting OAuth client id when credential_type is OAUTH_DELEGATED (azp / CIMD URL)."
+        },
+        "scope": {
+          "$ref": "#/definitions/v1OauthScope",
+          "description": "OAuth access-class when credential_type is OAUTH_DELEGATED."
         }
       },
       "description": "Caller identifies the authenticated actor that performed an action on a resource."
@@ -1155,6 +1171,19 @@
         }
       },
       "description": "CreateBackupScheduleResponse is the response from the CreateBackupSchedule function."
+    },
+    "v1CredentialType": {
+      "type": "string",
+      "enum": [
+        "CREDENTIAL_TYPE_UNSPECIFIED",
+        "CREDENTIAL_TYPE_SESSION",
+        "CREDENTIAL_TYPE_MANAGEMENT_KEY",
+        "CREDENTIAL_TYPE_PERSONAL_API_KEY",
+        "CREDENTIAL_TYPE_SERVICE",
+        "CREDENTIAL_TYPE_OAUTH_DELEGATED"
+      ],
+      "default": "CREDENTIAL_TYPE_UNSPECIFIED",
+      "description": "CredentialType identifies how the caller authenticated. Distinct from ActorType:\npersonal API keys and OAuth delegated tokens still authenticate as ACTOR_TYPE_USER.\nUsed by IAM AuthenticateResponse, gateway interactive_only enforcement, and Event.caller.\n\n - CREDENTIAL_TYPE_UNSPECIFIED: Unspecified / unknown credential type (or omitted on legacy events).\n - CREDENTIAL_TYPE_SESSION: Interactive login session (first-party console JWT).\n - CREDENTIAL_TYPE_MANAGEMENT_KEY: Account management (programmatic access) key.\n - CREDENTIAL_TYPE_PERSONAL_API_KEY: Personal API key owned by a user.\n - CREDENTIAL_TYPE_SERVICE: Service-to-service credential.\n - CREDENTIAL_TYPE_OAUTH_DELEGATED: Short-lived delegated JWT from OAuth token exchange (MCP, qcloud CLI, …)."
     },
     "v1DeleteBackupResponse": {
       "type": "object",
@@ -1252,6 +1281,16 @@
         }
       },
       "title": "ListBackupsResponse is the response from the ListBackups function"
+    },
+    "v1OauthScope": {
+      "type": "string",
+      "enum": [
+        "OAUTH_SCOPE_UNSPECIFIED",
+        "OAUTH_SCOPE_READ_ONLY",
+        "OAUTH_SCOPE_MANAGE"
+      ],
+      "default": "OAUTH_SCOPE_UNSPECIFIED",
+      "description": "OauthScope is the OAuth access-class for delegated credentials.\nDistinct from permission verbs (read/write/delete) and from RBAC resource scope.\nWire scope strings stay \"read-only\" and \"manage\".\nNamed OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.\n\n - OAUTH_SCOPE_UNSPECIFIED: Unspecified / unknown (or omitted on legacy events).\n - OAUTH_SCOPE_READ_ONLY: Read-class access only (wire: \"read-only\").\n - OAUTH_SCOPE_MANAGE: Full manage-class access (wire: \"manage\")."
     },
     "v1RestoreBackupResponse": {
       "type": "object",

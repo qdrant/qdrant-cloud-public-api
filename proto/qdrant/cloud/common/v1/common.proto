@@ -92,6 +92,17 @@ extend google.protobuf.MethodOptions {
   optional PatchSource patch_source = 50009;
 }
 
+// The extension for restricting a method to interactive session credentials.
+extend google.protobuf.MethodOptions {
+  // When true, the method may only be called with an interactive session credential
+  // (for example a first-party console JWT). It must be rejected for non-interactive
+  // credentials such as personal API keys and OAuth-delegated tokens, even when the
+  // actor type is USER and the caller holds the required permissions.
+  // When false or unset, any authenticated credential that passes other checks is allowed.
+  // Enforcement is performed by the API gateway once it understands credential_type.
+  bool interactive_only = 50012;
+}
+
 // PatchSource describes how to construct a Get request from an Update request,
 // enabling the API gateway to fetch the current resource for partial
 // (FieldMask-based) updates.
@@ -147,6 +158,37 @@ enum ActorType {
   ACTOR_TYPE_SERVICE_ACCOUNT = 3;
 }
 
+// CredentialType identifies how the caller authenticated. Distinct from ActorType:
+// personal API keys and OAuth delegated tokens still authenticate as ACTOR_TYPE_USER.
+// Used by IAM AuthenticateResponse, gateway interactive_only enforcement, and Event.caller.
+enum CredentialType {
+  // Unspecified / unknown credential type (or omitted on legacy events).
+  CREDENTIAL_TYPE_UNSPECIFIED = 0;
+  // Interactive login session (first-party console JWT).
+  CREDENTIAL_TYPE_SESSION = 1;
+  // Account management (programmatic access) key.
+  CREDENTIAL_TYPE_MANAGEMENT_KEY = 2;
+  // Personal API key owned by a user.
+  CREDENTIAL_TYPE_PERSONAL_API_KEY = 3;
+  // Service-to-service credential.
+  CREDENTIAL_TYPE_SERVICE = 4;
+  // Short-lived delegated JWT from OAuth token exchange (MCP, qcloud CLI, …).
+  CREDENTIAL_TYPE_OAUTH_DELEGATED = 5;
+}
+
+// OauthScope is the OAuth access-class for delegated credentials.
+// Distinct from permission verbs (read/write/delete) and from RBAC resource scope.
+// Wire scope strings stay "read-only" and "manage".
+// Named OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.
+enum OauthScope {
+  // Unspecified / unknown (or omitted on legacy events).
+  OAUTH_SCOPE_UNSPECIFIED = 0;
+  // Read-class access only (wire: "read-only").
+  OAUTH_SCOPE_READ_ONLY = 1;
+  // Full manage-class access (wire: "manage").
+  OAUTH_SCOPE_MANAGE = 2;
+}
+
 // Caller identifies the authenticated actor that performed an action on a resource.
 message Caller {
   // Unique identifier of the actor (user UUID, management-key id, service-account id, …).
@@ -159,6 +201,22 @@ message Caller {
   // HTTP User-Agent of the client that initiated the request, when available.
   // Omitted for internal/service-initiated actions without a client User-Agent.
   optional string user_agent = 3 [(buf.validate.field).string.max_len = 512];
+  // How the actor authenticated. Omitted on legacy events; distinct from actor_type
+  // (e.g. USER + OAUTH_DELEGATED or USER + PERSONAL_API_KEY).
+  optional CredentialType credential_type = 4 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Identifier of the credential (personal API key id, OAuth grant id, management key id).
+  // Omitted for interactive sessions and when unknown.
+  optional string credential_id = 5 [(buf.validate.field).string.min_len = 1];
+  // Acting OAuth client id when credential_type is OAUTH_DELEGATED (azp / CIMD URL).
+  optional string acting_client_id = 6 [(buf.validate.field).string.min_len = 1];
+  // OAuth access-class when credential_type is OAUTH_DELEGATED.
+  optional OauthScope scope = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // LogField represents a field to log (in case of an error).

@@ -16,7 +16,7 @@ service AccountService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Lists all accounts associated with the authenticated actor.
@@ -49,6 +49,8 @@ service AccountService {
     option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/account/v1/accounts"
@@ -124,6 +126,8 @@ service AccountService {
     option (common.v1.permissions) = "delete:account"; // not 'delete:accounts' for historical reasons
     // custom supported-actor-types expression. (Only the owner user can delete an account)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}"};
     // events
@@ -143,6 +147,8 @@ service AccountService {
     option (common.v1.permissions) = "";
     // custom supported-actor-types expression. (Only users can leave an account)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/leave"};
     // events
@@ -201,6 +207,8 @@ service AccountService {
     option (qdrant.cloud.common.v1.account_id_expression) = "account_invite.account_id";
     // custom supported-actor-types expression. (Sending an invite requires being authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
       post: "/api/account/v1/accounts/{account_invite.account_id}/invites"
@@ -252,6 +260,8 @@ service AccountService {
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Account invites are sent to users)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/accept"};
     // events
@@ -280,6 +290,8 @@ service AccountService {
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // custom supported-actor-types expression. (Account invites are sent to users)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/reject"};
     // events
@@ -330,6 +342,8 @@ service AccountService {
     option (common.v1.permissions) = "delete:users"; // Not 'delete:accounts' for historical reasons
     // custom supported-actor-types expression. (At this moment only users can delete account members)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}/members/{user_id}"};
     // events

@@ -39,6 +39,38 @@ rpc UserOnlyMethod(UserRequest) returns (UserResponse) {
 
 When `supported_actor_types` is not specified, all authenticated actor types are allowed (subject to authorization checks).
 
+### Interactive-only methods
+
+Some methods must only be callable from an interactive session (a real user login), not from long-lived or delegated credentials that still authenticate as `ACTOR_TYPE_USER` (personal API keys, OAuth-delegated agents). Use the `interactive_only` option:
+
+```protobuf
+rpc CreateManagementKey(CreateManagementKeyRequest) returns (CreateManagementKeyResponse) {
+  option (common.v1.permissions) = "write:management_keys";
+  option (common.v1.interactive_only) = true;
+}
+```
+
+- **`supported_actor_types = USER`** restricts *who* the principal is (user vs management key vs service account).
+- **`interactive_only = true`** restricts *how* that user authenticated (session vs personal API key / OAuth-delegated token).
+
+When `interactive_only` is unset or `false`, any credential that passes actor-type and permission checks is allowed. The API gateway enforces this once it receives `credential_type` from IAM.
+
+### Credential types
+
+`CredentialType` (in `common.v1`) describes *how* the caller authenticated. It is shared by the public `Caller` message (e.g. on `event.v1.Event`) and by the internal IAM `AuthenticateResponse`, so audit and authorization use one enum:
+
+| Value | Meaning |
+| --- | --- |
+| `CREDENTIAL_TYPE_SESSION` | Interactive console / first-party JWT |
+| `CREDENTIAL_TYPE_MANAGEMENT_KEY` | Account management API key |
+| `CREDENTIAL_TYPE_PERSONAL_API_KEY` | User-owned personal API key |
+| `CREDENTIAL_TYPE_SERVICE` | Service-to-service credential |
+| `CREDENTIAL_TYPE_OAUTH_DELEGATED` | Short-lived delegated JWT after OAuth token exchange |
+
+`Caller` may also carry `credential_id`, `acting_client_id` (OAuth client / CIMD URL), and `scope` (`OauthScope`: `READ_ONLY` / `MANAGE`, OAuth wire strings `read-only` / `manage`) when relevant. These fields are optional so legacy events remain valid.
+
+`OauthScope` is the shared access-class enum for delegated OAuth credentials (on `Caller` and IAM `AuthenticateResponse` / `ExchangeToken`). It is not a permission verb and not an RBAC resource scope.
+
 ## Authorization
 
 The API uses a permission-based authorization system for RPC methods. Each method defines the required permissions that must be satisfied for access to be granted.
