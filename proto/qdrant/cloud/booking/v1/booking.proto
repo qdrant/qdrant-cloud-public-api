@@ -5,7 +5,8 @@ package qdrant.cloud.booking.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // BookingService is the API used to configure the booking settings (like packages objects).
 service BookingService {
   // The API version of this service.
@@ -31,6 +32,11 @@ service BookingService {
       name: "cloud_provider_region_id"
       field_expression: "cloud_provider_region_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all packages known by the system, optional filtered."
+      title: "List packages"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_packages"};
   }
   // Gets the package identified by the given ID.
   // Required permissions:
@@ -45,6 +51,11 @@ service BookingService {
       name: "package_id"
       field_expression: "id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the package identified by the given ID."
+      title: "Get package"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_package"};
   }
   // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
   // Lists all public packages.
@@ -63,6 +74,11 @@ service BookingService {
       name: "cloud_provider_region_id"
       field_expression: "cloud_provider_region_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS Lists all public packages. Authentication not required"
+      title: "List global packages"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_global_packages"};
   }
   // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
   // Gets price quotes for a batch of cluster configurations.
@@ -115,6 +131,11 @@ service BookingService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/accounts/{account_id}/inference-models"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the list of available inference models."
+      title: "List inference models"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_inference_models"};
   }
 
   // Gets the list of globally available inference models.
@@ -124,6 +145,11 @@ service BookingService {
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/inference-models"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the list of globally available inference models. Authentication not required"
+      title: "List global inference models"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_global_inference_models"};
   }
 
   // Gets the list of available storage tiers for a particular region
@@ -134,6 +160,11 @@ service BookingService {
     option (common.v1.permissions) = "";
     // grpc Gateway REST call
     option (google.api.http) = {get: "/api/booking/v1/accounts/{account_id}/storage-tiers"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the list of available storage tiers for a particular region"
+      title: "List storage tier types"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_storage_tier_types"};
   }
 }
 

@@ -9,6 +9,8 @@ package bookingv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -2385,7 +2387,7 @@ var File_qdrant_cloud_booking_v1_booking_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\xfe\x05\n" +
+	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xfe\x05\n" +
 	"\x13ListPackagesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
@@ -2606,24 +2608,36 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\rModelModality\x12\x1e\n" +
 	"\x1aMODEL_MODALITY_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13MODEL_MODALITY_TEXT\x10\x01\x12\x18\n" +
-	"\x14MODEL_MODALITY_IMAGE\x10\x022\xcb\x0e\n" +
-	"\x0eBookingService\x12\x8a\x02\n" +
-	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\"\x9c\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
+	"\x14MODEL_MODALITY_IMAGE\x10\x022\x90\x14\n" +
+	"\x0eBookingService\x12\xec\x02\n" +
+	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\"\xfe\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
-	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x82\xd3\xe4\x93\x020\x12./api/booking/v1/accounts/{account_id}/packages\x12\xba\x01\n" +
+	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x8a\xb2\x19K\n" +
+	":Lists all packages known by the system, optional filtered.\x12\rList packages\xaa\xb8\x19\x0f\n" +
+	"\rlist_packages\x82\xd3\xe4\x93\x020\x12./api/booking/v1/accounts/{account_id}/packages\x12\x8b\x02\n" +
 	"\n" +
-	"GetPackage\x12*.qdrant.cloud.booking.v1.GetPackageRequest\x1a+.qdrant.cloud.booking.v1.GetPackageResponse\"S\x8a\xb5\x18\x00\xba\xb5\x18\x10\n" +
+	"GetPackage\x12*.qdrant.cloud.booking.v1.GetPackageRequest\x1a+.qdrant.cloud.booking.v1.GetPackageResponse\"\xa3\x01\x8a\xb5\x18\x00\xba\xb5\x18\x10\n" +
 	"\n" +
-	"package_id\x12\x02id\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/packages/{id}\x12\x86\x02\n" +
-	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"\x86\x01\x98\xb5\x18\x00\xba\xb5\x18&\n" +
+	"package_id\x12\x02id\x8a\xb2\x19;\n" +
+	",Gets the package identified by the given ID.\x12\vGet package\xaa\xb8\x19\r\n" +
+	"\vget_package\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/packages/{id}\x12\x9e\x03\n" +
+	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"\x9e\x02\x98\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
-	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\x9a\x01\n" +
+	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x8a\xb2\x19z\n" +
+	"bbuf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS Lists all public packages. Authentication not required\x12\x14List global packages\xaa\xb8\x19\x16\n" +
+	"\x14list_global_packages\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\x9a\x01\n" +
 	"\x0fGetGlobalQuotes\x12/.qdrant.cloud.booking.v1.GetGlobalQuotesRequest\x1a0.qdrant.cloud.booking.v1.GetGlobalQuotesResponse\"$\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/booking/v1/quote\x12\xa9\x01\n" +
 	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\"H\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quote\x12\xc1\x01\n" +
-	"\x0eGetBackupQuote\x12..qdrant.cloud.booking.v1.GetBackupQuoteRequest\x1a/.qdrant.cloud.booking.v1.GetBackupQuoteResponse\"N\x8a\xb5\x18\rwrite:backups\x82\xd3\xe4\x93\x027:\x01*\"2/api/booking/v1/accounts/{account_id}/backup-quote\x12\xc4\x01\n" +
-	"\x13ListInferenceModels\x123.qdrant.cloud.booking.v1.ListInferenceModelsRequest\x1a4.qdrant.cloud.booking.v1.ListInferenceModelsResponse\"B\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x028\x126/api/booking/v1/accounts/{account_id}/inference-models\x12\xc0\x01\n" +
-	"\x19ListGlobalInferenceModels\x129.qdrant.cloud.booking.v1.ListGlobalInferenceModelsRequest\x1a:.qdrant.cloud.booking.v1.ListGlobalInferenceModelsResponse\",\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\"\x12 /api/booking/v1/inference-models\x12\xc4\x01\n" +
-	"\x14ListStorageTierTypes\x124.qdrant.cloud.booking.v1.ListStorageTierTypesRequest\x1a5.qdrant.cloud.booking.v1.ListStorageTierTypesResponse\"?\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/storage-tiers\x1a\bµ\x18\x04\b\x01\x10\x01B\xfe\x01\n" +
+	"\x0eGetBackupQuote\x12..qdrant.cloud.booking.v1.GetBackupQuoteRequest\x1a/.qdrant.cloud.booking.v1.GetBackupQuoteResponse\"N\x8a\xb5\x18\rwrite:backups\x82\xd3\xe4\x93\x027:\x01*\"2/api/booking/v1/accounts/{account_id}/backup-quote\x12\xa9\x02\n" +
+	"\x13ListInferenceModels\x123.qdrant.cloud.booking.v1.ListInferenceModelsRequest\x1a4.qdrant.cloud.booking.v1.ListInferenceModelsResponse\"\xa6\x01\x8a\xb5\x18\x00\x8a\xb2\x19E\n" +
+	",Gets the list of available inference models.\x12\x15List inference models\xaa\xb8\x19\x17\n" +
+	"\x15list_inference_models\x82\xd3\xe4\x93\x028\x126/api/booking/v1/accounts/{account_id}/inference-models\x12\xd8\x02\n" +
+	"\x19ListGlobalInferenceModels\x129.qdrant.cloud.booking.v1.ListGlobalInferenceModelsRequest\x1a:.qdrant.cloud.booking.v1.ListGlobalInferenceModelsResponse\"\xc3\x01\x98\xb5\x18\x00\x8a\xb2\x19q\n" +
+	"QGets the list of globally available inference models. Authentication not required\x12\x1cList global inference models\xaa\xb8\x19\x1e\n" +
+	"\x1clist_global_inference_models\x82\xd3\xe4\x93\x02\"\x12 /api/booking/v1/inference-models\x12\xc1\x02\n" +
+	"\x14ListStorageTierTypes\x124.qdrant.cloud.booking.v1.ListStorageTierTypesRequest\x1a5.qdrant.cloud.booking.v1.ListStorageTierTypesResponse\"\xbb\x01\x8a\xb5\x18\x00\x8a\xb2\x19[\n" +
+	"@Gets the list of available storage tiers for a particular region\x12\x17List storage tier types\xaa\xb8\x19\x19\n" +
+	"\x17list_storage_tier_types\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/storage-tiers\x1a\bµ\x18\x04\b\x01\x10\x01B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.booking.v1B\fBookingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/booking/v1;bookingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Booking.V1\xca\x02\x17Qdrant\\Cloud\\Booking\\V1\xe2\x02#Qdrant\\Cloud\\Booking\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Booking::V1b\x06proto3"
 
 var (

@@ -9,6 +9,8 @@ package quotav1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -258,7 +260,7 @@ var File_qdrant_cloud_quota_v1_quota_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
 	"\n" +
-	"!qdrant/cloud/quota/v1/quota.proto\x12\x15qdrant.cloud.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"#\n" +
+	"!qdrant/cloud/quota/v1/quota.proto\x12\x15qdrant.cloud.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"#\n" +
 	"!GetAuthenticatedUserQuotasRequest\"\x94\x01\n" +
 	"\"GetAuthenticatedUserQuotasResponse\x125\n" +
 	"\x12max_owned_accounts\x18\x01 \x01(\rB\a\xbaH\x04*\x02 \x00R\x10maxOwnedAccounts\x127\n" +
@@ -272,10 +274,14 @@ const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
 	"\fmax_clusters\x18\x02 \x01(\rB\a\xbaH\x04*\x02(\x00R\vmaxClusters\x123\n" +
 	"\x11max_cluster_nodes\x18\x03 \x01(\rB\a\xbaH\x04*\x02(\x00R\x0fmaxClusterNodes\x12I\n" +
 	"\x1dmax_cluster_database_api_keys\x18\x04 \x01(\rB\a\xbaH\x04*\x02(\x00R\x19maxClusterDatabaseApiKeys\x12<\n" +
-	"\x16max_free_tier_clusters\x18\x05 \x01(\rB\a\xbaH\x04*\x02(\x00R\x13maxFreeTierClusters2\x8c\x03\n" +
-	"\fQuotaService\x12\xc5\x01\n" +
-	"\x1aGetAuthenticatedUserQuotas\x128.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest\x1a9.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse\"2\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/quota/v1/users/me/quotas\x12\xab\x01\n" +
-	"\x10GetAccountQuotas\x12..qdrant.cloud.quota.v1.GetAccountQuotasRequest\x1a/.qdrant.cloud.quota.v1.GetAccountQuotasResponse\"6\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02,\x12*/api/quota/v1/accounts/{account_id}/quotas\x1a\x06µ\x18\x02\b\x01B\xee\x01\n" +
+	"\x16max_free_tier_clusters\x18\x05 \x01(\rB\a\xbaH\x04*\x02(\x00R\x13maxFreeTierClusters2\xec\x04\n" +
+	"\fQuotaService\x12\xb4\x02\n" +
+	"\x1aGetAuthenticatedUserQuotas\x128.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest\x1a9.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse\"\xa0\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x8a\xb2\x19G\n" +
+	"&Get quotas for the authenticated user.\x12\x1dGet authenticated user quotas\xaa\xb8\x19\x1f\n" +
+	"\x1dget_authenticated_user_quotas\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/quota/v1/users/me/quotas\x12\x9c\x02\n" +
+	"\x10GetAccountQuotas\x12..qdrant.cloud.quota.v1.GetAccountQuotasRequest\x1a/.qdrant.cloud.quota.v1.GetAccountQuotasResponse\"\xa6\x01\x8a\xb5\x18\x00\x8a\xb2\x19T\n" +
+	">Get quotas for the account identified by the given account ID.\x12\x12Get account quotas\xaa\xb8\x19\x14\n" +
+	"\x12get_account_quotas\x82\xd3\xe4\x93\x02,\x12*/api/quota/v1/accounts/{account_id}/quotas\x1a\x06µ\x18\x02\b\x01B\xee\x01\n" +
 	"\x19com.qdrant.cloud.quota.v1B\n" +
 	"QuotaProtoP\x01ZNgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/quota/v1;quotav1\xa2\x02\x03QCQ\xaa\x02\x15Qdrant.Cloud.Quota.V1\xca\x02\x15Qdrant\\Cloud\\Quota\\V1\xe2\x02!Qdrant\\Cloud\\Quota\\V1\\GPBMetadata\xea\x02\x18Qdrant::Cloud::Quota::V1b\x06proto3"
 

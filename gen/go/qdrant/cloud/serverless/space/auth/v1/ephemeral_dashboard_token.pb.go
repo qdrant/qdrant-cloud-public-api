@@ -10,6 +10,8 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -377,7 +379,7 @@ var File_qdrant_cloud_serverless_space_auth_v1_ephemeral_dashboard_token_proto p
 
 const file_qdrant_cloud_serverless_space_auth_v1_ephemeral_dashboard_token_proto_rawDesc = "" +
 	"\n" +
-	"Eqdrant/cloud/serverless/space/auth/v1/ephemeral_dashboard_token.proto\x12%qdrant.cloud.serverless.space.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a9qdrant/cloud/serverless/space/auth/v1/space_api_key.proto\"t\n" +
+	"Eqdrant/cloud/serverless/space/auth/v1/ephemeral_dashboard_token.proto\x12%qdrant.cloud.serverless.space.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\x1a9qdrant/cloud/serverless/space/auth/v1/space_api_key.proto\"t\n" +
 	"$CreateEphemeralDashboardTokenRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
@@ -397,14 +399,15 @@ const file_qdrant_cloud_serverless_space_auth_v1_ephemeral_dashboard_token_proto
 	"\x10space_api_key_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\rspaceApiKeyId\"'\n" +
 	"%RevokeEphemeralDashboardTokenResponse\"^\n" +
 	"\x17EphemeralDashboardToken\x12C\n" +
-	"\x05token\x18\x01 \x01(\tB-\xbaH*r(2&^(local|signed):v([1-9][0-9]{0,4}):.*$R\x05token2\xf5\n" +
-	"\n" +
+	"\x05token\x18\x01 \x01(\tB-\xbaH*r(2&^(local|signed):v([1-9][0-9]{0,4}):.*$R\x05token2\xd3\f\n" +
 	"\x1eEphemeralDashboardTokenService\x12\xed\x03\n" +
 	"\x1dCreateEphemeralDashboardToken\x12K.qdrant.cloud.serverless.space.auth.v1.CreateEphemeralDashboardTokenRequest\x1aL.qdrant.cloud.serverless.space.auth.v1.CreateEphemeralDashboardTokenResponse\"\xb0\x02\x8a\xb5\x18\x16read:serverless_spaces\x92\xb5\x18\n" +
 	"account_id\xa2\xb5\x18\x01\x01\xba\xb5\x18\x14\n" +
-	"\bspace_id\x12\bspace_id\xca\xf3\x18\x81\x01\b\x04\x12\x10serverless-space\"\freq.space_id*;/accounts/{req.account_id}/serverless-spaces/{req.space_id}2 create-ephemeral-dashboard-token\x82\xd3\xe4\x93\x02_:\x01*\"Z/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/ephemeral-dashboard-tokens\x12\xb3\x02\n" +
-	"\x1cListEphemeralDashboardTokens\x12J.qdrant.cloud.serverless.space.auth.v1.ListEphemeralDashboardTokensRequest\x1aK.qdrant.cloud.serverless.space.auth.v1.ListEphemeralDashboardTokensResponse\"z\x8a\xb5\x18\x18read:serverless_api_keys\x92\xb5\x18\n" +
-	"account_id\x82\xd3\xe4\x93\x02J\x12H/api/serverless/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens\x12\xa4\x04\n" +
+	"\bspace_id\x12\bspace_id\xca\xf3\x18\x81\x01\b\x04\x12\x10serverless-space\"\freq.space_id*;/accounts/{req.account_id}/serverless-spaces/{req.space_id}2 create-ephemeral-dashboard-token\x82\xd3\xe4\x93\x02_:\x01*\"Z/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/ephemeral-dashboard-tokens\x12\x91\x04\n" +
+	"\x1cListEphemeralDashboardTokens\x12J.qdrant.cloud.serverless.space.auth.v1.ListEphemeralDashboardTokensRequest\x1aK.qdrant.cloud.serverless.space.auth.v1.ListEphemeralDashboardTokensResponse\"\xd7\x02\x8a\xb5\x18\x18read:serverless_api_keys\x92\xb5\x18\n" +
+	"account_id\x8a\xb2\x19\xb3\x01\n" +
+	"\x8d\x01ListEphemeralDashboardTokens returns the ephemeral dashboard tokens for the account identified by the given ID. Optionally filtered by space.\x12\x1fList ephemeral dashboard tokens\x18\x01\xaa\xb8\x19!\n" +
+	"\x1flist_ephemeral_dashboard_tokens\x82\xd3\xe4\x93\x02J\x12H/api/serverless/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens\x12\xa4\x04\n" +
 	"\x1dRevokeEphemeralDashboardToken\x12K.qdrant.cloud.serverless.space.auth.v1.RevokeEphemeralDashboardTokenRequest\x1aL.qdrant.cloud.serverless.space.auth.v1.RevokeEphemeralDashboardTokenResponse\"\xe7\x02\x8a\xb5\x18\x19write:serverless_api_keys\x92\xb5\x18\n" +
 	"account_id\xba\xb5\x18$\n" +
 	"\x10space_api_key_id\x12\x10space_api_key_id\xca\xf3\x18\xa2\x01\b\x04\x12\x18serverless-space-api-key\"\x14req.space_api_key_id*L/accounts/{req.account_id}/serverless-spaces/api-keys/{req.space_api_key_id}2 revoke-ephemeral-dashboard-token\x82\xd3\xe4\x93\x02g:\x01*\"b/api/serverless/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens/{space_api_key_id}/revoke\x1a\x06µ\x18\x02\b\x01B\xe3\x02\n" +

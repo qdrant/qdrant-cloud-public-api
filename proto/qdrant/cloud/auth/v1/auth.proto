@@ -8,7 +8,8 @@ import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // AuthService is the API used to manage the authentication settings (like management keys) for Qdrant Cloud.
 service AuthService {
   // The API version of this service.
@@ -25,6 +26,12 @@ service AuthService {
     option (common.v1.permissions) = "read:management_keys";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/auth/v1/accounts/{account_id}/management-keys"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all management keys in the account identified by the given ID."
+      title: "List management keys"
+      sensitive_response: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_management_keys"};
   }
   // Creates a management key in the account identified by the given ID.
   // Required permissions:

@@ -10,8 +10,9 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 import "qdrant/cloud/serverless/space/v1/space.proto";
-
 // BackupService is the API used to configure backup objects.
 service BackupService {
   // The API version of this service.
@@ -37,6 +38,11 @@ service BackupService {
       name: "backup_schedule_id"
       field_expression: "backup_schedule_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List serverless space backups with optional filters and pagination."
+      title: "List space backups"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_space_backups"};
   }
   // Gets a backup in the account identified by the given ID.
   // Required permissions:
@@ -51,6 +57,11 @@ service BackupService {
       name: "backup_id"
       field_expression: "backup_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get a single serverless space backup by ID."
+      title: "Get space backup"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space_backup"};
   }
   // Creates a backup for the cluster identified by the given ID.
   // Required permissions:
@@ -120,6 +131,11 @@ service BackupService {
       name: "space_id"
       field_expression: "space_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List serverless space backup restores with optional filters and pagination."
+      title: "List space backup restores"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_space_backup_restores"};
   }
   // Restores a backup to its original space.
   // Required permissions:
@@ -160,6 +176,11 @@ service BackupService {
       name: "space_id"
       field_expression: "space_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List serverless space backup schedules with optional filters and pagination."
+      title: "List space backup schedules"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_space_backup_schedules"};
   }
   // Gets a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -178,6 +199,11 @@ service BackupService {
       name: "backup_schedule_id"
       field_expression: "backup_schedule_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get a single serverless space backup schedule by ID."
+      title: "Get space backup schedule"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space_backup_schedule"};
   }
   // Creates a backup schedule in the account identified by the given ID.
   // Required permissions:

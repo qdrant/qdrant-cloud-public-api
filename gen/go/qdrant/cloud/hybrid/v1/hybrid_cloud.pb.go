@@ -11,6 +11,8 @@ import (
 	v11 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/v1"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -2076,7 +2078,7 @@ var File_qdrant_cloud_hybrid_v1_hybrid_cloud_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\n" +
-	")qdrant/cloud/hybrid/v1/hybrid_cloud.proto\x12\x16qdrant.cloud.hybrid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x94\x01\n" +
+	")qdrant/cloud/hybrid/v1/hybrid_cloud.proto\x12\x16qdrant.cloud.hybrid.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\x94\x01\n" +
 	" GenerateBootstrapCommandsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12G\n" +
@@ -2281,11 +2283,15 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x12#\n" +
 	"\x1fKUBERNETES_DISTRIBUTION_STACKIT\x10\v\x12!\n" +
 	"\x1dKUBERNETES_DISTRIBUTION_VULTR\x10\f\x12\x1f\n" +
-	"\x1bKUBERNETES_DISTRIBUTION_K3S\x10\r2\xf3\x18\n" +
-	"\x12HybridCloudService\x12\x96\x02\n" +
-	"\x1bListHybridCloudEnvironments\x12:.qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsRequest\x1a;.qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsResponse\"~\x8a\xb5\x18\x1eread:hybrid_cloud_environments\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x00\x82\xd3\xe4\x93\x02@\x12>/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments\x12\xed\x02\n" +
-	"\x19GetHybridCloudEnvironment\x128.qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentRequest\x1a9.qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentResponse\"\xda\x01\x8a\xb5\x18\x1eread:hybrid_cloud_environments\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x00\xba\xb5\x18:\n" +
-	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\x82\xd3\xe4\x93\x02^\x12\\/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}\x12\xbf\x04\n" +
+	"\x1bKUBERNETES_DISTRIBUTION_K3S\x10\r2\x9c\x1b\n" +
+	"\x12HybridCloudService\x12\xaf\x03\n" +
+	"\x1bListHybridCloudEnvironments\x12:.qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsRequest\x1a;.qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsResponse\"\x96\x02\x8a\xb5\x18\x1eread:hybrid_cloud_environments\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x00\x8a\xb2\x19p\n" +
+	"NLists all hybrid cloud environments in the account identified by the given ID.\x12\x1eList hybrid cloud environments\xaa\xb8\x19 \n" +
+	"\x1elist_hybrid_cloud_environments\x82\xd3\xe4\x93\x02@\x12>/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments\x12\xfd\x03\n" +
+	"\x19GetHybridCloudEnvironment\x128.qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentRequest\x1a9.qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentResponse\"\xea\x02\x8a\xb5\x18\x1eread:hybrid_cloud_environments\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x00\xba\xb5\x18:\n" +
+	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\x8a\xb2\x19j\n" +
+	"JGets a hybrid cloud environment in the account identified by the given ID.\x12\x1cGet hybrid cloud environment\xaa\xb8\x19\x1e\n" +
+	"\x1cget_hybrid_cloud_environment\x82\xd3\xe4\x93\x02^\x12\\/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}\x12\xbf\x04\n" +
 	"\x1cCreateHybridCloudEnvironment\x12;.qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentRequest\x1a<.qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentResponse\"\xa3\x03\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\x92\xb5\x18#hybrid_cloud_environment.account_id\xba\xb5\x18>\n" +
 	"\x1dhybrid_cloud_environment_name\x12\x1dhybrid_cloud_environment.name\xca\xf3\x18\xb0\x01\b\x01\x12\x18hybrid-cloud-environment\" resp.hybrid_cloud_environment.id*p/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{resp.hybrid_cloud_environment.id}\x82\xd3\xe4\x93\x02\\:\x01*\"W/api/hybrid/v1/accounts/{hybrid_cloud_environment.account_id}/hybrid-cloud-environments\x12\xc5\x06\n" +
 	"\x1cUpdateHybridCloudEnvironment\x12;.qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentRequest\x1a<.qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentResponse\"\xa9\x05\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\x92\xb5\x18#hybrid_cloud_environment.account_id\xba\xb5\x18:\n" +

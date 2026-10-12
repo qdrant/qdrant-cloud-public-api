@@ -9,6 +9,8 @@ package platformv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -484,7 +486,7 @@ var File_qdrant_cloud_serverless_platform_v1_platform_proto protoreflect.FileDes
 
 const file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDesc = "" +
 	"\n" +
-	"2qdrant/cloud/serverless/platform/v1/platform.proto\x12#qdrant.cloud.serverless.platform.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x1f\n" +
+	"2qdrant/cloud/serverless/platform/v1/platform.proto\x12#qdrant.cloud.serverless.platform.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\x1f\n" +
 	"\x1dListGlobalCloudRegionsRequest\"h\n" +
 	"\x1eListGlobalCloudRegionsResponse\x12F\n" +
 	"\x05items\x18\x01 \x03(\v20.qdrant.cloud.serverless.platform.v1.CloudRegionR\x05items\"N\n" +
@@ -511,14 +513,22 @@ const file_qdrant_cloud_serverless_platform_v1_platform_proto_rawDesc = "" +
 	"^[A-Z]{2}$\x98\x01\x02H\x00R\x0ecountryIsoCode\x88\x01\x01\x12D\n" +
 	"\x17geographical_sub_region\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x15geographicalSubRegion\x88\x01\x01B\x13\n" +
 	"\x11_country_iso_codeB\x1a\n" +
-	"\x18_geographical_sub_region2\xf2\a\n" +
-	"\x0fPlatformService\x12\xd8\x01\n" +
-	"\x16ListGlobalCloudRegions\x12B.qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsRequest\x1aC.qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsResponse\"5\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02+\x12)/api/serverless/platform/v1/cloud-regions\x12\x8a\x02\n" +
-	"\x14GetGlobalCloudRegion\x12@.qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionRequest\x1aA.qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionResponse\"m\x98\xb5\x18\x00\xba\xb5\x18\"\n" +
-	"\x0fcloud_region_id\x12\x0fcloud_region_id\x82\xd3\xe4\x93\x02=\x12;/api/serverless/platform/v1/cloud-regions/{cloud_region_id}\x12\xdc\x01\n" +
-	"\x10ListCloudRegions\x12<.qdrant.cloud.serverless.platform.v1.ListCloudRegionsRequest\x1a=.qdrant.cloud.serverless.platform.v1.ListCloudRegionsResponse\"K\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02A\x12?/api/serverless/platform/v1/accounts/{account_id}/cloud-regions\x12\x8f\x02\n" +
-	"\x0eGetCloudRegion\x12:.qdrant.cloud.serverless.platform.v1.GetCloudRegionRequest\x1a;.qdrant.cloud.serverless.platform.v1.GetCloudRegionResponse\"\x83\x01\x8a\xb5\x18\x00\xba\xb5\x18\"\n" +
-	"\x0fcloud_region_id\x12\x0fcloud_region_id\x82\xd3\xe4\x93\x02S\x12Q/api/serverless/platform/v1/accounts/{account_id}/cloud-regions/{cloud_region_id}\x1a\x06µ\x18\x02\b\x02B\xca\x02\n" +
+	"\x18_geographical_sub_region2\x9c\f\n" +
+	"\x0fPlatformService\x12\xe8\x02\n" +
+	"\x16ListGlobalCloudRegions\x12B.qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsRequest\x1aC.qdrant.cloud.serverless.platform.v1.ListGlobalCloudRegionsResponse\"\xc4\x01\x98\xb5\x18\x00\x8a\xb2\x19l\n" +
+	"OLists all cloud regions (not account-specific). Authentication is not required.\x12\x19List global cloud regions\xaa\xb8\x19\x1b\n" +
+	"\x19list_global_cloud_regions\x82\xd3\xe4\x93\x02+\x12)/api/serverless/platform/v1/cloud-regions\x12\xba\x03\n" +
+	"\x14GetGlobalCloudRegion\x12@.qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionRequest\x1aA.qdrant.cloud.serverless.platform.v1.GetGlobalCloudRegionResponse\"\x9c\x02\x98\xb5\x18\x00\xba\xb5\x18\"\n" +
+	"\x0fcloud_region_id\x12\x0fcloud_region_id\x8a\xb2\x19\x8d\x01\n" +
+	"rGets a specific cloud region (not account-specific) identified by cloud region ID. Authentication is not required.\x12\x17Get global cloud region\xaa\xb8\x19\x19\n" +
+	"\x17get_global_cloud_region\x82\xd3\xe4\x93\x02=\x12;/api/serverless/platform/v1/cloud-regions/{cloud_region_id}\x12\xd1\x02\n" +
+	"\x10ListCloudRegions\x12<.qdrant.cloud.serverless.platform.v1.ListCloudRegionsRequest\x1a=.qdrant.cloud.serverless.platform.v1.ListCloudRegionsResponse\"\xbf\x01\x8a\xb5\x18\x00\x8a\xb2\x19X\n" +
+	"BLists all cloud regions in the account identified by the given ID.\x12\x12List cloud regions\xaa\xb8\x19\x14\n" +
+	"\x12list_cloud_regions\x82\xd3\xe4\x93\x02A\x12?/api/serverless/platform/v1/accounts/{account_id}/cloud-regions\x12\x84\x03\n" +
+	"\x0eGetCloudRegion\x12:.qdrant.cloud.serverless.platform.v1.GetCloudRegionRequest\x1a;.qdrant.cloud.serverless.platform.v1.GetCloudRegionResponse\"\xf8\x01\x8a\xb5\x18\x00\xba\xb5\x18\"\n" +
+	"\x0fcloud_region_id\x12\x0fcloud_region_id\x8a\xb2\x19[\n" +
+	"GGets a specific cloud region in the account identified by the given ID.\x12\x10Get cloud region\xaa\xb8\x19\x12\n" +
+	"\x10get_cloud_region\x82\xd3\xe4\x93\x02S\x12Q/api/serverless/platform/v1/accounts/{account_id}/cloud-regions/{cloud_region_id}\x1a\x06µ\x18\x02\b\x02B\xca\x02\n" +
 	"'com.qdrant.cloud.serverless.platform.v1B\rPlatformProtoP\x01Z_github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/platform/v1;platformv1\xa2\x02\x04QCSP\xaa\x02#Qdrant.Cloud.Serverless.Platform.V1\xca\x02#Qdrant\\Cloud\\Serverless\\Platform\\V1\xe2\x02/Qdrant\\Cloud\\Serverless\\Platform\\V1\\GPBMetadata\xea\x02'Qdrant::Cloud::Serverless::Platform::V1b\x06proto3"
 
 var (

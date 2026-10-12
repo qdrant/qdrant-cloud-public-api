@@ -7,7 +7,8 @@ import "google/api/annotations.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // MonitoringService provides access to monitoring data for serverless spaces,
 // such as per-collection metrics, inference token usage, and alerts.
 // Unlike cluster monitoring, this service does not expose logs or events.
@@ -33,6 +34,11 @@ service MonitoringService {
       name: "space_id"
       field_expression: "space_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get per-collection summary metrics for a serverless space."
+      title: "Get space summary metrics"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space_summary_metrics"};
   }
   // Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
   // Metrics are aggregated per collection and may be paginated (a space can have many collections).
@@ -48,6 +54,11 @@ service MonitoringService {
       name: "space_id"
       field_expression: "space_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID. Metrics are aggregated per collection and may be paginated (a space can have many collections)."
+      title: "Get space usage metrics"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space_usage_metrics"};
   }
   // Gets the inference token usage metrics for a space.
   // Metrics are aggregated per collection and may be paginated (a space can have many collections).
@@ -64,6 +75,11 @@ service MonitoringService {
       name: "space_id"
       field_expression: "space_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the inference token usage metrics for a space. Metrics are aggregated per collection and may be paginated (a space can have many collections). Provide `inference_model_id` to limit the response to a single model."
+      title: "Get space inference metrics"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space_inference_metrics"};
   }
   // Lists the alerts for a space in the account identified by the given ID.
   // Alerts may be space-global or scoped to a collection, sorted by last_firing_at
@@ -80,6 +96,11 @@ service MonitoringService {
       name: "space_id"
       field_expression: "space_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List alerts for a serverless space (optional collection filter and pagination)."
+      title: "List space alerts"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_space_alerts"};
   }
 }
 

@@ -10,7 +10,8 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // SpaceService provides operations for managing spaces.
 service SpaceService {
   // The API version of this service.
@@ -27,6 +28,11 @@ service SpaceService {
     option (qdrant.cloud.common.v1.permissions) = "read:serverless_spaces";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List serverless spaces with optional filters and pagination."
+      title: "List serverless spaces"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_spaces"};
   }
   // Gets a space in the account identified by the given ID.
   // Required permissions:
@@ -41,6 +47,11 @@ service SpaceService {
       name: "space_id"
       field_expression: "space_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get a single serverless space by ID."
+      title: "Get serverless space"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space"};
   }
   // CreateSpace creates a new space with the specified configuration
   // Required Permissions:
@@ -180,6 +191,11 @@ service SpaceService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/suggest-name"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Suggest a unique human-friendly name for a new serverless space."
+      title: "Suggest space name"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "suggest_space_name"};
   }
 }
 

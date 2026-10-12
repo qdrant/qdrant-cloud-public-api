@@ -11,7 +11,8 @@ import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/cluster/v1/cluster.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // HybridCloudService is the API used for configuring hybrid cloud environments.
 service HybridCloudService {
   // The API version of this service.
@@ -31,6 +32,11 @@ service HybridCloudService {
     option (common.v1.permissions) = "write:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all hybrid cloud environments in the account identified by the given ID."
+      title: "List hybrid cloud environments"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_hybrid_cloud_environments"};
   }
   // Gets a hybrid cloud environment in the account identified by the given ID.
   // Required permissions (any-of):
@@ -48,6 +54,11 @@ service HybridCloudService {
       name: "hybrid_cloud_environment_id"
       field_expression: "hybrid_cloud_environment_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets a hybrid cloud environment in the account identified by the given ID."
+      title: "Get hybrid cloud environment"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_hybrid_cloud_environment"};
   }
   // Creates a hybrid cloud environment in the account identified by the given ID.
   // Required permissions:

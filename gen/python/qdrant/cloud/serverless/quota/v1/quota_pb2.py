@@ -25,9 +25,11 @@ _sym_db = _symbol_database.Default()
 from buf.validate import validate_pb2 as buf_dot_validate_dot_validate__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
+from qdrant.cloud.facade.mcp.v1 import mcp_options_pb2 as qdrant_dot_cloud_dot_facade_dot_mcp_dot_v1_dot_mcp__options__pb2
+from qdrant.cloud.facade.v1 import facade_options_pb2 as qdrant_dot_cloud_dot_facade_dot_v1_dot_facade__options__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,qdrant/cloud/serverless/quota/v1/quota.proto\x12 qdrant.cloud.serverless.quota.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\";\n\x10GetQuotasRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xbb\x03\n\x0c\x41\x63\x63ountQuota\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12&\n\nmax_spaces\x18\x02 \x01(\x04\x42\x07\xbaH\x04\x32\x02(\x00R\tmaxSpaces\x12\x42\n\x19max_collections_per_space\x18\x03 \x01(\x04\x42\x07\xbaH\x04\x32\x02(\x00R\x16maxCollectionsPerSpace\x12(\n\x0bused_spaces\x18\x05 \x01(\x04\x42\x07\xbaH\x04\x32\x02(\x00R\nusedSpaces\x12O\n platform_max_size_per_collection\x18\x07 \x01(\x04\x42\x07\xbaH\x04\x32\x02(\x00R\x1cplatformMaxSizePerCollection\x12U\n#platform_max_workers_per_collection\x18\x08 \x01(\x04\x42\x07\xbaH\x04\x32\x02(\x00R\x1fplatformMaxWorkersPerCollectionJ\x04\x08\x04\x10\x05J\x04\x08\x06\x10\x07R$platform_max_storage_bytes_per_spaceR\x12used_storage_bytes\"Y\n\x11GetQuotasResponse\x12\x44\n\x05quota\x18\x01 \x01(\x0b\x32..qdrant.cloud.serverless.quota.v1.AccountQuotaR\x05quota2\xe2\x01\n\x0cQuotaService\x12\xc7\x01\n\tGetQuotas\x12\x32.qdrant.cloud.serverless.quota.v1.GetQuotasRequest\x1a\x33.qdrant.cloud.serverless.quota.v1.GetQuotasResponse\"Q\x8a\xb5\x18\x16read:serverless_spaces\x82\xd3\xe4\x93\x02\x31\x12//api/serverless/v1/accounts/{account_id}/quotas\x1a\x08\xc2\xb5\x18\x04\x08\x01\x10\x01\x42\xb2\x02\n$com.qdrant.cloud.serverless.quota.v1B\nQuotaProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/quota/v1;quotav1\xa2\x02\x04QCSQ\xaa\x02 Qdrant.Cloud.Serverless.Quota.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Quota\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Quota\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Quota::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,qdrant/cloud/serverless/quota/v1/quota.proto\x12 qdrant.cloud.serverless.quota.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\";\n\x10GetQuotasRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xbb\x03\n\x0c\x41\x63\x63ountQuota\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12&\n\nmax_spaces\x18\x02 \x01(\x04\x42\x07\xbaH\x04\x32\x02(\x00R\tmaxSpaces\x12\x42\n\x19max_collections_per_space\x18\x03 \x01(\x04\x42\x07\xbaH\x04\x32\x02(\x00R\x16maxCollectionsPerSpace\x12(\n\x0bused_spaces\x18\x05 \x01(\x04\x42\x07\xbaH\x04\x32\x02(\x00R\nusedSpaces\x12O\n platform_max_size_per_collection\x18\x07 \x01(\x04\x42\x07\xbaH\x04\x32\x02(\x00R\x1cplatformMaxSizePerCollection\x12U\n#platform_max_workers_per_collection\x18\x08 \x01(\x04\x42\x07\xbaH\x04\x32\x02(\x00R\x1fplatformMaxWorkersPerCollectionJ\x04\x08\x04\x10\x05J\x04\x08\x06\x10\x07R$platform_max_storage_bytes_per_spaceR\x12used_storage_bytes\"Y\n\x11GetQuotasResponse\x12\x44\n\x05quota\x18\x01 \x01(\x0b\x32..qdrant.cloud.serverless.quota.v1.AccountQuotaR\x05quota2\xdd\x02\n\x0cQuotaService\x12\xc2\x02\n\tGetQuotas\x12\x32.qdrant.cloud.serverless.quota.v1.GetQuotasRequest\x1a\x33.qdrant.cloud.serverless.quota.v1.GetQuotasResponse\"\xcb\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19[\nBGet account-level serverless platform quotas and aggregated usage.\x12\x15Get serverless quotas\xaa\xb8\x19\x17\n\x15get_serverless_quotas\x82\xd3\xe4\x93\x02\x31\x12//api/serverless/v1/accounts/{account_id}/quotas\x1a\x08\xc2\xb5\x18\x04\x08\x01\x10\x01\x42\xb2\x02\n$com.qdrant.cloud.serverless.quota.v1B\nQuotaProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/quota/v1;quotav1\xa2\x02\x04QCSQ\xaa\x02 Qdrant.Cloud.Serverless.Quota.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Quota\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Quota\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Quota::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -52,13 +54,13 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_QUOTASERVICE']._loaded_options = None
   _globals['_QUOTASERVICE']._serialized_options = b'\302\265\030\004\010\001\020\001'
   _globals['_QUOTASERVICE'].methods_by_name['GetQuotas']._loaded_options = None
-  _globals['_QUOTASERVICE'].methods_by_name['GetQuotas']._serialized_options = b'\212\265\030\026read:serverless_spaces\202\323\344\223\0021\022//api/serverless/v1/accounts/{account_id}/quotas'
-  _globals['_GETQUOTASREQUEST']._serialized_start=178
-  _globals['_GETQUOTASREQUEST']._serialized_end=237
-  _globals['_ACCOUNTQUOTA']._serialized_start=240
-  _globals['_ACCOUNTQUOTA']._serialized_end=683
-  _globals['_GETQUOTASRESPONSE']._serialized_start=685
-  _globals['_GETQUOTASRESPONSE']._serialized_end=774
-  _globals['_QUOTASERVICE']._serialized_start=777
-  _globals['_QUOTASERVICE']._serialized_end=1003
+  _globals['_QUOTASERVICE'].methods_by_name['GetQuotas']._serialized_options = b'\212\265\030\026read:serverless_spaces\212\262\031[\nBGet account-level serverless platform quotas and aggregated usage.\022\025Get serverless quotas\252\270\031\027\n\025get_serverless_quotas\202\323\344\223\0021\022//api/serverless/v1/accounts/{account_id}/quotas'
+  _globals['_GETQUOTASREQUEST']._serialized_start=269
+  _globals['_GETQUOTASREQUEST']._serialized_end=328
+  _globals['_ACCOUNTQUOTA']._serialized_start=331
+  _globals['_ACCOUNTQUOTA']._serialized_end=774
+  _globals['_GETQUOTASRESPONSE']._serialized_start=776
+  _globals['_GETQUOTASRESPONSE']._serialized_end=865
+  _globals['_QUOTASERVICE']._serialized_start=868
+  _globals['_QUOTASERVICE']._serialized_end=1217
 # @@protoc_insertion_point(module_scope)

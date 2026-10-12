@@ -10,6 +10,8 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "google.golang.org/genproto/googleapis/rpc/errdetails"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -3099,7 +3101,7 @@ var File_qdrant_cloud_iam_v1_iam_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\n" +
-	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/rpc/error_details.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"Q\n" +
+	"\x1dqdrant/cloud/iam/v1/iam.proto\x12\x13qdrant.cloud.iam.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/rpc/error_details.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"Q\n" +
 	"\x1bGetAuthenticatedUserRequest\x12&\n" +
 	"\auser_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x06userId\x88\x01\x01B\n" +
 	"\n" +
@@ -3321,12 +3323,18 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x19USER_MFA_METHOD_TYPE_TOTP\x10\x01\x12&\n" +
 	"\"USER_MFA_METHOD_TYPE_RECOVERY_CODE\x10\x02\x12*\n" +
 	"&USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM\x10\x03\x12)\n" +
-	"%USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING\x10\x042\xa5*\n" +
+	"%USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING\x10\x042\xbb3\n" +
 	"\n" +
-	"IAMService\x12\xa6\x01\n" +
-	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\")\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\x99\x01\n" +
-	"\tListUsers\x12%.qdrant.cloud.iam.v1.ListUsersRequest\x1a&.qdrant.cloud.iam.v1.ListUsersResponse\"=\x8a\xb5\x18\n" +
-	"read:users\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/users\x12\xb1\x02\n" +
+	"IAMService\x12\xfc\x01\n" +
+	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\"\x7f\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x8a\xb2\x196\n" +
+	"\x1cGets the authenticated user.\x12\x16Get authenticated user\xaa\xb8\x19\x18\n" +
+	"\x16get_authenticated_user\x82\xd3\xe4\x93\x02\x16\x12\x14/api/iam/v1/users/me\x12\xd4\x01\n" +
+	"\tListUsers\x12%.qdrant.cloud.iam.v1.ListUsersRequest\x1a&.qdrant.cloud.iam.v1.ListUsersResponse\"x\x8a\xb5\x18\n" +
+	"read:users\x8a\xb2\x19'\n" +
+	"\x19List users in an account.\x12\n" +
+	"List users\xaa\xb8\x19\f\n" +
+	"\n" +
+	"list_users\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/users\x12\xb1\x02\n" +
 	"\n" +
 	"UpdateUser\x12&.qdrant.cloud.iam.v1.UpdateUserRequest\x1a'.qdrant.cloud.iam.v1.UpdateUserResponse\"\xd1\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x12\n" +
 	"\auser_id\x12\auser.idʵ\x18V\n" +
@@ -3334,20 +3342,33 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\auser_id\x12\auser.id\x1a\x04user\"\x04user\xe0\xb5\x18\x01\xca\xf3\x18+\b\x02\x12\x04user\"\vreq.user.id*\x14/users/{req.user.id}\x82\xd3\xe4\x93\x02 :\x01*\x1a\x1b/api/iam/v1/users/{user.id}\x12\xd3\x01\n" +
 	"\n" +
 	"DeleteUser\x12&.qdrant.cloud.iam.v1.DeleteUserRequest\x1a'.qdrant.cloud.iam.v1.DeleteUserResponse\"t\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x12\n" +
-	"\auser_id\x12\auser_id\xe0\xb5\x18\x01\xca\xf3\x18+\b\x03\x12\x04user\"\vreq.user_id*\x14/users/{req.user_id}\x82\xd3\xe4\x93\x02\x1d*\x1b/api/iam/v1/users/{user_id}\x12\x9c\x01\n" +
-	"\x0eGetUserProfile\x12*.qdrant.cloud.iam.v1.GetUserProfileRequest\x1a+.qdrant.cloud.iam.v1.GetUserProfileResponse\"1\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/profile\x12\xc2\x02\n" +
+	"\auser_id\x12\auser_id\xe0\xb5\x18\x01\xca\xf3\x18+\b\x03\x12\x04user\"\vreq.user_id*\x14/users/{req.user_id}\x82\xd3\xe4\x93\x02\x1d*\x1b/api/iam/v1/users/{user_id}\x12\xf6\x01\n" +
+	"\x0eGetUserProfile\x12*.qdrant.cloud.iam.v1.GetUserProfileRequest\x1a+.qdrant.cloud.iam.v1.GetUserProfileResponse\"\x8a\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x8a\xb2\x19?\n" +
+	"+Gets the profile of the authenticated user.\x12\x10Get user profile\xaa\xb8\x19\x12\n" +
+	"\x10get_user_profile\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/profile\x12\xc2\x02\n" +
 	"\x11UpdateUserProfile\x12-.qdrant.cloud.iam.v1.UpdateUserProfileRequest\x1a..qdrant.cloud.iam.v1.UpdateUserProfileResponse\"\xcd\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01ʵ\x18L\n" +
-	"./qdrant.cloud.iam.v1.IAMService/GetUserProfile\x1a\fuser_profile\"\fuser_profile\xe0\xb5\x18\x01\xca\xf3\x18A\b\x02\x12\fuser-profile\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}\x82\xd3\xe4\x93\x02!:\x01*\x1a\x1c/api/iam/v1/users/me/profile\x12\x9c\x01\n" +
-	"\x0eGetUserConsent\x12*.qdrant.cloud.iam.v1.GetUserConsentRequest\x1a+.qdrant.cloud.iam.v1.GetUserConsentResponse\"1\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/consent\x12\x9e\x02\n" +
+	"./qdrant.cloud.iam.v1.IAMService/GetUserProfile\x1a\fuser_profile\"\fuser_profile\xe0\xb5\x18\x01\xca\xf3\x18A\b\x02\x12\fuser-profile\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}\x82\xd3\xe4\x93\x02!:\x01*\x1a\x1c/api/iam/v1/users/me/profile\x12\x96\x02\n" +
+	"\x0eGetUserConsent\x12*.qdrant.cloud.iam.v1.GetUserConsentRequest\x1a+.qdrant.cloud.iam.v1.GetUserConsentResponse\"\xaa\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x8a\xb2\x19_\n" +
+	"KGets the authenticated user's consent status for a specific legal document.\x12\x10Get user consent\xaa\xb8\x19\x12\n" +
+	"\x10get_user_consent\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/iam/v1/users/me/consent\x12\x9e\x02\n" +
 	"\x11RecordUserConsent\x12-.qdrant.cloud.iam.v1.RecordUserConsentRequest\x1a..qdrant.cloud.iam.v1.RecordUserConsentResponse\"\xa9\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\xca\xf3\x18m\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x0erecord-consentR\"\n" +
-	"\rdocument_type\x12\x11req.document_type\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/iam/v1/users/me/consent\x12\xb1\x01\n" +
-	"\x0fListPermissions\x12+.qdrant.cloud.iam.v1.ListPermissionsRequest\x1a,.qdrant.cloud.iam.v1.ListPermissionsResponse\"C\x8a\xb5\x18\n" +
-	"read:roles\x82\xd3\xe4\x93\x02/\x12-/api/iam/v1/accounts/{account_id}/permissions\x12\x99\x01\n" +
-	"\tListRoles\x12%.qdrant.cloud.iam.v1.ListRolesRequest\x1a&.qdrant.cloud.iam.v1.ListRolesResponse\"=\x8a\xb5\x18\n" +
-	"read:roles\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/roles\x12\xb3\x01\n" +
-	"\aGetRole\x12#.qdrant.cloud.iam.v1.GetRoleRequest\x1a$.qdrant.cloud.iam.v1.GetRoleResponse\"]\x8a\xb5\x18\n" +
+	"\rdocument_type\x12\x11req.document_type\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/iam/v1/users/me/consent\x12\x94\x03\n" +
+	"\x0fListPermissions\x12+.qdrant.cloud.iam.v1.ListPermissionsRequest\x1a,.qdrant.cloud.iam.v1.ListPermissionsResponse\"\xa5\x02\x8a\xb5\x18\n" +
+	"read:roles\x8a\xb2\x19\xc7\x01\n" +
+	"\xb2\x01Lists all permissions known in the system for the provided account. Note: If you want to get a list of permissions available for you, please use ListEffectivePermissions instead.\x12\x10List permissions\xaa\xb8\x19\x12\n" +
+	"\x10list_permissions\x82\xd3\xe4\x93\x02/\x12-/api/iam/v1/accounts/{account_id}/permissions\x12\xd4\x01\n" +
+	"\tListRoles\x12%.qdrant.cloud.iam.v1.ListRolesRequest\x1a&.qdrant.cloud.iam.v1.ListRolesResponse\"x\x8a\xb5\x18\n" +
+	"read:roles\x8a\xb2\x19'\n" +
+	"\x19List roles in an account.\x12\n" +
+	"List roles\xaa\xb8\x19\f\n" +
+	"\n" +
+	"list_roles\x82\xd3\xe4\x93\x02)\x12'/api/iam/v1/accounts/{account_id}/roles\x12\xea\x01\n" +
+	"\aGetRole\x12#.qdrant.cloud.iam.v1.GetRoleRequest\x1a$.qdrant.cloud.iam.v1.GetRoleResponse\"\x93\x01\x8a\xb5\x18\n" +
 	"read:roles\xba\xb5\x18\x12\n" +
-	"\arole_id\x12\arole_id\x82\xd3\xe4\x93\x023\x121/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xa3\x02\n" +
+	"\arole_id\x12\arole_id\x8a\xb2\x19$\n" +
+	"\x18Get a single role by ID.\x12\bGet role\xaa\xb8\x19\n" +
+	"\n" +
+	"\bget_role\x82\xd3\xe4\x93\x023\x121/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xa3\x02\n" +
 	"\n" +
 	"CreateRole\x12&.qdrant.cloud.iam.v1.CreateRoleRequest\x1a'.qdrant.cloud.iam.v1.CreateRoleResponse\"\xc3\x01\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xba\xb5\x18\x16\n" +
 	"\trole_name\x12\trole.name\xca\xf3\x18L\b\x01\x12\x04role\"\fresp.role.id*4/accounts/{req.role.account_id}/roles/{resp.role.id}\x82\xd3\xe4\x93\x021:\x01*\",/api/iam/v1/accounts/{role.account_id}/roles\x12\x93\x03\n" +
@@ -3360,19 +3381,27 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\arole_id\x12\arole.id\x1a\x04role\"\x04role\xca\xf3\x18J\b\x02\x12\x04role\"\vreq.role.id*3/accounts/{req.role.account_id}/roles/{req.role.id}\x82\xd3\xe4\x93\x02;:\x01*\x1a6/api/iam/v1/accounts/{role.account_id}/roles/{role.id}\x12\x88\x02\n" +
 	"\n" +
 	"DeleteRole\x12&.qdrant.cloud.iam.v1.DeleteRoleRequest\x1a'.qdrant.cloud.iam.v1.DeleteRoleResponse\"\xa8\x01\x8a\xb5\x18\fdelete:roles\xba\xb5\x18\x12\n" +
-	"\arole_id\x12\arole_id\xca\xf3\x18E\b\x03\x12\x04role\"\vreq.role_id*./accounts/{req.account_id}/roles/{req.role_id}\x82\xd3\xe4\x93\x023*1/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xcc\x01\n" +
-	"\x18ListEffectivePermissions\x124.qdrant.cloud.iam.v1.ListEffectivePermissionsRequest\x1a5.qdrant.cloud.iam.v1.ListEffectivePermissionsResponse\"C\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/effective-permissions\x12\xcb\x01\n" +
-	"\rListUserRoles\x12).qdrant.cloud.iam.v1.ListUserRolesRequest\x1a*.qdrant.cloud.iam.v1.ListUserRolesResponse\"c\x8a\xb5\x18\n" +
+	"\arole_id\x12\arole_id\xca\xf3\x18E\b\x03\x12\x04role\"\vreq.role_id*./accounts/{req.account_id}/roles/{req.role_id}\x82\xd3\xe4\x93\x023*1/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xf5\x02\n" +
+	"\x18ListEffectivePermissions\x124.qdrant.cloud.iam.v1.ListEffectivePermissionsRequest\x1a5.qdrant.cloud.iam.v1.ListEffectivePermissionsResponse\"\xeb\x01\x8a\xb5\x18\x00\x8a\xb2\x19\x83\x01\n" +
+	"eLists the effective permissions for the authenticated user in the account identified by the given ID.\x12\x1aList effective permissions\xaa\xb8\x19\x1c\n" +
+	"\x1alist_effective_permissions\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/effective-permissions\x12\xaa\x02\n" +
+	"\rListUserRoles\x12).qdrant.cloud.iam.v1.ListUserRolesRequest\x1a*.qdrant.cloud.iam.v1.ListUserRolesResponse\"\xc1\x01\x8a\xb5\x18\n" +
 	"read:roles\xba\xb5\x18\x12\n" +
-	"\auser_id\x12\auser_id\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xcb\x01\n" +
-	"\rListRoleUsers\x12).qdrant.cloud.iam.v1.ListRoleUsersRequest\x1a*.qdrant.cloud.iam.v1.ListRoleUsersResponse\"c\x8a\xb5\x18\n" +
+	"\auser_id\x12\auser_id\x8a\xb2\x19E\n" +
+	"2List roles of the user identified by the given ID.\x12\x0fList user roles\xaa\xb8\x19\x11\n" +
+	"\x0flist_user_roles\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xab\x02\n" +
+	"\rListRoleUsers\x12).qdrant.cloud.iam.v1.ListRoleUsersRequest\x1a*.qdrant.cloud.iam.v1.ListRoleUsersResponse\"\xc2\x01\x8a\xb5\x18\n" +
 	"read:roles\xba\xb5\x18\x12\n" +
-	"\arole_id\x12\arole_id\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/roles/{role_id}/users\x12\xb7\x02\n" +
+	"\arole_id\x12\arole_id\x8a\xb2\x19F\n" +
+	"3List users for the role identified by the given ID.\x12\x0fList role users\xaa\xb8\x19\x11\n" +
+	"\x0flist_role_users\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/roles/{role_id}/users\x12\xb7\x02\n" +
 	"\x0fAssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"\xc8\x01\x8a\xb5\x18\vwrite:roles\xba\xb5\x18\x12\n" +
 	"\auser_id\x12\auser_id\xe0\xb5\x18\x01\xca\xf3\x18Y\b\x04\x12\x04user\"\vreq.user_id*4/accounts/{req.account_id}/users/{req.user_id}/roles2\fassign-roles\x82\xd3\xe4\x93\x02<:\x01*\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xd8\x01\n" +
 	"\n" +
-	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"y\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\xca\xf3\x18A\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logout\x12\xb0\x01\n" +
-	"\x12ListUserMfaMethods\x12..qdrant.cloud.iam.v1.ListUserMfaMethodsRequest\x1a/.qdrant.cloud.iam.v1.ListUserMfaMethodsResponse\"9\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\x82\xd3\xe4\x93\x02\"\x12 /api/iam/v1/users/me/mfa-methods\x12\x8b\x03\n" +
+	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"y\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\xca\xf3\x18A\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logout\x12\xa4\x02\n" +
+	"\x12ListUserMfaMethods\x12..qdrant.cloud.iam.v1.ListUserMfaMethodsRequest\x1a/.qdrant.cloud.iam.v1.ListUserMfaMethodsResponse\"\xac\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\x8a\xb2\x19T\n" +
+	";Lists the user's multi-factor authentication (MFA) methods.\x12\x15List user mfa methods\xaa\xb8\x19\x17\n" +
+	"\x15list_user_mfa_methods\x82\xd3\xe4\x93\x02\"\x12 /api/iam/v1/users/me/mfa-methods\x12\x8b\x03\n" +
 	"\x13UpdateUserMfaMethod\x12/.qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest\x1a0.qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse\"\x90\x02\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18%\n" +
 	"\vexternal_id\x12\x16mfa_method.external_id\xe0\xb5\x18\x01\xca\xf3\x18\x90\x01\b\x02\x12\n" +
 	"mfa-method\"\x1areq.mfa_method.external_id*D/users/{req-md.qc-actor-id}/mfa-methods/{req.mfa_method.external_id}R\x1e\n" +

@@ -10,6 +10,8 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1714,7 +1716,7 @@ var File_qdrant_cloud_payment_v1_payment_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/payment/v1/payment.proto\x12\x17qdrant.cloud.payment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"D\n" +
+	"%qdrant/cloud/payment/v1/payment.proto\x12\x17qdrant.cloud.payment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"D\n" +
 	"\x19ListPaymentMethodsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"Z\n" +
@@ -1859,12 +1861,18 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
 	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
 	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
-	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xa1\x1a\n" +
-	"\x0ePaymentService\x12\xd8\x01\n" +
-	"\x12ListPaymentMethods\x122.qdrant.cloud.payment.v1.ListPaymentMethodsRequest\x1a3.qdrant.cloud.payment.v1.ListPaymentMethodsResponse\"Y\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x027\x125/api/payment/v1/accounts/{account_id}/payment-methods\x12\x91\x02\n" +
-	"\x10GetPaymentMethod\x120.qdrant.cloud.payment.v1.GetPaymentMethodRequest\x1a1.qdrant.cloud.payment.v1.GetPaymentMethodResponse\"\x97\x01\x8a\xb5\x18\x18read:payment_information\xba\xb5\x18&\n" +
-	"\x11payment_method_id\x12\x11payment_method_id\x82\xd3\xe4\x93\x02K\x12I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xea\x01\n" +
-	"\x1cGetPaymentMethodAvailability\x12<.qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityRequest\x1a=.qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityResponse\"M\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/payment-method-availability\x12\xc0\x03\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xa2\x1f\n" +
+	"\x0ePaymentService\x12\xb3\x02\n" +
+	"\x12ListPaymentMethods\x122.qdrant.cloud.payment.v1.ListPaymentMethodsRequest\x1a3.qdrant.cloud.payment.v1.ListPaymentMethodsResponse\"\xb3\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19<\n" +
+	"$List payment methods for an account.\x12\x14List payment methods\xaa\xb8\x19\x16\n" +
+	"\x14list_payment_methods\x82\xd3\xe4\x93\x027\x125/api/payment/v1/accounts/{account_id}/payment-methods\x12\xe5\x02\n" +
+	"\x10GetPaymentMethod\x120.qdrant.cloud.payment.v1.GetPaymentMethodRequest\x1a1.qdrant.cloud.payment.v1.GetPaymentMethodResponse\"\xeb\x01\x8a\xb5\x18\x18read:payment_information\xba\xb5\x18&\n" +
+	"\x11payment_method_id\x12\x11payment_method_id\x8a\xb2\x198\n" +
+	"\"Get a single payment method by ID.\x12\x12Get payment method\xaa\xb8\x19\x14\n" +
+	"\x12get_payment_method\x82\xd3\xe4\x93\x02K\x12I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xfc\x03\n" +
+	"\x1cGetPaymentMethodAvailability\x12<.qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityRequest\x1a=.qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityResponse\"\xde\x02\x8a\xb5\x18\x00\x8a\xb2\x19\xe7\x01\n" +
+	"\xc3\x01Gets the payment method availability status for the account. This method can be used to determine if the account is ready to make payments. The authenticated user must be a member of the account.\x12\x1fGet payment method availability\xaa\xb8\x19!\n" +
+	"\x1fget_payment_method_availability\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/payment-method-availability\x12\xc0\x03\n" +
 	"\x13CreatePaymentMethod\x123.qdrant.cloud.payment.v1.CreatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.CreatePaymentMethodResponse\"\xbd\x02\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\xba\xb5\x18*\n" +
 	"\x13payment_method_type\x12\x13payment_method.type\xe0\xb5\x18\x01\xca\xf3\x18~\b\x01\x12\x0epayment-method\"\x16resp.payment_method.id*R/accounts/{req.payment_method.account_id}/payment-methods/{resp.payment_method.id}\x82\xd3\xe4\x93\x02I:\x01*\"D/api/payment/v1/accounts/{payment_method.account_id}/payment-methods\x12\xfe\x04\n" +
 	"\x13UpdatePaymentMethod\x123.qdrant.cloud.payment.v1.UpdatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.UpdatePaymentMethodResponse\"\xfb\x03\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\xba\xb5\x18&\n" +
@@ -1874,11 +1882,13 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"account_id\x12\x19payment_method.account_id\x12&\n" +
 	"\x11payment_method_id\x12\x11payment_method.id\x1a\x0epayment_method\"\x0epayment_method\xe0\xb5\x18\x01\xca\xf3\x18|\b\x02\x12\x0epayment-method\"\x15req.payment_method.id*Q/accounts/{req.payment_method.account_id}/payment-methods/{req.payment_method.id}\x82\xd3\xe4\x93\x02]:\x01*\x1aX/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}\x12\x90\x03\n" +
 	"\x13DeletePaymentMethod\x123.qdrant.cloud.payment.v1.DeletePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.DeletePaymentMethodResponse\"\x8d\x02\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18&\n" +
-	"\x11payment_method_id\x12\x11payment_method_id\xe0\xb5\x18\x01\xca\xf3\x18m\b\x03\x12\x0epayment-method\"\x15req.payment_method_id*B/accounts/{req.account_id}/payment-methods/{req.payment_method_id}\x82\xd3\xe4\x93\x02K*I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\x94\x02\n" +
-	"\x18GetStripeCheckoutSession\x128.qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest\x1a9.qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse\"\x82\x01\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18\x18\n" +
+	"\x11payment_method_id\x12\x11payment_method_id\xe0\xb5\x18\x01\xca\xf3\x18m\b\x03\x12\x0epayment-method\"\x15req.payment_method_id*B/accounts/{req.account_id}/payment-methods/{req.payment_method_id}\x82\xd3\xe4\x93\x02K*I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xd4\x03\n" +
+	"\x18GetStripeCheckoutSession\x128.qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest\x1a9.qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse\"\xc2\x02\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18\x18\n" +
 	"\n" +
 	"session_id\x12\n" +
-	"session_id\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}\x12\xf6\x02\n" +
+	"session_id\x8a\xb2\x19\x9a\x01\n" +
+	"yGet the Stripe Checkout session by its ID. This method is used to retrieve the session details after it has been created.\x12\x1bGet stripe checkout session\x18\x01\xaa\xb8\x19\x1d\n" +
+	"\x1bget_stripe_checkout_session\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}\x12\xf6\x02\n" +
 	"\x1bCreateStripeCheckoutSession\x12;.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest\x1a<.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse\"\xdb\x01\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18\x1c\n" +
 	"\fredirect_url\x12\fredirect_url\xe0\xb5\x18\x01\xca\xf3\x18W\b\x04\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}2\x1ecreate-stripe-checkout-session\x82\xd3\xe4\x93\x029:\x01*\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\xc1\x03\n" +
 	"!RecordCloudMarketplaceEntitlement\x12A.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest\x1aB.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse\"\x94\x02\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18,\n" +

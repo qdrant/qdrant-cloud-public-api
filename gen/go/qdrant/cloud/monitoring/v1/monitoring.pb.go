@@ -9,6 +9,8 @@ package monitoringv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1869,7 +1871,7 @@ var File_qdrant_cloud_monitoring_v1_monitoring_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
-	"+qdrant/cloud/monitoring/v1/monitoring.proto\x12\x1aqdrant.cloud.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"s\n" +
+	"+qdrant/cloud/monitoring/v1/monitoring.proto\x12\x1aqdrant.cloud.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"s\n" +
 	"\x1fGetClusterSummaryMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12'\n" +
@@ -2043,32 +2045,44 @@ const file_qdrant_cloud_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\"CLUSTER_ALERT_SEVERITY_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bCLUSTER_ALERT_SEVERITY_INFO\x10\x01\x12\"\n" +
 	"\x1eCLUSTER_ALERT_SEVERITY_WARNING\x10\x02\x12#\n" +
-	"\x1fCLUSTER_ALERT_SEVERITY_CRITICAL\x10\x032\xde\f\n" +
-	"\x11MonitoringService\x12\x9a\x02\n" +
-	"\x18GetClusterSummaryMetrics\x12;.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest\x1a<.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse\"\x82\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"\x1fCLUSTER_ALERT_SEVERITY_CRITICAL\x10\x032\xd6\x14\n" +
+	"\x11MonitoringService\x12\xae\x03\n" +
+	"\x18GetClusterSummaryMetrics\x12;.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsRequest\x1a<.qdrant.cloud.monitoring.v1.GetClusterSummaryMetricsResponse\"\x96\x02\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02O\x12M/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/summary-metrics\x12\x92\x02\n" +
-	"\x16GetClusterUsageMetrics\x129.qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest\x1a:.qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse\"\x80\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\x8a\xb2\x19o\n" +
+	"PGets the summary metrics of a cluster in the account identified by the given ID.\x12\x1bGet cluster summary metrics\xaa\xb8\x19\x1d\n" +
+	"\x1bget_cluster_summary_metrics\x82\xd3\xe4\x93\x02O\x12M/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/summary-metrics\x12\xba\x03\n" +
+	"\x16GetClusterUsageMetrics\x129.qdrant.cloud.monitoring.v1.GetClusterUsageMetricsRequest\x1a:.qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse\"\xa8\x02\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02M\x12K/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/usage-metrics\x12\xf0\x01\n" +
-	"\x0eGetClusterLogs\x121.qdrant.cloud.monitoring.v1.GetClusterLogsRequest\x1a2.qdrant.cloud.monitoring.v1.GetClusterLogsResponse\"w\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\x8a\xb2\x19\x84\x01\n" +
+	"gGets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.\x12\x19Get cluster usage metrics\xaa\xb8\x19\x1b\n" +
+	"\x19get_cluster_usage_metrics\x82\xd3\xe4\x93\x02M\x12K/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/usage-metrics\x12\xe4\x02\n" +
+	"\x0eGetClusterLogs\x121.qdrant.cloud.monitoring.v1.GetClusterLogsRequest\x1a2.qdrant.cloud.monitoring.v1.GetClusterLogsResponse\"\xea\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02D\x12B/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/logs\x12\xf8\x01\n" +
-	"\x10GetClusterEvents\x123.qdrant.cloud.monitoring.v1.GetClusterEventsRequest\x1a4.qdrant.cloud.monitoring.v1.GetClusterEventsResponse\"y\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\x8a\xb2\x19Y\n" +
+	"EGets the logs of a cluster in the account identified by the given ID.\x12\x10Get cluster logs\xaa\xb8\x19\x12\n" +
+	"\x10get_cluster_logs\x82\xd3\xe4\x93\x02D\x12B/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/logs\x12\xcf\x03\n" +
+	"\x10GetClusterEvents\x123.qdrant.cloud.monitoring.v1.GetClusterEventsRequest\x1a4.qdrant.cloud.monitoring.v1.GetClusterEventsResponse\"\xcf\x02\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02F\x12D/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/events\x12\xa2\x02\n" +
-	"\x1aGetClusterInferenceMetrics\x12=.qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest\x1a>.qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse\"\x84\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\x8a\xb2\x19\xb9\x01\n" +
+	"\xa2\x01Gets the events of a cluster in the account identified by the given ID. This method is currently available only for clusters running in hybrid cloud environments.\x12\x12Get cluster events\xaa\xb8\x19\x14\n" +
+	"\x12get_cluster_events\x82\xd3\xe4\x93\x02F\x12D/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/events\x12\xe6\x03\n" +
+	"\x1aGetClusterInferenceMetrics\x12=.qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsRequest\x1a>.qdrant.cloud.monitoring.v1.GetClusterInferenceMetricsResponse\"\xc8\x02\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02Q\x12O/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference\x12\xfb\x01\n" +
-	"\x11ListClusterAlerts\x124.qdrant.cloud.monitoring.v1.ListClusterAlertsRequest\x1a5.qdrant.cloud.monitoring.v1.ListClusterAlertsResponse\"y\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\x8a\xb2\x19\x9c\x01\n" +
+	"{Gets the inference token usage metrics for a cluster. Provide `inference_model_id` to limit the response to a single model.\x12\x1dGet cluster inference metrics\xaa\xb8\x19\x1f\n" +
+	"\x1dget_cluster_inference_metrics\x82\xd3\xe4\x93\x02Q\x12O/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/metrics/inference\x12\xa8\x03\n" +
+	"\x11ListClusterAlerts\x124.qdrant.cloud.monitoring.v1.ListClusterAlertsRequest\x1a5.qdrant.cloud.monitoring.v1.ListClusterAlertsResponse\"\xa5\x02\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02F\x12D/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/alerts\x1a\x06µ\x18\x02\b\x01B\x96\x02\n" +
+	"cluster_id\x8a\xb2\x19\x8e\x01\n" +
+	"wLists the alerts for a cluster in the account identified by the given ID. Sorted by last_firing_at (most recent first).\x12\x13List cluster alerts\xaa\xb8\x19\x15\n" +
+	"\x13list_cluster_alerts\x82\xd3\xe4\x93\x02F\x12D/api/monitoring/v1/accounts/{account_id}/cluster/{cluster_id}/alerts\x1a\x06µ\x18\x02\b\x01B\x96\x02\n" +
 	"\x1ecom.qdrant.cloud.monitoring.v1B\x0fMonitoringProtoP\x01ZXgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/monitoring/v1;monitoringv1\xa2\x02\x03QCM\xaa\x02\x1aQdrant.Cloud.Monitoring.V1\xca\x02\x1aQdrant\\Cloud\\Monitoring\\V1\xe2\x02&Qdrant\\Cloud\\Monitoring\\V1\\GPBMetadata\xea\x02\x1dQdrant::Cloud::Monitoring::V1b\x06proto3"
 
 var (

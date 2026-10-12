@@ -9,6 +9,8 @@ package uiv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/iam/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -178,7 +180,7 @@ var File_qdrant_cloud_ui_v1_ui_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_ui_v1_ui_proto_rawDesc = "" +
 	"\n" +
-	"\x1bqdrant/cloud/ui/v1/ui.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"D\n" +
+	"\x1bqdrant/cloud/ui/v1/ui.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"D\n" +
 	"\x19ListUsersWithRolesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"U\n" +
@@ -186,11 +188,13 @@ const file_qdrant_cloud_ui_v1_ui_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v2!.qdrant.cloud.ui.v1.UserWithRolesR\x05items\"w\n" +
 	"\rUserWithRoles\x125\n" +
 	"\x04user\x18\x01 \x01(\v2\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\x12/\n" +
-	"\x05roles\x18\x02 \x03(\v2\x19.qdrant.cloud.iam.v1.RoleR\x05roles2\xe2\x01\n" +
-	"\x12AggregationService\x12\xc3\x01\n" +
-	"\x12ListUsersWithRoles\x12-.qdrant.cloud.ui.v1.ListUsersWithRolesRequest\x1a..qdrant.cloud.ui.v1.ListUsersWithRolesResponse\"N\x8a\xb5\x18\n" +
+	"\x05roles\x18\x02 \x03(\v2\x19.qdrant.cloud.iam.v1.RoleR\x05roles2\xd6\x03\n" +
+	"\x12AggregationService\x12\xb7\x03\n" +
+	"\x12ListUsersWithRoles\x12-.qdrant.cloud.ui.v1.ListUsersWithRolesRequest\x1a..qdrant.cloud.ui.v1.ListUsersWithRolesResponse\"\xc1\x02\x8a\xb5\x18\n" +
 	"read:users\x8a\xb5\x18\n" +
-	"read:roles\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02(\x12&/api/ui/v1/accounts/{account_id}/users\x1a\x06µ\x18\x02\b\x01B\xd6\x01\n" +
+	"read:roles\xa8\xb5\x18\x01\x8a\xb2\x19\xd3\x01\n" +
+	"\xb9\x01Lists users in an account with their assigned roles. This endpoint provides a consolidated view that would otherwise require separate calls to ListUsers and ListUserRoles for each user.\x12\x15List users with roles\xaa\xb8\x19\x17\n" +
+	"\x15list_users_with_roles\x82\xd3\xe4\x93\x02(\x12&/api/ui/v1/accounts/{account_id}/users\x1a\x06µ\x18\x02\b\x01B\xd6\x01\n" +
 	"\x16com.qdrant.cloud.ui.v1B\aUiProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3"
 
 var (

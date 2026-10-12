@@ -5,7 +5,8 @@ package qdrant.cloud.serverless.platform.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // PlatformService is the API used to query for cloud regions information for the serverless spaces in the platform.
 service PlatformService {
   // The API version of this service.
@@ -21,6 +22,11 @@ service PlatformService {
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/serverless/platform/v1/cloud-regions"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all cloud regions (not account-specific). Authentication is not required."
+      title: "List global cloud regions"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_global_cloud_regions"};
   }
   // Gets a specific cloud region (not account-specific) identified by cloud region ID.
   // Authentication is not required.
@@ -34,6 +40,11 @@ service PlatformService {
       name: "cloud_region_id"
       field_expression: "cloud_region_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets a specific cloud region (not account-specific) identified by cloud region ID. Authentication is not required."
+      title: "Get global cloud region"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_global_cloud_region"};
   }
   // Lists all cloud regions in the account identified by the given ID.
   // Required permissions:
@@ -43,6 +54,11 @@ service PlatformService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/serverless/platform/v1/accounts/{account_id}/cloud-regions"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all cloud regions in the account identified by the given ID."
+      title: "List cloud regions"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_cloud_regions"};
   }
   // Gets a specific cloud region in the account identified by the given ID.
   // Required permissions:
@@ -57,6 +73,11 @@ service PlatformService {
       name: "cloud_region_id"
       field_expression: "cloud_region_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets a specific cloud region in the account identified by the given ID."
+      title: "Get cloud region"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cloud_region"};
   }
 }
 

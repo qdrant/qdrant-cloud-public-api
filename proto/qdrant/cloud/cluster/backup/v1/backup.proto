@@ -11,7 +11,8 @@ import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/cluster/v1/cluster.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // BackupService is the API used to configure backup objects.
 service BackupService {
   // The API version of this service.
@@ -37,6 +38,11 @@ service BackupService {
       name: "backup_schedule_id"
       field_expression: "backup_schedule_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List cluster backups with optional filters and pagination."
+      title: "List cluster backups"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_backups"};
   }
   // Gets a backup in the account identified by the given ID.
   // Required permissions:
@@ -51,6 +57,11 @@ service BackupService {
       name: "backup_id"
       field_expression: "backup_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get a single cluster backup by ID."
+      title: "Get cluster backup"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_backup"};
   }
   // Creates a backup for the cluster identified by the given ID.
   // Required permissions:
@@ -151,6 +162,11 @@ service BackupService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all backup restores in the account identified by the given ID."
+      title: "List backup restores"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_backup_restores"};
   }
   // Restores a backup in the account identified by the given ID.
   // Required permissions:
@@ -191,6 +207,11 @@ service BackupService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List cluster backup schedules with optional filters."
+      title: "List cluster backup schedules"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_backup_schedules"};
   }
   // Gets a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -209,6 +230,11 @@ service BackupService {
       name: "backup_schedule_id"
       field_expression: "backup_schedule_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get a single cluster backup schedule by ID."
+      title: "Get cluster backup schedule"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_backup_schedule"};
   }
   // Creates a backup schedule in the account identified by the given ID.
   // Required permissions:

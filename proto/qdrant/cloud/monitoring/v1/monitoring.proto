@@ -7,7 +7,8 @@ import "google/api/annotations.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // MonitoringService provides access to monitoring data such as cluster metrics, logs, and events.
 service MonitoringService {
   // The API version of this service.
@@ -29,6 +30,11 @@ service MonitoringService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the summary metrics of a cluster in the account identified by the given ID."
+      title: "Get cluster summary metrics"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster_summary_metrics"};
   }
   // Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
   // Required permissions:
@@ -43,6 +49,11 @@ service MonitoringService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID."
+      title: "Get cluster usage metrics"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster_usage_metrics"};
   }
   // Gets the logs of a cluster in the account identified by the given ID.
   // Required permissions:
@@ -57,6 +68,11 @@ service MonitoringService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the logs of a cluster in the account identified by the given ID."
+      title: "Get cluster logs"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster_logs"};
   }
   // Gets the events of a cluster in the account identified by the given ID.
   // This method is currently available only for clusters running in hybrid cloud environments.
@@ -72,6 +88,11 @@ service MonitoringService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the events of a cluster in the account identified by the given ID. This method is currently available only for clusters running in hybrid cloud environments."
+      title: "Get cluster events"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster_events"};
   }
   // Gets the inference token usage metrics for a cluster.
   // Provide `inference_model_id` to limit the response to a single model.
@@ -87,6 +108,11 @@ service MonitoringService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the inference token usage metrics for a cluster. Provide `inference_model_id` to limit the response to a single model."
+      title: "Get cluster inference metrics"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster_inference_metrics"};
   }
   // Lists the alerts for a cluster in the account identified by the given ID.
   // Sorted by last_firing_at (most recent first).
@@ -102,6 +128,11 @@ service MonitoringService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists the alerts for a cluster in the account identified by the given ID. Sorted by last_firing_at (most recent first)."
+      title: "List cluster alerts"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_cluster_alerts"};
   }
 }
 
