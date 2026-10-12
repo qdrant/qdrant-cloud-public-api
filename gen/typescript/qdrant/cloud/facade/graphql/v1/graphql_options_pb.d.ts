@@ -164,12 +164,11 @@ export declare const GraphqlFieldOptionsSchema: GenMessage<GraphqlFieldOptions, 
 export declare const graphql: GenExtension<MethodOptions, GraphqlMethodOptions>;
 
 /**
- * GraphQL nested-field overlay(s) for this RPC. Repeatable: the same RPC may
- * hang off multiple parent types (for example Cluster and Space backups).
+ * GraphQL nested-field overlay for this RPC (one parent type per RPC).
  *
- * @generated from extension: repeated qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions graphql_nested = 52203;
+ * @generated from extension: qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions graphql_nested = 52203;
  */
-export declare const graphql_nested: GenExtension<MethodOptions, GraphqlNestedOptions[]>;
+export declare const graphql_nested: GenExtension<MethodOptions, GraphqlNestedOptions>;
 
 /**
  * GraphQL argument overlay for this request field.

@@ -13,8 +13,9 @@ import "google/protobuf/descriptor.proto";
 // description live on (qdrant.cloud.facade.v1.facade_field).
 //
 // Presence of (graphql) marks the RPC as eligible for a GraphQL root field.
-// Each (graphql_nested) attaches the same RPC as a nested field on a parent
-// GraphQL type (parent message → child RPC wiring).
+// Presence of (graphql_nested) attaches the RPC as a nested field on one parent
+// GraphQL type (parent message → child RPC wiring). Cluster vs space backups are
+// separate RPCs in different packages, each with its own single nested parent.
 //
 // Example (together with facade options):
 //  option (qdrant.cloud.facade.v1.facade) = {
@@ -40,9 +41,8 @@ extend google.protobuf.MethodOptions {
   // GraphQL root overlay for this RPC (field name, response path).
   // Extension number 52201 is in the facade.graphql overlay range.
   GraphqlMethodOptions graphql = 52201;
-  // GraphQL nested-field overlay(s) for this RPC. Repeatable: the same RPC may
-  // hang off multiple parent types (for example Cluster and Space backups).
-  repeated GraphqlNestedOptions graphql_nested = 52203;
+  // GraphQL nested-field overlay for this RPC (one parent type per RPC).
+  GraphqlNestedOptions graphql_nested = 52203;
 }
 
 // GraphQL-specific field options for request-message fields used as GraphQL

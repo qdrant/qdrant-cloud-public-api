@@ -288,10 +288,10 @@ var file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_extTypes = []proto
 	},
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
-		ExtensionType: ([]*GraphqlNestedOptions)(nil),
+		ExtensionType: (*GraphqlNestedOptions)(nil),
 		Field:         52203,
 		Name:          "qdrant.cloud.facade.graphql.v1.graphql_nested",
-		Tag:           "bytes,52203,rep,name=graphql_nested",
+		Tag:           "bytes,52203,opt,name=graphql_nested",
 		Filename:      "qdrant/cloud/facade/graphql/v1/graphql_options.proto",
 	},
 	{
@@ -311,10 +311,9 @@ var (
 	//
 	// optional qdrant.cloud.facade.graphql.v1.GraphqlMethodOptions graphql = 52201;
 	E_Graphql = &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_extTypes[0]
-	// GraphQL nested-field overlay(s) for this RPC. Repeatable: the same RPC may
-	// hang off multiple parent types (for example Cluster and Space backups).
+	// GraphQL nested-field overlay for this RPC (one parent type per RPC).
 	//
-	// repeated qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions graphql_nested = 52203;
+	// optional qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions graphql_nested = 52203;
 	E_GraphqlNested = &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_extTypes[1]
 )
 
@@ -351,7 +350,7 @@ const file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDesc = "" +
 	"\x13GraphqlFieldOptions\x12=\n" +
 	"\barg_name\x18\x01 \x01(\tB\"\xbaH\x1fr\x1d2\x1b^(|[A-Za-z_][A-Za-z0-9_]*)$R\aargName:p\n" +
 	"\agraphql\x12\x1e.google.protobuf.MethodOptions\x18\xe9\x97\x03 \x01(\v24.qdrant.cloud.facade.graphql.v1.GraphqlMethodOptionsR\agraphql:}\n" +
-	"\x0egraphql_nested\x12\x1e.google.protobuf.MethodOptions\x18\xeb\x97\x03 \x03(\v24.qdrant.cloud.facade.graphql.v1.GraphqlNestedOptionsR\rgraphqlNested:y\n" +
+	"\x0egraphql_nested\x12\x1e.google.protobuf.MethodOptions\x18\xeb\x97\x03 \x01(\v24.qdrant.cloud.facade.graphql.v1.GraphqlNestedOptionsR\rgraphqlNested:y\n" +
 	"\rgraphql_field\x12\x1d.google.protobuf.FieldOptions\x18\xea\x97\x03 \x01(\v23.qdrant.cloud.facade.graphql.v1.GraphqlFieldOptionsR\fgraphqlFieldB\xb1\x02\n" +
 	"\"com.qdrant.cloud.facade.graphql.v1B\x13GraphqlOptionsProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/graphql/v1;graphqlv1\xa2\x02\x04QCFG\xaa\x02\x1eQdrant.Cloud.Facade.Graphql.V1\xca\x02\x1eQdrant\\Cloud\\Facade\\Graphql\\V1\xe2\x02*Qdrant\\Cloud\\Facade\\Graphql\\V1\\GPBMetadata\xea\x02\"Qdrant::Cloud::Facade::Graphql::V1b\x06proto3"
 
