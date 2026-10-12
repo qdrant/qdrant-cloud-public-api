@@ -78,6 +78,12 @@ service SpaceService {
       name: "space_name"
       field_expression: "space.name"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "CreateSpace creates a new space with the specified configuration Required Permissions:"
+      title: "Create space"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_space"};
   }
   // Create a new space from an existing backup
   // Required permissions (both):
@@ -113,6 +119,12 @@ service SpaceService {
       name: "space_name"
       field_expression: "space_name"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Create a new space from an existing backup"
+      title: "Create space from backup"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_space_from_backup"};
   }
   // Updates a space in the account identified by the given ID.
   // Required Permissions:
@@ -156,6 +168,12 @@ service SpaceService {
       response_resource_field: "space"
       request_resource_field: "space"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Updates a space in the account identified by the given ID. Required Permissions:"
+      title: "Update space"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_space"};
   }
   // DeleteSpace removes a space by ID
   // Required Permissions:
@@ -181,6 +199,12 @@ service SpaceService {
       name: "space_id"
       field_expression: "space_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "DeleteSpace removes a space by ID Required Permissions:"
+      title: "Delete space"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_space"};
   }
   // Suggests a unique and human-friendly name for a new space in the specified account.
   // This can be used by clients to pre-fill the name field when creating a new space.

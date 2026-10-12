@@ -45,6 +45,13 @@ service EphemeralDashboardTokenService {
       name: "space_id"
       field_expression: "space_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates an ephemeral dashboard token in the account identified by the given ID."
+      title: "Create ephemeral dashboard token"
+      sensitive_response: true
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "space_auth_create_ephemeral_dashboard_token"};
   }
   // ListEphemeralDashboardTokens returns the ephemeral dashboard tokens for the account identified by the given ID.
   // Optionally filtered by space.
@@ -90,6 +97,13 @@ service EphemeralDashboardTokenService {
       name: "space_api_key_id"
       field_expression: "space_api_key_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "RevokeEphemeralDashboardToken revokes an ephemeral dashboard token in the account identified by the given ID."
+      title: "Revoke ephemeral dashboard token"
+      sensitive_response: true
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "revoke_ephemeral_dashboard_token"};
   }
 }
 

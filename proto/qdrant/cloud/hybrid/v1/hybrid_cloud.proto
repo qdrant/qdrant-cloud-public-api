@@ -85,6 +85,12 @@ service HybridCloudService {
       name: "hybrid_cloud_environment_name"
       field_expression: "hybrid_cloud_environment.name"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates a hybrid cloud environment in the account identified by the given ID."
+      title: "Create hybrid cloud environment"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_hybrid_cloud_environment"};
   }
   // Updates a hybrid cloud environment in the account identified by the given ID.
   // Required permissions:
@@ -129,6 +135,12 @@ service HybridCloudService {
       response_resource_field: "hybrid_cloud_environment"
       request_resource_field: "hybrid_cloud_environment"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Updates a hybrid cloud environment in the account identified by the given ID."
+      title: "Update hybrid cloud environment"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_hybrid_cloud_environment"};
   }
   // Deletes a hybrid cloud environment in the account identified by the given ID.
   // Required permissions:
@@ -150,6 +162,12 @@ service HybridCloudService {
       name: "hybrid_cloud_environment_id"
       field_expression: "hybrid_cloud_environment_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes a hybrid cloud environment in the account identified by the given ID."
+      title: "Delete hybrid cloud environment"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_hybrid_cloud_environment"};
   }
   // Generates the commands that should be executed against a kubernetes cluster to
   // bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
@@ -181,6 +199,12 @@ service HybridCloudService {
       name: "hybrid_cloud_environment_id"
       field_expression: "hybrid_cloud_environment_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Generates the commands that should be executed against a kubernetes cluster to bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times, but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials. Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment."
+      title: "Generate bootstrap commands"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "generate_bootstrap_commands"};
   }
 }
 

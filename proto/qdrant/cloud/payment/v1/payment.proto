@@ -96,6 +96,12 @@ service PaymentService {
       name: "payment_method_type"
       field_expression: "payment_method.type"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates a new payment method for the account. This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe)."
+      title: "Create payment method"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_payment_method"};
   }
   // Updates the payment method for the account.
   // This method is used to update the payment method details, such as billing address.
@@ -142,6 +148,12 @@ service PaymentService {
       response_resource_field: "payment_method"
       request_resource_field: "payment_method"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Updates the payment method for the account. This method is used to update the payment method details, such as billing address."
+      title: "Update payment method"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_payment_method"};
   }
   // Delete the payment method identified by the given ID.
   // Required permissions:
@@ -165,6 +177,12 @@ service PaymentService {
       name: "payment_method_id"
       field_expression: "payment_method_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Delete the payment method identified by the given ID."
+      title: "Delete payment method"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_payment_method"};
   }
   // Get the Stripe Checkout session by its ID.
   // This method is used to retrieve the session details after it has been created.
@@ -214,6 +232,13 @@ service PaymentService {
       name: "redirect_url"
       field_expression: "redirect_url"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Initiates the creation of a Stripe Checkout session for the specified account. This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page."
+      title: "Create stripe checkout session"
+      sensitive_response: true
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_stripe_checkout_session"};
   }
   // Records a cloud marketplace entitlement for the specified account.
   // This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure)
@@ -240,6 +265,12 @@ service PaymentService {
       name: "marketplace_entitlement_id"
       field_expression: "entitlement_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Records a cloud marketplace entitlement for the specified account. This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure) and the entitlement needs to be recorded in the payment system."
+      title: "Record cloud marketplace entitlement"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "record_cloud_marketplace_entitlement"};
   }
 }
 

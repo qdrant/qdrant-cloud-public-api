@@ -55,6 +55,13 @@ service AuthService {
       resource_id_field: "resp.management_key.id"
       resource_url_template: "/accounts/{req.management_key.account_id}/management-keys/{resp.management_key.id}"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates a management key in the account identified by the given ID."
+      title: "Create management key"
+      sensitive_response: true
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_management_key"};
   }
   // Deletes a management key in the account identified by the given ID.
   // Required permissions:
@@ -76,6 +83,13 @@ service AuthService {
       name: "management_key_id"
       field_expression: "management_key_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes a management key in the account identified by the given ID."
+      title: "Delete management key"
+      sensitive_response: true
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_management_key"};
   }
 }
 

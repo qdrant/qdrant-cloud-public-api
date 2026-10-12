@@ -92,6 +92,12 @@ service BackupService {
       name: "cluster_id"
       field_expression: "backup.cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates a backup for the cluster identified by the given ID."
+      title: "Create backup"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_backup"};
   }
   // Updates a backup in the account identified by the given ID.
   // Only the display name can be changed; every other field is read-only and is ignored.
@@ -123,6 +129,12 @@ service BackupService {
       name: "backup_id"
       field_expression: "backup.id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Updates a backup in the account identified by the given ID. Only the display name can be changed; every other field is read-only and is ignored."
+      title: "Update backup"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_backup"};
   }
   // Deletes a backup in the account identified by the given ID.
   // Required permissions:
@@ -148,6 +160,12 @@ service BackupService {
       name: "backup_id"
       field_expression: "backup_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes a backup in the account identified by the given ID."
+      title: "Delete backup"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_backup"};
   }
   // Lists all backup restores in the account identified by the given ID.
   // Required permissions:
@@ -193,6 +211,12 @@ service BackupService {
       name: "backup_id"
       field_expression: "backup_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Restores a backup in the account identified by the given ID."
+      title: "Restore backup"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "restore_backup"};
   }
   // Lists all backup schedules in the account identified by the given ID.
   // Required permissions:
@@ -265,6 +289,12 @@ service BackupService {
       name: "cluster_id"
       field_expression: "backup_schedule.cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates a backup schedule in the account identified by the given ID."
+      title: "Create backup schedule"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_backup_schedule"};
   }
   // Updates a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -320,6 +350,12 @@ service BackupService {
       response_resource_field: "backup_schedule"
       request_resource_field: "backup_schedule"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Updates a backup schedule in the account identified by the given ID."
+      title: "Update backup schedule"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_backup_schedule"};
   }
   // Deletes a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -349,6 +385,12 @@ service BackupService {
       name: "backup_schedule_id"
       field_expression: "backup_schedule_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes a backup schedule in the account identified by the given ID."
+      title: "Delete backup schedule"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_backup_schedule"};
   }
 }
 

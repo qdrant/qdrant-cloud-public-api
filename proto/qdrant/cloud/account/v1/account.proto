@@ -79,6 +79,12 @@ service AccountService {
       name: "account_name"
       field_expression: "account.name"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates an account for the authenticated user."
+      title: "Create account"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_account"};
   }
   // Updates an account identified by the given ID.
   // Some fields can only be updated by specific actors, see the field
@@ -128,6 +134,12 @@ service AccountService {
       response_resource_field: "account"
       request_resource_field: "account"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Updates an account identified by the given ID. Some fields can only be updated by specific actors, see the field documentation in the Account message for details."
+      title: "Update account"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_account"};
   }
   // Deletes an account identified by the given ID.
   // Required permissions:
@@ -148,6 +160,12 @@ service AccountService {
       resource_id_field: "req.account_id"
       resource_url_template: "/accounts/{req.account_id}"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes an account identified by the given ID."
+      title: "Delete account"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_account"};
   }
   // Allows the authenticated user to leave an account they are a member of.
   // Owners must transfer ownership to another user before leaving the account.
@@ -170,6 +188,12 @@ service AccountService {
       resource_id_field: "req.account_id"
       resource_url_template: "/accounts/{req.account_id}"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Allows the authenticated user to leave an account they are a member of. Owners must transfer ownership to another user before leaving the account."
+      title: "Leave account"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "leave_account"};
   }
   // Lists all account invites in the account identified by the given account ID.
   // Required permissions:
@@ -252,6 +276,12 @@ service AccountService {
       name: "user_email"
       field_expression: "account_invite.user_email"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates a new account invite."
+      title: "Create account invite"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_account_invite"};
   }
   // Deletes an account invite.
   // Required permissions:
@@ -273,6 +303,12 @@ service AccountService {
       name: "invite_id"
       field_expression: "invite_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes an account invite."
+      title: "Delete account invite"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_account_invite"};
   }
   // Accepts an account invite.
   // The authenticated user's email address must match the email address specified in
@@ -303,6 +339,12 @@ service AccountService {
       name: "invite_id"
       field_expression: "invite_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Accepts an account invite. The authenticated user's email address must match the email address specified in the invite."
+      title: "Accept account invite"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "accept_account_invite"};
   }
   // Rejects an account invite.
   // The authenticated user's email address must match the email address specified in
@@ -333,6 +375,12 @@ service AccountService {
       name: "invite_id"
       field_expression: "invite_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Rejects an account invite. The authenticated user's email address must match the email address specified in the invite."
+      title: "Reject account invite"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "reject_account_invite"};
   }
   // Lists all account members in the account identified by the given account ID.
   // The authenticated actor must be a member of the account identified by the given account ID.
@@ -394,6 +442,12 @@ service AccountService {
       name: "user_id"
       field_expression: "user_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes an account member. The authenticated actor must be a member of the account from which the the member is being removed."
+      title: "Delete account member"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_account_member"};
   }
   // Suggest a list of companies based on partial name or email.
   // Required permissions:

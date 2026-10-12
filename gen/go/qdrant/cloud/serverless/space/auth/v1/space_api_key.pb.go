@@ -1032,20 +1032,24 @@ const file_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto_rawDesc = "
 	"\x1eCollectionAccessRuleAccessType\x122\n" +
 	".COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x120\n" +
 	",COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY\x10\x01\x121\n" +
-	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\xb3\f\n" +
+	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\xb7\x0e\n" +
 	"\x12SpaceApiKeyService\x12\x97\x03\n" +
 	"\x10ListSpaceApiKeys\x12>.qdrant.cloud.serverless.space.auth.v1.ListSpaceApiKeysRequest\x1a?.qdrant.cloud.serverless.space.auth.v1.ListSpaceApiKeysResponse\"\x81\x02\x8a\xb5\x18\x18read:serverless_api_keys\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\x8a\xb2\x19`\n" +
 	"GListSpaceApiKeys returns all API keys for a space Required Permissions:\x12\x13List space api keys\x18\x01\xaa\xb8\x19\x15\n" +
-	"\x13list_space_api_keys\x82\xd3\xe4\x93\x02J\x12H/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/api-keys\x12\xed\x04\n" +
-	"\x11CreateSpaceApiKey\x12?.qdrant.cloud.serverless.space.auth.v1.CreateSpaceApiKeyRequest\x1a@.qdrant.cloud.serverless.space.auth.v1.CreateSpaceApiKeyResponse\"\xd4\x03\x8a\xb5\x18\x19write:serverless_api_keys\x92\xb5\x18\x18space_api_key.account_id\xba\xb5\x18\"\n" +
+	"\x13list_space_api_keys\x82\xd3\xe4\x93\x02J\x12H/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/api-keys\x12\xf0\x05\n" +
+	"\x11CreateSpaceApiKey\x12?.qdrant.cloud.serverless.space.auth.v1.CreateSpaceApiKeyRequest\x1a@.qdrant.cloud.serverless.space.auth.v1.CreateSpaceApiKeyResponse\"\xd7\x04\x8a\xb5\x18\x19write:serverless_api_keys\x92\xb5\x18\x18space_api_key.account_id\xba\xb5\x18\"\n" +
 	"\bspace_id\x12\x16space_api_key.space_id\xba\xb5\x18(\n" +
 	"\x12space_api_key_name\x12\x12space_api_key.name\xca\xf3\x18\xd5\x01\b\x01\x12\x18serverless-space-api-key\"\x15resp.space_api_key.id*x/accounts/{req.space_api_key.account_id}/serverless-spaces/{req.space_api_key.space_id}/api-keys/{resp.space_api_key.id}R&\n" +
-	"\bspace_id\x12\x1areq.space_api_key.space_id\x82\xd3\xe4\x93\x02i:\x01*\"d/api/serverless/auth/v1/accounts/{space_api_key.account_id}/spaces/{space_api_key.space_id}/api-keys\x12\x88\x04\n" +
-	"\x11DeleteSpaceApiKey\x12?.qdrant.cloud.serverless.space.auth.v1.DeleteSpaceApiKeyRequest\x1a@.qdrant.cloud.serverless.space.auth.v1.DeleteSpaceApiKeyResponse\"\xef\x02\x8a\xb5\x18\x1adelete:serverless_api_keys\xba\xb5\x18\x14\n" +
+	"\bspace_id\x12\x1areq.space_api_key.space_id\x8a\xb2\x19e\n" +
+	"ICreateSpaceApiKey creates a new API key for a space Required Permissions:\x12\x14Create space api key\x18\x018\x01\xaa\xb8\x19\x16\n" +
+	"\x14create_space_api_key\x82\xd3\xe4\x93\x02i:\x01*\"d/api/serverless/auth/v1/accounts/{space_api_key.account_id}/spaces/{space_api_key.space_id}/api-keys\x12\x89\x05\n" +
+	"\x11DeleteSpaceApiKey\x12?.qdrant.cloud.serverless.space.auth.v1.DeleteSpaceApiKeyRequest\x1a@.qdrant.cloud.serverless.space.auth.v1.DeleteSpaceApiKeyResponse\"\xf0\x03\x8a\xb5\x18\x1adelete:serverless_api_keys\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xba\xb5\x18$\n" +
 	"\x10space_api_key_id\x12\x10space_api_key_id\xca\xf3\x18\xa9\x01\b\x03\x12\x18serverless-space-api-key\"\x14req.space_api_key_id*[/accounts/{req.account_id}/serverless-spaces/{req.space_id}/api-keys/{req.space_api_key_id}R\x18\n" +
-	"\bspace_id\x12\freq.space_id\x82\xd3\xe4\x93\x02]*[/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/api-keys/{space_api_key_id}\x1a\bµ\x18\x04\b\x02\x10\x01B\xd7\x02\n" +
+	"\bspace_id\x12\freq.space_id\x8a\xb2\x19c\n" +
+	"GDeleteSpaceApiKey removes an API key from a space Required Permissions:\x12\x14Delete space api key\x18\x018\x01\xaa\xb8\x19\x16\n" +
+	"\x14delete_space_api_key\x82\xd3\xe4\x93\x02]*[/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/api-keys/{space_api_key_id}\x1a\bµ\x18\x04\b\x02\x10\x01B\xd7\x02\n" +
 	")com.qdrant.cloud.serverless.space.auth.v1B\x10SpaceApiKeyProtoP\x01Z]github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/auth/v1;authv1\xa2\x02\x05QCSSA\xaa\x02%Qdrant.Cloud.Serverless.Space.Auth.V1\xca\x02%Qdrant\\Cloud\\Serverless\\Space\\Auth\\V1\xe2\x021Qdrant\\Cloud\\Serverless\\Space\\Auth\\V1\\GPBMetadata\xea\x02*Qdrant::Cloud::Serverless::Space::Auth::V1b\x06proto3"
 
 var (

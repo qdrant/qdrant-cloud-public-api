@@ -5674,7 +5674,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1aClusterBackupSupportStatus\x12-\n" +
 	")CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED\x10\x01\x12/\n" +
-	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xf2*\n" +
+	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xf83\n" +
 	"\x0eClusterService\x12\xeb\x02\n" +
 	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"\xfd\x01\x8a\xb5\x18\rread:clusters\x8a\xb2\x19\x9e\x01\n" +
 	"\x8c\x01List all clusters in an account. Use list_accounts first if the account ID is unknown. Returns cluster IDs, names, state, and endpoint URLs.\x12\rList clusters\xaa\xb8\x19\x0f\n" +
@@ -5694,14 +5694,18 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"package_id\x12\n" +
 	"package_id\x8a\xb2\x19\xc4\x02\n" +
 	"\xa5\x02Gets the downscale risks of applying the properties provided in the request to the cluster identified by the given ID, one entry per assessed resource. The call does not modify the cluster and is evaluated against freshly read measurements, so repeated calls track the cluster's current state.\x12\x1aGet cluster downscale risk\xaa\xb8\x19\x1c\n" +
-	"\x1aget_cluster_downscale_risk\x82\xd3\xe4\x93\x02L\x12J/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/downscale-risk\x12\xd9\x02\n" +
-	"\rCreateCluster\x12-.qdrant.cloud.cluster.v1.CreateClusterRequest\x1a..qdrant.cloud.cluster.v1.CreateClusterResponse\"\xe8\x01\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xba\xb5\x18\x1c\n" +
-	"\fcluster_name\x12\fcluster.name\xca\xf3\x18[\b\x01\x12\acluster\"\x0fresp.cluster.id*=/accounts/{req.cluster.account_id}/clusters/{resp.cluster.id}\x82\xd3\xe4\x93\x02;:\x01*\"6/api/cluster/v1/accounts/{cluster.account_id}/clusters\x12\xb4\x03\n" +
-	"\x17CreateClusterFromBackup\x127.qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest\x1a8.qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse\"\xa5\x02\x8a\xb5\x18\x0frestore:backups\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x01\xba\xb5\x18\x16\n" +
+	"\x1aget_cluster_downscale_risk\x82\xd3\xe4\x93\x02L\x12J/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/downscale-risk\x12\xc1\x03\n" +
+	"\rCreateCluster\x12-.qdrant.cloud.cluster.v1.CreateClusterRequest\x1a..qdrant.cloud.cluster.v1.CreateClusterResponse\"\xd0\x02\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xba\xb5\x18\x1c\n" +
+	"\fcluster_name\x12\fcluster.name\xca\xf3\x18[\b\x01\x12\acluster\"\x0fresp.cluster.id*=/accounts/{req.cluster.account_id}/clusters/{resp.cluster.id}\x8a\xb2\x19P\n" +
+	"<Creates a cluster in the account identified by the given ID.\x12\x0eCreate cluster8\x01\xaa\xb8\x19\x10\n" +
+	"\x0ecreate_cluster\x82\xd3\xe4\x93\x02;:\x01*\"6/api/cluster/v1/accounts/{cluster.account_id}/clusters\x12\xa4\x04\n" +
+	"\x17CreateClusterFromBackup\x127.qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest\x1a8.qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse\"\x95\x03\x8a\xb5\x18\x0frestore:backups\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x01\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\xba\xb5\x18\x1c\n" +
 	"\fcluster_name\x12\fcluster_name\xca\xf3\x18t\b\x01\x12\acluster\"\x0fresp.cluster.id*5/accounts/{req.account_id}/clusters/{resp.cluster.id}R\x1f\n" +
-	"\x0efrom_backup_id\x12\rreq.backup_id\x82\xd3\xe4\x93\x02D\"B/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters\x12\xe7\x03\n" +
-	"\rUpdateCluster\x12-.qdrant.cloud.cluster.v1.UpdateClusterRequest\x1a..qdrant.cloud.cluster.v1.UpdateClusterResponse\"\xf6\x02\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xba\xb5\x18\x18\n" +
+	"\x0efrom_backup_id\x12\rreq.backup_id\x8a\xb2\x19L\n" +
+	",Create a new cluster from an existing backup\x12\x1aCreate cluster from backup8\x01\xaa\xb8\x19\x1c\n" +
+	"\x1acreate_cluster_from_backup\x82\xd3\xe4\x93\x02D\"B/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters\x12\xcf\x04\n" +
+	"\rUpdateCluster\x12-.qdrant.cloud.cluster.v1.UpdateClusterRequest\x1a..qdrant.cloud.cluster.v1.UpdateClusterResponse\"\xde\x03\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster.idʵ\x18\x82\x01\n" +
@@ -5710,28 +5714,40 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"account_id\x12\x12cluster.account_id\x12\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster.id\x1a\acluster\"\acluster\xca\xf3\x18Y\b\x02\x12\acluster\"\x0ereq.cluster.id*</accounts/{req.cluster.account_id}/clusters/{req.cluster.id}\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xde\x02\n" +
-	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\xed\x01\x8a\xb5\x18\x0fdelete:clusters\xba\xb5\x18\x18\n" +
+	"cluster.id\x1a\acluster\"\acluster\xca\xf3\x18Y\b\x02\x12\acluster\"\x0ereq.cluster.id*</accounts/{req.cluster.account_id}/clusters/{req.cluster.id}\x8a\xb2\x19P\n" +
+	"<Updates a cluster in the account identified by the given ID.\x12\x0eUpdate cluster8\x01\xaa\xb8\x19\x10\n" +
+	"\x0eupdate_cluster\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xc6\x03\n" +
+	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\xd5\x02\x8a\xb5\x18\x0fdelete:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\xca\xf3\x18w\b\x03\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}R$\n" +
-	"\x0edelete_backups\x12\x12req.delete_backups\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xcb\x02\n" +
-	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"\xd7\x01\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"\x0edelete_backups\x12\x12req.delete_backups\x8a\xb2\x19P\n" +
+	"<Deletes a cluster in the account identified by the given ID.\x12\x0eDelete cluster8\x01\xaa\xb8\x19\x10\n" +
+	"\x0edelete_cluster\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xb6\x03\n" +
+	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"\xc2\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18Z\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\arestart\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart\x12\xcb\x02\n" +
-	"\x0eSuspendCluster\x12..qdrant.cloud.cluster.v1.SuspendClusterRequest\x1a/.qdrant.cloud.cluster.v1.SuspendClusterResponse\"\xd7\x01\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\xca\xf3\x18Z\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\arestart\x8a\xb2\x19R\n" +
+	"=Restarts a cluster in the account identified by the given ID.\x12\x0fRestart cluster8\x01\xaa\xb8\x19\x11\n" +
+	"\x0frestart_cluster\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart\x12\xb6\x03\n" +
+	"\x0eSuspendCluster\x12..qdrant.cloud.cluster.v1.SuspendClusterRequest\x1a/.qdrant.cloud.cluster.v1.SuspendClusterResponse\"\xc2\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18Z\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\asuspend\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend\x12\xd5\x02\n" +
-	"\x10UnsuspendCluster\x120.qdrant.cloud.cluster.v1.UnsuspendClusterRequest\x1a1.qdrant.cloud.cluster.v1.UnsuspendClusterResponse\"\xdb\x01\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\xca\xf3\x18Z\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\asuspend\x8a\xb2\x19R\n" +
+	"=Suspends a cluster in the account identified by the given ID.\x12\x0fSuspend cluster8\x01\xaa\xb8\x19\x11\n" +
+	"\x0fsuspend_cluster\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend\x12\xc6\x03\n" +
+	"\x10UnsuspendCluster\x120.qdrant.cloud.cluster.v1.UnsuspendClusterRequest\x1a1.qdrant.cloud.cluster.v1.UnsuspendClusterResponse\"\xcc\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18\\\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\tunsuspend\x82\xd3\xe4\x93\x02G\"E/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/unsuspend\x12\xe9\x02\n" +
-	"\x14EnableClusterJwtRbac\x124.qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest\x1a5.qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse\"\xe3\x01\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\xca\xf3\x18\\\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\tunsuspend\x8a\xb2\x19V\n" +
+	"?Unsuspends a cluster in the account identified by the given ID.\x12\x11Unsuspend cluster8\x01\xaa\xb8\x19\x13\n" +
+	"\x11unsuspend_cluster\x82\xd3\xe4\x93\x02G\"E/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/unsuspend\x12\x80\x06\n" +
+	"\x14EnableClusterJwtRbac\x124.qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest\x1a5.qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse\"\xfa\x04\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18c\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\x10enabled-jwt-rbac\x82\xd3\xe4\x93\x02H\"F/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/enable-jwt\x12\xa8\x03\n" +
+	"cluster_id\xca\xf3\x18c\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\x10enabled-jwt-rbac\x8a\xb2\x19\xf5\x02\n" +
+	"\xd7\x02Enables JWT Role Based Access Control (RBAC) for a cluster (version 1.9+ is required) in the managed cloud environments in the account identified by the given ID. This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value. If enabled, you can generate JWT tokens with fine-grained rules for access control.\x12\x17Enable cluster jwt rbac8\x01\xaa\xb8\x19\x19\n" +
+	"\x17enable_cluster_jwt_rbac\x82\xd3\xe4\x93\x02H\"F/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/enable-jwt\x12\xa8\x03\n" +
 	"\x12SuggestClusterName\x122.qdrant.cloud.cluster.v1.SuggestClusterNameRequest\x1a3.qdrant.cloud.cluster.v1.SuggestClusterNameResponse\"\xa8\x02\x8a\xb5\x18\x00\x8a\xb2\x19\xc2\x01\n" +
 	"\xa9\x01Suggests a unique and human-friendly name for a new cluster in the specified account. This can be used by clients to pre-fill the name field when creating a new cluster.\x12\x14Suggest cluster name\xaa\xb8\x19\x16\n" +
 	"\x14suggest_cluster_name\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/suggest-name\x12\xd8\x02\n" +
