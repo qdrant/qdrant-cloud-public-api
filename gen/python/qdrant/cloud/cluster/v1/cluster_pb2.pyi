@@ -332,12 +332,14 @@ class CreateClusterResponse(_message.Message):
     def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ...) -> None: ...
 
 class UpdateClusterRequest(_message.Message):
-    __slots__ = ("cluster", "update_mask")
+    __slots__ = ("cluster", "update_mask", "clear_additional_disk")
     CLUSTER_FIELD_NUMBER: _ClassVar[int]
     UPDATE_MASK_FIELD_NUMBER: _ClassVar[int]
+    CLEAR_ADDITIONAL_DISK_FIELD_NUMBER: _ClassVar[int]
     cluster: Cluster
     update_mask: _field_mask_pb2.FieldMask
-    def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ...) -> None: ...
+    clear_additional_disk: bool
+    def __init__(self, cluster: _Optional[_Union[Cluster, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ..., clear_additional_disk: _Optional[bool] = ...) -> None: ...
 
 class UpdateClusterResponse(_message.Message):
     __slots__ = ("cluster",)

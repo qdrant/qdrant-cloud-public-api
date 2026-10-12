@@ -1727,9 +1727,16 @@ type UpdateClusterRequest struct {
 	// not the request envelope (e.g. "name", "configuration.num_nodes").
 	// When unset or empty, the request is treated as a full-resource
 	// replacement (the existing behavior).
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// When true, removes the additional disk from the cluster. The disk included
+	// in the package is kept.
+	// When false or omitted, the additional disk is kept unless
+	// configuration.additional_resources.disk sets a new positive amount.
+	// Setting configuration.additional_resources.disk to 0 does not remove it.
+	// Cannot be combined with a positive configuration.additional_resources.disk.
+	ClearAdditionalDisk bool `protobuf:"varint,3,opt,name=clear_additional_disk,json=clearAdditionalDisk,proto3" json:"clear_additional_disk,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *UpdateClusterRequest) Reset() {
@@ -1774,6 +1781,13 @@ func (x *UpdateClusterRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
 		return x.UpdateMask
 	}
 	return nil
+}
+
+func (x *UpdateClusterRequest) GetClearAdditionalDisk() bool {
+	if x != nil {
+		return x.ClearAdditionalDisk
+	}
+	return false
 }
 
 // UpdateClusterResponse is the response from the UpdateCluster function
@@ -5202,12 +5216,14 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\"create_cluster.no_read_only_fields\x12Nread-only fields (id, created_at, deleted_at, state) must not be set on create\x1asthis.cluster.id == '' && !has(this.cluster.created_at) && !has(this.cluster.deleted_at) && !has(this.cluster.state)\"\xc4\x01\n" +
 	"\x15CreateClusterResponse\x12B\n" +
 	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster:g\xbaHd\x1ab\n" +
-	"\x1ccreate_cluster.state_present\x12)state is required for an existing cluster\x1a\x17has(this.cluster.state)\"\xf6\x01\n" +
+	"\x1ccreate_cluster.state_present\x12)state is required for an existing cluster\x1a\x17has(this.cluster.state)\"\x9c\x04\n" +
 	"\x14UpdateClusterRequest\x12B\n" +
 	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask:]\xbaHZ\x1aX\n" +
-	"\x19update_cluster.id_present\x12$cluster.id is required for an update\x1a\x15this.cluster.id != ''\"\xc4\x01\n" +
+	"updateMask\x122\n" +
+	"\x15clear_additional_disk\x18\x03 \x01(\bR\x13clearAdditionalDisk:\xce\x02\xbaH\xca\x02\x1aX\n" +
+	"\x19update_cluster.id_present\x12$cluster.id is required for an update\x1a\x15this.cluster.id != ''\x1a\xed\x01\n" +
+	".update_cluster.clear_additional_disk_exclusive\x12`clear_additional_disk cannot be combined with a positive configuration.additional_resources.disk\x1aY!this.clear_additional_disk || this.cluster.configuration.additional_resources.disk == 0u\"\xc4\x01\n" +
 	"\x15UpdateClusterResponse\x12B\n" +
 	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster:g\xbaHd\x1ab\n" +
 	"\x1cupdate_cluster.state_present\x12)state is required for an existing cluster\x1a\x17has(this.cluster.state)\"\xcc\x01\n" +

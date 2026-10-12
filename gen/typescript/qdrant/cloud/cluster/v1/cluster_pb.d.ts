@@ -362,6 +362,18 @@ export declare type UpdateClusterRequest = Message<"qdrant.cloud.cluster.v1.Upda
    * @generated from field: google.protobuf.FieldMask update_mask = 2;
    */
   updateMask?: FieldMask | undefined;
+
+  /**
+   * When true, removes the additional disk from the cluster. The disk included
+   * in the package is kept.
+   * When false or omitted, the additional disk is kept unless
+   * configuration.additional_resources.disk sets a new positive amount.
+   * Setting configuration.additional_resources.disk to 0 does not remove it.
+   * Cannot be combined with a positive configuration.additional_resources.disk.
+   *
+   * @generated from field: bool clear_additional_disk = 3;
+   */
+  clearAdditionalDisk: boolean;
 };
 
 /**
@@ -388,6 +400,18 @@ export declare type UpdateClusterRequestValid = Message<"qdrant.cloud.cluster.v1
    * @generated from field: google.protobuf.FieldMask update_mask = 2;
    */
   updateMask?: FieldMask | undefined;
+
+  /**
+   * When true, removes the additional disk from the cluster. The disk included
+   * in the package is kept.
+   * When false or omitted, the additional disk is kept unless
+   * configuration.additional_resources.disk sets a new positive amount.
+   * Setting configuration.additional_resources.disk to 0 does not remove it.
+   * Cannot be combined with a positive configuration.additional_resources.disk.
+   *
+   * @generated from field: bool clear_additional_disk = 3;
+   */
+  clearAdditionalDisk: boolean;
 };
 
 /**

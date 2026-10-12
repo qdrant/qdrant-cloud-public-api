@@ -524,10 +524,22 @@ message UpdateClusterRequest {
   // When unset or empty, the request is treated as a full-resource
   // replacement (the existing behavior).
   google.protobuf.FieldMask update_mask = 2;
+  // When true, removes the additional disk from the cluster. The disk included
+  // in the package is kept.
+  // When false or omitted, the additional disk is kept unless
+  // configuration.additional_resources.disk sets a new positive amount.
+  // Setting configuration.additional_resources.disk to 0 does not remove it.
+  // Cannot be combined with a positive configuration.additional_resources.disk.
+  bool clear_additional_disk = 3;
   option (buf.validate.message).cel = {
     id: "update_cluster.id_present"
     message: "cluster.id is required for an update"
     expression: "this.cluster.id != ''"
+  };
+  option (buf.validate.message).cel = {
+    id: "update_cluster.clear_additional_disk_exclusive"
+    message: "clear_additional_disk cannot be combined with a positive configuration.additional_resources.disk"
+    expression: "!this.clear_additional_disk || this.cluster.configuration.additional_resources.disk == 0u"
   };
 }
 
