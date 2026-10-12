@@ -4,7 +4,7 @@
 
 import type { GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { FieldOptions, MethodOptions } from "@bufbuild/protobuf/wkt";
+import type { MethodOptions } from "@bufbuild/protobuf/wkt";
 
 /**
  * Describes the file qdrant/cloud/facade/graphql/v1/graphql_options.proto.
@@ -133,29 +133,6 @@ export declare type GraphqlNestedInputValid = GraphqlNestedInput;
 export declare const GraphqlNestedInputSchema: GenMessage<GraphqlNestedInput, {validType: GraphqlNestedInputValid}>;
 
 /**
- * GraphqlFieldOptions holds GraphQL-only argument metadata for a request field.
- *
- * @generated from message qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions
- */
-export declare type GraphqlFieldOptions = Message<"qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions"> & {
-  /**
-   * Override the GraphQL argument name for this request field.
-   * When unset, gateways may derive camelCase from the proto field name.
-   *
-   * @generated from field: string arg_name = 1;
-   */
-  argName: string;
-};
-
-export declare type GraphqlFieldOptionsValid = GraphqlFieldOptions;
-
-/**
- * Describes the message qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions.
- * Use `create(GraphqlFieldOptionsSchema)` to create a new message.
- */
-export declare const GraphqlFieldOptionsSchema: GenMessage<GraphqlFieldOptions, {validType: GraphqlFieldOptionsValid}>;
-
-/**
  * GraphQL root overlay for this RPC (field name, response path).
  * Extension number 52201 is in the facade.graphql overlay range.
  *
@@ -166,14 +143,7 @@ export declare const graphql: GenExtension<MethodOptions, GraphqlMethodOptions>;
 /**
  * GraphQL nested-field overlay for this RPC (one parent type per RPC).
  *
- * @generated from extension: qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions graphql_nested = 52203;
+ * @generated from extension: qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions graphql_nested = 52202;
  */
 export declare const graphql_nested: GenExtension<MethodOptions, GraphqlNestedOptions>;
-
-/**
- * GraphQL argument overlay for this request field.
- *
- * @generated from extension: qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions graphql_field = 52202;
- */
-export declare const graphql_field: GenExtension<FieldOptions, GraphqlFieldOptions>;
 

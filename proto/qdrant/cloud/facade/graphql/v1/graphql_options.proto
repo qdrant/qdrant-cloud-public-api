@@ -17,6 +17,10 @@ import "google/protobuf/descriptor.proto";
 // GraphQL type (parent message → child RPC wiring). Cluster vs space backups are
 // separate RPCs in different packages, each with its own single nested parent.
 //
+// Root GraphQL argument names are derived as camelCase from request proto field
+// names (same as the gateway's default name mapper); no per-field GraphQL
+// argument overlay is needed.
+//
 // Example (together with facade options):
 //  option (qdrant.cloud.facade.v1.facade) = {
 //    description: "List backups with optional filters and pagination."
@@ -42,23 +46,7 @@ extend google.protobuf.MethodOptions {
   // Extension number 52201 is in the facade.graphql overlay range.
   GraphqlMethodOptions graphql = 52201;
   // GraphQL nested-field overlay for this RPC (one parent type per RPC).
-  GraphqlNestedOptions graphql_nested = 52203;
-}
-
-// GraphQL-specific field options for request-message fields used as GraphQL
-// arguments. Ignored on response fields.
-//
-// Example:
-//  string account_id = 1 [
-//    (buf.validate.field).string.uuid = true,
-//    (qdrant.cloud.facade.graphql.v1.graphql_field) = {
-//      arg_name: "accountId"
-//    }
-//  ];
-//
-extend google.protobuf.FieldOptions {
-  // GraphQL argument overlay for this request field.
-  GraphqlFieldOptions graphql_field = 52202;
+  GraphqlNestedOptions graphql_nested = 52202;
 }
 
 // GraphqlMethodOptions holds GraphQL-only root-field metadata.
@@ -128,11 +116,4 @@ message GraphqlNestedInput {
     min_len: 1
     pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"
   }];
-}
-
-// GraphqlFieldOptions holds GraphQL-only argument metadata for a request field.
-message GraphqlFieldOptions {
-  // Override the GraphQL argument name for this request field.
-  // When unset, gateways may derive camelCase from the proto field name.
-  string arg_name = 1 [(buf.validate.field).string = {pattern: "^(|[A-Za-z_][A-Za-z0-9_]*)$"}];
 }

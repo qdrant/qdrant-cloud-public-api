@@ -11,8 +11,6 @@ GRAPHQL_FIELD_NUMBER: _ClassVar[int]
 graphql: _descriptor.FieldDescriptor
 GRAPHQL_NESTED_FIELD_NUMBER: _ClassVar[int]
 graphql_nested: _descriptor.FieldDescriptor
-GRAPHQL_FIELD_FIELD_NUMBER: _ClassVar[int]
-graphql_field: _descriptor.FieldDescriptor
 
 class GraphqlMethodOptions(_message.Message):
     __slots__ = ("field", "response_path")
@@ -45,9 +43,3 @@ class GraphqlNestedInput(_message.Message):
     proto_path: str
     parent_path: str
     def __init__(self, proto_path: _Optional[str] = ..., parent_path: _Optional[str] = ...) -> None: ...
-
-class GraphqlFieldOptions(_message.Message):
-    __slots__ = ("arg_name",)
-    ARG_NAME_FIELD_NUMBER: _ClassVar[int]
-    arg_name: str
-    def __init__(self, arg_name: _Optional[str] = ...) -> None: ...
