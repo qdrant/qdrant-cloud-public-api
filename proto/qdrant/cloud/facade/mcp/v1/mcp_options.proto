@@ -25,8 +25,7 @@ import "google/protobuf/descriptor.proto";
 //
 extend google.protobuf.MethodOptions {
   // MCP tool overlay for this RPC (stable tool name, mutation gate).
-  // Extension number 52101 is the facade.mcp overlay range; 522xx is reserved
-  // for a future GraphQL overlay.
+  // Extension number 52101 is in the facade.mcp overlay range.
   McpToolOptions mcp_tool = 52101;
 }
 

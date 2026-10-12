@@ -95,8 +95,7 @@ var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_extTypes = []protoimpl.Ext
 // Extension fields to descriptorpb.MethodOptions.
 var (
 	// MCP tool overlay for this RPC (stable tool name, mutation gate).
-	// Extension number 52101 is the facade.mcp overlay range; 522xx is reserved
-	// for a future GraphQL overlay.
+	// Extension number 52101 is in the facade.mcp overlay range.
 	//
 	// optional qdrant.cloud.facade.mcp.v1.McpToolOptions mcp_tool = 52101;
 	E_McpTool = &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_extTypes[0]

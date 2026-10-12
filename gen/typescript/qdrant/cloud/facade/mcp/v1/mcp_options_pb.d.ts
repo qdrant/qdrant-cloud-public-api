@@ -45,8 +45,7 @@ export declare const McpToolOptionsSchema: GenMessage<McpToolOptions, {validType
 
 /**
  * MCP tool overlay for this RPC (stable tool name, mutation gate).
- * Extension number 52101 is the facade.mcp overlay range; 522xx is reserved
- * for a future GraphQL overlay.
+ * Extension number 52101 is in the facade.mcp overlay range.
  *
  * @generated from extension: qdrant.cloud.facade.mcp.v1.McpToolOptions mcp_tool = 52101;
  */
