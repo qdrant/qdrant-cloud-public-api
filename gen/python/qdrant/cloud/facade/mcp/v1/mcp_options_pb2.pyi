@@ -9,9 +9,7 @@ MCP_TOOL_FIELD_NUMBER: _ClassVar[int]
 mcp_tool: _descriptor.FieldDescriptor
 
 class McpToolOptions(_message.Message):
-    __slots__ = ("name", "allow_mutation")
+    __slots__ = ("name",)
     NAME_FIELD_NUMBER: _ClassVar[int]
-    ALLOW_MUTATION_FIELD_NUMBER: _ClassVar[int]
     name: str
-    allow_mutation: bool
-    def __init__(self, name: _Optional[str] = ..., allow_mutation: _Optional[bool] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ...) -> None: ...

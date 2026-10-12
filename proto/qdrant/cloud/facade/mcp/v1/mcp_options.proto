@@ -10,9 +10,9 @@ import "google/protobuf/descriptor.proto";
 // for the MCP tool catalog (subject to gateway flags such as enableMCP and
 // mcpExposeMutations, and to HTTP-verb / allow_mutation filters).
 //
-// Shared description, title, sensitive_response, and operation hints live on
-// (qdrant.cloud.facade.v1.facade). Field hide / description live on
-// (qdrant.cloud.facade.v1.facade_field).
+// Shared description, title, sensitive_response, allow_mutation, and
+// operation hints live on (qdrant.cloud.facade.v1.facade). Field hide /
+// description live on (qdrant.cloud.facade.v1.facade_field).
 //
 // Example (together with facade options):
 //  option (qdrant.cloud.facade.v1.facade) = {
@@ -24,7 +24,7 @@ import "google/protobuf/descriptor.proto";
 //  };
 //
 extend google.protobuf.MethodOptions {
-  // MCP tool overlay for this RPC (stable tool name, mutation gate).
+  // MCP tool overlay for this RPC (stable tool name).
   // Extension number 52101 is in the facade.mcp overlay range.
   McpToolOptions mcp_tool = 52101;
 }
@@ -37,8 +37,4 @@ message McpToolOptions {
     min_len: 1
     pattern: "^[A-Za-z0-9_-]+$"
   }];
-  // When true, the tool may be exposed when mcpExposeMutations is on even if
-  // google.api.http is not GET. Default false means read-only catalog only
-  // unless the HTTP rule is GET.
-  bool allow_mutation = 2;
 }

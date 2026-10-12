@@ -44,8 +44,13 @@ type FacadeMethodOptions struct {
 	DestructiveHint *bool `protobuf:"varint,5,opt,name=destructive_hint,json=destructiveHint,proto3,oneof" json:"destructive_hint,omitempty"`
 	// Optional override for idempotent classification.
 	IdempotentHint *bool `protobuf:"varint,6,opt,name=idempotent_hint,json=idempotentHint,proto3,oneof" json:"idempotent_hint,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// When true, mutating RPCs (non-GET) may be exposed by facades that support
+	// mutations when their expose-mutations flag is on (for example MCP
+	// mcpExposeMutations, or a future GraphQL Mutation surface). Default false
+	// means read-only facades only unless the HTTP rule is GET.
+	AllowMutation bool `protobuf:"varint,7,opt,name=allow_mutation,json=allowMutation,proto3" json:"allow_mutation,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FacadeMethodOptions) Reset() {
@@ -116,6 +121,13 @@ func (x *FacadeMethodOptions) GetDestructiveHint() bool {
 func (x *FacadeMethodOptions) GetIdempotentHint() bool {
 	if x != nil && x.IdempotentHint != nil {
 		return *x.IdempotentHint
+	}
+	return false
+}
+
+func (x *FacadeMethodOptions) GetAllowMutation() bool {
+	if x != nil {
+		return x.AllowMutation
 	}
 	return false
 }
@@ -217,14 +229,15 @@ var File_qdrant_cloud_facade_v1_facade_options_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_facade_v1_facade_options_proto_rawDesc = "" +
 	"\n" +
-	"+qdrant/cloud/facade/v1/facade_options.proto\x12\x16qdrant.cloud.facade.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\xca\x02\n" +
+	"+qdrant/cloud/facade/v1/facade_options.proto\x12\x16qdrant.cloud.facade.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\xf1\x02\n" +
 	"\x13FacadeMethodOptions\x12)\n" +
 	"\vdescription\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12-\n" +
 	"\x12sensitive_response\x18\x03 \x01(\bR\x11sensitiveResponse\x12)\n" +
 	"\x0eread_only_hint\x18\x04 \x01(\bH\x00R\freadOnlyHint\x88\x01\x01\x12.\n" +
 	"\x10destructive_hint\x18\x05 \x01(\bH\x01R\x0fdestructiveHint\x88\x01\x01\x12,\n" +
-	"\x0fidempotent_hint\x18\x06 \x01(\bH\x02R\x0eidempotentHint\x88\x01\x01B\x11\n" +
+	"\x0fidempotent_hint\x18\x06 \x01(\bH\x02R\x0eidempotentHint\x88\x01\x01\x12%\n" +
+	"\x0eallow_mutation\x18\a \x01(\bR\rallowMutationB\x11\n" +
 	"\x0f_read_only_hintB\x13\n" +
 	"\x11_destructive_hintB\x12\n" +
 	"\x10_idempotent_hint\"J\n" +

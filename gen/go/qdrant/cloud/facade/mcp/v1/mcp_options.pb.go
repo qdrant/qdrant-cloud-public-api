@@ -28,11 +28,7 @@ const (
 type McpToolOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Stable MCP tool name: [A-Za-z0-9_-]+, unique across the public catalog.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// When true, the tool may be exposed when mcpExposeMutations is on even if
-	// google.api.http is not GET. Default false means read-only catalog only
-	// unless the HTTP rule is GET.
-	AllowMutation bool `protobuf:"varint,2,opt,name=allow_mutation,json=allowMutation,proto3" json:"allow_mutation,omitempty"`
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -74,13 +70,6 @@ func (x *McpToolOptions) GetName() string {
 	return ""
 }
 
-func (x *McpToolOptions) GetAllowMutation() bool {
-	if x != nil {
-		return x.AllowMutation
-	}
-	return false
-}
-
 var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
@@ -94,7 +83,7 @@ var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_extTypes = []protoimpl.Ext
 
 // Extension fields to descriptorpb.MethodOptions.
 var (
-	// MCP tool overlay for this RPC (stable tool name, mutation gate).
+	// MCP tool overlay for this RPC (stable tool name).
 	// Extension number 52101 is in the facade.mcp overlay range.
 	//
 	// optional qdrant.cloud.facade.mcp.v1.McpToolOptions mcp_tool = 52101;
@@ -105,10 +94,9 @@ var File_qdrant_cloud_facade_mcp_v1_mcp_options_proto protoreflect.FileDescripto
 
 const file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDesc = "" +
 	"\n" +
-	",qdrant/cloud/facade/mcp/v1/mcp_options.proto\x12\x1aqdrant.cloud.facade.mcp.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"f\n" +
+	",qdrant/cloud/facade/mcp/v1/mcp_options.proto\x12\x1aqdrant.cloud.facade.mcp.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"?\n" +
 	"\x0eMcpToolOptions\x12-\n" +
-	"\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x012\x10^[A-Za-z0-9_-]+$R\x04name\x12%\n" +
-	"\x0eallow_mutation\x18\x02 \x01(\bR\rallowMutation:g\n" +
+	"\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x012\x10^[A-Za-z0-9_-]+$R\x04name:g\n" +
 	"\bmcp_tool\x12\x1e.google.protobuf.MethodOptions\x18\x85\x97\x03 \x01(\v2*.qdrant.cloud.facade.mcp.v1.McpToolOptionsR\amcpToolB\x91\x02\n" +
 	"\x1ecom.qdrant.cloud.facade.mcp.v1B\x0fMcpOptionsProtoP\x01ZQgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1;mcpv1\xa2\x02\x04QCFM\xaa\x02\x1aQdrant.Cloud.Facade.Mcp.V1\xca\x02\x1aQdrant\\Cloud\\Facade\\Mcp\\V1\xe2\x02&Qdrant\\Cloud\\Facade\\Mcp\\V1\\GPBMetadata\xea\x02\x1eQdrant::Cloud::Facade::Mcp::V1b\x06proto3"
 

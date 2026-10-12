@@ -24,15 +24,6 @@ export declare type McpToolOptions = Message<"qdrant.cloud.facade.mcp.v1.McpTool
    * @generated from field: string name = 1;
    */
   name: string;
-
-  /**
-   * When true, the tool may be exposed when mcpExposeMutations is on even if
-   * google.api.http is not GET. Default false means read-only catalog only
-   * unless the HTTP rule is GET.
-   *
-   * @generated from field: bool allow_mutation = 2;
-   */
-  allowMutation: boolean;
 };
 
 export declare type McpToolOptionsValid = McpToolOptions;
@@ -44,7 +35,7 @@ export declare type McpToolOptionsValid = McpToolOptions;
 export declare const McpToolOptionsSchema: GenMessage<McpToolOptions, {validType: McpToolOptionsValid}>;
 
 /**
- * MCP tool overlay for this RPC (stable tool name, mutation gate).
+ * MCP tool overlay for this RPC (stable tool name).
  * Extension number 52101 is in the facade.mcp overlay range.
  *
  * @generated from extension: qdrant.cloud.facade.mcp.v1.McpToolOptions mcp_tool = 52101;

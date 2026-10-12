@@ -26,7 +26,7 @@ from buf.validate import validate_pb2 as buf_dot_validate_dot_validate__pb2
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x12\x1aqdrant.cloud.facade.mcp.v1\x1a\x1b\x62uf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"f\n\x0eMcpToolOptions\x12-\n\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x01\x32\x10^[A-Za-z0-9_-]+$R\x04name\x12%\n\x0e\x61llow_mutation\x18\x02 \x01(\x08R\rallowMutation:g\n\x08mcp_tool\x12\x1e.google.protobuf.MethodOptions\x18\x85\x97\x03 \x01(\x0b\x32*.qdrant.cloud.facade.mcp.v1.McpToolOptionsR\x07mcpToolB\x91\x02\n\x1e\x63om.qdrant.cloud.facade.mcp.v1B\x0fMcpOptionsProtoP\x01ZQgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1;mcpv1\xa2\x02\x04QCFM\xaa\x02\x1aQdrant.Cloud.Facade.Mcp.V1\xca\x02\x1aQdrant\\Cloud\\Facade\\Mcp\\V1\xe2\x02&Qdrant\\Cloud\\Facade\\Mcp\\V1\\GPBMetadata\xea\x02\x1eQdrant::Cloud::Facade::Mcp::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x12\x1aqdrant.cloud.facade.mcp.v1\x1a\x1b\x62uf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"?\n\x0eMcpToolOptions\x12-\n\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x01\x32\x10^[A-Za-z0-9_-]+$R\x04name:g\n\x08mcp_tool\x12\x1e.google.protobuf.MethodOptions\x18\x85\x97\x03 \x01(\x0b\x32*.qdrant.cloud.facade.mcp.v1.McpToolOptionsR\x07mcpToolB\x91\x02\n\x1e\x63om.qdrant.cloud.facade.mcp.v1B\x0fMcpOptionsProtoP\x01ZQgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1;mcpv1\xa2\x02\x04QCFM\xaa\x02\x1aQdrant.Cloud.Facade.Mcp.V1\xca\x02\x1aQdrant\\Cloud\\Facade\\Mcp\\V1\xe2\x02&Qdrant\\Cloud\\Facade\\Mcp\\V1\\GPBMetadata\xea\x02\x1eQdrant::Cloud::Facade::Mcp::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -37,5 +37,5 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_MCPTOOLOPTIONS'].fields_by_name['name']._loaded_options = None
   _globals['_MCPTOOLOPTIONS'].fields_by_name['name']._serialized_options = b'\272H\026r\024\020\0012\020^[A-Za-z0-9_-]+$'
   _globals['_MCPTOOLOPTIONS']._serialized_start=139
-  _globals['_MCPTOOLOPTIONS']._serialized_end=241
+  _globals['_MCPTOOLOPTIONS']._serialized_end=202
 # @@protoc_insertion_point(module_scope)

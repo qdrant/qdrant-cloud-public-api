@@ -65,6 +65,11 @@ message FacadeMethodOptions {
   optional bool destructive_hint = 5;
   // Optional override for idempotent classification.
   optional bool idempotent_hint = 6;
+  // When true, mutating RPCs (non-GET) may be exposed by facades that support
+  // mutations when their expose-mutations flag is on (for example MCP
+  // mcpExposeMutations, or a future GraphQL Mutation surface). Default false
+  // means read-only facades only unless the HTTP rule is GET.
+  bool allow_mutation = 7;
 }
 
 // FacadeFieldOptions holds per-field hints for facade input schemas.

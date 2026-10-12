@@ -64,6 +64,16 @@ export declare type FacadeMethodOptions = Message<"qdrant.cloud.facade.v1.Facade
    * @generated from field: optional bool idempotent_hint = 6;
    */
   idempotentHint?: boolean | undefined;
+
+  /**
+   * When true, mutating RPCs (non-GET) may be exposed by facades that support
+   * mutations when their expose-mutations flag is on (for example MCP
+   * mcpExposeMutations, or a future GraphQL Mutation surface). Default false
+   * means read-only facades only unless the HTTP rule is GET.
+   *
+   * @generated from field: bool allow_mutation = 7;
+   */
+  allowMutation: boolean;
 };
 
 export declare type FacadeMethodOptionsValid = FacadeMethodOptions;
