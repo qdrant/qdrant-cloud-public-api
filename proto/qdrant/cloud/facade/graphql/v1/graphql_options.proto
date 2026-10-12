@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package qdrant.cloud.facade.graphql.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/descriptor.proto";
+
+// GraphQL-specific method options that overlay the shared facade metadata in
+// qdrant.cloud.facade.v1. Presence of this option marks the RPC as eligible
+// for a GraphQL root field (subject to gateway flags and filters).
+//
+// Shared description, title, sensitive_response, allow_mutation, and
+// operation hints live on (qdrant.cloud.facade.v1.facade). Field hide /
+// description live on (qdrant.cloud.facade.v1.facade_field).
+//
+// Nested GraphQL fields (parent type → child RPC wiring) stay in gateway YAML
+// for now; this overlay covers root-field metadata only.
+//
+// Example (together with facade options):
+//  option (qdrant.cloud.facade.v1.facade) = {
+//    description: "List all clusters in an account."
+//    title: "List clusters"
+//  };
+//  option (qdrant.cloud.facade.graphql.v1.graphql) = {
+//    field: "clusters"
+//    response_path: "items"
+//  };
+//
+extend google.protobuf.MethodOptions {
+  // GraphQL root overlay for this RPC (field name, response path).
+  // Extension number 52201 is in the facade.graphql overlay range.
+  GraphqlMethodOptions graphql = 52201;
+}
+
+// GraphQL-specific field options for request-message fields used as GraphQL
+// arguments. Ignored on response fields.
+//
+// Example:
+//  string account_id = 1 [
+//    (buf.validate.field).string.uuid = true,
+//    (qdrant.cloud.facade.graphql.v1.graphql_field) = {
+//      arg_name: "accountId"
+//    }
+//  ];
+//
+extend google.protobuf.FieldOptions {
+  // GraphQL argument overlay for this request field.
+  GraphqlFieldOptions graphql_field = 52202;
+}
+
+// GraphqlMethodOptions holds GraphQL-only root-field metadata.
+message GraphqlMethodOptions {
+  // GraphQL field name in camelCase (for example "clusters", "backupSchedule").
+  string field = 1 [(buf.validate.field).string = {
+    min_len: 1
+    pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
+  }];
+  // Path from the gRPC response message to the value exposed as this GraphQL
+  // field (for example "items" for list RPCs, "cluster" for get RPCs).
+  // Each segment is a proto field name (snake_case).
+  repeated string response_path = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    items: {
+      string: {
+        min_len: 1
+        pattern: "^[a-z_][a-z0-9_]*$"
+      }
+    }
+  }];
+}
+
+// GraphqlFieldOptions holds GraphQL-only argument metadata for a request field.
+message GraphqlFieldOptions {
+  // Override the GraphQL argument name for this request field.
+  // When unset, gateways may derive camelCase from the proto field name.
+  string arg_name = 1 [(buf.validate.field).string = {pattern: "^(|[A-Za-z_][A-Za-z0-9_]*)$"}];
+}
