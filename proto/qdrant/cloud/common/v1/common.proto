@@ -177,6 +177,18 @@ enum CredentialType {
   CREDENTIAL_TYPE_OAUTH_DELEGATED = 5;
 }
 
+// OAuthScope is the OAuth access-class for delegated credentials.
+// Distinct from permission verbs (read/write/delete) and from RBAC resource scope.
+// Wire / Auth0 scope strings stay "read-only" and "manage".
+enum OAuthScope {
+  // Unspecified / unknown (or omitted on legacy events).
+  OAUTH_SCOPE_UNSPECIFIED = 0;
+  // Read-class access only (Auth0 / wire: "read-only").
+  OAUTH_SCOPE_READ_ONLY = 1;
+  // Full manage-class access (Auth0 / wire: "manage").
+  OAUTH_SCOPE_MANAGE = 2;
+}
+
 // Caller identifies the authenticated actor that performed an action on a resource.
 message Caller {
   // Unique identifier of the actor (user UUID, management-key id, service-account id, …).
@@ -200,8 +212,11 @@ message Caller {
   optional string credential_id = 5 [(buf.validate.field).string.min_len = 1];
   // Acting OAuth client id when credential_type is OAUTH_DELEGATED (Auth0 azp / CIMD URL).
   optional string acting_client_id = 6 [(buf.validate.field).string.min_len = 1];
-  // OAuth access-class scope when credential_type is OAUTH_DELEGATED ("read-only" or "manage").
-  optional string scope = 7 [(buf.validate.field).string.min_len = 1];
+  // OAuth access-class when credential_type is OAUTH_DELEGATED.
+  optional OAuthScope scope = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 // LogField represents a field to log (in case of an error).
