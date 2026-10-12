@@ -535,8 +535,4 @@ message SpaceEndpoint {
     (buf.validate.field).string = {uri: true},
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
-  // Removed: rest_port (2), grpc_port (3).
-  // REST and gRPC share the single HTTPS endpoint on port 443.
-  reserved 2, 3;
-  reserved "rest_port", "grpc_port";
 }

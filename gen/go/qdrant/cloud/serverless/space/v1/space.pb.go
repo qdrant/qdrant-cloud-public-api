@@ -1484,9 +1484,9 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x1b\n" +
 	"\x06reason\x18\x02 \x01(\tB\x03\xe0A\x03R\x06reason\x12U\n" +
 	"\bendpoint\x18\a \x01(\v2/.qdrant.cloud.serverless.space.v1.SpaceEndpointB\x03\xe0A\x03H\x00R\bendpoint\x88\x01\x01B\v\n" +
-	"\t_endpoint\"P\n" +
+	"\t_endpoint\".\n" +
 	"\rSpaceEndpoint\x12\x1d\n" +
-	"\x03url\x18\x01 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\x88\x01\x01R\x03urlJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\trest_portR\tgrpc_port*\xb3\x01\n" +
+	"\x03url\x18\x01 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\x88\x01\x01R\x03url*\xb3\x01\n" +
 	"\x0fSpaceStatePhase\x12!\n" +
 	"\x1dSPACE_STATE_PHASE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
