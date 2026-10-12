@@ -117,7 +117,7 @@ export declare const FacadeFieldOptionsSchema: GenMessage<FacadeFieldOptions, {v
 /**
  * Shared facade metadata for this RPC (description, title, sensitivity, hints).
  * Extension number 52001 is in the Qdrant public-api custom-option range
- * (common uses 50001–50012; events uses 51001).
+ * (common uses 50xxx; events uses 51xxx).
  *
  * @generated from extension: qdrant.cloud.facade.v1.FacadeMethodOptions facade = 52001;
  */

@@ -211,7 +211,7 @@ var file_qdrant_cloud_facade_v1_facade_options_proto_extTypes = []protoimpl.Exte
 var (
 	// Shared facade metadata for this RPC (description, title, sensitivity, hints).
 	// Extension number 52001 is in the Qdrant public-api custom-option range
-	// (common uses 50001–50012; events uses 51001).
+	// (common uses 50xxx; events uses 51xxx).
 	//
 	// optional qdrant.cloud.facade.v1.FacadeMethodOptions facade = 52001;
 	E_Facade = &file_qdrant_cloud_facade_v1_facade_options_proto_extTypes[0]
