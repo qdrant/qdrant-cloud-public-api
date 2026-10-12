@@ -1,0 +1,478 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/billing/v1/billing.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "BillingService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/billing/v1/accounts/{accountId}/children": {
+      "get": {
+        "summary": "Lists all child accounts for the billing parent account identified by the given ID.\nReturns an empty list if the account has no children.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListBillingAccountChildren",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListBillingAccountChildrenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/api/billing/v1/accounts/{accountId}/credit-contracts": {
+      "get": {
+        "summary": "Lists all credit contracts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListCreditContracts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCreditContractsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/api/billing/v1/accounts/{accountId}/discounts": {
+      "get": {
+        "summary": "Lists all discounts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListDiscounts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListDiscountsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/api/billing/v1/accounts/{accountId}/invoices": {
+      "get": {
+        "summary": "Lists all invoices for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListInvoices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListInvoicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/api/billing/v1/accounts/{accountId}/parent": {
+      "get": {
+        "summary": "Returns the parent billing account for the account identified by the given ID.\nReturns NOT_FOUND if the account has no parent.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_GetBillingAccountParent",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetBillingAccountParentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CreditContract": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the credit contract record."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account this credit contract belongs to."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Total contract value."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of the contract amount.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        },
+        "activeFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the contract becomes active."
+        },
+        "activeTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the contract expires."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional internal notes about this contract."
+        },
+        "usedAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Amount consumed so far."
+        },
+        "remainingAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Amount remaining."
+        },
+        "exhaustedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp the balance was spent down to nothing. Absent while credits remain, and for\na balance zeroed at expiry rather than spent."
+        },
+        "voidedAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Amount voided from this block (a full or partial correction). 0 if never voided."
+        },
+        "overageExempt": {
+          "type": "boolean",
+          "description": "Whether this contract covers usage after `exhausted_at` instead of billing it as\npay-as-you-go. False for every ordinary account; true only for a contract that waives it.\nIndependent of `exhausted_at` so a client can show the exhaustion date without implying the\ncustomer owes anything for usage since then."
+        }
+      },
+      "description": "CreditContract represents a prepaid credit contract for an organization."
+    },
+    "v1Discount": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable name for the discount."
+        },
+        "percentage": {
+          "$ref": "#/definitions/v1DiscountPercentage",
+          "description": "Percentage-based discount (e.g., 10% off)."
+        },
+        "fixed": {
+          "$ref": "#/definitions/v1DiscountFixed",
+          "description": "Fixed amount discount (e.g., $5 off)."
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the discount becomes valid."
+        },
+        "validUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the discount expires. Must be after valid_from."
+        }
+      },
+      "description": "Discount represents a billing discount applied to an account."
+    },
+    "v1DiscountFixed": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The discount amount as a decimal. Must be positive."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency for the discount amount.\nSpecifies the currency in which the prices are denominated.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        }
+      },
+      "description": "DiscountFixed represents a fixed amount discount."
+    },
+    "v1DiscountPercentage": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The percentage value (e.g., 12.5 for 12.5%). Must be between 0 and 100."
+        }
+      },
+      "description": "DiscountPercentage represents a percentage-based discount."
+    },
+    "v1GetBillingAccountParentResponse": {
+      "type": "object",
+      "properties": {
+        "parentAccountId": {
+          "type": "string",
+          "description": "The identifier of the parent billing account."
+        }
+      },
+      "description": "GetBillingAccountParentResponse contains the parent account for the requested account."
+    },
+    "v1Invoice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the invoice."
+        },
+        "number": {
+          "type": "string",
+          "description": "Optional invoice unique identifier. It appears on emails sent to the\ncustomer for this invoice."
+        },
+        "totalAmount": {
+          "type": "string",
+          "format": "int64",
+          "description": "Total invoice amount in millicents."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the invoice was created."
+        },
+        "status": {
+          "$ref": "#/definitions/v1InvoiceStatus",
+          "description": "The current status of the invoice."
+        },
+        "pdfUrl": {
+          "type": "string",
+          "description": "The URL to download the PDF for the invoice.\nIf the invoice has not been finalized yet, this field will not be set."
+        },
+        "subtotalAmount": {
+          "type": "string",
+          "format": "int64",
+          "description": "Subtotal invoice amount in millicents (gross amount before discounts)."
+        },
+        "amountDue": {
+          "type": "string",
+          "format": "int64",
+          "description": "Remaining amount due in millicents (after credit balance / prepaid credits)."
+        }
+      },
+      "description": "Invoice represents a billing invoice issued to an account."
+    },
+    "v1InvoiceStatus": {
+      "type": "string",
+      "enum": [
+        "INVOICE_STATUS_UNSPECIFIED",
+        "INVOICE_STATUS_DRAFT",
+        "INVOICE_STATUS_OPEN",
+        "INVOICE_STATUS_VOID",
+        "INVOICE_STATUS_PAID",
+        "INVOICE_STATUS_UNCOLLECTIBLE"
+      ],
+      "default": "INVOICE_STATUS_UNSPECIFIED",
+      "description": "The possible status of an invoice.\n\n - INVOICE_STATUS_UNSPECIFIED: Unspecified\n - INVOICE_STATUS_DRAFT: Draft\n - INVOICE_STATUS_OPEN: Open\n - INVOICE_STATUS_VOID: Void\n - INVOICE_STATUS_PAID: Paid\n - INVOICE_STATUS_UNCOLLECTIBLE: Uncollectible"
+    },
+    "v1ListBillingAccountChildrenResponse": {
+      "type": "object",
+      "properties": {
+        "childAccountIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The identifiers of the child billing accounts."
+        }
+      },
+      "description": "ListBillingAccountChildrenResponse contains the child accounts for the requested account."
+    },
+    "v1ListCreditContractsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CreditContract"
+          },
+          "description": "The list of credit contracts."
+        },
+        "consumptionHistory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1MonthlyCreditConsumption"
+          },
+          "description": "History of credit consumption."
+        }
+      },
+      "title": "ListCreditContractsResponse is the response from the ListCreditContracts function"
+    },
+    "v1ListDiscountsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Discount"
+          },
+          "description": "The list of discounts."
+        }
+      },
+      "title": "ListDiscountsResponse is the response from the ListDiscounts function"
+    },
+    "v1ListInvoicesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Invoice"
+          },
+          "description": "The list of invoices."
+        }
+      },
+      "title": "ListInvoicesResponse is the response from the ListInvoices function"
+    },
+    "v1MonthlyCreditConsumption": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The year this entry represents (e.g. 2026)."
+        },
+        "month": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The month this entry represents (1 = January, 12 = December)."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "The amount of credits consumed in the month."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of the consumed credits."
+        }
+      },
+      "description": "MonthlyCreditConsumption represents a month's consumed credits."
+    }
+  }
+}

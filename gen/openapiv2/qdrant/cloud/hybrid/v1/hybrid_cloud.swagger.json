@@ -1,0 +1,1139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/hybrid/v1/hybrid_cloud.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "HybridCloudService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments": {
+      "get": {
+        "summary": "Lists all hybrid cloud environments in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write:clusters",
+        "operationId": "HybridCloudService_ListHybridCloudEnvironments",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListHybridCloudEnvironmentsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    },
+    "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}": {
+      "get": {
+        "summary": "Gets a hybrid cloud environment in the account identified by the given ID.\nRequired permissions (any-of):\n- read:hybrid_cloud_environments\n- write:clusters",
+        "operationId": "HybridCloudService_GetHybridCloudEnvironment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetHybridCloudEnvironmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hybridCloudEnvironmentId",
+            "description": "The identifier for the hybrid cloud environment (in GUID format).\nIt should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes a hybrid cloud environment in the account identified by the given ID.\nRequired permissions:\n- delete:hybrid_cloud_environments",
+        "operationId": "HybridCloudService_DeleteHybridCloudEnvironment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteHybridCloudEnvironmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hybridCloudEnvironmentId",
+            "description": "The identifier for the hybrid cloud environment (in GUID format).\nIt should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    },
+    "/api/hybrid/v1/accounts/{accountId}/hybrid-cloud-environments/{hybridCloudEnvironmentId}/bootstrap-commands": {
+      "post": {
+        "summary": "Generates the commands that should be executed against a kubernetes cluster to\nbootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,\nbut be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials.\nThus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.\nRequired permissions (both):\n- write:hybrid_cloud_environments\n- write:management_keys",
+        "operationId": "HybridCloudService_GenerateBootstrapCommands",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GenerateBootstrapCommandsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hybridCloudEnvironmentId",
+            "description": "The identifier for the hybrid cloud environment (in GUID format).\nIt should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridCloudServiceGenerateBootstrapCommandsBody"
+            }
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    },
+    "/api/hybrid/v1/accounts/{hybridCloudEnvironment.accountId}/hybrid-cloud-environments": {
+      "post": {
+        "summary": "Creates a hybrid cloud environment in the account identified by the given ID.\nRequired permissions:\n- write:hybrid_cloud_environments",
+        "operationId": "HybridCloudService_CreateHybridCloudEnvironment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateHybridCloudEnvironmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hybridCloudEnvironment.accountId",
+            "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridCloudServiceCreateHybridCloudEnvironmentBody"
+            }
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    },
+    "/api/hybrid/v1/accounts/{hybridCloudEnvironment.accountId}/hybrid-cloud-environments/{hybridCloudEnvironment.id}": {
+      "put": {
+        "summary": "Updates a hybrid cloud environment in the account identified by the given ID.\nRequired permissions:\n- write:hybrid_cloud_environments",
+        "operationId": "HybridCloudService_UpdateHybridCloudEnvironment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateHybridCloudEnvironmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hybridCloudEnvironment.accountId",
+            "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hybridCloudEnvironment.id",
+            "description": "Unique identifier for the hybrid cloud environment (in GUID format).\nThis is a read-only field and will be available after it is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridCloudServiceUpdateHybridCloudEnvironmentBody"
+            }
+          }
+        ],
+        "tags": [
+          "HybridCloudService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "HybridCloudServiceCreateHybridCloudEnvironmentBody": {
+      "type": "object",
+      "properties": {
+        "hybridCloudEnvironment": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the hybrid cloud environment (in GUID format).\nThis is a read-only field and will be available after it is created.",
+              "readOnly": true
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created.",
+              "readOnly": true
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the hybrid cloud environment was modified the last time.\nThis is a read-only field and will be available after it is created.",
+              "readOnly": true
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the hybrid cloud environment\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "createdByEmail": {
+              "type": "string",
+              "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.",
+              "readOnly": true
+            },
+            "bootstrapCommandsGenerated": {
+              "type": "boolean",
+              "description": "Set if the generate bootstrap commands has been called at least once.\nSee HybridCloudService.GenerateBootstrapCommands for details."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration",
+              "title": "Configuration of the environment"
+            },
+            "status": {
+              "$ref": "#/definitions/v1HybridCloudEnvironmentStatus",
+              "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server.",
+              "readOnly": true
+            }
+          },
+          "title": "The actual hybrid cloud environment"
+        }
+      },
+      "title": "CreateHybridCloudEnvironmentRequest is the request for CreateHybridCloudEnvironment function"
+    },
+    "HybridCloudServiceGenerateBootstrapCommandsBody": {
+      "type": "object",
+      "title": "GenerateBootstrapCommandsRequest is the request for GenerateBootstrapCommands function"
+    },
+    "HybridCloudServiceUpdateHybridCloudEnvironmentBody": {
+      "type": "object",
+      "properties": {
+        "hybridCloudEnvironment": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created.",
+              "readOnly": true
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the hybrid cloud environment was modified the last time.\nThis is a read-only field and will be available after it is created.",
+              "readOnly": true
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the hybrid cloud environment\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "createdByEmail": {
+              "type": "string",
+              "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.",
+              "readOnly": true
+            },
+            "bootstrapCommandsGenerated": {
+              "type": "boolean",
+              "description": "Set if the generate bootstrap commands has been called at least once.\nSee HybridCloudService.GenerateBootstrapCommands for details."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration",
+              "title": "Configuration of the environment"
+            },
+            "status": {
+              "$ref": "#/definitions/v1HybridCloudEnvironmentStatus",
+              "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server.",
+              "readOnly": true
+            }
+          },
+          "title": "The actual hybrid cloud environment"
+        },
+        "updateMask": {
+          "type": "string",
+          "description": "Optional mask of fields to update. When set, only the fields listed in\nthe mask will be updated; all other fields retain their current values\non the server. Field paths reference the resource\n(HybridCloudEnvironment) message, not the request envelope\n(e.g. \"name\").\nWhen unset or empty, the request is treated as a full-resource\nreplacement (the existing behavior)."
+        }
+      },
+      "title": "UpdateHybridCloudEnvironmentRequest is the request for UpdateHybridCloudEnvironment function"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "protobufNullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CreateHybridCloudEnvironmentResponse": {
+      "type": "object",
+      "properties": {
+        "hybridCloudEnvironment": {
+          "$ref": "#/definitions/v1HybridCloudEnvironment",
+          "title": "The actual hybrid cloud environment"
+        }
+      },
+      "title": "CreateHybridCloudEnvironmentResponse is the response for CreateHybridCloudEnvironment function"
+    },
+    "v1DeleteHybridCloudEnvironmentResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteHybridCloudEnvironmentResponse is the response for DeleteHybridCloudEnvironment function"
+    },
+    "v1GenerateBootstrapCommandsResponse": {
+      "type": "object",
+      "properties": {
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Commands to execute for bootstrapping a kubernetes cluster into hybrid cloud environment\n`kubectl` and `helm` CLIs are required for execution."
+        },
+        "accessKey": {
+          "type": "string",
+          "description": "The access key for the Qdrant cloud.\nThis is a sensitive field and should be handled as a secret."
+        },
+        "registryUsername": {
+          "type": "string",
+          "description": "The username for the container/helm registry (registry.cloud.qdrant.io).\nThis is a sensitive field and should be handled as a secret."
+        },
+        "registryPassword": {
+          "type": "string",
+          "description": "The password for the container/helm registry (registry.cloud.qdrant.io).\nThis is a sensitive field and should be handled as a secret."
+        }
+      },
+      "title": "GenerateBootstrapCommandsResponse is the response for GenerateBootstrapCommands function"
+    },
+    "v1GetHybridCloudEnvironmentResponse": {
+      "type": "object",
+      "properties": {
+        "hybridCloudEnvironment": {
+          "$ref": "#/definitions/v1HybridCloudEnvironment",
+          "title": "The actual hybrid cloud environment"
+        }
+      },
+      "title": "GetHybridCloudEnvironmentResponse is the response for GetHybridCloudEnvironment function"
+    },
+    "v1HybridCloudEnvironment": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the hybrid cloud environment (in GUID format).\nThis is a read-only field and will be available after it is created.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the hybrid cloud environment was created.\nThis is a read-only field and will be available after it is created.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the hybrid cloud environment was modified the last time.\nThis is a read-only field and will be available after it is created.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the hybrid cloud environment\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "createdByEmail": {
+          "type": "string",
+          "description": "The email of the user who created the hybrid cloud environment.\nThis is a read-only field and will be available after it is created.\nIf the hybrid cloud environment is created by an actual user the information will be filled-out, if it's created programmatically the field will be empty.",
+          "readOnly": true
+        },
+        "bootstrapCommandsGenerated": {
+          "type": "boolean",
+          "description": "Set if the generate bootstrap commands has been called at least once.\nSee HybridCloudService.GenerateBootstrapCommands for details."
+        },
+        "configuration": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentConfiguration",
+          "title": "Configuration of the environment"
+        },
+        "status": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentStatus",
+          "description": "Status of the environment.\nThis is a read-only field and will be available after the environment has been communicated with the server.",
+          "readOnly": true
+        }
+      },
+      "title": "HybridCloudEnvironment represents a hybrid cloud environment"
+    },
+    "v1HybridCloudEnvironmentCapabilities": {
+      "type": "object",
+      "properties": {
+        "volumeSnapshot": {
+          "type": "boolean",
+          "title": "True if volume snapshotting is available"
+        },
+        "volumeExpansion": {
+          "type": "boolean",
+          "title": "True if volume expansion is available"
+        }
+      },
+      "title": "Capabilities of hybrid cloud environment"
+    },
+    "v1HybridCloudEnvironmentComponentStatus": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Component name"
+        },
+        "namespace": {
+          "type": "string",
+          "title": "Component namespace"
+        },
+        "version": {
+          "type": "string",
+          "title": "Component version"
+        },
+        "phase": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentComponentStatusPhase",
+          "title": "Phase"
+        },
+        "message": {
+          "type": "string",
+          "title": "Status message"
+        }
+      },
+      "title": "Status of a component deployed in the hybrid cloud environment"
+    },
+    "v1HybridCloudEnvironmentComponentStatusPhase": {
+      "type": "string",
+      "enum": [
+        "HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_UNSPECIFIED",
+        "HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_READY",
+        "HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_NOT_READY",
+        "HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_NOT_FOUND"
+      ],
+      "default": "HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_UNSPECIFIED",
+      "description": "- HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_UNSPECIFIED: Unspecified\n - HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_READY: Ready\n - HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_NOT_READY: Not ready\n - HYBRID_CLOUD_ENVIRONMENT_COMPONENT_STATUS_PHASE_NOT_FOUND: Not found",
+      "title": "Component status phase"
+    },
+    "v1HybridCloudEnvironmentConfiguration": {
+      "type": "object",
+      "properties": {
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the configuration was last updated.\nThis is a read-only field and will be available after it is created.",
+          "readOnly": true
+        },
+        "namespace": {
+          "type": "string",
+          "title": "Namespace where qdrant components are deployed, readonly after bootstrapping"
+        },
+        "httpProxyUrl": {
+          "type": "string",
+          "title": "optional HTTP proxy URL"
+        },
+        "httpsProxyUrl": {
+          "type": "string",
+          "title": "optional HTTPS proxy URL"
+        },
+        "noProxyConfigs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "no proxy config"
+        },
+        "containerRegistryUrl": {
+          "type": "string",
+          "title": "Container registry URL\nLike: your-registry.example.com/qdrant (this will for example result in your-registry.example.com/qdrant/qdrant-cloud-agent)"
+        },
+        "chartRepositoryUrl": {
+          "type": "string",
+          "title": "Chart registry URL\nLike: oci://your-registry.example.com/qdrant-charts (this will for example result in oci://your-registry.example.com/qdrant-charts/qdrant-cloud-agent)"
+        },
+        "registrySecretName": {
+          "type": "string",
+          "title": "k8s secret name containing registry credentials for accessing container and helm repositories"
+        },
+        "caCertificates": {
+          "type": "string",
+          "title": "CA certificates"
+        },
+        "databaseStorageClass": {
+          "type": "string",
+          "title": "Default database storage class, if omitted\nkubernetes cluster default is used"
+        },
+        "snapshotStorageClass": {
+          "type": "string",
+          "title": "Default snapshot storage class, if omitted\nkubernetes cluster default is used"
+        },
+        "volumeSnapshotStorageClass": {
+          "type": "string",
+          "title": "Default volume snapshot storage class, if omitted\ncsi-snapclass is used"
+        },
+        "ingress": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyIngressRule"
+          },
+          "title": "Optional Ingress rules for Qdrant databases"
+        },
+        "egress": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyEgressRule"
+          },
+          "title": "Optional Egress rules for Qdrant databases"
+        },
+        "logLevel": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentConfigurationLogLevel",
+          "title": "Log level for deployed components"
+        },
+        "tolerations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Toleration"
+          },
+          "title": "List of tolerations for clusters in this hybrid cloud environment"
+        },
+        "nodeSelector": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "Node selector for Qdrant nodes in this hybrid cloud environment"
+        },
+        "advancedOperatorSettings": {
+          "type": "object",
+          "description": "Advanced operator settings as a JSON object.\nThis field is to specify fields that don't have a strongly-typed field.\nThe strongly-typed fields in HybridCloudEnvironmentConfiguration take precedence in case they are both set."
+        },
+        "controlPlaneLabels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of labels applied to the control plane deployments and pods (operator, agent, ...) in a hybrid cloud environment.\nThis is an optional field"
+        },
+        "clusterDomain": {
+          "type": "string",
+          "description": "The Kubernetes cluster domain used to reach in-cluster services (e.g. `cluster.local`).\nSet this only for clusters configured with a custom cluster domain; when omitted the\ndeployed components fall back to the default `cluster.local`.\nThis is an optional field."
+        }
+      },
+      "title": "A HybridCloudEnvironmentConfiguration represents a configuration of hybrid cloud environment"
+    },
+    "v1HybridCloudEnvironmentConfigurationLogLevel": {
+      "type": "string",
+      "enum": [
+        "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_UNSPECIFIED",
+        "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_DEBUG",
+        "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_INFO",
+        "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_WARN",
+        "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_ERROR"
+      ],
+      "default": "HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_UNSPECIFIED",
+      "description": "- HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: UNSPECIFIED\n - HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_DEBUG: DEBUG\n - HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_INFO: INFO\n - HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_WARN: WARNING\n - HYBRID_CLOUD_ENVIRONMENT_CONFIGURATION_LOG_LEVEL_ERROR: ERROR",
+      "title": "HybridCloudEnvironmentConfigurationLogLevel represents the log level applied to the hybrid cloud environment components"
+    },
+    "v1HybridCloudEnvironmentStatus": {
+      "type": "object",
+      "properties": {
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the hybrid cloud environment status was modified the last time.",
+          "readOnly": true
+        },
+        "phase": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentStatusPhase",
+          "title": "Phase",
+          "readOnly": true
+        },
+        "kubernetesVersion": {
+          "type": "string",
+          "title": "Kubernetes version",
+          "readOnly": true
+        },
+        "kubernetesDistribution": {
+          "$ref": "#/definitions/v1KubernetesDistribution",
+          "title": "Kubernetes distribution",
+          "readOnly": true
+        },
+        "numberOfNodes": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Number of kubernetes nodes",
+          "readOnly": true
+        },
+        "capabilities": {
+          "$ref": "#/definitions/v1HybridCloudEnvironmentCapabilities",
+          "title": "Capabilities of hybrid cloud environment",
+          "readOnly": true
+        },
+        "componentStatuses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentComponentStatus"
+          },
+          "title": "Status of deployed component",
+          "readOnly": true
+        },
+        "clusterCreationReadiness": {
+          "$ref": "#/definitions/v1QdrantClusterCreationStatus",
+          "title": "Report if the hybrid cloud environment is ready for Qdrant cluster creation",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "title": "Status message",
+          "readOnly": true
+        },
+        "storageClasses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentStorageClass"
+          },
+          "title": "Storage classes available in the hybrid cloud environment",
+          "readOnly": true
+        },
+        "volumeSnapshotClasses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeSnapshotClass"
+          },
+          "title": "Volume snapshot classes available in the hybrid cloud environment",
+          "readOnly": true
+        },
+        "volumeAttributesClasses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeAttributesClass"
+          },
+          "title": "Volume attributes classes available in the hybrid cloud environment",
+          "readOnly": true
+        },
+        "storageConfigurationReadiness": {
+          "$ref": "#/definitions/v1StorageConfigurationReadiness",
+          "title": "Expresses the storage configuration state of the hybrid cloud environment.\nDeprecated: because the storage configuration state is not a requirement for cluster creation",
+          "readOnly": true
+        }
+      },
+      "title": "Status of a hybrid cloud environment, read only"
+    },
+    "v1HybridCloudEnvironmentStatusPhase": {
+      "type": "string",
+      "enum": [
+        "HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_UNSPECIFIED",
+        "HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_READY",
+        "HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_NOT_READY",
+        "HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_FAILED_TO_SYNC"
+      ],
+      "default": "HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_UNSPECIFIED",
+      "description": "- HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_UNSPECIFIED: Unspecified\n - HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_READY: Ready\n - HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_NOT_READY: Not ready\n - HYBRID_CLOUD_ENVIRONMENT_STATUS_PHASE_FAILED_TO_SYNC: Failed to sync",
+      "title": "Status phase of hybrid cloud environment"
+    },
+    "v1HybridCloudEnvironmentStorageClass": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name specifies the name of the storage class"
+        },
+        "default": {
+          "type": "boolean",
+          "title": "Default specifies whether the storage class is the default storage class"
+        },
+        "provisioner": {
+          "type": "string",
+          "title": "Provisioner specifies the provisioner of the storage class"
+        },
+        "allowVolumeExpansion": {
+          "type": "boolean",
+          "title": "It specifies whether the storage class allows volume expansion"
+        },
+        "reclaimPolicy": {
+          "type": "string",
+          "title": "Specifies the reclaim policy of the storage class"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "parameters of the storage class"
+        }
+      },
+      "title": "A storage class available in hybrid cloud environment"
+    },
+    "v1HybridCloudEnvironmentVolumeAttributesClass": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name of the volume attributes class"
+        },
+        "driver": {
+          "type": "string",
+          "title": "Driver of the volume attributes class"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "Parameters of the volume attributes class"
+        }
+      },
+      "title": "Volume attributes class available in the hybrid cloud environment"
+    },
+    "v1HybridCloudEnvironmentVolumeSnapshotClass": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name of the volume snapshot class"
+        },
+        "driver": {
+          "type": "string",
+          "title": "Driver of the volume snapshot class"
+        }
+      },
+      "title": "Volume snapshot class available in the hybrid cloud environment"
+    },
+    "v1IPBlock": {
+      "type": "object",
+      "properties": {
+        "cidr": {
+          "type": "string",
+          "description": "CIDR is a string representing the IP Block.\nValid examples are \"192.168.1.1/24\" or \"2001:db9::/64\"."
+        },
+        "except": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Except is a slice of CIDRs that should not be included within an IP Block.\nExcept values will be rejected if they are outside the CIDR range."
+        }
+      },
+      "description": "IPBlock describes a particular CIDR (e.g. \"192.168.1.1/24\") that is allowed\nto the pods.\nThis is a gRPC-native equivalent of the Kubernetes IPBlock."
+    },
+    "v1KeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "The key part of a key-value pair"
+        },
+        "value": {
+          "type": "string",
+          "title": "The value part of a key-value pair"
+        }
+      },
+      "description": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes."
+    },
+    "v1KubernetesDistribution": {
+      "type": "string",
+      "enum": [
+        "KUBERNETES_DISTRIBUTION_UNSPECIFIED",
+        "KUBERNETES_DISTRIBUTION_AWS",
+        "KUBERNETES_DISTRIBUTION_GCP",
+        "KUBERNETES_DISTRIBUTION_AZURE",
+        "KUBERNETES_DISTRIBUTION_DO",
+        "KUBERNETES_DISTRIBUTION_SCALEWAY",
+        "KUBERNETES_DISTRIBUTION_OPENSHIFT",
+        "KUBERNETES_DISTRIBUTION_LINODE",
+        "KUBERNETES_DISTRIBUTION_CIVO",
+        "KUBERNETES_DISTRIBUTION_OCI",
+        "KUBERNETES_DISTRIBUTION_OVHCLOUD",
+        "KUBERNETES_DISTRIBUTION_STACKIT",
+        "KUBERNETES_DISTRIBUTION_VULTR",
+        "KUBERNETES_DISTRIBUTION_K3S"
+      ],
+      "default": "KUBERNETES_DISTRIBUTION_UNSPECIFIED",
+      "description": "- KUBERNETES_DISTRIBUTION_UNSPECIFIED: Unspecified\n - KUBERNETES_DISTRIBUTION_AWS: AWS\n - KUBERNETES_DISTRIBUTION_GCP: GCP\n - KUBERNETES_DISTRIBUTION_AZURE: Azure\n - KUBERNETES_DISTRIBUTION_DO: DigitalOcean\n - KUBERNETES_DISTRIBUTION_SCALEWAY: Scaleway\n - KUBERNETES_DISTRIBUTION_OPENSHIFT: Openshift\n - KUBERNETES_DISTRIBUTION_LINODE: Linode\n - KUBERNETES_DISTRIBUTION_CIVO: Civo\n - KUBERNETES_DISTRIBUTION_OCI: OracleCloud\n - KUBERNETES_DISTRIBUTION_OVHCLOUD: OVHcloud\n - KUBERNETES_DISTRIBUTION_STACKIT: Stackit\n - KUBERNETES_DISTRIBUTION_VULTR: Vultr\n - KUBERNETES_DISTRIBUTION_K3S: K3S",
+      "title": "Kubernetes distributions"
+    },
+    "v1LabelSelector": {
+      "type": "object",
+      "properties": {
+        "matchLabels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "description": "match_labels is a map of {key,value} pairs.\nmatch_labels is a list of KeyValue objects."
+        },
+        "matchExpressions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1LabelSelectorRequirement"
+          },
+          "description": "match_expressions is a list of label selector requirements. The requirements are AND-ed."
+        }
+      },
+      "description": "A label selector is a label query over a set of resources. The result of match_labels and\nmatch_expressions are AND-ed. An empty label selector matches all objects.\nThis is a gRPC-native equivalent of the Kubernetes LabelSelector."
+    },
+    "v1LabelSelectorRequirement": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "key is the label key that the selector applies to."
+        },
+        "operator": {
+          "type": "string",
+          "description": "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "values is an array of string values.\nIf the operator is In or NotIn, the values array must be non-empty.\nIf the operator is Exists or DoesNotExist, the values array must be empty."
+        }
+      },
+      "description": "A label selector requirement is a selector that contains values, a key, and an operator that\nrelates the key and values.\nThis is a gRPC-native equivalent of the Kubernetes LabelSelectorRequirement."
+    },
+    "v1ListHybridCloudEnvironmentsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1HybridCloudEnvironment"
+          },
+          "title": "The actual hybrid cloud environments in this list"
+        }
+      },
+      "title": "ListHybridCloudEnvironmentsResponse is the response for ListHybridCloudEnvironments function"
+    },
+    "v1NetworkPolicyEgressRule": {
+      "type": "object",
+      "properties": {
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyPort"
+          },
+          "description": "List of destination ports for outgoing traffic.\nEach item in this list is combined using a logical OR. If this field is\nempty or missing, this rule matches all ports (traffic not restricted by port).\nIf this field is present and contains at least one item, then this rule allows\ntraffic only if the traffic matches at least one port in the list."
+        },
+        "to": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyPeer"
+          },
+          "description": "List of destinations for outgoing traffic of pods selected for this rule.\nItems in this list are combined using a logical OR operation. If this field is\nempty or missing, this rule matches all destinations (traffic not restricted by\ndestination). If this field is present and contains at least one item, this rule\nallows traffic only if the traffic matches at least one item in the to list."
+        }
+      },
+      "description": "NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods\nmatched by a NetworkPolicySpec's podSelector. The traffic must match both ports and to.\nThis is a gRPC-native equivalent of the Kubernetes NetworkPolicyEgressRule."
+    },
+    "v1NetworkPolicyIngressRule": {
+      "type": "object",
+      "properties": {
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyPort"
+          },
+          "description": "List of ports which should be made accessible on the pods selected for this\nrule. Each item in this list is combined using a logical OR. If this field is\nempty or missing, this rule matches all ports (traffic not restricted by port).\nIf this field is present and contains at least one item, then this rule allows\ntraffic only if the traffic matches at least one port in the list."
+        },
+        "from": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1NetworkPolicyPeer"
+          },
+          "description": "List of sources which should be able to access the pods selected for this rule.\nItems in this list are combined using a logical OR operation. If this field is\nempty or missing, this rule matches all sources (traffic not restricted by\nsource). If this field is present and contains at least one item, this rule\nallows traffic only if the traffic matches at least one item in the from list."
+        }
+      },
+      "description": "NetworkPolicyIngressRule describes a particular set of traffic that is allowed to the pods\nmatched by a NetworkPolicySpec's podSelector. The traffic must match both ports and from.\nThis is a gRPC-native equivalent of the Kubernetes NetworkPolicyIngressRule."
+    },
+    "v1NetworkPolicyPeer": {
+      "type": "object",
+      "properties": {
+        "selector": {
+          "$ref": "#/definitions/v1PeerSelector",
+          "description": "Selects pods and/or namespaces."
+        },
+        "ipBlock": {
+          "$ref": "#/definitions/v1IPBlock",
+          "description": "Defines policy on a particular IPBlock."
+        }
+      },
+      "description": "NetworkPolicyPeer describes a peer to allow traffic to/from.\nThis is a gRPC-native equivalent of the Kubernetes NetworkPolicyPeer."
+    },
+    "v1NetworkPolicyPort": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this\nfield defaults to TCP."
+        },
+        "portNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A numerical port number."
+        },
+        "portName": {
+          "type": "string",
+          "description": "A named port on a pod."
+        },
+        "endPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If set, indicates that the range of ports from port to end_port, inclusive,\nshould be allowed by the policy. This field cannot be defined if the port field\nis defined as a named (string) port.\nThe end_port must be equal to or greater than port."
+        }
+      },
+      "description": "NetworkPolicyPort describes a port to allow traffic on.\nThis is a gRPC-native equivalent of the Kubernetes NetworkPolicyPort."
+    },
+    "v1PeerSelector": {
+      "type": "object",
+      "properties": {
+        "podSelector": {
+          "$ref": "#/definitions/v1LabelSelector",
+          "description": "This is a label selector which selects Pods.\nIf NamespaceSelector is also set, then the NetworkPolicyPeer as a whole selects\nthe Pods matching PodSelector in the Namespaces selected by NamespaceSelector.\nOtherwise it selects the Pods matching PodSelector in the policy's own Namespace."
+        },
+        "namespaceSelector": {
+          "$ref": "#/definitions/v1LabelSelector",
+          "description": "Selects Namespaces using cluster-scoped labels.\nIf PodSelector is also set, then the NetworkPolicyPeer as a whole selects\nthe Pods matching PodSelector in the Namespaces selected by NamespaceSelector.\nOtherwise it selects all Pods in the Namespaces selected by NamespaceSelector."
+        }
+      },
+      "description": "PeerSelector selects pods and/or namespaces."
+    },
+    "v1QdrantClusterCreationStatus": {
+      "type": "string",
+      "enum": [
+        "QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED",
+        "QDRANT_CLUSTER_CREATION_STATUS_READY",
+        "QDRANT_CLUSTER_CREATION_STATUS_NOT_READY"
+      ],
+      "default": "QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED",
+      "description": "- QDRANT_CLUSTER_CREATION_STATUS_UNSPECIFIED: Unspecified\n - QDRANT_CLUSTER_CREATION_STATUS_READY: Clusters can be created\n - QDRANT_CLUSTER_CREATION_STATUS_NOT_READY: Clusters cannot be created",
+      "title": "QdrantClusterCreationStatus indicates if Qdrant clusters can be created in the environment"
+    },
+    "v1StorageConfigurationReadiness": {
+      "type": "string",
+      "enum": [
+        "STORAGE_CONFIGURATION_READINESS_UNSPECIFIED",
+        "STORAGE_CONFIGURATION_READINESS_READY",
+        "STORAGE_CONFIGURATION_READINESS_NOT_READY",
+        "STORAGE_CONFIGURATION_READINESS_INVALID"
+      ],
+      "default": "STORAGE_CONFIGURATION_READINESS_UNSPECIFIED",
+      "description": "StorageConfigurationReadiness expresses the storage configuration state of the hybrid cloud environment.\n\n - STORAGE_CONFIGURATION_READINESS_UNSPECIFIED: Default/unknown, safe fallback\n - STORAGE_CONFIGURATION_READINESS_READY: Storage config explicitly set\n - STORAGE_CONFIGURATION_READINESS_NOT_READY: Storage config absent\n - STORAGE_CONFIGURATION_READINESS_INVALID: Config present but invalid"
+    },
+    "v1Toleration": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the taint that the toleration applies to.\nIf key is not set (or empty) together with operator `Exists` matches all keys, values and effects.\nThe key must be a valid Kubernetes qualified name."
+        },
+        "operator": {
+          "$ref": "#/definitions/v1TolerationOperator",
+          "description": "The operator represents a key's relationship to the value.\nThe default is TOLERATION_OPERATOR_EQUAL."
+        },
+        "value": {
+          "type": "string",
+          "title": "The value is the taint value the toleration matches to.\nIf the operator is `Exists`, the value should not be set.\nIf the operator is `Equal` (the default), the value is required.\n'value' must be a valid identifier (alphanumeric start/end, allows -_. in between)"
+        },
+        "effect": {
+          "$ref": "#/definitions/v1TolerationEffect",
+          "description": "The effect indicates the taint effect to match.\nIf not set, matches all taint effects."
+        },
+        "tolerationSeconds": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The toleration seconds indicates the duration to tolerate the taint."
+        }
+      },
+      "description": "The Toleration message represents a toleration object for Kubernetes."
+    },
+    "v1TolerationEffect": {
+      "type": "string",
+      "enum": [
+        "TOLERATION_EFFECT_UNSPECIFIED",
+        "TOLERATION_EFFECT_NO_SCHEDULE",
+        "TOLERATION_EFFECT_PREFER_NO_SCHEDULE",
+        "TOLERATION_EFFECT_NO_EXECUTE"
+      ],
+      "default": "TOLERATION_EFFECT_UNSPECIFIED",
+      "description": "- TOLERATION_EFFECT_UNSPECIFIED: Unspecified effect.\n - TOLERATION_EFFECT_NO_SCHEDULE: NoSchedule taint effect.\n - TOLERATION_EFFECT_PREFER_NO_SCHEDULE: PreferNoSchedule taint effect.\n - TOLERATION_EFFECT_NO_EXECUTE: NoExecute taint effect.",
+      "title": "TolerationEffect represents the effects a taint has on pod scheduling and eviction.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
+    },
+    "v1TolerationOperator": {
+      "type": "string",
+      "enum": [
+        "TOLERATION_OPERATOR_UNSPECIFIED",
+        "TOLERATION_OPERATOR_EXISTS",
+        "TOLERATION_OPERATOR_EQUAL"
+      ],
+      "default": "TOLERATION_OPERATOR_UNSPECIFIED",
+      "description": "- TOLERATION_OPERATOR_UNSPECIFIED: Unspecified operator.\n - TOLERATION_OPERATOR_EXISTS: The operator means the key exists.\n - TOLERATION_OPERATOR_EQUAL: The operator means the key equals the given value.",
+      "title": "TolerationOperator defines the valid operators for tolerations.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
+    },
+    "v1UpdateHybridCloudEnvironmentResponse": {
+      "type": "object",
+      "properties": {
+        "hybridCloudEnvironment": {
+          "$ref": "#/definitions/v1HybridCloudEnvironment",
+          "title": "The actual hybrid cloud environment"
+        }
+      },
+      "title": "UpdateHybridCloudEnvironmentResponse is the response for UpdateHybridCloudEnvironment function"
+    }
+  }
+}

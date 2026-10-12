@@ -1,0 +1,882 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/monitoring/v1/monitoring.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "MonitoringService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/alerts": {
+      "get": {
+        "summary": "Lists the alerts for a cluster in the account identified by the given ID.\nSorted by last_firing_at (most recent first).\nRequired permissions:\n- read:clusters",
+        "operationId": "MonitoringService_ListClusterAlerts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListClusterAlertsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "description": "Optional alert-state filter. If omitted (empty), alerts in ALL states are\nreturned; if set, only alerts in that state are returned.\n\n - CLUSTER_ALERT_STATE_UNSPECIFIED: The alert state is unspecified.\n - CLUSTER_ALERT_STATE_FIRING: The alert is currently firing.\n - CLUSTER_ALERT_STATE_RESOLVED: The alert has been resolved by the backend.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CLUSTER_ALERT_STATE_UNSPECIFIED",
+              "CLUSTER_ALERT_STATE_FIRING",
+              "CLUSTER_ALERT_STATE_RESOLVED"
+            ],
+            "default": "CLUSTER_ALERT_STATE_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
+    "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/events": {
+      "get": {
+        "summary": "Gets the events of a cluster in the account identified by the given ID.\nThis method is currently available only for clusters running in hybrid cloud environments.\nRequired permissions:\n- read:clusters",
+        "operationId": "MonitoringService_GetClusterEvents",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterEventsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "since",
+            "description": "Optional start time for the events query.\nIf omitted, defaults to 7 days ago.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "until",
+            "description": "Optional end time for the events query.\nIf omitted, defaults to current time.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
+    "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/logs": {
+      "get": {
+        "summary": "Gets the logs of a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "operationId": "MonitoringService_GetClusterLogs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterLogsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "since",
+            "description": "Optional start time for the logs query.\nIf omitted, defaults to 3 days ago.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "until",
+            "description": "Optional end time for the logs query.\nIf omitted, defaults to current time.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "limit",
+            "description": "Optional limit for the logs query.\nIf omitted, defaults to 100.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
+    "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/metrics/inference": {
+      "get": {
+        "summary": "Gets the inference token usage metrics for a cluster.\nProvide `inference_model_id` to limit the response to a single model.\nRequired permissions:\n- read:clusters",
+        "operationId": "MonitoringService_GetClusterInferenceMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterInferenceMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "since",
+            "description": "Optional start time for the inference metrics query.\nIf omitted, defaults to 7 days ago.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "until",
+            "description": "Optional end time for the inference metrics query.\nIf omitted, defaults to current time.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "interval",
+            "description": "Optional aggregation interval for histogram buckets.\n\n - INFERENCE_METRICS_INTERVAL_UNSPECIFIED: Interval is unspecified; defaults to DAY.\n - INFERENCE_METRICS_INTERVAL_DAY: Buckets are aggregated per day.\n - INFERENCE_METRICS_INTERVAL_WEEK: Buckets are aggregated per week.\n - INFERENCE_METRICS_INTERVAL_MONTH: Buckets are aggregated per month.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "INFERENCE_METRICS_INTERVAL_UNSPECIFIED",
+              "INFERENCE_METRICS_INTERVAL_DAY",
+              "INFERENCE_METRICS_INTERVAL_WEEK",
+              "INFERENCE_METRICS_INTERVAL_MONTH"
+            ],
+            "default": "INFERENCE_METRICS_INTERVAL_UNSPECIFIED"
+          },
+          {
+            "name": "inferenceModelId",
+            "description": "Optional identifier for a specific inference model to filter metrics by.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
+    "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/summary-metrics": {
+      "get": {
+        "summary": "Gets the summary metrics of a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "operationId": "MonitoringService_GetClusterSummaryMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterSummaryMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    },
+    "/api/monitoring/v1/accounts/{accountId}/cluster/{clusterId}/usage-metrics": {
+      "get": {
+        "summary": "Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "operationId": "MonitoringService_GetClusterUsageMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterUsageMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "since",
+            "description": "Optional start time for the metrics query.\nIf omitted, defaults to 1 hour ago.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "until",
+            "description": "Optional end time for the metrics query.\nIf omitted, defaults to current time.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "aggregator",
+            "description": "Aggregation function to apply to the time series data.\nIf omitted, defaults to SUM.\n\n - AGGREGATOR_UNSPECIFIED: Unspecified aggregation function.\n - AGGREGATOR_SUM: SUM aggregation function.\n - AGGREGATOR_AVG: AVG aggregation function.\n - AGGREGATOR_MAX: MAX aggregation function.\n - AGGREGATOR_MIN: MIN aggregation function.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AGGREGATOR_UNSPECIFIED",
+              "AGGREGATOR_SUM",
+              "AGGREGATOR_AVG",
+              "AGGREGATOR_MAX",
+              "AGGREGATOR_MIN"
+            ],
+            "default": "AGGREGATOR_UNSPECIFIED"
+          }
+        ],
+        "tags": [
+          "MonitoringService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1Aggregator": {
+      "type": "string",
+      "enum": [
+        "AGGREGATOR_UNSPECIFIED",
+        "AGGREGATOR_SUM",
+        "AGGREGATOR_AVG",
+        "AGGREGATOR_MAX",
+        "AGGREGATOR_MIN"
+      ],
+      "default": "AGGREGATOR_UNSPECIFIED",
+      "description": "Aggregator defines how metrics should be aggregated over time.\n\n - AGGREGATOR_UNSPECIFIED: Unspecified aggregation function.\n - AGGREGATOR_SUM: SUM aggregation function.\n - AGGREGATOR_AVG: AVG aggregation function.\n - AGGREGATOR_MAX: MAX aggregation function.\n - AGGREGATOR_MIN: MIN aggregation function."
+    },
+    "v1ClusterAlert": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable identifier for this firing instance (in GUID format).\nRe-firing a previously-resolved alert produces a new ID."
+        },
+        "type": {
+          "$ref": "#/definitions/v1ClusterAlertType",
+          "description": "The category of alert."
+        },
+        "severity": {
+          "$ref": "#/definitions/v1ClusterAlertSeverity",
+          "description": "Severity tier, derived server-side from the alert type."
+        },
+        "title": {
+          "type": "string",
+          "description": "Human-readable title (English, at most 80 characters)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description (English, at most 300 characters)."
+        },
+        "lastFiringAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp of the most recent firing observation for this instance."
+        },
+        "state": {
+          "$ref": "#/definitions/v1ClusterAlertState",
+          "description": "The state of this alert. Always populated so callers can tell each row's\nstate apart when the request applies no state filter."
+        }
+      },
+      "description": "ClusterAlert is a single alert instance for a cluster."
+    },
+    "v1ClusterAlertSeverity": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_ALERT_SEVERITY_UNSPECIFIED",
+        "CLUSTER_ALERT_SEVERITY_INFO",
+        "CLUSTER_ALERT_SEVERITY_WARNING",
+        "CLUSTER_ALERT_SEVERITY_CRITICAL"
+      ],
+      "default": "CLUSTER_ALERT_SEVERITY_UNSPECIFIED",
+      "description": "ClusterAlertSeverity is the tier used by the UI to render badge color and announce severity to\nassistive tech. Color alone never conveys severity - clients must render the label.\n\n - CLUSTER_ALERT_SEVERITY_UNSPECIFIED: Default / fallback tier. Also what an alert type that is not yet mapped resolves to;\nthere is intentionally no separate UNKNOWN value.\n - CLUSTER_ALERT_SEVERITY_INFO: Informational severity.\n - CLUSTER_ALERT_SEVERITY_WARNING: Warning severity.\n - CLUSTER_ALERT_SEVERITY_CRITICAL: Critical severity."
+    },
+    "v1ClusterAlertState": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_ALERT_STATE_UNSPECIFIED",
+        "CLUSTER_ALERT_STATE_FIRING",
+        "CLUSTER_ALERT_STATE_RESOLVED"
+      ],
+      "default": "CLUSTER_ALERT_STATE_UNSPECIFIED",
+      "description": "ClusterAlertState mirrors the backend state of a cluster alert. It is used both as\nthe optional request-side filter AND echoed per row on the ClusterAlert response.\n\n - CLUSTER_ALERT_STATE_UNSPECIFIED: The alert state is unspecified.\n - CLUSTER_ALERT_STATE_FIRING: The alert is currently firing.\n - CLUSTER_ALERT_STATE_RESOLVED: The alert has been resolved by the backend."
+    },
+    "v1ClusterAlertType": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_ALERT_TYPE_UNSPECIFIED",
+        "CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED",
+        "CLUSTER_ALERT_TYPE_MEMORY_OVERUTILIZED",
+        "CLUSTER_ALERT_TYPE_OOD",
+        "CLUSTER_ALERT_TYPE_OOM",
+        "CLUSTER_ALERT_TYPE_RECOVERY_MODE",
+        "CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_UNHEALTHY",
+        "CLUSTER_ALERT_TYPE_TOO_MANY_COLLECTIONS",
+        "CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_CPU_THROTTLED",
+        "CLUSTER_ALERT_TYPE_QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE",
+        "CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA",
+        "CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT",
+        "CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT",
+        "CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT"
+      ],
+      "default": "CLUSTER_ALERT_TYPE_UNSPECIFIED",
+      "description": "ClusterAlertType is the category of a cluster alert. Mirrors the backend alert types.\n\n - CLUSTER_ALERT_TYPE_UNSPECIFIED: The alert type is unspecified.\n - CLUSTER_ALERT_TYPE_DISK_OVERUTILIZED: Disk usage is over the configured utilization threshold.\n - CLUSTER_ALERT_TYPE_MEMORY_OVERUTILIZED: Memory usage is over the configured utilization threshold.\n - CLUSTER_ALERT_TYPE_OOD: The cluster is out of disk.\n - CLUSTER_ALERT_TYPE_OOM: The cluster is out of memory.\n - CLUSTER_ALERT_TYPE_RECOVERY_MODE: One or more nodes are in recovery mode.\n - CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_UNHEALTHY: The Qdrant cluster is unhealthy.\n - CLUSTER_ALERT_TYPE_TOO_MANY_COLLECTIONS: The cluster has too many collections.\n - CLUSTER_ALERT_TYPE_QDRANT_CLUSTER_CPU_THROTTLED: The Qdrant cluster is being CPU throttled.\n - CLUSTER_ALERT_TYPE_QDRANT_JWT_API_KEY_ABOUT_TO_EXPIRE: A Qdrant JWT API key is about to expire.\n - CLUSTER_ALERT_TYPE_CLUSTER_VERSION_IS_NOT_COVERED_BY_SLA: The cluster version is not covered by the SLA.\n - CLUSTER_ALERT_TYPE_CLUSTER_DISK_HOTSPOT: The cluster has a disk hotspot.\n - CLUSTER_ALERT_TYPE_CLUSTER_MEMORY_HOTSPOT: The cluster has a memory hotspot.\n - CLUSTER_ALERT_TYPE_CLUSTER_CPU_HOTSPOT: The cluster has a CPU hotspot."
+    },
+    "v1ClusterInferenceModelMetrics": {
+      "type": "object",
+      "properties": {
+        "inferenceModelId": {
+          "type": "string",
+          "description": "Identifier of the inference model."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Aggregated histogram values for the inference model."
+        }
+      },
+      "description": "ClusterInferenceModelMetrics groups histogram data for a single inference model."
+    },
+    "v1ClusterMetricOverview": {
+      "type": "object",
+      "properties": {
+        "avg": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1IntervalAverage"
+          },
+          "description": "Average metric values calculated over various time intervals."
+        },
+        "total": {
+          "$ref": "#/definitions/v1ResourceValue",
+          "description": "Total available value of the resource on the node."
+        }
+      },
+      "description": "ClusterMetricOverview contains both the average values of a metric over\npredefined intervals, and the total available value of that resource."
+    },
+    "v1ClusterNodeMetrics": {
+      "type": "object",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "Unique identifier of the node."
+        },
+        "cpu": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "Overview of CPU usage."
+        },
+        "ram": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "Overview of RAM usage."
+        },
+        "ramCache": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "Overview of RAM cache usage."
+        },
+        "ramRss": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "Overview of RSS memory usage."
+        },
+        "ramQdrantRss": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "Overview of RSS memory usage by the Qdrant database."
+        },
+        "disk": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "Overview of disk usage."
+        },
+        "gpu": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "optional Overview of GPU usage."
+        },
+        "gpuRam": {
+          "$ref": "#/definitions/v1ClusterMetricOverview",
+          "description": "Overview of GPU RAM usage."
+        }
+      },
+      "description": "ClusterNodeMetrics contains metric overview for a node."
+    },
+    "v1ClusterNodeUsageMetrics": {
+      "type": "object",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "Unique identifier of the node."
+        },
+        "cpu": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of CPU usage for the node."
+        },
+        "ram": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of RAM usage for the node."
+        },
+        "ramCache": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of RAM cache usage for the node."
+        },
+        "ramRss": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of RSS memory usage for the node."
+        },
+        "ramQdrantRss": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of RSS memory usage by the Qdrant database for the node."
+        },
+        "disk": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of disk usage for the node."
+        },
+        "gpu": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of gpu usage for the node."
+        },
+        "gpuRam": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of GPU RAM usage for the node."
+        }
+      },
+      "description": "ClusterNodeUsageMetrics defines per-node usage metrics."
+    },
+    "v1GetClusterEventsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1LogEntry"
+          },
+          "description": "A list of entries representing events that have happened in the cluster."
+        }
+      },
+      "title": "GetClusterEventsRequest is the response from the GetClusterEvents function"
+    },
+    "v1GetClusterInferenceMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterInferenceModelMetrics"
+          },
+          "description": "Per-model inference token usage metrics for the cluster."
+        }
+      },
+      "title": "GetClusterInferenceMetricsResponse is the response from the GetClusterInferenceMetrics function"
+    },
+    "v1GetClusterLogsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1LogEntry"
+          },
+          "description": "A list of log entries from the cluster."
+        }
+      },
+      "title": "GetClusterLogsResponse is the response from the GetClusterLogs function"
+    },
+    "v1GetClusterSummaryMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterNodeMetrics"
+          },
+          "description": "List of metrics aggregated per node in the cluster."
+        }
+      },
+      "title": "GetClusterSummaryMetricsResponse is the response from the GetClusterSummaryMetrics function"
+    },
+    "v1GetClusterUsageMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of overall CPU usage across the cluster."
+        },
+        "ram": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of overall RAM usage across the cluster."
+        },
+        "ramCache": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of RAM used for cache across the cluster."
+        },
+        "ramRss": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of RSS memory used across the cluster."
+        },
+        "ramQdrantRss": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of RSS memory used by the Qdrant database across the cluster."
+        },
+        "disk": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of disk usage across the cluster."
+        },
+        "rps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of requests per second (RPS) across the cluster."
+        },
+        "latency": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of request latency across the cluster."
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterNodeUsageMetrics"
+          },
+          "description": "Per-node metrics."
+        },
+        "gpu": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of overall GPU usage across the cluster."
+        },
+        "gpuRam": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of overall GPU RAM usage across the cluster."
+        }
+      },
+      "title": "GetClusterUsageMetricsResponse is the response from the GetClusterUsageMetrics function"
+    },
+    "v1InferenceMetricsInterval": {
+      "type": "string",
+      "enum": [
+        "INFERENCE_METRICS_INTERVAL_UNSPECIFIED",
+        "INFERENCE_METRICS_INTERVAL_DAY",
+        "INFERENCE_METRICS_INTERVAL_WEEK",
+        "INFERENCE_METRICS_INTERVAL_MONTH"
+      ],
+      "default": "INFERENCE_METRICS_INTERVAL_UNSPECIFIED",
+      "description": "InferenceMetricsInterval defines the histogram bucket size for inference metrics.\n\n - INFERENCE_METRICS_INTERVAL_UNSPECIFIED: Interval is unspecified; defaults to DAY.\n - INFERENCE_METRICS_INTERVAL_DAY: Buckets are aggregated per day.\n - INFERENCE_METRICS_INTERVAL_WEEK: Buckets are aggregated per week.\n - INFERENCE_METRICS_INTERVAL_MONTH: Buckets are aggregated per month."
+    },
+    "v1IntervalAverage": {
+      "type": "object",
+      "properties": {
+        "interval": {
+          "type": "string",
+          "description": "The duration of the interval."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Average value of the metric during the specified interval."
+        }
+      },
+      "description": "IntervalAverage represents the average value of a metric over a specific time interval."
+    },
+    "v1ListClusterAlertsResponse": {
+      "type": "object",
+      "properties": {
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterAlert"
+          },
+          "description": "The alerts for the cluster, sorted by last_firing_at (descending) - most recent first."
+        }
+      },
+      "title": "ListClusterAlertsResponse is the response from the ListClusterAlerts function"
+    },
+    "v1LogEntry": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp indicating when the log entry was recorded."
+        },
+        "message": {
+          "type": "string",
+          "description": "The content of the log message."
+        }
+      },
+      "description": "LogEntry represents a single log line."
+    },
+    "v1Metric": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the data point."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Numerical value of the metric at the given timestamp."
+        }
+      },
+      "description": "A single metric data point."
+    },
+    "v1ResourceValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Value of the resource, e.g., 0.5."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the resource value, e.g., \"vcpu/core\"."
+        }
+      },
+      "description": "ResourceValue represents the total value of a resource along with its unit."
+    }
+  }
+}

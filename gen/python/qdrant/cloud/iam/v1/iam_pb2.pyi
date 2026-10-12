@@ -1,0 +1,455 @@
+import datetime
+
+from buf.validate import validate_pb2 as _validate_pb2
+from google.api import annotations_pb2 as _annotations_pb2
+from google.api import field_behavior_pb2 as _field_behavior_pb2
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
+from google.protobuf import timestamp_pb2 as _timestamp_pb2
+from google.rpc import error_details_pb2 as _error_details_pb2
+from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
+from qdrant.cloud.event.v1 import events_pb2 as _events_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from collections.abc import Iterable as _Iterable, Mapping as _Mapping
+from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
+DESCRIPTOR: _descriptor.FileDescriptor
+
+class UserStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    USER_STATUS_UNSPECIFIED: _ClassVar[UserStatus]
+    USER_STATUS_ACTIVE: _ClassVar[UserStatus]
+    USER_STATUS_BLOCKED: _ClassVar[UserStatus]
+    USER_STATUS_DELETED: _ClassVar[UserStatus]
+
+class OnboardingStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    ONBOARDING_STATUS_UNSPECIFIED: _ClassVar[OnboardingStatus]
+    ONBOARDING_STATUS_PENDING: _ClassVar[OnboardingStatus]
+    ONBOARDING_STATUS_COMPLETED: _ClassVar[OnboardingStatus]
+
+class RoleType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    ROLE_TYPE_UNSPECIFIED: _ClassVar[RoleType]
+    ROLE_TYPE_SYSTEM: _ClassVar[RoleType]
+    ROLE_TYPE_CUSTOM: _ClassVar[RoleType]
+
+class SystemRoleSubType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED: _ClassVar[SystemRoleSubType]
+    SYSTEM_ROLE_SUB_TYPE_OWNER: _ClassVar[SystemRoleSubType]
+    SYSTEM_ROLE_SUB_TYPE_ADMIN: _ClassVar[SystemRoleSubType]
+    SYSTEM_ROLE_SUB_TYPE_BASE: _ClassVar[SystemRoleSubType]
+
+class LegalDocumentType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    LEGAL_DOCUMENT_TYPE_UNSPECIFIED: _ClassVar[LegalDocumentType]
+    LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE: _ClassVar[LegalDocumentType]
+    LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY: _ClassVar[LegalDocumentType]
+    LEGAL_DOCUMENT_TYPE_SLA: _ClassVar[LegalDocumentType]
+
+class UserConsentStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    USER_CONSENT_STATUS_UNSPECIFIED: _ClassVar[UserConsentStatus]
+    USER_CONSENT_STATUS_ACCEPTED: _ClassVar[UserConsentStatus]
+    USER_CONSENT_STATUS_REVOKED: _ClassVar[UserConsentStatus]
+    USER_CONSENT_STATUS_PENDING: _ClassVar[UserConsentStatus]
+
+class UserMfaMethodType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    USER_MFA_METHOD_TYPE_UNSPECIFIED: _ClassVar[UserMfaMethodType]
+    USER_MFA_METHOD_TYPE_TOTP: _ClassVar[UserMfaMethodType]
+    USER_MFA_METHOD_TYPE_RECOVERY_CODE: _ClassVar[UserMfaMethodType]
+    USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM: _ClassVar[UserMfaMethodType]
+    USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING: _ClassVar[UserMfaMethodType]
+USER_STATUS_UNSPECIFIED: UserStatus
+USER_STATUS_ACTIVE: UserStatus
+USER_STATUS_BLOCKED: UserStatus
+USER_STATUS_DELETED: UserStatus
+ONBOARDING_STATUS_UNSPECIFIED: OnboardingStatus
+ONBOARDING_STATUS_PENDING: OnboardingStatus
+ONBOARDING_STATUS_COMPLETED: OnboardingStatus
+ROLE_TYPE_UNSPECIFIED: RoleType
+ROLE_TYPE_SYSTEM: RoleType
+ROLE_TYPE_CUSTOM: RoleType
+SYSTEM_ROLE_SUB_TYPE_UNSPECIFIED: SystemRoleSubType
+SYSTEM_ROLE_SUB_TYPE_OWNER: SystemRoleSubType
+SYSTEM_ROLE_SUB_TYPE_ADMIN: SystemRoleSubType
+SYSTEM_ROLE_SUB_TYPE_BASE: SystemRoleSubType
+LEGAL_DOCUMENT_TYPE_UNSPECIFIED: LegalDocumentType
+LEGAL_DOCUMENT_TYPE_TERMS_OF_SERVICE: LegalDocumentType
+LEGAL_DOCUMENT_TYPE_PRIVACY_POLICY: LegalDocumentType
+LEGAL_DOCUMENT_TYPE_SLA: LegalDocumentType
+USER_CONSENT_STATUS_UNSPECIFIED: UserConsentStatus
+USER_CONSENT_STATUS_ACCEPTED: UserConsentStatus
+USER_CONSENT_STATUS_REVOKED: UserConsentStatus
+USER_CONSENT_STATUS_PENDING: UserConsentStatus
+USER_MFA_METHOD_TYPE_UNSPECIFIED: UserMfaMethodType
+USER_MFA_METHOD_TYPE_TOTP: UserMfaMethodType
+USER_MFA_METHOD_TYPE_RECOVERY_CODE: UserMfaMethodType
+USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM: UserMfaMethodType
+USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING: UserMfaMethodType
+
+class GetAuthenticatedUserRequest(_message.Message):
+    __slots__ = ("user_id",)
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    user_id: str
+    def __init__(self, user_id: _Optional[str] = ...) -> None: ...
+
+class GetAuthenticatedUserResponse(_message.Message):
+    __slots__ = ("user",)
+    USER_FIELD_NUMBER: _ClassVar[int]
+    user: User
+    def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
+
+class ListUsersRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class ListUsersResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[User]
+    def __init__(self, items: _Optional[_Iterable[_Union[User, _Mapping]]] = ...) -> None: ...
+
+class UpdateUserRequest(_message.Message):
+    __slots__ = ("user", "update_mask")
+    USER_FIELD_NUMBER: _ClassVar[int]
+    UPDATE_MASK_FIELD_NUMBER: _ClassVar[int]
+    user: User
+    update_mask: _field_mask_pb2.FieldMask
+    def __init__(self, user: _Optional[_Union[User, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ...) -> None: ...
+
+class UpdateUserResponse(_message.Message):
+    __slots__ = ("user",)
+    USER_FIELD_NUMBER: _ClassVar[int]
+    user: User
+    def __init__(self, user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
+
+class DeleteUserRequest(_message.Message):
+    __slots__ = ("user_id",)
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    user_id: str
+    def __init__(self, user_id: _Optional[str] = ...) -> None: ...
+
+class DeleteUserResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class GetUserConsentRequest(_message.Message):
+    __slots__ = ("document_type",)
+    DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    document_type: LegalDocumentType
+    def __init__(self, document_type: _Optional[_Union[LegalDocumentType, str]] = ...) -> None: ...
+
+class GetUserConsentResponse(_message.Message):
+    __slots__ = ("user_consent",)
+    USER_CONSENT_FIELD_NUMBER: _ClassVar[int]
+    user_consent: UserConsent
+    def __init__(self, user_consent: _Optional[_Union[UserConsent, _Mapping]] = ...) -> None: ...
+
+class GetUserProfileRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class GetUserProfileResponse(_message.Message):
+    __slots__ = ("user_profile",)
+    USER_PROFILE_FIELD_NUMBER: _ClassVar[int]
+    user_profile: UserProfile
+    def __init__(self, user_profile: _Optional[_Union[UserProfile, _Mapping]] = ...) -> None: ...
+
+class UpdateUserProfileRequest(_message.Message):
+    __slots__ = ("user_profile", "update_mask")
+    USER_PROFILE_FIELD_NUMBER: _ClassVar[int]
+    UPDATE_MASK_FIELD_NUMBER: _ClassVar[int]
+    user_profile: UserProfile
+    update_mask: _field_mask_pb2.FieldMask
+    def __init__(self, user_profile: _Optional[_Union[UserProfile, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ...) -> None: ...
+
+class UpdateUserProfileResponse(_message.Message):
+    __slots__ = ("user_profile",)
+    USER_PROFILE_FIELD_NUMBER: _ClassVar[int]
+    user_profile: UserProfile
+    def __init__(self, user_profile: _Optional[_Union[UserProfile, _Mapping]] = ...) -> None: ...
+
+class RecordUserConsentRequest(_message.Message):
+    __slots__ = ("document_type", "status_update")
+    DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    STATUS_UPDATE_FIELD_NUMBER: _ClassVar[int]
+    document_type: LegalDocumentType
+    status_update: UserConsentStatus
+    def __init__(self, document_type: _Optional[_Union[LegalDocumentType, str]] = ..., status_update: _Optional[_Union[UserConsentStatus, str]] = ...) -> None: ...
+
+class RecordUserConsentResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class ListPermissionsRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class ListPermissionsResponse(_message.Message):
+    __slots__ = ("permissions",)
+    PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
+    permissions: _containers.RepeatedCompositeFieldContainer[Permission]
+    def __init__(self, permissions: _Optional[_Iterable[_Union[Permission, _Mapping]]] = ...) -> None: ...
+
+class ListRolesRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class ListRolesResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[Role]
+    def __init__(self, items: _Optional[_Iterable[_Union[Role, _Mapping]]] = ...) -> None: ...
+
+class GetRoleRequest(_message.Message):
+    __slots__ = ("account_id", "role_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    ROLE_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    role_id: str
+    def __init__(self, account_id: _Optional[str] = ..., role_id: _Optional[str] = ...) -> None: ...
+
+class GetRoleResponse(_message.Message):
+    __slots__ = ("role",)
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    role: Role
+    def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
+
+class CreateRoleRequest(_message.Message):
+    __slots__ = ("role",)
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    role: Role
+    def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
+
+class CreateRoleResponse(_message.Message):
+    __slots__ = ("role",)
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    role: Role
+    def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
+
+class UpdateRoleRequest(_message.Message):
+    __slots__ = ("role", "update_mask")
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    UPDATE_MASK_FIELD_NUMBER: _ClassVar[int]
+    role: Role
+    update_mask: _field_mask_pb2.FieldMask
+    def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ..., update_mask: _Optional[_Union[_field_mask_pb2.FieldMask, _Mapping]] = ...) -> None: ...
+
+class UpdateRoleResponse(_message.Message):
+    __slots__ = ("role",)
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    role: Role
+    def __init__(self, role: _Optional[_Union[Role, _Mapping]] = ...) -> None: ...
+
+class DeleteRoleRequest(_message.Message):
+    __slots__ = ("account_id", "role_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    ROLE_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    role_id: str
+    def __init__(self, account_id: _Optional[str] = ..., role_id: _Optional[str] = ...) -> None: ...
+
+class DeleteRoleResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class ListEffectivePermissionsRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class ListEffectivePermissionsResponse(_message.Message):
+    __slots__ = ("permissions",)
+    PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
+    permissions: _containers.RepeatedCompositeFieldContainer[Permission]
+    def __init__(self, permissions: _Optional[_Iterable[_Union[Permission, _Mapping]]] = ...) -> None: ...
+
+class ListUserRolesRequest(_message.Message):
+    __slots__ = ("account_id", "user_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    user_id: str
+    def __init__(self, account_id: _Optional[str] = ..., user_id: _Optional[str] = ...) -> None: ...
+
+class ListUserRolesResponse(_message.Message):
+    __slots__ = ("roles",)
+    ROLES_FIELD_NUMBER: _ClassVar[int]
+    roles: _containers.RepeatedCompositeFieldContainer[Role]
+    def __init__(self, roles: _Optional[_Iterable[_Union[Role, _Mapping]]] = ...) -> None: ...
+
+class ListRoleUsersRequest(_message.Message):
+    __slots__ = ("account_id", "role_id")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    ROLE_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    role_id: str
+    def __init__(self, account_id: _Optional[str] = ..., role_id: _Optional[str] = ...) -> None: ...
+
+class ListRoleUsersResponse(_message.Message):
+    __slots__ = ("users",)
+    USERS_FIELD_NUMBER: _ClassVar[int]
+    users: _containers.RepeatedCompositeFieldContainer[User]
+    def __init__(self, users: _Optional[_Iterable[_Union[User, _Mapping]]] = ...) -> None: ...
+
+class AssignUserRolesRequest(_message.Message):
+    __slots__ = ("account_id", "user_id", "role_ids_to_add", "role_ids_to_delete")
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    USER_ID_FIELD_NUMBER: _ClassVar[int]
+    ROLE_IDS_TO_ADD_FIELD_NUMBER: _ClassVar[int]
+    ROLE_IDS_TO_DELETE_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    user_id: str
+    role_ids_to_add: _containers.RepeatedScalarFieldContainer[str]
+    role_ids_to_delete: _containers.RepeatedScalarFieldContainer[str]
+    def __init__(self, account_id: _Optional[str] = ..., user_id: _Optional[str] = ..., role_ids_to_add: _Optional[_Iterable[str]] = ..., role_ids_to_delete: _Optional[_Iterable[str]] = ...) -> None: ...
+
+class AssignUserRolesResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class User(_message.Message):
+    __slots__ = ("id", "created_at", "last_modified_at", "email", "status", "default_account_id", "onboarding_status")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
+    EMAIL_FIELD_NUMBER: _ClassVar[int]
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    DEFAULT_ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    ONBOARDING_STATUS_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    created_at: _timestamp_pb2.Timestamp
+    last_modified_at: _timestamp_pb2.Timestamp
+    email: str
+    status: UserStatus
+    default_account_id: str
+    onboarding_status: OnboardingStatus
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., email: _Optional[str] = ..., status: _Optional[_Union[UserStatus, str]] = ..., default_account_id: _Optional[str] = ..., onboarding_status: _Optional[_Union[OnboardingStatus, str]] = ...) -> None: ...
+
+class Permission(_message.Message):
+    __slots__ = ("value", "category")
+    VALUE_FIELD_NUMBER: _ClassVar[int]
+    CATEGORY_FIELD_NUMBER: _ClassVar[int]
+    value: str
+    category: str
+    def __init__(self, value: _Optional[str] = ..., category: _Optional[str] = ...) -> None: ...
+
+class Role(_message.Message):
+    __slots__ = ("id", "created_at", "last_modified_at", "account_id", "name", "description", "role_type", "permissions", "sub_type")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    ROLE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
+    SUB_TYPE_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    created_at: _timestamp_pb2.Timestamp
+    last_modified_at: _timestamp_pb2.Timestamp
+    account_id: str
+    name: str
+    description: str
+    role_type: RoleType
+    permissions: _containers.RepeatedCompositeFieldContainer[Permission]
+    sub_type: SystemRoleSubType
+    def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., role_type: _Optional[_Union[RoleType, str]] = ..., permissions: _Optional[_Iterable[_Union[Permission, _Mapping]]] = ..., sub_type: _Optional[_Union[SystemRoleSubType, str]] = ...) -> None: ...
+
+class LogoutUserRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class LogoutUserResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class ListUserMfaMethodsRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class ListUserMfaMethodsResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[UserMfaMethod]
+    def __init__(self, items: _Optional[_Iterable[_Union[UserMfaMethod, _Mapping]]] = ...) -> None: ...
+
+class UpdateUserMfaMethodRequest(_message.Message):
+    __slots__ = ("mfa_method",)
+    MFA_METHOD_FIELD_NUMBER: _ClassVar[int]
+    mfa_method: UserMfaMethod
+    def __init__(self, mfa_method: _Optional[_Union[UserMfaMethod, _Mapping]] = ...) -> None: ...
+
+class UpdateUserMfaMethodResponse(_message.Message):
+    __slots__ = ("mfa_method",)
+    MFA_METHOD_FIELD_NUMBER: _ClassVar[int]
+    mfa_method: UserMfaMethod
+    def __init__(self, mfa_method: _Optional[_Union[UserMfaMethod, _Mapping]] = ...) -> None: ...
+
+class DeleteUserMfaMethodRequest(_message.Message):
+    __slots__ = ("mfa_method",)
+    MFA_METHOD_FIELD_NUMBER: _ClassVar[int]
+    mfa_method: UserMfaMethod
+    def __init__(self, mfa_method: _Optional[_Union[UserMfaMethod, _Mapping]] = ...) -> None: ...
+
+class DeleteUserMfaMethodResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class UserProfile(_message.Message):
+    __slots__ = ("given_name", "family_name", "demographics")
+    GIVEN_NAME_FIELD_NUMBER: _ClassVar[int]
+    FAMILY_NAME_FIELD_NUMBER: _ClassVar[int]
+    DEMOGRAPHICS_FIELD_NUMBER: _ClassVar[int]
+    given_name: str
+    family_name: str
+    demographics: UserDemographics
+    def __init__(self, given_name: _Optional[str] = ..., family_name: _Optional[str] = ..., demographics: _Optional[_Union[UserDemographics, _Mapping]] = ...) -> None: ...
+
+class UserDemographics(_message.Message):
+    __slots__ = ("role_in_company", "usage_tags", "use_case")
+    ROLE_IN_COMPANY_FIELD_NUMBER: _ClassVar[int]
+    USAGE_TAGS_FIELD_NUMBER: _ClassVar[int]
+    USE_CASE_FIELD_NUMBER: _ClassVar[int]
+    role_in_company: str
+    usage_tags: _containers.RepeatedScalarFieldContainer[str]
+    use_case: str
+    def __init__(self, role_in_company: _Optional[str] = ..., usage_tags: _Optional[_Iterable[str]] = ..., use_case: _Optional[str] = ...) -> None: ...
+
+class UserConsent(_message.Message):
+    __slots__ = ("document_type", "status", "last_modified_at", "is_accepted")
+    DOCUMENT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
+    IS_ACCEPTED_FIELD_NUMBER: _ClassVar[int]
+    document_type: LegalDocumentType
+    status: UserConsentStatus
+    last_modified_at: _timestamp_pb2.Timestamp
+    is_accepted: bool
+    def __init__(self, document_type: _Optional[_Union[LegalDocumentType, str]] = ..., status: _Optional[_Union[UserConsentStatus, str]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., is_accepted: _Optional[bool] = ...) -> None: ...
+
+class UserMfaMethod(_message.Message):
+    __slots__ = ("external_id", "type", "created_at", "last_authenticated_at", "name")
+    EXTERNAL_ID_FIELD_NUMBER: _ClassVar[int]
+    TYPE_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    LAST_AUTHENTICATED_AT_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    external_id: str
+    type: UserMfaMethodType
+    created_at: _timestamp_pb2.Timestamp
+    last_authenticated_at: _timestamp_pb2.Timestamp
+    name: str
+    def __init__(self, external_id: _Optional[str] = ..., type: _Optional[_Union[UserMfaMethodType, str]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_authenticated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ...) -> None: ...

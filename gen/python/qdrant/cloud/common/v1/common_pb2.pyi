@@ -1,0 +1,234 @@
+from buf.validate import validate_pb2 as _validate_pb2
+from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from collections.abc import Iterable as _Iterable, Mapping as _Mapping
+from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
+DESCRIPTOR: _descriptor.FileDescriptor
+
+class ActorType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    ACTOR_TYPE_UNSPECIFIED: _ClassVar[ActorType]
+    ACTOR_TYPE_USER: _ClassVar[ActorType]
+    ACTOR_TYPE_MANAGEMENT_KEY: _ClassVar[ActorType]
+    ACTOR_TYPE_SERVICE_ACCOUNT: _ClassVar[ActorType]
+
+class CredentialType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CREDENTIAL_TYPE_UNSPECIFIED: _ClassVar[CredentialType]
+    CREDENTIAL_TYPE_SESSION: _ClassVar[CredentialType]
+    CREDENTIAL_TYPE_MANAGEMENT_KEY: _ClassVar[CredentialType]
+    CREDENTIAL_TYPE_PERSONAL_API_KEY: _ClassVar[CredentialType]
+    CREDENTIAL_TYPE_SERVICE: _ClassVar[CredentialType]
+    CREDENTIAL_TYPE_OAUTH_DELEGATED: _ClassVar[CredentialType]
+
+class OauthScope(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    OAUTH_SCOPE_UNSPECIFIED: _ClassVar[OauthScope]
+    OAUTH_SCOPE_READ_ONLY: _ClassVar[OauthScope]
+    OAUTH_SCOPE_MANAGE: _ClassVar[OauthScope]
+
+class StorageTierType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    STORAGE_TIER_TYPE_UNSPECIFIED: _ClassVar[StorageTierType]
+    STORAGE_TIER_TYPE_COST_OPTIMISED: _ClassVar[StorageTierType]
+    STORAGE_TIER_TYPE_BALANCED: _ClassVar[StorageTierType]
+    STORAGE_TIER_TYPE_PERFORMANCE: _ClassVar[StorageTierType]
+
+class TopologySpreadConstraintWhenUnsatisfiable(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED: _ClassVar[TopologySpreadConstraintWhenUnsatisfiable]
+    TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE: _ClassVar[TopologySpreadConstraintWhenUnsatisfiable]
+    TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY: _ClassVar[TopologySpreadConstraintWhenUnsatisfiable]
+ACTOR_TYPE_UNSPECIFIED: ActorType
+ACTOR_TYPE_USER: ActorType
+ACTOR_TYPE_MANAGEMENT_KEY: ActorType
+ACTOR_TYPE_SERVICE_ACCOUNT: ActorType
+CREDENTIAL_TYPE_UNSPECIFIED: CredentialType
+CREDENTIAL_TYPE_SESSION: CredentialType
+CREDENTIAL_TYPE_MANAGEMENT_KEY: CredentialType
+CREDENTIAL_TYPE_PERSONAL_API_KEY: CredentialType
+CREDENTIAL_TYPE_SERVICE: CredentialType
+CREDENTIAL_TYPE_OAUTH_DELEGATED: CredentialType
+OAUTH_SCOPE_UNSPECIFIED: OauthScope
+OAUTH_SCOPE_READ_ONLY: OauthScope
+OAUTH_SCOPE_MANAGE: OauthScope
+STORAGE_TIER_TYPE_UNSPECIFIED: StorageTierType
+STORAGE_TIER_TYPE_COST_OPTIMISED: StorageTierType
+STORAGE_TIER_TYPE_BALANCED: StorageTierType
+STORAGE_TIER_TYPE_PERFORMANCE: StorageTierType
+TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED: TopologySpreadConstraintWhenUnsatisfiable
+TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE: TopologySpreadConstraintWhenUnsatisfiable
+TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY: TopologySpreadConstraintWhenUnsatisfiable
+PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
+permissions: _descriptor.FieldDescriptor
+ACCOUNT_ID_EXPRESSION_FIELD_NUMBER: _ClassVar[int]
+account_id_expression: _descriptor.FieldDescriptor
+REQUIRES_AUTHENTICATION_FIELD_NUMBER: _ClassVar[int]
+requires_authentication: _descriptor.FieldDescriptor
+SUPPORTED_ACTOR_TYPES_FIELD_NUMBER: _ClassVar[int]
+supported_actor_types: _descriptor.FieldDescriptor
+REQUIRES_ALL_PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
+requires_all_permissions: _descriptor.FieldDescriptor
+MAX_MESSAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
+max_message_size: _descriptor.FieldDescriptor
+LOG_FIELDS_FIELD_NUMBER: _ClassVar[int]
+log_fields: _descriptor.FieldDescriptor
+API_VERSION_FIELD_NUMBER: _ClassVar[int]
+api_version: _descriptor.FieldDescriptor
+PATCH_SOURCE_FIELD_NUMBER: _ClassVar[int]
+patch_source: _descriptor.FieldDescriptor
+INTERACTIVE_ONLY_FIELD_NUMBER: _ClassVar[int]
+interactive_only: _descriptor.FieldDescriptor
+
+class PatchSource(_message.Message):
+    __slots__ = ("get_method", "field_mapping", "response_resource_field", "request_resource_field")
+    class FieldMappingEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    GET_METHOD_FIELD_NUMBER: _ClassVar[int]
+    FIELD_MAPPING_FIELD_NUMBER: _ClassVar[int]
+    RESPONSE_RESOURCE_FIELD_FIELD_NUMBER: _ClassVar[int]
+    REQUEST_RESOURCE_FIELD_FIELD_NUMBER: _ClassVar[int]
+    get_method: str
+    field_mapping: _containers.ScalarMap[str, str]
+    response_resource_field: str
+    request_resource_field: str
+    def __init__(self, get_method: _Optional[str] = ..., field_mapping: _Optional[_Mapping[str, str]] = ..., response_resource_field: _Optional[str] = ..., request_resource_field: _Optional[str] = ...) -> None: ...
+
+class Caller(_message.Message):
+    __slots__ = ("actor_id", "actor_type", "user_agent", "credential_type", "credential_id", "acting_client_id", "scope")
+    ACTOR_ID_FIELD_NUMBER: _ClassVar[int]
+    ACTOR_TYPE_FIELD_NUMBER: _ClassVar[int]
+    USER_AGENT_FIELD_NUMBER: _ClassVar[int]
+    CREDENTIAL_TYPE_FIELD_NUMBER: _ClassVar[int]
+    CREDENTIAL_ID_FIELD_NUMBER: _ClassVar[int]
+    ACTING_CLIENT_ID_FIELD_NUMBER: _ClassVar[int]
+    SCOPE_FIELD_NUMBER: _ClassVar[int]
+    actor_id: str
+    actor_type: ActorType
+    user_agent: str
+    credential_type: CredentialType
+    credential_id: str
+    acting_client_id: str
+    scope: OauthScope
+    def __init__(self, actor_id: _Optional[str] = ..., actor_type: _Optional[_Union[ActorType, str]] = ..., user_agent: _Optional[str] = ..., credential_type: _Optional[_Union[CredentialType, str]] = ..., credential_id: _Optional[str] = ..., acting_client_id: _Optional[str] = ..., scope: _Optional[_Union[OauthScope, str]] = ...) -> None: ...
+
+class LogField(_message.Message):
+    __slots__ = ("name", "field_expression")
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    FIELD_EXPRESSION_FIELD_NUMBER: _ClassVar[int]
+    name: str
+    field_expression: str
+    def __init__(self, name: _Optional[str] = ..., field_expression: _Optional[str] = ...) -> None: ...
+
+class Version(_message.Message):
+    __slots__ = ("major", "minor", "patch")
+    MAJOR_FIELD_NUMBER: _ClassVar[int]
+    MINOR_FIELD_NUMBER: _ClassVar[int]
+    PATCH_FIELD_NUMBER: _ClassVar[int]
+    major: int
+    minor: int
+    patch: int
+    def __init__(self, major: _Optional[int] = ..., minor: _Optional[int] = ..., patch: _Optional[int] = ...) -> None: ...
+
+class SecretKeyRef(_message.Message):
+    __slots__ = ("name", "key")
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    KEY_FIELD_NUMBER: _ClassVar[int]
+    name: str
+    key: str
+    def __init__(self, name: _Optional[str] = ..., key: _Optional[str] = ...) -> None: ...
+
+class KeyValue(_message.Message):
+    __slots__ = ("key", "value")
+    KEY_FIELD_NUMBER: _ClassVar[int]
+    VALUE_FIELD_NUMBER: _ClassVar[int]
+    key: str
+    value: str
+    def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+
+class TopologySpreadConstraint(_message.Message):
+    __slots__ = ("max_skew", "topology_key", "when_unsatisfiable")
+    MAX_SKEW_FIELD_NUMBER: _ClassVar[int]
+    TOPOLOGY_KEY_FIELD_NUMBER: _ClassVar[int]
+    WHEN_UNSATISFIABLE_FIELD_NUMBER: _ClassVar[int]
+    max_skew: int
+    topology_key: str
+    when_unsatisfiable: TopologySpreadConstraintWhenUnsatisfiable
+    def __init__(self, max_skew: _Optional[int] = ..., topology_key: _Optional[str] = ..., when_unsatisfiable: _Optional[_Union[TopologySpreadConstraintWhenUnsatisfiable, str]] = ...) -> None: ...
+
+class LabelSelectorRequirement(_message.Message):
+    __slots__ = ("key", "operator", "values")
+    KEY_FIELD_NUMBER: _ClassVar[int]
+    OPERATOR_FIELD_NUMBER: _ClassVar[int]
+    VALUES_FIELD_NUMBER: _ClassVar[int]
+    key: str
+    operator: str
+    values: _containers.RepeatedScalarFieldContainer[str]
+    def __init__(self, key: _Optional[str] = ..., operator: _Optional[str] = ..., values: _Optional[_Iterable[str]] = ...) -> None: ...
+
+class LabelSelector(_message.Message):
+    __slots__ = ("match_labels", "match_expressions")
+    MATCH_LABELS_FIELD_NUMBER: _ClassVar[int]
+    MATCH_EXPRESSIONS_FIELD_NUMBER: _ClassVar[int]
+    match_labels: _containers.RepeatedCompositeFieldContainer[KeyValue]
+    match_expressions: _containers.RepeatedCompositeFieldContainer[LabelSelectorRequirement]
+    def __init__(self, match_labels: _Optional[_Iterable[_Union[KeyValue, _Mapping]]] = ..., match_expressions: _Optional[_Iterable[_Union[LabelSelectorRequirement, _Mapping]]] = ...) -> None: ...
+
+class IPBlock(_message.Message):
+    __slots__ = ("cidr",)
+    CIDR_FIELD_NUMBER: _ClassVar[int]
+    EXCEPT_FIELD_NUMBER: _ClassVar[int]
+    cidr: str
+    def __init__(self, cidr: _Optional[str] = ..., **kwargs) -> None: ...
+
+class PeerSelector(_message.Message):
+    __slots__ = ("pod_selector", "namespace_selector")
+    POD_SELECTOR_FIELD_NUMBER: _ClassVar[int]
+    NAMESPACE_SELECTOR_FIELD_NUMBER: _ClassVar[int]
+    pod_selector: LabelSelector
+    namespace_selector: LabelSelector
+    def __init__(self, pod_selector: _Optional[_Union[LabelSelector, _Mapping]] = ..., namespace_selector: _Optional[_Union[LabelSelector, _Mapping]] = ...) -> None: ...
+
+class NetworkPolicyPeer(_message.Message):
+    __slots__ = ("selector", "ip_block")
+    SELECTOR_FIELD_NUMBER: _ClassVar[int]
+    IP_BLOCK_FIELD_NUMBER: _ClassVar[int]
+    selector: PeerSelector
+    ip_block: IPBlock
+    def __init__(self, selector: _Optional[_Union[PeerSelector, _Mapping]] = ..., ip_block: _Optional[_Union[IPBlock, _Mapping]] = ...) -> None: ...
+
+class NetworkPolicyPort(_message.Message):
+    __slots__ = ("protocol", "port_number", "port_name", "end_port")
+    PROTOCOL_FIELD_NUMBER: _ClassVar[int]
+    PORT_NUMBER_FIELD_NUMBER: _ClassVar[int]
+    PORT_NAME_FIELD_NUMBER: _ClassVar[int]
+    END_PORT_FIELD_NUMBER: _ClassVar[int]
+    protocol: str
+    port_number: int
+    port_name: str
+    end_port: int
+    def __init__(self, protocol: _Optional[str] = ..., port_number: _Optional[int] = ..., port_name: _Optional[str] = ..., end_port: _Optional[int] = ...) -> None: ...
+
+class NetworkPolicyIngressRule(_message.Message):
+    __slots__ = ("ports",)
+    PORTS_FIELD_NUMBER: _ClassVar[int]
+    FROM_FIELD_NUMBER: _ClassVar[int]
+    ports: _containers.RepeatedCompositeFieldContainer[NetworkPolicyPort]
+    def __init__(self, ports: _Optional[_Iterable[_Union[NetworkPolicyPort, _Mapping]]] = ..., **kwargs) -> None: ...
+
+class NetworkPolicyEgressRule(_message.Message):
+    __slots__ = ("ports", "to")
+    PORTS_FIELD_NUMBER: _ClassVar[int]
+    TO_FIELD_NUMBER: _ClassVar[int]
+    ports: _containers.RepeatedCompositeFieldContainer[NetworkPolicyPort]
+    to: _containers.RepeatedCompositeFieldContainer[NetworkPolicyPeer]
+    def __init__(self, ports: _Optional[_Iterable[_Union[NetworkPolicyPort, _Mapping]]] = ..., to: _Optional[_Iterable[_Union[NetworkPolicyPeer, _Mapping]]] = ...) -> None: ...

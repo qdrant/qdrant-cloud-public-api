@@ -1,0 +1,2015 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/cluster/v1/cluster.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ClusterService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/cluster/v1/accounts/{accountId}/backups/{backupId}/clusters": {
+      "post": {
+        "summary": "Create a new cluster from an existing backup\nRequired permissions (both):\n- restore:backups\n- write:clusters",
+        "operationId": "ClusterService_CreateClusterFromBackup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateClusterFromBackupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupId",
+            "description": "The identifier of the backup (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "description": "Name of the new cluster",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/clusters": {
+      "get": {
+        "summary": "Lists all clusters in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_ListClusters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListClustersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderId",
+            "description": "Optional filter specifying the cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nIf omitted, all clusters for the specified account are returned, including those hosted in hybrid cloud environments.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cloudProviderRegionId",
+            "description": "Optional filter specifying the cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nIf this field is set, the `cloud_provider_id` is required to set as well (and it should match).\nFor hybrid this should be the hybrid cloud environment ID.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of items to return.\nIf not specified, all items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/clusters/suggest-name": {
+      "get": {
+        "summary": "Suggests a unique and human-friendly name for a new cluster in the specified account.\nThis can be used by clients to pre-fill the name field when creating a new cluster.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "ClusterService_SuggestClusterName",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SuggestClusterNameResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}": {
+      "get": {
+        "summary": "Gets a cluster in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_GetCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes a cluster in the account identified by the given ID.\nRequired permissions:\n- delete:clusters",
+        "operationId": "ClusterService_DeleteCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deleteBackups",
+            "description": "If set, the backups of this cluster will be deleted as well.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "force",
+            "description": "If set to true, the cluster is removed from our records without waiting\nfor the cloud-agent to confirm the deletion of the underlying resources.\nThis is independent of delete_backups: backups are still governed by that\nflag regardless of this value.\nThis is supported for hybrid cloud clusters only and is ignored for managed\ncloud clusters. Because the deletion is not confirmed by the cloud-agent,\nany leftover resources in the Kubernetes cluster must be cleaned up manually.\nDefaults to false.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/downscale-risk": {
+      "get": {
+        "summary": "Gets the downscale risks of applying the properties provided in the request to the\ncluster identified by the given ID, one entry per assessed resource.\nThe call does not modify the cluster and is evaluated against freshly read\nmeasurements, so repeated calls track the cluster's current state.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_GetClusterDownscaleRisk",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetClusterDownscaleRiskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account that owns the cluster (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier of the cluster to assess (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageId",
+            "description": "The identifier of the candidate package the cluster would be moved to (in GUID format).\nThis is the only property assessed for now; further properties may be added later.\nThis is a required field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/enable-jwt": {
+      "post": {
+        "summary": "Enables JWT Role Based Access Control (RBAC) for a cluster (version 1.9+ is required) in the managed cloud environments\nin the account identified by the given ID.\nThis can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_EnableClusterJwtRbac",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1EnableClusterJwtRbacResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/restart": {
+      "post": {
+        "summary": "Restarts a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_RestartCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RestartClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/suspend": {
+      "post": {
+        "summary": "Suspends a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_SuspendCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SuspendClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/clusters/{clusterId}/unsuspend": {
+      "post": {
+        "summary": "Unsuspends a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_UnsuspendCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UnsuspendClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/releases": {
+      "get": {
+        "summary": "Lists all Qdrant releases in the account identified by the given ID.\nOptionally a cluster ID can be provided, the list will return the update options for that cluster only.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_ListQdrantReleases",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListQdrantReleasesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "description": "The identifier for the cluster (in GUID format).\nThis cluster should be part of the provided account.\nThis is an optional field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{accountId}/releases/{version}": {
+      "get": {
+        "summary": "Gets a Qdrant release by version in the account identified by the given ID.\nRequired permissions:\n- read:clusters",
+        "operationId": "ClusterService_GetQdrantRelease",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetQdrantReleaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "description": "The version of the Qdrant release.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{cluster.accountId}/clusters": {
+      "post": {
+        "summary": "Creates a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_CreateCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cluster.accountId",
+            "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceCreateClusterBody"
+            }
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    },
+    "/api/cluster/v1/accounts/{cluster.accountId}/clusters/{cluster.id}": {
+      "put": {
+        "summary": "Updates a cluster in the account identified by the given ID.\nRequired permissions:\n- write:clusters",
+        "operationId": "ClusterService_UpdateCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateClusterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cluster.accountId",
+            "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cluster.id",
+            "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterServiceUpdateClusterBody"
+            }
+          }
+        ],
+        "tags": [
+          "ClusterService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ClusterServiceCreateClusterBody": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created.",
+              "readOnly": true
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created.",
+              "readOnly": true
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called.",
+              "readOnly": true
+            },
+            "cloudProviderId": {
+              "type": "string",
+              "description": "Cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nAfter creation, this field cannot be changed."
+            },
+            "cloudProviderRegionId": {
+              "type": "string",
+              "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+            },
+            "labels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/v1KeyValue"
+              },
+              "title": "List of labels for a cluster. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
+            },
+            "costAllocationLabel": {
+              "type": "string",
+              "description": "When using cloud provider marketplaces for billing, the cluster label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1ClusterConfiguration",
+              "description": "Current configuration details of the cluster."
+            },
+            "state": {
+              "$ref": "#/definitions/v1ClusterState",
+              "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only.",
+              "readOnly": true
+            }
+          },
+          "title": "The actual cluster"
+        }
+      },
+      "title": "CreateClusterRequest is the request for the CreateCluster function"
+    },
+    "ClusterServiceUpdateClusterBody": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "type": "object",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created.",
+              "readOnly": true
+            },
+            "name": {
+              "type": "string",
+              "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called.",
+              "readOnly": true
+            },
+            "cloudProviderId": {
+              "type": "string",
+              "description": "Cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nAfter creation, this field cannot be changed."
+            },
+            "cloudProviderRegionId": {
+              "type": "string",
+              "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+            },
+            "labels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/v1KeyValue"
+              },
+              "title": "List of labels for a cluster. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
+            },
+            "costAllocationLabel": {
+              "type": "string",
+              "description": "When using cloud provider marketplaces for billing, the cluster label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
+            },
+            "configuration": {
+              "$ref": "#/definitions/v1ClusterConfiguration",
+              "description": "Current configuration details of the cluster."
+            },
+            "state": {
+              "$ref": "#/definitions/v1ClusterState",
+              "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only.",
+              "readOnly": true
+            }
+          },
+          "title": "The actual cluster"
+        },
+        "updateMask": {
+          "type": "string",
+          "description": "Optional mask of fields to update. When set, only the fields listed in\nthe mask will be updated; all other fields retain their current values\non the server. Field paths reference the resource (Cluster) message,\nnot the request envelope (e.g. \"name\", \"configuration.num_nodes\").\nWhen unset or empty, the request is treated as a full-resource\nreplacement (the existing behavior)."
+        }
+      },
+      "title": "UpdateClusterRequest is the request for the UpdateCluster function"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AdditionalResources": {
+      "type": "object",
+      "properties": {
+        "disk": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Additional Disk (expressed in Gib)"
+        }
+      },
+      "title": "AdditionalResources contains the information about additional resources"
+    },
+    "v1AuditLogRotation": {
+      "type": "string",
+      "enum": [
+        "AUDIT_LOG_ROTATION_UNSPECIFIED",
+        "AUDIT_LOG_ROTATION_DAILY",
+        "AUDIT_LOG_ROTATION_HOURLY"
+      ],
+      "default": "AUDIT_LOG_ROTATION_UNSPECIFIED",
+      "description": "AuditLogRotation defines the rotation interval for audit logs.\n\n - AUDIT_LOG_ROTATION_UNSPECIFIED: Unspecified rotation.\n - AUDIT_LOG_ROTATION_DAILY: Daily rotation.\n - AUDIT_LOG_ROTATION_HOURLY: Hourly rotation."
+    },
+    "v1Cluster": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the cluster (in GUID format).\nThis is a read-only field and will be available after a cluster is created.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster was created.\nThis is a read-only field and will be available after a cluster is created.",
+          "readOnly": true
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account associated with the cluster (in GUID format).\nThis is a required field."
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the cluster.\nThis is a required field.\nName can only contain letters, numbers, underscores and dashes"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster was deleted (or is started to be deleting).\nThis is a read-only field and will be set after DeleteCluster is called.",
+          "readOnly": true
+        },
+        "cloudProviderId": {
+          "type": "string",
+          "description": "Cloud provider where the cluster is hosted.\nMust match one of the provider IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviders` method.\nAfter creation, this field cannot be changed."
+        },
+        "cloudProviderRegionId": {
+          "type": "string",
+          "description": "Cloud provider region where the cluster is hosted.\nMust match one of the region IDs returned by the `qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions` method.\nFor hybrid this should be the hybrid cloud environment ID.\nThis is a required field.\nAfter creation, this field cannot be changed."
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of labels for a cluster. These labels are used in the cloud ui and billing reports.\nThis is an optional field"
+        },
+        "costAllocationLabel": {
+          "type": "string",
+          "description": "When using cloud provider marketplaces for billing, the cluster label with the configured key is sent while metering\nusage data as additional meta data to be used for cost allocation in the billing reports."
+        },
+        "configuration": {
+          "$ref": "#/definitions/v1ClusterConfiguration",
+          "description": "Current configuration details of the cluster."
+        },
+        "state": {
+          "$ref": "#/definitions/v1ClusterState",
+          "description": "Current state of the cluster (available after the cluster has been created).\nAll fields inside `state` are read-only.",
+          "readOnly": true
+        }
+      },
+      "description": "A Cluster represents one cluster of a Qdrant database."
+    },
+    "v1ClusterBackupSupportInfo": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1ClusterBackupSupportStatus",
+          "title": "The current backup support status"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Optional human-readable reason providing more context about the backup support status.\nWhen a cluster does not support backup, this explain why."
+        }
+      },
+      "title": "ClusterBackupSupportInfo provides information about backup support"
+    },
+    "v1ClusterBackupSupportStatus": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED",
+        "CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED",
+        "CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED"
+      ],
+      "default": "CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED",
+      "description": "ClusterBackupSupportStatus defines the backup support states of a cluster.\n\n - CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED: Backup support is unspecified.\n - CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED: Cluster supports backup.\n - CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED: Cluster does not support backup."
+    },
+    "v1ClusterCapabilities": {
+      "type": "object",
+      "properties": {
+        "diskExpansion": {
+          "$ref": "#/definitions/v1ClusterDiskExpansionSupportInfo",
+          "description": "Whether the StorageClass used by the cluster supports disk expansion or not.\nDisk scaling will be enabled or disabled based on this for hybrid cloud clusters."
+        },
+        "backup": {
+          "$ref": "#/definitions/v1ClusterBackupSupportInfo",
+          "description": "Whether it is possible to take a backup for the cluster or not.\nBackup tab will be shown or hidden based on this for hybrid cloud clusters."
+        },
+        "scalabilityInfo": {
+          "$ref": "#/definitions/v1ClusterScalabilityInfo",
+          "description": "Whether the cluster can be scaled up or down."
+        }
+      },
+      "description": "ClusterCapabilities specifies whether some actions are supported by the cluster or not."
+    },
+    "v1ClusterConfiguration": {
+      "type": "object",
+      "properties": {
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster configuration was last updated.\nThis is a read-only field and will be available after a cluster is created.",
+          "readOnly": true
+        },
+        "numberOfNodes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of nodes in a cluster.\nThis should be a number \u003e= 1.\nThis is a required field."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the cluster software.\nIf omitted the latest version will be used and filled out during create.\nUse ListReleases() to determine which versions are allowed to be used.\nSee upgrade guidelines for more info."
+        },
+        "packageId": {
+          "type": "string",
+          "description": "The package identifier used to configure the resources of the cluster. Use `qdrant.cloud.booking.v1.BookingService.ListPackages` to select one.\nThis is a required field."
+        },
+        "additionalResources": {
+          "$ref": "#/definitions/v1AdditionalResources",
+          "description": "The additional resources on top of the selected package.\nThis is an optional field, if not specified all additional resources are 0."
+        },
+        "databaseConfiguration": {
+          "$ref": "#/definitions/v1DatabaseConfiguration",
+          "description": "Configuration to setup a qdrant database.\nThis is an optional field."
+        },
+        "nodeSelector": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "The node selector for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "tolerations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Toleration"
+          },
+          "title": "List of tolerations for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of annotations for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "allowedIpSourceRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of allowed IP source ranges for this cluster.\nField is used for both managed cloud and hybrid cloud and clusters. On Hybrid Cloud, this will\nconfigure the loadBalancerSourceRanges of a LoadBalancer Service. This is an optional field\nThe CIDRs supports IPv4 only."
+        },
+        "serviceType": {
+          "$ref": "#/definitions/v1ClusterServiceType",
+          "description": "The type of service to use for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field, default is Cluster IP."
+        },
+        "serviceAnnotations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of annotations applied to the service of this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "podLabels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "title": "List of labels applied to the pods of this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "reservedCpuPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "title": "The percentage of CPU resources reserved for system components\nThis is an optional field, default is 20%.\nNumber between 1..80 (both included)"
+        },
+        "reservedMemoryPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "title": "The percentage of RAM resources reserved for system components\nThis is an optional field, default is 20%.\nNumber between 1..80 (both included)"
+        },
+        "gpuType": {
+          "$ref": "#/definitions/v1ClusterConfigurationGpuType",
+          "title": "The gpu type that should be used for the database\nThis is an optional field, default is No configured GPU"
+        },
+        "restartPolicy": {
+          "$ref": "#/definitions/v1ClusterConfigurationRestartPolicy",
+          "title": "The restart policy for the database\nThis is an optional field, default is Automatic"
+        },
+        "rebalanceStrategy": {
+          "$ref": "#/definitions/v1ClusterConfigurationRebalanceStrategy",
+          "title": "The automatic shard rebalancing strategy for the database\nThis is an optional field, default is By Count and Size"
+        },
+        "topologySpreadConstraints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1TopologySpreadConstraint"
+          },
+          "title": "List of topologySpreadConstraints for this cluster in a hybrid cloud environment.\nIt is ignored for managed cloud clusters. This is an optional field"
+        },
+        "clusterStorageConfiguration": {
+          "$ref": "#/definitions/v1ClusterStorageConfiguration",
+          "title": "Storage IOPS and Throughput configuration, defaults to COST_OPTIMISED storage configuration"
+        },
+        "gpuConfiguration": {
+          "$ref": "#/definitions/v1ClusterConfigurationGpuConfiguration",
+          "description": "The advanced gpu configuration for the database.\nThis is for hybrid cloud clusters only. It is ignored for managed cloud clusters."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the cluster configuration was created.\nThis is a read-only field and will be available after a cluster is created.",
+          "readOnly": true
+        }
+      },
+      "description": "A ClusterConfiguration represents the configuration of a cluster."
+    },
+    "v1ClusterConfigurationGpuConfiguration": {
+      "type": "object",
+      "properties": {
+        "forceHalfPrecision": {
+          "type": "boolean",
+          "description": "Force half precision (`f16`) for `f32` values while indexing.\nConversion happens only in GPU memory and does not affect storage type.\nThis is an optional field, default is false."
+        },
+        "deviceFilter": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Filter GPU devices by hardware name (case-insensitive).\nList of substrings to match against the GPU device name.\nIf not specified, all devices are accepted."
+        },
+        "devices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of explicit GPU device indexes to use.\nIf `device_filter` is set, indexes are applied after filtering.\nIf not specified, all devices are accepted."
+        },
+        "parallelIndexes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of parallel indexes to run on the GPU.\nThis is an optional field, default is 1."
+        },
+        "groupsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Amount of used Vulkan groups on the GPU.\nIn other words, how many parallel points can be indexed by GPU.\nDo not change this value unless you know what you are doing."
+        },
+        "allowIntegrated": {
+          "type": "boolean",
+          "description": "Allow integrated GPUs to be used.\nThis is an optional field, default is false."
+        }
+      },
+      "description": "ClusterConfigurationGpuConfiguration defines advanced GPU configuration for clusters.\nThis is relevant for hybrid cloud clusters only."
+    },
+    "v1ClusterConfigurationGpuType": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED",
+        "CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA",
+        "CLUSTER_CONFIGURATION_GPU_TYPE_AMD"
+      ],
+      "default": "CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED",
+      "description": "ClusterConfigurationGpuType defines GPU types available for clusters.\n\n - CLUSTER_CONFIGURATION_GPU_TYPE_UNSPECIFIED: No GPU is configured.\n - CLUSTER_CONFIGURATION_GPU_TYPE_NVIDIA: Use an NVIDIA GPU.\n - CLUSTER_CONFIGURATION_GPU_TYPE_AMD: Use an AMD GPU."
+    },
+    "v1ClusterConfigurationRebalanceStrategy": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED",
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT",
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE",
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE",
+        "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_DISABLED"
+      ],
+      "default": "CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED",
+      "description": "ClusterConfigurationRebalanceStrategy defines shard rebalancing strategies.\n\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_UNSPECIFIED: No rebalancing strategy is configured.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT: Rebalance shards by count.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_SIZE: Rebalance shards by size.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_BY_COUNT_AND_SIZE: Rebalance shards by both count and size.\n - CLUSTER_CONFIGURATION_REBALANCE_STRATEGY_DISABLED: Automatic rebalancing is explicitly disabled for this cluster."
+    },
+    "v1ClusterConfigurationRestartPolicy": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED",
+        "CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING",
+        "CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL",
+        "CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC"
+      ],
+      "default": "CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED",
+      "description": "ClusterConfigurationRestartPolicy defines restart strategies for the cluster's database.\n\n - CLUSTER_CONFIGURATION_RESTART_POLICY_UNSPECIFIED: Restart policy is unspecified.\n - CLUSTER_CONFIGURATION_RESTART_POLICY_ROLLING: Rolling restart policy (one by one).\n - CLUSTER_CONFIGURATION_RESTART_POLICY_PARALLEL: Parallel restart policy (restart all at once).\n - CLUSTER_CONFIGURATION_RESTART_POLICY_AUTOMATIC: Automatic restart policy."
+    },
+    "v1ClusterDiskExpansionSupportInfo": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1ClusterDiskExpansionSupportStatus",
+          "title": "The current disk expansion support status"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Optional human-readable reason providing more context about the disk expansion status.\nWhen a cluster does not support disk expansion, this explain why."
+        }
+      },
+      "title": "ClusterDiskExpansionSupportInfo provides information about disk expansion support"
+    },
+    "v1ClusterDiskExpansionSupportStatus": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED",
+        "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED",
+        "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED"
+      ],
+      "default": "CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED",
+      "description": "ClusterDiskExpansionSupportStatus defines the disk expansion support states of a cluster.\n\n - CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_UNSPECIFIED: Disk expansion support is unspecified.\n - CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_SUPPORTED: Cluster supports disk expansion.\n - CLUSTER_DISK_EXPANSION_SUPPORT_STATUS_NOT_SUPPORTED: Cluster does not support disk expansion."
+    },
+    "v1ClusterDownscaleRiskInfo": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/v1ClusterDownscaleRiskResource",
+          "description": "The resource the risk is assessed for."
+        },
+        "status": {
+          "$ref": "#/definitions/v1ClusterDownscaleRiskStatus",
+          "description": "The downscale risk status for the assessed cluster, resource and requested properties."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Human-readable explanation of the status, so that clients without their own\ncopy for each status can report what is happening. Clients that have their\nown copy select it from `status` and ignore this field."
+        }
+      },
+      "description": "ClusterDownscaleRiskInfo provides information about the risk of applying the requested\nproperties to a cluster, for a single resource."
+    },
+    "v1ClusterDownscaleRiskResource": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_DOWNSCALE_RISK_RESOURCE_UNSPECIFIED",
+        "CLUSTER_DOWNSCALE_RISK_RESOURCE_MEMORY"
+      ],
+      "default": "CLUSTER_DOWNSCALE_RISK_RESOURCE_UNSPECIFIED",
+      "description": "ClusterDownscaleRiskResource defines the cluster resources a downscale risk is assessed for.\n\n - CLUSTER_DOWNSCALE_RISK_RESOURCE_UNSPECIFIED: Downscale risk resource is unspecified.\n - CLUSTER_DOWNSCALE_RISK_RESOURCE_MEMORY: The risk is about the RAM the cluster would have with the requested properties."
+    },
+    "v1ClusterDownscaleRiskStatus": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_DOWNSCALE_RISK_STATUS_UNSPECIFIED",
+        "CLUSTER_DOWNSCALE_RISK_STATUS_NO_RISK",
+        "CLUSTER_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET",
+        "CLUSTER_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN"
+      ],
+      "default": "CLUSTER_DOWNSCALE_RISK_STATUS_UNSPECIFIED",
+      "description": "ClusterDownscaleRiskStatus defines the risk states of applying properties that leave a\ncluster with less of a given resource than it currently has.\n\n - CLUSTER_DOWNSCALE_RISK_STATUS_UNSPECIFIED: Downscale risk is unspecified.\n - CLUSTER_DOWNSCALE_RISK_STATUS_NO_RISK: Applying the requested properties carries no risk for the resource, either because\nthey do not reduce it, or because the cluster's observed usage fits within it.\n - CLUSTER_DOWNSCALE_RISK_STATUS_USAGE_EXCEEDS_TARGET: The cluster's observed usage of the resource does not fit within what the requested\nproperties provide.\n - CLUSTER_DOWNSCALE_RISK_STATUS_USAGE_UNKNOWN: The cluster's usage of the resource could not be determined, so the risk is unknown."
+    },
+    "v1ClusterEndpoint": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "URL to access the qdrant cluster (aka database) without port",
+          "readOnly": true
+        },
+        "restPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for HTTP REST calls (6333)",
+          "readOnly": true
+        },
+        "grpcPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port to use for gRPC calls (6334)",
+          "readOnly": true
+        }
+      },
+      "description": "Endpoint information to access the qdrant cluster (aka database) or a specific node in the cluster.\nAll fields in this message are a read-only field."
+    },
+    "v1ClusterNodeAction": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/v1ClusterNodeActionKind",
+          "description": "What the user is asked to do.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of the action, for example \"Scale your cluster\".",
+          "readOnly": true
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL to open, for actions that are a navigation.\nNot set for actions the consumer carries out itself, such as\nCLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY and\nCLUSTER_NODE_ACTION_KIND_VIEW_LOGS, for which the consumer already has the\naccount and cluster identifiers it needs.",
+          "readOnly": true
+        }
+      },
+      "description": "ClusterNodeAction describes something the user can do to resolve a node's\nnot-ready condition.\nAll fields in this message are read-only."
+    },
+    "v1ClusterNodeActionKind": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_NODE_ACTION_KIND_UNSPECIFIED",
+        "CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY",
+        "CLUSTER_NODE_ACTION_KIND_DOCUMENTATION",
+        "CLUSTER_NODE_ACTION_KIND_VIEW_LOGS"
+      ],
+      "default": "CLUSTER_NODE_ACTION_KIND_UNSPECIFIED",
+      "description": "ClusterNodeActionKind describes what a ClusterNodeAction asks the user to do.\n\n - CLUSTER_NODE_ACTION_KIND_UNSPECIFIED: The action kind is unspecified.\n - CLUSTER_NODE_ACTION_KIND_SCALE_VERTICALLY: Scale the cluster's resources per node.\n - CLUSTER_NODE_ACTION_KIND_DOCUMENTATION: Read the documentation explaining the condition and how to resolve it.\n - CLUSTER_NODE_ACTION_KIND_VIEW_LOGS: Look at the cluster's logs, where the cause is visible in the database's\nown output rather than in anything the platform can report."
+    },
+    "v1ClusterNodeInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name specifies the name of the node.",
+          "readOnly": true
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "StartedAt specifies the time when the node started.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Version specifies the version of Qdrant running on the node.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "$ref": "#/definitions/v1ClusterEndpoint",
+          "description": "Endpoint specific to this node.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/v1ClusterNodeState",
+          "description": "State of the node.",
+          "readOnly": true
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availability zone where this node is running (e.g., \"us-east-1a\").\nThis is a read-only field provided by the system.\nOnly set for Multi-AZ clusters.",
+          "readOnly": true
+        },
+        "notReadyInfo": {
+          "$ref": "#/definitions/v1ClusterNodeNotReadyInfo",
+          "description": "Structured explanation of why the node is not ready.\nSet alongside CLUSTER_NODE_STATE_STARTING as well as\nCLUSTER_NODE_STATE_UNHEALTHY: a container stuck in a restart loop reports\nas starting, because it shares a pod-condition signature with ordinary\nstartup. Not always set: a node that is not ready may carry no explanation,\nfor example while the cluster's status is stale (CLUSTER_PHASE_UNKNOWN) and\nno current reason can be determined. Consumers should not assume this field\nis present whenever a node is not ready.\nIt clears automatically once the node recovers.",
+          "readOnly": true
+        }
+      },
+      "description": "ClusterNodeInfo represents a node in a cluster.\nAll fields in this message are read-only."
+    },
+    "v1ClusterNodeNotReadyCondition": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
+        "CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR",
+        "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED",
+        "CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING",
+        "CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING",
+        "CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN"
+      ],
+      "default": "CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED",
+      "description": "ClusterNodeNotReadyCondition describes why a node is not ready right now.\nIt is derived from the current node status, so it clears on its own once the\nnode recovers.\n\n - CLUSTER_NODE_NOT_READY_CONDITION_UNSPECIFIED: The condition is unspecified.\n - CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR: The node's pod could not be scheduled, for example because the\nKubernetes cluster has insufficient capacity.\nOnly reported for hybrid cloud clusters, where the user owns the\ninfrastructure.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED: Something is preventing the node's container from starting, for example an\nimage that cannot be pulled or configuration that cannot be resolved.\nDistinct from CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: the\nprocess has never run.\nClusterNodeNotReadyInfo.reason may explain what is blocking it.\n - CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING: The node's container has run before but cannot stay up, and is being\nrestarted. ClusterNodeNotReadyInfo.reason may explain what terminated it.\n - CLUSTER_NODE_NOT_READY_CONDITION_READINESS_FAILING: The node's container is running, but its readiness check is failing.\n - CLUSTER_NODE_NOT_READY_CONDITION_UNKNOWN: The node is not ready for a reason that cannot be determined from the\nreported node status.\nNot currently emitted: where the node status does not say what is wrong,\nClusterNodeInfo.not_ready_info is left unset instead, because the node's own\nstate already reports that it is not ready."
+    },
+    "v1ClusterNodeNotReadyInfo": {
+      "type": "object",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/v1ClusterNodeNotReadyCondition",
+          "description": "What is wrong with the node right now.",
+          "readOnly": true
+        },
+        "conditionMessage": {
+          "type": "string",
+          "description": "Human-readable explanation of the condition,\nfor example \"Your container is restarting\".",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/v1ClusterNodeNotReadyReason",
+          "description": "Why the node is in this condition.\nNot always set: the node status does not always say why, in which case the\ncondition is reported on its own. Each reason is only ever reported under\nthe conditions documented on ClusterNodeNotReadyReason.",
+          "readOnly": true
+        },
+        "reasonMessage": {
+          "type": "string",
+          "description": "Human-readable explanation of the reason,\nfor example \"Your node has reached its memory limit\".\nOnly set when reason is set.",
+          "readOnly": true
+        },
+        "event": {
+          "$ref": "#/definitions/v1ClusterNodeTerminationEvent",
+          "description": "What terminated the node's container the last time it went down.\nOnly set together with\nCLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING.\n\nDeprecated: use reason instead, which reports these two values plus the\ncauses this field cannot express. Still populated whenever reason is\nCLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY or\nCLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED, so existing consumers see no\nchange in behavior, and scheduled for removal once the reason tier is the\nannounced surface.",
+          "readOnly": true
+        },
+        "eventMessage": {
+          "type": "string",
+          "description": "Human-readable explanation of the event,\nfor example \"Your node has reached its memory limit\".\nOnly set when event is set.\n\nDeprecated: use reason_message instead.",
+          "readOnly": true
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterNodeAction"
+          },
+          "description": "Actions the user can take to resolve the condition.\nA CLUSTER_NODE_ACTION_KIND_DOCUMENTATION action is not guaranteed: it is\nonly attached where a page exists that helps with the specific cause.",
+          "readOnly": true
+        }
+      },
+      "description": "ClusterNodeNotReadyInfo explains why a cluster node is not ready.\nThe explanation has two tiers: condition answers what is wrong with the node\nright now and is small and stable, while reason answers why and grows as more\ncauses become recognizable.\nThe messages are short technical sentences intended for consumers without a\nuser interface of their own. Consumers are free to ignore them and render\ntheir own copy based on the condition and reason values.\nAll fields in this message are read-only."
+    },
+    "v1ClusterNodeNotReadyReason": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_NODE_NOT_READY_REASON_UNSPECIFIED",
+        "CLUSTER_NODE_NOT_READY_REASON_INSUFFICIENT_RESOURCES",
+        "CLUSTER_NODE_NOT_READY_REASON_NODE_CONSTRAINTS_UNSATISFIED",
+        "CLUSTER_NODE_NOT_READY_REASON_VOLUME_UNAVAILABLE",
+        "CLUSTER_NODE_NOT_READY_REASON_IMAGE_UNAVAILABLE",
+        "CLUSTER_NODE_NOT_READY_REASON_CONFIGURATION_MISSING",
+        "CLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY",
+        "CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED"
+      ],
+      "default": "CLUSTER_NODE_NOT_READY_REASON_UNSPECIFIED",
+      "description": "ClusterNodeNotReadyReason describes why a node is in its current not-ready\ncondition. It is the growable second tier of the explanation: the same reason\ncan appear under more than one ClusterNodeNotReadyCondition, because some\ncauses are noticed at different points in a pod's lifecycle.\nConsumers that meet a value they do not know should fall back to rendering the\ncondition on its own.\n\n - CLUSTER_NODE_NOT_READY_REASON_UNSPECIFIED: The reason is unspecified.\n - CLUSTER_NODE_NOT_READY_REASON_INSUFFICIENT_RESOURCES: No node in the Kubernetes cluster has enough free capacity to run the pod.\nReported under CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR.\n - CLUSTER_NODE_NOT_READY_REASON_NODE_CONSTRAINTS_UNSATISFIED: No node in the Kubernetes cluster satisfies the pod's placement\nconstraints, for example its node selector, affinity rules or the\ntolerations it would need for the available nodes' taints.\nReported under CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR.\n - CLUSTER_NODE_NOT_READY_REASON_VOLUME_UNAVAILABLE: A volume the node needs cannot be provisioned, attached or mounted.\nReported under CLUSTER_NODE_NOT_READY_CONDITION_POD_SCHEDULING_ERROR, when\nthe claim never binds and the pod therefore cannot be placed, and under\nCLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED, when the claim\nbinds but the volume cannot be mounted. Which of the two occurs is decided\nby the storage class's binding mode, not by the underlying problem.\n - CLUSTER_NODE_NOT_READY_REASON_IMAGE_UNAVAILABLE: The container image cannot be pulled, or its reference cannot be parsed.\nReported under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED.\n - CLUSTER_NODE_NOT_READY_REASON_CONFIGURATION_MISSING: Configuration the container needs in order to start is missing, for example\na secret holding an api-key or a TLS certificate.\nReported under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_START_BLOCKED.\n - CLUSTER_NODE_NOT_READY_REASON_OUT_OF_MEMORY: The container reached its memory limit and was terminated.\nReported only under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING,\nwhich is what keeps this historical fact from being reported after the\nrestart loop it describes has ended.\n - CLUSTER_NODE_NOT_READY_REASON_PROCESS_EXITED: The container's process exited unexpectedly, with a non-zero exit code that\nis not a memory limit kill.\nReported only under CLUSTER_NODE_NOT_READY_CONDITION_CONTAINER_RESTARTING."
+    },
+    "v1ClusterNodeResources": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number",
+          "format": "double",
+          "description": "Base resources that are part of the standard allocation for the cluster per node.\nThis includes default CPU, memory, storage, etc."
+        },
+        "complimentary": {
+          "type": "number",
+          "format": "double",
+          "description": "Complimentary resources provided to the cluster at no additional cost.\nThis might include complimentary network bandwidth, credits, etc."
+        },
+        "additional": {
+          "type": "number",
+          "format": "double",
+          "description": "Additional resources allocated to the cluster.\nThis could include additional storage, compute power, etc."
+        },
+        "reserved": {
+          "type": "number",
+          "format": "double",
+          "description": "The reserved is the amount used by the system, which cannot be used by the database itself."
+        },
+        "available": {
+          "type": "number",
+          "format": "double",
+          "title": "The available is the total (base+complimentary+additional) - reserved"
+        }
+      },
+      "description": "ClusterNodeResources represents the allocation of various resources for a cluster per node."
+    },
+    "v1ClusterNodeResourcesSummary": {
+      "type": "object",
+      "properties": {
+        "disk": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "Disk resources"
+        },
+        "ram": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "Memory resources"
+        },
+        "cpu": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "CPU resources"
+        },
+        "gpu": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "title": "GPU resources, empty if cluster has no GPU"
+        },
+        "gpuRam": {
+          "$ref": "#/definitions/v1ClusterNodeResources",
+          "description": "GPU RAM, empty if cluster has not GPU."
+        }
+      },
+      "description": "ClusterNodeResourcesSummary represents the resources used in this cluster per node."
+    },
+    "v1ClusterNodeState": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_NODE_STATE_UNSPECIFIED",
+        "CLUSTER_NODE_STATE_STARTING",
+        "CLUSTER_NODE_STATE_HEALTHY",
+        "CLUSTER_NODE_STATE_UNHEALTHY",
+        "CLUSTER_NODE_STATE_SUSPENDED",
+        "CLUSTER_NODE_STATE_RECOVERING"
+      ],
+      "default": "CLUSTER_NODE_STATE_UNSPECIFIED",
+      "description": "ClusterNodeState represents the state of a cluster node.\n\n - CLUSTER_NODE_STATE_UNSPECIFIED: The state is unspecified.\n - CLUSTER_NODE_STATE_STARTING: The node is starting.\n - CLUSTER_NODE_STATE_HEALTHY: The node is healthy.\n - CLUSTER_NODE_STATE_UNHEALTHY: The node is unhealthy.\n - CLUSTER_NODE_STATE_SUSPENDED: The node is suspended.\n - CLUSTER_NODE_STATE_RECOVERING: The node is started but still needs to do some operations to recover."
+    },
+    "v1ClusterNodeTerminationEvent": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED",
+        "CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY",
+        "CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED"
+      ],
+      "default": "CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED",
+      "description": "ClusterNodeTerminationEvent describes what terminated a node's container the\nlast time it went down. Unlike a condition, this is a historical fact and is\nonly reported as supporting evidence for a node that is currently not ready.\n\nDeprecated: superseded by ClusterNodeNotReadyReason, which carries these two\nvalues alongside the causes that block a container from starting or a pod from\nbeing scheduled. Still populated for the two values it defines.\n\n - CLUSTER_NODE_TERMINATION_EVENT_UNSPECIFIED: The event is unspecified.\n - CLUSTER_NODE_TERMINATION_EVENT_OUT_OF_MEMORY: The container was terminated because it reached its memory limit.\n - CLUSTER_NODE_TERMINATION_EVENT_PROCESS_EXITED: The container's process exited unexpectedly with a non-zero exit code."
+    },
+    "v1ClusterPhase": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_PHASE_UNSPECIFIED",
+        "CLUSTER_PHASE_CREATING",
+        "CLUSTER_PHASE_FAILED_TO_CREATE",
+        "CLUSTER_PHASE_UPDATING",
+        "CLUSTER_PHASE_FAILED_TO_UPDATE",
+        "CLUSTER_PHASE_SCALING",
+        "CLUSTER_PHASE_UPGRADING",
+        "CLUSTER_PHASE_SUSPENDING",
+        "CLUSTER_PHASE_SUSPENDED",
+        "CLUSTER_PHASE_FAILED_TO_SUSPEND",
+        "CLUSTER_PHASE_RESUMING",
+        "CLUSTER_PHASE_FAILED_TO_RESUME",
+        "CLUSTER_PHASE_HEALTHY",
+        "CLUSTER_PHASE_NOT_READY",
+        "CLUSTER_PHASE_RECOVERY_MODE",
+        "CLUSTER_PHASE_MANUAL_MAINTENANCE",
+        "CLUSTER_PHASE_FAILED_TO_SYNC",
+        "CLUSTER_PHASE_NOT_FOUND",
+        "CLUSTER_PHASE_DELETING",
+        "CLUSTER_PHASE_UNKNOWN"
+      ],
+      "default": "CLUSTER_PHASE_UNSPECIFIED",
+      "description": "Defines the operational or transitional state of the Qdrant cluster.\n\n - CLUSTER_PHASE_UNSPECIFIED: The phase is unknown or not specified. Should not normally be used.\n - CLUSTER_PHASE_CREATING: The cluster is currently being created.\n - CLUSTER_PHASE_FAILED_TO_CREATE: The cluster creation process failed.\n - CLUSTER_PHASE_UPDATING: The cluster configuration is being updated.\n - CLUSTER_PHASE_FAILED_TO_UPDATE: The cluster update process failed.\n - CLUSTER_PHASE_SCALING: The cluster is undergoing scaling (up or down).\n - CLUSTER_PHASE_UPGRADING: The Qdrant version in the cluster is being upgraded.\n - CLUSTER_PHASE_SUSPENDING: The cluster is in the process of being suspended.\n - CLUSTER_PHASE_SUSPENDED: The cluster is currently suspended (inactive).\n - CLUSTER_PHASE_FAILED_TO_SUSPEND: The cluster suspension process failed.\n - CLUSTER_PHASE_RESUMING: The cluster is resuming from a suspended state.\n - CLUSTER_PHASE_FAILED_TO_RESUME: The cluster resumption process failed.\n - CLUSTER_PHASE_HEALTHY: The cluster is operational and healthy.\n - CLUSTER_PHASE_NOT_READY: The cluster is operational but not all components are ready or healthy.\n - CLUSTER_PHASE_RECOVERY_MODE: The cluster is in recovery mode, potentially after a failure.\n - CLUSTER_PHASE_MANUAL_MAINTENANCE: The cluster is under manual maintenance.\n - CLUSTER_PHASE_FAILED_TO_SYNC: There was an error syncing the cluster in the cloud provider region.\n - CLUSTER_PHASE_NOT_FOUND: The cluster was expected but not found in the cloud provider region.\n - CLUSTER_PHASE_DELETING: The cluster is being deleted.\n - CLUSTER_PHASE_UNKNOWN: The agent has not reported the cluster's status for longer than the\nstaleness window (~5 min), so its real phase cannot be trusted. The\nregion is effectively unreachable. Distinct from\nCLUSTER_PHASE_UNSPECIFIED, which means the phase is simply not set.\nConsumers gate actions such as force-delete on this value."
+    },
+    "v1ClusterScalabilityInfo": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1ClusterScalabilityStatus",
+          "description": "The current scalability status of the cluster."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Optional human-readable reason providing more context about the scalability status.\nWhen a cluster is not scalable, this field explains why."
+        }
+      },
+      "title": "ClusterScalabilityInfo provides information about the"
+    },
+    "v1ClusterScalabilityStatus": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_SCALABILITY_STATUS_UNSPECIFIED",
+        "CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE",
+        "CLUSTER_SCALABILITY_STATUS_SCALABLE"
+      ],
+      "default": "CLUSTER_SCALABILITY_STATUS_UNSPECIFIED",
+      "description": "ClusterScalabilityStatus defines the scalability states of a cluster.\n\n - CLUSTER_SCALABILITY_STATUS_UNSPECIFIED: Scalability status is unspecified.\n - CLUSTER_SCALABILITY_STATUS_NOT_SCALABLE: The cluster is not scalable.\n - CLUSTER_SCALABILITY_STATUS_SCALABLE: The cluster supports scaling operations."
+    },
+    "v1ClusterServiceType": {
+      "type": "string",
+      "enum": [
+        "CLUSTER_SERVICE_TYPE_UNSPECIFIED",
+        "CLUSTER_SERVICE_TYPE_CLUSTER_IP",
+        "CLUSTER_SERVICE_TYPE_NODE_PORT",
+        "CLUSTER_SERVICE_TYPE_LOAD_BALANCER"
+      ],
+      "default": "CLUSTER_SERVICE_TYPE_UNSPECIFIED",
+      "description": "- CLUSTER_SERVICE_TYPE_UNSPECIFIED: Service type is unspecified.\n - CLUSTER_SERVICE_TYPE_CLUSTER_IP: Use a service configured with type ClusterIP.\n - CLUSTER_SERVICE_TYPE_NODE_PORT: Use a service configured with type NodePort.\n - CLUSTER_SERVICE_TYPE_LOAD_BALANCER: Use a service configured with type LoadBalancer.",
+      "title": "ClusterServiceType defines the type of service to use for the cluster.\nSee: https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/#ServiceSpec"
+    },
+    "v1ClusterState": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the cluster software.",
+          "readOnly": true
+        },
+        "nodesUp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of cluster nodes that are up and running.",
+          "readOnly": true
+        },
+        "restartedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the cluster was restarted.",
+          "readOnly": true
+        },
+        "phase": {
+          "$ref": "#/definitions/v1ClusterPhase",
+          "description": "Current phase of the cluster.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for the current phase of the cluster.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "$ref": "#/definitions/v1ClusterEndpoint",
+          "description": "Endpoint information to access the qdrant cluster (aka database).",
+          "readOnly": true
+        },
+        "resources": {
+          "$ref": "#/definitions/v1ClusterNodeResourcesSummary",
+          "title": "The resources used by the cluster per node.\nFor the complete cluster you have to multiply by cluster.configuration.number_of_nodes",
+          "readOnly": true
+        },
+        "scalabilityInfo": {
+          "$ref": "#/definitions/v1ClusterScalabilityInfo",
+          "title": "Whether the cluster can be scaled up or down.\nDeprecated: Use capabilities.scalability_info instead",
+          "readOnly": true
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterNodeInfo"
+          },
+          "description": "List of nodes in the cluster.",
+          "readOnly": true
+        },
+        "jwtRbac": {
+          "type": "boolean",
+          "description": "Whether or not JWT Role Based Access Control (RBAC) is enabled.\nOn hybrid-cloud this is inferred from the fact a database secret is provided.\nOn managed-cloud this depends on the version of the cluster and whether or not this feature is enabled after an upgrade.\n                 When this setting is false (and version 1.9+ is used) you can use EnableClusterJwtRbac to update.\nIf enabled, you can generate JWT tokens with fine-grained rules for access control.",
+          "readOnly": true
+        },
+        "capabilities": {
+          "$ref": "#/definitions/v1ClusterCapabilities",
+          "description": "Specifies whether some operations are supported by cluster or not.",
+          "readOnly": true
+        }
+      },
+      "description": "ClusterState represents the current state of a cluster\nAll fields in this message are read-only."
+    },
+    "v1ClusterStorageConfiguration": {
+      "type": "object",
+      "properties": {
+        "storageTierType": {
+          "$ref": "#/definitions/v1StorageTierType",
+          "description": "We might allow custom IOPS and Throughput values configuration in the future,\n that's why ClusterStorageConfiguration is a separate message and not just a field",
+          "title": "Type of storage tier"
+        },
+        "databaseStorageClass": {
+          "type": "string",
+          "description": "The storage class to use for the database storage, if different from the environment default.\nThis is relevant for hybrid cloud clusters only."
+        },
+        "snapshotStorageClass": {
+          "type": "string",
+          "description": "The storage class to use for the snapshot storage, if different from the the environment default.\nThis is relevant for hybrid cloud clusters only."
+        },
+        "volumeSnapshotClass": {
+          "type": "string",
+          "description": "The volume snapshot class to use for the database storage, if different from the the environment default.\nThis is relevant for hybrid cloud clusters only."
+        },
+        "volumeAttributesClass": {
+          "type": "string",
+          "description": "The volume attributes class to use for the database storage, if different from the the environment default.\nThis is relevant for hybrid cloud clusters only."
+        }
+      },
+      "title": "ClusterStorageConfiguration defines Storage IOPS and Throughput configuration"
+    },
+    "v1CreateClusterFromBackupResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v1Cluster",
+          "title": "Cluster created from the backup"
+        }
+      },
+      "description": "CreateClusterFromBackupResponse is the response for the CreateCluster function."
+    },
+    "v1CreateClusterResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v1Cluster",
+          "title": "The actual cluster"
+        }
+      },
+      "title": "CreateClusterResponse is the response from the CreateCluster function"
+    },
+    "v1DatabaseConfiguration": {
+      "type": "object",
+      "properties": {
+        "collection": {
+          "$ref": "#/definitions/v1DatabaseConfigurationCollection",
+          "description": "The default Qdrant database collection configuration.\nThis setting is for both managed and hybrid cloud clusters, see sub-messages for more details.\nThis is an optional field."
+        },
+        "storage": {
+          "$ref": "#/definitions/v1DatabaseConfigurationStorage",
+          "description": "The default Qdrant database storage configuration.\nThis setting is for both managed and hybrid cloud clusters.\nThis is an optional field."
+        },
+        "service": {
+          "$ref": "#/definitions/v1DatabaseConfigurationService",
+          "title": "The Qdrant database service configuration\nThis setting is for both managed and hybrid cloud clusters, see sub-messages for more details.\nThis is an optional field"
+        },
+        "logLevel": {
+          "$ref": "#/definitions/v1DatabaseConfigurationLogLevel",
+          "description": "The log level for the database.\nQdrant is written in Rust and is using: https://docs.rs/log/latest/log/enum.LevelFilter.html\nThis setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.\nThis is an optional field, default is Info."
+        },
+        "tls": {
+          "$ref": "#/definitions/v1DatabaseConfigurationTls",
+          "description": "The Qdrant database TLS configuration.\nThis setting is for hybrid cloud clusters only, it is ignored for managed cloud clusters.\nThis is an optional field, if not set an unsecure connection is provided."
+        },
+        "inference": {
+          "$ref": "#/definitions/v1DatabaseConfigurationInference",
+          "title": "The Qdrant database inference configuration.\nThis setting is for managed cloud clusters only, it is ignored for hybrid cloud clusters.\nThis is an optional field, if unset, the database is not configured for cloud inferencing"
+        },
+        "auditLogging": {
+          "$ref": "#/definitions/v1DatabaseConfigurationAuditLogging",
+          "description": "The Audit logging configuration.\nThis setting is for both managed and hybrid cloud clusters, see sub-messages for more details.\nThis is an optional field."
+        }
+      },
+      "description": "Configuration to setup a Qdrant database.\nThe settings apply to managed and/or hybrid cloud, see documentation on each message for more details."
+    },
+    "v1DatabaseConfigurationAuditLogging": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "If true, the cluster is configured to use Audit for logging"
+        },
+        "rotation": {
+          "$ref": "#/definitions/v1AuditLogRotation",
+          "description": "Rotation specifies the rotation interval: Daily (default) or Hourly.\nRotation interval is how long a single audit log file is used before service starts writing to a new file.\nFor example, with daily rotation, a new audit log file will be created each day and the previous\nday's log file will be closed and kept for future reference according to the max_log_files setting."
+        },
+        "maxLogFiles": {
+          "type": "integer",
+          "format": "int64",
+          "description": "MaxLogFiles specifies the maximum number of rotated audit log files to keep.\nDefault is 7."
+        },
+        "trustForwardedHeaders": {
+          "type": "boolean",
+          "description": "TrustForwardedHeaders specifies whether to use X-Forwarded-For header to\ndetermine the client address recorded in audit log entries.\nFor managed cloud clusters, this is always true and the field is ignored.\nFor hybrid cloud clusters, this is an optional field, default is false."
+        }
+      },
+      "description": "Configuration for Audit logging for qdrant cluster."
+    },
+    "v1DatabaseConfigurationCollection": {
+      "type": "object",
+      "properties": {
+        "replicationFactor": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Number of replicas of each shard that network tries to maintain\nThis is an optional, the default is 1"
+        },
+        "writeConsistencyFactor": {
+          "type": "integer",
+          "format": "int32",
+          "title": "How many replicas should apply the operation for us to consider it successful\nThis is an optional, the default is 1"
+        },
+        "vectors": {
+          "$ref": "#/definitions/v1DatabaseConfigurationCollectionVectors",
+          "description": "The default parameters for vectors.\nThis is an optional field, see DatabaseConfigurationCollectionVectors for defaults."
+        }
+      },
+      "title": "The default Qdrant database collection configuration"
+    },
+    "v1DatabaseConfigurationCollectionVectors": {
+      "type": "object",
+      "properties": {
+        "onDisk": {
+          "type": "boolean",
+          "description": "If set, this will create a collection with all vectors immediately stored in memmap storage.\nThis is the recommended way, in case your Qdrant instance operates with fast disks and you are working with large collections.\nFor more info see: https://qdrant.tech/documentation/concepts/storage/#configuring-memmap-storage\nThis is an optional field, the default value will be true."
+        }
+      },
+      "title": "The default Qdrant database collection vectors configuration"
+    },
+    "v1DatabaseConfigurationInference": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "If true, the database is configured to use cloud inferencing"
+        }
+      },
+      "title": "DatabaseConfigurationInference contains cloud inferencing configuration"
+    },
+    "v1DatabaseConfigurationLogLevel": {
+      "type": "string",
+      "enum": [
+        "DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_TRACE",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_INFO",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_WARN",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_ERROR",
+        "DATABASE_CONFIGURATION_LOG_LEVEL_OFF"
+      ],
+      "default": "DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED",
+      "description": "- DATABASE_CONFIGURATION_LOG_LEVEL_UNSPECIFIED: Unspecified log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_TRACE: Trace log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_DEBUG: Debug log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_INFO: Info log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_WARN: Warn log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: Error log level.\n - DATABASE_CONFIGURATION_LOG_LEVEL_OFF: Off log level.",
+      "title": "DatabaseConfigurationLogLevel defines the supported logging levels for the\nQdrant database. See: https://docs.rs/log/latest/log/enum.LevelFilter.html"
+    },
+    "v1DatabaseConfigurationService": {
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "$ref": "#/definitions/v1SecretKeyRef",
+          "title": "Set an api-key.\nThis setting is for hybrid cloud clusters only, for managed cloud please use qdrant.cloud.cluster.auth.[v1|v2].DatabaseApiKeyService to configure keys.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
+        },
+        "readOnlyApiKey": {
+          "$ref": "#/definitions/v1SecretKeyRef",
+          "title": "Set an api-key for read-only operations.\nThis setting is for hybrid cloud clusters only, for managed cloud please use qdrant.cloud.cluster.auth.[v1|v2].DatabaseApiKeyService to configure keys.\nIf set, all requests must include a header with the api-key.\nexample header: `api-key: \u003cAPI-KEY\u003e`"
+        },
+        "enableTls": {
+          "type": "boolean",
+          "description": "Enable HTTPS for the REST and gRPC API\nThis setting is for hybrid cloud clusters only, for managed cloud clusters the platform controls it (and clients need to use a secure connection)."
+        }
+      },
+      "title": "The Qdrant database service configuration"
+    },
+    "v1DatabaseConfigurationStorage": {
+      "type": "object",
+      "properties": {
+        "performance": {
+          "$ref": "#/definitions/v1DatabaseConfigurationStoragePerformance",
+          "description": "The performance related Qdrant database storage configuration\nThis is an optional field, see DatabaseConfigurationStoragePerformance for defaults."
+        }
+      },
+      "title": "The Qdrant storage configuration"
+    },
+    "v1DatabaseConfigurationStoragePerformance": {
+      "type": "object",
+      "properties": {
+        "optimizerCpuBudget": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU budget, how many CPUs (threads) to allocate for an optimization job.\nIf not set or set to 0 - auto selection, keep 1 or more CPUs unallocated depending on CPU size\nIf negative - subtract this number of CPUs from the available CPUs.\nIf positive - use this exact number of CPUs."
+        },
+        "asyncScorer": {
+          "type": "boolean",
+          "title": "Enable async scorer which uses io_uring when rescoring.\nOnly supported on Linux, must be enabled in your kernel.\nSee: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant"
+        }
+      },
+      "title": "The performance related Qdrant database storage configuration"
+    },
+    "v1DatabaseConfigurationTls": {
+      "type": "object",
+      "properties": {
+        "cert": {
+          "$ref": "#/definitions/v1SecretKeyRef",
+          "title": "Secret to use for the certificate"
+        },
+        "key": {
+          "$ref": "#/definitions/v1SecretKeyRef",
+          "title": "Secret to use for the private key"
+        }
+      },
+      "title": "DatabaseConfigurationTls contains the information to setup a TLS connection to the database endpoint"
+    },
+    "v1DeleteClusterResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "DeleteClusterResponse is the response from the DeleteCluster function"
+    },
+    "v1EnableClusterJwtRbacResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "EnableClusterJwtRbacResponse is the response from the EnableClusterJwtRbac function"
+    },
+    "v1GetClusterDownscaleRiskResponse": {
+      "type": "object",
+      "properties": {
+        "downscaleRisks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ClusterDownscaleRiskInfo"
+          },
+          "description": "The risks of applying the requested properties to the cluster, one entry per assessed\nresource and at most one entry per resource. Resources that carry no risk are\nreported too, with status `CLUSTER_DOWNSCALE_RISK_STATUS_NO_RISK`, so applying the\nproperties is safe only when every entry has that status."
+        }
+      },
+      "description": "GetClusterDownscaleRiskResponse is the response from the GetClusterDownscaleRisk function."
+    },
+    "v1GetClusterResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v1Cluster",
+          "title": "The actual cluster"
+        }
+      },
+      "title": "GetClusterResponse is the response from the GetCluster function"
+    },
+    "v1GetQdrantReleaseResponse": {
+      "type": "object",
+      "properties": {
+        "release": {
+          "$ref": "#/definitions/v1QdrantRelease",
+          "title": "The actual Qdrant release"
+        }
+      },
+      "title": "GetQdrantReleaseResponse is the response from the GetQdrantRelease function"
+    },
+    "v1KeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "The key part of a key-value pair"
+        },
+        "value": {
+          "type": "string",
+          "title": "The value part of a key-value pair"
+        }
+      },
+      "description": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes."
+    },
+    "v1ListClustersResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Cluster"
+          },
+          "title": "The actual clusters in this list"
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
+        }
+      },
+      "title": "ListClustersResponse is the response from the ListClusters function"
+    },
+    "v1ListQdrantReleasesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1QdrantRelease"
+          },
+          "title": "The actual Qdrant releases in this list, ordered by the version field in ascending semantic version order.\nFor example: v1.12.6, v1.13.6, v1.14.1, v1.15.4"
+        }
+      },
+      "title": "ListQdrantReleasesResponse is the response from the ListQdrantReleases function"
+    },
+    "v1QdrantRelease": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "Version of the Qdrant release"
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Flag to indicate if this is the default release\nThere can be at most a single item in the list that have this property set."
+        },
+        "releaseNotesUrl": {
+          "type": "string",
+          "title": "URL to the release notes"
+        },
+        "remarks": {
+          "type": "string",
+          "title": "Additional message regarding this release that might be useful to the client\""
+        },
+        "endOfLife": {
+          "type": "boolean",
+          "title": "True, if the release version is end of life and not supported anymore"
+        },
+        "unavailable": {
+          "type": "boolean",
+          "title": "True, if the release is not available for the cluster creation or updates"
+        }
+      },
+      "title": "QdrantRelease represent a single Qdrant release"
+    },
+    "v1RestartClusterResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "RestartClusterResponse is the response from the RestartCluster function"
+    },
+    "v1SecretKeyRef": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the secret (in the same namespace as the QdrantCluster CRD instance)\nThis is a required field"
+        },
+        "key": {
+          "type": "string",
+          "title": "The key inside the secret\nThis is a required field"
+        }
+      },
+      "title": "SecretKeyRef is a reference to a Kubernetes secret name and the key inside the secret"
+    },
+    "v1StorageTierType": {
+      "type": "string",
+      "enum": [
+        "STORAGE_TIER_TYPE_UNSPECIFIED",
+        "STORAGE_TIER_TYPE_COST_OPTIMISED",
+        "STORAGE_TIER_TYPE_BALANCED",
+        "STORAGE_TIER_TYPE_PERFORMANCE"
+      ],
+      "default": "STORAGE_TIER_TYPE_UNSPECIFIED",
+      "description": "- STORAGE_TIER_TYPE_UNSPECIFIED: No storage tier type is configured, same as COST_OPTIMIZED\n - STORAGE_TIER_TYPE_COST_OPTIMISED: Base pre-configured type\n - STORAGE_TIER_TYPE_BALANCED: Mid tier pre-configured type\n - STORAGE_TIER_TYPE_PERFORMANCE: Most performant pre-configured type",
+      "title": "StorageTierType defines type of storage performance tiers which maps to predefined IOPS and Throughput amount"
+    },
+    "v1SuggestClusterNameResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The suggested name for a new cluster."
+        }
+      },
+      "title": "SuggestClusterNameResponse is the response from the SuggestClusterName function"
+    },
+    "v1SuspendClusterResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "SuspendClusterResponse is the response from the SuspendCluster function"
+    },
+    "v1Toleration": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the taint that the toleration applies to.\nIf key is not set (or empty) together with operator `Exists` matches all keys, values and effects.\nThe key must be a valid Kubernetes qualified name."
+        },
+        "operator": {
+          "$ref": "#/definitions/v1TolerationOperator",
+          "description": "The operator represents a key's relationship to the value.\nThe default is TOLERATION_OPERATOR_EQUAL."
+        },
+        "value": {
+          "type": "string",
+          "title": "The value is the taint value the toleration matches to.\nIf the operator is `Exists`, the value should not be set.\nIf the operator is `Equal` (the default), the value is required.\n'value' must be a valid identifier (alphanumeric start/end, allows -_. in between)"
+        },
+        "effect": {
+          "$ref": "#/definitions/v1TolerationEffect",
+          "description": "The effect indicates the taint effect to match.\nIf not set, matches all taint effects."
+        },
+        "tolerationSeconds": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The toleration seconds indicates the duration to tolerate the taint."
+        }
+      },
+      "description": "The Toleration message represents a toleration object for Kubernetes."
+    },
+    "v1TolerationEffect": {
+      "type": "string",
+      "enum": [
+        "TOLERATION_EFFECT_UNSPECIFIED",
+        "TOLERATION_EFFECT_NO_SCHEDULE",
+        "TOLERATION_EFFECT_PREFER_NO_SCHEDULE",
+        "TOLERATION_EFFECT_NO_EXECUTE"
+      ],
+      "default": "TOLERATION_EFFECT_UNSPECIFIED",
+      "description": "- TOLERATION_EFFECT_UNSPECIFIED: Unspecified effect.\n - TOLERATION_EFFECT_NO_SCHEDULE: NoSchedule taint effect.\n - TOLERATION_EFFECT_PREFER_NO_SCHEDULE: PreferNoSchedule taint effect.\n - TOLERATION_EFFECT_NO_EXECUTE: NoExecute taint effect.",
+      "title": "TolerationEffect represents the effects a taint has on pod scheduling and eviction.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
+    },
+    "v1TolerationOperator": {
+      "type": "string",
+      "enum": [
+        "TOLERATION_OPERATOR_UNSPECIFIED",
+        "TOLERATION_OPERATOR_EXISTS",
+        "TOLERATION_OPERATOR_EQUAL"
+      ],
+      "default": "TOLERATION_OPERATOR_UNSPECIFIED",
+      "description": "- TOLERATION_OPERATOR_UNSPECIFIED: Unspecified operator.\n - TOLERATION_OPERATOR_EXISTS: The operator means the key exists.\n - TOLERATION_OPERATOR_EQUAL: The operator means the key equals the given value.",
+      "title": "TolerationOperator defines the valid operators for tolerations.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
+    },
+    "v1TopologySpreadConstraint": {
+      "type": "object",
+      "properties": {
+        "maxSkew": {
+          "type": "integer",
+          "format": "int32",
+          "description": "max_skew describes the degree to which pods may be unevenly distributed.\nWhen `whenUnsatisfiable=DoNotSchedule`, it is the maximum permitted difference\nbetween the number of matching pods in the target topology and the global minimum.\nFor example, in a 3-zone cluster, max_skew is set to 1, and pods with the same\nlabelSelector spread as 1/1/0:\n+-------+-------+-------+\n| zone1 | zone2 | zone3 |\n+-------+-------+-------+\n|   P   |   P   |       |\n+-------+-------+-------+\n- if max_skew is 1, incoming pod can only be scheduled to zone3 to become 1/1/1;\nscheduling it onto zone1(zone2) would make the ActualSkew(2-0) on zone1(zone2)\nviolate MaxSkew(1).\n- if max_skew is 2, incoming pod can be scheduled onto any zone.\nWhen `whenUnsatisfiable=ScheduleAnyway`, it is used to give higher precedence\nto topologies that satisfy it.\nDefault value is 1 and 0 is not allowed."
+        },
+        "topologyKey": {
+          "type": "string",
+          "description": "topology_key is the key of node labels. Nodes that have a label with this key\nand identical values are considered to be in the same topology.\nWe consider each \u003ckey, value\u003e as a \"bucket\", and try to put balanced number\nof pods into each bucket.\nIt's a required field."
+        },
+        "whenUnsatisfiable": {
+          "$ref": "#/definitions/v1TopologySpreadConstraintWhenUnsatisfiable",
+          "description": "when_unsatisfiable indicates how to deal with a pod if it doesn't satisfy\nthe spread constraint.\n- DoNotSchedule (default) tells the scheduler not to schedule it.\n- ScheduleAnyway tells the scheduler to schedule the pod in any location,\n  but giving higher precedence to topologies that would help reduce the\n  skew.\nA constraint is considered \"Unsatisfiable\" for an incoming pod\nif and only if every possible node assignment for that pod would violate\n\"max_skew\" on some topology.\nFor example, in a 3-zone cluster, max_skew is set to 1, and pods with the same\nlabelSelector spread as 3/1/1:\n+-------+-------+-------+\n| zone1 | zone2 | zone3 |\n+-------+-------+-------+\n| P P P |   P   |   P   |\n+-------+-------+-------+\nIf when_unsatisfiable is set to DoNotSchedule, incoming pod can only be scheduled\nto zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies\nmax_skew(1). In other words, the cluster can still be imbalanced, but scheduler\nwon't make it *more* imbalanced."
+        }
+      },
+      "description": "TopologySpreadConstraint specifies how to spread matching pods among the given topology."
+    },
+    "v1TopologySpreadConstraintWhenUnsatisfiable": {
+      "type": "string",
+      "enum": [
+        "TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED",
+        "TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE",
+        "TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY"
+      ],
+      "default": "TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED",
+      "description": "- TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED: Unspecified.\n - TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE: DoNotSchedule (default) tells the scheduler not to schedule it.\n - TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY: ScheduleAnyway tells the scheduler to still schedule it while prioritizing nodes that minimize the skew.",
+      "title": "TopologySpreadConstraintWhenUnsatisfiable defines the valid whenUnsatisfiable for TopologySpreadConstraints.\nSee: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/"
+    },
+    "v1UnsuspendClusterResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "UnsuspendClusterResponse is the response from the UnsuspendCluster function"
+    },
+    "v1UpdateClusterResponse": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/v1Cluster",
+          "title": "The actual cluster"
+        }
+      },
+      "title": "UpdateClusterResponse is the response from the UpdateCluster function"
+    }
+  }
+}
