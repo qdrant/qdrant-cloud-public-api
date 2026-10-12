@@ -112,7 +112,7 @@ export declare type Caller = Message<"qdrant.cloud.common.v1.Caller"> & {
   credentialId?: string | undefined;
 
   /**
-   * Acting OAuth client id when credential_type is OAUTH_DELEGATED (Auth0 azp / CIMD URL).
+   * Acting OAuth client id when credential_type is OAUTH_DELEGATED (azp / CIMD URL).
    *
    * @generated from field: optional string acting_client_id = 6;
    */
@@ -756,7 +756,7 @@ export declare const CredentialTypeSchema: GenEnum<CredentialType>;
 /**
  * OauthScope is the OAuth access-class for delegated credentials.
  * Distinct from permission verbs (read/write/delete) and from RBAC resource scope.
- * Wire / Auth0 scope strings stay "read-only" and "manage".
+ * Wire scope strings stay "read-only" and "manage".
  * Named OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.
  *
  * @generated from enum qdrant.cloud.common.v1.OauthScope
@@ -770,14 +770,14 @@ export enum OauthScope {
   UNSPECIFIED = 0,
 
   /**
-   * Read-class access only (Auth0 / wire: "read-only").
+   * Read-class access only (wire: "read-only").
    *
    * @generated from enum value: OAUTH_SCOPE_READ_ONLY = 1;
    */
   READ_ONLY = 1,
 
   /**
-   * Full manage-class access (Auth0 / wire: "manage").
+   * Full manage-class access (wire: "manage").
    *
    * @generated from enum value: OAUTH_SCOPE_MANAGE = 2;
    */

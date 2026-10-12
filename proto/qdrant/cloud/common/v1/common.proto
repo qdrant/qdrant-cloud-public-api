@@ -93,7 +93,6 @@ extend google.protobuf.MethodOptions {
 }
 
 // The extension for restricting a method to interactive session credentials.
-// Field numbers 50010–50011 are reserved for resource-scoped RBAC / ABAC options.
 extend google.protobuf.MethodOptions {
   // When true, the method may only be called with an interactive session credential
   // (for example a first-party console JWT). It must be rejected for non-interactive
@@ -179,14 +178,14 @@ enum CredentialType {
 
 // OauthScope is the OAuth access-class for delegated credentials.
 // Distinct from permission verbs (read/write/delete) and from RBAC resource scope.
-// Wire / Auth0 scope strings stay "read-only" and "manage".
+// Wire scope strings stay "read-only" and "manage".
 // Named OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.
 enum OauthScope {
   // Unspecified / unknown (or omitted on legacy events).
   OAUTH_SCOPE_UNSPECIFIED = 0;
-  // Read-class access only (Auth0 / wire: "read-only").
+  // Read-class access only (wire: "read-only").
   OAUTH_SCOPE_READ_ONLY = 1;
-  // Full manage-class access (Auth0 / wire: "manage").
+  // Full manage-class access (wire: "manage").
   OAUTH_SCOPE_MANAGE = 2;
 }
 
@@ -211,7 +210,7 @@ message Caller {
   // Identifier of the credential (personal API key id, OAuth grant id, management key id).
   // Omitted for interactive sessions and when unknown.
   optional string credential_id = 5 [(buf.validate.field).string.min_len = 1];
-  // Acting OAuth client id when credential_type is OAUTH_DELEGATED (Auth0 azp / CIMD URL).
+  // Acting OAuth client id when credential_type is OAUTH_DELEGATED (azp / CIMD URL).
   optional string acting_client_id = 6 [(buf.validate.field).string.min_len = 1];
   // OAuth access-class when credential_type is OAUTH_DELEGATED.
   optional OauthScope scope = 7 [(buf.validate.field).enum = {

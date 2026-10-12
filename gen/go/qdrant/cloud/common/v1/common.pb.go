@@ -152,16 +152,16 @@ func (CredentialType) EnumDescriptor() ([]byte, []int) {
 
 // OauthScope is the OAuth access-class for delegated credentials.
 // Distinct from permission verbs (read/write/delete) and from RBAC resource scope.
-// Wire / Auth0 scope strings stay "read-only" and "manage".
+// Wire scope strings stay "read-only" and "manage".
 // Named OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.
 type OauthScope int32
 
 const (
 	// Unspecified / unknown (or omitted on legacy events).
 	OauthScope_OAUTH_SCOPE_UNSPECIFIED OauthScope = 0
-	// Read-class access only (Auth0 / wire: "read-only").
+	// Read-class access only (wire: "read-only").
 	OauthScope_OAUTH_SCOPE_READ_ONLY OauthScope = 1
-	// Full manage-class access (Auth0 / wire: "manage").
+	// Full manage-class access (wire: "manage").
 	OauthScope_OAUTH_SCOPE_MANAGE OauthScope = 2
 )
 
@@ -419,7 +419,7 @@ type Caller struct {
 	// Identifier of the credential (personal API key id, OAuth grant id, management key id).
 	// Omitted for interactive sessions and when unknown.
 	CredentialId *string `protobuf:"bytes,5,opt,name=credential_id,json=credentialId,proto3,oneof" json:"credential_id,omitempty"`
-	// Acting OAuth client id when credential_type is OAUTH_DELEGATED (Auth0 azp / CIMD URL).
+	// Acting OAuth client id when credential_type is OAUTH_DELEGATED (azp / CIMD URL).
 	ActingClientId *string `protobuf:"bytes,6,opt,name=acting_client_id,json=actingClientId,proto3,oneof" json:"acting_client_id,omitempty"`
 	// OAuth access-class when credential_type is OAUTH_DELEGATED.
 	Scope         *OauthScope `protobuf:"varint,7,opt,name=scope,proto3,enum=qdrant.cloud.common.v1.OauthScope,oneof" json:"scope,omitempty"`

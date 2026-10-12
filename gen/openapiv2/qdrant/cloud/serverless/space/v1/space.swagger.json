@@ -540,7 +540,7 @@
         },
         "actingClientId": {
           "type": "string",
-          "description": "Acting OAuth client id when credential_type is OAUTH_DELEGATED (Auth0 azp / CIMD URL)."
+          "description": "Acting OAuth client id when credential_type is OAUTH_DELEGATED (azp / CIMD URL)."
         },
         "scope": {
           "$ref": "#/definitions/v1OauthScope",
@@ -659,7 +659,7 @@
         "OAUTH_SCOPE_MANAGE"
       ],
       "default": "OAUTH_SCOPE_UNSPECIFIED",
-      "description": "OauthScope is the OAuth access-class for delegated credentials.\nDistinct from permission verbs (read/write/delete) and from RBAC resource scope.\nWire / Auth0 scope strings stay \"read-only\" and \"manage\".\nNamed OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.\n\n - OAUTH_SCOPE_UNSPECIFIED: Unspecified / unknown (or omitted on legacy events).\n - OAUTH_SCOPE_READ_ONLY: Read-class access only (Auth0 / wire: \"read-only\").\n - OAUTH_SCOPE_MANAGE: Full manage-class access (Auth0 / wire: \"manage\")."
+      "description": "OauthScope is the OAuth access-class for delegated credentials.\nDistinct from permission verbs (read/write/delete) and from RBAC resource scope.\nWire scope strings stay \"read-only\" and \"manage\".\nNamed OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.\n\n - OAUTH_SCOPE_UNSPECIFIED: Unspecified / unknown (or omitted on legacy events).\n - OAUTH_SCOPE_READ_ONLY: Read-class access only (wire: \"read-only\").\n - OAUTH_SCOPE_MANAGE: Full manage-class access (wire: \"manage\")."
     },
     "v1SearcherSettings": {
       "type": "object",

@@ -67,7 +67,7 @@ When `interactive_only` is unset or `false`, any credential that passes actor-ty
 | `CREDENTIAL_TYPE_SERVICE` | Service-to-service credential |
 | `CREDENTIAL_TYPE_OAUTH_DELEGATED` | Short-lived delegated JWT after OAuth token exchange |
 
-`Caller` may also carry `credential_id`, `acting_client_id` (OAuth client / CIMD URL), and `scope` (`OauthScope`: `READ_ONLY` / `MANAGE`, Auth0 wire strings `read-only` / `manage`) when relevant. These fields are optional so legacy events remain valid.
+`Caller` may also carry `credential_id`, `acting_client_id` (OAuth client / CIMD URL), and `scope` (`OauthScope`: `READ_ONLY` / `MANAGE`, OAuth wire strings `read-only` / `manage`) when relevant. These fields are optional so legacy events remain valid.
 
 `OauthScope` is the shared access-class enum for delegated OAuth credentials (on `Caller` and IAM `AuthenticateResponse` / `ExchangeToken`). It is not a permission verb and not an RBAC resource scope.
 

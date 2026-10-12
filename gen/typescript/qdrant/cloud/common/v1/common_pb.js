@@ -156,7 +156,7 @@ export const OauthScopeSchema = /*@__PURE__*/
 /**
  * OauthScope is the OAuth access-class for delegated credentials.
  * Distinct from permission verbs (read/write/delete) and from RBAC resource scope.
- * Wire / Auth0 scope strings stay "read-only" and "manage".
+ * Wire scope strings stay "read-only" and "manage".
  * Named OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.
  *
  * @generated from enum qdrant.cloud.common.v1.OauthScope
