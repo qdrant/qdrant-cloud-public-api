@@ -9,6 +9,10 @@ import "google/protobuf/descriptor.proto";
 // future consumers). Presence of this option marks the RPC as eligible for
 // facade exposure, subject to each facade's filters and overlays.
 //
+// Facade-specific overlays live under nested packages, for example:
+//   - qdrant.cloud.facade.mcp.v1 (extension range 521xx)
+//   - reserved 522xx for a future GraphQL overlay
+//
 // Example:
 //  option (qdrant.cloud.facade.v1.facade) = {
 //    description:
@@ -19,7 +23,7 @@ import "google/protobuf/descriptor.proto";
 //  };
 //
 extend google.protobuf.MethodOptions {
-  // Shared facade metadata for this RPC (description, title).
+  // Shared facade metadata for this RPC (description, title, sensitivity, hints).
   // Extension number 52001 is in the Qdrant public-api custom-option range
   // (common uses 50001–50012; events uses 51001).
   FacadeMethodOptions facade = 52001;
@@ -50,6 +54,17 @@ message FacadeMethodOptions {
   string description = 1 [(buf.validate.field).string.min_len = 1];
   // Optional short display title (for example MCP ToolAnnotations.title).
   string title = 2;
+  // When true, the response may contain secrets; facades should apply
+  // sensitive-response handling and/or exclude the RPC by default.
+  bool sensitive_response = 3;
+  // Optional overrides when HTTP-verb heuristics for read-only / destructive /
+  // idempotent classification are wrong. Facades map these to their own
+  // annotation models (for example MCP ToolAnnotations).
+  optional bool read_only_hint = 4;
+  // Optional override for destructive classification.
+  optional bool destructive_hint = 5;
+  // Optional override for idempotent classification.
+  optional bool idempotent_hint = 6;
 }
 
 // FacadeFieldOptions holds per-field hints for facade input schemas.

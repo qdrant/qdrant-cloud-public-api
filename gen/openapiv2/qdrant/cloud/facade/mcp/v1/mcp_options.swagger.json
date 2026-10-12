@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "qdrant/cloud/mcp/v1/mcp_options.proto",
+    "title": "qdrant/cloud/facade/mcp/v1/mcp_options.proto",
     "version": "version not set"
   },
   "consumes": [

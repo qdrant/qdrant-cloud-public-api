@@ -32,9 +32,20 @@ type FacadeMethodOptions struct {
 	// truth for facade documentation strings.
 	Description string `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
 	// Optional short display title (for example MCP ToolAnnotations.title).
-	Title         string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Title string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	// When true, the response may contain secrets; facades should apply
+	// sensitive-response handling and/or exclude the RPC by default.
+	SensitiveResponse bool `protobuf:"varint,3,opt,name=sensitive_response,json=sensitiveResponse,proto3" json:"sensitive_response,omitempty"`
+	// Optional overrides when HTTP-verb heuristics for read-only / destructive /
+	// idempotent classification are wrong. Facades map these to their own
+	// annotation models (for example MCP ToolAnnotations).
+	ReadOnlyHint *bool `protobuf:"varint,4,opt,name=read_only_hint,json=readOnlyHint,proto3,oneof" json:"read_only_hint,omitempty"`
+	// Optional override for destructive classification.
+	DestructiveHint *bool `protobuf:"varint,5,opt,name=destructive_hint,json=destructiveHint,proto3,oneof" json:"destructive_hint,omitempty"`
+	// Optional override for idempotent classification.
+	IdempotentHint *bool `protobuf:"varint,6,opt,name=idempotent_hint,json=idempotentHint,proto3,oneof" json:"idempotent_hint,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *FacadeMethodOptions) Reset() {
@@ -79,6 +90,34 @@ func (x *FacadeMethodOptions) GetTitle() string {
 		return x.Title
 	}
 	return ""
+}
+
+func (x *FacadeMethodOptions) GetSensitiveResponse() bool {
+	if x != nil {
+		return x.SensitiveResponse
+	}
+	return false
+}
+
+func (x *FacadeMethodOptions) GetReadOnlyHint() bool {
+	if x != nil && x.ReadOnlyHint != nil {
+		return *x.ReadOnlyHint
+	}
+	return false
+}
+
+func (x *FacadeMethodOptions) GetDestructiveHint() bool {
+	if x != nil && x.DestructiveHint != nil {
+		return *x.DestructiveHint
+	}
+	return false
+}
+
+func (x *FacadeMethodOptions) GetIdempotentHint() bool {
+	if x != nil && x.IdempotentHint != nil {
+		return *x.IdempotentHint
+	}
+	return false
 }
 
 // FacadeFieldOptions holds per-field hints for facade input schemas.
@@ -158,7 +197,7 @@ var file_qdrant_cloud_facade_v1_facade_options_proto_extTypes = []protoimpl.Exte
 
 // Extension fields to descriptorpb.MethodOptions.
 var (
-	// Shared facade metadata for this RPC (description, title).
+	// Shared facade metadata for this RPC (description, title, sensitivity, hints).
 	// Extension number 52001 is in the Qdrant public-api custom-option range
 	// (common uses 50001–50012; events uses 51001).
 	//
@@ -178,10 +217,17 @@ var File_qdrant_cloud_facade_v1_facade_options_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_facade_v1_facade_options_proto_rawDesc = "" +
 	"\n" +
-	"+qdrant/cloud/facade/v1/facade_options.proto\x12\x16qdrant.cloud.facade.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"V\n" +
+	"+qdrant/cloud/facade/v1/facade_options.proto\x12\x16qdrant.cloud.facade.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\xca\x02\n" +
 	"\x13FacadeMethodOptions\x12)\n" +
 	"\vdescription\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\"J\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12-\n" +
+	"\x12sensitive_response\x18\x03 \x01(\bR\x11sensitiveResponse\x12)\n" +
+	"\x0eread_only_hint\x18\x04 \x01(\bH\x00R\freadOnlyHint\x88\x01\x01\x12.\n" +
+	"\x10destructive_hint\x18\x05 \x01(\bH\x01R\x0fdestructiveHint\x88\x01\x01\x12,\n" +
+	"\x0fidempotent_hint\x18\x06 \x01(\bH\x02R\x0eidempotentHint\x88\x01\x01B\x11\n" +
+	"\x0f_read_only_hintB\x13\n" +
+	"\x11_destructive_hintB\x12\n" +
+	"\x10_idempotent_hint\"J\n" +
 	"\x12FacadeFieldOptions\x12\x12\n" +
 	"\x04hide\x18\x01 \x01(\bR\x04hide\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription:e\n" +
@@ -225,6 +271,7 @@ func file_qdrant_cloud_facade_v1_facade_options_proto_init() {
 	if File_qdrant_cloud_facade_v1_facade_options_proto != nil {
 		return
 	}
+	file_qdrant_cloud_facade_v1_facade_options_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

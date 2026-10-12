@@ -33,6 +33,37 @@ export declare type FacadeMethodOptions = Message<"qdrant.cloud.facade.v1.Facade
    * @generated from field: string title = 2;
    */
   title: string;
+
+  /**
+   * When true, the response may contain secrets; facades should apply
+   * sensitive-response handling and/or exclude the RPC by default.
+   *
+   * @generated from field: bool sensitive_response = 3;
+   */
+  sensitiveResponse: boolean;
+
+  /**
+   * Optional overrides when HTTP-verb heuristics for read-only / destructive /
+   * idempotent classification are wrong. Facades map these to their own
+   * annotation models (for example MCP ToolAnnotations).
+   *
+   * @generated from field: optional bool read_only_hint = 4;
+   */
+  readOnlyHint?: boolean | undefined;
+
+  /**
+   * Optional override for destructive classification.
+   *
+   * @generated from field: optional bool destructive_hint = 5;
+   */
+  destructiveHint?: boolean | undefined;
+
+  /**
+   * Optional override for idempotent classification.
+   *
+   * @generated from field: optional bool idempotent_hint = 6;
+   */
+  idempotentHint?: boolean | undefined;
 };
 
 export declare type FacadeMethodOptionsValid = FacadeMethodOptions;
@@ -74,7 +105,7 @@ export declare type FacadeFieldOptionsValid = FacadeFieldOptions;
 export declare const FacadeFieldOptionsSchema: GenMessage<FacadeFieldOptions, {validType: FacadeFieldOptionsValid}>;
 
 /**
- * Shared facade metadata for this RPC (description, title).
+ * Shared facade metadata for this RPC (description, title, sensitivity, hints).
  * Extension number 52001 is in the Qdrant public-api custom-option range
  * (common uses 50001–50012; events uses 51001).
  *
