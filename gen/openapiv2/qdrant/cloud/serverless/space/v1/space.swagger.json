@@ -798,19 +798,7 @@
       "properties": {
         "url": {
           "type": "string",
-          "title": "URL to access the qdrant space (aka serverless database) without port",
-          "readOnly": true
-        },
-        "restPort": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The port to use for HTTP REST calls (e.g. 443)",
-          "readOnly": true
-        },
-        "grpcPort": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The port to use for gRPC calls (e.g. 443)",
+          "description": "URL to access the qdrant space (aka serverless database) without port.\nBoth HTTP REST and gRPC calls are served on port 443, the HTTPS default,\nso the URL can be used as is without specifying a port.",
           "readOnly": true
         }
       },

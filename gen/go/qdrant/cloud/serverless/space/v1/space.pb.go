@@ -1323,12 +1323,10 @@ func (x *SpaceState) GetEndpoint() *SpaceEndpoint {
 // All fields in this message are a read-only field.
 type SpaceEndpoint struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// URL to access the qdrant space (aka serverless database) without port
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	// The port to use for HTTP REST calls (e.g. 443)
-	RestPort int32 `protobuf:"varint,2,opt,name=rest_port,json=restPort,proto3" json:"rest_port,omitempty"`
-	// The port to use for gRPC calls (e.g. 443)
-	GrpcPort      int32 `protobuf:"varint,3,opt,name=grpc_port,json=grpcPort,proto3" json:"grpc_port,omitempty"`
+	// URL to access the qdrant space (aka serverless database) without port.
+	// Both HTTP REST and gRPC calls are served on port 443, the HTTPS default,
+	// so the URL can be used as is without specifying a port.
+	Url           string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1368,20 +1366,6 @@ func (x *SpaceEndpoint) GetUrl() string {
 		return x.Url
 	}
 	return ""
-}
-
-func (x *SpaceEndpoint) GetRestPort() int32 {
-	if x != nil {
-		return x.RestPort
-	}
-	return 0
-}
-
-func (x *SpaceEndpoint) GetGrpcPort() int32 {
-	if x != nil {
-		return x.GrpcPort
-	}
-	return 0
 }
 
 var File_qdrant_cloud_serverless_space_v1_space_proto protoreflect.FileDescriptor
@@ -1500,13 +1484,9 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x1b\n" +
 	"\x06reason\x18\x02 \x01(\tB\x03\xe0A\x03R\x06reason\x12U\n" +
 	"\bendpoint\x18\a \x01(\v2/.qdrant.cloud.serverless.space.v1.SpaceEndpointB\x03\xe0A\x03H\x00R\bendpoint\x88\x01\x01B\v\n" +
-	"\t_endpoint\"\x80\x01\n" +
+	"\t_endpoint\"P\n" +
 	"\rSpaceEndpoint\x12\x1d\n" +
-	"\x03url\x18\x01 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\x88\x01\x01R\x03url\x12'\n" +
-	"\trest_port\x18\x02 \x01(\x05B\n" +
-	"\xe0A\x03\xbaH\x04\x1a\x02 \x00R\brestPort\x12'\n" +
-	"\tgrpc_port\x18\x03 \x01(\x05B\n" +
-	"\xe0A\x03\xbaH\x04\x1a\x02 \x00R\bgrpcPort*\xb3\x01\n" +
+	"\x03url\x18\x01 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\x88\x01\x01R\x03urlJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\trest_portR\tgrpc_port*\xb3\x01\n" +
 	"\x0fSpaceStatePhase\x12!\n" +
 	"\x1dSPACE_STATE_PHASE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
