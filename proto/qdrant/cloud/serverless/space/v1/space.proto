@@ -533,12 +533,12 @@ message SpaceEndpoint {
     (buf.validate.field).string = {uri: true},
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
-  // The port to use for HTTP REST calls (6333)
+  // The port to use for HTTP REST calls (e.g. 443)
   int32 rest_port = 2 [
     (buf.validate.field).int32.gt = 0,
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
-  // The port to use for gRPC calls (6334)
+  // The port to use for gRPC calls (e.g. 443)
   int32 grpc_port = 3 [
     (buf.validate.field).int32.gt = 0,
     (google.api.field_behavior) = OUTPUT_ONLY

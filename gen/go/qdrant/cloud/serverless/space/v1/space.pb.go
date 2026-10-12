@@ -1325,9 +1325,9 @@ type SpaceEndpoint struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// URL to access the qdrant space (aka serverless database) without port
 	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	// The port to use for HTTP REST calls (6333)
+	// The port to use for HTTP REST calls (e.g. 443)
 	RestPort int32 `protobuf:"varint,2,opt,name=rest_port,json=restPort,proto3" json:"rest_port,omitempty"`
-	// The port to use for gRPC calls (6334)
+	// The port to use for gRPC calls (e.g. 443)
 	GrpcPort      int32 `protobuf:"varint,3,opt,name=grpc_port,json=grpcPort,proto3" json:"grpc_port,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

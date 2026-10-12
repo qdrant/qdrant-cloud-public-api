@@ -804,13 +804,13 @@
         "restPort": {
           "type": "integer",
           "format": "int32",
-          "title": "The port to use for HTTP REST calls (6333)",
+          "title": "The port to use for HTTP REST calls (e.g. 443)",
           "readOnly": true
         },
         "grpcPort": {
           "type": "integer",
           "format": "int32",
-          "title": "The port to use for gRPC calls (6334)",
+          "title": "The port to use for gRPC calls (e.g. 443)",
           "readOnly": true
         }
       },

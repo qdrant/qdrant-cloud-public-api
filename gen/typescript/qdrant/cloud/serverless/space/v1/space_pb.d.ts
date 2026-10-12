@@ -965,14 +965,14 @@ export declare type SpaceEndpoint = Message<"qdrant.cloud.serverless.space.v1.Sp
   url: string;
 
   /**
-   * The port to use for HTTP REST calls (6333)
+   * The port to use for HTTP REST calls (e.g. 443)
    *
    * @generated from field: int32 rest_port = 2;
    */
   restPort: number;
 
   /**
-   * The port to use for gRPC calls (6334)
+   * The port to use for gRPC calls (e.g. 443)
    *
    * @generated from field: int32 grpc_port = 3;
    */
