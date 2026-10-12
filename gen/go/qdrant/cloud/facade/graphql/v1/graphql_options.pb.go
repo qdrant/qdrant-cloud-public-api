@@ -80,6 +80,156 @@ func (x *GraphqlMethodOptions) GetResponsePath() []string {
 	return nil
 }
 
+// GraphqlNestedOptions attaches this RPC as a nested field on a parent GraphQL
+// type. Description defaults to (qdrant.cloud.facade.v1.facade).description
+// when unset.
+type GraphqlNestedOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Fully-qualified proto message name of the parent GraphQL object type
+	// (for example "qdrant.cloud.cluster.v1.Cluster").
+	ParentType string `protobuf:"bytes,1,opt,name=parent_type,json=parentType,proto3" json:"parent_type,omitempty"`
+	// GraphQL field name on the parent type in camelCase (for example "backups").
+	Field string `protobuf:"bytes,2,opt,name=field,proto3" json:"field,omitempty"`
+	// Path from the gRPC response message to the nested field value.
+	ResponsePath []string `protobuf:"bytes,3,rep,name=response_path,json=responsePath,proto3" json:"response_path,omitempty"`
+	// Maps fields from the parent message into the child RPC request.
+	Inputs []*GraphqlNestedInput `protobuf:"bytes,4,rep,name=inputs,proto3" json:"inputs,omitempty"`
+	// When true, the gateway may batch nested resolutions (for example DataLoader).
+	Batch bool `protobuf:"varint,5,opt,name=batch,proto3" json:"batch,omitempty"`
+	// Optional nested-field description override. When unset, gateways should
+	// reuse (qdrant.cloud.facade.v1.facade).description.
+	Description   *string `protobuf:"bytes,6,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GraphqlNestedOptions) Reset() {
+	*x = GraphqlNestedOptions{}
+	mi := &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GraphqlNestedOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GraphqlNestedOptions) ProtoMessage() {}
+
+func (x *GraphqlNestedOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GraphqlNestedOptions.ProtoReflect.Descriptor instead.
+func (*GraphqlNestedOptions) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GraphqlNestedOptions) GetParentType() string {
+	if x != nil {
+		return x.ParentType
+	}
+	return ""
+}
+
+func (x *GraphqlNestedOptions) GetField() string {
+	if x != nil {
+		return x.Field
+	}
+	return ""
+}
+
+func (x *GraphqlNestedOptions) GetResponsePath() []string {
+	if x != nil {
+		return x.ResponsePath
+	}
+	return nil
+}
+
+func (x *GraphqlNestedOptions) GetInputs() []*GraphqlNestedInput {
+	if x != nil {
+		return x.Inputs
+	}
+	return nil
+}
+
+func (x *GraphqlNestedOptions) GetBatch() bool {
+	if x != nil {
+		return x.Batch
+	}
+	return false
+}
+
+func (x *GraphqlNestedOptions) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+// GraphqlNestedInput maps a parent message field path into a child request field.
+type GraphqlNestedInput struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Field path in the child RPC request message (snake_case, may be nested).
+	ProtoPath string `protobuf:"bytes,1,opt,name=proto_path,json=protoPath,proto3" json:"proto_path,omitempty"`
+	// Field path in the parent message (snake_case, may be nested).
+	ParentPath    string `protobuf:"bytes,2,opt,name=parent_path,json=parentPath,proto3" json:"parent_path,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GraphqlNestedInput) Reset() {
+	*x = GraphqlNestedInput{}
+	mi := &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GraphqlNestedInput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GraphqlNestedInput) ProtoMessage() {}
+
+func (x *GraphqlNestedInput) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GraphqlNestedInput.ProtoReflect.Descriptor instead.
+func (*GraphqlNestedInput) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GraphqlNestedInput) GetProtoPath() string {
+	if x != nil {
+		return x.ProtoPath
+	}
+	return ""
+}
+
+func (x *GraphqlNestedInput) GetParentPath() string {
+	if x != nil {
+		return x.ParentPath
+	}
+	return ""
+}
+
 // GraphqlFieldOptions holds GraphQL-only argument metadata for a request field.
 type GraphqlFieldOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -92,7 +242,7 @@ type GraphqlFieldOptions struct {
 
 func (x *GraphqlFieldOptions) Reset() {
 	*x = GraphqlFieldOptions{}
-	mi := &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -104,7 +254,7 @@ func (x *GraphqlFieldOptions) String() string {
 func (*GraphqlFieldOptions) ProtoMessage() {}
 
 func (x *GraphqlFieldOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -117,7 +267,7 @@ func (x *GraphqlFieldOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GraphqlFieldOptions.ProtoReflect.Descriptor instead.
 func (*GraphqlFieldOptions) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GraphqlFieldOptions) GetArgName() string {
@@ -137,6 +287,14 @@ var file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_extTypes = []proto
 		Filename:      "qdrant/cloud/facade/graphql/v1/graphql_options.proto",
 	},
 	{
+		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
+		ExtensionType: ([]*GraphqlNestedOptions)(nil),
+		Field:         52203,
+		Name:          "qdrant.cloud.facade.graphql.v1.graphql_nested",
+		Tag:           "bytes,52203,rep,name=graphql_nested",
+		Filename:      "qdrant/cloud/facade/graphql/v1/graphql_options.proto",
+	},
+	{
 		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: (*GraphqlFieldOptions)(nil),
 		Field:         52202,
@@ -153,6 +311,11 @@ var (
 	//
 	// optional qdrant.cloud.facade.graphql.v1.GraphqlMethodOptions graphql = 52201;
 	E_Graphql = &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_extTypes[0]
+	// GraphQL nested-field overlay(s) for this RPC. Repeatable: the same RPC may
+	// hang off multiple parent types (for example Cluster and Space backups).
+	//
+	// repeated qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions graphql_nested = 52203;
+	E_GraphqlNested = &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_extTypes[1]
 )
 
 // Extension fields to descriptorpb.FieldOptions.
@@ -160,7 +323,7 @@ var (
 	// GraphQL argument overlay for this request field.
 	//
 	// optional qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions graphql_field = 52202;
-	E_GraphqlField = &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_extTypes[1]
+	E_GraphqlField = &file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_extTypes[2]
 )
 
 var File_qdrant_cloud_facade_graphql_v1_graphql_options_proto protoreflect.FileDescriptor
@@ -170,10 +333,25 @@ const file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDesc = "" +
 	"4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x12\x1eqdrant.cloud.facade.graphql.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\x98\x01\n" +
 	"\x14GraphqlMethodOptions\x127\n" +
 	"\x05field\x18\x01 \x01(\tB!\xbaH\x1er\x1c\x10\x012\x18^[A-Za-z_][A-Za-z0-9_]*$R\x05field\x12G\n" +
-	"\rresponse_path\x18\x02 \x03(\tB\"\xbaH\x1f\x92\x01\x1c\b\x01\"\x18r\x16\x10\x012\x12^[a-z_][a-z0-9_]*$R\fresponsePath\"T\n" +
+	"\rresponse_path\x18\x02 \x03(\tB\"\xbaH\x1f\x92\x01\x1c\b\x01\"\x18r\x16\x10\x012\x12^[a-z_][a-z0-9_]*$R\fresponsePath\"\x89\x03\n" +
+	"\x14GraphqlNestedOptions\x12C\n" +
+	"\vparent_type\x18\x01 \x01(\tB\"\xbaH\x1fr\x1d\x10\x012\x19^[A-Za-z_][A-Za-z0-9_.]*$R\n" +
+	"parentType\x127\n" +
+	"\x05field\x18\x02 \x01(\tB!\xbaH\x1er\x1c\x10\x012\x18^[A-Za-z_][A-Za-z0-9_]*$R\x05field\x12G\n" +
+	"\rresponse_path\x18\x03 \x03(\tB\"\xbaH\x1f\x92\x01\x1c\b\x01\"\x18r\x16\x10\x012\x12^[a-z_][a-z0-9_]*$R\fresponsePath\x12T\n" +
+	"\x06inputs\x18\x04 \x03(\v22.qdrant.cloud.facade.graphql.v1.GraphqlNestedInputB\b\xbaH\x05\x92\x01\x02\b\x01R\x06inputs\x12\x14\n" +
+	"\x05batch\x18\x05 \x01(\bR\x05batch\x12.\n" +
+	"\vdescription\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\vdescription\x88\x01\x01B\x0e\n" +
+	"\f_description\"\xb8\x01\n" +
+	"\x12GraphqlNestedInput\x12O\n" +
+	"\n" +
+	"proto_path\x18\x01 \x01(\tB0\xbaH-r+\x10\x012'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$R\tprotoPath\x12Q\n" +
+	"\vparent_path\x18\x02 \x01(\tB0\xbaH-r+\x10\x012'^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$R\n" +
+	"parentPath\"T\n" +
 	"\x13GraphqlFieldOptions\x12=\n" +
 	"\barg_name\x18\x01 \x01(\tB\"\xbaH\x1fr\x1d2\x1b^(|[A-Za-z_][A-Za-z0-9_]*)$R\aargName:p\n" +
-	"\agraphql\x12\x1e.google.protobuf.MethodOptions\x18\xe9\x97\x03 \x01(\v24.qdrant.cloud.facade.graphql.v1.GraphqlMethodOptionsR\agraphql:y\n" +
+	"\agraphql\x12\x1e.google.protobuf.MethodOptions\x18\xe9\x97\x03 \x01(\v24.qdrant.cloud.facade.graphql.v1.GraphqlMethodOptionsR\agraphql:}\n" +
+	"\x0egraphql_nested\x12\x1e.google.protobuf.MethodOptions\x18\xeb\x97\x03 \x03(\v24.qdrant.cloud.facade.graphql.v1.GraphqlNestedOptionsR\rgraphqlNested:y\n" +
 	"\rgraphql_field\x12\x1d.google.protobuf.FieldOptions\x18\xea\x97\x03 \x01(\v23.qdrant.cloud.facade.graphql.v1.GraphqlFieldOptionsR\fgraphqlFieldB\xb1\x02\n" +
 	"\"com.qdrant.cloud.facade.graphql.v1B\x13GraphqlOptionsProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/graphql/v1;graphqlv1\xa2\x02\x04QCFG\xaa\x02\x1eQdrant.Cloud.Facade.Graphql.V1\xca\x02\x1eQdrant\\Cloud\\Facade\\Graphql\\V1\xe2\x02*Qdrant\\Cloud\\Facade\\Graphql\\V1\\GPBMetadata\xea\x02\"Qdrant::Cloud::Facade::Graphql::V1b\x06proto3"
 
@@ -189,23 +367,28 @@ func file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDescGZIP() []b
 	return file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDescData
 }
 
-var file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_goTypes = []any{
 	(*GraphqlMethodOptions)(nil),       // 0: qdrant.cloud.facade.graphql.v1.GraphqlMethodOptions
-	(*GraphqlFieldOptions)(nil),        // 1: qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions
-	(*descriptorpb.MethodOptions)(nil), // 2: google.protobuf.MethodOptions
-	(*descriptorpb.FieldOptions)(nil),  // 3: google.protobuf.FieldOptions
+	(*GraphqlNestedOptions)(nil),       // 1: qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions
+	(*GraphqlNestedInput)(nil),         // 2: qdrant.cloud.facade.graphql.v1.GraphqlNestedInput
+	(*GraphqlFieldOptions)(nil),        // 3: qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions
+	(*descriptorpb.MethodOptions)(nil), // 4: google.protobuf.MethodOptions
+	(*descriptorpb.FieldOptions)(nil),  // 5: google.protobuf.FieldOptions
 }
 var file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_depIdxs = []int32{
-	2, // 0: qdrant.cloud.facade.graphql.v1.graphql:extendee -> google.protobuf.MethodOptions
-	3, // 1: qdrant.cloud.facade.graphql.v1.graphql_field:extendee -> google.protobuf.FieldOptions
-	0, // 2: qdrant.cloud.facade.graphql.v1.graphql:type_name -> qdrant.cloud.facade.graphql.v1.GraphqlMethodOptions
-	1, // 3: qdrant.cloud.facade.graphql.v1.graphql_field:type_name -> qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	2, // [2:4] is the sub-list for extension type_name
-	0, // [0:2] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions.inputs:type_name -> qdrant.cloud.facade.graphql.v1.GraphqlNestedInput
+	4, // 1: qdrant.cloud.facade.graphql.v1.graphql:extendee -> google.protobuf.MethodOptions
+	4, // 2: qdrant.cloud.facade.graphql.v1.graphql_nested:extendee -> google.protobuf.MethodOptions
+	5, // 3: qdrant.cloud.facade.graphql.v1.graphql_field:extendee -> google.protobuf.FieldOptions
+	0, // 4: qdrant.cloud.facade.graphql.v1.graphql:type_name -> qdrant.cloud.facade.graphql.v1.GraphqlMethodOptions
+	1, // 5: qdrant.cloud.facade.graphql.v1.graphql_nested:type_name -> qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions
+	3, // 6: qdrant.cloud.facade.graphql.v1.graphql_field:type_name -> qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	4, // [4:7] is the sub-list for extension type_name
+	1, // [1:4] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_init() }
@@ -213,14 +396,15 @@ func file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_init() {
 	if File_qdrant_cloud_facade_graphql_v1_graphql_options_proto != nil {
 		return
 	}
+	file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDesc), len(file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
-			NumExtensions: 2,
+			NumMessages:   4,
+			NumExtensions: 3,
 			NumServices:   0,
 		},
 		GoTypes:           file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_goTypes,

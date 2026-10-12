@@ -10,7 +10,7 @@ import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
  * Describes the file qdrant/cloud/facade/graphql/v1/graphql_options.proto.
  */
 export const file_qdrant_cloud_facade_graphql_v1_graphql_options = /*@__PURE__*/
-  fileDesc("CjRxZHJhbnQvY2xvdWQvZmFjYWRlL2dyYXBocWwvdjEvZ3JhcGhxbF9vcHRpb25zLnByb3RvEh5xZHJhbnQuY2xvdWQuZmFjYWRlLmdyYXBocWwudjEigwEKFEdyYXBocWxNZXRob2RPcHRpb25zEjAKBWZpZWxkGAEgASgJQiG6SB5yHBABMhheW0EtWmEtel9dW0EtWmEtejAtOV9dKiQSOQoNcmVzcG9uc2VfcGF0aBgCIAMoCUIiukgfkgEcCAEiGHIWEAEyEl5bYS16X11bYS16MC05X10qJCJLChNHcmFwaHFsRmllbGRPcHRpb25zEjQKCGFyZ19uYW1lGAEgASgJQiK6SB9yHTIbXih8W0EtWmEtel9dW0EtWmEtejAtOV9dKikkOnAKB2dyYXBocWwSHi5nb29nbGUucHJvdG9idWYuTWV0aG9kT3B0aW9ucxjplwMgASgLMjQucWRyYW50LmNsb3VkLmZhY2FkZS5ncmFwaHFsLnYxLkdyYXBocWxNZXRob2RPcHRpb25zUgdncmFwaHFsOnkKDWdyYXBocWxfZmllbGQSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGOqXAyABKAsyMy5xZHJhbnQuY2xvdWQuZmFjYWRlLmdyYXBocWwudjEuR3JhcGhxbEZpZWxkT3B0aW9uc1IMZ3JhcGhxbEZpZWxkQrECCiJjb20ucWRyYW50LmNsb3VkLmZhY2FkZS5ncmFwaHFsLnYxQhNHcmFwaHFsT3B0aW9uc1Byb3RvUAFaWWdpdGh1Yi5jb20vcWRyYW50L3FkcmFudC1jbG91ZC1wdWJsaWMtYXBpL2dlbi9nby9xZHJhbnQvY2xvdWQvZmFjYWRlL2dyYXBocWwvdjE7Z3JhcGhxbHYxogIEUUNGR6oCHlFkcmFudC5DbG91ZC5GYWNhZGUuR3JhcGhxbC5WMcoCHlFkcmFudFxDbG91ZFxGYWNhZGVcR3JhcGhxbFxWMeICKlFkcmFudFxDbG91ZFxGYWNhZGVcR3JhcGhxbFxWMVxHUEJNZXRhZGF0YeoCIlFkcmFudDo6Q2xvdWQ6OkZhY2FkZTo6R3JhcGhxbDo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_protobuf_descriptor]);
+  fileDesc("CjRxZHJhbnQvY2xvdWQvZmFjYWRlL2dyYXBocWwvdjEvZ3JhcGhxbF9vcHRpb25zLnByb3RvEh5xZHJhbnQuY2xvdWQuZmFjYWRlLmdyYXBocWwudjEigwEKFEdyYXBocWxNZXRob2RPcHRpb25zEjAKBWZpZWxkGAEgASgJQiG6SB5yHBABMhheW0EtWmEtel9dW0EtWmEtejAtOV9dKiQSOQoNcmVzcG9uc2VfcGF0aBgCIAMoCUIiukgfkgEcCAEiGHIWEAEyEl5bYS16X11bYS16MC05X10qJCLMAgoUR3JhcGhxbE5lc3RlZE9wdGlvbnMSNwoLcGFyZW50X3R5cGUYASABKAlCIrpIH3IdEAEyGV5bQS1aYS16X11bQS1aYS16MC05Xy5dKiQSMAoFZmllbGQYAiABKAlCIbpIHnIcEAEyGF5bQS1aYS16X11bQS1aYS16MC05X10qJBI5Cg1yZXNwb25zZV9wYXRoGAMgAygJQiK6SB+SARwIASIYchYQATISXlthLXpfXVthLXowLTlfXSokEkwKBmlucHV0cxgEIAMoCzIyLnFkcmFudC5jbG91ZC5mYWNhZGUuZ3JhcGhxbC52MS5HcmFwaHFsTmVzdGVkSW5wdXRCCLpIBZIBAggBEg0KBWJhdGNoGAUgASgIEiEKC2Rlc2NyaXB0aW9uGAYgASgJQge6SARyAhABSACIAQFCDgoMX2Rlc2NyaXB0aW9uIqEBChJHcmFwaHFsTmVzdGVkSW5wdXQSRAoKcHJvdG9fcGF0aBgBIAEoCUIwukgtcisQATInXlthLXpfXVthLXowLTlfXSooXC5bYS16X11bYS16MC05X10qKSokEkUKC3BhcmVudF9wYXRoGAIgASgJQjC6SC1yKxABMideW2Etel9dW2EtejAtOV9dKihcLlthLXpfXVthLXowLTlfXSopKiQiSwoTR3JhcGhxbEZpZWxkT3B0aW9ucxI0CghhcmdfbmFtZRgBIAEoCUIiukgfch0yG14ofFtBLVphLXpfXVtBLVphLXowLTlfXSopJDpwCgdncmFwaHFsEh4uZ29vZ2xlLnByb3RvYnVmLk1ldGhvZE9wdGlvbnMY6ZcDIAEoCzI0LnFkcmFudC5jbG91ZC5mYWNhZGUuZ3JhcGhxbC52MS5HcmFwaHFsTWV0aG9kT3B0aW9uc1IHZ3JhcGhxbDp9Cg5ncmFwaHFsX25lc3RlZBIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGOuXAyADKAsyNC5xZHJhbnQuY2xvdWQuZmFjYWRlLmdyYXBocWwudjEuR3JhcGhxbE5lc3RlZE9wdGlvbnNSDWdyYXBocWxOZXN0ZWQ6eQoNZ3JhcGhxbF9maWVsZBIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMY6pcDIAEoCzIzLnFkcmFudC5jbG91ZC5mYWNhZGUuZ3JhcGhxbC52MS5HcmFwaHFsRmllbGRPcHRpb25zUgxncmFwaHFsRmllbGRCsQIKImNvbS5xZHJhbnQuY2xvdWQuZmFjYWRlLmdyYXBocWwudjFCE0dyYXBocWxPcHRpb25zUHJvdG9QAVpZZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9mYWNhZGUvZ3JhcGhxbC92MTtncmFwaHFsdjGiAgRRQ0ZHqgIeUWRyYW50LkNsb3VkLkZhY2FkZS5HcmFwaHFsLlYxygIeUWRyYW50XENsb3VkXEZhY2FkZVxHcmFwaHFsXFYx4gIqUWRyYW50XENsb3VkXEZhY2FkZVxHcmFwaHFsXFYxXEdQQk1ldGFkYXRh6gIiUWRyYW50OjpDbG91ZDo6RmFjYWRlOjpHcmFwaHFsOjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_protobuf_descriptor]);
 
 /**
  * Describes the message qdrant.cloud.facade.graphql.v1.GraphqlMethodOptions.
@@ -20,11 +20,25 @@ export const GraphqlMethodOptionsSchema = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_facade_graphql_v1_graphql_options, 0);
 
 /**
+ * Describes the message qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions.
+ * Use `create(GraphqlNestedOptionsSchema)` to create a new message.
+ */
+export const GraphqlNestedOptionsSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_facade_graphql_v1_graphql_options, 1);
+
+/**
+ * Describes the message qdrant.cloud.facade.graphql.v1.GraphqlNestedInput.
+ * Use `create(GraphqlNestedInputSchema)` to create a new message.
+ */
+export const GraphqlNestedInputSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_facade_graphql_v1_graphql_options, 2);
+
+/**
  * Describes the message qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions.
  * Use `create(GraphqlFieldOptionsSchema)` to create a new message.
  */
 export const GraphqlFieldOptionsSchema = /*@__PURE__*/
-  messageDesc(file_qdrant_cloud_facade_graphql_v1_graphql_options, 1);
+  messageDesc(file_qdrant_cloud_facade_graphql_v1_graphql_options, 3);
 
 /**
  * GraphQL root overlay for this RPC (field name, response path).
@@ -36,10 +50,19 @@ export const graphql = /*@__PURE__*/
   extDesc(file_qdrant_cloud_facade_graphql_v1_graphql_options, 0);
 
 /**
+ * GraphQL nested-field overlay(s) for this RPC. Repeatable: the same RPC may
+ * hang off multiple parent types (for example Cluster and Space backups).
+ *
+ * @generated from extension: repeated qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions graphql_nested = 52203;
+ */
+export const graphql_nested = /*@__PURE__*/
+  extDesc(file_qdrant_cloud_facade_graphql_v1_graphql_options, 1);
+
+/**
  * GraphQL argument overlay for this request field.
  *
  * @generated from extension: qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions graphql_field = 52202;
  */
 export const graphql_field = /*@__PURE__*/
-  extDesc(file_qdrant_cloud_facade_graphql_v1_graphql_options, 1);
+  extDesc(file_qdrant_cloud_facade_graphql_v1_graphql_options, 2);
 

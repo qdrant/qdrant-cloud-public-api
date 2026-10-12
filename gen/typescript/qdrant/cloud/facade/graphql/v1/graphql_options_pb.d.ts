@@ -43,6 +43,96 @@ export declare type GraphqlMethodOptionsValid = GraphqlMethodOptions;
 export declare const GraphqlMethodOptionsSchema: GenMessage<GraphqlMethodOptions, {validType: GraphqlMethodOptionsValid}>;
 
 /**
+ * GraphqlNestedOptions attaches this RPC as a nested field on a parent GraphQL
+ * type. Description defaults to (qdrant.cloud.facade.v1.facade).description
+ * when unset.
+ *
+ * @generated from message qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions
+ */
+export declare type GraphqlNestedOptions = Message<"qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions"> & {
+  /**
+   * Fully-qualified proto message name of the parent GraphQL object type
+   * (for example "qdrant.cloud.cluster.v1.Cluster").
+   *
+   * @generated from field: string parent_type = 1;
+   */
+  parentType: string;
+
+  /**
+   * GraphQL field name on the parent type in camelCase (for example "backups").
+   *
+   * @generated from field: string field = 2;
+   */
+  field: string;
+
+  /**
+   * Path from the gRPC response message to the nested field value.
+   *
+   * @generated from field: repeated string response_path = 3;
+   */
+  responsePath: string[];
+
+  /**
+   * Maps fields from the parent message into the child RPC request.
+   *
+   * @generated from field: repeated qdrant.cloud.facade.graphql.v1.GraphqlNestedInput inputs = 4;
+   */
+  inputs: GraphqlNestedInput[];
+
+  /**
+   * When true, the gateway may batch nested resolutions (for example DataLoader).
+   *
+   * @generated from field: bool batch = 5;
+   */
+  batch: boolean;
+
+  /**
+   * Optional nested-field description override. When unset, gateways should
+   * reuse (qdrant.cloud.facade.v1.facade).description.
+   *
+   * @generated from field: optional string description = 6;
+   */
+  description?: string | undefined;
+};
+
+export declare type GraphqlNestedOptionsValid = GraphqlNestedOptions;
+
+/**
+ * Describes the message qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions.
+ * Use `create(GraphqlNestedOptionsSchema)` to create a new message.
+ */
+export declare const GraphqlNestedOptionsSchema: GenMessage<GraphqlNestedOptions, {validType: GraphqlNestedOptionsValid}>;
+
+/**
+ * GraphqlNestedInput maps a parent message field path into a child request field.
+ *
+ * @generated from message qdrant.cloud.facade.graphql.v1.GraphqlNestedInput
+ */
+export declare type GraphqlNestedInput = Message<"qdrant.cloud.facade.graphql.v1.GraphqlNestedInput"> & {
+  /**
+   * Field path in the child RPC request message (snake_case, may be nested).
+   *
+   * @generated from field: string proto_path = 1;
+   */
+  protoPath: string;
+
+  /**
+   * Field path in the parent message (snake_case, may be nested).
+   *
+   * @generated from field: string parent_path = 2;
+   */
+  parentPath: string;
+};
+
+export declare type GraphqlNestedInputValid = GraphqlNestedInput;
+
+/**
+ * Describes the message qdrant.cloud.facade.graphql.v1.GraphqlNestedInput.
+ * Use `create(GraphqlNestedInputSchema)` to create a new message.
+ */
+export declare const GraphqlNestedInputSchema: GenMessage<GraphqlNestedInput, {validType: GraphqlNestedInputValid}>;
+
+/**
  * GraphqlFieldOptions holds GraphQL-only argument metadata for a request field.
  *
  * @generated from message qdrant.cloud.facade.graphql.v1.GraphqlFieldOptions
@@ -72,6 +162,14 @@ export declare const GraphqlFieldOptionsSchema: GenMessage<GraphqlFieldOptions, 
  * @generated from extension: qdrant.cloud.facade.graphql.v1.GraphqlMethodOptions graphql = 52201;
  */
 export declare const graphql: GenExtension<MethodOptions, GraphqlMethodOptions>;
+
+/**
+ * GraphQL nested-field overlay(s) for this RPC. Repeatable: the same RPC may
+ * hang off multiple parent types (for example Cluster and Space backups).
+ *
+ * @generated from extension: repeated qdrant.cloud.facade.graphql.v1.GraphqlNestedOptions graphql_nested = 52203;
+ */
+export declare const graphql_nested: GenExtension<MethodOptions, GraphqlNestedOptions[]>;
 
 /**
  * GraphQL argument overlay for this request field.
