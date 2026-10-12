@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package qdrant.cloud.facade.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/descriptor.proto";
+
+// Shared method options for API gateway facades (MCP tools, GraphQL roots, and
+// future consumers). Presence of this option marks the RPC as eligible for
+// facade exposure, subject to each facade's filters and overlays.
+//
+// Example:
+//  option (qdrant.cloud.facade.v1.facade) = {
+//    description:
+//      "List all clusters in an account. Use list_accounts first if the "
+//      "account ID is unknown. Returns cluster IDs, names, state, and "
+//      "endpoint URLs."
+//    title: "List clusters"
+//  };
+//
+extend google.protobuf.MethodOptions {
+  // Shared facade metadata for this RPC (description, title).
+  // Extension number 52001 is in the Qdrant public-api custom-option range
+  // (common uses 50001–50012; events uses 51001).
+  FacadeMethodOptions facade = 52001;
+}
+
+// Shared field options for request-message fields consumed by gateway facades.
+// Ignored on response fields.
+//
+// Example:
+//  string account_id = 1 [
+//    (buf.validate.field).string.uuid = true,
+//    (qdrant.cloud.facade.v1.facade_field) = {
+//      description: "Account UUID from list_accounts"
+//    }
+//  ];
+//
+extend google.protobuf.FieldOptions {
+  // Shared facade field metadata (hide from input schema, description).
+  FacadeFieldOptions facade_field = 52002;
+}
+
+// FacadeMethodOptions holds agent- and UI-facing metadata shared by MCP and
+// GraphQL (and other facades) for a single RPC.
+message FacadeMethodOptions {
+  // Required human-facing description used by MCP tools and GraphQL roots.
+  // Reflection does not carry proto source comments, so this is the source of
+  // truth for facade documentation strings.
+  string description = 1 [(buf.validate.field).string.min_len = 1];
+  // Optional short display title (for example MCP ToolAnnotations.title).
+  string title = 2;
+}
+
+// FacadeFieldOptions holds per-field hints for facade input schemas.
+message FacadeFieldOptions {
+  // When true, omit this request field from the facade input schema
+  // (for example output-only or gateway-injected fields).
+  bool hide = 1;
+  // Override or supply the JSON Schema / GraphQL argument description.
+  string description = 2;
+}
