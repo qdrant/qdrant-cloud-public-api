@@ -61,6 +61,7 @@ service AccountService {
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
@@ -79,12 +80,6 @@ service AccountService {
       name: "account_name"
       field_expression: "account.name"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Creates an account for the authenticated user."
-      title: "Create account"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_account"};
   }
   // Updates an account identified by the given ID.
   // Some fields can only be updated by specific actors, see the field
@@ -150,6 +145,7 @@ service AccountService {
     // custom supported-actor-types expression. (Only the owner user can delete an account)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}"};
@@ -160,12 +156,6 @@ service AccountService {
       resource_id_field: "req.account_id"
       resource_url_template: "/accounts/{req.account_id}"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Deletes an account identified by the given ID."
-      title: "Delete account"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_account"};
   }
   // Allows the authenticated user to leave an account they are a member of.
   // Owners must transfer ownership to another user before leaving the account.
@@ -177,6 +167,7 @@ service AccountService {
     // custom supported-actor-types expression. (Only users can leave an account)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/leave"};
@@ -188,12 +179,6 @@ service AccountService {
       resource_id_field: "req.account_id"
       resource_url_template: "/accounts/{req.account_id}"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Allows the authenticated user to leave an account they are a member of. Owners must transfer ownership to another user before leaving the account."
-      title: "Leave account"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "leave_account"};
   }
   // Lists all account invites in the account identified by the given account ID.
   // Required permissions:
@@ -258,6 +243,7 @@ service AccountService {
     // custom supported-actor-types expression. (Sending an invite requires being authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
@@ -276,12 +262,6 @@ service AccountService {
       name: "user_email"
       field_expression: "account_invite.user_email"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Creates a new account invite."
-      title: "Create account invite"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_account_invite"};
   }
   // Deletes an account invite.
   // Required permissions:
@@ -323,6 +303,7 @@ service AccountService {
     // custom supported-actor-types expression. (Account invites are sent to users)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/accept"};
@@ -339,12 +320,6 @@ service AccountService {
       name: "invite_id"
       field_expression: "invite_id"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Accepts an account invite. The authenticated user's email address must match the email address specified in the invite."
-      title: "Accept account invite"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "accept_account_invite"};
   }
   // Rejects an account invite.
   // The authenticated user's email address must match the email address specified in
@@ -359,6 +334,7 @@ service AccountService {
     // custom supported-actor-types expression. (Account invites are sent to users)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/account/v1/accounts/{account_id}/invites/{invite_id}/reject"};
@@ -375,12 +351,6 @@ service AccountService {
       name: "invite_id"
       field_expression: "invite_id"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Rejects an account invite. The authenticated user's email address must match the email address specified in the invite."
-      title: "Reject account invite"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "reject_account_invite"};
   }
   // Lists all account members in the account identified by the given account ID.
   // The authenticated actor must be a member of the account identified by the given account ID.
@@ -427,6 +397,7 @@ service AccountService {
     // custom supported-actor-types expression. (At this moment only users can delete account members)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/account/v1/accounts/{account_id}/members/{user_id}"};
@@ -442,12 +413,6 @@ service AccountService {
       name: "user_id"
       field_expression: "user_id"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Deletes an account member. The authenticated actor must be a member of the account from which the the member is being removed."
-      title: "Delete account member"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_account_member"};
   }
   // Suggest a list of companies based on partial name or email.
   // Required permissions:

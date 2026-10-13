@@ -42,6 +42,7 @@ service AuthService {
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "management_key.account_id";
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
@@ -55,13 +56,6 @@ service AuthService {
       resource_id_field: "resp.management_key.id"
       resource_url_template: "/accounts/{req.management_key.account_id}/management-keys/{resp.management_key.id}"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Creates a management key in the account identified by the given ID."
-      title: "Create management key"
-      sensitive_response: true
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_management_key"};
   }
   // Deletes a management key in the account identified by the given ID.
   // Required permissions:

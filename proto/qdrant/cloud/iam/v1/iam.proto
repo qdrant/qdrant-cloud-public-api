@@ -64,6 +64,7 @@ service IAMService {
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
@@ -100,12 +101,6 @@ service IAMService {
       response_resource_field: "user"
       request_resource_field: "user"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Updates the user identified by the given ID."
-      title: "Update user"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_user"};
   }
   // Deletes the user identified by the given ID.
   // If the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion.
@@ -117,6 +112,7 @@ service IAMService {
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "";
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/iam/v1/users/{user_id}"};
@@ -132,12 +128,6 @@ service IAMService {
       name: "user_id"
       field_expression: "user_id"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Deletes the user identified by the given ID. If the user owns any accounts, the deletion will fail. The user must transfer ownership of all accounts before deletion."
-      title: "Delete user"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_user"};
   }
   // Gets the profile of the authenticated user.
   // Required permissions:
@@ -168,6 +158,7 @@ service IAMService {
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
@@ -192,12 +183,6 @@ service IAMService {
       response_resource_field: "user_profile"
       request_resource_field: "user_profile"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Updates the profile of the authenticated user."
-      title: "Update user profile"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_user_profile"};
   }
   // Gets the authenticated user's consent status for a specific legal document.
   // Required permissions:
@@ -228,6 +213,7 @@ service IAMService {
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
@@ -246,12 +232,6 @@ service IAMService {
         value: "req.document_type"
       }
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Records the authenticated user's consent for a legal document."
-      title: "Record user consent"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "record_user_consent"};
   }
   // Lists all permissions known in the system for the provided account.
   // Note: If you want to get a list of permissions available for you, please use ListEffectivePermissions instead.
@@ -471,6 +451,7 @@ service IAMService {
     // permissions
     option (common.v1.permissions) = "write:roles";
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
@@ -490,12 +471,6 @@ service IAMService {
       name: "user_id"
       field_expression: "user_id"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Assigns the provided roles to the user in the account identified by the given ID."
-      title: "Assign user roles"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "assign_user_roles"};
   }
   // Logs out the authenticated user.
   // Required permissions:
@@ -508,6 +483,7 @@ service IAMService {
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {post: "/api/iam/v1/users/me/logout"};
@@ -519,12 +495,6 @@ service IAMService {
       resource_id_field: "req-md.qc-actor-id"
       resource_url_template: "/users/{req-md.qc-actor-id}"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Logs out the authenticated user."
-      title: "Logout user"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "logout_user"};
   }
   // Lists the user's multi-factor authentication (MFA) methods.
   // Required permissions:
@@ -537,6 +507,7 @@ service IAMService {
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me/mfa-methods"};
@@ -552,6 +523,7 @@ service IAMService {
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {put: "/api/iam/v1/users/me/mfa-methods/{mfa_method.external_id}"};
@@ -571,12 +543,6 @@ service IAMService {
       name: "external_id"
       field_expression: "mfa_method.external_id"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Updates a user's multi-factor authentication (MFA) method."
-      title: "Update user mfa method"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_user_mfa_method"};
   }
   // Deletes the user's multi-factor authentication (MFA) methods.
   // Required permissions:
@@ -589,6 +555,7 @@ service IAMService {
     // custom supported-actor-types expression. (Requires to be authenticated as a user)
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/iam/v1/users/me/mfa-methods/{mfa_method.external_id}"};
@@ -608,12 +575,6 @@ service IAMService {
       name: "external_id"
       field_expression: "mfa_method.external_id"
     };
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Deletes the user's multi-factor authentication (MFA) methods."
-      title: "Delete user mfa method"
-      allow_mutation: true
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_user_mfa_method"};
   }
 }
 

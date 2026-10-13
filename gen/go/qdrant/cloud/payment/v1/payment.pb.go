@@ -1861,7 +1861,7 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
 	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
 	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
-	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\x8a(\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xf0!\n" +
 	"\x0ePaymentService\x12\xb3\x02\n" +
 	"\x12ListPaymentMethods\x122.qdrant.cloud.payment.v1.ListPaymentMethodsRequest\x1a3.qdrant.cloud.payment.v1.ListPaymentMethodsResponse\"\xb3\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19<\n" +
 	"$List payment methods for an account.\x12\x14List payment methods\xaa\xb8\x19\x16\n" +
@@ -1872,33 +1872,25 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\x12get_payment_method\x82\xd3\xe4\x93\x02K\x12I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xfc\x03\n" +
 	"\x1cGetPaymentMethodAvailability\x12<.qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityRequest\x1a=.qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityResponse\"\xde\x02\x8a\xb5\x18\x00\x8a\xb2\x19\xe7\x01\n" +
 	"\xc3\x01Gets the payment method availability status for the account. This method can be used to determine if the account is ready to make payments. The authenticated user must be a member of the account.\x12\x1fGet payment method availability\xaa\xb8\x19!\n" +
-	"\x1fget_payment_method_availability\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/payment-method-availability\x12\x9e\x05\n" +
-	"\x13CreatePaymentMethod\x123.qdrant.cloud.payment.v1.CreatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.CreatePaymentMethodResponse\"\x9b\x04\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\xba\xb5\x18*\n" +
-	"\x13payment_method_type\x12\x13payment_method.type\xe0\xb5\x18\x01\xca\xf3\x18~\b\x01\x12\x0epayment-method\"\x16resp.payment_method.id*R/accounts/{req.payment_method.account_id}/payment-methods/{resp.payment_method.id}\x8a\xb2\x19\xbe\x01\n" +
-	"\xa2\x01Creates a new payment method for the account. This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).\x12\x15Create payment method8\x01\xaa\xb8\x19\x17\n" +
-	"\x15create_payment_method\x82\xd3\xe4\x93\x02I:\x01*\"D/api/payment/v1/accounts/{payment_method.account_id}/payment-methods\x12\xb7\x06\n" +
-	"\x13UpdatePaymentMethod\x123.qdrant.cloud.payment.v1.UpdatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.UpdatePaymentMethodResponse\"\xb4\x05\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\xba\xb5\x18&\n" +
+	"\x1fget_payment_method_availability\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/payment-method-availability\x12\xc0\x03\n" +
+	"\x13CreatePaymentMethod\x123.qdrant.cloud.payment.v1.CreatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.CreatePaymentMethodResponse\"\xbd\x02\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\xba\xb5\x18*\n" +
+	"\x13payment_method_type\x12\x13payment_method.type\xe0\xb5\x18\x01\xca\xf3\x18~\b\x01\x12\x0epayment-method\"\x16resp.payment_method.id*R/accounts/{req.payment_method.account_id}/payment-methods/{resp.payment_method.id}\x82\xd3\xe4\x93\x02I:\x01*\"D/api/payment/v1/accounts/{payment_method.account_id}/payment-methods\x12\xfe\x04\n" +
+	"\x13UpdatePaymentMethod\x123.qdrant.cloud.payment.v1.UpdatePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.UpdatePaymentMethodResponse\"\xfb\x03\x8a\xb5\x18\x19write:payment_information\x92\xb5\x18\x19payment_method.account_id\xba\xb5\x18&\n" +
 	"\x11payment_method_id\x12\x11payment_method.idʵ\x18\xab\x01\n" +
 	"8/qdrant.cloud.payment.v1.PaymentService/GetPaymentMethod\x12'\n" +
 	"\n" +
 	"account_id\x12\x19payment_method.account_id\x12&\n" +
-	"\x11payment_method_id\x12\x11payment_method.id\x1a\x0epayment_method\"\x0epayment_method\xe0\xb5\x18\x01\xca\xf3\x18|\b\x02\x12\x0epayment-method\"\x15req.payment_method.id*Q/accounts/{req.payment_method.account_id}/payment-methods/{req.payment_method.id}\x8a\xb2\x19\x99\x01\n" +
-	"~Updates the payment method for the account. This method is used to update the payment method details, such as billing address.\x12\x15Update payment method8\x01\xaa\xb8\x19\x17\n" +
-	"\x15update_payment_method\x82\xd3\xe4\x93\x02]:\x01*\x1aX/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}\x12\xff\x03\n" +
-	"\x13DeletePaymentMethod\x123.qdrant.cloud.payment.v1.DeletePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.DeletePaymentMethodResponse\"\xfc\x02\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18&\n" +
-	"\x11payment_method_id\x12\x11payment_method_id\xe0\xb5\x18\x01\xca\xf3\x18m\b\x03\x12\x0epayment-method\"\x15req.payment_method_id*B/accounts/{req.account_id}/payment-methods/{req.payment_method_id}\x8a\xb2\x19P\n" +
-	"5Delete the payment method identified by the given ID.\x12\x15Delete payment method8\x01\xaa\xb8\x19\x17\n" +
-	"\x15delete_payment_method\x82\xd3\xe4\x93\x02K*I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xd4\x03\n" +
+	"\x11payment_method_id\x12\x11payment_method.id\x1a\x0epayment_method\"\x0epayment_method\xe0\xb5\x18\x01\xca\xf3\x18|\b\x02\x12\x0epayment-method\"\x15req.payment_method.id*Q/accounts/{req.payment_method.account_id}/payment-methods/{req.payment_method.id}\x82\xd3\xe4\x93\x02]:\x01*\x1aX/api/payment/v1/accounts/{payment_method.account_id}/payment-methods/{payment_method.id}\x12\x90\x03\n" +
+	"\x13DeletePaymentMethod\x123.qdrant.cloud.payment.v1.DeletePaymentMethodRequest\x1a4.qdrant.cloud.payment.v1.DeletePaymentMethodResponse\"\x8d\x02\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18&\n" +
+	"\x11payment_method_id\x12\x11payment_method_id\xe0\xb5\x18\x01\xca\xf3\x18m\b\x03\x12\x0epayment-method\"\x15req.payment_method_id*B/accounts/{req.account_id}/payment-methods/{req.payment_method_id}\x82\xd3\xe4\x93\x02K*I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xd4\x03\n" +
 	"\x18GetStripeCheckoutSession\x128.qdrant.cloud.payment.v1.GetStripeCheckoutSessionRequest\x1a9.qdrant.cloud.payment.v1.GetStripeCheckoutSessionResponse\"\xc2\x02\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18\x18\n" +
 	"\n" +
 	"session_id\x12\n" +
 	"session_id\x8a\xb2\x19\x9a\x01\n" +
 	"yGet the Stripe Checkout session by its ID. This method is used to retrieve the session details after it has been created.\x12\x1bGet stripe checkout session\x18\x01\xaa\xb8\x19\x1d\n" +
-	"\x1bget_stripe_checkout_session\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}\x12\x8a\x05\n" +
-	"\x1bCreateStripeCheckoutSession\x12;.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest\x1a<.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse\"\xef\x03\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18\x1c\n" +
-	"\fredirect_url\x12\fredirect_url\xe0\xb5\x18\x01\xca\xf3\x18W\b\x04\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}2\x1ecreate-stripe-checkout-session\x8a\xb2\x19\xeb\x01\n" +
-	"\xc4\x01Initiates the creation of a Stripe Checkout session for the specified account. This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.\x12\x1eCreate stripe checkout session\x18\x018\x01\xaa\xb8\x19 \n" +
-	"\x1ecreate_stripe_checkout_session\x82\xd3\xe4\x93\x029:\x01*\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\x8f\x06\n" +
+	"\x1bget_stripe_checkout_session\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}\x12\xf6\x02\n" +
+	"\x1bCreateStripeCheckoutSession\x12;.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest\x1a<.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse\"\xdb\x01\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18\x1c\n" +
+	"\fredirect_url\x12\fredirect_url\xe0\xb5\x18\x01\xca\xf3\x18W\b\x04\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}2\x1ecreate-stripe-checkout-session\x82\xd3\xe4\x93\x029:\x01*\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\x8f\x06\n" +
 	"!RecordCloudMarketplaceEntitlement\x12A.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest\x1aB.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse\"\xe2\x04\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18,\n" +
 	"\x1amarketplace_entitlement_id\x12\x0eentitlement_id\xca\xf3\x18z\b\x01\x12\x18marketplace-entitlements\"\x12req.entitlement_id*H/accounts/{req.account_id}/marketplace-entitlements/{req.entitlement_id}\x8a\xb2\x19\x9f\x02\n" +
 	"\xf4\x01Records a cloud marketplace entitlement for the specified account. This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure) and the entitlement needs to be recorded in the payment system.\x12$Record cloud marketplace entitlement8\x01\xaa\xb8\x19&\n" +

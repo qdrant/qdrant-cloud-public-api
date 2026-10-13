@@ -2320,7 +2320,7 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x1dACCOUNT_INVITE_STATUS_PENDING\x10\x01\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_ACCEPTED\x10\x02\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_REJECTED\x10\x03\x12\"\n" +
-	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xcf7\n" +
+	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xe9/\n" +
 	"\x0eAccountService\x12\xac\x02\n" +
 	"\fListAccounts\x12,.qdrant.cloud.account.v1.ListAccountsRequest\x1a-.qdrant.cloud.account.v1.ListAccountsResponse\"\xbe\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\x8a\xb2\x19\x7f\n" +
 	"nList accounts the caller can access. Use this first to discover accountId values required by most other tools.\x12\rList accounts\xaa\xb8\x19\x0f\n" +
@@ -2328,11 +2328,9 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\n" +
 	"GetAccount\x12*.qdrant.cloud.account.v1.GetAccountRequest\x1a+.qdrant.cloud.account.v1.GetAccountResponse\"\x8c\x01\x8a\xb5\x18\fread:account\x8a\xb2\x19:\n" +
 	"+Gets an account identified by the given ID.\x12\vGet account\xaa\xb8\x19\r\n" +
-	"\vget_account\x82\xd3\xe4\x93\x02'\x12%/api/account/v1/accounts/{account_id}\x12\xdc\x02\n" +
-	"\rCreateAccount\x12-.qdrant.cloud.account.v1.CreateAccountRequest\x1a..qdrant.cloud.account.v1.CreateAccountResponse\"\xeb\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18\x1c\n" +
-	"\faccount_name\x12\faccount.name\xe0\xb5\x18\x01\xca\xf3\x189\b\x01\x12\aaccount\"\x0fresp.account.id*\x1b/accounts/{resp.account.id}\x8a\xb2\x19B\n" +
-	".Creates an account for the authenticated user.\x12\x0eCreate account8\x01\xaa\xb8\x19\x10\n" +
-	"\x0ecreate_account\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/account/v1/accounts\x12\xa3\x05\n" +
+	"\vget_account\x82\xd3\xe4\x93\x02'\x12%/api/account/v1/accounts/{account_id}\x12\x82\x02\n" +
+	"\rCreateAccount\x12-.qdrant.cloud.account.v1.CreateAccountRequest\x1a..qdrant.cloud.account.v1.CreateAccountResponse\"\x91\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18\x1c\n" +
+	"\faccount_name\x12\faccount.name\xe0\xb5\x18\x01\xca\xf3\x189\b\x01\x12\aaccount\"\x0fresp.account.id*\x1b/accounts/{resp.account.id}\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/account/v1/accounts\x12\xa3\x05\n" +
 	"\rUpdateAccount\x12-.qdrant.cloud.account.v1.UpdateAccountRequest\x1a..qdrant.cloud.account.v1.UpdateAccountResponse\"\xb2\x04\x8a\xb5\x18\rwrite:account\x92\xb5\x18\n" +
 	"account.id\xba\xb5\x18\x1c\n" +
 	"\faccount_name\x12\faccount.name\xba\xb5\x18(\n" +
@@ -2343,13 +2341,9 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"account_id\x12\n" +
 	"account.id\x1a\aaccount\"\aaccount\xca\xf3\x187\b\x02\x12\aaccount\"\x0ereq.account.id*\x1a/accounts/{req.account.id}\x8a\xb2\x19\xb7\x01\n" +
 	"\xa2\x01Updates an account identified by the given ID. Some fields can only be updated by specific actors, see the field documentation in the Account message for details.\x12\x0eUpdate account8\x01\xaa\xb8\x19\x10\n" +
-	"\x0eupdate_account\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/account/v1/accounts/{account.id}\x12\xce\x02\n" +
-	"\rDeleteAccount\x12-.qdrant.cloud.account.v1.DeleteAccountRequest\x1a..qdrant.cloud.account.v1.DeleteAccountResponse\"\xdd\x01\x8a\xb5\x18\x0edelete:account\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\xca\xf3\x187\b\x03\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}\x8a\xb2\x19B\n" +
-	".Deletes an account identified by the given ID.\x12\x0eDelete account8\x01\xaa\xb8\x19\x10\n" +
-	"\x0edelete_account\x82\xd3\xe4\x93\x02'*%/api/account/v1/accounts/{account_id}\x12\xae\x03\n" +
-	"\fLeaveAccount\x12,.qdrant.cloud.account.v1.LeaveAccountRequest\x1a-.qdrant.cloud.account.v1.LeaveAccountResponse\"\xc0\x02\x8a\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\xca\xf3\x18>\b\x04\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}2\x05leave\x8a\xb2\x19\xa6\x01\n" +
-	"\x92\x01Allows the authenticated user to leave an account they are a member of. Owners must transfer ownership to another user before leaving the account.\x12\rLeave account8\x01\xaa\xb8\x19\x0f\n" +
-	"\rleave_account\x82\xd3\xe4\x93\x02-\"+/api/account/v1/accounts/{account_id}/leave\x12\xc7\x02\n" +
+	"\x0eupdate_account\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/account/v1/accounts/{account.id}\x12\xf4\x01\n" +
+	"\rDeleteAccount\x12-.qdrant.cloud.account.v1.DeleteAccountRequest\x1a..qdrant.cloud.account.v1.DeleteAccountResponse\"\x83\x01\x8a\xb5\x18\x0edelete:account\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\xca\xf3\x187\b\x03\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}\x82\xd3\xe4\x93\x02'*%/api/account/v1/accounts/{account_id}\x12\xf0\x01\n" +
+	"\fLeaveAccount\x12,.qdrant.cloud.account.v1.LeaveAccountRequest\x1a-.qdrant.cloud.account.v1.LeaveAccountResponse\"\x82\x01\x8a\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\xca\xf3\x18>\b\x04\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}2\x05leave\x82\xd3\xe4\x93\x02-\"+/api/account/v1/accounts/{account_id}/leave\x12\xc7\x02\n" +
 	"\x12ListAccountInvites\x122.qdrant.cloud.account.v1.ListAccountInvitesRequest\x1a3.qdrant.cloud.account.v1.ListAccountInvitesResponse\"\xc7\x01\x8a\xb5\x18\fread:invites\x8a\xb2\x19d\n" +
 	"LLists all account invites in the account identified by the given account ID.\x12\x14List account invites\xaa\xb8\x19\x16\n" +
 	"\x14list_account_invites\x82\xd3\xe4\x93\x02/\x12-/api/account/v1/accounts/{account_id}/invites\x12\xa8\x03\n" +
@@ -2359,24 +2353,18 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x10GetAccountInvite\x120.qdrant.cloud.account.v1.GetAccountInviteRequest\x1a1.qdrant.cloud.account.v1.GetAccountInviteResponse\"\xe5\x01\x8a\xb5\x18\fread:invites\xba\xb5\x18\x16\n" +
 	"\tinvite_id\x12\tinvite_id\x8a\xb2\x19^\n" +
 	"HGets an account invite identified by the given account ID and invite ID.\x12\x12Get account invite\xaa\xb8\x19\x14\n" +
-	"\x12get_account_invite\x82\xd3\xe4\x93\x02;\x129/api/account/v1/accounts/{account_id}/invites/{invite_id}\x12\xfd\x03\n" +
-	"\x13CreateAccountInvite\x123.qdrant.cloud.account.v1.CreateAccountInviteRequest\x1a4.qdrant.cloud.account.v1.CreateAccountInviteResponse\"\xfa\x02\x8a\xb5\x18\rwrite:invites\x92\xb5\x18\x19account_invite.account_id\xa2\xb5\x18\x01\x01\xba\xb5\x18'\n" +
+	"\x12get_account_invite\x82\xd3\xe4\x93\x02;\x129/api/account/v1/accounts/{account_id}/invites/{invite_id}\x12\xa6\x03\n" +
+	"\x13CreateAccountInvite\x123.qdrant.cloud.account.v1.CreateAccountInviteRequest\x1a4.qdrant.cloud.account.v1.CreateAccountInviteResponse\"\xa3\x02\x8a\xb5\x18\rwrite:invites\x92\xb5\x18\x19account_invite.account_id\xa2\xb5\x18\x01\x01\xba\xb5\x18'\n" +
 	"\n" +
-	"user_email\x12\x19account_invite.user_email\xe0\xb5\x18\x01\xca\xf3\x18v\b\x01\x12\x0eaccount-invite\"\x16resp.account_invite.id*J/accounts/{req.account_invite.account_id}/invites/{resp.account_invite.id}\x8a\xb2\x198\n" +
-	"\x1dCreates a new account invite.\x12\x15Create account invite8\x01\xaa\xb8\x19\x17\n" +
-	"\x15create_account_invite\x82\xd3\xe4\x93\x02A:\x01*\"</api/account/v1/accounts/{account_invite.account_id}/invites\x12\x9d\x03\n" +
+	"user_email\x12\x19account_invite.user_email\xe0\xb5\x18\x01\xca\xf3\x18v\b\x01\x12\x0eaccount-invite\"\x16resp.account_invite.id*J/accounts/{req.account_invite.account_id}/invites/{resp.account_invite.id}\x82\xd3\xe4\x93\x02A:\x01*\"</api/account/v1/accounts/{account_invite.account_id}/invites\x12\x9d\x03\n" +
 	"\x13DeleteAccountInvite\x123.qdrant.cloud.account.v1.DeleteAccountInviteRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountInviteResponse\"\x9a\x02\x8a\xb5\x18\x0edelete:invites\xba\xb5\x18\x16\n" +
 	"\tinvite_id\x12\tinvite_id\xca\xf3\x18U\b\x03\x12\x0eaccount-invite\"\rreq.invite_id*2/accounts/{req.account_id}/invites/{req.invite_id}\x8a\xb2\x195\n" +
 	"\x1aDeletes an account invite.\x12\x15Delete account invite8\x01\xaa\xb8\x19\x17\n" +
-	"\x15delete_account_invite\x82\xd3\xe4\x93\x02;*9/api/account/v1/accounts/{account_id}/invites/{invite_id}\x12\x89\x04\n" +
-	"\x13AcceptAccountInvite\x123.qdrant.cloud.account.v1.AcceptAccountInviteRequest\x1a4.qdrant.cloud.account.v1.AcceptAccountInviteResponse\"\x86\x03\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18\x16\n" +
-	"\tinvite_id\x12\tinvite_id\xe0\xb5\x18\x01\xca\xf3\x18]\b\x04\x12\x0eaccount-invite\"\rreq.invite_id*2/accounts/{req.account_id}/invites/{req.invite_id}2\x06accept\x8a\xb2\x19\x92\x01\n" +
-	"wAccepts an account invite. The authenticated user's email address must match the email address specified in the invite.\x12\x15Accept account invite8\x01\xaa\xb8\x19\x17\n" +
-	"\x15accept_account_invite\x82\xd3\xe4\x93\x02B\"@/api/account/v1/accounts/{account_id}/invites/{invite_id}/accept\x12\x89\x04\n" +
-	"\x13RejectAccountInvite\x123.qdrant.cloud.account.v1.RejectAccountInviteRequest\x1a4.qdrant.cloud.account.v1.RejectAccountInviteResponse\"\x86\x03\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18\x16\n" +
-	"\tinvite_id\x12\tinvite_id\xe0\xb5\x18\x01\xca\xf3\x18]\b\x04\x12\x0eaccount-invite\"\rreq.invite_id*2/accounts/{req.account_id}/invites/{req.invite_id}2\x06reject\x8a\xb2\x19\x92\x01\n" +
-	"wRejects an account invite. The authenticated user's email address must match the email address specified in the invite.\x12\x15Reject account invite8\x01\xaa\xb8\x19\x17\n" +
-	"\x15reject_account_invite\x82\xd3\xe4\x93\x02B\"@/api/account/v1/accounts/{account_id}/invites/{invite_id}/reject\x12\xa3\x03\n" +
+	"\x15delete_account_invite\x82\xd3\xe4\x93\x02;*9/api/account/v1/accounts/{account_id}/invites/{invite_id}\x12\xd7\x02\n" +
+	"\x13AcceptAccountInvite\x123.qdrant.cloud.account.v1.AcceptAccountInviteRequest\x1a4.qdrant.cloud.account.v1.AcceptAccountInviteResponse\"\xd4\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18\x16\n" +
+	"\tinvite_id\x12\tinvite_id\xe0\xb5\x18\x01\xca\xf3\x18]\b\x04\x12\x0eaccount-invite\"\rreq.invite_id*2/accounts/{req.account_id}/invites/{req.invite_id}2\x06accept\x82\xd3\xe4\x93\x02B\"@/api/account/v1/accounts/{account_id}/invites/{invite_id}/accept\x12\xd7\x02\n" +
+	"\x13RejectAccountInvite\x123.qdrant.cloud.account.v1.RejectAccountInviteRequest\x1a4.qdrant.cloud.account.v1.RejectAccountInviteResponse\"\xd4\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18\x16\n" +
+	"\tinvite_id\x12\tinvite_id\xe0\xb5\x18\x01\xca\xf3\x18]\b\x04\x12\x0eaccount-invite\"\rreq.invite_id*2/accounts/{req.account_id}/invites/{req.invite_id}2\x06reject\x82\xd3\xe4\x93\x02B\"@/api/account/v1/accounts/{account_id}/invites/{invite_id}/reject\x12\xa3\x03\n" +
 	"\x12ListAccountMembers\x122.qdrant.cloud.account.v1.ListAccountMembersRequest\x1a3.qdrant.cloud.account.v1.ListAccountMembersResponse\"\xa3\x02\x8a\xb5\x18\n" +
 	"read:users\x8a\xb2\x19\xc1\x01\n" +
 	"\xa8\x01Lists all account members in the account identified by the given account ID. The authenticated actor must be a member of the account identified by the given account ID.\x12\x14List account members\xaa\xb8\x19\x16\n" +
@@ -2385,11 +2373,9 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"read:users\xba\xb5\x18\x12\n" +
 	"\auser_id\x12\auser_id\x8a\xb2\x19\x8b\x01\n" +
 	"uGets an account member by ID. The authenticated actor must be a member of the same account as the member being fetch.\x12\x12Get account member\xaa\xb8\x19\x14\n" +
-	"\x12get_account_member\x82\xd3\xe4\x93\x029\x127/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xff\x03\n" +
-	"\x13DeleteAccountMember\x123.qdrant.cloud.account.v1.DeleteAccountMemberRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountMemberResponse\"\xfc\x02\x8a\xb5\x18\fdelete:users\xa2\xb5\x18\x01\x01\xba\xb5\x18\x12\n" +
-	"\auser_id\x12\auser_id\xe0\xb5\x18\x01\xca\xf3\x18Q\b\x03\x12\x0eaccount-member\"\vreq.user_id*0/accounts/{req.account_id}/members/{req.user_id}\x8a\xb2\x19\x99\x01\n" +
-	"~Deletes an account member. The authenticated actor must be a member of the account from which the the member is being removed.\x12\x15Delete account member8\x01\xaa\xb8\x19\x17\n" +
-	"\x15delete_account_member\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xc6\x02\n" +
+	"\x12get_account_member\x82\xd3\xe4\x93\x029\x127/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xc6\x02\n" +
+	"\x13DeleteAccountMember\x123.qdrant.cloud.account.v1.DeleteAccountMemberRequest\x1a4.qdrant.cloud.account.v1.DeleteAccountMemberResponse\"\xc3\x01\x8a\xb5\x18\fdelete:users\xa2\xb5\x18\x01\x01\xba\xb5\x18\x12\n" +
+	"\auser_id\x12\auser_id\xe0\xb5\x18\x01\xca\xf3\x18Q\b\x03\x12\x0eaccount-member\"\vreq.user_id*0/accounts/{req.account_id}/members/{req.user_id}\x82\xd3\xe4\x93\x029*7/api/account/v1/accounts/{account_id}/members/{user_id}\x12\xc6\x02\n" +
 	"\x10SuggestCompanies\x120.qdrant.cloud.account.v1.SuggestCompaniesRequest\x1a1.qdrant.cloud.account.v1.SuggestCompaniesResponse\"\xcc\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xba\xb5\x18\x16\n" +
 	"\rcompany_email\x12\x05email\xba\xb5\x18\x14\n" +
 	"\fcompany_name\x12\x04name\x8a\xb2\x19P\n" +
