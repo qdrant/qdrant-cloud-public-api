@@ -38,16 +38,24 @@ type FacadeMethodOptions struct {
 	SensitiveResponse bool `protobuf:"varint,3,opt,name=sensitive_response,json=sensitiveResponse,proto3" json:"sensitive_response,omitempty"`
 	// Optional overrides when HTTP-verb heuristics for read-only / destructive /
 	// idempotent classification are wrong. Facades map these to their own
-	// annotation models (for example MCP ToolAnnotations).
+	// annotation models (for example MCP ToolAnnotations). When set true,
+	// read_only_hint also treats the RPC as read for the allow_mutation /
+	// expose-mutations gate (see allow_mutation).
 	ReadOnlyHint *bool `protobuf:"varint,4,opt,name=read_only_hint,json=readOnlyHint,proto3,oneof" json:"read_only_hint,omitempty"`
 	// Optional override for destructive classification.
 	DestructiveHint *bool `protobuf:"varint,5,opt,name=destructive_hint,json=destructiveHint,proto3,oneof" json:"destructive_hint,omitempty"`
 	// Optional override for idempotent classification.
 	IdempotentHint *bool `protobuf:"varint,6,opt,name=idempotent_hint,json=idempotentHint,proto3,oneof" json:"idempotent_hint,omitempty"`
-	// When true, mutating RPCs (non-GET) may be exposed by facades that support
-	// mutations when their expose-mutations flag is on (for example MCP
-	// mcpExposeMutations, or a future GraphQL Mutation surface). Default false
-	// means read-only facades only unless the HTTP rule is GET.
+	// When true, mutating RPCs may be exposed by facades that support mutations
+	// when their expose-mutations flag is on (for example MCP mcpExposeMutations,
+	// or a future GraphQL Mutation surface). Default false means read-only
+	// facades only.
+	//
+	// Classification for this gate: HTTP GET is always read; otherwise the RPC is
+	// mutating unless read_only_hint is set to true. POST/PUT/PATCH "reads"
+	// (for example GetQuote) should set read_only_hint=true and do **not** need
+	// allow_mutation. Set allow_mutation only for true side-effecting RPCs that
+	// should appear when expose-mutations is enabled.
 	AllowMutation bool `protobuf:"varint,7,opt,name=allow_mutation,json=allowMutation,proto3" json:"allow_mutation,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

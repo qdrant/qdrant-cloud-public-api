@@ -45,7 +45,9 @@ export declare type FacadeMethodOptions = Message<"qdrant.cloud.facade.v1.Facade
   /**
    * Optional overrides when HTTP-verb heuristics for read-only / destructive /
    * idempotent classification are wrong. Facades map these to their own
-   * annotation models (for example MCP ToolAnnotations).
+   * annotation models (for example MCP ToolAnnotations). When set true,
+   * read_only_hint also treats the RPC as read for the allow_mutation /
+   * expose-mutations gate (see allow_mutation).
    *
    * @generated from field: optional bool read_only_hint = 4;
    */
@@ -66,10 +68,16 @@ export declare type FacadeMethodOptions = Message<"qdrant.cloud.facade.v1.Facade
   idempotentHint?: boolean | undefined;
 
   /**
-   * When true, mutating RPCs (non-GET) may be exposed by facades that support
-   * mutations when their expose-mutations flag is on (for example MCP
-   * mcpExposeMutations, or a future GraphQL Mutation surface). Default false
-   * means read-only facades only unless the HTTP rule is GET.
+   * When true, mutating RPCs may be exposed by facades that support mutations
+   * when their expose-mutations flag is on (for example MCP mcpExposeMutations,
+   * or a future GraphQL Mutation surface). Default false means read-only
+   * facades only.
+   *
+   * Classification for this gate: HTTP GET is always read; otherwise the RPC is
+   * mutating unless read_only_hint is set to true. POST/PUT/PATCH "reads"
+   * (for example GetQuote) should set read_only_hint=true and do **not** need
+   * allow_mutation. Set allow_mutation only for true side-effecting RPCs that
+   * should appear when expose-mutations is enabled.
    *
    * @generated from field: bool allow_mutation = 7;
    */
