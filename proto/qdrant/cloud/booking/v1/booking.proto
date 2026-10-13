@@ -96,7 +96,6 @@ service BookingService {
       description: "Gets price quotes for a batch of cluster configurations. Always prices at standard tier with no discount, since there is no account to discount against. Authentication not required"
       title: "Get global quotes"
       read_only_hint: true
-      allow_mutation: true
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_global_quotes"};
   }
@@ -117,7 +116,6 @@ service BookingService {
       description: "Gets a price quote for a cluster configuration. Calculates pricing information including hourly costs, and any applicable discounts for the specified cluster configuration."
       title: "Get quote"
       read_only_hint: true
-      allow_mutation: true
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_quote"};
   }
@@ -139,7 +137,6 @@ service BookingService {
       description: "Gets a price quote for a backup configuration. Calculates pricing information for storing a backup, based on the specified cloud provider, region, and backup size."
       title: "Get backup quote"
       read_only_hint: true
-      allow_mutation: true
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_backup_quote"};
   }
