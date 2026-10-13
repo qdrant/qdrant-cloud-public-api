@@ -75,7 +75,7 @@ service BookingService {
       field_expression: "cloud_provider_region_id"
     };
     option (qdrant.cloud.facade.v1.facade) = {
-      description: "buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS Lists all public packages. Authentication not required"
+      description: "Lists all public packages. Authentication not required"
       title: "List global packages"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_global_packages"};

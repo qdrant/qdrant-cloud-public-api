@@ -188,11 +188,11 @@ const file_qdrant_cloud_ui_v1_clusterdata_proto_rawDesc = "" +
 	"\x17ListCollectionsResponse\x128\n" +
 	"\x05items\x18\x01 \x03(\v2\".qdrant.cloud.ui.v1.CollectionInfoR\x05items\"-\n" +
 	"\x0eCollectionInfo\x12\x1b\n" +
-	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name2\xc7\x02\n" +
-	"\x12ClusterDataService\x12\xa8\x02\n" +
-	"\x0fListCollections\x12*.qdrant.cloud.ui.v1.ListCollectionsRequest\x1a+.qdrant.cloud.ui.v1.ListCollectionsResponse\"\xbb\x01\x8a\xb5\x18\rread:clusters\xa2\xb5\x18\x01\x01\x8a\xb2\x19A\n" +
-	"-List the collections for the provided cluster\x12\x10List collections\xaa\xb8\x19\x12\n" +
-	"\x10list_collections\x82\xd3\xe4\x93\x02D\x12B/api/ui/v1/accounts/{account_id}/clusters/{cluster_id}/collections\x1a\x06µ\x18\x02\b\x01B\xdf\x01\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name2\xcf\x02\n" +
+	"\x12ClusterDataService\x12\xb0\x02\n" +
+	"\x0fListCollections\x12*.qdrant.cloud.ui.v1.ListCollectionsRequest\x1a+.qdrant.cloud.ui.v1.ListCollectionsResponse\"\xc3\x01\x8a\xb5\x18\rread:clusters\xa2\xb5\x18\x01\x01\x8a\xb2\x19A\n" +
+	"-List the collections for the provided cluster\x12\x10List collections\xaa\xb8\x19\x1a\n" +
+	"\x18list_cluster_collections\x82\xd3\xe4\x93\x02D\x12B/api/ui/v1/accounts/{account_id}/clusters/{cluster_id}/collections\x1a\x06µ\x18\x02\b\x01B\xdf\x01\n" +
 	"\x16com.qdrant.cloud.ui.v1B\x10ClusterdataProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3"
 
 var (

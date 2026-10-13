@@ -29,7 +29,7 @@ service ClusterDataService {
       description: "List the collections for the provided cluster"
       title: "List collections"
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_collections"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_cluster_collections"};
   }
 }
 

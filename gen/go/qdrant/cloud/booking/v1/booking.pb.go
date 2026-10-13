@@ -2608,7 +2608,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\rModelModality\x12\x1e\n" +
 	"\x1aMODEL_MODALITY_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13MODEL_MODALITY_TEXT\x10\x01\x12\x18\n" +
-	"\x14MODEL_MODALITY_IMAGE\x10\x022\x90\x14\n" +
+	"\x14MODEL_MODALITY_IMAGE\x10\x022\xe4\x13\n" +
 	"\x0eBookingService\x12\xec\x02\n" +
 	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\"\xfe\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
@@ -2620,11 +2620,11 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
 	"package_id\x12\x02id\x8a\xb2\x19;\n" +
 	",Gets the package identified by the given ID.\x12\vGet package\xaa\xb8\x19\r\n" +
-	"\vget_package\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/packages/{id}\x12\x9e\x03\n" +
-	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"\x9e\x02\x98\xb5\x18\x00\xba\xb5\x18&\n" +
+	"\vget_package\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/packages/{id}\x12\xf2\x02\n" +
+	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"\xf2\x01\x98\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
-	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x8a\xb2\x19z\n" +
-	"bbuf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS Lists all public packages. Authentication not required\x12\x14List global packages\xaa\xb8\x19\x16\n" +
+	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x8a\xb2\x19N\n" +
+	"6Lists all public packages. Authentication not required\x12\x14List global packages\xaa\xb8\x19\x16\n" +
 	"\x14list_global_packages\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\x9a\x01\n" +
 	"\x0fGetGlobalQuotes\x12/.qdrant.cloud.booking.v1.GetGlobalQuotesRequest\x1a0.qdrant.cloud.booking.v1.GetGlobalQuotesResponse\"$\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/booking/v1/quote\x12\xa9\x01\n" +
 	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\"H\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quote\x12\xc1\x01\n" +
