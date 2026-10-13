@@ -362,6 +362,19 @@ export declare type UpdateClusterRequest = Message<"qdrant.cloud.cluster.v1.Upda
    * @generated from field: google.protobuf.FieldMask update_mask = 2;
    */
   updateMask?: FieldMask | undefined;
+
+  /**
+   * When true, configuration.additional_resources.disk is the new amount of
+   * additional disk, and it may be lower than the current amount.
+   * Setting it to 0 removes the additional disk.
+   * The disk included in the package is kept.
+   * When false or omitted, the additional disk can only grow: a lower amount
+   * is rejected, and 0 keeps the current amount.
+   * Requires configuration.additional_resources to be set.
+   *
+   * @generated from field: bool allow_additional_disk_decrease = 3;
+   */
+  allowAdditionalDiskDecrease: boolean;
 };
 
 /**
@@ -388,6 +401,19 @@ export declare type UpdateClusterRequestValid = Message<"qdrant.cloud.cluster.v1
    * @generated from field: google.protobuf.FieldMask update_mask = 2;
    */
   updateMask?: FieldMask | undefined;
+
+  /**
+   * When true, configuration.additional_resources.disk is the new amount of
+   * additional disk, and it may be lower than the current amount.
+   * Setting it to 0 removes the additional disk.
+   * The disk included in the package is kept.
+   * When false or omitted, the additional disk can only grow: a lower amount
+   * is rejected, and 0 keeps the current amount.
+   * Requires configuration.additional_resources to be set.
+   *
+   * @generated from field: bool allow_additional_disk_decrease = 3;
+   */
+  allowAdditionalDiskDecrease: boolean;
 };
 
 /**

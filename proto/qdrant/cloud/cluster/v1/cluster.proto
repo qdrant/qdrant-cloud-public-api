@@ -524,10 +524,23 @@ message UpdateClusterRequest {
   // When unset or empty, the request is treated as a full-resource
   // replacement (the existing behavior).
   google.protobuf.FieldMask update_mask = 2;
+  // When true, configuration.additional_resources.disk is the new amount of
+  // additional disk, and it may be lower than the current amount.
+  // Setting it to 0 removes the additional disk.
+  // The disk included in the package is kept.
+  // When false or omitted, the additional disk can only grow: a lower amount
+  // is rejected, and 0 keeps the current amount.
+  // Requires configuration.additional_resources to be set.
+  bool allow_additional_disk_decrease = 3;
   option (buf.validate.message).cel = {
     id: "update_cluster.id_present"
     message: "cluster.id is required for an update"
     expression: "this.cluster.id != ''"
+  };
+  option (buf.validate.message).cel = {
+    id: "update_cluster.allow_additional_disk_decrease_target"
+    message: "allow_additional_disk_decrease requires configuration.additional_resources"
+    expression: "!this.allow_additional_disk_decrease || has(this.cluster.configuration.additional_resources)"
   };
 }
 
