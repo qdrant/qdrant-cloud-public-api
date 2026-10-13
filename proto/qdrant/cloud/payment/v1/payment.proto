@@ -78,7 +78,6 @@ service PaymentService {
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "payment_method.account_id";
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
-    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (qdrant.cloud.common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
@@ -108,7 +107,6 @@ service PaymentService {
     // custom account-id expression
     option (qdrant.cloud.common.v1.account_id_expression) = "payment_method.account_id";
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
-    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (qdrant.cloud.common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
@@ -152,7 +150,6 @@ service PaymentService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
-    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (qdrant.cloud.common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {delete: "/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}"};
@@ -198,7 +195,6 @@ service PaymentService {
     // permissions
     option (qdrant.cloud.common.v1.permissions) = "write:payment_information";
     // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
-    // No MCP/facade overlays: agent credentials cannot call interactive_only RPCs.
     option (qdrant.cloud.common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {
