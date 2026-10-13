@@ -5,7 +5,8 @@ package qdrant.cloud.ui.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // ClusterDataService provides cluster data for UI components, this is considered a beta feature.
 service ClusterDataService {
   // The API version of this service.
@@ -24,6 +25,11 @@ service ClusterDataService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/ui/v1/accounts/{account_id}/clusters/{cluster_id}/collections"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List the collections for the provided cluster"
+      title: "List collections"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_cluster_collections"};
   }
 }
 

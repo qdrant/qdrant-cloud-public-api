@@ -6,7 +6,8 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // MeteringService is the API to retrieve usage data used for billing purposes.
 service MeteringService {
   // The API version of this service.
@@ -24,6 +25,11 @@ service MeteringService {
     option (common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/metering/v1/accounts/{account_id}/meterings"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists aggregated monthly meterings for the account identified by the given ID. Each summary represents the total metering amount for one month."
+      title: "List monthly meterings"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_monthly_meterings"};
   }
   // Lists detailed metering entries for a specific month for the account identified by the given ID.
   // Required permissions:
@@ -33,6 +39,11 @@ service MeteringService {
     option (common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/metering/v1/accounts/{account_id}/meterings/{year}/{month}"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists detailed metering entries for a specific month for the account identified by the given ID."
+      title: "List meterings"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_meterings"};
   }
   // Returns the usage breakdown for the account identified by the given ID, within the requested time range.
   // For parent billing accounts, the response aggregates usage across all child accounts.
@@ -43,6 +54,11 @@ service MeteringService {
     option (common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/metering/v1/accounts/{account_id}/usage-breakdown"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Returns the usage breakdown for the account identified by the given ID, within the requested time range. For parent billing accounts, the response aggregates usage across all child accounts."
+      title: "Get usage breakdown"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_usage_breakdown"};
   }
 }
 

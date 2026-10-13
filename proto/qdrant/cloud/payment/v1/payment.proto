@@ -9,7 +9,8 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // PaymentService is the API used to manage payment settings.
 service PaymentService {
   // The API version of this service.
@@ -26,6 +27,11 @@ service PaymentService {
     option (qdrant.cloud.common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-methods"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List payment methods for an account."
+      title: "List payment methods"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_payment_methods"};
   }
   // Gets the payment method identified by the given ID.
   // Required permissions:
@@ -40,6 +46,11 @@ service PaymentService {
       name: "payment_method_id"
       field_expression: "payment_method_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get a single payment method by ID."
+      title: "Get payment method"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_payment_method"};
   }
   // Gets the payment method availability status for the account.
   // This method can be used to determine if the account is ready to make payments.
@@ -51,6 +62,11 @@ service PaymentService {
     option (qdrant.cloud.common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/payment/v1/accounts/{account_id}/payment-method-availability"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the payment method availability status for the account. This method can be used to determine if the account is ready to make payments. The authenticated user must be a member of the account."
+      title: "Get payment method availability"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_payment_method_availability"};
   }
   // Creates a new payment method for the account.
   // This method is used to create a new payment method, which can then be connected to a payment provider (like Stripe).
@@ -164,6 +180,12 @@ service PaymentService {
       name: "session_id"
       field_expression: "session_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get the Stripe Checkout session by its ID. This method is used to retrieve the session details after it has been created."
+      title: "Get stripe checkout session"
+      sensitive_response: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_stripe_checkout_session"};
   }
   // Initiates the creation of a Stripe Checkout session for the specified account.
   // This session can be used by the client (usually via frontend) to interact directly with Stripe's hosted payment page.

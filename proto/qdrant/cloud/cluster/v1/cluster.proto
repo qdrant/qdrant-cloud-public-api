@@ -9,7 +9,8 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // ClusterService is the API used to configure cluster objects.
 service ClusterService {
   // The API version of this service.
@@ -26,6 +27,11 @@ service ClusterService {
     option (common.v1.permissions) = "read:clusters";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v1/accounts/{account_id}/clusters"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List all clusters in an account. Use list_accounts first if the account ID is unknown. Returns cluster IDs, names, state, and endpoint URLs."
+      title: "List clusters"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_clusters"};
   }
   // Gets a cluster in the account identified by the given ID.
   // Required permissions:
@@ -40,6 +46,11 @@ service ClusterService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get a single cluster by account ID and cluster ID."
+      title: "Get cluster"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster"};
   }
   // Gets the downscale risks of applying the properties provided in the request to the
   // cluster identified by the given ID, one entry per assessed resource.
@@ -61,6 +72,11 @@ service ClusterService {
       name: "package_id"
       field_expression: "package_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the downscale risks of applying the properties provided in the request to the cluster identified by the given ID, one entry per assessed resource. The call does not modify the cluster and is evaluated against freshly read measurements, so repeated calls track the cluster's current state."
+      title: "Get cluster downscale risk"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster_downscale_risk"};
   }
   // Creates a cluster in the account identified by the given ID.
   // Required permissions:
@@ -289,6 +305,11 @@ service ClusterService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/cluster/v1/accounts/{account_id}/clusters/suggest-name"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Suggests a unique and human-friendly name for a new cluster in the specified account. This can be used by clients to pre-fill the name field when creating a new cluster."
+      title: "Suggest cluster name"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "suggest_cluster_name"};
   }
   // Lists all Qdrant releases in the account identified by the given ID.
   // Optionally a cluster ID can be provided, the list will return the update options for that cluster only.
@@ -304,6 +325,11 @@ service ClusterService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List available Qdrant releases, optionally filtered by cluster."
+      title: "List Qdrant releases"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_qdrant_releases"};
   }
   // Gets a Qdrant release by version in the account identified by the given ID.
   // Required permissions:
@@ -318,6 +344,11 @@ service ClusterService {
       name: "version"
       field_expression: "version"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets a Qdrant release by version in the account identified by the given ID."
+      title: "Get qdrant release"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_qdrant_release"};
   }
 }
 

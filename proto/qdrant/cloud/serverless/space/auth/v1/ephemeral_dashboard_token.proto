@@ -6,8 +6,9 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 import "qdrant/cloud/serverless/space/auth/v1/space_api_key.proto";
-
 // EphemeralDashboardTokenService is the API used to create ephemeral tokens to access the Qdrant Dashboard of a serverless space, used by the Qdrant Cloud UI
 service EphemeralDashboardTokenService {
   // The API version of this service.
@@ -56,6 +57,12 @@ service EphemeralDashboardTokenService {
     option (qdrant.cloud.common.v1.account_id_expression) = "account_id";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/serverless/auth/v1/accounts/{account_id}/ephemeral-dashboard-tokens"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "ListEphemeralDashboardTokens returns the ephemeral dashboard tokens for the account identified by the given ID. Optionally filtered by space."
+      title: "List ephemeral dashboard tokens"
+      sensitive_response: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_ephemeral_dashboard_tokens"};
   }
   // RevokeEphemeralDashboardToken revokes an ephemeral dashboard token in the account identified by the given ID.
   // Required permissions:

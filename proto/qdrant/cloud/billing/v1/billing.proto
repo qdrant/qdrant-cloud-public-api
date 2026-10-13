@@ -6,7 +6,8 @@ import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // BillingService is the API used to retrieve billing information, such as invoices.
 service BillingService {
   // The API version of this service.
@@ -23,6 +24,11 @@ service BillingService {
     option (common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/invoices"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all invoices for the account identified by the given ID."
+      title: "List invoices"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_invoices"};
   }
   // Lists all discounts for the account identified by the given ID.
   // Required permissions:
@@ -32,6 +38,11 @@ service BillingService {
     option (common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/discounts"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all discounts for the account identified by the given ID."
+      title: "List discounts"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_discounts"};
   }
   // Lists all credit contracts for the account identified by the given ID.
   // Required permissions:
@@ -41,6 +52,11 @@ service BillingService {
     option (common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/credit-contracts"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all credit contracts for the account identified by the given ID."
+      title: "List credit contracts"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_credit_contracts"};
   }
   // Returns the parent billing account for the account identified by the given ID.
   // Returns NOT_FOUND if the account has no parent.
@@ -51,6 +67,11 @@ service BillingService {
     option (common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/parent"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Returns the parent billing account for the account identified by the given ID. Returns NOT_FOUND if the account has no parent."
+      title: "Get billing account parent"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_billing_account_parent"};
   }
   // Lists all child accounts for the billing parent account identified by the given ID.
   // Returns an empty list if the account has no children.
@@ -61,6 +82,11 @@ service BillingService {
     option (common.v1.permissions) = "read:payment_information";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/children"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all child accounts for the billing parent account identified by the given ID. Returns an empty list if the account has no children."
+      title: "List billing account children"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_billing_account_children"};
   }
 }
 

@@ -9,6 +9,8 @@ package meteringv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1490,7 +1492,7 @@ var File_qdrant_cloud_metering_v1_metering_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\n" +
-	"'qdrant/cloud/metering/v1/metering.proto\x12\x18qdrant.cloud.metering.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"F\n" +
+	"'qdrant/cloud/metering/v1/metering.proto\x12\x18qdrant.cloud.metering.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"F\n" +
 	"\x1bListMonthlyMeteringsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"f\n" +
@@ -1623,11 +1625,17 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x06configB\x18\n" +
 	"\x16_cost_allocation_labelB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
-	"\x18_discount_amount_percent2\xaa\x05\n" +
-	"\x0fMeteringService\x12\xdb\x01\n" +
-	"\x14ListMonthlyMeterings\x125.qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest\x1a6.qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse\"T\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x022\x120/api/metering/v1/accounts/{account_id}/meterings\x12\xd5\x01\n" +
-	"\rListMeterings\x12..qdrant.cloud.metering.v1.ListMeteringsRequest\x1a/.qdrant.cloud.metering.v1.ListMeteringsResponse\"c\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02A\x12?/api/metering/v1/accounts/{account_id}/meterings/{year}/{month}\x12\xd8\x01\n" +
-	"\x11GetUsageBreakdown\x122.qdrant.cloud.metering.v1.GetUsageBreakdownRequest\x1a3.qdrant.cloud.metering.v1.GetUsageBreakdownResponse\"Z\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x028\x126/api/metering/v1/accounts/{account_id}/usage-breakdown\x1a\x06µ\x18\x02\b\x01B\x86\x02\n" +
+	"\x18_discount_amount_percent2\xf6\t\n" +
+	"\x0fMeteringService\x12\xa7\x03\n" +
+	"\x14ListMonthlyMeterings\x125.qdrant.cloud.metering.v1.ListMonthlyMeteringsRequest\x1a6.qdrant.cloud.metering.v1.ListMonthlyMeteringsResponse\"\x9f\x02\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19\xaa\x01\n" +
+	"\x8f\x01Lists aggregated monthly meterings for the account identified by the given ID. Each summary represents the total metering amount for one month.\x12\x16List monthly meterings\xaa\xb8\x19\x18\n" +
+	"\x16list_monthly_meterings\x82\xd3\xe4\x93\x022\x120/api/metering/v1/accounts/{account_id}/meterings\x12\xe0\x02\n" +
+	"\rListMeterings\x12..qdrant.cloud.metering.v1.ListMeteringsRequest\x1a/.qdrant.cloud.metering.v1.ListMeteringsResponse\"\xed\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19r\n" +
+	"`Lists detailed metering entries for a specific month for the account identified by the given ID.\x12\x0eList meterings\xaa\xb8\x19\x10\n" +
+	"\x0elist_meterings\x82\xd3\xe4\x93\x02A\x12?/api/metering/v1/accounts/{account_id}/meterings/{year}/{month}\x12\xcd\x03\n" +
+	"\x11GetUsageBreakdown\x122.qdrant.cloud.metering.v1.GetUsageBreakdownRequest\x1a3.qdrant.cloud.metering.v1.GetUsageBreakdownResponse\"\xce\x02\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19\xd6\x01\n" +
+	"\xbe\x01Returns the usage breakdown for the account identified by the given ID, within the requested time range. For parent billing accounts, the response aggregates usage across all child accounts.\x12\x13Get usage breakdown\xaa\xb8\x19\x15\n" +
+	"\x13get_usage_breakdown\x82\xd3\xe4\x93\x028\x126/api/metering/v1/accounts/{account_id}/usage-breakdown\x1a\x06µ\x18\x02\b\x01B\x86\x02\n" +
 	"\x1ccom.qdrant.cloud.metering.v1B\rMeteringProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/metering/v1;meteringv1\xa2\x02\x03QCM\xaa\x02\x18Qdrant.Cloud.Metering.V1\xca\x02\x18Qdrant\\Cloud\\Metering\\V1\xe2\x02$Qdrant\\Cloud\\Metering\\V1\\GPBMetadata\xea\x02\x1bQdrant::Cloud::Metering::V1b\x06proto3"
 
 var (

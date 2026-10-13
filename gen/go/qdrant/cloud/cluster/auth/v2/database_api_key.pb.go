@@ -10,6 +10,8 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -787,7 +789,7 @@ var File_qdrant_cloud_cluster_auth_v2_database_api_key_proto protoreflect.FileDe
 
 const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\n" +
-	"3qdrant/cloud/cluster/auth/v2/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v2\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\x82\x01\n" +
+	"3qdrant/cloud/cluster/auth/v2/database_api_key.proto\x12\x1cqdrant.cloud.cluster.auth.v2\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\x82\x01\n" +
 	"\x1aListDatabaseApiKeysRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12,\n" +
@@ -853,12 +855,14 @@ const file_qdrant_cloud_cluster_auth_v2_database_api_key_proto_rawDesc = "" +
 	"\x1eCollectionAccessRuleAccessType\x122\n" +
 	".COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x120\n" +
 	",COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY\x10\x01\x121\n" +
-	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\x9a\v\n" +
-	"\x15DatabaseApiKeyService\x12\xfd\x01\n" +
-	"\x13ListDatabaseApiKeys\x128.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest\x1a9.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse\"q\x8a\xb5\x18\rread:api_keys\xba\xb5\x18\x18\n" +
+	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\xaa\f\n" +
+	"\x15DatabaseApiKeyService\x12\x8d\x03\n" +
+	"\x13ListDatabaseApiKeys\x128.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysRequest\x1a9.qdrant.cloud.cluster.auth.v2.ListDatabaseApiKeysResponse\"\x80\x02\x8a\xb5\x18\rread:api_keys\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02>\x12</api/cluster/auth/v2/accounts/{account_id}/database-api-keys\x12\xe0\x04\n" +
+	"cluster_id\x8a\xb2\x19b\n" +
+	"FLists all database api keys in the account identified by the given ID.\x12\x16List database api keys\x18\x01\xaa\xb8\x19%\n" +
+	"#cluster_auth_list_database_api_keys\x82\xd3\xe4\x93\x02>\x12</api/cluster/auth/v2/accounts/{account_id}/database-api-keys\x12\xe0\x04\n" +
 	"\x14CreateDatabaseApiKey\x129.qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyRequest\x1a:.qdrant.cloud.cluster.auth.v2.CreateDatabaseApiKeyResponse\"\xd0\x03\x8a\xb5\x18\x0ewrite:api_keys\x92\xb5\x18\x1bdatabase_api_key.account_id\xba\xb5\x18)\n" +
 	"\n" +
 	"cluster_id\x12\x1bdatabase_api_key.cluster_id\xba\xb5\x18.\n" +

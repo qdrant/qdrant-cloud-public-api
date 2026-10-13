@@ -8,7 +8,8 @@ import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // Service for managing API keys for a serverless space
 service SpaceApiKeyService {
   // The API version of this service.
@@ -30,6 +31,12 @@ service SpaceApiKeyService {
       name: "space_id"
       field_expression: "space_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "ListSpaceApiKeys returns all API keys for a space Required Permissions:"
+      title: "List space api keys"
+      sensitive_response: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_space_api_keys"};
   }
   // CreateSpaceApiKey creates a new API key for a space
   // Required Permissions:

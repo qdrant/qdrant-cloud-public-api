@@ -5,7 +5,8 @@ package qdrant.cloud.quota.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // QuotaService is the API used to configure Quotas.
 service QuotaService {
   // The API version of this service.
@@ -26,6 +27,11 @@ service QuotaService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/quota/v1/users/me/quotas"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get quotas for the authenticated user."
+      title: "Get authenticated user quotas"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_authenticated_user_quotas"};
   }
   // Get quotas for the account identified by the given account ID.
   // Required permissions:
@@ -35,6 +41,11 @@ service QuotaService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/quota/v1/accounts/{account_id}/quotas"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get quotas for the account identified by the given account ID."
+      title: "Get account quotas"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_account_quotas"};
   }
 }
 

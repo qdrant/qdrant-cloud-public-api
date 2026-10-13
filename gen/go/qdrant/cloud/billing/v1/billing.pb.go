@@ -9,6 +9,8 @@ package billingv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1119,7 +1121,7 @@ var File_qdrant_cloud_billing_v1_billing_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/billing/v1/billing.proto\x12\x17qdrant.cloud.billing.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\">\n" +
+	"%qdrant/cloud/billing/v1/billing.proto\x12\x17qdrant.cloud.billing.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\">\n" +
 	"\x13ListInvoicesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"N\n" +
@@ -1213,13 +1215,23 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n" +
 	"\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n" +
 	"\x13INVOICE_STATUS_PAID\x10\x04\x12 \n" +
-	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\xcc\b\n" +
-	"\x0eBillingService\x12\xbf\x01\n" +
-	"\fListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x020\x12./api/billing/v1/accounts/{account_id}/invoices\x12\xc3\x01\n" +
-	"\rListDiscounts\x12-.qdrant.cloud.billing.v1.ListDiscountsRequest\x1a..qdrant.cloud.billing.v1.ListDiscountsResponse\"S\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x021\x12//api/billing/v1/accounts/{account_id}/discounts\x12\xdc\x01\n" +
-	"\x13ListCreditContracts\x123.qdrant.cloud.billing.v1.ListCreditContractsRequest\x1a4.qdrant.cloud.billing.v1.ListCreditContractsResponse\"Z\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x028\x126/api/billing/v1/accounts/{account_id}/credit-contracts\x12\xde\x01\n" +
-	"\x17GetBillingAccountParent\x127.qdrant.cloud.billing.v1.GetBillingAccountParentRequest\x1a8.qdrant.cloud.billing.v1.GetBillingAccountParentResponse\"P\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x02.\x12,/api/billing/v1/accounts/{account_id}/parent\x12\xe9\x01\n" +
-	"\x1aListBillingAccountChildren\x12:.qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest\x1a;.qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse\"R\x8a\xb5\x18\x18read:payment_information\x82\xd3\xe4\x93\x020\x12./api/billing/v1/accounts/{account_id}/children\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
+	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\xb2\x0e\n" +
+	"\x0eBillingService\x12\xa6\x02\n" +
+	"\fListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"\xb8\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19O\n" +
+	">Lists all invoices for the account identified by the given ID.\x12\rList invoices\xaa\xb8\x19\x0f\n" +
+	"\rlist_invoices\x82\xd3\xe4\x93\x020\x12./api/billing/v1/accounts/{account_id}/invoices\x12\xad\x02\n" +
+	"\rListDiscounts\x12-.qdrant.cloud.billing.v1.ListDiscountsRequest\x1a..qdrant.cloud.billing.v1.ListDiscountsResponse\"\xbc\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19Q\n" +
+	"?Lists all discounts for the account identified by the given ID.\x12\x0eList discounts\xaa\xb8\x19\x10\n" +
+	"\x0elist_discounts\x82\xd3\xe4\x93\x021\x12//api/billing/v1/accounts/{account_id}/discounts\x12\xdb\x02\n" +
+	"\x13ListCreditContracts\x123.qdrant.cloud.billing.v1.ListCreditContractsRequest\x1a4.qdrant.cloud.billing.v1.ListCreditContractsResponse\"\xd8\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19_\n" +
+	"FLists all credit contracts for the account identified by the given ID.\x12\x15List credit contracts\xaa\xb8\x19\x17\n" +
+	"\x15list_credit_contracts\x82\xd3\xe4\x93\x028\x126/api/billing/v1/accounts/{account_id}/credit-contracts\x12\xa0\x03\n" +
+	"\x17GetBillingAccountParent\x127.qdrant.cloud.billing.v1.GetBillingAccountParentRequest\x1a8.qdrant.cloud.billing.v1.GetBillingAccountParentResponse\"\x91\x02\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19\x9c\x01\n" +
+	"~Returns the parent billing account for the account identified by the given ID. Returns NOT_FOUND if the account has no parent.\x12\x1aGet billing account parent\xaa\xb8\x19\x1c\n" +
+	"\x1aget_billing_account_parent\x82\xd3\xe4\x93\x02.\x12,/api/billing/v1/accounts/{account_id}/parent\x12\xbd\x03\n" +
+	"\x1aListBillingAccountChildren\x12:.qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest\x1a;.qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse\"\xa5\x02\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19\xab\x01\n" +
+	"\x89\x01Lists all child accounts for the billing parent account identified by the given ID. Returns an empty list if the account has no children.\x12\x1dList billing account children\xaa\xb8\x19\x1f\n" +
+	"\x1dlist_billing_account_children\x82\xd3\xe4\x93\x020\x12./api/billing/v1/accounts/{account_id}/children\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.billing.v1B\fBillingProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/billing/v1;billingv1\xa2\x02\x03QCB\xaa\x02\x17Qdrant.Cloud.Billing.V1\xca\x02\x17Qdrant\\Cloud\\Billing\\V1\xe2\x02#Qdrant\\Cloud\\Billing\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Billing::V1b\x06proto3"
 
 var (

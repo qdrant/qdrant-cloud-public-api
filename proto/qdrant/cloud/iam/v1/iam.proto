@@ -13,7 +13,8 @@ import "google/protobuf/timestamp.proto";
 import "google/rpc/error_details.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // IAMService is the API used to configure IAM (identity and access management) objects.
 service IAMService {
   // The API version of this service.
@@ -34,6 +35,11 @@ service IAMService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the authenticated user."
+      title: "Get authenticated user"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_authenticated_user"};
   }
   // List users in the account identified by the given ID.
   // Required permissions:
@@ -43,6 +49,11 @@ service IAMService {
     option (common.v1.permissions) = "read:users";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/users"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List users in an account."
+      title: "List users"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_users"};
   }
   // Updates the user identified by the given ID.
   // Required permissions:
@@ -128,6 +139,11 @@ service IAMService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me/profile"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the profile of the authenticated user."
+      title: "Get user profile"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_user_profile"};
   }
   // Updates the profile of the authenticated user.
   // Required permissions:
@@ -177,6 +193,11 @@ service IAMService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me/consent"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the authenticated user's consent status for a specific legal document."
+      title: "Get user consent"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_user_consent"};
   }
   // Records the authenticated user's consent for a legal document.
   // Required permissions:
@@ -217,6 +238,11 @@ service IAMService {
     option (common.v1.permissions) = "read:roles";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/permissions"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all permissions known in the system for the provided account. Note: If you want to get a list of permissions available for you, please use ListEffectivePermissions instead."
+      title: "List permissions"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_permissions"};
   }
   // Lists all roles in the account identified by the given ID.
   // Required permissions:
@@ -226,6 +252,11 @@ service IAMService {
     option (common.v1.permissions) = "read:roles";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/roles"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List roles in an account."
+      title: "List roles"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_roles"};
   }
   // Gets a role for the account identified by the given ID.
   // Required permissions:
@@ -240,6 +271,11 @@ service IAMService {
       name: "role_id"
       field_expression: "role_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get a single role by ID."
+      title: "Get role"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_role"};
   }
   // Creates a role for the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
@@ -342,6 +378,11 @@ service IAMService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/accounts/{account_id}/effective-permissions"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists the effective permissions for the authenticated user in the account identified by the given ID."
+      title: "List effective permissions"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_effective_permissions"};
   }
   // List roles of the user identified by the given ID.
   // Required permissions:
@@ -356,6 +397,11 @@ service IAMService {
       name: "user_id"
       field_expression: "user_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List roles of the user identified by the given ID."
+      title: "List user roles"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_user_roles"};
   }
   // List users for the role identified by the given ID.
   // Required permissions:
@@ -370,6 +416,11 @@ service IAMService {
       name: "role_id"
       field_expression: "role_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List users for the role identified by the given ID."
+      title: "List role users"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_role_users"};
   }
   // Assigns the provided roles to the user in the account identified by the given ID.
   // Required permissions:
@@ -435,6 +486,11 @@ service IAMService {
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me/mfa-methods"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists the user's multi-factor authentication (MFA) methods."
+      title: "List user mfa methods"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_user_mfa_methods"};
   }
   // Updates a user's multi-factor authentication (MFA) method.
   // Required permissions:

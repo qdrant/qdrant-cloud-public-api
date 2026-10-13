@@ -9,6 +9,8 @@ package platformv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/hybrid/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -887,7 +889,7 @@ var File_qdrant_cloud_platform_v1_platform_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\n" +
-	"'qdrant/cloud/platform/v1/platform.proto\x12\x18qdrant.cloud.platform.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a)qdrant/cloud/hybrid/v1/hybrid_cloud.proto\"J\n" +
+	"'qdrant/cloud/platform/v1/platform.proto\x12\x18qdrant.cloud.platform.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\x1a)qdrant/cloud/hybrid/v1/hybrid_cloud.proto\"J\n" +
 	"\x19ListCloudProvidersRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountIdJ\x04\b\x02\x10\x03\"[\n" +
@@ -943,20 +945,32 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\x10\vJ\x04\b\r\x10\x0e\"u\n" +
 	"\x1fCloudProviderRegionCapabilities\x12'\n" +
 	"\x0fvolume_snapshot\x18\x01 \x01(\bR\x0evolumeSnapshot\x12)\n" +
-	"\x10volume_expansion\x18\x02 \x01(\bR\x0fvolumeExpansion2\xd4\f\n" +
-	"\x0fPlatformService\x12\xbf\x01\n" +
-	"\x18ListGlobalCloudProviders\x129.qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest\x1a:.qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse\",\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\"\x12 /api/platform/v1/cloud-providers\x12\xc3\x01\n" +
-	"\x12ListCloudProviders\x123.qdrant.cloud.platform.v1.ListCloudProvidersRequest\x1a4.qdrant.cloud.platform.v1.ListCloudProvidersResponse\"B\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x028\x126/api/platform/v1/accounts/{account_id}/cloud-providers\x12\x97\x02\n" +
-	"\x1eListGlobalCloudProviderRegions\x12?.qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest\x1a@.qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse\"r\x98\xb5\x18\x00\xba\xb5\x18&\n" +
-	"\x11cloud_provider_id\x12\x11cloud_provider_id\x82\xd3\xe4\x93\x02>\x12</api/platform/v1/cloud-providers/{cloud_provider_id}/regions\x12\xb8\x02\n" +
-	"\x1cGetGlobalCloudProviderRegion\x12=.qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionRequest\x1a>.qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse\"\x98\x01\x98\xb5\x18\x00\xba\xb5\x18&\n" +
+	"\x10volume_expansion\x18\x02 \x01(\bR\x0fvolumeExpansion2\xe6\x14\n" +
+	"\x0fPlatformService\x12\xe9\x02\n" +
+	"\x18ListGlobalCloudProviders\x129.qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest\x1a:.qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse\"\xd5\x01\x98\xb5\x18\x00\x8a\xb2\x19\x83\x01\n" +
+	"dLists all available cloud providers globally (not account-specific). Authentication is not required.\x12\x1bList global cloud providers\xaa\xb8\x19\x1d\n" +
+	"\x1blist_global_cloud_providers\x82\xd3\xe4\x93\x02\"\x12 /api/platform/v1/cloud-providers\x12\xbe\x02\n" +
+	"\x12ListCloudProviders\x123.qdrant.cloud.platform.v1.ListCloudProvidersRequest\x1a4.qdrant.cloud.platform.v1.ListCloudProvidersResponse\"\xbc\x01\x8a\xb5\x18\x00\x8a\xb2\x19\\\n" +
+	"DLists all cloud providers in the account identified by the given ID.\x12\x14List cloud providers\xaa\xb8\x19\x16\n" +
+	"\x14list_cloud_providers\x82\xd3\xe4\x93\x028\x126/api/platform/v1/accounts/{account_id}/cloud-providers\x12\xe3\x03\n" +
+	"\x1eListGlobalCloudProviderRegions\x12?.qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest\x1a@.qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse\"\xbd\x02\x98\xb5\x18\x00\xba\xb5\x18&\n" +
+	"\x11cloud_provider_id\x12\x11cloud_provider_id\x8a\xb2\x19\x9e\x01\n" +
+	"xLists all cloud provider regions (not account-specific) identified by cloud provider ID. Authentication is not required.\x12\"List global cloud provider regions\xaa\xb8\x19$\n" +
+	"\"list_global_cloud_provider_regions\x82\xd3\xe4\x93\x02>\x12</api/platform/v1/cloud-providers/{cloud_provider_id}/regions\x12\x93\x04\n" +
+	"\x1cGetGlobalCloudProviderRegion\x12=.qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionRequest\x1a>.qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse\"\xf3\x02\x98\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x18\x16\n" +
-	"\tregion_id\x12\tregion_id\x82\xd3\xe4\x93\x02J\x12H/api/platform/v1/cloud-providers/{cloud_provider_id}/regions/{region_id}\x12\x9c\x02\n" +
-	"\x18ListCloudProviderRegions\x129.qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest\x1a:.qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse\"\x88\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
-	"\x11cloud_provider_id\x12\x11cloud_provider_id\x82\xd3\xe4\x93\x02T\x12R/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions\x12\xbc\x02\n" +
-	"\x16GetCloudProviderRegion\x127.qdrant.cloud.platform.v1.GetCloudProviderRegionRequest\x1a8.qdrant.cloud.platform.v1.GetCloudProviderRegionResponse\"\xae\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
+	"\tregion_id\x12\tregion_id\x8a\xb2\x19\xb0\x01\n" +
+	"\x8b\x01Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID. Authentication is not required.\x12 Get global cloud provider region\xaa\xb8\x19\"\n" +
+	" get_global_cloud_provider_region\x82\xd3\xe4\x93\x02J\x12H/api/platform/v1/cloud-providers/{cloud_provider_id}/regions/{region_id}\x12\xbe\x03\n" +
+	"\x18ListCloudProviderRegions\x129.qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest\x1a:.qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse\"\xaa\x02\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
+	"\x11cloud_provider_id\x12\x11cloud_provider_id\x8a\xb2\x19}\n" +
+	"^Lists all cloud provider regions in the account identified by the given ID and cloud provider.\x12\x1bList cloud provider regions\xaa\xb8\x19\x1d\n" +
+	"\x1blist_cloud_provider_regions\x82\xd3\xe4\x93\x02T\x12R/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions\x12\xe0\x03\n" +
+	"\x16GetCloudProviderRegion\x127.qdrant.cloud.platform.v1.GetCloudProviderRegionRequest\x1a8.qdrant.cloud.platform.v1.GetCloudProviderRegionResponse\"\xd2\x02\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x18\x16\n" +
-	"\tregion_id\x12\tregion_id\x82\xd3\xe4\x93\x02`\x12^/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}\x1a\x06µ\x18\x02\b\x01B\x86\x02\n" +
+	"\tregion_id\x12\tregion_id\x8a\xb2\x19\x80\x01\n" +
+	"cGets a specific cloud provider region in the account identified by the given ID and cloud provider.\x12\x19Get cloud provider region\xaa\xb8\x19\x1b\n" +
+	"\x19get_cloud_provider_region\x82\xd3\xe4\x93\x02`\x12^/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}\x1a\x06µ\x18\x02\b\x01B\x86\x02\n" +
 	"\x1ccom.qdrant.cloud.platform.v1B\rPlatformProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/platform/v1;platformv1\xa2\x02\x03QCP\xaa\x02\x18Qdrant.Cloud.Platform.V1\xca\x02\x18Qdrant\\Cloud\\Platform\\V1\xe2\x02$Qdrant\\Cloud\\Platform\\V1\\GPBMetadata\xea\x02\x1bQdrant::Cloud::Platform::V1b\x06proto3"
 
 var (

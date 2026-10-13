@@ -9,8 +9,9 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 import "qdrant/cloud/iam/v1/iam.proto";
-
 // AccountService is the API used to configure Accounts.
 service AccountService {
   // The API version of this service.
@@ -29,6 +30,11 @@ service AccountService {
     option (qdrant.cloud.common.v1.account_id_expression) = ""; // not relevant for this method
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List accounts the caller can access. Use this first to discover accountId values required by most other tools."
+      title: "List accounts"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_accounts"};
   }
   // Gets an account identified by the given ID.
   // Required permissions:
@@ -38,6 +44,11 @@ service AccountService {
     option (common.v1.permissions) = "read:account"; // not 'read:accounts' for historical reasons
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets an account identified by the given ID."
+      title: "Get account"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_account"};
   }
   // Creates an account for the authenticated user.
   // Required permissions:
@@ -168,6 +179,11 @@ service AccountService {
     option (common.v1.permissions) = "read:invites";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/invites"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all account invites in the account identified by the given account ID."
+      title: "List account invites"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_account_invites"};
   }
   // Lists all account invites for the authenticated user (across all accounts).
   // These are the invites the user has received, not the ones they have sent.
@@ -182,6 +198,11 @@ service AccountService {
     option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/self/invites"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all account invites for the authenticated user (across all accounts). These are the invites the user has received, not the ones they have sent."
+      title: "List received account invites"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_received_account_invites"};
   }
   // Gets an account invite identified by the given account ID and invite ID.
   // Required permissions:
@@ -196,6 +217,11 @@ service AccountService {
       name: "invite_id"
       field_expression: "invite_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets an account invite identified by the given account ID and invite ID."
+      title: "Get account invite"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_account_invite"};
   }
   // Creates a new account invite.
   // Required permissions:
@@ -317,6 +343,11 @@ service AccountService {
     option (common.v1.permissions) = "read:users"; // Not 'read:accounts' for historical reasons
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/members"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all account members in the account identified by the given account ID. The authenticated actor must be a member of the account identified by the given account ID."
+      title: "List account members"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_account_members"};
   }
   // Gets an account member by ID.
   // The authenticated actor must be a member of the same account as the member being fetch.
@@ -332,6 +363,11 @@ service AccountService {
       name: "user_id"
       field_expression: "user_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets an account member by ID. The authenticated actor must be a member of the same account as the member being fetch."
+      title: "Get account member"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_account_member"};
   }
   // Deletes an account member.
   // The authenticated actor must be a member of the account from which the the member is being removed.
@@ -378,6 +414,11 @@ service AccountService {
       name: "company_name"
       field_expression: "name"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Suggest a list of companies based on partial name or email."
+      title: "Suggest companies"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "suggest_companies"};
   }
 }
 

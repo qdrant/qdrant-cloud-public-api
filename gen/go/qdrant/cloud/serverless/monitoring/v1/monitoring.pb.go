@@ -9,6 +9,8 @@ package monitoringv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1896,7 +1898,7 @@ var File_qdrant_cloud_serverless_monitoring_v1_monitoring_proto protoreflect.Fil
 
 const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
-	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\"\x9f\x03\n" +
+	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\x9f\x03\n" +
 	"\x1dGetSpaceSummaryMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
@@ -2084,16 +2086,24 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	" SPACE_ALERT_SEVERITY_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19SPACE_ALERT_SEVERITY_INFO\x10\x01\x12 \n" +
 	"\x1cSPACE_ALERT_SEVERITY_WARNING\x10\x02\x12!\n" +
-	"\x1dSPACE_ALERT_SEVERITY_CRITICAL\x10\x032\xba\t\n" +
-	"\x11MonitoringService\x12\xac\x02\n" +
-	"\x16GetSpaceSummaryMetrics\x12D.qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest\x1aE.qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse\"\x84\x01\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
-	"\bspace_id\x12\bspace_id\x82\xd3\xe4\x93\x02L\x12J/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/summary-metrics\x12\xa4\x02\n" +
-	"\x14GetSpaceUsageMetrics\x12B.qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest\x1aC.qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse\"\x82\x01\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
-	"\bspace_id\x12\bspace_id\x82\xd3\xe4\x93\x02J\x12H/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/usage-metrics\x12\xb4\x02\n" +
-	"\x18GetSpaceInferenceMetrics\x12F.qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest\x1aG.qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse\"\x86\x01\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
-	"\bspace_id\x12\bspace_id\x82\xd3\xe4\x93\x02N\x12L/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/metrics/inference\x12\x8d\x02\n" +
-	"\x0fListSpaceAlerts\x12=.qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest\x1a>.qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse\"{\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
-	"\bspace_id\x12\bspace_id\x82\xd3\xe4\x93\x02C\x12A/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts\x1a\bµ\x18\x04\b\x02\x10\x01B\xda\x02\n" +
+	"\x1dSPACE_ALERT_SEVERITY_CRITICAL\x10\x032\xd6\x0f\n" +
+	"\x11MonitoringService\x12\xa6\x03\n" +
+	"\x16GetSpaceSummaryMetrics\x12D.qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest\x1aE.qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse\"\xfe\x01\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
+	"\bspace_id\x12\bspace_id\x8a\xb2\x19W\n" +
+	":Get per-collection summary metrics for a serverless space.\x12\x19Get space summary metrics\xaa\xb8\x19\x1b\n" +
+	"\x19get_space_summary_metrics\x82\xd3\xe4\x93\x02L\x12J/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/summary-metrics\x12\xa7\x04\n" +
+	"\x14GetSpaceUsageMetrics\x12B.qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest\x1aC.qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse\"\x85\x03\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
+	"\bspace_id\x12\bspace_id\x8a\xb2\x19\xe1\x01\n" +
+	"\xc5\x01Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID. Metrics are aggregated per collection and may be paginated (a space can have many collections).\x12\x17Get space usage metrics\xaa\xb8\x19\x19\n" +
+	"\x17get_space_usage_metrics\x82\xd3\xe4\x93\x02J\x12H/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/usage-metrics\x12\xd3\x04\n" +
+	"\x18GetSpaceInferenceMetrics\x12F.qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest\x1aG.qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse\"\xa5\x03\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
+	"\bspace_id\x12\bspace_id\x8a\xb2\x19\xf9\x01\n" +
+	"\xd9\x01Gets the inference token usage metrics for a space. Metrics are aggregated per collection and may be paginated (a space can have many collections). Provide `inference_model_id` to limit the response to a single model.\x12\x1bGet space inference metrics\xaa\xb8\x19\x1d\n" +
+	"\x1bget_space_inference_metrics\x82\xd3\xe4\x93\x02N\x12L/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/metrics/inference\x12\x8d\x03\n" +
+	"\x0fListSpaceAlerts\x12=.qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest\x1a>.qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse\"\xfa\x01\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
+	"\bspace_id\x12\bspace_id\x8a\xb2\x19d\n" +
+	"OList alerts for a serverless space (optional collection filter and pagination).\x12\x11List space alerts\xaa\xb8\x19\x13\n" +
+	"\x11list_space_alerts\x82\xd3\xe4\x93\x02C\x12A/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts\x1a\bµ\x18\x04\b\x02\x10\x01B\xda\x02\n" +
 	")com.qdrant.cloud.serverless.monitoring.v1B\x0fMonitoringProtoP\x01Zcgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/monitoring/v1;monitoringv1\xa2\x02\x04QCSM\xaa\x02%Qdrant.Cloud.Serverless.Monitoring.V1\xca\x02%Qdrant\\Cloud\\Serverless\\Monitoring\\V1\xe2\x021Qdrant\\Cloud\\Serverless\\Monitoring\\V1\\GPBMetadata\xea\x02)Qdrant::Cloud::Serverless::Monitoring::V1b\x06proto3"
 
 var (

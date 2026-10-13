@@ -5,7 +5,8 @@ package qdrant.cloud.serverless.quota.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
-
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 // QuotaService exposes serverless **account-level** platform quotas and aggregated usage.
 // Per-space collection and searcher caps live on Space.configuration (UpdateSpace).
 service QuotaService {
@@ -21,6 +22,11 @@ service QuotaService {
   rpc GetQuotas(GetQuotasRequest) returns (GetQuotasResponse) {
     option (qdrant.cloud.common.v1.permissions) = "read:serverless_spaces";
     option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/quotas"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get account-level serverless platform quotas and aggregated usage."
+      title: "Get serverless quotas"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_serverless_quotas"};
   }
 }
 

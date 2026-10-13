@@ -25,9 +25,11 @@ _sym_db = _symbol_database.Default()
 from buf.validate import validate_pb2 as buf_dot_validate_dot_validate__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
+from qdrant.cloud.facade.mcp.v1 import mcp_options_pb2 as qdrant_dot_cloud_dot_facade_dot_mcp_dot_v1_dot_mcp__options__pb2
+from qdrant.cloud.facade.v1 import facade_options_pb2 as qdrant_dot_cloud_dot_facade_dot_v1_dot_facade__options__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!qdrant/cloud/quota/v1/quota.proto\x12\x15qdrant.cloud.quota.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\"#\n!GetAuthenticatedUserQuotasRequest\"\x94\x01\n\"GetAuthenticatedUserQuotasResponse\x12\x35\n\x12max_owned_accounts\x18\x01 \x01(\rB\x07\xbaH\x04*\x02 \x00R\x10maxOwnedAccounts\x12\x37\n\x13max_member_accounts\x18\x02 \x01(\rB\x07\xbaH\x04*\x02 \x00R\x11maxMemberAccounts\"B\n\x17GetAccountQuotasRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xad\x02\n\x18GetAccountQuotasResponse\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12*\n\x0cmax_clusters\x18\x02 \x01(\rB\x07\xbaH\x04*\x02(\x00R\x0bmaxClusters\x12\x33\n\x11max_cluster_nodes\x18\x03 \x01(\rB\x07\xbaH\x04*\x02(\x00R\x0fmaxClusterNodes\x12I\n\x1dmax_cluster_database_api_keys\x18\x04 \x01(\rB\x07\xbaH\x04*\x02(\x00R\x19maxClusterDatabaseApiKeys\x12<\n\x16max_free_tier_clusters\x18\x05 \x01(\rB\x07\xbaH\x04*\x02(\x00R\x13maxFreeTierClusters2\x8c\x03\n\x0cQuotaService\x12\xc5\x01\n\x1aGetAuthenticatedUserQuotas\x12\x38.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest\x1a\x39.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse\"2\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/quota/v1/users/me/quotas\x12\xab\x01\n\x10GetAccountQuotas\x12..qdrant.cloud.quota.v1.GetAccountQuotasRequest\x1a/.qdrant.cloud.quota.v1.GetAccountQuotasResponse\"6\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02,\x12*/api/quota/v1/accounts/{account_id}/quotas\x1a\x06\xc2\xb5\x18\x02\x08\x01\x42\xee\x01\n\x19\x63om.qdrant.cloud.quota.v1B\nQuotaProtoP\x01ZNgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/quota/v1;quotav1\xa2\x02\x03QCQ\xaa\x02\x15Qdrant.Cloud.Quota.V1\xca\x02\x15Qdrant\\Cloud\\Quota\\V1\xe2\x02!Qdrant\\Cloud\\Quota\\V1\\GPBMetadata\xea\x02\x18Qdrant::Cloud::Quota::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!qdrant/cloud/quota/v1/quota.proto\x12\x15qdrant.cloud.quota.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"#\n!GetAuthenticatedUserQuotasRequest\"\x94\x01\n\"GetAuthenticatedUserQuotasResponse\x12\x35\n\x12max_owned_accounts\x18\x01 \x01(\rB\x07\xbaH\x04*\x02 \x00R\x10maxOwnedAccounts\x12\x37\n\x13max_member_accounts\x18\x02 \x01(\rB\x07\xbaH\x04*\x02 \x00R\x11maxMemberAccounts\"B\n\x17GetAccountQuotasRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xad\x02\n\x18GetAccountQuotasResponse\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12*\n\x0cmax_clusters\x18\x02 \x01(\rB\x07\xbaH\x04*\x02(\x00R\x0bmaxClusters\x12\x33\n\x11max_cluster_nodes\x18\x03 \x01(\rB\x07\xbaH\x04*\x02(\x00R\x0fmaxClusterNodes\x12I\n\x1dmax_cluster_database_api_keys\x18\x04 \x01(\rB\x07\xbaH\x04*\x02(\x00R\x19maxClusterDatabaseApiKeys\x12<\n\x16max_free_tier_clusters\x18\x05 \x01(\rB\x07\xbaH\x04*\x02(\x00R\x13maxFreeTierClusters2\xec\x04\n\x0cQuotaService\x12\xb4\x02\n\x1aGetAuthenticatedUserQuotas\x12\x38.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest\x1a\x39.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse\"\xa0\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x8a\xb2\x19G\n&Get quotas for the authenticated user.\x12\x1dGet authenticated user quotas\xaa\xb8\x19\x1f\n\x1dget_authenticated_user_quotas\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/quota/v1/users/me/quotas\x12\x9c\x02\n\x10GetAccountQuotas\x12..qdrant.cloud.quota.v1.GetAccountQuotasRequest\x1a/.qdrant.cloud.quota.v1.GetAccountQuotasResponse\"\xa6\x01\x8a\xb5\x18\x00\x8a\xb2\x19T\n>Get quotas for the account identified by the given account ID.\x12\x12Get account quotas\xaa\xb8\x19\x14\n\x12get_account_quotas\x82\xd3\xe4\x93\x02,\x12*/api/quota/v1/accounts/{account_id}/quotas\x1a\x06\xc2\xb5\x18\x02\x08\x01\x42\xee\x01\n\x19\x63om.qdrant.cloud.quota.v1B\nQuotaProtoP\x01ZNgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/quota/v1;quotav1\xa2\x02\x03QCQ\xaa\x02\x15Qdrant.Cloud.Quota.V1\xca\x02\x15Qdrant\\Cloud\\Quota\\V1\xe2\x02!Qdrant\\Cloud\\Quota\\V1\\GPBMetadata\xea\x02\x18Qdrant::Cloud::Quota::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -54,17 +56,17 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_QUOTASERVICE']._loaded_options = None
   _globals['_QUOTASERVICE']._serialized_options = b'\302\265\030\002\010\001'
   _globals['_QUOTASERVICE'].methods_by_name['GetAuthenticatedUserQuotas']._loaded_options = None
-  _globals['_QUOTASERVICE'].methods_by_name['GetAuthenticatedUserQuotas']._serialized_options = b'\212\265\030\000\222\265\030\000\242\265\030\001\001\202\323\344\223\002\037\022\035/api/quota/v1/users/me/quotas'
+  _globals['_QUOTASERVICE'].methods_by_name['GetAuthenticatedUserQuotas']._serialized_options = b'\212\265\030\000\222\265\030\000\242\265\030\001\001\212\262\031G\n&Get quotas for the authenticated user.\022\035Get authenticated user quotas\252\270\031\037\n\035get_authenticated_user_quotas\202\323\344\223\002\037\022\035/api/quota/v1/users/me/quotas'
   _globals['_QUOTASERVICE'].methods_by_name['GetAccountQuotas']._loaded_options = None
-  _globals['_QUOTASERVICE'].methods_by_name['GetAccountQuotas']._serialized_options = b'\212\265\030\000\202\323\344\223\002,\022*/api/quota/v1/accounts/{account_id}/quotas'
-  _globals['_GETAUTHENTICATEDUSERQUOTASREQUEST']._serialized_start=156
-  _globals['_GETAUTHENTICATEDUSERQUOTASREQUEST']._serialized_end=191
-  _globals['_GETAUTHENTICATEDUSERQUOTASRESPONSE']._serialized_start=194
-  _globals['_GETAUTHENTICATEDUSERQUOTASRESPONSE']._serialized_end=342
-  _globals['_GETACCOUNTQUOTASREQUEST']._serialized_start=344
-  _globals['_GETACCOUNTQUOTASREQUEST']._serialized_end=410
-  _globals['_GETACCOUNTQUOTASRESPONSE']._serialized_start=413
-  _globals['_GETACCOUNTQUOTASRESPONSE']._serialized_end=714
-  _globals['_QUOTASERVICE']._serialized_start=717
-  _globals['_QUOTASERVICE']._serialized_end=1113
+  _globals['_QUOTASERVICE'].methods_by_name['GetAccountQuotas']._serialized_options = b'\212\265\030\000\212\262\031T\n>Get quotas for the account identified by the given account ID.\022\022Get account quotas\252\270\031\024\n\022get_account_quotas\202\323\344\223\002,\022*/api/quota/v1/accounts/{account_id}/quotas'
+  _globals['_GETAUTHENTICATEDUSERQUOTASREQUEST']._serialized_start=247
+  _globals['_GETAUTHENTICATEDUSERQUOTASREQUEST']._serialized_end=282
+  _globals['_GETAUTHENTICATEDUSERQUOTASRESPONSE']._serialized_start=285
+  _globals['_GETAUTHENTICATEDUSERQUOTASRESPONSE']._serialized_end=433
+  _globals['_GETACCOUNTQUOTASREQUEST']._serialized_start=435
+  _globals['_GETACCOUNTQUOTASREQUEST']._serialized_end=501
+  _globals['_GETACCOUNTQUOTASRESPONSE']._serialized_start=504
+  _globals['_GETACCOUNTQUOTASRESPONSE']._serialized_end=805
+  _globals['_QUOTASERVICE']._serialized_start=808
+  _globals['_QUOTASERVICE']._serialized_end=1428
 # @@protoc_insertion_point(module_scope)

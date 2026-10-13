@@ -10,6 +10,8 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -5153,7 +5155,7 @@ var File_qdrant_cloud_cluster_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"\xb2\x06\n" +
+	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xb2\x06\n" +
 	"\x13ListClustersRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
@@ -5672,21 +5674,27 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1aClusterBackupSupportStatus\x12-\n" +
 	")CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED\x10\x01\x12/\n" +
-	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xa5\"\n" +
-	"\x0eClusterService\x12\xb4\x01\n" +
-	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"G\x8a\xb5\x18\rread:clusters\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xd7\x01\n" +
+	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xf2*\n" +
+	"\x0eClusterService\x12\xeb\x02\n" +
+	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"\xfd\x01\x8a\xb5\x18\rread:clusters\x8a\xb2\x19\x9e\x01\n" +
+	"\x8c\x01List all clusters in an account. Use list_accounts first if the account ID is unknown. Returns cluster IDs, names, state, and endpoint URLs.\x12\rList clusters\xaa\xb8\x19\x0f\n" +
+	"\rlist_clusters\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xae\x02\n" +
 	"\n" +
-	"GetCluster\x12*.qdrant.cloud.cluster.v1.GetClusterRequest\x1a+.qdrant.cloud.cluster.v1.GetClusterResponse\"p\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"GetCluster\x12*.qdrant.cloud.cluster.v1.GetClusterRequest\x1a+.qdrant.cloud.cluster.v1.GetClusterResponse\"\xc6\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xaa\x02\n" +
-	"\x17GetClusterDownscaleRisk\x127.qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest\x1a8.qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse\"\x9b\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\x8a\xb2\x19A\n" +
+	"2Get a single cluster by account ID and cluster ID.\x12\vGet cluster\xaa\xb8\x19\r\n" +
+	"\vget_cluster\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\x93\x05\n" +
+	"\x17GetClusterDownscaleRisk\x127.qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest\x1a8.qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse\"\x84\x04\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\xba\xb5\x18\x18\n" +
 	"\n" +
 	"package_id\x12\n" +
-	"package_id\x82\xd3\xe4\x93\x02L\x12J/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/downscale-risk\x12\xd9\x02\n" +
+	"package_id\x8a\xb2\x19\xc4\x02\n" +
+	"\xa5\x02Gets the downscale risks of applying the properties provided in the request to the cluster identified by the given ID, one entry per assessed resource. The call does not modify the cluster and is evaluated against freshly read measurements, so repeated calls track the cluster's current state.\x12\x1aGet cluster downscale risk\xaa\xb8\x19\x1c\n" +
+	"\x1aget_cluster_downscale_risk\x82\xd3\xe4\x93\x02L\x12J/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/downscale-risk\x12\xd9\x02\n" +
 	"\rCreateCluster\x12-.qdrant.cloud.cluster.v1.CreateClusterRequest\x1a..qdrant.cloud.cluster.v1.CreateClusterResponse\"\xe8\x01\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xba\xb5\x18\x1c\n" +
 	"\fcluster_name\x12\fcluster.name\xca\xf3\x18[\b\x01\x12\acluster\"\x0fresp.cluster.id*=/accounts/{req.cluster.account_id}/clusters/{resp.cluster.id}\x82\xd3\xe4\x93\x02;:\x01*\"6/api/cluster/v1/accounts/{cluster.account_id}/clusters\x12\xb4\x03\n" +
 	"\x17CreateClusterFromBackup\x127.qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest\x1a8.qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse\"\xa5\x02\x8a\xb5\x18\x0frestore:backups\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x01\xba\xb5\x18\x16\n" +
@@ -5723,14 +5731,20 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x14EnableClusterJwtRbac\x124.qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest\x1a5.qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse\"\xe3\x01\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18c\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\x10enabled-jwt-rbac\x82\xd3\xe4\x93\x02H\"F/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/enable-jwt\x12\xc6\x01\n" +
-	"\x12SuggestClusterName\x122.qdrant.cloud.cluster.v1.SuggestClusterNameRequest\x1a3.qdrant.cloud.cluster.v1.SuggestClusterNameResponse\"G\x8a\xb5\x18\x00\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/suggest-name\x12\xe2\x01\n" +
-	"\x12ListQdrantReleases\x122.qdrant.cloud.cluster.v1.ListQdrantReleasesRequest\x1a3.qdrant.cloud.cluster.v1.ListQdrantReleasesResponse\"c\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\xca\xf3\x18c\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\x10enabled-jwt-rbac\x82\xd3\xe4\x93\x02H\"F/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/enable-jwt\x12\xa8\x03\n" +
+	"\x12SuggestClusterName\x122.qdrant.cloud.cluster.v1.SuggestClusterNameRequest\x1a3.qdrant.cloud.cluster.v1.SuggestClusterNameResponse\"\xa8\x02\x8a\xb5\x18\x00\x8a\xb2\x19\xc2\x01\n" +
+	"\xa9\x01Suggests a unique and human-friendly name for a new cluster in the specified account. This can be used by clients to pre-fill the name field when creating a new cluster.\x12\x14Suggest cluster name\xaa\xb8\x19\x16\n" +
+	"\x14suggest_cluster_name\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/suggest-name\x12\xd8\x02\n" +
+	"\x12ListQdrantReleases\x122.qdrant.cloud.cluster.v1.ListQdrantReleasesRequest\x1a3.qdrant.cloud.cluster.v1.ListQdrantReleasesResponse\"\xd8\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/releases\x12\xe0\x01\n" +
-	"\x10GetQdrantRelease\x120.qdrant.cloud.cluster.v1.GetQdrantReleaseRequest\x1a1.qdrant.cloud.cluster.v1.GetQdrantReleaseResponse\"g\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x12\n" +
-	"\aversion\x12\aversion\x82\xd3\xe4\x93\x02:\x128/api/cluster/v1/accounts/{account_id}/releases/{version}\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
+	"cluster_id\x8a\xb2\x19W\n" +
+	"?List available Qdrant releases, optionally filtered by cluster.\x12\x14List Qdrant releases\xaa\xb8\x19\x16\n" +
+	"\x14list_qdrant_releases\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/releases\x12\xde\x02\n" +
+	"\x10GetQdrantRelease\x120.qdrant.cloud.cluster.v1.GetQdrantReleaseRequest\x1a1.qdrant.cloud.cluster.v1.GetQdrantReleaseResponse\"\xe4\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x12\n" +
+	"\aversion\x12\aversion\x8a\xb2\x19a\n" +
+	"KGets a Qdrant release by version in the account identified by the given ID.\x12\x12Get qdrant release\xaa\xb8\x19\x14\n" +
+	"\x12get_qdrant_release\x82\xd3\xe4\x93\x02:\x128/api/cluster/v1/accounts/{account_id}/releases/{version}\x1a\x06µ\x18\x02\b\x01B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.cluster.v1B\fClusterProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/v1;clusterv1\xa2\x02\x03QCC\xaa\x02\x17Qdrant.Cloud.Cluster.V1\xca\x02\x17Qdrant\\Cloud\\Cluster\\V1\xe2\x02#Qdrant\\Cloud\\Cluster\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Cluster::V1b\x06proto3"
 
 var (

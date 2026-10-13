@@ -9,6 +9,8 @@ package quotav1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -214,7 +216,7 @@ var File_qdrant_cloud_serverless_quota_v1_quota_proto protoreflect.FileDescripto
 
 const file_qdrant_cloud_serverless_quota_v1_quota_proto_rawDesc = "" +
 	"\n" +
-	",qdrant/cloud/serverless/quota/v1/quota.proto\x12 qdrant.cloud.serverless.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\";\n" +
+	",qdrant/cloud/serverless/quota/v1/quota.proto\x12 qdrant.cloud.serverless.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\";\n" +
 	"\x10GetQuotasRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xbb\x03\n" +
@@ -229,9 +231,11 @@ const file_qdrant_cloud_serverless_quota_v1_quota_proto_rawDesc = "" +
 	" platform_max_size_per_collection\x18\a \x01(\x04B\a\xbaH\x042\x02(\x00R\x1cplatformMaxSizePerCollection\x12U\n" +
 	"#platform_max_workers_per_collection\x18\b \x01(\x04B\a\xbaH\x042\x02(\x00R\x1fplatformMaxWorkersPerCollectionJ\x04\b\x04\x10\x05J\x04\b\x06\x10\aR$platform_max_storage_bytes_per_spaceR\x12used_storage_bytes\"Y\n" +
 	"\x11GetQuotasResponse\x12D\n" +
-	"\x05quota\x18\x01 \x01(\v2..qdrant.cloud.serverless.quota.v1.AccountQuotaR\x05quota2\xe2\x01\n" +
-	"\fQuotaService\x12\xc7\x01\n" +
-	"\tGetQuotas\x122.qdrant.cloud.serverless.quota.v1.GetQuotasRequest\x1a3.qdrant.cloud.serverless.quota.v1.GetQuotasResponse\"Q\x8a\xb5\x18\x16read:serverless_spaces\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/quotas\x1a\bµ\x18\x04\b\x01\x10\x01B\xb2\x02\n" +
+	"\x05quota\x18\x01 \x01(\v2..qdrant.cloud.serverless.quota.v1.AccountQuotaR\x05quota2\xdd\x02\n" +
+	"\fQuotaService\x12\xc2\x02\n" +
+	"\tGetQuotas\x122.qdrant.cloud.serverless.quota.v1.GetQuotasRequest\x1a3.qdrant.cloud.serverless.quota.v1.GetQuotasResponse\"\xcb\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19[\n" +
+	"BGet account-level serverless platform quotas and aggregated usage.\x12\x15Get serverless quotas\xaa\xb8\x19\x17\n" +
+	"\x15get_serverless_quotas\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/quotas\x1a\bµ\x18\x04\b\x01\x10\x01B\xb2\x02\n" +
 	"$com.qdrant.cloud.serverless.quota.v1B\n" +
 	"QuotaProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/quota/v1;quotav1\xa2\x02\x04QCSQ\xaa\x02 Qdrant.Cloud.Serverless.Quota.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Quota\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Quota\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Quota::V1b\x06proto3"
 

@@ -5,8 +5,9 @@ package qdrant.cloud.platform.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
 import "qdrant/cloud/hybrid/v1/hybrid_cloud.proto";
-
 // PlatformService is the API used to query for cloud provider & regional information for the dedicated clusters in the platform.
 service PlatformService {
   // The API version of this service.
@@ -22,6 +23,11 @@ service PlatformService {
     option (qdrant.cloud.common.v1.requires_authentication) = false;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/platform/v1/cloud-providers"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all available cloud providers globally (not account-specific). Authentication is not required."
+      title: "List global cloud providers"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_global_cloud_providers"};
   }
   // Lists all cloud providers in the account identified by the given ID.
   // Required permissions:
@@ -31,6 +37,11 @@ service PlatformService {
     option (common.v1.permissions) = "";
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/platform/v1/accounts/{account_id}/cloud-providers"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all cloud providers in the account identified by the given ID."
+      title: "List cloud providers"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_cloud_providers"};
   }
   // Lists all cloud provider regions (not account-specific) identified by cloud provider ID.
   // Authentication is not required.
@@ -44,6 +55,11 @@ service PlatformService {
       name: "cloud_provider_id"
       field_expression: "cloud_provider_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all cloud provider regions (not account-specific) identified by cloud provider ID. Authentication is not required."
+      title: "List global cloud provider regions"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_global_cloud_provider_regions"};
   }
   // Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID.
   // Authentication is not required.
@@ -61,6 +77,11 @@ service PlatformService {
       name: "region_id"
       field_expression: "region_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets a specific cloud provider region (not account-specific) identified by cloud provider ID and region ID. Authentication is not required."
+      title: "Get global cloud provider region"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_global_cloud_provider_region"};
   }
   // Lists all cloud provider regions in the account identified by the given ID and cloud provider.
   // Required permissions:
@@ -78,6 +99,11 @@ service PlatformService {
       name: "cloud_provider_id"
       field_expression: "cloud_provider_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists all cloud provider regions in the account identified by the given ID and cloud provider."
+      title: "List cloud provider regions"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_cloud_provider_regions"};
   }
   // Gets a specific cloud provider region in the account identified by the given ID and cloud provider.
   // Required permissions:
@@ -99,6 +125,11 @@ service PlatformService {
       name: "region_id"
       field_expression: "region_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets a specific cloud provider region in the account identified by the given ID and cloud provider."
+      title: "Get cloud provider region"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cloud_provider_region"};
   }
 }
 

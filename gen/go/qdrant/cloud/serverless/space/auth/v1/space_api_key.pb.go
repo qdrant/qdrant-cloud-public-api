@@ -10,6 +10,8 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -949,7 +951,7 @@ var File_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto protoreflect.
 
 const file_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto_rawDesc = "" +
 	"\n" +
-	"9qdrant/cloud/serverless/space/auth/v1/space_api_key.proto\x12%qdrant.cloud.serverless.space.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\"g\n" +
+	"9qdrant/cloud/serverless/space/auth/v1/space_api_key.proto\x12%qdrant.cloud.serverless.space.auth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"g\n" +
 	"\x17ListSpaceApiKeysRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
@@ -1030,10 +1032,12 @@ const file_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto_rawDesc = "
 	"\x1eCollectionAccessRuleAccessType\x122\n" +
 	".COLLECTION_ACCESS_RULE_ACCESS_TYPE_UNSPECIFIED\x10\x00\x120\n" +
 	",COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_ONLY\x10\x01\x121\n" +
-	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\xb6\v\n" +
-	"\x12SpaceApiKeyService\x12\x9a\x02\n" +
-	"\x10ListSpaceApiKeys\x12>.qdrant.cloud.serverless.space.auth.v1.ListSpaceApiKeysRequest\x1a?.qdrant.cloud.serverless.space.auth.v1.ListSpaceApiKeysResponse\"\x84\x01\x8a\xb5\x18\x18read:serverless_api_keys\xba\xb5\x18\x14\n" +
-	"\bspace_id\x12\bspace_id\x82\xd3\xe4\x93\x02J\x12H/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/api-keys\x12\xed\x04\n" +
+	"-COLLECTION_ACCESS_RULE_ACCESS_TYPE_READ_WRITE\x10\x022\xb3\f\n" +
+	"\x12SpaceApiKeyService\x12\x97\x03\n" +
+	"\x10ListSpaceApiKeys\x12>.qdrant.cloud.serverless.space.auth.v1.ListSpaceApiKeysRequest\x1a?.qdrant.cloud.serverless.space.auth.v1.ListSpaceApiKeysResponse\"\x81\x02\x8a\xb5\x18\x18read:serverless_api_keys\xba\xb5\x18\x14\n" +
+	"\bspace_id\x12\bspace_id\x8a\xb2\x19`\n" +
+	"GListSpaceApiKeys returns all API keys for a space Required Permissions:\x12\x13List space api keys\x18\x01\xaa\xb8\x19\x15\n" +
+	"\x13list_space_api_keys\x82\xd3\xe4\x93\x02J\x12H/api/serverless/auth/v1/accounts/{account_id}/spaces/{space_id}/api-keys\x12\xed\x04\n" +
 	"\x11CreateSpaceApiKey\x12?.qdrant.cloud.serverless.space.auth.v1.CreateSpaceApiKeyRequest\x1a@.qdrant.cloud.serverless.space.auth.v1.CreateSpaceApiKeyResponse\"\xd4\x03\x8a\xb5\x18\x19write:serverless_api_keys\x92\xb5\x18\x18space_api_key.account_id\xba\xb5\x18\"\n" +
 	"\bspace_id\x12\x16space_api_key.space_id\xba\xb5\x18(\n" +
 	"\x12space_api_key_name\x12\x12space_api_key.name\xca\xf3\x18\xd5\x01\b\x01\x12\x18serverless-space-api-key\"\x15resp.space_api_key.id*x/accounts/{req.space_api_key.account_id}/serverless-spaces/{req.space_api_key.space_id}/api-keys/{resp.space_api_key.id}R&\n" +

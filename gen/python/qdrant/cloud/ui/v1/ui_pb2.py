@@ -25,10 +25,12 @@ _sym_db = _symbol_database.Default()
 from buf.validate import validate_pb2 as buf_dot_validate_dot_validate__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from qdrant.cloud.common.v1 import common_pb2 as qdrant_dot_cloud_dot_common_dot_v1_dot_common__pb2
+from qdrant.cloud.facade.mcp.v1 import mcp_options_pb2 as qdrant_dot_cloud_dot_facade_dot_mcp_dot_v1_dot_mcp__options__pb2
+from qdrant.cloud.facade.v1 import facade_options_pb2 as qdrant_dot_cloud_dot_facade_dot_v1_dot_facade__options__pb2
 from qdrant.cloud.iam.v1 import iam_pb2 as qdrant_dot_cloud_dot_iam_dot_v1_dot_iam__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bqdrant/cloud/ui/v1/ui.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"D\n\x19ListUsersWithRolesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"U\n\x1aListUsersWithRolesResponse\x12\x37\n\x05items\x18\x01 \x03(\x0b\x32!.qdrant.cloud.ui.v1.UserWithRolesR\x05items\"w\n\rUserWithRoles\x12\x35\n\x04user\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\x12/\n\x05roles\x18\x02 \x03(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x05roles2\xe2\x01\n\x12\x41ggregationService\x12\xc3\x01\n\x12ListUsersWithRoles\x12-.qdrant.cloud.ui.v1.ListUsersWithRolesRequest\x1a..qdrant.cloud.ui.v1.ListUsersWithRolesResponse\"N\x8a\xb5\x18\nread:users\x8a\xb5\x18\nread:roles\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02(\x12&/api/ui/v1/accounts/{account_id}/users\x1a\x06\xc2\xb5\x18\x02\x08\x01\x42\xd6\x01\n\x16\x63om.qdrant.cloud.ui.v1B\x07UiProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bqdrant/cloud/ui/v1/ui.proto\x12\x12qdrant.cloud.ui.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"D\n\x19ListUsersWithRolesRequest\x12\'\n\naccount_id\x18\x01 \x01(\tB\x08\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"U\n\x1aListUsersWithRolesResponse\x12\x37\n\x05items\x18\x01 \x03(\x0b\x32!.qdrant.cloud.ui.v1.UserWithRolesR\x05items\"w\n\rUserWithRoles\x12\x35\n\x04user\x18\x01 \x01(\x0b\x32\x19.qdrant.cloud.iam.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\x12/\n\x05roles\x18\x02 \x03(\x0b\x32\x19.qdrant.cloud.iam.v1.RoleR\x05roles2\xd6\x03\n\x12\x41ggregationService\x12\xb7\x03\n\x12ListUsersWithRoles\x12-.qdrant.cloud.ui.v1.ListUsersWithRolesRequest\x1a..qdrant.cloud.ui.v1.ListUsersWithRolesResponse\"\xc1\x02\x8a\xb5\x18\nread:users\x8a\xb5\x18\nread:roles\xa8\xb5\x18\x01\x8a\xb2\x19\xd3\x01\n\xb9\x01Lists users in an account with their assigned roles. This endpoint provides a consolidated view that would otherwise require separate calls to ListUsers and ListUserRoles for each user.\x12\x15List users with roles\xaa\xb8\x19\x17\n\x15list_users_with_roles\x82\xd3\xe4\x93\x02(\x12&/api/ui/v1/accounts/{account_id}/users\x1a\x06\xc2\xb5\x18\x02\x08\x01\x42\xd6\x01\n\x16\x63om.qdrant.cloud.ui.v1B\x07UiProtoP\x01ZHgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/ui/v1;uiv1\xa2\x02\x03QCU\xaa\x02\x12Qdrant.Cloud.Ui.V1\xca\x02\x12Qdrant\\Cloud\\Ui\\V1\xe2\x02\x1eQdrant\\Cloud\\Ui\\V1\\GPBMetadata\xea\x02\x15Qdrant::Cloud::Ui::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -43,13 +45,13 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_AGGREGATIONSERVICE']._loaded_options = None
   _globals['_AGGREGATIONSERVICE']._serialized_options = b'\302\265\030\002\010\001'
   _globals['_AGGREGATIONSERVICE'].methods_by_name['ListUsersWithRoles']._loaded_options = None
-  _globals['_AGGREGATIONSERVICE'].methods_by_name['ListUsersWithRoles']._serialized_options = b'\212\265\030\nread:users\212\265\030\nread:roles\250\265\030\001\202\323\344\223\002(\022&/api/ui/v1/accounts/{account_id}/users'
-  _globals['_LISTUSERSWITHROLESREQUEST']._serialized_start=178
-  _globals['_LISTUSERSWITHROLESREQUEST']._serialized_end=246
-  _globals['_LISTUSERSWITHROLESRESPONSE']._serialized_start=248
-  _globals['_LISTUSERSWITHROLESRESPONSE']._serialized_end=333
-  _globals['_USERWITHROLES']._serialized_start=335
-  _globals['_USERWITHROLES']._serialized_end=454
-  _globals['_AGGREGATIONSERVICE']._serialized_start=457
-  _globals['_AGGREGATIONSERVICE']._serialized_end=683
+  _globals['_AGGREGATIONSERVICE'].methods_by_name['ListUsersWithRoles']._serialized_options = b'\212\265\030\nread:users\212\265\030\nread:roles\250\265\030\001\212\262\031\323\001\n\271\001Lists users in an account with their assigned roles. This endpoint provides a consolidated view that would otherwise require separate calls to ListUsers and ListUserRoles for each user.\022\025List users with roles\252\270\031\027\n\025list_users_with_roles\202\323\344\223\002(\022&/api/ui/v1/accounts/{account_id}/users'
+  _globals['_LISTUSERSWITHROLESREQUEST']._serialized_start=269
+  _globals['_LISTUSERSWITHROLESREQUEST']._serialized_end=337
+  _globals['_LISTUSERSWITHROLESRESPONSE']._serialized_start=339
+  _globals['_LISTUSERSWITHROLESRESPONSE']._serialized_end=424
+  _globals['_USERWITHROLES']._serialized_start=426
+  _globals['_USERWITHROLES']._serialized_end=545
+  _globals['_AGGREGATIONSERVICE']._serialized_start=548
+  _globals['_AGGREGATIONSERVICE']._serialized_end=1018
 # @@protoc_insertion_point(module_scope)
