@@ -128,6 +128,12 @@ service AccountService {
       response_resource_field: "account"
       request_resource_field: "account"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Updates an account identified by the given ID. Some fields can only be updated by specific actors, see the field documentation in the Account message for details."
+      title: "Update account"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_account"};
   }
   // Deletes an account identified by the given ID.
   // Required permissions:
@@ -273,6 +279,12 @@ service AccountService {
       name: "invite_id"
       field_expression: "invite_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes an account invite."
+      title: "Delete account invite"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_account_invite"};
   }
   // Accepts an account invite.
   // The authenticated user's email address must match the email address specified in

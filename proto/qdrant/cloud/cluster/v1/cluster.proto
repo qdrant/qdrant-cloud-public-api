@@ -103,6 +103,12 @@ service ClusterService {
       name: "cluster_name"
       field_expression: "cluster.name"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates a cluster in the account identified by the given ID."
+      title: "Create cluster"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_cluster"};
   }
   // Create a new cluster from an existing backup
   // Required permissions (both):
@@ -135,6 +141,12 @@ service ClusterService {
       name: "cluster_name"
       field_expression: "cluster_name"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Create a new cluster from an existing backup"
+      title: "Create cluster from backup"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_cluster_from_backup"};
   }
 
   // Updates a cluster in the account identified by the given ID.
@@ -179,6 +191,12 @@ service ClusterService {
       response_resource_field: "cluster"
       request_resource_field: "cluster"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Updates a cluster in the account identified by the given ID."
+      title: "Update cluster"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_cluster"};
   }
   // Deletes a cluster in the account identified by the given ID.
   // Required permissions:
@@ -204,6 +222,12 @@ service ClusterService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes a cluster in the account identified by the given ID."
+      title: "Delete cluster"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_cluster"};
   }
   // Restarts a cluster in the account identified by the given ID.
   // Required permissions:
@@ -226,6 +250,12 @@ service ClusterService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Restarts a cluster in the account identified by the given ID."
+      title: "Restart cluster"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "restart_cluster"};
   }
   // Suspends a cluster in the account identified by the given ID.
   // Required permissions:
@@ -248,6 +278,12 @@ service ClusterService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Suspends a cluster in the account identified by the given ID."
+      title: "Suspend cluster"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "suspend_cluster"};
   }
   // Unsuspends a cluster in the account identified by the given ID.
   // Required permissions:
@@ -270,6 +306,12 @@ service ClusterService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Unsuspends a cluster in the account identified by the given ID."
+      title: "Unsuspend cluster"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "unsuspend_cluster"};
   }
   // Enables JWT Role Based Access Control (RBAC) for a cluster (version 1.9+ is required) in the managed cloud environments
   // in the account identified by the given ID.
@@ -295,6 +337,12 @@ service ClusterService {
       name: "cluster_id"
       field_expression: "cluster_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Enables JWT Role Based Access Control (RBAC) for a cluster (version 1.9+ is required) in the managed cloud environments in the account identified by the given ID. This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value. If enabled, you can generate JWT tokens with fine-grained rules for access control."
+      title: "Enable cluster jwt rbac"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "enable_cluster_jwt_rbac"};
   }
   // Suggests a unique and human-friendly name for a new cluster in the specified account.
   // This can be used by clients to pre-fill the name field when creating a new cluster.

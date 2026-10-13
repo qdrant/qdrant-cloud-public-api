@@ -71,6 +71,13 @@ service DatabaseApiKeyService {
       name: "database_api_key_name"
       field_expression: "database_api_key.name"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates a database api key in the account identified by the given ID."
+      title: "Create database api key"
+      sensitive_response: true
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "cluster_auth_create_database_api_key"};
   }
   // Deletes a database api key in the account identified by the given ID.
   // Required permissions:
@@ -100,6 +107,13 @@ service DatabaseApiKeyService {
       name: "database_api_key_id"
       field_expression: "database_api_key_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes a database api key in the account identified by the given ID."
+      title: "Delete database api key"
+      sensitive_response: true
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "cluster_auth_delete_database_api_key"};
   }
 }
 

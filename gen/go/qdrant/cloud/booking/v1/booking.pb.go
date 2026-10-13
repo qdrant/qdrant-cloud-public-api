@@ -2608,7 +2608,7 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\rModelModality\x12\x1e\n" +
 	"\x1aMODEL_MODALITY_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13MODEL_MODALITY_TEXT\x10\x01\x12\x18\n" +
-	"\x14MODEL_MODALITY_IMAGE\x10\x022\xe4\x13\n" +
+	"\x14MODEL_MODALITY_IMAGE\x10\x022\xf4\x18\n" +
 	"\x0eBookingService\x12\xec\x02\n" +
 	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\"\xfe\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
@@ -2625,10 +2625,16 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
 	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x8a\xb2\x19N\n" +
 	"6Lists all public packages. Authentication not required\x12\x14List global packages\xaa\xb8\x19\x16\n" +
-	"\x14list_global_packages\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\x9a\x01\n" +
-	"\x0fGetGlobalQuotes\x12/.qdrant.cloud.booking.v1.GetGlobalQuotesRequest\x1a0.qdrant.cloud.booking.v1.GetGlobalQuotesResponse\"$\x98\xb5\x18\x00\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/booking/v1/quote\x12\xa9\x01\n" +
-	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\"H\x8a\xb5\x18\x0ewrite:clusters\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quote\x12\xc1\x01\n" +
-	"\x0eGetBackupQuote\x12..qdrant.cloud.booking.v1.GetBackupQuoteRequest\x1a/.qdrant.cloud.booking.v1.GetBackupQuoteResponse\"N\x8a\xb5\x18\rwrite:backups\x82\xd3\xe4\x93\x027:\x01*\"2/api/booking/v1/accounts/{account_id}/backup-quote\x12\xa9\x02\n" +
+	"\x14list_global_packages\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/booking/v1/packages\x12\x83\x03\n" +
+	"\x0fGetGlobalQuotes\x12/.qdrant.cloud.booking.v1.GetGlobalQuotesRequest\x1a0.qdrant.cloud.booking.v1.GetGlobalQuotesResponse\"\x8c\x02\x98\xb5\x18\x00\x8a\xb2\x19\xcc\x01\n" +
+	"\xb4\x01Gets price quotes for a batch of cluster configurations. Always prices at standard tier with no discount, since there is no account to discount against. Authentication not required\x12\x11Get global quotes \x01\xaa\xb8\x19\x13\n" +
+	"\x11get_global_quotes\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/booking/v1/quote\x12\xfa\x02\n" +
+	"\bGetQuote\x12(.qdrant.cloud.booking.v1.GetQuoteRequest\x1a).qdrant.cloud.booking.v1.GetQuoteResponse\"\x98\x02\x8a\xb5\x18\x0ewrite:clusters\x8a\xb2\x19\xbc\x01\n" +
+	"\xac\x01Gets a price quote for a cluster configuration. Calculates pricing information including hourly costs, and any applicable discounts for the specified cluster configuration.\x12\tGet quote \x01\xaa\xb8\x19\v\n" +
+	"\tget_quote\x82\xd3\xe4\x93\x020:\x01*\"+/api/booking/v1/accounts/{account_id}/quote\x12\x97\x03\n" +
+	"\x0eGetBackupQuote\x12..qdrant.cloud.booking.v1.GetBackupQuoteRequest\x1a/.qdrant.cloud.booking.v1.GetBackupQuoteResponse\"\xa3\x02\x8a\xb5\x18\rwrite:backups\x8a\xb2\x19\xba\x01\n" +
+	"\xa3\x01Gets a price quote for a backup configuration. Calculates pricing information for storing a backup, based on the specified cloud provider, region, and backup size.\x12\x10Get backup quote \x01\xaa\xb8\x19\x12\n" +
+	"\x10get_backup_quote\x82\xd3\xe4\x93\x027:\x01*\"2/api/booking/v1/accounts/{account_id}/backup-quote\x12\xa9\x02\n" +
 	"\x13ListInferenceModels\x123.qdrant.cloud.booking.v1.ListInferenceModelsRequest\x1a4.qdrant.cloud.booking.v1.ListInferenceModelsResponse\"\xa6\x01\x8a\xb5\x18\x00\x8a\xb2\x19E\n" +
 	",Gets the list of available inference models.\x12\x15List inference models\xaa\xb8\x19\x17\n" +
 	"\x15list_inference_models\x82\xd3\xe4\x93\x028\x126/api/booking/v1/accounts/{account_id}/inference-models\x12\xd8\x02\n" +

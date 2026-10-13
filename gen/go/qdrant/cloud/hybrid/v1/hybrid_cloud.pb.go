@@ -2283,7 +2283,7 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x12#\n" +
 	"\x1fKUBERNETES_DISTRIBUTION_STACKIT\x10\v\x12!\n" +
 	"\x1dKUBERNETES_DISTRIBUTION_VULTR\x10\f\x12\x1f\n" +
-	"\x1bKUBERNETES_DISTRIBUTION_K3S\x10\r2\x9c\x1b\n" +
+	"\x1bKUBERNETES_DISTRIBUTION_K3S\x10\r2\xc3\"\n" +
 	"\x12HybridCloudService\x12\xaf\x03\n" +
 	"\x1bListHybridCloudEnvironments\x12:.qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsRequest\x1a;.qdrant.cloud.hybrid.v1.ListHybridCloudEnvironmentsResponse\"\x96\x02\x8a\xb5\x18\x1eread:hybrid_cloud_environments\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x00\x8a\xb2\x19p\n" +
 	"NLists all hybrid cloud environments in the account identified by the given ID.\x12\x1eList hybrid cloud environments\xaa\xb8\x19 \n" +
@@ -2291,19 +2291,27 @@ const file_qdrant_cloud_hybrid_v1_hybrid_cloud_proto_rawDesc = "" +
 	"\x19GetHybridCloudEnvironment\x128.qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentRequest\x1a9.qdrant.cloud.hybrid.v1.GetHybridCloudEnvironmentResponse\"\xea\x02\x8a\xb5\x18\x1eread:hybrid_cloud_environments\x8a\xb5\x18\x0ewrite:clusters\xa8\xb5\x18\x00\xba\xb5\x18:\n" +
 	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\x8a\xb2\x19j\n" +
 	"JGets a hybrid cloud environment in the account identified by the given ID.\x12\x1cGet hybrid cloud environment\xaa\xb8\x19\x1e\n" +
-	"\x1cget_hybrid_cloud_environment\x82\xd3\xe4\x93\x02^\x12\\/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}\x12\xbf\x04\n" +
-	"\x1cCreateHybridCloudEnvironment\x12;.qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentRequest\x1a<.qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentResponse\"\xa3\x03\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\x92\xb5\x18#hybrid_cloud_environment.account_id\xba\xb5\x18>\n" +
-	"\x1dhybrid_cloud_environment_name\x12\x1dhybrid_cloud_environment.name\xca\xf3\x18\xb0\x01\b\x01\x12\x18hybrid-cloud-environment\" resp.hybrid_cloud_environment.id*p/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{resp.hybrid_cloud_environment.id}\x82\xd3\xe4\x93\x02\\:\x01*\"W/api/hybrid/v1/accounts/{hybrid_cloud_environment.account_id}/hybrid-cloud-environments\x12\xc5\x06\n" +
-	"\x1cUpdateHybridCloudEnvironment\x12;.qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentRequest\x1a<.qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentResponse\"\xa9\x05\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\x92\xb5\x18#hybrid_cloud_environment.account_id\xba\xb5\x18:\n" +
+	"\x1cget_hybrid_cloud_environment\x82\xd3\xe4\x93\x02^\x12\\/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}\x12\xda\x05\n" +
+	"\x1cCreateHybridCloudEnvironment\x12;.qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentRequest\x1a<.qdrant.cloud.hybrid.v1.CreateHybridCloudEnvironmentResponse\"\xbe\x04\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\x92\xb5\x18#hybrid_cloud_environment.account_id\xba\xb5\x18>\n" +
+	"\x1dhybrid_cloud_environment_name\x12\x1dhybrid_cloud_environment.name\xca\xf3\x18\xb0\x01\b\x01\x12\x18hybrid-cloud-environment\" resp.hybrid_cloud_environment.id*p/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{resp.hybrid_cloud_environment.id}\x8a\xb2\x19r\n" +
+	"MCreates a hybrid cloud environment in the account identified by the given ID.\x12\x1fCreate hybrid cloud environment8\x01\xaa\xb8\x19!\n" +
+	"\x1fcreate_hybrid_cloud_environment\x82\xd3\xe4\x93\x02\\:\x01*\"W/api/hybrid/v1/accounts/{hybrid_cloud_environment.account_id}/hybrid-cloud-environments\x12\xe0\a\n" +
+	"\x1cUpdateHybridCloudEnvironment\x12;.qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentRequest\x1a<.qdrant.cloud.hybrid.v1.UpdateHybridCloudEnvironmentResponse\"\xc4\x06\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\x92\xb5\x18#hybrid_cloud_environment.account_id\xba\xb5\x18:\n" +
 	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment.idʵ\x18\xe9\x01\n" +
 	"D/qdrant.cloud.hybrid.v1.HybridCloudService/GetHybridCloudEnvironment\x121\n" +
 	"\n" +
 	"account_id\x12#hybrid_cloud_environment.account_id\x12:\n" +
-	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment.id\x1a\x18hybrid_cloud_environment\"\x18hybrid_cloud_environment\xca\xf3\x18\xae\x01\b\x02\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment.id*o/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment.id}\x82\xd3\xe4\x93\x02z:\x01*\x1au/api/hybrid/v1/accounts/{hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{hybrid_cloud_environment.id}\x12\xfc\x03\n" +
-	"\x1cDeleteHybridCloudEnvironment\x12;.qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentRequest\x1a<.qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentResponse\"\xe0\x02\x8a\xb5\x18 delete:hybrid_cloud_environments\xba\xb5\x18:\n" +
-	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\xca\xf3\x18\x95\x01\b\x03\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment_id*V/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}\x82\xd3\xe4\x93\x02^*\\/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}\x12\xc2\x04\n" +
-	"\x19GenerateBootstrapCommands\x128.qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsRequest\x1a9.qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsResponse\"\xaf\x03\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\x8a\xb5\x18\x15write:management_keys\xa8\xb5\x18\x01\xba\xb5\x18:\n" +
-	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\xca\xf3\x18\xb2\x01\b\x04\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment_id*V/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}2\x1bgenerate-bootstrap-commands\x82\xd3\xe4\x93\x02t:\x01*\"o/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}/bootstrap-commands\x1a\x06µ\x18\x02\b\x01B\xfb\x01\n" +
+	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment.id\x1a\x18hybrid_cloud_environment\"\x18hybrid_cloud_environment\xca\xf3\x18\xae\x01\b\x02\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment.id*o/accounts/{req.hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment.id}\x8a\xb2\x19r\n" +
+	"MUpdates a hybrid cloud environment in the account identified by the given ID.\x12\x1fUpdate hybrid cloud environment8\x01\xaa\xb8\x19!\n" +
+	"\x1fupdate_hybrid_cloud_environment\x82\xd3\xe4\x93\x02z:\x01*\x1au/api/hybrid/v1/accounts/{hybrid_cloud_environment.account_id}/hybrid-cloud-environments/{hybrid_cloud_environment.id}\x12\x97\x05\n" +
+	"\x1cDeleteHybridCloudEnvironment\x12;.qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentRequest\x1a<.qdrant.cloud.hybrid.v1.DeleteHybridCloudEnvironmentResponse\"\xfb\x03\x8a\xb5\x18 delete:hybrid_cloud_environments\xba\xb5\x18:\n" +
+	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\xca\xf3\x18\x95\x01\b\x03\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment_id*V/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}\x8a\xb2\x19r\n" +
+	"MDeletes a hybrid cloud environment in the account identified by the given ID.\x12\x1fDelete hybrid cloud environment8\x01\xaa\xb8\x19!\n" +
+	"\x1fdelete_hybrid_cloud_environment\x82\xd3\xe4\x93\x02^*\\/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}\x12\x98\b\n" +
+	"\x19GenerateBootstrapCommands\x128.qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsRequest\x1a9.qdrant.cloud.hybrid.v1.GenerateBootstrapCommandsResponse\"\x85\a\x8a\xb5\x18\x1fwrite:hybrid_cloud_environments\x8a\xb5\x18\x15write:management_keys\xa8\xb5\x18\x01\xba\xb5\x18:\n" +
+	"\x1bhybrid_cloud_environment_id\x12\x1bhybrid_cloud_environment_id\xca\xf3\x18\xb2\x01\b\x04\x12\x18hybrid-cloud-environment\"\x1freq.hybrid_cloud_environment_id*V/accounts/{req.account_id}/hybrid-cloud-environments/{req.hybrid_cloud_environment_id}2\x1bgenerate-bootstrap-commands\x8a\xb2\x19\xb0\x03\n" +
+	"\x8e\x03Generates the commands that should be executed against a kubernetes cluster to bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times, but be aware that each invocation is going to create new Qdrant cloud access token and the registry credentials. Thus, it makes sense to call it only if a kubernetes cluster is not yet registered to the given hybrid environment.\x12\x1bGenerate bootstrap commands8\x01\xaa\xb8\x19\x1d\n" +
+	"\x1bgenerate_bootstrap_commands\x82\xd3\xe4\x93\x02t:\x01*\"o/api/hybrid/v1/accounts/{account_id}/hybrid-cloud-environments/{hybrid_cloud_environment_id}/bootstrap-commands\x1a\x06µ\x18\x02\b\x01B\xfb\x01\n" +
 	"\x1acom.qdrant.cloud.hybrid.v1B\x10HybridCloudProtoP\x01ZPgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/hybrid/v1;hybridv1\xa2\x02\x03QCH\xaa\x02\x16Qdrant.Cloud.Hybrid.V1\xca\x02\x16Qdrant\\Cloud\\Hybrid\\V1\xe2\x02\"Qdrant\\Cloud\\Hybrid\\V1\\GPBMetadata\xea\x02\x19Qdrant::Cloud::Hybrid::V1b\x06proto3"
 
 var (

@@ -76,6 +76,13 @@ service AuthService {
       name: "management_key_id"
       field_expression: "management_key_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes a management key in the account identified by the given ID."
+      title: "Delete management key"
+      sensitive_response: true
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_management_key"};
   }
 }
 

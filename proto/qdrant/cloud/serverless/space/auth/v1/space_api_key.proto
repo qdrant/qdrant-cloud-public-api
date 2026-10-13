@@ -71,6 +71,13 @@ service SpaceApiKeyService {
       name: "space_api_key_name"
       field_expression: "space_api_key.name"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "CreateSpaceApiKey creates a new API key for a space Required Permissions:"
+      title: "Create space api key"
+      sensitive_response: true
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_space_api_key"};
   }
   // DeleteSpaceApiKey removes an API key from a space
   // Required Permissions:
@@ -100,6 +107,13 @@ service SpaceApiKeyService {
       name: "space_api_key_id"
       field_expression: "space_api_key_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "DeleteSpaceApiKey removes an API key from a space Required Permissions:"
+      title: "Delete space api key"
+      sensitive_response: true
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_space_api_key"};
   }
 }
 

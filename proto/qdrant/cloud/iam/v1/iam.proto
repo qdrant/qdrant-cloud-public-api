@@ -303,6 +303,12 @@ service IAMService {
       name: "role_name"
       field_expression: "role.name"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Creates a role for the account identified by the given ID. Note: The role_type must be ROLE_TYPE_CUSTOM."
+      title: "Create role"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "create_role"};
   }
   // Updates a role in the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
@@ -347,6 +353,12 @@ service IAMService {
       response_resource_field: "role"
       request_resource_field: "role"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Updates a role in the account identified by the given ID. Note: The role_type must be ROLE_TYPE_CUSTOM."
+      title: "Update role"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_role"};
   }
   // Deletes a role in the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
@@ -369,6 +381,12 @@ service IAMService {
       name: "role_id"
       field_expression: "role_id"
     };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Deletes a role in the account identified by the given ID. Note: The role_type must be ROLE_TYPE_CUSTOM."
+      title: "Delete role"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_role"};
   }
   // Lists the effective permissions for the authenticated user in the account identified by the given ID.
   // Required permissions:

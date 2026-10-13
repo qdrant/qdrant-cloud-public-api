@@ -1861,7 +1861,7 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
 	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
 	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
-	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xa2\x1f\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xf0!\n" +
 	"\x0ePaymentService\x12\xb3\x02\n" +
 	"\x12ListPaymentMethods\x122.qdrant.cloud.payment.v1.ListPaymentMethodsRequest\x1a3.qdrant.cloud.payment.v1.ListPaymentMethodsResponse\"\xb3\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19<\n" +
 	"$List payment methods for an account.\x12\x14List payment methods\xaa\xb8\x19\x16\n" +
@@ -1890,9 +1890,11 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"yGet the Stripe Checkout session by its ID. This method is used to retrieve the session details after it has been created.\x12\x1bGet stripe checkout session\x18\x01\xaa\xb8\x19\x1d\n" +
 	"\x1bget_stripe_checkout_session\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/stripe-session/{session_id}\x12\xf6\x02\n" +
 	"\x1bCreateStripeCheckoutSession\x12;.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionRequest\x1a<.qdrant.cloud.payment.v1.CreateStripeCheckoutSessionResponse\"\xdb\x01\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18\x1c\n" +
-	"\fredirect_url\x12\fredirect_url\xe0\xb5\x18\x01\xca\xf3\x18W\b\x04\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}2\x1ecreate-stripe-checkout-session\x82\xd3\xe4\x93\x029:\x01*\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\xc1\x03\n" +
-	"!RecordCloudMarketplaceEntitlement\x12A.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest\x1aB.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse\"\x94\x02\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18,\n" +
-	"\x1amarketplace_entitlement_id\x12\x0eentitlement_id\xca\xf3\x18z\b\x01\x12\x18marketplace-entitlements\"\x12req.entitlement_id*H/accounts/{req.account_id}/marketplace-entitlements/{req.entitlement_id}\x82\xd3\xe4\x93\x02C:\x01*\">/api/payment/v1/accounts/{account_id}/marketplace-entitlements\x1a\bµ\x18\x04\b\x01\x10\x01B\xfe\x01\n" +
+	"\fredirect_url\x12\fredirect_url\xe0\xb5\x18\x01\xca\xf3\x18W\b\x04\x12\aaccount\"\x0ereq.account_id*\x1a/accounts/{req.account_id}2\x1ecreate-stripe-checkout-session\x82\xd3\xe4\x93\x029:\x01*\"4/api/payment/v1/accounts/{account_id}/stripe-session\x12\x8f\x06\n" +
+	"!RecordCloudMarketplaceEntitlement\x12A.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementRequest\x1aB.qdrant.cloud.payment.v1.RecordCloudMarketplaceEntitlementResponse\"\xe2\x04\x8a\xb5\x18\x19write:payment_information\xba\xb5\x18,\n" +
+	"\x1amarketplace_entitlement_id\x12\x0eentitlement_id\xca\xf3\x18z\b\x01\x12\x18marketplace-entitlements\"\x12req.entitlement_id*H/accounts/{req.account_id}/marketplace-entitlements/{req.entitlement_id}\x8a\xb2\x19\x9f\x02\n" +
+	"\xf4\x01Records a cloud marketplace entitlement for the specified account. This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure) and the entitlement needs to be recorded in the payment system.\x12$Record cloud marketplace entitlement8\x01\xaa\xb8\x19&\n" +
+	"$record_cloud_marketplace_entitlement\x82\xd3\xe4\x93\x02C:\x01*\">/api/payment/v1/accounts/{account_id}/marketplace-entitlements\x1a\bµ\x18\x04\b\x01\x10\x01B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.payment.v1B\fPaymentProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/payment/v1;paymentv1\xa2\x02\x03QCP\xaa\x02\x17Qdrant.Cloud.Payment.V1\xca\x02\x17Qdrant\\Cloud\\Payment\\V1\xe2\x02#Qdrant\\Cloud\\Payment\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Payment::V1b\x06proto3"
 
 var (
