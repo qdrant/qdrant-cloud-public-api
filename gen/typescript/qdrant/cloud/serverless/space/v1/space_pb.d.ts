@@ -958,25 +958,13 @@ export declare const SpaceStateSchema: GenMessage<SpaceState, {validType: SpaceS
  */
 export declare type SpaceEndpoint = Message<"qdrant.cloud.serverless.space.v1.SpaceEndpoint"> & {
   /**
-   * URL to access the qdrant space (aka serverless database) without port
+   * URL to access the qdrant space (aka serverless database) without port.
+   * Both HTTP REST and gRPC calls are served on port 443, the HTTPS default,
+   * so the URL can be used as is without specifying a port.
    *
    * @generated from field: string url = 1;
    */
   url: string;
-
-  /**
-   * The port to use for HTTP REST calls (6333)
-   *
-   * @generated from field: int32 rest_port = 2;
-   */
-  restPort: number;
-
-  /**
-   * The port to use for gRPC calls (6334)
-   *
-   * @generated from field: int32 grpc_port = 3;
-   */
-  grpcPort: number;
 };
 
 export declare type SpaceEndpointValid = SpaceEndpoint;

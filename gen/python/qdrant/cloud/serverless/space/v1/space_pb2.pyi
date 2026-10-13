@@ -209,11 +209,7 @@ class SpaceState(_message.Message):
     def __init__(self, phase: _Optional[_Union[SpaceStatePhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[SpaceEndpoint, _Mapping]] = ...) -> None: ...
 
 class SpaceEndpoint(_message.Message):
-    __slots__ = ("url", "rest_port", "grpc_port")
+    __slots__ = ("url",)
     URL_FIELD_NUMBER: _ClassVar[int]
-    REST_PORT_FIELD_NUMBER: _ClassVar[int]
-    GRPC_PORT_FIELD_NUMBER: _ClassVar[int]
     url: str
-    rest_port: int
-    grpc_port: int
-    def __init__(self, url: _Optional[str] = ..., rest_port: _Optional[int] = ..., grpc_port: _Optional[int] = ...) -> None: ...
+    def __init__(self, url: _Optional[str] = ...) -> None: ...
