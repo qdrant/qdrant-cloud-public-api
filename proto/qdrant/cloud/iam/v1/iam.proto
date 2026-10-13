@@ -486,11 +486,6 @@ service IAMService {
     option (common.v1.interactive_only) = true;
     // gRPC Gateway REST call
     option (google.api.http) = {get: "/api/iam/v1/users/me/mfa-methods"};
-    option (qdrant.cloud.facade.v1.facade) = {
-      description: "Lists the user's multi-factor authentication (MFA) methods."
-      title: "List user mfa methods"
-    };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_user_mfa_methods"};
   }
   // Updates a user's multi-factor authentication (MFA) method.
   // Required permissions:

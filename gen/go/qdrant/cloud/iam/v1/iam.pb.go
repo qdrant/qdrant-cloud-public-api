@@ -3323,7 +3323,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x19USER_MFA_METHOD_TYPE_TOTP\x10\x01\x12&\n" +
 	"\"USER_MFA_METHOD_TYPE_RECOVERY_CODE\x10\x02\x12*\n" +
 	"&USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM\x10\x03\x12)\n" +
-	"%USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING\x10\x042\xbb3\n" +
+	"%USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING\x10\x042\xc72\n" +
 	"\n" +
 	"IAMService\x12\xfc\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\"\x7f\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x8a\xb2\x196\n" +
@@ -3398,10 +3398,8 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x0fAssignUserRoles\x12+.qdrant.cloud.iam.v1.AssignUserRolesRequest\x1a,.qdrant.cloud.iam.v1.AssignUserRolesResponse\"\xc8\x01\x8a\xb5\x18\vwrite:roles\xba\xb5\x18\x12\n" +
 	"\auser_id\x12\auser_id\xe0\xb5\x18\x01\xca\xf3\x18Y\b\x04\x12\x04user\"\vreq.user_id*4/accounts/{req.account_id}/users/{req.user_id}/roles2\fassign-roles\x82\xd3\xe4\x93\x02<:\x01*\"7/api/iam/v1/accounts/{account_id}/users/{user_id}/roles\x12\xd8\x01\n" +
 	"\n" +
-	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"y\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\xca\xf3\x18A\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logout\x12\xa4\x02\n" +
-	"\x12ListUserMfaMethods\x12..qdrant.cloud.iam.v1.ListUserMfaMethodsRequest\x1a/.qdrant.cloud.iam.v1.ListUserMfaMethodsResponse\"\xac\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\x8a\xb2\x19T\n" +
-	";Lists the user's multi-factor authentication (MFA) methods.\x12\x15List user mfa methods\xaa\xb8\x19\x17\n" +
-	"\x15list_user_mfa_methods\x82\xd3\xe4\x93\x02\"\x12 /api/iam/v1/users/me/mfa-methods\x12\x8b\x03\n" +
+	"LogoutUser\x12&.qdrant.cloud.iam.v1.LogoutUserRequest\x1a'.qdrant.cloud.iam.v1.LogoutUserResponse\"y\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\xca\xf3\x18A\b\x04\x12\x04user\"\x12req-md.qc-actor-id*\x1b/users/{req-md.qc-actor-id}2\x06logout\x82\xd3\xe4\x93\x02\x1d\"\x1b/api/iam/v1/users/me/logout\x12\xb0\x01\n" +
+	"\x12ListUserMfaMethods\x12..qdrant.cloud.iam.v1.ListUserMfaMethodsRequest\x1a/.qdrant.cloud.iam.v1.ListUserMfaMethodsResponse\"9\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\x82\xd3\xe4\x93\x02\"\x12 /api/iam/v1/users/me/mfa-methods\x12\x8b\x03\n" +
 	"\x13UpdateUserMfaMethod\x12/.qdrant.cloud.iam.v1.UpdateUserMfaMethodRequest\x1a0.qdrant.cloud.iam.v1.UpdateUserMfaMethodResponse\"\x90\x02\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18%\n" +
 	"\vexternal_id\x12\x16mfa_method.external_id\xe0\xb5\x18\x01\xca\xf3\x18\x90\x01\b\x02\x12\n" +
 	"mfa-method\"\x1areq.mfa_method.external_id*D/users/{req-md.qc-actor-id}/mfa-methods/{req.mfa_method.external_id}R\x1e\n" +
