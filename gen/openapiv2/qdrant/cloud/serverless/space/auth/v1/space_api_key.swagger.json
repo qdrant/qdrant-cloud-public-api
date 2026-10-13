@@ -315,6 +315,10 @@
         "scope": {
           "$ref": "#/definitions/v1OauthScope",
           "description": "OAuth access-class when credential_type is OAUTH_DELEGATED."
+        },
+        "platformHandler": {
+          "$ref": "#/definitions/v1PlatformHandler",
+          "description": "Which platform API handler received the request (gRPC, gRPC-Gateway, Connect, MCP, GraphQL).\nOmitted on legacy events; new publishers should set it when available."
         }
       },
       "description": "Caller identifies the authenticated actor that performed an action on a resource."
@@ -417,6 +421,20 @@
       ],
       "default": "OAUTH_SCOPE_UNSPECIFIED",
       "description": "OauthScope is the OAuth access-class for delegated credentials.\nDistinct from permission verbs (read/write/delete) and from RBAC resource scope.\nWire scope strings stay \"read-only\" and \"manage\".\nNamed OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.\n\n - OAUTH_SCOPE_UNSPECIFIED: Unspecified / unknown (or omitted on legacy events).\n - OAUTH_SCOPE_READ_ONLY: Read-class access only (wire: \"read-only\").\n - OAUTH_SCOPE_MANAGE: Full manage-class access (wire: \"manage\")."
+    },
+    "v1PlatformHandler": {
+      "type": "string",
+      "enum": [
+        "PLATFORM_HANDLER_UNSPECIFIED",
+        "PLATFORM_HANDLER_GRPC",
+        "PLATFORM_HANDLER_GRPC_GATEWAY",
+        "PLATFORM_HANDLER_CONNECT",
+        "PLATFORM_HANDLER_MCP",
+        "PLATFORM_HANDLER_GRAPHQL",
+        "PLATFORM_HANDLER_UNKNOWN"
+      ],
+      "default": "PLATFORM_HANDLER_UNSPECIFIED",
+      "description": "PlatformHandler identifies which API gateway / protocol handler received the request.\nUsed on Caller for audit attribution of how the call entered the platform.\n\n - PLATFORM_HANDLER_UNSPECIFIED: Unspecified; not a valid platform handler (or omitted on legacy events).\n - PLATFORM_HANDLER_GRPC: Native gRPC.\n - PLATFORM_HANDLER_GRPC_GATEWAY: gRPC-Gateway (HTTP/JSON transcoding to gRPC).\n - PLATFORM_HANDLER_CONNECT: Connect protocol.\n - PLATFORM_HANDLER_MCP: Model Context Protocol (MCP).\n - PLATFORM_HANDLER_GRAPHQL: GraphQL.\n - PLATFORM_HANDLER_UNKNOWN: Handler could not be determined."
     },
     "v1SpaceApiKey": {
       "type": "object",
