@@ -67,9 +67,22 @@ When `interactive_only` is unset or `false`, any credential that passes actor-ty
 | `CREDENTIAL_TYPE_SERVICE` | Service-to-service credential |
 | `CREDENTIAL_TYPE_OAUTH_DELEGATED` | Short-lived delegated JWT after OAuth token exchange |
 
-`Caller` may also carry `credential_id`, `acting_client_id` (OAuth client / CIMD URL), and `scope` (`OauthScope`: `READ_ONLY` / `MANAGE`, OAuth wire strings `read-only` / `manage`) when relevant. These fields are optional so legacy events remain valid.
+`Caller` may also carry `credential_id`, `acting_client_id` (OAuth client / CIMD URL), `scope` (`OauthScope`: `READ_ONLY` / `MANAGE`, OAuth wire strings `read-only` / `manage`), and `platform_handler` when relevant. These fields are optional so legacy events remain valid.
 
 `OauthScope` is the shared access-class enum for delegated OAuth credentials (on `Caller` and IAM `AuthenticateResponse` / `ExchangeToken`). It is not a permission verb and not an RBAC resource scope.
+
+### Platform handler
+
+`PlatformHandler` (in `common.v1`) identifies which API gateway / protocol handler received the request. It is carried on `Caller` for audit attribution:
+
+| Value | Meaning |
+| --- | --- |
+| `PLATFORM_HANDLER_GRPC` | Native gRPC |
+| `PLATFORM_HANDLER_GRPC_GATEWAY` | gRPC-Gateway (HTTP/JSON transcoding) |
+| `PLATFORM_HANDLER_CONNECT` | Connect protocol |
+| `PLATFORM_HANDLER_MCP` | Model Context Protocol |
+| `PLATFORM_HANDLER_GRAPHQL` | GraphQL |
+| `PLATFORM_HANDLER_UNKNOWN` | Handler could not be determined |
 
 ## Authorization
 

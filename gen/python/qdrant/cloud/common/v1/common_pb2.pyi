@@ -31,6 +31,16 @@ class OauthScope(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     OAUTH_SCOPE_READ_ONLY: _ClassVar[OauthScope]
     OAUTH_SCOPE_MANAGE: _ClassVar[OauthScope]
 
+class PlatformHandler(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    PLATFORM_HANDLER_UNSPECIFIED: _ClassVar[PlatformHandler]
+    PLATFORM_HANDLER_GRPC: _ClassVar[PlatformHandler]
+    PLATFORM_HANDLER_GRPC_GATEWAY: _ClassVar[PlatformHandler]
+    PLATFORM_HANDLER_CONNECT: _ClassVar[PlatformHandler]
+    PLATFORM_HANDLER_MCP: _ClassVar[PlatformHandler]
+    PLATFORM_HANDLER_GRAPHQL: _ClassVar[PlatformHandler]
+    PLATFORM_HANDLER_UNKNOWN: _ClassVar[PlatformHandler]
+
 class StorageTierType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     STORAGE_TIER_TYPE_UNSPECIFIED: _ClassVar[StorageTierType]
@@ -56,6 +66,13 @@ CREDENTIAL_TYPE_OAUTH_DELEGATED: CredentialType
 OAUTH_SCOPE_UNSPECIFIED: OauthScope
 OAUTH_SCOPE_READ_ONLY: OauthScope
 OAUTH_SCOPE_MANAGE: OauthScope
+PLATFORM_HANDLER_UNSPECIFIED: PlatformHandler
+PLATFORM_HANDLER_GRPC: PlatformHandler
+PLATFORM_HANDLER_GRPC_GATEWAY: PlatformHandler
+PLATFORM_HANDLER_CONNECT: PlatformHandler
+PLATFORM_HANDLER_MCP: PlatformHandler
+PLATFORM_HANDLER_GRAPHQL: PlatformHandler
+PLATFORM_HANDLER_UNKNOWN: PlatformHandler
 STORAGE_TIER_TYPE_UNSPECIFIED: StorageTierType
 STORAGE_TIER_TYPE_COST_OPTIMISED: StorageTierType
 STORAGE_TIER_TYPE_BALANCED: StorageTierType
@@ -104,7 +121,7 @@ class PatchSource(_message.Message):
     def __init__(self, get_method: _Optional[str] = ..., field_mapping: _Optional[_Mapping[str, str]] = ..., response_resource_field: _Optional[str] = ..., request_resource_field: _Optional[str] = ...) -> None: ...
 
 class Caller(_message.Message):
-    __slots__ = ("actor_id", "actor_type", "user_agent", "credential_type", "credential_id", "acting_client_id", "scope")
+    __slots__ = ("actor_id", "actor_type", "user_agent", "credential_type", "credential_id", "acting_client_id", "scope", "platform_handler")
     ACTOR_ID_FIELD_NUMBER: _ClassVar[int]
     ACTOR_TYPE_FIELD_NUMBER: _ClassVar[int]
     USER_AGENT_FIELD_NUMBER: _ClassVar[int]
@@ -112,6 +129,7 @@ class Caller(_message.Message):
     CREDENTIAL_ID_FIELD_NUMBER: _ClassVar[int]
     ACTING_CLIENT_ID_FIELD_NUMBER: _ClassVar[int]
     SCOPE_FIELD_NUMBER: _ClassVar[int]
+    PLATFORM_HANDLER_FIELD_NUMBER: _ClassVar[int]
     actor_id: str
     actor_type: ActorType
     user_agent: str
@@ -119,7 +137,8 @@ class Caller(_message.Message):
     credential_id: str
     acting_client_id: str
     scope: OauthScope
-    def __init__(self, actor_id: _Optional[str] = ..., actor_type: _Optional[_Union[ActorType, str]] = ..., user_agent: _Optional[str] = ..., credential_type: _Optional[_Union[CredentialType, str]] = ..., credential_id: _Optional[str] = ..., acting_client_id: _Optional[str] = ..., scope: _Optional[_Union[OauthScope, str]] = ...) -> None: ...
+    platform_handler: PlatformHandler
+    def __init__(self, actor_id: _Optional[str] = ..., actor_type: _Optional[_Union[ActorType, str]] = ..., user_agent: _Optional[str] = ..., credential_type: _Optional[_Union[CredentialType, str]] = ..., credential_id: _Optional[str] = ..., acting_client_id: _Optional[str] = ..., scope: _Optional[_Union[OauthScope, str]] = ..., platform_handler: _Optional[_Union[PlatformHandler, str]] = ...) -> None: ...
 
 class LogField(_message.Message):
     __slots__ = ("name", "field_expression")

@@ -124,6 +124,14 @@ export declare type Caller = Message<"qdrant.cloud.common.v1.Caller"> & {
    * @generated from field: optional qdrant.cloud.common.v1.OauthScope scope = 7;
    */
   scope?: OauthScope | undefined;
+
+  /**
+   * Which platform API handler received the request (gRPC, gRPC-Gateway, Connect, MCP, GraphQL).
+   * Omitted on legacy events; new publishers should set it when available.
+   *
+   * @generated from field: optional qdrant.cloud.common.v1.PlatformHandler platform_handler = 8;
+   */
+  platformHandler?: PlatformHandler | undefined;
 };
 
 export declare type CallerValid = Caller;
@@ -788,6 +796,68 @@ export enum OauthScope {
  * Describes the enum qdrant.cloud.common.v1.OauthScope.
  */
 export declare const OauthScopeSchema: GenEnum<OauthScope>;
+
+/**
+ * PlatformHandler identifies which API gateway / protocol handler received the request.
+ * Used on Caller for audit attribution of how the call entered the platform.
+ *
+ * @generated from enum qdrant.cloud.common.v1.PlatformHandler
+ */
+export enum PlatformHandler {
+  /**
+   * Unspecified; not a valid platform handler (or omitted on legacy events).
+   *
+   * @generated from enum value: PLATFORM_HANDLER_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Native gRPC.
+   *
+   * @generated from enum value: PLATFORM_HANDLER_GRPC = 1;
+   */
+  GRPC = 1,
+
+  /**
+   * gRPC-Gateway (HTTP/JSON transcoding to gRPC).
+   *
+   * @generated from enum value: PLATFORM_HANDLER_GRPC_GATEWAY = 2;
+   */
+  GRPC_GATEWAY = 2,
+
+  /**
+   * Connect protocol.
+   *
+   * @generated from enum value: PLATFORM_HANDLER_CONNECT = 3;
+   */
+  CONNECT = 3,
+
+  /**
+   * Model Context Protocol (MCP).
+   *
+   * @generated from enum value: PLATFORM_HANDLER_MCP = 4;
+   */
+  MCP = 4,
+
+  /**
+   * GraphQL.
+   *
+   * @generated from enum value: PLATFORM_HANDLER_GRAPHQL = 5;
+   */
+  GRAPHQL = 5,
+
+  /**
+   * Handler could not be determined.
+   *
+   * @generated from enum value: PLATFORM_HANDLER_UNKNOWN = 6;
+   */
+  UNKNOWN = 6,
+}
+
+/**
+ * Describes the enum qdrant.cloud.common.v1.PlatformHandler.
+ */
+export declare const PlatformHandlerSchema: GenEnum<PlatformHandler>;
 
 /**
  * StorageTierType defines type of storage performance tiers which maps to predefined IOPS and Throughput amount

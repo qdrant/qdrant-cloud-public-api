@@ -189,6 +189,25 @@ enum OauthScope {
   OAUTH_SCOPE_MANAGE = 2;
 }
 
+// PlatformHandler identifies which API gateway / protocol handler received the request.
+// Used on Caller for audit attribution of how the call entered the platform.
+enum PlatformHandler {
+  // Unspecified; not a valid platform handler (or omitted on legacy events).
+  PLATFORM_HANDLER_UNSPECIFIED = 0;
+  // Native gRPC.
+  PLATFORM_HANDLER_GRPC = 1;
+  // gRPC-Gateway (HTTP/JSON transcoding to gRPC).
+  PLATFORM_HANDLER_GRPC_GATEWAY = 2;
+  // Connect protocol.
+  PLATFORM_HANDLER_CONNECT = 3;
+  // Model Context Protocol (MCP).
+  PLATFORM_HANDLER_MCP = 4;
+  // GraphQL.
+  PLATFORM_HANDLER_GRAPHQL = 5;
+  // Handler could not be determined.
+  PLATFORM_HANDLER_UNKNOWN = 6;
+}
+
 // Caller identifies the authenticated actor that performed an action on a resource.
 message Caller {
   // Unique identifier of the actor (user UUID, management-key id, service-account id, …).
@@ -214,6 +233,12 @@ message Caller {
   optional string acting_client_id = 6 [(buf.validate.field).string.min_len = 1];
   // OAuth access-class when credential_type is OAUTH_DELEGATED.
   optional OauthScope scope = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Which platform API handler received the request (gRPC, gRPC-Gateway, Connect, MCP, GraphQL).
+  // Omitted on legacy events; new publishers should set it when available.
+  optional PlatformHandler platform_handler = 8 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
   }];
