@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package qdrant.cloud.facade.mcp.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/descriptor.proto";
+
+// MCP-specific method options that overlay the shared facade metadata in
+// qdrant.cloud.facade.v1. Presence of this option marks the RPC as eligible
+// for the MCP tool catalog (subject to gateway flags such as enableMCP and
+// mcpExposeMutations, and to HTTP-verb / allow_mutation filters).
+//
+// Shared description, title, sensitive_response, allow_mutation, and
+// operation hints live on (qdrant.cloud.facade.v1.facade). Field hide /
+// description live on (qdrant.cloud.facade.v1.facade_field).
+//
+// Example (together with facade options):
+//  option (qdrant.cloud.facade.v1.facade) = {
+//    description: "List all clusters in an account."
+//    title: "List clusters"
+//  };
+//  option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+//    name: "list_clusters"
+//  };
+//
+extend google.protobuf.MethodOptions {
+  // MCP tool overlay for this RPC (stable tool name).
+  // Extension number 52101 is in the facade.mcp overlay range.
+  McpToolOptions mcp_tool = 52101;
+}
+
+// McpToolOptions holds MCP-only tool metadata that does not apply to GraphQL
+// or other facades.
+message McpToolOptions {
+  // Stable MCP tool name: [A-Za-z0-9_-]+, unique across the public catalog.
+  string name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    pattern: "^[A-Za-z0-9_-]+$"
+  }];
+}

@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package qdrant.cloud.facade.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/descriptor.proto";
+
+// Shared method options for API gateway facades (MCP tools, GraphQL roots, and
+// future consumers). Presence of this option marks the RPC as eligible for
+// facade exposure, subject to each facade's filters and overlays.
+//
+// Methods with common.v1.interactive_only are never exposed over MCP (or other
+// agent facades that use personal API keys / OAuth-delegated credentials):
+// those credential types are rejected on interactive_only RPCs by the API
+// gateway after qdrant/qdrant-cloud-api-gateway#674.
+//
+// Facade-specific overlays live under nested packages, for example:
+//   - qdrant.cloud.facade.mcp.v1 (extension range 521xx)
+//   - reserved 522xx for a future GraphQL overlay
+//
+// Example:
+//  option (qdrant.cloud.facade.v1.facade) = {
+//    description:
+//      "List all clusters in an account. Use list_accounts first if the "
+//      "account ID is unknown. Returns cluster IDs, names, state, and "
+//      "endpoint URLs."
+//    title: "List clusters"
+//  };
+//
+extend google.protobuf.MethodOptions {
+  // Shared facade metadata for this RPC (description, title, sensitivity, hints).
+  // Extension number 52001 is in the Qdrant public-api custom-option range
+  // (common uses 50xxx; events uses 51xxx).
+  FacadeMethodOptions facade = 52001;
+}
+
+// Shared field options for request-message fields consumed by gateway facades.
+// Ignored on response fields.
+//
+// Example:
+//  string account_id = 1 [
+//    (buf.validate.field).string.uuid = true,
+//    (qdrant.cloud.facade.v1.facade_field) = {
+//      description: "Account UUID from list_accounts"
+//    }
+//  ];
+//
+extend google.protobuf.FieldOptions {
+  // Shared facade field metadata (hide from input schema, description).
+  FacadeFieldOptions facade_field = 52002;
+}
+
+// FacadeMethodOptions holds agent- and UI-facing metadata shared by MCP and
+// GraphQL (and other facades) for a single RPC.
+message FacadeMethodOptions {
+  // Required human-facing description used by MCP tools and GraphQL roots.
+  // Reflection does not carry proto source comments, so this is the source of
+  // truth for facade documentation strings.
+  string description = 1 [(buf.validate.field).string.min_len = 1];
+  // Optional short display title (for example MCP ToolAnnotations.title).
+  string title = 2;
+  // When true, the response may contain secrets; facades should apply
+  // sensitive-response handling and/or exclude the RPC by default.
+  bool sensitive_response = 3;
+  // Optional overrides when HTTP-verb heuristics for read-only / destructive /
+  // idempotent classification are wrong. Facades map these to their own
+  // annotation models (for example MCP ToolAnnotations). When set true,
+  // read_only_hint also treats the RPC as read for the allow_mutation /
+  // expose-mutations gate (see allow_mutation).
+  optional bool read_only_hint = 4;
+  // Optional override for destructive classification.
+  optional bool destructive_hint = 5;
+  // Optional override for idempotent classification.
+  optional bool idempotent_hint = 6;
+  // When true, mutating RPCs may be exposed by facades that support mutations
+  // when their expose-mutations flag is on (for example MCP mcpExposeMutations,
+  // or a future GraphQL Mutation surface). Default false means read-only
+  // facades only.
+  //
+  // Classification for this gate: HTTP GET is always read; otherwise the RPC is
+  // mutating unless read_only_hint is set to true. POST/PUT/PATCH "reads"
+  // (for example GetQuote) should set read_only_hint=true and do **not** need
+  // allow_mutation. Set allow_mutation only for true side-effecting RPCs that
+  // should appear when expose-mutations is enabled.
+  bool allow_mutation = 7;
+}
+
+// FacadeFieldOptions holds per-field hints for facade input schemas.
+message FacadeFieldOptions {
+  // When true, omit this request field from the facade input schema
+  // (for example output-only or gateway-injected fields).
+  bool hide = 1;
+  // Override or supply the JSON Schema / GraphQL argument description.
+  string description = 2;
+}
