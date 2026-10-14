@@ -9,6 +9,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/graphql/v1/graphql_options.proto";
 import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
 import "qdrant/cloud/facade/v1/facade_options.proto";
 import "qdrant/cloud/iam/v1/iam.proto";
@@ -35,6 +36,10 @@ service AccountService {
       title: "List accounts"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_accounts"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "accounts"
+      response_path: "items"
+    };
   }
   // Gets an account identified by the given ID.
   // Required permissions:
@@ -49,6 +54,10 @@ service AccountService {
       title: "Get account"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_account"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "account"
+      response_path: "account"
+    };
   }
   // Creates an account for the authenticated user.
   // Required permissions:

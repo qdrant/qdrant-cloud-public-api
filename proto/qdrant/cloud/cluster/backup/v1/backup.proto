@@ -11,6 +11,7 @@ import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/cluster/v1/cluster.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/graphql/v1/graphql_options.proto";
 import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
 import "qdrant/cloud/facade/v1/facade_options.proto";
 // BackupService is the API used to configure backup objects.
@@ -43,6 +44,27 @@ service BackupService {
       title: "List cluster backups"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_backups"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "backups"
+      response_path: "items"
+    };
+    option (qdrant.cloud.facade.graphql.v1.graphql_nested) = {
+      parent_type: "qdrant.cloud.cluster.v1.Cluster"
+      field: "backups"
+      response_path: "items"
+      batch: true
+      description: "The backups associated with this cluster"
+      inputs: [
+        {
+          proto_path: "cluster_id"
+          parent_path: "id"
+        },
+        {
+          proto_path: "account_id"
+          parent_path: "account_id"
+        }
+      ]
+    };
   }
   // Gets a backup in the account identified by the given ID.
   // Required permissions:
@@ -62,6 +84,10 @@ service BackupService {
       title: "Get cluster backup"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_backup"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "backup"
+      response_path: "backup"
+    };
   }
   // Creates a backup for the cluster identified by the given ID.
   // Required permissions:
@@ -236,6 +262,27 @@ service BackupService {
       title: "List cluster backup schedules"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_backup_schedules"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "backupSchedules"
+      response_path: "items"
+    };
+    option (qdrant.cloud.facade.graphql.v1.graphql_nested) = {
+      parent_type: "qdrant.cloud.cluster.v1.Cluster"
+      field: "backupSchedules"
+      response_path: "items"
+      batch: true
+      description: "The backup schedules associated with this cluster"
+      inputs: [
+        {
+          proto_path: "cluster_id"
+          parent_path: "id"
+        },
+        {
+          proto_path: "account_id"
+          parent_path: "account_id"
+        }
+      ]
+    };
   }
   // Gets a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -259,6 +306,10 @@ service BackupService {
       title: "Get cluster backup schedule"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_backup_schedule"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "backupSchedule"
+      response_path: "backup_schedule"
+    };
   }
   // Creates a backup schedule in the account identified by the given ID.
   // Required permissions:

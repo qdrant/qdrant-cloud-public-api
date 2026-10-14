@@ -5,6 +5,7 @@ package qdrant.cloud.serverless.quota.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/facade/graphql/v1/graphql_options.proto";
 import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
 import "qdrant/cloud/facade/v1/facade_options.proto";
 // QuotaService exposes serverless **account-level** platform quotas and aggregated usage.
@@ -27,6 +28,10 @@ service QuotaService {
       title: "Get serverless quotas"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_serverless_quotas"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "serverlessQuotas"
+      response_path: "quota"
+    };
   }
 }
 

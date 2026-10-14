@@ -7,6 +7,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/facade/graphql/v1/graphql_options.proto";
 import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
 import "qdrant/cloud/facade/v1/facade_options.proto";
 // MonitoringService provides access to monitoring data for serverless spaces,
@@ -39,6 +40,27 @@ service MonitoringService {
       title: "Get space summary metrics"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space_summary_metrics"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "spaceSummaryMetrics"
+      response_path: "items"
+    };
+    option (qdrant.cloud.facade.graphql.v1.graphql_nested) = {
+      parent_type: "qdrant.cloud.serverless.space.v1.Space"
+      field: "summaryMetrics"
+      response_path: "items"
+      batch: true
+      description: "Per-collection summary metrics for this serverless space"
+      inputs: [
+        {
+          proto_path: "space_id"
+          parent_path: "id"
+        },
+        {
+          proto_path: "account_id"
+          parent_path: "account_id"
+        }
+      ]
+    };
   }
   // Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
   // Metrics are aggregated per collection and may be paginated (a space can have many collections).
@@ -101,6 +123,27 @@ service MonitoringService {
       title: "List space alerts"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_space_alerts"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "spaceAlerts"
+      response_path: "items"
+    };
+    option (qdrant.cloud.facade.graphql.v1.graphql_nested) = {
+      parent_type: "qdrant.cloud.serverless.space.v1.Space"
+      field: "alerts"
+      response_path: "items"
+      batch: true
+      description: "Alerts for this serverless space"
+      inputs: [
+        {
+          proto_path: "space_id"
+          parent_path: "id"
+        },
+        {
+          proto_path: "account_id"
+          parent_path: "account_id"
+        }
+      ]
+    };
   }
 }
 

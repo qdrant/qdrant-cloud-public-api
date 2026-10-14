@@ -10,6 +10,7 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/graphql/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -5170,7 +5171,7 @@ var File_qdrant_cloud_cluster_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xb2\x06\n" +
+	"%qdrant/cloud/cluster/v1/cluster.proto\x12\x17qdrant.cloud.cluster.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xb2\x06\n" +
 	"\x13ListClustersRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x128\n" +
@@ -5691,18 +5692,20 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1aClusterBackupSupportStatus\x12-\n" +
 	")CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED\x10\x01\x12/\n" +
-	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xf83\n" +
-	"\x0eClusterService\x12\xeb\x02\n" +
-	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"\xfd\x01\x8a\xb5\x18\rread:clusters\x8a\xb2\x19\x9e\x01\n" +
+	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xbe4\n" +
+	"\x0eClusterService\x12\x80\x03\n" +
+	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"\x92\x02\x8a\xb5\x18\rread:clusters\x8a\xb2\x19\x9e\x01\n" +
 	"\x8c\x01List all clusters in an account. Use list_accounts first if the account ID is unknown. Returns cluster IDs, names, state, and endpoint URLs.\x12\rList clusters\xaa\xb8\x19\x0f\n" +
-	"\rlist_clusters\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xae\x02\n" +
+	"\rlist_clustersʾ\x19\x11\n" +
+	"\bclusters\x12\x05items\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xc4\x02\n" +
 	"\n" +
-	"GetCluster\x12*.qdrant.cloud.cluster.v1.GetClusterRequest\x1a+.qdrant.cloud.cluster.v1.GetClusterResponse\"\xc6\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"GetCluster\x12*.qdrant.cloud.cluster.v1.GetClusterRequest\x1a+.qdrant.cloud.cluster.v1.GetClusterResponse\"\xdc\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\x8a\xb2\x19A\n" +
 	"2Get a single cluster by account ID and cluster ID.\x12\vGet cluster\xaa\xb8\x19\r\n" +
-	"\vget_cluster\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\x93\x05\n" +
+	"\vget_clusterʾ\x19\x12\n" +
+	"\acluster\x12\acluster\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\x93\x05\n" +
 	"\x17GetClusterDownscaleRisk\x127.qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest\x1a8.qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse\"\x84\x04\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
@@ -5767,13 +5770,14 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x17enable_cluster_jwt_rbac\x82\xd3\xe4\x93\x02H\"F/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/enable-jwt\x12\xa8\x03\n" +
 	"\x12SuggestClusterName\x122.qdrant.cloud.cluster.v1.SuggestClusterNameRequest\x1a3.qdrant.cloud.cluster.v1.SuggestClusterNameResponse\"\xa8\x02\x8a\xb5\x18\x00\x8a\xb2\x19\xc2\x01\n" +
 	"\xa9\x01Suggests a unique and human-friendly name for a new cluster in the specified account. This can be used by clients to pre-fill the name field when creating a new cluster.\x12\x14Suggest cluster name\xaa\xb8\x19\x16\n" +
-	"\x14suggest_cluster_name\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/suggest-name\x12\xd8\x02\n" +
-	"\x12ListQdrantReleases\x122.qdrant.cloud.cluster.v1.ListQdrantReleasesRequest\x1a3.qdrant.cloud.cluster.v1.ListQdrantReleasesResponse\"\xd8\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"\x14suggest_cluster_name\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/suggest-name\x12\xf3\x02\n" +
+	"\x12ListQdrantReleases\x122.qdrant.cloud.cluster.v1.ListQdrantReleasesRequest\x1a3.qdrant.cloud.cluster.v1.ListQdrantReleasesResponse\"\xf3\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\x8a\xb2\x19W\n" +
 	"?List available Qdrant releases, optionally filtered by cluster.\x12\x14List Qdrant releases\xaa\xb8\x19\x16\n" +
-	"\x14list_qdrant_releases\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/releases\x12\xde\x02\n" +
+	"\x14list_qdrant_releasesʾ\x19\x17\n" +
+	"\x0eqdrantReleases\x12\x05items\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/releases\x12\xde\x02\n" +
 	"\x10GetQdrantRelease\x120.qdrant.cloud.cluster.v1.GetQdrantReleaseRequest\x1a1.qdrant.cloud.cluster.v1.GetQdrantReleaseResponse\"\xe4\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x12\n" +
 	"\aversion\x12\aversion\x8a\xb2\x19a\n" +
 	"KGets a Qdrant release by version in the account identified by the given ID.\x12\x12Get qdrant release\xaa\xb8\x19\x14\n" +

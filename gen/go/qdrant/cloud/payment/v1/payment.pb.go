@@ -10,6 +10,7 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/graphql/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -1716,7 +1717,7 @@ var File_qdrant_cloud_payment_v1_payment_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/payment/v1/payment.proto\x12\x17qdrant.cloud.payment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"D\n" +
+	"%qdrant/cloud/payment/v1/payment.proto\x12\x17qdrant.cloud.payment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"D\n" +
 	"\x19ListPaymentMethodsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"Z\n" +
@@ -1861,15 +1862,17 @@ const file_qdrant_cloud_payment_v1_payment_proto_rawDesc = "" +
 	"*STRIPE_SETUP_INTENT_STATUS_REQUIRES_ACTION\x10\x03\x12)\n" +
 	"%STRIPE_SETUP_INTENT_STATUS_PROCESSING\x10\x04\x12'\n" +
 	"#STRIPE_SETUP_INTENT_STATUS_CANCELED\x10\x05\x12(\n" +
-	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xf0!\n" +
-	"\x0ePaymentService\x12\xb3\x02\n" +
-	"\x12ListPaymentMethods\x122.qdrant.cloud.payment.v1.ListPaymentMethodsRequest\x1a3.qdrant.cloud.payment.v1.ListPaymentMethodsResponse\"\xb3\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19<\n" +
+	"$STRIPE_SETUP_INTENT_STATUS_SUCCEEDED\x10\x062\xae\"\n" +
+	"\x0ePaymentService\x12\xce\x02\n" +
+	"\x12ListPaymentMethods\x122.qdrant.cloud.payment.v1.ListPaymentMethodsRequest\x1a3.qdrant.cloud.payment.v1.ListPaymentMethodsResponse\"\xce\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19<\n" +
 	"$List payment methods for an account.\x12\x14List payment methods\xaa\xb8\x19\x16\n" +
-	"\x14list_payment_methods\x82\xd3\xe4\x93\x027\x125/api/payment/v1/accounts/{account_id}/payment-methods\x12\xe5\x02\n" +
-	"\x10GetPaymentMethod\x120.qdrant.cloud.payment.v1.GetPaymentMethodRequest\x1a1.qdrant.cloud.payment.v1.GetPaymentMethodResponse\"\xeb\x01\x8a\xb5\x18\x18read:payment_information\xba\xb5\x18&\n" +
+	"\x14list_payment_methodsʾ\x19\x17\n" +
+	"\x0epaymentMethods\x12\x05items\x82\xd3\xe4\x93\x027\x125/api/payment/v1/accounts/{account_id}/payment-methods\x12\x88\x03\n" +
+	"\x10GetPaymentMethod\x120.qdrant.cloud.payment.v1.GetPaymentMethodRequest\x1a1.qdrant.cloud.payment.v1.GetPaymentMethodResponse\"\x8e\x02\x8a\xb5\x18\x18read:payment_information\xba\xb5\x18&\n" +
 	"\x11payment_method_id\x12\x11payment_method_id\x8a\xb2\x198\n" +
 	"\"Get a single payment method by ID.\x12\x12Get payment method\xaa\xb8\x19\x14\n" +
-	"\x12get_payment_method\x82\xd3\xe4\x93\x02K\x12I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xfc\x03\n" +
+	"\x12get_payment_methodʾ\x19\x1f\n" +
+	"\rpaymentMethod\x12\x0epayment_method\x82\xd3\xe4\x93\x02K\x12I/api/payment/v1/accounts/{account_id}/payment-methods/{payment_method_id}\x12\xfc\x03\n" +
 	"\x1cGetPaymentMethodAvailability\x12<.qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityRequest\x1a=.qdrant.cloud.payment.v1.GetPaymentMethodAvailabilityResponse\"\xde\x02\x8a\xb5\x18\x00\x8a\xb2\x19\xe7\x01\n" +
 	"\xc3\x01Gets the payment method availability status for the account. This method can be used to determine if the account is ready to make payments. The authenticated user must be a member of the account.\x12\x1fGet payment method availability\xaa\xb8\x19!\n" +
 	"\x1fget_payment_method_availability\x82\xd3\xe4\x93\x02C\x12A/api/payment/v1/accounts/{account_id}/payment-method-availability\x12\xc0\x03\n" +

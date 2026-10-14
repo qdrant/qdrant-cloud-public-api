@@ -31,6 +31,7 @@ type GraphqlMethodOptions struct {
 	// Path from the gRPC response message to the value exposed as this GraphQL
 	// field (for example "items" for list RPCs, "cluster" for get RPCs).
 	// Each segment is a proto field name (snake_case).
+	// Empty means expose the whole response message (for example SuggestSpaceName).
 	ResponsePath  []string `protobuf:"bytes,2,rep,name=response_path,json=responsePath,proto3" json:"response_path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -266,10 +267,10 @@ var File_qdrant_cloud_facade_graphql_v1_graphql_options_proto protoreflect.FileD
 
 const file_qdrant_cloud_facade_graphql_v1_graphql_options_proto_rawDesc = "" +
 	"\n" +
-	"4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x12\x1eqdrant.cloud.facade.graphql.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\x98\x01\n" +
+	"4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x12\x1eqdrant.cloud.facade.graphql.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\x96\x01\n" +
 	"\x14GraphqlMethodOptions\x127\n" +
-	"\x05field\x18\x01 \x01(\tB!\xbaH\x1er\x1c\x10\x012\x18^[A-Za-z_][A-Za-z0-9_]*$R\x05field\x12G\n" +
-	"\rresponse_path\x18\x02 \x03(\tB\"\xbaH\x1f\x92\x01\x1c\b\x01\"\x18r\x16\x10\x012\x12^[a-z_][a-z0-9_]*$R\fresponsePath\"\x89\x03\n" +
+	"\x05field\x18\x01 \x01(\tB!\xbaH\x1er\x1c\x10\x012\x18^[A-Za-z_][A-Za-z0-9_]*$R\x05field\x12E\n" +
+	"\rresponse_path\x18\x02 \x03(\tB \xbaH\x1d\x92\x01\x1a\"\x18r\x16\x10\x012\x12^[a-z_][a-z0-9_]*$R\fresponsePath\"\x89\x03\n" +
 	"\x14GraphqlNestedOptions\x12C\n" +
 	"\vparent_type\x18\x01 \x01(\tB\"\xbaH\x1fr\x1d\x10\x012\x19^[A-Za-z_][A-Za-z0-9_.]*$R\n" +
 	"parentType\x127\n" +

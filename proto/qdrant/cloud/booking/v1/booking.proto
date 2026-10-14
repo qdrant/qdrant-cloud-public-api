@@ -5,6 +5,7 @@ package qdrant.cloud.booking.v1;
 import "buf/validate/validate.proto";
 import "google/api/annotations.proto";
 import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/facade/graphql/v1/graphql_options.proto";
 import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
 import "qdrant/cloud/facade/v1/facade_options.proto";
 // BookingService is the API used to configure the booking settings (like packages objects).
@@ -56,6 +57,31 @@ service BookingService {
       title: "Get package"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_package"};
+    option (qdrant.cloud.facade.graphql.v1.graphql_nested) = {
+      parent_type: "qdrant.cloud.cluster.v1.Cluster"
+      field: "package"
+      response_path: "package"
+      batch: true
+      description: "The package deployed on this cluster"
+      inputs: [
+        {
+          proto_path: "id"
+          parent_path: "configuration.package_id"
+        },
+        {
+          proto_path: "cloud_provider_id"
+          parent_path: "cloud_provider_id"
+        },
+        {
+          proto_path: "cloud_provider_region_id"
+          parent_path: "cloud_provider_region_id"
+        },
+        {
+          proto_path: "account_id"
+          parent_path: "account_id"
+        }
+      ]
+    };
   }
   // buf:lint:ignore QDRANT_CLOUD_METHOD_OPTIONS
   // Lists all public packages.

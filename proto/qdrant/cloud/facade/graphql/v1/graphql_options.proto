@@ -59,8 +59,8 @@ message GraphqlMethodOptions {
   // Path from the gRPC response message to the value exposed as this GraphQL
   // field (for example "items" for list RPCs, "cluster" for get RPCs).
   // Each segment is a proto field name (snake_case).
+  // Empty means expose the whole response message (for example SuggestSpaceName).
   repeated string response_path = 2 [(buf.validate.field).repeated = {
-    min_items: 1
     items: {
       string: {
         min_len: 1

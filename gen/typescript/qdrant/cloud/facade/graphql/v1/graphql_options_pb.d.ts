@@ -28,6 +28,7 @@ export declare type GraphqlMethodOptions = Message<"qdrant.cloud.facade.graphql.
    * Path from the gRPC response message to the value exposed as this GraphQL
    * field (for example "items" for list RPCs, "cluster" for get RPCs).
    * Each segment is a proto field name (snake_case).
+   * Empty means expose the whole response message (for example SuggestSpaceName).
    *
    * @generated from field: repeated string response_path = 2;
    */
