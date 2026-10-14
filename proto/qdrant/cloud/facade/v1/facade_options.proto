@@ -16,7 +16,7 @@ import "google/protobuf/descriptor.proto";
 //
 // Facade-specific overlays live under nested packages, for example:
 //   - qdrant.cloud.facade.mcp.v1 (extension range 521xx)
-//   - reserved 522xx for a future GraphQL overlay
+//   - qdrant.cloud.facade.graphql.v1 (extension range 522xx)
 //
 // Example:
 //  option (qdrant.cloud.facade.v1.facade) = {

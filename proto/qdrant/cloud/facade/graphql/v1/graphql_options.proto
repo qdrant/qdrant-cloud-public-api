@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package qdrant.cloud.facade.graphql.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/descriptor.proto";
+
+// GraphQL-specific method options that overlay the shared facade metadata in
+// qdrant.cloud.facade.v1.
+//
+// Shared description, title, sensitive_response, allow_mutation, and
+// operation hints live on (qdrant.cloud.facade.v1.facade). Field hide /
+// description live on (qdrant.cloud.facade.v1.facade_field).
+//
+// Presence of (graphql) marks the RPC as eligible for a GraphQL root field.
+// Presence of (graphql_nested) attaches the RPC as a nested field on one parent
+// GraphQL type (parent message → child RPC wiring). Cluster vs space backups are
+// separate RPCs in different packages, each with its own single nested parent.
+//
+// Root GraphQL argument names are derived as camelCase from request proto field
+// names (same as the gateway's default name mapper); no per-field GraphQL
+// argument overlay is needed.
+//
+// Example (together with facade options):
+//  option (qdrant.cloud.facade.v1.facade) = {
+//    description: "List backups with optional filters and pagination."
+//    title: "List backups"
+//  };
+//  option (qdrant.cloud.facade.graphql.v1.graphql) = {
+//    field: "backups"
+//    response_path: "items"
+//  };
+//  option (qdrant.cloud.facade.graphql.v1.graphql_nested) = {
+//    parent_type: "qdrant.cloud.cluster.v1.Cluster"
+//    field: "backups"
+//    response_path: "items"
+//    batch: true
+//    inputs: [
+//      {proto_path: "cluster_id", parent_path: "id"},
+//      {proto_path: "account_id", parent_path: "account_id"}
+//    ]
+//  };
+//
+extend google.protobuf.MethodOptions {
+  // GraphQL root overlay for this RPC (field name, response path).
+  // Extension number 52201 is in the facade.graphql overlay range.
+  GraphqlMethodOptions graphql = 52201;
+  // GraphQL nested-field overlay for this RPC (one parent type per RPC).
+  GraphqlNestedOptions graphql_nested = 52202;
+}
+
+// GraphqlMethodOptions holds GraphQL-only root-field metadata.
+message GraphqlMethodOptions {
+  // GraphQL field name in camelCase (for example "clusters", "backupSchedule").
+  string field = 1 [(buf.validate.field).string = {
+    min_len: 1
+    pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
+  }];
+  // Path from the gRPC response message to the value exposed as this GraphQL
+  // field (for example "items" for list RPCs, "cluster" for get RPCs).
+  // Each segment is a proto field name (snake_case).
+  repeated string response_path = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    items: {
+      string: {
+        min_len: 1
+        pattern: "^[a-z_][a-z0-9_]*$"
+      }
+    }
+  }];
+}
+
+// GraphqlNestedOptions attaches this RPC as a nested field on a parent GraphQL
+// type. Description defaults to (qdrant.cloud.facade.v1.facade).description
+// when unset.
+message GraphqlNestedOptions {
+  // Fully-qualified proto message name of the parent GraphQL object type
+  // (for example "qdrant.cloud.cluster.v1.Cluster").
+  string parent_type = 1 [(buf.validate.field).string = {
+    min_len: 1
+    pattern: "^[A-Za-z_][A-Za-z0-9_.]*$"
+  }];
+  // GraphQL field name on the parent type in camelCase (for example "backups").
+  string field = 2 [(buf.validate.field).string = {
+    min_len: 1
+    pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
+  }];
+  // Path from the gRPC response message to the nested field value.
+  repeated string response_path = 3 [(buf.validate.field).repeated = {
+    min_items: 1
+    items: {
+      string: {
+        min_len: 1
+        pattern: "^[a-z_][a-z0-9_]*$"
+      }
+    }
+  }];
+  // Maps fields from the parent message into the child RPC request.
+  repeated GraphqlNestedInput inputs = 4 [(buf.validate.field).repeated.min_items = 1];
+  // When true, the gateway may batch nested resolutions (for example DataLoader).
+  bool batch = 5;
+  // Optional nested-field description override. When unset, gateways should
+  // reuse (qdrant.cloud.facade.v1.facade).description.
+  optional string description = 6 [(buf.validate.field).string.min_len = 1];
+}
+
+// GraphqlNestedInput maps a parent message field path into a child request field.
+message GraphqlNestedInput {
+  // Field path in the child RPC request message (snake_case, may be nested).
+  string proto_path = 1 [(buf.validate.field).string = {
+    min_len: 1
+    pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"
+  }];
+  // Field path in the parent message (snake_case, may be nested).
+  string parent_path = 2 [(buf.validate.field).string = {
+    min_len: 1
+    pattern: "^[a-z_][a-z0-9_]*(\\.[a-z_][a-z0-9_]*)*$"
+  }];
+}

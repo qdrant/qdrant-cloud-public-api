@@ -50,3 +50,5 @@ CIMD
 qcloud
 mcp
 RPCs
+graphql
+Graphql
