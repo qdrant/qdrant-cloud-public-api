@@ -9,6 +9,7 @@ package bookingv1
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/graphql/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -2387,7 +2388,7 @@ var File_qdrant_cloud_booking_v1_booking_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xfe\x05\n" +
+	"%qdrant/cloud/booking/v1/booking.proto\x12\x17qdrant.cloud.booking.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xfe\x05\n" +
 	"\x13ListPackagesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x123\n" +
@@ -2608,19 +2609,26 @@ const file_qdrant_cloud_booking_v1_booking_proto_rawDesc = "" +
 	"\rModelModality\x12\x1e\n" +
 	"\x1aMODEL_MODALITY_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13MODEL_MODALITY_TEXT\x10\x01\x12\x18\n" +
-	"\x14MODEL_MODALITY_IMAGE\x10\x022\xf4\x18\n" +
+	"\x14MODEL_MODALITY_IMAGE\x10\x022\xec\x1a\n" +
 	"\x0eBookingService\x12\xec\x02\n" +
 	"\fListPackages\x12,.qdrant.cloud.booking.v1.ListPackagesRequest\x1a-.qdrant.cloud.booking.v1.ListPackagesResponse\"\xfe\x01\x8a\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
 	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x8a\xb2\x19K\n" +
 	":Lists all packages known by the system, optional filtered.\x12\rList packages\xaa\xb8\x19\x0f\n" +
-	"\rlist_packages\x82\xd3\xe4\x93\x020\x12./api/booking/v1/accounts/{account_id}/packages\x12\x8b\x02\n" +
+	"\rlist_packages\x82\xd3\xe4\x93\x020\x12./api/booking/v1/accounts/{account_id}/packages\x12\x83\x04\n" +
 	"\n" +
-	"GetPackage\x12*.qdrant.cloud.booking.v1.GetPackageRequest\x1a+.qdrant.cloud.booking.v1.GetPackageResponse\"\xa3\x01\x8a\xb5\x18\x00\xba\xb5\x18\x10\n" +
+	"GetPackage\x12*.qdrant.cloud.booking.v1.GetPackageRequest\x1a+.qdrant.cloud.booking.v1.GetPackageResponse\"\x9b\x03\x8a\xb5\x18\x00\xba\xb5\x18\x10\n" +
 	"\n" +
 	"package_id\x12\x02id\x8a\xb2\x19;\n" +
 	",Gets the package identified by the given ID.\x12\vGet package\xaa\xb8\x19\r\n" +
-	"\vget_package\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/packages/{id}\x12\xf2\x02\n" +
+	"\vget_packageҾ\x19\xf3\x01\n" +
+	"\x1fqdrant.cloud.cluster.v1.Cluster\x12\apackage\x1a\apackage\"\x1e\n" +
+	"\x02id\x12\x18configuration.package_id\"&\n" +
+	"\x11cloud_provider_id\x12\x11cloud_provider_id\"4\n" +
+	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\"\x18\n" +
+	"\n" +
+	"account_id\x12\n" +
+	"account_id(\x012$The package deployed on this cluster\x82\xd3\xe4\x93\x025\x123/api/booking/v1/accounts/{account_id}/packages/{id}\x12\xf2\x02\n" +
 	"\x12ListGlobalPackages\x122.qdrant.cloud.booking.v1.ListGlobalPackagesRequest\x1a3.qdrant.cloud.booking.v1.ListGlobalPackagesResponse\"\xf2\x01\x98\xb5\x18\x00\xba\xb5\x18&\n" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x184\n" +
 	"\x18cloud_provider_region_id\x12\x18cloud_provider_region_id\x8a\xb2\x19N\n" +

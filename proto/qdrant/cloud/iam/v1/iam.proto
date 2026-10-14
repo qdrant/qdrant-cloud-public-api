@@ -13,6 +13,7 @@ import "google/protobuf/timestamp.proto";
 import "google/rpc/error_details.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/graphql/v1/graphql_options.proto";
 import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
 import "qdrant/cloud/facade/v1/facade_options.proto";
 // IAMService is the API used to configure IAM (identity and access management) objects.
@@ -54,6 +55,10 @@ service IAMService {
       title: "List users"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_users"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "users"
+      response_path: "items"
+    };
   }
   // Updates the user identified by the given ID.
   // Required permissions:
@@ -257,6 +262,10 @@ service IAMService {
       title: "List roles"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_roles"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "roles"
+      response_path: "items"
+    };
   }
   // Gets a role for the account identified by the given ID.
   // Required permissions:
@@ -276,6 +285,10 @@ service IAMService {
       title: "Get role"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_role"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "role"
+      response_path: "role"
+    };
   }
   // Creates a role for the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
@@ -420,6 +433,23 @@ service IAMService {
       title: "List user roles"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_user_roles"};
+    option (qdrant.cloud.facade.graphql.v1.graphql_nested) = {
+      parent_type: "qdrant.cloud.iam.v1.User"
+      field: "roles"
+      response_path: "roles"
+      batch: true
+      description: "The roles assigned to this user"
+      inputs: [
+        {
+          proto_path: "user_id"
+          parent_path: "id"
+        },
+        {
+          proto_path: "account_id"
+          parent_path: "default_account_id"
+        }
+      ]
+    };
   }
   // List users for the role identified by the given ID.
   // Required permissions:
@@ -439,6 +469,23 @@ service IAMService {
       title: "List role users"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_role_users"};
+    option (qdrant.cloud.facade.graphql.v1.graphql_nested) = {
+      parent_type: "qdrant.cloud.iam.v1.Role"
+      field: "users"
+      response_path: "users"
+      batch: true
+      description: "The users assigned to this role"
+      inputs: [
+        {
+          proto_path: "role_id"
+          parent_path: "id"
+        },
+        {
+          proto_path: "account_id"
+          parent_path: "account_id"
+        }
+      ]
+    };
   }
   // Assigns the provided roles to the user in the account identified by the given ID.
   // Required permissions:

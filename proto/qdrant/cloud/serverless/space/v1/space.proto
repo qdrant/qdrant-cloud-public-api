@@ -10,6 +10,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/graphql/v1/graphql_options.proto";
 import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
 import "qdrant/cloud/facade/v1/facade_options.proto";
 // SpaceService provides operations for managing spaces.
@@ -33,6 +34,10 @@ service SpaceService {
       title: "List serverless spaces"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_spaces"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "spaces"
+      response_path: "items"
+    };
   }
   // Gets a space in the account identified by the given ID.
   // Required permissions:
@@ -52,6 +57,10 @@ service SpaceService {
       title: "Get serverless space"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "space"
+      response_path: "space"
+    };
   }
   // CreateSpace creates a new space with the specified configuration
   // Required Permissions:
@@ -220,6 +229,7 @@ service SpaceService {
       title: "Suggest space name"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "suggest_space_name"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {field: "suggestSpaceName"};
   }
 }
 

@@ -10,6 +10,7 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/graphql/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/iam/v1"
@@ -2172,7 +2173,7 @@ var File_qdrant_cloud_account_v1_account_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\n" +
-	"%qdrant/cloud/account/v1/account.proto\x12\x17qdrant.cloud.account.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"\x15\n" +
+	"%qdrant/cloud/account/v1/account.proto\x12\x17qdrant.cloud.account.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\x1a\x1dqdrant/cloud/iam/v1/iam.proto\"\x15\n" +
 	"\x13ListAccountsRequest\"N\n" +
 	"\x14ListAccountsResponse\x126\n" +
 	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.account.v1.AccountR\x05items\"<\n" +
@@ -2320,15 +2321,17 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x1dACCOUNT_INVITE_STATUS_PENDING\x10\x01\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_ACCEPTED\x10\x02\x12\"\n" +
 	"\x1eACCOUNT_INVITE_STATUS_REJECTED\x10\x03\x12\"\n" +
-	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\xe9/\n" +
-	"\x0eAccountService\x12\xac\x02\n" +
-	"\fListAccounts\x12,.qdrant.cloud.account.v1.ListAccountsRequest\x1a-.qdrant.cloud.account.v1.ListAccountsResponse\"\xbe\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\x8a\xb2\x19\x7f\n" +
+	"\x1eACCOUNT_INVITE_STATUS_CANCELED\x10\x052\x940\n" +
+	"\x0eAccountService\x12\xc1\x02\n" +
+	"\fListAccounts\x12,.qdrant.cloud.account.v1.ListAccountsRequest\x1a-.qdrant.cloud.account.v1.ListAccountsResponse\"\xd3\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\x8a\xb2\x19\x7f\n" +
 	"nList accounts the caller can access. Use this first to discover accountId values required by most other tools.\x12\rList accounts\xaa\xb8\x19\x0f\n" +
-	"\rlist_accounts\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/account/v1/accounts\x12\xf4\x01\n" +
+	"\rlist_accountsʾ\x19\x11\n" +
+	"\baccounts\x12\x05items\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/account/v1/accounts\x12\x8a\x02\n" +
 	"\n" +
-	"GetAccount\x12*.qdrant.cloud.account.v1.GetAccountRequest\x1a+.qdrant.cloud.account.v1.GetAccountResponse\"\x8c\x01\x8a\xb5\x18\fread:account\x8a\xb2\x19:\n" +
+	"GetAccount\x12*.qdrant.cloud.account.v1.GetAccountRequest\x1a+.qdrant.cloud.account.v1.GetAccountResponse\"\xa2\x01\x8a\xb5\x18\fread:account\x8a\xb2\x19:\n" +
 	"+Gets an account identified by the given ID.\x12\vGet account\xaa\xb8\x19\r\n" +
-	"\vget_account\x82\xd3\xe4\x93\x02'\x12%/api/account/v1/accounts/{account_id}\x12\x82\x02\n" +
+	"\vget_accountʾ\x19\x12\n" +
+	"\aaccount\x12\aaccount\x82\xd3\xe4\x93\x02'\x12%/api/account/v1/accounts/{account_id}\x12\x82\x02\n" +
 	"\rCreateAccount\x12-.qdrant.cloud.account.v1.CreateAccountRequest\x1a..qdrant.cloud.account.v1.CreateAccountResponse\"\x91\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18\x1c\n" +
 	"\faccount_name\x12\faccount.name\xe0\xb5\x18\x01\xca\xf3\x189\b\x01\x12\aaccount\"\x0fresp.account.id*\x1b/accounts/{resp.account.id}\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/account/v1/accounts\x12\xa3\x05\n" +
 	"\rUpdateAccount\x12-.qdrant.cloud.account.v1.UpdateAccountRequest\x1a..qdrant.cloud.account.v1.UpdateAccountResponse\"\xb2\x04\x8a\xb5\x18\rwrite:account\x92\xb5\x18\n" +

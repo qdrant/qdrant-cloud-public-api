@@ -8,6 +8,7 @@ import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/graphql/v1/graphql_options.proto";
 import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
 import "qdrant/cloud/facade/v1/facade_options.proto";
 // DatabaseApiKeyService is the API used to manage keys that give access to a cluster database.
@@ -37,6 +38,23 @@ service DatabaseApiKeyService {
       sensitive_response: true
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "cluster_auth_list_database_api_keys"};
+    option (qdrant.cloud.facade.graphql.v1.graphql_nested) = {
+      parent_type: "qdrant.cloud.cluster.v1.Cluster"
+      field: "databaseApiKeys"
+      response_path: "items"
+      batch: true
+      description: "The database API keys associated with this cluster"
+      inputs: [
+        {
+          proto_path: "cluster_id"
+          parent_path: "id"
+        },
+        {
+          proto_path: "account_id"
+          parent_path: "account_id"
+        }
+      ]
+    };
   }
   // Creates a database api key in the account identified by the given ID.
   // Required permissions:

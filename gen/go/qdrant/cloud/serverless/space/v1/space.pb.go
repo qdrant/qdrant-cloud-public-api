@@ -10,6 +10,7 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/graphql/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -1374,7 +1375,7 @@ var File_qdrant_cloud_serverless_space_v1_space_proto protoreflect.FileDescripto
 
 const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
-	",qdrant/cloud/serverless/space/v1/space.proto\x12 qdrant.cloud.serverless.space.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xfe\x01\n" +
+	",qdrant/cloud/serverless/space/v1/space.proto\x12 qdrant.cloud.serverless.space.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xfe\x01\n" +
 	"\x11ListSpacesRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x124\n" +
@@ -1494,16 +1495,18 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
 	"\x17SPACE_STATE_PHASE_READY\x10\x02\x12\x1e\n" +
 	"\x1aSPACE_STATE_PHASE_DISABLED\x10\x03\x12\x1e\n" +
-	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xe9\x18\n" +
-	"\fSpaceService\x12\xb6\x02\n" +
+	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xa4\x19\n" +
+	"\fSpaceService\x12\xc9\x02\n" +
 	"\n" +
-	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"\xbc\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19V\n" +
+	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"\xcf\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19V\n" +
 	"<List serverless spaces with optional filters and pagination.\x12\x16List serverless spaces\xaa\xb8\x19\r\n" +
-	"\vlist_spaces\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/spaces\x12\xb7\x02\n" +
-	"\bGetSpace\x121.qdrant.cloud.serverless.space.v1.GetSpaceRequest\x1a2.qdrant.cloud.serverless.space.v1.GetSpaceResponse\"\xc3\x01\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
+	"\vlist_spacesʾ\x19\x0f\n" +
+	"\x06spaces\x12\x05items\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/spaces\x12\xc9\x02\n" +
+	"\bGetSpace\x121.qdrant.cloud.serverless.space.v1.GetSpaceRequest\x1a2.qdrant.cloud.serverless.space.v1.GetSpaceResponse\"\xd5\x01\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\x8a\xb2\x19<\n" +
 	"$Get a single serverless space by ID.\x12\x14Get serverless space\xaa\xb8\x19\v\n" +
-	"\tget_space\x82\xd3\xe4\x93\x02<\x12:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xf1\x03\n" +
+	"\tget_spaceʾ\x19\x0e\n" +
+	"\x05space\x12\x05space\x82\xd3\xe4\x93\x02<\x12:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xf1\x03\n" +
 	"\vCreateSpace\x124.qdrant.cloud.serverless.space.v1.CreateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.CreateSpaceResponse\"\xf4\x02\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x18\n" +
 	"\n" +
 	"space_name\x12\n" +
@@ -1530,10 +1533,11 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\bspace_id\x12\bspace_id\xca\xf3\x18\x85\x01\b\x03\x12\x10serverless-space\"\freq.space_id*;/accounts/{req.account_id}/serverless-spaces/{req.space_id}R$\n" +
 	"\x0edelete_backups\x12\x12req.delete_backups\x8a\xb2\x19I\n" +
 	"7DeleteSpace removes a space by ID Required Permissions:\x12\fDelete space8\x01\xaa\xb8\x19\x0e\n" +
-	"\fdelete_space\x82\xd3\xe4\x93\x02<*:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xc6\x02\n" +
-	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"\xba\x01\x8a\xb5\x18\x00\x8a\xb2\x19V\n" +
+	"\fdelete_space\x82\xd3\xe4\x93\x02<*:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xdc\x02\n" +
+	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"\xd0\x01\x8a\xb5\x18\x00\x8a\xb2\x19V\n" +
 	"@Suggest a unique human-friendly name for a new serverless space.\x12\x12Suggest space name\xaa\xb8\x19\x14\n" +
-	"\x12suggest_space_name\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\x06µ\x18\x02\b\x02B\xb2\x02\n" +
+	"\x12suggest_space_nameʾ\x19\x12\n" +
+	"\x10suggestSpaceName\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\x06µ\x18\x02\b\x02B\xb2\x02\n" +
 	"$com.qdrant.cloud.serverless.space.v1B\n" +
 	"SpaceProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/v1;spacev1\xa2\x02\x04QCSS\xaa\x02 Qdrant.Cloud.Serverless.Space.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Space\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Space\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Space::V1b\x06proto3"
 

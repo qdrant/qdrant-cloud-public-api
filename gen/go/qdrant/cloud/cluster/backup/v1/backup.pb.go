@@ -11,6 +11,7 @@ import (
 	v1 "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/common/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
+	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/graphql/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -2358,7 +2359,7 @@ var File_qdrant_cloud_cluster_backup_v1_backup_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"+qdrant/cloud/cluster/backup/v1/backup.proto\x12\x1eqdrant.cloud.cluster.backup.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xc6\x02\n" +
+	"+qdrant/cloud/cluster/backup/v1/backup.proto\x12\x1eqdrant.cloud.cluster.backup.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%qdrant/cloud/cluster/v1/cluster.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xc6\x02\n" +
 	"\x12ListBackupsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12,\n" +
@@ -2591,20 +2592,28 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x1fBACKUP_RESTORE_STATUS_SUCCEEDED\x10\x03\x12(\n" +
 	"$BACKUP_RESTORE_STATUS_FAILED_TO_SYNC\x10\x04\x12#\n" +
 	"\x1fBACKUP_RESTORE_STATUS_NOT_FOUND\x10\x05\x12!\n" +
-	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xb22\n" +
-	"\rBackupService\x12\xf5\x02\n" +
-	"\vListBackups\x122.qdrant.cloud.cluster.backup.v1.ListBackupsRequest\x1a3.qdrant.cloud.cluster.backup.v1.ListBackupsResponse\"\xfc\x01\x8a\xb5\x18\fread:backups\xba\xb5\x18\x18\n" +
+	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xc85\n" +
+	"\rBackupService\x12\x97\x04\n" +
+	"\vListBackups\x122.qdrant.cloud.cluster.backup.v1.ListBackupsRequest\x1a3.qdrant.cloud.cluster.backup.v1.ListBackupsResponse\"\x9e\x03\x8a\xb5\x18\fread:backups\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\xba\xb5\x18(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule_id\x8a\xb2\x19R\n" +
 	":List cluster backups with optional filters and pagination.\x12\x14List cluster backups\xaa\xb8\x19\x0e\n" +
-	"\flist_backups\x82\xd3\xe4\x93\x026\x124/api/cluster/backup/v1/accounts/{account_id}/backups\x12\xb1\x02\n" +
-	"\tGetBackup\x120.qdrant.cloud.cluster.backup.v1.GetBackupRequest\x1a1.qdrant.cloud.cluster.backup.v1.GetBackupResponse\"\xbe\x01\x8a\xb5\x18\fread:backups\xba\xb5\x18\x16\n" +
+	"\flist_backupsʾ\x19\x10\n" +
+	"\abackups\x12\x05itemsҾ\x19\x89\x01\n" +
+	"\x1fqdrant.cloud.cluster.v1.Cluster\x12\abackups\x1a\x05items\"\x10\n" +
+	"\n" +
+	"cluster_id\x12\x02id\"\x18\n" +
+	"\n" +
+	"account_id\x12\n" +
+	"account_id(\x012(The backups associated with this cluster\x82\xd3\xe4\x93\x026\x124/api/cluster/backup/v1/accounts/{account_id}/backups\x12\xc5\x02\n" +
+	"\tGetBackup\x120.qdrant.cloud.cluster.backup.v1.GetBackupRequest\x1a1.qdrant.cloud.cluster.backup.v1.GetBackupResponse\"\xd2\x01\x8a\xb5\x18\fread:backups\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\x8a\xb2\x198\n" +
 	"\"Get a single cluster backup by ID.\x12\x12Get cluster backup\xaa\xb8\x19\f\n" +
 	"\n" +
-	"get_backup\x82\xd3\xe4\x93\x02B\x12@/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}\x12\x92\x04\n" +
+	"get_backupʾ\x19\x10\n" +
+	"\x06backup\x12\x06backup\x82\xd3\xe4\x93\x02B\x12@/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}\x12\x92\x04\n" +
 	"\fCreateBackup\x123.qdrant.cloud.cluster.backup.v1.CreateBackupRequest\x1a4.qdrant.cloud.cluster.backup.v1.CreateBackupResponse\"\x96\x03\x8a\xb5\x18\rwrite:backups\x92\xb5\x18\x11backup.account_id\xba\xb5\x18\x1f\n" +
 	"\n" +
 	"cluster_id\x12\x11backup.cluster_id\xca\xf3\x18\x9c\x01\b\x01\x12\x06backup\"\x0eresp.backup.id*[/accounts/{req.backup.account_id}/clusters/{req.backup.cluster_id}/backups/{resp.backup.id}R#\n" +
@@ -2635,20 +2644,28 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x12\x1bresp-md.qc-event-cluster-id\x8a\xb2\x19P\n" +
 	"<Restores a backup in the account identified by the given ID.\x12\x0eRestore backup8\x01\xaa\xb8\x19\x10\n" +
-	"\x0erestore_backup\x82\xd3\xe4\x93\x02J\"H/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/restore\x12\xff\x02\n" +
-	"\x13ListBackupSchedules\x12:.qdrant.cloud.cluster.backup.v1.ListBackupSchedulesRequest\x1a;.qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse\"\xee\x01\x8a\xb5\x18\x15read:backup_schedules\xba\xb5\x18\x18\n" +
+	"\x0erestore_backup\x82\xd3\xe4\x93\x02J\"H/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/restore\x12\xba\x04\n" +
+	"\x13ListBackupSchedules\x12:.qdrant.cloud.cluster.backup.v1.ListBackupSchedulesRequest\x1a;.qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse\"\xa9\x03\x8a\xb5\x18\x15read:backup_schedules\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\x8a\xb2\x19U\n" +
 	"4List cluster backup schedules with optional filters.\x12\x1dList cluster backup schedules\xaa\xb8\x19\x17\n" +
-	"\x15list_backup_schedules\x82\xd3\xe4\x93\x02?\x12=/api/cluster/backup/v1/accounts/{account_id}/backup_schedules\x12\xad\x03\n" +
-	"\x11GetBackupSchedule\x128.qdrant.cloud.cluster.backup.v1.GetBackupScheduleRequest\x1a9.qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse\"\xa2\x02\x8a\xb5\x18\x15read:backup_schedules\xba\xb5\x18\x18\n" +
+	"\x15list_backup_schedulesʾ\x19\x18\n" +
+	"\x0fbackupSchedules\x12\x05itemsҾ\x19\x9a\x01\n" +
+	"\x1fqdrant.cloud.cluster.v1.Cluster\x12\x0fbackupSchedules\x1a\x05items\"\x10\n" +
+	"\n" +
+	"cluster_id\x12\x02id\"\x18\n" +
+	"\n" +
+	"account_id\x12\n" +
+	"account_id(\x0121The backup schedules associated with this cluster\x82\xd3\xe4\x93\x02?\x12=/api/cluster/backup/v1/accounts/{account_id}/backup_schedules\x12\xd2\x03\n" +
+	"\x11GetBackupSchedule\x128.qdrant.cloud.cluster.backup.v1.GetBackupScheduleRequest\x1a9.qdrant.cloud.cluster.backup.v1.GetBackupScheduleResponse\"\xc7\x02\x8a\xb5\x18\x15read:backup_schedules\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\xba\xb5\x18(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule_id\x8a\xb2\x19J\n" +
 	"+Get a single cluster backup schedule by ID.\x12\x1bGet cluster backup schedule\xaa\xb8\x19\x15\n" +
-	"\x13get_backup_schedule\x82\xd3\xe4\x93\x02T\x12R/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x12\xb0\x05\n" +
+	"\x13get_backup_scheduleʾ\x19!\n" +
+	"\x0ebackupSchedule\x12\x0fbackup_schedule\x82\xd3\xe4\x93\x02T\x12R/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x12\xb0\x05\n" +
 	"\x14CreateBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.CreateBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.CreateBackupScheduleResponse\"\x9c\x04\x8a\xb5\x18\x16write:backup_schedules\x92\xb5\x18\x1abackup_schedule.account_id\xba\xb5\x18(\n" +
 	"\n" +
 	"cluster_id\x12\x1abackup_schedule.cluster_id\xca\xf3\x18\xdb\x01\b\x01\x12\x0fbackup-schedule\"\x17resp.backup_schedule.id*\x7f/accounts/{req.backup_schedule.account_id}/clusters/{req.backup_schedule.cluster_id}/backup_schedules/{resp.backup_schedule.id}R,\n" +

@@ -8,6 +8,7 @@ import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/graphql/v1/graphql_options.proto";
 import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
 import "qdrant/cloud/facade/v1/facade_options.proto";
 // Service for managing API keys for a serverless space
@@ -37,6 +38,23 @@ service SpaceApiKeyService {
       sensitive_response: true
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_space_api_keys"};
+    option (qdrant.cloud.facade.graphql.v1.graphql_nested) = {
+      parent_type: "qdrant.cloud.serverless.space.v1.Space"
+      field: "spaceApiKeys"
+      response_path: "items"
+      batch: true
+      description: "The API keys associated with this serverless space"
+      inputs: [
+        {
+          proto_path: "space_id"
+          parent_path: "id"
+        },
+        {
+          proto_path: "account_id"
+          parent_path: "account_id"
+        }
+      ]
+    };
   }
   // CreateSpaceApiKey creates a new API key for a space
   // Required Permissions:

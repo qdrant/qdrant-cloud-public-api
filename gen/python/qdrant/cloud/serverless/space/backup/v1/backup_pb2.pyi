@@ -8,6 +8,7 @@ from google.protobuf import field_mask_pb2 as _field_mask_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from qdrant.cloud.event.v1 import events_pb2 as _events_pb2
+from qdrant.cloud.facade.graphql.v1 import graphql_options_pb2 as _graphql_options_pb2
 from qdrant.cloud.facade.mcp.v1 import mcp_options_pb2 as _mcp_options_pb2
 from qdrant.cloud.facade.v1 import facade_options_pb2 as _facade_options_pb2
 from qdrant.cloud.serverless.space.v1 import space_pb2 as _space_pb2

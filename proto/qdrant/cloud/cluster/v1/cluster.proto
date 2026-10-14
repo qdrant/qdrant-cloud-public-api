@@ -9,6 +9,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "qdrant/cloud/common/v1/common.proto";
 import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/graphql/v1/graphql_options.proto";
 import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
 import "qdrant/cloud/facade/v1/facade_options.proto";
 // ClusterService is the API used to configure cluster objects.
@@ -32,6 +33,10 @@ service ClusterService {
       title: "List clusters"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_clusters"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "clusters"
+      response_path: "items"
+    };
   }
   // Gets a cluster in the account identified by the given ID.
   // Required permissions:
@@ -51,6 +56,10 @@ service ClusterService {
       title: "Get cluster"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "cluster"
+      response_path: "cluster"
+    };
   }
   // Gets the downscale risks of applying the properties provided in the request to the
   // cluster identified by the given ID, one entry per assessed resource.
@@ -378,6 +387,10 @@ service ClusterService {
       title: "List Qdrant releases"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_qdrant_releases"};
+    option (qdrant.cloud.facade.graphql.v1.graphql) = {
+      field: "qdrantReleases"
+      response_path: "items"
+    };
   }
   // Gets a Qdrant release by version in the account identified by the given ID.
   // Required permissions:
