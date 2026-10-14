@@ -1727,9 +1727,17 @@ type UpdateClusterRequest struct {
 	// not the request envelope (e.g. "name", "configuration.num_nodes").
 	// When unset or empty, the request is treated as a full-resource
 	// replacement (the existing behavior).
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// When true, configuration.additional_resources.disk is the new amount of
+	// additional disk, and it may be lower than the current amount.
+	// Setting it to 0 removes the additional disk.
+	// The disk included in the package is kept.
+	// When false or omitted, the additional disk can only grow: a lower amount
+	// is rejected, and 0 keeps the current amount.
+	// Requires configuration.additional_resources to be set.
+	AllowAdditionalDiskDecrease bool `protobuf:"varint,3,opt,name=allow_additional_disk_decrease,json=allowAdditionalDiskDecrease,proto3" json:"allow_additional_disk_decrease,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *UpdateClusterRequest) Reset() {
@@ -1774,6 +1782,13 @@ func (x *UpdateClusterRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
 		return x.UpdateMask
 	}
 	return nil
+}
+
+func (x *UpdateClusterRequest) GetAllowAdditionalDiskDecrease() bool {
+	if x != nil {
+		return x.AllowAdditionalDiskDecrease
+	}
+	return false
 }
 
 // UpdateClusterResponse is the response from the UpdateCluster function
@@ -5202,12 +5217,14 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\"create_cluster.no_read_only_fields\x12Nread-only fields (id, created_at, deleted_at, state) must not be set on create\x1asthis.cluster.id == '' && !has(this.cluster.created_at) && !has(this.cluster.deleted_at) && !has(this.cluster.state)\"\xc4\x01\n" +
 	"\x15CreateClusterResponse\x12B\n" +
 	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster:g\xbaHd\x1ab\n" +
-	"\x1ccreate_cluster.state_present\x12)state is required for an existing cluster\x1a\x17has(this.cluster.state)\"\xf6\x01\n" +
+	"\x1ccreate_cluster.state_present\x12)state is required for an existing cluster\x1a\x17has(this.cluster.state)\"\xa0\x04\n" +
 	"\x14UpdateClusterRequest\x12B\n" +
 	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask:]\xbaHZ\x1aX\n" +
-	"\x19update_cluster.id_present\x12$cluster.id is required for an update\x1a\x15this.cluster.id != ''\"\xc4\x01\n" +
+	"updateMask\x12C\n" +
+	"\x1eallow_additional_disk_decrease\x18\x03 \x01(\bR\x1ballowAdditionalDiskDecrease:\xc1\x02\xbaH\xbd\x02\x1aX\n" +
+	"\x19update_cluster.id_present\x12$cluster.id is required for an update\x1a\x15this.cluster.id != ''\x1a\xe0\x01\n" +
+	"4update_cluster.allow_additional_disk_decrease_target\x12Jallow_additional_disk_decrease requires configuration.additional_resources\x1a\\!this.allow_additional_disk_decrease || has(this.cluster.configuration.additional_resources)\"\xc4\x01\n" +
 	"\x15UpdateClusterResponse\x12B\n" +
 	"\acluster\x18\x01 \x01(\v2 .qdrant.cloud.cluster.v1.ClusterB\x06\xbaH\x03\xc8\x01\x01R\acluster:g\xbaHd\x1ab\n" +
 	"\x1cupdate_cluster.state_present\x12)state is required for an existing cluster\x1a\x17has(this.cluster.state)\"\xcc\x01\n" +
