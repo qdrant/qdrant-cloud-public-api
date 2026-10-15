@@ -81,6 +81,14 @@ service SpaceService {
       resource_type: "serverless-space"
       resource_id_field: "resp.space.id"
       resource_url_template: "/accounts/{req.space.account_id}/serverless-spaces/{resp.space.id}"
+      additional_context_fields: {
+        key: "space_name"
+        value: "req.space.name"
+      }
+      additional_context_fields: {
+        key: "cloud_region_id"
+        value: "req.space.cloud_region_id"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
