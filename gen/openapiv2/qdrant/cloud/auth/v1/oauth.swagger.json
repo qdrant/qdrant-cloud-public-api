@@ -1,0 +1,304 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/auth/v1/oauth.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "OAuthService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/auth/v1/accounts/{accountId}/oauth-grants": {
+      "get": {
+        "summary": "Lists the active OAuth grants that cover the account identified by the given ID.\nRequired permissions:\n- read:oauth_grants",
+        "operationId": "OAuthService_ListAccountOAuthGrants",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAccountOAuthGrantsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OAuthService"
+        ]
+      }
+    },
+    "/api/auth/v1/accounts/{accountId}/oauth-grants/{oauthGrantId}/revoke": {
+      "post": {
+        "summary": "Revokes an OAuth grant for the account identified by the given ID only.\nThe account is removed from the grant, so the client can no longer act in this account.\nThe grant stays active for the user's other accounts; it is revoked entirely only when\nno accounts remain. To revoke a grant for all accounts, the user calls RevokeMyOAuthGrant.\nRequired permissions:\n- delete:oauth_grants",
+        "operationId": "OAuthService_RevokeAccountOAuthGrant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RevokeAccountOAuthGrantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "oauthGrantId",
+            "description": "The identifier of the OAuth grant (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OAuthServiceRevokeAccountOAuthGrantBody"
+            }
+          }
+        ],
+        "tags": [
+          "OAuthService"
+        ]
+      }
+    },
+    "/api/auth/v1/users/me/oauth-grants": {
+      "get": {
+        "summary": "Lists the active OAuth grants of the authenticated user.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "OAuthService_ListMyOAuthGrants",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListMyOAuthGrantsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "OAuthService"
+        ]
+      }
+    },
+    "/api/auth/v1/users/me/oauth-grants/{oauthGrantId}/revoke": {
+      "post": {
+        "summary": "Revokes an OAuth grant of the authenticated user, for all accounts it covers.\nThe client loses access to every one of those accounts, and its refresh tokens are revoked.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "OAuthService_RevokeMyOAuthGrant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RevokeMyOAuthGrantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "oauthGrantId",
+            "description": "The identifier of the OAuth grant (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OAuthServiceRevokeMyOAuthGrantBody"
+            }
+          }
+        ],
+        "tags": [
+          "OAuthService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "OAuthServiceRevokeAccountOAuthGrantBody": {
+      "type": "object",
+      "title": "RevokeAccountOAuthGrantRequest is the request for the RevokeAccountOAuthGrant function"
+    },
+    "OAuthServiceRevokeMyOAuthGrantBody": {
+      "type": "object",
+      "title": "RevokeMyOAuthGrantRequest is the request for the RevokeMyOAuthGrant function"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ListAccountOAuthGrantsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1OAuthGrant"
+          },
+          "description": "The active OAuth grants that cover the account.\nThe account_ids of each grant only contain the requested account."
+        }
+      },
+      "title": "ListAccountOAuthGrantsResponse is the response from the ListAccountOAuthGrants function"
+    },
+    "v1ListMyOAuthGrantsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1OAuthGrant"
+          },
+          "description": "The active OAuth grants of the authenticated user."
+        }
+      },
+      "title": "ListMyOAuthGrantsResponse is the response from the ListMyOAuthGrants function"
+    },
+    "v1OAuthGrant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the OAuth grant (in GUID format).\nThis is a read-only field.",
+          "readOnly": true
+        },
+        "userId": {
+          "type": "string",
+          "description": "The identifier of the user who gave the consent (in GUID format).\nThis is a read-only field.",
+          "readOnly": true
+        },
+        "userEmail": {
+          "type": "string",
+          "description": "The email of the user who gave the consent.\nThis is a read-only field. It is resolved from the user's current profile when the grant is\nread, not stored with the grant, so it reflects email changes. It is empty when the user can\nno longer be resolved, for example after their data has been erased.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The OAuth client identifier, usually the URL of the client's metadata document\n(for example \"https://claude.ai/oauth/mcp-client-metadata.json\").\nThis is a read-only field.",
+          "readOnly": true
+        },
+        "clientName": {
+          "type": "string",
+          "description": "The display name of the OAuth client, taken from its metadata when the consent was given.\nThis is a read-only field.",
+          "readOnly": true
+        },
+        "scope": {
+          "$ref": "#/definitions/v1OauthScope",
+          "description": "The maximum OAuth scope the client may use.\nThis is a read-only field.",
+          "readOnly": true
+        },
+        "accountIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The identifiers of the accounts the client may act in (in GUID format).\nThis is a read-only field.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the consent was given.\nThis is a read-only field.",
+          "readOnly": true
+        },
+        "lastUsedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the client last used the grant, if it has been used.\nThis is a read-only field.",
+          "readOnly": true
+        }
+      },
+      "description": "An OAuthGrant represents a user's consent that an OAuth client may act on their behalf\nin one or more Qdrant Cloud accounts.\nGrants are created through the OAuth consent flow, not through this API."
+    },
+    "v1OauthScope": {
+      "type": "string",
+      "enum": [
+        "OAUTH_SCOPE_UNSPECIFIED",
+        "OAUTH_SCOPE_READ_ONLY",
+        "OAUTH_SCOPE_MANAGE"
+      ],
+      "default": "OAUTH_SCOPE_UNSPECIFIED",
+      "description": "OauthScope is the OAuth access-class for delegated credentials.\nDistinct from permission verbs (read/write/delete) and from RBAC resource scope.\nWire scope strings stay \"read-only\" and \"manage\".\nNamed OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.\n\n - OAUTH_SCOPE_UNSPECIFIED: Unspecified / unknown (or omitted on legacy events).\n - OAUTH_SCOPE_READ_ONLY: Read-class access only (wire: \"read-only\").\n - OAUTH_SCOPE_MANAGE: Full manage-class access (wire: \"manage\")."
+    },
+    "v1RevokeAccountOAuthGrantResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "RevokeAccountOAuthGrantResponse is the response from the RevokeAccountOAuthGrant function"
+    },
+    "v1RevokeMyOAuthGrantResponse": {
+      "type": "object",
+      "description": "Empty",
+      "title": "RevokeMyOAuthGrantResponse is the response from the RevokeMyOAuthGrant function"
+    }
+  }
+}
