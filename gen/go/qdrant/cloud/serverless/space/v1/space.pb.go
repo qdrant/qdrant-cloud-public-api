@@ -1511,7 +1511,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
 	"space_name\x12\n" +
 	"space.name\xca\xf3\x18\xb3\x01\b\x01\x12\x10serverless-space\"\rresp.space.id*B/accounts/{req.space.account_id}/serverless-spaces/{resp.space.id}R,\n" +
-	"\x0fcloud_region_id\x12\x19req.space.cloud_region_idR\x1c\n" +
+	"\x0fcloud_region_id\x12\x19req.space.cloud_region_idZ\x1c\n" +
 	"\n" +
 	"space_name\x12\x0ereq.space.name\x8a\xb2\x19h\n" +
 	"VCreateSpace creates a new space with the specified configuration Required Permissions:\x12\fCreate space8\x01\xaa\xb8\x19\x0e\n" +
