@@ -864,6 +864,20 @@ message Backup {
   // This is a read-only field. Absent — not zero — when the cost cannot be determined:
   // a backup not metered yet, or a region with no backup-storage price.
   optional BackupPrice price = 13 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The storage the backup currently occupies and is billed for, in bytes.
+  //
+  // This is a read-only field. Absent — not zero — when the size is not known:
+  // a backup that is deleted or not metered yet, a hybrid cloud backup, or a
+  // cluster that is not on a paid package.
+  //
+  // Backups are incremental on AWS and GCP, so a backup reports only what it
+  // adds over the backups before it, and the value can rise when an older
+  // backup is removed. On Azure it is the figure the Azure price is applied to,
+  // which is half the disk usage recorded when the backup was taken.
+  optional int64 size_bytes = 14 [
+    (buf.validate.field).int64.gte = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
 // BackupPrice represents the price of keeping one backup stored, at its current size.
