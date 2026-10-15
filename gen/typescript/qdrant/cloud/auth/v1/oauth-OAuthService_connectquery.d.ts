@@ -35,7 +35,7 @@ export const revokeMyOAuthGrant: typeof OAuthService["method"]["revokeMyOAuthGra
  * The grant stays active for the user's other accounts; it is revoked entirely only when
  * no accounts remain. To revoke a grant for all accounts, the user calls RevokeMyOAuthGrant.
  * Required permissions:
- * - delete:oauth_grants
+ * - write:oauth_grants
  *
  * @generated from rpc qdrant.cloud.auth.v1.OAuthService.RevokeAccountOAuthGrant
  */

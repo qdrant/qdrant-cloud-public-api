@@ -553,7 +553,7 @@ const file_qdrant_cloud_auth_v1_oauth_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12A\n" +
 	"\flast_used_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\n" +
-	"lastUsedAt2\xc7\n" +
+	"lastUsedAt2\xc6\n" +
 	"\n" +
 	"\fOAuthService\x12\xb1\x01\n" +
 	"\x11ListMyOAuthGrants\x12..qdrant.cloud.auth.v1.ListMyOAuthGrantsRequest\x1a/.qdrant.cloud.auth.v1.ListMyOAuthGrantsResponse\";\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\x82\xd3\xe4\x93\x02$\x12\"/api/auth/v1/users/me/oauth-grants\x12\xf3\x02\n" +
@@ -561,8 +561,8 @@ const file_qdrant_cloud_auth_v1_oauth_proto_rawDesc = "" +
 	"aLists the active OAuth grants (connected apps) that cover the account identified by the given ID.\x12\x19List account OAuth grants\xaa\xb8\x19\x1b\n" +
 	"\x19list_account_oauth_grants\x82\xd3\xe4\x93\x021\x12//api/auth/v1/accounts/{account_id}/oauth-grants\x12\xee\x02\n" +
 	"\x12RevokeMyOAuthGrant\x12/.qdrant.cloud.auth.v1.RevokeMyOAuthGrantRequest\x1a0.qdrant.cloud.auth.v1.RevokeMyOAuthGrantResponse\"\xf4\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18 \n" +
-	"\x0eoauth_grant_id\x12\x0eoauth_grant_id\xe0\xb5\x18\x01\xca\xf3\x18v\b\x04\x12\voauth-grant\"\x12req.oauth_grant_id*=/users/{req-md.qc-actor-id}/oauth-grants/{req.oauth_grant_id}2\x12revoke-oauth-grant\x82\xd3\xe4\x93\x02?:\x01*\":/api/auth/v1/users/me/oauth-grants/{oauth_grant_id}/revoke\x12\x93\x03\n" +
-	"\x17RevokeAccountOAuthGrant\x124.qdrant.cloud.auth.v1.RevokeAccountOAuthGrantRequest\x1a5.qdrant.cloud.auth.v1.RevokeAccountOAuthGrantResponse\"\x8a\x02\x8a\xb5\x18\x13delete:oauth_grants\xba\xb5\x18 \n" +
+	"\x0eoauth_grant_id\x12\x0eoauth_grant_id\xe0\xb5\x18\x01\xca\xf3\x18v\b\x04\x12\voauth-grant\"\x12req.oauth_grant_id*=/users/{req-md.qc-actor-id}/oauth-grants/{req.oauth_grant_id}2\x12revoke-oauth-grant\x82\xd3\xe4\x93\x02?:\x01*\":/api/auth/v1/users/me/oauth-grants/{oauth_grant_id}/revoke\x12\x92\x03\n" +
+	"\x17RevokeAccountOAuthGrant\x124.qdrant.cloud.auth.v1.RevokeAccountOAuthGrantRequest\x1a5.qdrant.cloud.auth.v1.RevokeAccountOAuthGrantResponse\"\x89\x02\x8a\xb5\x18\x12write:oauth_grants\xba\xb5\x18 \n" +
 	"\x0eoauth_grant_id\x12\x0eoauth_grant_id\xe0\xb5\x18\x01\xca\xf3\x18u\b\x04\x12\voauth-grant\"\x12req.oauth_grant_id*</accounts/{req.account_id}/oauth-grants/{req.oauth_grant_id}2\x12revoke-oauth-grant\x82\xd3\xe4\x93\x02L:\x01*\"G/api/auth/v1/accounts/{account_id}/oauth-grants/{oauth_grant_id}/revoke\x1a\x06µ\x18\x02\b\x01B\xe7\x01\n" +
 	"\x18com.qdrant.cloud.auth.v1B\n" +
 	"OauthProtoP\x01ZLgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/auth/v1;authv1\xa2\x02\x03QCA\xaa\x02\x14Qdrant.Cloud.Auth.V1\xca\x02\x14Qdrant\\Cloud\\Auth\\V1\xe2\x02 Qdrant\\Cloud\\Auth\\V1\\GPBMetadata\xea\x02\x17Qdrant::Cloud::Auth::V1b\x06proto3"

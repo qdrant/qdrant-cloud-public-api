@@ -79,7 +79,7 @@ class OAuthServiceServicer(object):
         The grant stays active for the user's other accounts; it is revoked entirely only when
         no accounts remain. To revoke a grant for all accounts, the user calls RevokeMyOAuthGrant.
         Required permissions:
-        - delete:oauth_grants
+        - write:oauth_grants
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

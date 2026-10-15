@@ -50,7 +50,7 @@
     },
     "/api/auth/v1/accounts/{accountId}/oauth-grants/{oauthGrantId}/revoke": {
       "post": {
-        "summary": "Revokes an OAuth grant for the account identified by the given ID only.\nThe account is removed from the grant, so the client can no longer act in this account.\nThe grant stays active for the user's other accounts; it is revoked entirely only when\nno accounts remain. To revoke a grant for all accounts, the user calls RevokeMyOAuthGrant.\nRequired permissions:\n- delete:oauth_grants",
+        "summary": "Revokes an OAuth grant for the account identified by the given ID only.\nThe account is removed from the grant, so the client can no longer act in this account.\nThe grant stays active for the user's other accounts; it is revoked entirely only when\nno accounts remain. To revoke a grant for all accounts, the user calls RevokeMyOAuthGrant.\nRequired permissions:\n- write:oauth_grants",
         "operationId": "OAuthService_RevokeAccountOAuthGrant",
         "responses": {
           "200": {
