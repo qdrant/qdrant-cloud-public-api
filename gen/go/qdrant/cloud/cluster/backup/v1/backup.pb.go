@@ -1659,7 +1659,18 @@ type Backup struct {
 	// What keeping this backup stored costs the account that owns it.
 	// This is a read-only field. Absent — not zero — when the cost cannot be determined:
 	// a backup not metered yet, or a region with no backup-storage price.
-	Price         *BackupPrice `protobuf:"bytes,13,opt,name=price,proto3,oneof" json:"price,omitempty"`
+	Price *BackupPrice `protobuf:"bytes,13,opt,name=price,proto3,oneof" json:"price,omitempty"`
+	// The storage the backup currently occupies and is billed for, in bytes.
+	//
+	// This is a read-only field. Absent — not zero — when the size is not known:
+	// a backup that is deleted or not metered yet, a hybrid cloud backup, or a
+	// cluster that is not on a paid package.
+	//
+	// Backups are incremental on AWS and GCP, so a backup reports only what it
+	// adds over the backups before it, and the value can rise when an older
+	// backup is removed. On Azure it is the figure the Azure price is applied to,
+	// which is half the disk usage recorded when the backup was taken.
+	SizeBytes     *int64 `protobuf:"varint,14,opt,name=size_bytes,json=sizeBytes,proto3,oneof" json:"size_bytes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1783,6 +1794,13 @@ func (x *Backup) GetPrice() *BackupPrice {
 		return x.Price
 	}
 	return nil
+}
+
+func (x *Backup) GetSizeBytes() int64 {
+	if x != nil && x.SizeBytes != nil {
+		return *x.SizeBytes
+	}
+	return 0
 }
 
 // BackupPrice represents the price of keeping one backup stored, at its current size.
@@ -2486,7 +2504,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x10backupScheduleId\x12*\n" +
 	"\x0edelete_backups\x18\x03 \x01(\bH\x00R\rdeleteBackups\x88\x01\x01B\x11\n" +
 	"\x0f_delete_backups\"\x1e\n" +
-	"\x1cDeleteBackupScheduleResponse\"\xb9\t\n" +
+	"\x1cDeleteBackupScheduleResponse\"\xf9\t\n" +
 	"\x06Backup\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe2A\x01\x03R\x02id\x12?\n" +
 	"\n" +
@@ -2505,14 +2523,17 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	" \x01(\v2\x19.google.protobuf.DurationB\x13\xbaH\x10\xaa\x01\r\"\x05\b\x80\xe7\x84\x0f2\x04\b\x80\xa3\x05H\x01R\x0fretentionPeriod\x88\x01\x01\x12T\n" +
 	"\fcluster_info\x18\f \x01(\v2+.qdrant.cloud.cluster.backup.v1.ClusterInfoB\x04\xe2A\x01\x03R\vclusterInfo\x12!\n" +
 	"\fdisplay_name\x18\v \x01(\tR\vdisplayName\x12L\n" +
-	"\x05price\x18\r \x01(\v2+.qdrant.cloud.cluster.backup.v1.BackupPriceB\x04\xe2A\x01\x03H\x02R\x05price\x88\x01\x01:\xee\x02\xbaH\xea\x02\x1a\xa3\x01\n" +
+	"\x05price\x18\r \x01(\v2+.qdrant.cloud.cluster.backup.v1.BackupPriceB\x04\xe2A\x01\x03H\x02R\x05price\x88\x01\x01\x12/\n" +
+	"\n" +
+	"size_bytes\x18\x0e \x01(\x03B\v\xe2A\x01\x03\xbaH\x04\"\x02(\x00H\x03R\tsizeBytes\x88\x01\x01:\xee\x02\xbaH\xea\x02\x1a\xa3\x01\n" +
 	"\n" +
 	"cluster.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1aT\n" +
 	"\vbackup.name\x12\x16name must not be empty\x1a-this.name.size() > 0 || !has(this.created_at)\x1al\n" +
 	"\x13backup.display_name\x12\x1edisplay_name must not be empty\x1a5this.display_name.size() > 0 || !has(this.created_at)B\x15\n" +
 	"\x13_backup_schedule_idB\x13\n" +
 	"\x11_retention_periodB\b\n" +
-	"\x06_price\"\x95\x03\n" +
+	"\x06_priceB\r\n" +
+	"\v_size_bytes\"\x95\x03\n" +
 	"\vBackupPrice\x120\n" +
 	"\bcurrency\x18\x01 \x01(\tB\x14\xbaH\x11r\x0f2\n" +
 	"^[A-Z]{3}$\x98\x01\x03R\bcurrency\x12>\n" +
