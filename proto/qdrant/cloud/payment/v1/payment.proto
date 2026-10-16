@@ -467,6 +467,9 @@ message PaymentMethod {
       not_in: [0]
     }
   ];
+  // Represents the payment method details, such as card information.
+  // This field is optional and only available for marketplace payment provider types.
+  optional MarketplaceDetails marketplace_details = 12;
 }
 
 // Represents the payment method availability status for an account.
@@ -597,6 +600,15 @@ message PaymentMethodDetails {
   string id = 1 [(buf.validate.field).string = {min_len: 1}];
   // Card details.
   Card card = 2 [(buf.validate.field).required = true];
+}
+
+// Represents details of the marketplace subscription
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+message MarketplaceDetails {
+  // The identifier of the entitlement at the marketplace processor.
+  optional string entitlement_id = 1;
+  // The identifier of the buyer at the marketplace processor.
+  optional string buyer_id = 2;
 }
 
 // Represents payment method card details

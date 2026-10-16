@@ -188,6 +188,28 @@ export declare type Invoice = Message<"qdrant.cloud.billing.v1.Invoice"> & {
    * @generated from field: optional int64 amount_due = 8;
    */
   amountDue?: bigint | undefined;
+
+  /**
+   * A URL for the customer-facing invoice portal. This URL expires 30 days after the invoice's due date.
+   *
+   * @generated from field: optional string hosted_invoice_url = 9;
+   */
+  hostedInvoiceUrl?: string | undefined;
+
+  /**
+   * The timestamp when the invoice was paid.
+   *
+   * @generated from field: optional google.protobuf.Timestamp paid_at = 10;
+   */
+  paidAt?: Timestamp | undefined;
+
+  /**
+   * If payment was attempted on this invoice but failed, this will be the time of
+   * the most recent attempt.
+   *
+   * @generated from field: optional google.protobuf.Timestamp payment_failed_at = 11;
+   */
+  paymentFailedAt?: Timestamp | undefined;
 };
 
 /**
@@ -253,6 +275,28 @@ export declare type InvoiceValid = Message<"qdrant.cloud.billing.v1.Invoice"> & 
    * @generated from field: optional int64 amount_due = 8;
    */
   amountDue?: bigint | undefined;
+
+  /**
+   * A URL for the customer-facing invoice portal. This URL expires 30 days after the invoice's due date.
+   *
+   * @generated from field: optional string hosted_invoice_url = 9;
+   */
+  hostedInvoiceUrl?: string | undefined;
+
+  /**
+   * The timestamp when the invoice was paid.
+   *
+   * @generated from field: optional google.protobuf.Timestamp paid_at = 10;
+   */
+  paidAt?: Timestamp | undefined;
+
+  /**
+   * If payment was attempted on this invoice but failed, this will be the time of
+   * the most recent attempt.
+   *
+   * @generated from field: optional google.protobuf.Timestamp payment_failed_at = 11;
+   */
+  paymentFailedAt?: Timestamp | undefined;
 };
 
 /**

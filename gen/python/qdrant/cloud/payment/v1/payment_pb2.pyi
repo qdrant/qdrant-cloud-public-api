@@ -192,7 +192,7 @@ class StripeCheckoutSession(_message.Message):
     def __init__(self, id: _Optional[str] = ..., url: _Optional[str] = ..., customer: _Optional[str] = ..., setup_intent_id: _Optional[str] = ..., setup_intent_status: _Optional[_Union[StripeSetupIntentStatus, str]] = ..., setup_intent_payment_method: _Optional[str] = ...) -> None: ...
 
 class PaymentMethod(_message.Message):
-    __slots__ = ("id", "account_id", "type", "payment_provider_id", "payment_method_details", "billing_address", "created_at", "last_modified_at", "tax_id", "is_default", "status")
+    __slots__ = ("id", "account_id", "type", "payment_provider_id", "payment_method_details", "billing_address", "created_at", "last_modified_at", "tax_id", "is_default", "status", "marketplace_details")
     ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -204,6 +204,7 @@ class PaymentMethod(_message.Message):
     TAX_ID_FIELD_NUMBER: _ClassVar[int]
     IS_DEFAULT_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
+    MARKETPLACE_DETAILS_FIELD_NUMBER: _ClassVar[int]
     id: str
     account_id: str
     type: PaymentProviderType
@@ -215,7 +216,8 @@ class PaymentMethod(_message.Message):
     tax_id: str
     is_default: bool
     status: PaymentMethodStatus
-    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method_details: _Optional[_Union[PaymentMethodDetails, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ..., is_default: _Optional[bool] = ..., status: _Optional[_Union[PaymentMethodStatus, str]] = ...) -> None: ...
+    marketplace_details: MarketplaceDetails
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., type: _Optional[_Union[PaymentProviderType, str]] = ..., payment_provider_id: _Optional[str] = ..., payment_method_details: _Optional[_Union[PaymentMethodDetails, _Mapping]] = ..., billing_address: _Optional[_Union[BillingAddress, _Mapping]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., tax_id: _Optional[str] = ..., is_default: _Optional[bool] = ..., status: _Optional[_Union[PaymentMethodStatus, str]] = ..., marketplace_details: _Optional[_Union[MarketplaceDetails, _Mapping]] = ...) -> None: ...
 
 class PaymentMethodAvailability(_message.Message):
     __slots__ = ("status",)
@@ -268,6 +270,14 @@ class PaymentMethodDetails(_message.Message):
     id: str
     card: Card
     def __init__(self, id: _Optional[str] = ..., card: _Optional[_Union[Card, _Mapping]] = ...) -> None: ...
+
+class MarketplaceDetails(_message.Message):
+    __slots__ = ("entitlement_id", "buyer_id")
+    ENTITLEMENT_ID_FIELD_NUMBER: _ClassVar[int]
+    BUYER_ID_FIELD_NUMBER: _ClassVar[int]
+    entitlement_id: str
+    buyer_id: str
+    def __init__(self, entitlement_id: _Optional[str] = ..., buyer_id: _Optional[str] = ...) -> None: ...
 
 class Card(_message.Message):
     __slots__ = ("brand", "last4", "expiration_month", "expiration_year")

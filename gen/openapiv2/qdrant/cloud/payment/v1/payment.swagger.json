@@ -416,6 +416,10 @@
               "$ref": "#/definitions/v1PaymentMethodStatus",
               "description": "Payment method status.\nThis is read-only field.",
               "readOnly": true
+            },
+            "marketplaceDetails": {
+              "$ref": "#/definitions/v1MarketplaceDetails",
+              "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for marketplace payment provider types."
             }
           },
           "description": "The payment method to create.\nThis is a required field.",
@@ -491,6 +495,10 @@
               "$ref": "#/definitions/v1PaymentMethodStatus",
               "description": "Payment method status.\nThis is read-only field.",
               "readOnly": true
+            },
+            "marketplaceDetails": {
+              "$ref": "#/definitions/v1MarketplaceDetails",
+              "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for marketplace payment provider types."
             }
           },
           "description": "The payment method to update.",
@@ -673,6 +681,20 @@
       },
       "description": "Response containing a list of payment methods."
     },
+    "v1MarketplaceDetails": {
+      "type": "object",
+      "properties": {
+        "entitlementId": {
+          "type": "string",
+          "description": "The identifier of the entitlement at the marketplace processor."
+        },
+        "buyerId": {
+          "type": "string",
+          "description": "The identifier of the buyer at the marketplace processor."
+        }
+      },
+      "title": "Represents details of the marketplace subscription\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
+    },
     "v1PaymentMethod": {
       "type": "object",
       "properties": {
@@ -726,6 +748,10 @@
           "$ref": "#/definitions/v1PaymentMethodStatus",
           "description": "Payment method status.\nThis is read-only field.",
           "readOnly": true
+        },
+        "marketplaceDetails": {
+          "$ref": "#/definitions/v1MarketplaceDetails",
+          "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for marketplace payment provider types."
         }
       },
       "title": "Represents a payment method.\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
