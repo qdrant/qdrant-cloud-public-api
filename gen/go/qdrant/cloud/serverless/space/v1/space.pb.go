@@ -1491,7 +1491,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
 	"\x17SPACE_STATE_PHASE_READY\x10\x02\x12\x1e\n" +
 	"\x1aSPACE_STATE_PHASE_DISABLED\x10\x03\x12\x1e\n" +
-	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xf1\x19\n" +
+	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xbe\x1a\n" +
 	"\fSpaceService\x12\xc9\x02\n" +
 	"\n" +
 	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"\xcf\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19V\n" +
@@ -1511,13 +1511,16 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
 	"space_name\x12\x0ereq.space.name\x8a\xb2\x19h\n" +
 	"VCreateSpace creates a new space with the specified configuration Required Permissions:\x12\fCreate space8\x01\xaa\xb8\x19\x0e\n" +
-	"\fcreate_space\x82\xd3\xe4\x93\x02::\x01*\"5/api/serverless/v1/accounts/{space.account_id}/spaces\x12\xcd\x04\n" +
-	"\x15CreateSpaceFromBackup\x12>.qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest\x1a?.qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse\"\xb2\x03\x8a\xb5\x18\x1arestore:serverless_backups\x8a\xb5\x18\x17write:serverless_spaces\xa8\xb5\x18\x01\xba\xb5\x18\x16\n" +
+	"\fcreate_space\x82\xd3\xe4\x93\x02::\x01*\"5/api/serverless/v1/accounts/{space.account_id}/spaces\x12\x9a\x05\n" +
+	"\x15CreateSpaceFromBackup\x12>.qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest\x1a?.qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse\"\xff\x03\x8a\xb5\x18\x1arestore:serverless_backups\x8a\xb5\x18\x17write:serverless_spaces\xa8\xb5\x18\x01\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\xba\xb5\x18\x18\n" +
 	"\n" +
 	"space_name\x12\n" +
-	"space_name\xca\xf3\x18\x82\x01\b\x01\x12\x10serverless-space\"\rresp.space.id*</accounts/{req.account_id}/serverless-spaces/{resp.space.id}R\x1f\n" +
-	"\x0efrom_backup_id\x12\rreq.backup_id\x8a\xb2\x19H\n" +
+	"space_name\xca\xf3\x18\xcf\x01\b\x01\x12\x10serverless-space\"\rresp.space.id*</accounts/{req.account_id}/serverless-spaces/{resp.space.id}R-\n" +
+	"\x0fcloud_region_id\x12\x1aresp.space.cloud_region_idR\x1f\n" +
+	"\x0efrom_backup_id\x12\rreq.backup_idZ\x1c\n" +
+	"\n" +
+	"space_name\x12\x0ereq.space_name\x8a\xb2\x19H\n" +
 	"*Create a new space from an existing backup\x12\x18Create space from backup8\x01\xaa\xb8\x19\x1a\n" +
 	"\x18create_space_from_backup\x82\xd3\xe4\x93\x02H:\x01*\"C/api/serverless/v1/accounts/{account_id}/backups/{backup_id}/spaces\x12\xf1\x04\n" +
 	"\vUpdateSpace\x124.qdrant.cloud.serverless.space.v1.UpdateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.UpdateSpaceResponse\"\xf4\x03\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x14\n" +
