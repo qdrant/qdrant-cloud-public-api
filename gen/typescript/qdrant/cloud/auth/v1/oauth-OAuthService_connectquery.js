@@ -23,6 +23,20 @@ export const listMyOAuthGrants = OAuthService.method.listMyOAuthGrants;
 export const listAccountOAuthGrants = OAuthService.method.listAccountOAuthGrants;
 
 /**
+ * Gets the OAuth consent request the authorization server (Auth0) sent the user to the
+ * consent page for, from the auth0_session_token, so the page can show verified details
+ * before the user decides: the client, the requested scope, and the user's active grant
+ * for the client, if any. The session token is verified the same way as in CreateOAuthGrant,
+ * and must belong to the authenticated user. Nothing is created or changed.
+ * The token is sent in the body (POST) to keep it out of URLs and access logs.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.auth.v1.OAuthService.GetOAuthConsentRequest
+ */
+export const getOAuthConsentRequest = OAuthService.method.getOAuthConsentRequest;
+
+/**
  * Creates an OAuth grant for the authenticated user, from the OAuth consent page.
  * The client and the requested scope come from the auth0_session_token, which the
  * authorization server (Auth0) signs when it redirects the user to the consent page; the

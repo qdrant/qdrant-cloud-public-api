@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	OAuthService_ListMyOAuthGrants_FullMethodName       = "/qdrant.cloud.auth.v1.OAuthService/ListMyOAuthGrants"
 	OAuthService_ListAccountOAuthGrants_FullMethodName  = "/qdrant.cloud.auth.v1.OAuthService/ListAccountOAuthGrants"
+	OAuthService_GetOAuthConsentRequest_FullMethodName  = "/qdrant.cloud.auth.v1.OAuthService/GetOAuthConsentRequest"
 	OAuthService_CreateOAuthGrant_FullMethodName        = "/qdrant.cloud.auth.v1.OAuthService/CreateOAuthGrant"
 	OAuthService_RevokeMyOAuthGrant_FullMethodName      = "/qdrant.cloud.auth.v1.OAuthService/RevokeMyOAuthGrant"
 	OAuthService_RevokeAccountOAuthGrant_FullMethodName = "/qdrant.cloud.auth.v1.OAuthService/RevokeAccountOAuthGrant"
@@ -42,6 +43,15 @@ type OAuthServiceClient interface {
 	// Required permissions:
 	// - read:oauth_grants
 	ListAccountOAuthGrants(ctx context.Context, in *ListAccountOAuthGrantsRequest, opts ...grpc.CallOption) (*ListAccountOAuthGrantsResponse, error)
+	// Gets the OAuth consent request the authorization server (Auth0) sent the user to the
+	// consent page for, from the auth0_session_token, so the page can show verified details
+	// before the user decides: the client, the requested scope, and the user's active grant
+	// for the client, if any. The session token is verified the same way as in CreateOAuthGrant,
+	// and must belong to the authenticated user. Nothing is created or changed.
+	// The token is sent in the body (POST) to keep it out of URLs and access logs.
+	// Required permissions:
+	// - None (authenticated only)
+	GetOAuthConsentRequest(ctx context.Context, in *GetOAuthConsentRequestRequest, opts ...grpc.CallOption) (*GetOAuthConsentRequestResponse, error)
 	// Creates an OAuth grant for the authenticated user, from the OAuth consent page.
 	// The client and the requested scope come from the auth0_session_token, which the
 	// authorization server (Auth0) signs when it redirects the user to the consent page; the
@@ -96,6 +106,16 @@ func (c *oAuthServiceClient) ListAccountOAuthGrants(ctx context.Context, in *Lis
 	return out, nil
 }
 
+func (c *oAuthServiceClient) GetOAuthConsentRequest(ctx context.Context, in *GetOAuthConsentRequestRequest, opts ...grpc.CallOption) (*GetOAuthConsentRequestResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOAuthConsentRequestResponse)
+	err := c.cc.Invoke(ctx, OAuthService_GetOAuthConsentRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *oAuthServiceClient) CreateOAuthGrant(ctx context.Context, in *CreateOAuthGrantRequest, opts ...grpc.CallOption) (*CreateOAuthGrantResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateOAuthGrantResponse)
@@ -142,6 +162,15 @@ type OAuthServiceServer interface {
 	// Required permissions:
 	// - read:oauth_grants
 	ListAccountOAuthGrants(context.Context, *ListAccountOAuthGrantsRequest) (*ListAccountOAuthGrantsResponse, error)
+	// Gets the OAuth consent request the authorization server (Auth0) sent the user to the
+	// consent page for, from the auth0_session_token, so the page can show verified details
+	// before the user decides: the client, the requested scope, and the user's active grant
+	// for the client, if any. The session token is verified the same way as in CreateOAuthGrant,
+	// and must belong to the authenticated user. Nothing is created or changed.
+	// The token is sent in the body (POST) to keep it out of URLs and access logs.
+	// Required permissions:
+	// - None (authenticated only)
+	GetOAuthConsentRequest(context.Context, *GetOAuthConsentRequestRequest) (*GetOAuthConsentRequestResponse, error)
 	// Creates an OAuth grant for the authenticated user, from the OAuth consent page.
 	// The client and the requested scope come from the auth0_session_token, which the
 	// authorization server (Auth0) signs when it redirects the user to the consent page; the
@@ -181,6 +210,9 @@ func (UnimplementedOAuthServiceServer) ListMyOAuthGrants(context.Context, *ListM
 }
 func (UnimplementedOAuthServiceServer) ListAccountOAuthGrants(context.Context, *ListAccountOAuthGrantsRequest) (*ListAccountOAuthGrantsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAccountOAuthGrants not implemented")
+}
+func (UnimplementedOAuthServiceServer) GetOAuthConsentRequest(context.Context, *GetOAuthConsentRequestRequest) (*GetOAuthConsentRequestResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOAuthConsentRequest not implemented")
 }
 func (UnimplementedOAuthServiceServer) CreateOAuthGrant(context.Context, *CreateOAuthGrantRequest) (*CreateOAuthGrantResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOAuthGrant not implemented")
@@ -244,6 +276,24 @@ func _OAuthService_ListAccountOAuthGrants_Handler(srv interface{}, ctx context.C
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OAuthServiceServer).ListAccountOAuthGrants(ctx, req.(*ListAccountOAuthGrantsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAuthService_GetOAuthConsentRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOAuthConsentRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAuthServiceServer).GetOAuthConsentRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OAuthService_GetOAuthConsentRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAuthServiceServer).GetOAuthConsentRequest(ctx, req.(*GetOAuthConsentRequestRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -316,6 +366,10 @@ var OAuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAccountOAuthGrants",
 			Handler:    _OAuthService_ListAccountOAuthGrants_Handler,
+		},
+		{
+			MethodName: "GetOAuthConsentRequest",
+			Handler:    _OAuthService_GetOAuthConsentRequest_Handler,
 		},
 		{
 			MethodName: "CreateOAuthGrant",
