@@ -95,6 +95,40 @@
         ]
       }
     },
+    "/api/auth/v1/users/me/oauth-consent-request": {
+      "post": {
+        "summary": "Gets the OAuth consent request the authorization server (Auth0) sent the user to the\nconsent page for, from the auth0_session_token, so the page can show verified details\nbefore the user decides: the client, the requested scope, and the user's active grant\nfor the client, if any. The session token is verified the same way as in CreateOAuthGrant,\nand must belong to the authenticated user. Nothing is created or changed.\nThe token is sent in the body (POST) to keep it out of URLs and access logs.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "OAuthService_GetOAuthConsentRequest",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetOAuthConsentRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "GetOAuthConsentRequestRequest is the request for the GetOAuthConsentRequest function\nIt has no account_id: the user picks the accounts on the consent page.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetOAuthConsentRequestRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OAuthService"
+        ]
+      }
+    },
     "/api/auth/v1/users/me/oauth-grants": {
       "get": {
         "summary": "Lists the active OAuth grants of the authenticated user.\nRequired permissions:\n- None (authenticated only)",
@@ -113,6 +147,37 @@
             }
           }
         },
+        "tags": [
+          "OAuthService"
+        ]
+      },
+      "post": {
+        "summary": "Creates an OAuth grant for the authenticated user, from the OAuth consent page.\nThe client and the requested scope come from the auth0_session_token, which the\nauthorization server (Auth0) signs when it redirects the user to the consent page; the\nrequest only carries what the user chose there: the accounts, and optionally a narrower\nscope. The user must be a member of every account.\nIf the user already has an active grant for the client, it is revoked and replaced by\nthe new one, so a grant always reflects the latest consent.\nThe response carries the continuation_token, which the consent page passes back to the\nauthorization server to resume the login; the issued tokens then reference the grant.\nRequired permissions:\n- None (authenticated only)",
+        "operationId": "OAuthService_CreateOAuthGrant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateOAuthGrantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateOAuthGrantRequest"
+            }
+          }
+        ],
         "tags": [
           "OAuthService"
         ]
@@ -196,6 +261,61 @@
         }
       }
     },
+    "v1CreateOAuthGrantRequest": {
+      "type": "object",
+      "properties": {
+        "auth0SessionToken": {
+          "type": "string",
+          "description": "The session token the authorization server (Auth0) passed to the consent page.\nIt is signed by the authorization server and identifies the user, the OAuth client, the\nrequested scope and the login transaction to resume.\nThis is a required field."
+        },
+        "accountIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The identifiers of the accounts the client may act in (in GUID format).\nThe user must be a member of every account.\nThis is a required field."
+        },
+        "scope": {
+          "$ref": "#/definitions/v1OauthScope",
+          "description": "The OAuth scope to grant, when narrower than the requested scope.\nIf omitted, the requested scope from the session token is granted. A scope wider than\nthe requested one is rejected."
+        }
+      },
+      "title": "CreateOAuthGrantRequest is the request for the CreateOAuthGrant function"
+    },
+    "v1CreateOAuthGrantResponse": {
+      "type": "object",
+      "properties": {
+        "oauthGrant": {
+          "$ref": "#/definitions/v1OAuthGrant",
+          "description": "The created OAuth grant."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token the consent page passes back to the authorization server to resume the login\n(as a query parameter of its /continue endpoint, together with the original state).\nIt is signed by Qdrant Cloud and binds the grant to the login transaction."
+        }
+      },
+      "title": "CreateOAuthGrantResponse is the response from the CreateOAuthGrant function"
+    },
+    "v1GetOAuthConsentRequestRequest": {
+      "type": "object",
+      "properties": {
+        "auth0SessionToken": {
+          "type": "string",
+          "description": "The session token the authorization server (Auth0) passed to the consent page.\nThis is a required field."
+        }
+      },
+      "description": "GetOAuthConsentRequestRequest is the request for the GetOAuthConsentRequest function\nIt has no account_id: the user picks the accounts on the consent page."
+    },
+    "v1GetOAuthConsentRequestResponse": {
+      "type": "object",
+      "properties": {
+        "consentRequest": {
+          "$ref": "#/definitions/v1OAuthConsentRequest",
+          "description": "The verified consent request."
+        }
+      },
+      "title": "GetOAuthConsentRequestResponse is the response from the GetOAuthConsentRequest function"
+    },
     "v1ListAccountOAuthGrantsResponse": {
       "type": "object",
       "properties": {
@@ -223,6 +343,41 @@
         }
       },
       "title": "ListMyOAuthGrantsResponse is the response from the ListMyOAuthGrants function"
+    },
+    "v1OAuthConsentRequest": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The OAuth client identifier, usually the URL of the client's metadata document."
+        },
+        "clientName": {
+          "type": "string",
+          "description": "The display name of the OAuth client."
+        },
+        "clientUri": {
+          "type": "string",
+          "description": "The home page of the OAuth client, from its metadata, to show its domain on the\nconsent page. It is empty when the client publishes none."
+        },
+        "requestedScope": {
+          "$ref": "#/definitions/v1OauthScope",
+          "description": "The scope the client requested. CreateOAuthGrant may only narrow it."
+        },
+        "firstParty": {
+          "type": "boolean",
+          "description": "Whether the client is a first-party Qdrant client (for example the qcloud CLI).\nThe consent page pre-selects all of the user's accounts for first-party clients."
+        },
+        "activeGrant": {
+          "$ref": "#/definitions/v1OAuthGrant",
+          "description": "The user's active grant for this client, if any. Its accounts can be pre-selected, and a\nrequested scope wider than the grant's scope is a step-up the page should point out.\nCreateOAuthGrant replaces it."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the session token expires. CreateOAuthGrant must be called before then."
+        }
+      },
+      "description": "An OAuthConsentRequest has no id, name or account: it describes a login in progress.\nAn OAuthConsentRequest is an OAuth client's pending request to act on behalf of the\nauthenticated user, as verified from the authorization server's session token."
     },
     "v1OAuthGrant": {
       "type": "object",
@@ -278,7 +433,7 @@
           "readOnly": true
         }
       },
-      "description": "An OAuthGrant represents a user's consent that an OAuth client may act on their behalf\nin one or more Qdrant Cloud accounts.\nGrants are created through the OAuth consent flow, not through this API."
+      "description": "An OAuthGrant has no name, and belongs to a user rather than one account (account_ids).\nAn OAuthGrant represents a user's consent that an OAuth client may act on their behalf\nin one or more Qdrant Cloud accounts.\nGrants are created through the OAuth consent flow (CreateOAuthGrant on the consent page)."
     },
     "v1OauthScope": {
       "type": "string",

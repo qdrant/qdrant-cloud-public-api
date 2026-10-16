@@ -970,41 +970,41 @@ const file_qdrant_cloud_serverless_space_auth_v1_space_api_key_proto_rawDesc = "
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x121\n" +
 	"\x10space_api_key_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\rspaceApiKeyId\"\x1b\n" +
-	"\x19DeleteSpaceApiKeyResponse\"\xae\f\n" +
-	"\vSpaceApiKey\x12\x13\n" +
-	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12'\n" +
+	"\x19DeleteSpaceApiKeyResponse\"\xb8\f\n" +
+	"\vSpaceApiKey\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe2A\x01\x03R\x02id\x12'\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12>\n" +
+	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12?\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12#\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\tcreatedAt\x12#\n" +
 	"\bspace_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12*\n" +
 	"\x04name\x18\x05 \x01(\tB\x16\xbaH\x13r\x11\x10\x04\x18\x80\x012\n" +
 	"^[\\w\\s-]+$R\x04name\x12>\n" +
 	"\n" +
 	"expires_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\texpiresAt\x88\x01\x01\x12^\n" +
-	"\faccess_rules\x18\a \x03(\v21.qdrant.cloud.serverless.space.auth.v1.AccessRuleB\b\xbaH\x05\x92\x01\x02\x10\x14R\vaccessRules\x12B\n" +
+	"\faccess_rules\x18\a \x03(\v21.qdrant.cloud.serverless.space.auth.v1.AccessRuleB\b\xbaH\x05\x92\x01\x02\x10\x14R\vaccessRules\x12C\n" +
 	"\n" +
-	"created_by\x18\v \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x03\xe0A\x03R\tcreatedBy\x12B\n" +
+	"created_by\x18\v \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x04\xe2A\x01\x03R\tcreatedBy\x12C\n" +
 	"\n" +
-	"deleted_by\x18\f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x03\xe0A\x03R\tdeletedBy\x12>\n" +
+	"deleted_by\x18\f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x04\xe2A\x01\x03R\tdeletedBy\x12?\n" +
 	"\n" +
-	"deleted_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tdeletedAt\x12\x1d\n" +
-	"\apostfix\x18\t \x01(\tB\x03\xe0A\x03R\apostfix\x12\x15\n" +
+	"deleted_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\tdeletedAt\x12\x1e\n" +
+	"\apostfix\x18\t \x01(\tB\x04\xe2A\x01\x03R\apostfix\x12\x16\n" +
 	"\x03key\x18\n" +
-	" \x01(\tB\x03\xe0A\x03R\x03key\x12R\n" +
-	"\x05state\x18d \x01(\v27.qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyStateB\x03\xe0A\x03R\x05state\x12>\n" +
+	" \x01(\tB\x04\xe2A\x01\x03R\x03key\x12S\n" +
+	"\x05state\x18d \x01(\v27.qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyStateB\x04\xe2A\x01\x03R\x05state\x12?\n" +
 	"\n" +
-	"revoked_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\trevokedAt\x12B\n" +
+	"revoked_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\trevokedAt\x12C\n" +
 	"\n" +
-	"revoked_by\x18\x0f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x03\xe0A\x03R\trevokedBy:\xb2\x05\xbaH\xae\x05\x1a\xa9\x01\n" +
+	"revoked_by\x18\x0f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x04\xe2A\x01\x03R\trevokedBy:\xb2\x05\xbaH\xae\x05\x1a\xa9\x01\n" +
 	"\x10space_api_key.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)\x1a\xeb\x01\n" +
 	",space_api_key.no_mixed_global_and_collection\x12LThere can't be global and collection access rules in the same space api key.\x1am!(this.access_rules.exists(r, has(r.global_access)) && this.access_rules.exists(r, has(r.collection_access)))\x1a\xab\x01\n" +
 	"$space_api_key.only_one_global_access\x12EThere can't be more than one global access rule in the configuration.\x1a<size(this.access_rules.filter(r, has(r.global_access))) <= 1\x1ad\n" +
 	"\x15space_api_key.postfix\x12\x19postfix must not be empty\x1a0this.postfix.size() > 0 || !has(this.created_at)B\r\n" +
-	"\v_expires_atJ\x04\b\b\x10\tR\x10created_by_email\"\x90\x01\n" +
-	"\x10SpaceApiKeyState\x12_\n" +
-	"\x05phase\x18\x01 \x01(\x0e2<.qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyStatePhaseB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x1b\n" +
-	"\x06reason\x18\x02 \x01(\tB\x03\xe0A\x03R\x06reason\"\xe8\x01\n" +
+	"\v_expires_atJ\x04\b\b\x10\tR\x10created_by_email\"\x92\x01\n" +
+	"\x10SpaceApiKeyState\x12`\n" +
+	"\x05phase\x18\x01 \x01(\x0e2<.qdrant.cloud.serverless.space.auth.v1.SpaceApiKeyStatePhaseB\f\xe2A\x01\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x1c\n" +
+	"\x06reason\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06reason\"\xe8\x01\n" +
 	"\n" +
 	"AccessRule\x12^\n" +
 	"\rglobal_access\x18\x01 \x01(\v27.qdrant.cloud.serverless.space.auth.v1.GlobalAccessRuleH\x00R\fglobalAccess\x12j\n" +

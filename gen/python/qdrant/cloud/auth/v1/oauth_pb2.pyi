@@ -38,6 +38,36 @@ class ListAccountOAuthGrantsResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[OAuthGrant]
     def __init__(self, items: _Optional[_Iterable[_Union[OAuthGrant, _Mapping]]] = ...) -> None: ...
 
+class GetOAuthConsentRequestRequest(_message.Message):
+    __slots__ = ("auth0_session_token",)
+    AUTH0_SESSION_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    auth0_session_token: str
+    def __init__(self, auth0_session_token: _Optional[str] = ...) -> None: ...
+
+class GetOAuthConsentRequestResponse(_message.Message):
+    __slots__ = ("consent_request",)
+    CONSENT_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    consent_request: OAuthConsentRequest
+    def __init__(self, consent_request: _Optional[_Union[OAuthConsentRequest, _Mapping]] = ...) -> None: ...
+
+class CreateOAuthGrantRequest(_message.Message):
+    __slots__ = ("auth0_session_token", "account_ids", "scope")
+    AUTH0_SESSION_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_IDS_FIELD_NUMBER: _ClassVar[int]
+    SCOPE_FIELD_NUMBER: _ClassVar[int]
+    auth0_session_token: str
+    account_ids: _containers.RepeatedScalarFieldContainer[str]
+    scope: _common_pb2.OauthScope
+    def __init__(self, auth0_session_token: _Optional[str] = ..., account_ids: _Optional[_Iterable[str]] = ..., scope: _Optional[_Union[_common_pb2.OauthScope, str]] = ...) -> None: ...
+
+class CreateOAuthGrantResponse(_message.Message):
+    __slots__ = ("oauth_grant", "continuation_token")
+    OAUTH_GRANT_FIELD_NUMBER: _ClassVar[int]
+    CONTINUATION_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    oauth_grant: OAuthGrant
+    continuation_token: str
+    def __init__(self, oauth_grant: _Optional[_Union[OAuthGrant, _Mapping]] = ..., continuation_token: _Optional[str] = ...) -> None: ...
+
 class RevokeMyOAuthGrantRequest(_message.Message):
     __slots__ = ("oauth_grant_id",)
     OAUTH_GRANT_ID_FIELD_NUMBER: _ClassVar[int]
@@ -81,3 +111,21 @@ class OAuthGrant(_message.Message):
     created_at: _timestamp_pb2.Timestamp
     last_used_at: _timestamp_pb2.Timestamp
     def __init__(self, id: _Optional[str] = ..., user_id: _Optional[str] = ..., user_email: _Optional[str] = ..., client_id: _Optional[str] = ..., client_name: _Optional[str] = ..., scope: _Optional[_Union[_common_pb2.OauthScope, str]] = ..., account_ids: _Optional[_Iterable[str]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_used_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+
+class OAuthConsentRequest(_message.Message):
+    __slots__ = ("client_id", "client_name", "client_uri", "requested_scope", "first_party", "active_grant", "expires_at")
+    CLIENT_ID_FIELD_NUMBER: _ClassVar[int]
+    CLIENT_NAME_FIELD_NUMBER: _ClassVar[int]
+    CLIENT_URI_FIELD_NUMBER: _ClassVar[int]
+    REQUESTED_SCOPE_FIELD_NUMBER: _ClassVar[int]
+    FIRST_PARTY_FIELD_NUMBER: _ClassVar[int]
+    ACTIVE_GRANT_FIELD_NUMBER: _ClassVar[int]
+    EXPIRES_AT_FIELD_NUMBER: _ClassVar[int]
+    client_id: str
+    client_name: str
+    client_uri: str
+    requested_scope: _common_pb2.OauthScope
+    first_party: bool
+    active_grant: OAuthGrant
+    expires_at: _timestamp_pb2.Timestamp
+    def __init__(self, client_id: _Optional[str] = ..., client_name: _Optional[str] = ..., client_uri: _Optional[str] = ..., requested_scope: _Optional[_Union[_common_pb2.OauthScope, str]] = ..., first_party: _Optional[bool] = ..., active_grant: _Optional[_Union[OAuthGrant, _Mapping]] = ..., expires_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...

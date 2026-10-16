@@ -17,7 +17,7 @@ service OAuthService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Lists the active OAuth grants of the authenticated user.
@@ -48,6 +48,62 @@ service OAuthService {
       title: "List account OAuth grants"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_account_oauth_grants"};
+  }
+  // Gets the OAuth consent request the authorization server (Auth0) sent the user to the
+  // consent page for, from the auth0_session_token, so the page can show verified details
+  // before the user decides: the client, the requested scope, and the user's active grant
+  // for the client, if any. The session token is verified the same way as in CreateOAuthGrant,
+  // and must belong to the authenticated user. Nothing is created or changed.
+  // The token is sent in the body (POST) to keep it out of URLs and access logs.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc GetOAuthConsentRequest(GetOAuthConsentRequestRequest) returns (GetOAuthConsentRequestResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/auth/v1/users/me/oauth-consent-request"
+      body: "*"
+    };
+  }
+  // Creates an OAuth grant for the authenticated user, from the OAuth consent page.
+  // The client and the requested scope come from the auth0_session_token, which the
+  // authorization server (Auth0) signs when it redirects the user to the consent page; the
+  // request only carries what the user chose there: the accounts, and optionally a narrower
+  // scope. The user must be a member of every account.
+  // If the user already has an active grant for the client, it is revoked and replaced by
+  // the new one, so a grant always reflects the latest consent.
+  // The response carries the continuation_token, which the consent page passes back to the
+  // authorization server to resume the login; the issued tokens then reference the grant.
+  // Required permissions:
+  // - None (authenticated only)
+  rpc CreateOAuthGrant(CreateOAuthGrantRequest) returns (CreateOAuthGrantResponse) {
+    // permissions
+    option (common.v1.permissions) = "";
+    // custom account-id expression
+    option (qdrant.cloud.common.v1.account_id_expression) = "";
+    // custom supported-actor-types expression. (Requires to be authenticated as a user)
+    option (qdrant.cloud.common.v1.supported_actor_types) = ACTOR_TYPE_USER;
+    // interactive only (session credential; not personal API keys or OAuth-delegated tokens)
+    option (common.v1.interactive_only) = true;
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/auth/v1/users/me/oauth-grants"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_CREATED
+      resource_type: "oauth-grant"
+      resource_id_field: "resp.oauth_grant.id"
+      resource_url_template: "/users/{req-md.qc-actor-id}/oauth-grants/{resp.oauth_grant.id}"
+    };
   }
   // Revokes an OAuth grant of the authenticated user, for all accounts it covers.
   // The client loses access to every one of those accounts, and its refresh tokens are revoked.
@@ -140,6 +196,62 @@ message ListAccountOAuthGrantsResponse {
   repeated OAuthGrant items = 1;
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
+// GetOAuthConsentRequestRequest is the request for the GetOAuthConsentRequest function
+// It has no account_id: the user picks the accounts on the consent page.
+message GetOAuthConsentRequestRequest {
+  // The session token the authorization server (Auth0) passed to the consent page.
+  // This is a required field.
+  string auth0_session_token = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 8192
+  }];
+}
+
+// GetOAuthConsentRequestResponse is the response from the GetOAuthConsentRequest function
+message GetOAuthConsentRequestResponse {
+  // The verified consent request.
+  OAuthConsentRequest consent_request = 1 [(buf.validate.field).required = true];
+}
+
+// CreateOAuthGrantRequest is the request for the CreateOAuthGrant function
+message CreateOAuthGrantRequest {
+  // The session token the authorization server (Auth0) passed to the consent page.
+  // It is signed by the authorization server and identifies the user, the OAuth client, the
+  // requested scope and the login transaction to resume.
+  // This is a required field.
+  string auth0_session_token = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 8192
+  }];
+  // The identifiers of the accounts the client may act in (in GUID format).
+  // The user must be a member of every account.
+  // This is a required field.
+  repeated string account_ids = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    unique: true
+    items: {string: {uuid: true}}
+  }];
+  // The OAuth scope to grant, when narrower than the requested scope.
+  // If omitted, the requested scope from the session token is granted. A scope wider than
+  // the requested one is rejected.
+  optional common.v1.OauthScope scope = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
+
+// CreateOAuthGrantResponse is the response from the CreateOAuthGrant function
+message CreateOAuthGrantResponse {
+  // The created OAuth grant.
+  OAuthGrant oauth_grant = 1 [(buf.validate.field).required = true];
+  // The token the consent page passes back to the authorization server to resume the login
+  // (as a query parameter of its /continue endpoint, together with the original state).
+  // It is signed by Qdrant Cloud and binds the grant to the login transaction.
+  string continuation_token = 2 [(buf.validate.field).string.min_len = 1];
+}
+
 // RevokeMyOAuthGrantRequest is the request for the RevokeMyOAuthGrant function
 message RevokeMyOAuthGrantRequest {
   // The identifier of the OAuth grant (in GUID format).
@@ -167,9 +279,11 @@ message RevokeAccountOAuthGrantResponse {
   // Empty
 }
 
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// An OAuthGrant has no name, and belongs to a user rather than one account (account_ids).
 // An OAuthGrant represents a user's consent that an OAuth client may act on their behalf
 // in one or more Qdrant Cloud accounts.
-// Grants are created through the OAuth consent flow, not through this API.
+// Grants are created through the OAuth consent flow (CreateOAuthGrant on the consent page).
 message OAuthGrant {
   // Unique identifier for the OAuth grant (in GUID format).
   // This is a read-only field.
@@ -210,4 +324,32 @@ message OAuthGrant {
   // Timestamp when the client last used the grant, if it has been used.
   // This is a read-only field.
   google.protobuf.Timestamp last_used_at = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// An OAuthConsentRequest has no id, name or account: it describes a login in progress.
+// An OAuthConsentRequest is an OAuth client's pending request to act on behalf of the
+// authenticated user, as verified from the authorization server's session token.
+message OAuthConsentRequest {
+  // The OAuth client identifier, usually the URL of the client's metadata document.
+  string client_id = 1 [(buf.validate.field).string.min_len = 1];
+  // The display name of the OAuth client.
+  string client_name = 2 [(buf.validate.field).string.min_len = 1];
+  // The home page of the OAuth client, from its metadata, to show its domain on the
+  // consent page. It is empty when the client publishes none.
+  string client_uri = 3;
+  // The scope the client requested. CreateOAuthGrant may only narrow it.
+  common.v1.OauthScope requested_scope = 4 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Whether the client is a first-party Qdrant client (for example the qcloud CLI).
+  // The consent page pre-selects all of the user's accounts for first-party clients.
+  bool first_party = 5;
+  // The user's active grant for this client, if any. Its accounts can be pre-selected, and a
+  // requested scope wider than the grant's scope is a step-up the page should point out.
+  // CreateOAuthGrant replaces it.
+  optional OAuthGrant active_grant = 6;
+  // Timestamp when the session token expires. CreateOAuthGrant must be called before then.
+  google.protobuf.Timestamp expires_at = 7;
 }
