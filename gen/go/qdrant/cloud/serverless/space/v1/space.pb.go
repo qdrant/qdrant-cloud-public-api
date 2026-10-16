@@ -1436,66 +1436,62 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"7\n" +
 	"\x18SuggestSpaceNameResponse\x12\x1b\n" +
-	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"\xff\b\n" +
-	"\x05Space\x12\x13\n" +
-	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x03R\x02id\x12>\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"\x87\t\n" +
+	"\x05Space\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe2A\x01\x03R\x02id\x12?\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12'\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\tcreatedAt\x12'\n" +
 	"\n" +
 	"account_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12/\n" +
-	"\x04name\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12>\n" +
+	"\x04name\x18\x04 \x01(\tB\x1b\xbaH\x18r\x16\x10\x04\x18@2\x10^[a-zA-Z0-9-_]+$R\x04name\x12?\n" +
 	"\n" +
-	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tdeletedAt\x122\n" +
-	"\x0fcloud_region_id\x18\v \x01(\tB\n" +
-	"\xe0A\x05\xbaH\x04r\x02\x10\x01R\rcloudRegionId\x12B\n" +
+	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\tdeletedAt\x123\n" +
+	"\x0fcloud_region_id\x18\v \x01(\tB\v\xe2A\x01\x05\xbaH\x04r\x02\x10\x01R\rcloudRegionId\x12B\n" +
 	"\x06labels\x18\f \x03(\v2 .qdrant.cloud.common.v1.KeyValueB\b\xbaH\x05\x92\x01\x02\x10\n" +
 	"R\x06labels\x12\xc7\x01\n" +
 	"\x15cost_allocation_label\x18\r \x01(\tB\x8d\x01\xbaH\x89\x01r\x86\x01\x18\xfd\x012\x80\x01^([a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?(\\.[a-z0-9A-Z]([-a-z0-9A-Z]*[a-z0-9A-Z])?)*\\/)?([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$H\x00R\x13costAllocationLabel\x88\x01\x01\x12b\n" +
-	"\rconfiguration\x18\x14 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\x12B\n" +
+	"\rconfiguration\x18\x14 \x01(\v24.qdrant.cloud.serverless.space.v1.SpaceConfigurationB\x06\xbaH\x03\xc8\x01\x01R\rconfiguration\x12C\n" +
 	"\n" +
-	"created_by\x18\x0e \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x03\xe0A\x03R\tcreatedBy\x12K\n" +
-	"\x0flast_updated_by\x18\x0f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x03\xe0A\x03R\rlastUpdatedBy\x12B\n" +
+	"created_by\x18\x0e \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x04\xe2A\x01\x03R\tcreatedBy\x12L\n" +
+	"\x0flast_updated_by\x18\x0f \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x04\xe2A\x01\x03R\rlastUpdatedBy\x12C\n" +
 	"\n" +
-	"deleted_by\x18\x10 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x03\xe0A\x03R\tdeletedBy\x12G\n" +
-	"\x05state\x18d \x01(\v2,.qdrant.cloud.serverless.space.v1.SpaceStateB\x03\xe0A\x03R\x05state:\xa8\x01\xbaH\xa4\x01\x1a\xa1\x01\n" +
+	"deleted_by\x18\x10 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x04\xe2A\x01\x03R\tdeletedBy\x12H\n" +
+	"\x05state\x18d \x01(\v2,.qdrant.cloud.serverless.space.v1.SpaceStateB\x04\xe2A\x01\x03R\x05state:\xa8\x01\xbaH\xa4\x01\x1a\xa1\x01\n" +
 	"\bspace.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x18\n" +
-	"\x16_cost_allocation_label\"\x87\x05\n" +
-	"\x12SpaceConfiguration\x12I\n" +
-	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x0elastModifiedAt\x12H\n" +
+	"\x16_cost_allocation_label\"\x89\x05\n" +
+	"\x12SpaceConfiguration\x12J\n" +
+	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\x0elastModifiedAt\x12H\n" +
 	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10(\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12\x91\x01\n" +
 	"\x0fallowed_origins\x18\f \x03(\tBh\xbaHe\x92\x01b\x10\n" +
-	"\x18\x01\"\\rZ\x10\x01\x18\xfd\x012S^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$R\x0eallowedOrigins\x12E\n" +
-	"\x19max_collections_per_space\x18\x0f \x01(\x04B\n" +
-	"\xe0A\x03\xbaH\x042\x02(\x00R\x16maxCollectionsPerSpace\x12e\n" +
+	"\x18\x01\"\\rZ\x10\x01\x18\xfd\x012S^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$R\x0eallowedOrigins\x12F\n" +
+	"\x19max_collections_per_space\x18\x0f \x01(\x04B\v\xe2A\x01\x03\xbaH\x042\x02(\x00R\x16maxCollectionsPerSpace\x12e\n" +
 	"\x13collection_settings\x18\x10 \x01(\v24.qdrant.cloud.serverless.space.v1.CollectionSettingsR\x12collectionSettings\x12_\n" +
-	"\x11searcher_settings\x18\x11 \x01(\v22.qdrant.cloud.serverless.space.v1.SearcherSettingsR\x10searcherSettingsJ\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0fR\x1aplatform_max_storage_bytesR\x11max_storage_bytes\"\x82\x01\n" +
-	"\x12CollectionSettings\x126\n" +
-	"\x11platform_max_size\x18\x01 \x01(\x04B\n" +
-	"\xe0A\x03\xbaH\x042\x02(\x00R\x0fplatformMaxSize\x12'\n" +
+	"\x11searcher_settings\x18\x11 \x01(\v22.qdrant.cloud.serverless.space.v1.SearcherSettingsR\x10searcherSettingsJ\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0fR\x1aplatform_max_storage_bytesR\x11max_storage_bytes\"\x83\x01\n" +
+	"\x12CollectionSettings\x127\n" +
+	"\x11platform_max_size\x18\x01 \x01(\x04B\v\xe2A\x01\x03\xbaH\x042\x02(\x00R\x0fplatformMaxSize\x12'\n" +
 	"\bmax_size\x18\x02 \x01(\x04B\a\xbaH\x042\x02(\x00H\x00R\amaxSize\x88\x01\x01B\v\n" +
-	"\t_max_size\"\xf4\x01\n" +
+	"\t_max_size\"\xf5\x01\n" +
 	"\x10SearcherSettings\x12R\n" +
-	"\fidle_timeout\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x0f\xbaH\f\xaa\x01\t\"\x03\b\x84\a2\x02\b<H\x00R\vidleTimeout\x88\x01\x01\x12<\n" +
-	"\x14platform_max_workers\x18\x02 \x01(\x04B\n" +
-	"\xe0A\x03\xbaH\x042\x02(\x00R\x12platformMaxWorkers\x12-\n" +
+	"\fidle_timeout\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x0f\xbaH\f\xaa\x01\t\"\x03\b\x84\a2\x02\b<H\x00R\vidleTimeout\x88\x01\x01\x12=\n" +
+	"\x14platform_max_workers\x18\x02 \x01(\x04B\v\xe2A\x01\x03\xbaH\x042\x02(\x00R\x12platformMaxWorkers\x12-\n" +
 	"\vmax_workers\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x01H\x01R\n" +
 	"maxWorkers\x88\x01\x01B\x0f\n" +
 	"\r_idle_timeoutB\x0e\n" +
-	"\f_max_workers\"\xe3\x01\n" +
+	"\f_max_workers\"\xe6\x01\n" +
 	"\n" +
-	"SpaceState\x12T\n" +
-	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\v\xe0A\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x1b\n" +
-	"\x06reason\x18\x02 \x01(\tB\x03\xe0A\x03R\x06reason\x12U\n" +
-	"\bendpoint\x18\a \x01(\v2/.qdrant.cloud.serverless.space.v1.SpaceEndpointB\x03\xe0A\x03H\x00R\bendpoint\x88\x01\x01B\v\n" +
-	"\t_endpoint\".\n" +
-	"\rSpaceEndpoint\x12\x1d\n" +
-	"\x03url\x18\x01 \x01(\tB\v\xe0A\x03\xbaH\x05r\x03\x88\x01\x01R\x03url*\xb3\x01\n" +
+	"SpaceState\x12U\n" +
+	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\f\xe2A\x01\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x1c\n" +
+	"\x06reason\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x06reason\x12V\n" +
+	"\bendpoint\x18\a \x01(\v2/.qdrant.cloud.serverless.space.v1.SpaceEndpointB\x04\xe2A\x01\x03H\x00R\bendpoint\x88\x01\x01B\v\n" +
+	"\t_endpoint\"/\n" +
+	"\rSpaceEndpoint\x12\x1e\n" +
+	"\x03url\x18\x01 \x01(\tB\f\xe2A\x01\x03\xbaH\x05r\x03\x88\x01\x01R\x03url*\xb3\x01\n" +
 	"\x0fSpaceStatePhase\x12!\n" +
 	"\x1dSPACE_STATE_PHASE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
 	"\x17SPACE_STATE_PHASE_READY\x10\x02\x12\x1e\n" +
 	"\x1aSPACE_STATE_PHASE_DISABLED\x10\x03\x12\x1e\n" +
-	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xa4\x19\n" +
+	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xbe\x1a\n" +
 	"\fSpaceService\x12\xc9\x02\n" +
 	"\n" +
 	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"\xcf\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19V\n" +
@@ -1506,19 +1502,25 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\bspace_id\x12\bspace_id\x8a\xb2\x19<\n" +
 	"$Get a single serverless space by ID.\x12\x14Get serverless space\xaa\xb8\x19\v\n" +
 	"\tget_spaceʾ\x19\x0e\n" +
-	"\x05space\x12\x05space\x82\xd3\xe4\x93\x02<\x12:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xf1\x03\n" +
-	"\vCreateSpace\x124.qdrant.cloud.serverless.space.v1.CreateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.CreateSpaceResponse\"\xf4\x02\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x18\n" +
+	"\x05space\x12\x05space\x82\xd3\xe4\x93\x02<\x12:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xbe\x04\n" +
+	"\vCreateSpace\x124.qdrant.cloud.serverless.space.v1.CreateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.CreateSpaceResponse\"\xc1\x03\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x18\n" +
 	"\n" +
 	"space_name\x12\n" +
-	"space.name\xca\xf3\x18g\b\x01\x12\x10serverless-space\"\rresp.space.id*B/accounts/{req.space.account_id}/serverless-spaces/{resp.space.id}\x8a\xb2\x19h\n" +
+	"space.name\xca\xf3\x18\xb3\x01\b\x01\x12\x10serverless-space\"\rresp.space.id*B/accounts/{req.space.account_id}/serverless-spaces/{resp.space.id}R,\n" +
+	"\x0fcloud_region_id\x12\x19req.space.cloud_region_idZ\x1c\n" +
+	"\n" +
+	"space_name\x12\x0ereq.space.name\x8a\xb2\x19h\n" +
 	"VCreateSpace creates a new space with the specified configuration Required Permissions:\x12\fCreate space8\x01\xaa\xb8\x19\x0e\n" +
-	"\fcreate_space\x82\xd3\xe4\x93\x02::\x01*\"5/api/serverless/v1/accounts/{space.account_id}/spaces\x12\xcd\x04\n" +
-	"\x15CreateSpaceFromBackup\x12>.qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest\x1a?.qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse\"\xb2\x03\x8a\xb5\x18\x1arestore:serverless_backups\x8a\xb5\x18\x17write:serverless_spaces\xa8\xb5\x18\x01\xba\xb5\x18\x16\n" +
+	"\fcreate_space\x82\xd3\xe4\x93\x02::\x01*\"5/api/serverless/v1/accounts/{space.account_id}/spaces\x12\x9a\x05\n" +
+	"\x15CreateSpaceFromBackup\x12>.qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupRequest\x1a?.qdrant.cloud.serverless.space.v1.CreateSpaceFromBackupResponse\"\xff\x03\x8a\xb5\x18\x1arestore:serverless_backups\x8a\xb5\x18\x17write:serverless_spaces\xa8\xb5\x18\x01\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\xba\xb5\x18\x18\n" +
 	"\n" +
 	"space_name\x12\n" +
-	"space_name\xca\xf3\x18\x82\x01\b\x01\x12\x10serverless-space\"\rresp.space.id*</accounts/{req.account_id}/serverless-spaces/{resp.space.id}R\x1f\n" +
-	"\x0efrom_backup_id\x12\rreq.backup_id\x8a\xb2\x19H\n" +
+	"space_name\xca\xf3\x18\xcf\x01\b\x01\x12\x10serverless-space\"\rresp.space.id*</accounts/{req.account_id}/serverless-spaces/{resp.space.id}R-\n" +
+	"\x0fcloud_region_id\x12\x1aresp.space.cloud_region_idR\x1f\n" +
+	"\x0efrom_backup_id\x12\rreq.backup_idZ\x1c\n" +
+	"\n" +
+	"space_name\x12\x0ereq.space_name\x8a\xb2\x19H\n" +
 	"*Create a new space from an existing backup\x12\x18Create space from backup8\x01\xaa\xb8\x19\x1a\n" +
 	"\x18create_space_from_backup\x82\xd3\xe4\x93\x02H:\x01*\"C/api/serverless/v1/accounts/{account_id}/backups/{backup_id}/spaces\x12\xf1\x04\n" +
 	"\vUpdateSpace\x124.qdrant.cloud.serverless.space.v1.UpdateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.UpdateSpaceResponse\"\xf4\x03\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x14\n" +

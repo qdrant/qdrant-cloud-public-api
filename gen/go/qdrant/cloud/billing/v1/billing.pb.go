@@ -298,9 +298,16 @@ type Invoice struct {
 	// Subtotal invoice amount in millicents (gross amount before discounts).
 	SubtotalAmount *int64 `protobuf:"varint,7,opt,name=subtotal_amount,json=subtotalAmount,proto3,oneof" json:"subtotal_amount,omitempty"`
 	// Remaining amount due in millicents (after credit balance / prepaid credits).
-	AmountDue     *int64 `protobuf:"varint,8,opt,name=amount_due,json=amountDue,proto3,oneof" json:"amount_due,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	AmountDue *int64 `protobuf:"varint,8,opt,name=amount_due,json=amountDue,proto3,oneof" json:"amount_due,omitempty"`
+	// A URL for the customer-facing invoice portal. This URL expires 30 days after the invoice's due date.
+	HostedInvoiceUrl *string `protobuf:"bytes,9,opt,name=hosted_invoice_url,json=hostedInvoiceUrl,proto3,oneof" json:"hosted_invoice_url,omitempty"`
+	// The timestamp when the invoice was paid.
+	PaidAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=paid_at,json=paidAt,proto3,oneof" json:"paid_at,omitempty"`
+	// If payment was attempted on this invoice but failed, this will be the time of
+	// the most recent attempt.
+	PaymentFailedAt *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=payment_failed_at,json=paymentFailedAt,proto3,oneof" json:"payment_failed_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Invoice) Reset() {
@@ -387,6 +394,27 @@ func (x *Invoice) GetAmountDue() int64 {
 		return *x.AmountDue
 	}
 	return 0
+}
+
+func (x *Invoice) GetHostedInvoiceUrl() string {
+	if x != nil && x.HostedInvoiceUrl != nil {
+		return *x.HostedInvoiceUrl
+	}
+	return ""
+}
+
+func (x *Invoice) GetPaidAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.PaidAt
+	}
+	return nil
+}
+
+func (x *Invoice) GetPaymentFailedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.PaymentFailedAt
+	}
+	return nil
 }
 
 // Discount represents a billing discount applied to an account.
@@ -1131,7 +1159,7 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"P\n" +
 	"\x15ListDiscountsResponse\x127\n" +
-	"\x05items\x18\x01 \x03(\v2!.qdrant.cloud.billing.v1.DiscountR\x05items\"\xc9\x03\n" +
+	"\x05items\x18\x01 \x03(\v2!.qdrant.cloud.billing.v1.DiscountR\x05items\"\xc6\x05\n" +
 	"\aInvoice\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12$\n" +
 	"\x06number\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06number\x88\x01\x01\x12*\n" +
@@ -1143,12 +1171,20 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\apdf_url\x18\x06 \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x01R\x06pdfUrl\x88\x01\x01\x125\n" +
 	"\x0fsubtotal_amount\x18\a \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x02R\x0esubtotalAmount\x88\x01\x01\x12+\n" +
 	"\n" +
-	"amount_due\x18\b \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x03R\tamountDue\x88\x01\x01B\t\n" +
+	"amount_due\x18\b \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x03R\tamountDue\x88\x01\x01\x12;\n" +
+	"\x12hosted_invoice_url\x18\t \x01(\tB\b\xbaH\x05r\x03\x88\x01\x01H\x04R\x10hostedInvoiceUrl\x88\x01\x01\x128\n" +
+	"\apaid_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampH\x05R\x06paidAt\x88\x01\x01\x12K\n" +
+	"\x11payment_failed_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\x06R\x0fpaymentFailedAt\x88\x01\x01B\t\n" +
 	"\a_numberB\n" +
 	"\n" +
 	"\b_pdf_urlB\x12\n" +
 	"\x10_subtotal_amountB\r\n" +
-	"\v_amount_due\"\xba\x03\n" +
+	"\v_amount_dueB\x15\n" +
+	"\x13_hosted_invoice_urlB\n" +
+	"\n" +
+	"\b_paid_atB\x14\n" +
+	"\x12_payment_failed_at\"\xba\x03\n" +
 	"\bDiscount\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12M\n" +
 	"\n" +
@@ -1273,30 +1309,32 @@ var file_qdrant_cloud_billing_v1_billing_proto_depIdxs = []int32{
 	6,  // 1: qdrant.cloud.billing.v1.ListDiscountsResponse.items:type_name -> qdrant.cloud.billing.v1.Discount
 	17, // 2: qdrant.cloud.billing.v1.Invoice.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 3: qdrant.cloud.billing.v1.Invoice.status:type_name -> qdrant.cloud.billing.v1.InvoiceStatus
-	7,  // 4: qdrant.cloud.billing.v1.Discount.percentage:type_name -> qdrant.cloud.billing.v1.DiscountPercentage
-	8,  // 5: qdrant.cloud.billing.v1.Discount.fixed:type_name -> qdrant.cloud.billing.v1.DiscountFixed
-	17, // 6: qdrant.cloud.billing.v1.Discount.valid_from:type_name -> google.protobuf.Timestamp
-	17, // 7: qdrant.cloud.billing.v1.Discount.valid_until:type_name -> google.protobuf.Timestamp
-	12, // 8: qdrant.cloud.billing.v1.ListCreditContractsResponse.items:type_name -> qdrant.cloud.billing.v1.CreditContract
-	11, // 9: qdrant.cloud.billing.v1.ListCreditContractsResponse.consumption_history:type_name -> qdrant.cloud.billing.v1.MonthlyCreditConsumption
-	17, // 10: qdrant.cloud.billing.v1.CreditContract.active_from:type_name -> google.protobuf.Timestamp
-	17, // 11: qdrant.cloud.billing.v1.CreditContract.active_to:type_name -> google.protobuf.Timestamp
-	17, // 12: qdrant.cloud.billing.v1.CreditContract.exhausted_at:type_name -> google.protobuf.Timestamp
-	1,  // 13: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
-	3,  // 14: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
-	9,  // 15: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:input_type -> qdrant.cloud.billing.v1.ListCreditContractsRequest
-	13, // 16: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:input_type -> qdrant.cloud.billing.v1.GetBillingAccountParentRequest
-	15, // 17: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:input_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
-	2,  // 18: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
-	4,  // 19: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
-	10, // 20: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:output_type -> qdrant.cloud.billing.v1.ListCreditContractsResponse
-	14, // 21: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:output_type -> qdrant.cloud.billing.v1.GetBillingAccountParentResponse
-	16, // 22: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:output_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
-	18, // [18:23] is the sub-list for method output_type
-	13, // [13:18] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	17, // 4: qdrant.cloud.billing.v1.Invoice.paid_at:type_name -> google.protobuf.Timestamp
+	17, // 5: qdrant.cloud.billing.v1.Invoice.payment_failed_at:type_name -> google.protobuf.Timestamp
+	7,  // 6: qdrant.cloud.billing.v1.Discount.percentage:type_name -> qdrant.cloud.billing.v1.DiscountPercentage
+	8,  // 7: qdrant.cloud.billing.v1.Discount.fixed:type_name -> qdrant.cloud.billing.v1.DiscountFixed
+	17, // 8: qdrant.cloud.billing.v1.Discount.valid_from:type_name -> google.protobuf.Timestamp
+	17, // 9: qdrant.cloud.billing.v1.Discount.valid_until:type_name -> google.protobuf.Timestamp
+	12, // 10: qdrant.cloud.billing.v1.ListCreditContractsResponse.items:type_name -> qdrant.cloud.billing.v1.CreditContract
+	11, // 11: qdrant.cloud.billing.v1.ListCreditContractsResponse.consumption_history:type_name -> qdrant.cloud.billing.v1.MonthlyCreditConsumption
+	17, // 12: qdrant.cloud.billing.v1.CreditContract.active_from:type_name -> google.protobuf.Timestamp
+	17, // 13: qdrant.cloud.billing.v1.CreditContract.active_to:type_name -> google.protobuf.Timestamp
+	17, // 14: qdrant.cloud.billing.v1.CreditContract.exhausted_at:type_name -> google.protobuf.Timestamp
+	1,  // 15: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
+	3,  // 16: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
+	9,  // 17: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:input_type -> qdrant.cloud.billing.v1.ListCreditContractsRequest
+	13, // 18: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:input_type -> qdrant.cloud.billing.v1.GetBillingAccountParentRequest
+	15, // 19: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:input_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
+	2,  // 20: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
+	4,  // 21: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
+	10, // 22: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:output_type -> qdrant.cloud.billing.v1.ListCreditContractsResponse
+	14, // 23: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:output_type -> qdrant.cloud.billing.v1.GetBillingAccountParentResponse
+	16, // 24: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:output_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
+	20, // [20:25] is the sub-list for method output_type
+	15, // [15:20] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_billing_v1_billing_proto_init() }

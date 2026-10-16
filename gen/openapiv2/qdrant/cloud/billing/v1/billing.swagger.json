@@ -369,6 +369,20 @@
           "type": "string",
           "format": "int64",
           "description": "Remaining amount due in millicents (after credit balance / prepaid credits)."
+        },
+        "hostedInvoiceUrl": {
+          "type": "string",
+          "description": "A URL for the customer-facing invoice portal. This URL expires 30 days after the invoice's due date."
+        },
+        "paidAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the invoice was paid."
+        },
+        "paymentFailedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "If payment was attempted on this invoice but failed, this will be the time of\nthe most recent attempt."
         }
       },
       "description": "Invoice represents a billing invoice issued to an account."

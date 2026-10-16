@@ -55,7 +55,7 @@ class ListDiscountsResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[Discount, _Mapping]]] = ...) -> None: ...
 
 class Invoice(_message.Message):
-    __slots__ = ("id", "number", "total_amount", "created_at", "status", "pdf_url", "subtotal_amount", "amount_due")
+    __slots__ = ("id", "number", "total_amount", "created_at", "status", "pdf_url", "subtotal_amount", "amount_due", "hosted_invoice_url", "paid_at", "payment_failed_at")
     ID_FIELD_NUMBER: _ClassVar[int]
     NUMBER_FIELD_NUMBER: _ClassVar[int]
     TOTAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
@@ -64,6 +64,9 @@ class Invoice(_message.Message):
     PDF_URL_FIELD_NUMBER: _ClassVar[int]
     SUBTOTAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
     AMOUNT_DUE_FIELD_NUMBER: _ClassVar[int]
+    HOSTED_INVOICE_URL_FIELD_NUMBER: _ClassVar[int]
+    PAID_AT_FIELD_NUMBER: _ClassVar[int]
+    PAYMENT_FAILED_AT_FIELD_NUMBER: _ClassVar[int]
     id: str
     number: str
     total_amount: int
@@ -72,7 +75,10 @@ class Invoice(_message.Message):
     pdf_url: str
     subtotal_amount: int
     amount_due: int
-    def __init__(self, id: _Optional[str] = ..., number: _Optional[str] = ..., total_amount: _Optional[int] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[InvoiceStatus, str]] = ..., pdf_url: _Optional[str] = ..., subtotal_amount: _Optional[int] = ..., amount_due: _Optional[int] = ...) -> None: ...
+    hosted_invoice_url: str
+    paid_at: _timestamp_pb2.Timestamp
+    payment_failed_at: _timestamp_pb2.Timestamp
+    def __init__(self, id: _Optional[str] = ..., number: _Optional[str] = ..., total_amount: _Optional[int] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., status: _Optional[_Union[InvoiceStatus, str]] = ..., pdf_url: _Optional[str] = ..., subtotal_amount: _Optional[int] = ..., amount_due: _Optional[int] = ..., hosted_invoice_url: _Optional[str] = ..., paid_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., payment_failed_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class Discount(_message.Message):
     __slots__ = ("name", "percentage", "fixed", "valid_from", "valid_until")

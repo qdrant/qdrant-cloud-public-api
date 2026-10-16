@@ -681,6 +681,14 @@ export declare type PaymentMethod = Message<"qdrant.cloud.payment.v1.PaymentMeth
    * @generated from field: optional qdrant.cloud.payment.v1.PaymentMethodStatus status = 11;
    */
   status?: PaymentMethodStatus | undefined;
+
+  /**
+   * Represents the payment method details, such as card information.
+   * This field is optional and only available for marketplace payment provider types.
+   *
+   * @generated from field: optional qdrant.cloud.payment.v1.MarketplaceDetails marketplace_details = 12;
+   */
+  marketplaceDetails?: MarketplaceDetails | undefined;
 };
 
 /**
@@ -776,6 +784,14 @@ export declare type PaymentMethodValid = Message<"qdrant.cloud.payment.v1.Paymen
    * @generated from field: optional qdrant.cloud.payment.v1.PaymentMethodStatus status = 11;
    */
   status?: PaymentMethodStatus | undefined;
+
+  /**
+   * Represents the payment method details, such as card information.
+   * This field is optional and only available for marketplace payment provider types.
+   *
+   * @generated from field: optional qdrant.cloud.payment.v1.MarketplaceDetails marketplace_details = 12;
+   */
+  marketplaceDetails?: MarketplaceDetailsValid | undefined;
 };
 
 /**
@@ -1012,6 +1028,35 @@ export declare type PaymentMethodDetailsValid = Message<"qdrant.cloud.payment.v1
  * Use `create(PaymentMethodDetailsSchema)` to create a new message.
  */
 export declare const PaymentMethodDetailsSchema: GenMessage<PaymentMethodDetails, {validType: PaymentMethodDetailsValid}>;
+
+/**
+ * Represents details of the marketplace subscription
+ *
+ * @generated from message qdrant.cloud.payment.v1.MarketplaceDetails
+ */
+export declare type MarketplaceDetails = Message<"qdrant.cloud.payment.v1.MarketplaceDetails"> & {
+  /**
+   * The identifier of the entitlement at the marketplace processor.
+   *
+   * @generated from field: optional string entitlement_id = 1;
+   */
+  entitlementId?: string | undefined;
+
+  /**
+   * The identifier of the buyer at the marketplace processor.
+   *
+   * @generated from field: optional string buyer_id = 2;
+   */
+  buyerId?: string | undefined;
+};
+
+export declare type MarketplaceDetailsValid = MarketplaceDetails;
+
+/**
+ * Describes the message qdrant.cloud.payment.v1.MarketplaceDetails.
+ * Use `create(MarketplaceDetailsSchema)` to create a new message.
+ */
+export declare const MarketplaceDetailsSchema: GenMessage<MarketplaceDetails, {validType: MarketplaceDetailsValid}>;
 
 /**
  * Represents payment method card details

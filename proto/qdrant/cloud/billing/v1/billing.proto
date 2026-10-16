@@ -140,6 +140,13 @@ message Invoice {
   optional int64 subtotal_amount = 7 [(buf.validate.field).int64.gte = 0];
   // Remaining amount due in millicents (after credit balance / prepaid credits).
   optional int64 amount_due = 8 [(buf.validate.field).int64.gte = 0];
+  // A URL for the customer-facing invoice portal. This URL expires 30 days after the invoice's due date.
+  optional string hosted_invoice_url = 9 [(buf.validate.field).string.uri = true];
+  // The timestamp when the invoice was paid.
+  optional google.protobuf.Timestamp paid_at = 10;
+  // If payment was attempted on this invoice but failed, this will be the time of
+  // the most recent attempt.
+  optional google.protobuf.Timestamp payment_failed_at = 11;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
