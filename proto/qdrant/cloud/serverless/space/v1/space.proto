@@ -126,6 +126,14 @@ service SpaceService {
         key: "from_backup_id"
         value: "req.backup_id"
       }
+      additional_context_fields: {
+        key: "cloud_region_id"
+        value: "resp.space.cloud_region_id"
+      }
+      additional_payload_fields: {
+        key: "space_name"
+        value: "req.space_name"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
