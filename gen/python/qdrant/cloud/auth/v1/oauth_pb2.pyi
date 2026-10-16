@@ -38,6 +38,24 @@ class ListAccountOAuthGrantsResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[OAuthGrant]
     def __init__(self, items: _Optional[_Iterable[_Union[OAuthGrant, _Mapping]]] = ...) -> None: ...
 
+class CreateOAuthGrantRequest(_message.Message):
+    __slots__ = ("auth0_session_token", "account_ids", "scope")
+    AUTH0_SESSION_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_IDS_FIELD_NUMBER: _ClassVar[int]
+    SCOPE_FIELD_NUMBER: _ClassVar[int]
+    auth0_session_token: str
+    account_ids: _containers.RepeatedScalarFieldContainer[str]
+    scope: _common_pb2.OauthScope
+    def __init__(self, auth0_session_token: _Optional[str] = ..., account_ids: _Optional[_Iterable[str]] = ..., scope: _Optional[_Union[_common_pb2.OauthScope, str]] = ...) -> None: ...
+
+class CreateOAuthGrantResponse(_message.Message):
+    __slots__ = ("oauth_grant", "continuation_token")
+    OAUTH_GRANT_FIELD_NUMBER: _ClassVar[int]
+    CONTINUATION_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    oauth_grant: OAuthGrant
+    continuation_token: str
+    def __init__(self, oauth_grant: _Optional[_Union[OAuthGrant, _Mapping]] = ..., continuation_token: _Optional[str] = ...) -> None: ...
+
 class RevokeMyOAuthGrantRequest(_message.Message):
     __slots__ = ("oauth_grant_id",)
     OAUTH_GRANT_ID_FIELD_NUMBER: _ClassVar[int]

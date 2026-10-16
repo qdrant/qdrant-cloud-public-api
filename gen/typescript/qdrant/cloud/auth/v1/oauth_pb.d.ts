@@ -100,6 +100,101 @@ export declare type ListAccountOAuthGrantsResponseValid = ListAccountOAuthGrants
 export declare const ListAccountOAuthGrantsResponseSchema: GenMessage<ListAccountOAuthGrantsResponse, {validType: ListAccountOAuthGrantsResponseValid}>;
 
 /**
+ * CreateOAuthGrantRequest is the request for the CreateOAuthGrant function
+ *
+ * @generated from message qdrant.cloud.auth.v1.CreateOAuthGrantRequest
+ */
+export declare type CreateOAuthGrantRequest = Message<"qdrant.cloud.auth.v1.CreateOAuthGrantRequest"> & {
+  /**
+   * The session token the authorization server (Auth0) passed to the consent page.
+   * It is signed by the authorization server and identifies the user, the OAuth client, the
+   * requested scope and the login transaction to resume.
+   * This is a required field.
+   *
+   * @generated from field: string auth0_session_token = 1;
+   */
+  auth0SessionToken: string;
+
+  /**
+   * The identifiers of the accounts the client may act in (in GUID format).
+   * The user must be a member of every account.
+   * This is a required field.
+   *
+   * @generated from field: repeated string account_ids = 2;
+   */
+  accountIds: string[];
+
+  /**
+   * The OAuth scope to grant, when narrower than the requested scope.
+   * If omitted, the requested scope from the session token is granted. A scope wider than
+   * the requested one is rejected.
+   *
+   * @generated from field: optional qdrant.cloud.common.v1.OauthScope scope = 3;
+   */
+  scope?: OauthScope | undefined;
+};
+
+export declare type CreateOAuthGrantRequestValid = CreateOAuthGrantRequest;
+
+/**
+ * Describes the message qdrant.cloud.auth.v1.CreateOAuthGrantRequest.
+ * Use `create(CreateOAuthGrantRequestSchema)` to create a new message.
+ */
+export declare const CreateOAuthGrantRequestSchema: GenMessage<CreateOAuthGrantRequest, {validType: CreateOAuthGrantRequestValid}>;
+
+/**
+ * CreateOAuthGrantResponse is the response from the CreateOAuthGrant function
+ *
+ * @generated from message qdrant.cloud.auth.v1.CreateOAuthGrantResponse
+ */
+export declare type CreateOAuthGrantResponse = Message<"qdrant.cloud.auth.v1.CreateOAuthGrantResponse"> & {
+  /**
+   * The created OAuth grant.
+   *
+   * @generated from field: qdrant.cloud.auth.v1.OAuthGrant oauth_grant = 1;
+   */
+  oauthGrant?: OAuthGrant | undefined;
+
+  /**
+   * The token the consent page passes back to the authorization server to resume the login
+   * (as a query parameter of its /continue endpoint, together with the original state).
+   * It is signed by Qdrant Cloud and binds the grant to the login transaction.
+   *
+   * @generated from field: string continuation_token = 2;
+   */
+  continuationToken: string;
+};
+
+/**
+ * CreateOAuthGrantResponse is the response from the CreateOAuthGrant function
+ *
+ * @generated from message qdrant.cloud.auth.v1.CreateOAuthGrantResponse
+ */
+export declare type CreateOAuthGrantResponseValid = Message<"qdrant.cloud.auth.v1.CreateOAuthGrantResponse"> & {
+  /**
+   * The created OAuth grant.
+   *
+   * @generated from field: qdrant.cloud.auth.v1.OAuthGrant oauth_grant = 1;
+   */
+  oauthGrant: OAuthGrantValid;
+
+  /**
+   * The token the consent page passes back to the authorization server to resume the login
+   * (as a query parameter of its /continue endpoint, together with the original state).
+   * It is signed by Qdrant Cloud and binds the grant to the login transaction.
+   *
+   * @generated from field: string continuation_token = 2;
+   */
+  continuationToken: string;
+};
+
+/**
+ * Describes the message qdrant.cloud.auth.v1.CreateOAuthGrantResponse.
+ * Use `create(CreateOAuthGrantResponseSchema)` to create a new message.
+ */
+export declare const CreateOAuthGrantResponseSchema: GenMessage<CreateOAuthGrantResponse, {validType: CreateOAuthGrantResponseValid}>;
+
+/**
  * RevokeMyOAuthGrantRequest is the request for the RevokeMyOAuthGrant function
  *
  * @generated from message qdrant.cloud.auth.v1.RevokeMyOAuthGrantRequest
@@ -190,9 +285,10 @@ export declare type RevokeAccountOAuthGrantResponseValid = RevokeAccountOAuthGra
 export declare const RevokeAccountOAuthGrantResponseSchema: GenMessage<RevokeAccountOAuthGrantResponse, {validType: RevokeAccountOAuthGrantResponseValid}>;
 
 /**
+ * An OAuthGrant has no name, and belongs to a user rather than one account (account_ids).
  * An OAuthGrant represents a user's consent that an OAuth client may act on their behalf
  * in one or more Qdrant Cloud accounts.
- * Grants are created through the OAuth consent flow, not through this API.
+ * Grants are created through the OAuth consent flow (CreateOAuthGrant on the consent page).
  *
  * @generated from message qdrant.cloud.auth.v1.OAuthGrant
  */
@@ -312,6 +408,26 @@ export declare const OAuthService: GenService<{
     methodKind: "unary";
     input: typeof ListAccountOAuthGrantsRequestSchema;
     output: typeof ListAccountOAuthGrantsResponseSchema;
+  },
+  /**
+   * Creates an OAuth grant for the authenticated user, from the OAuth consent page.
+   * The client and the requested scope come from the auth0_session_token, which the
+   * authorization server (Auth0) signs when it redirects the user to the consent page; the
+   * request only carries what the user chose there: the accounts, and optionally a narrower
+   * scope. The user must be a member of every account.
+   * If the user already has an active grant for the client, it is revoked and replaced by
+   * the new one, so a grant always reflects the latest consent.
+   * The response carries the continuation_token, which the consent page passes back to the
+   * authorization server to resume the login; the issued tokens then reference the grant.
+   * Required permissions:
+   * - None (authenticated only)
+   *
+   * @generated from rpc qdrant.cloud.auth.v1.OAuthService.CreateOAuthGrant
+   */
+  createOAuthGrant: {
+    methodKind: "unary";
+    input: typeof CreateOAuthGrantRequestSchema;
+    output: typeof CreateOAuthGrantResponseSchema;
   },
   /**
    * Revokes an OAuth grant of the authenticated user, for all accounts it covers.

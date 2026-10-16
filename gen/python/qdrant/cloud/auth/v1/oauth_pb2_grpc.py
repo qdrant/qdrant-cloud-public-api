@@ -27,6 +27,11 @@ class OAuthServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.ListAccountOAuthGrantsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.ListAccountOAuthGrantsResponse.FromString,
                 _registered_method=True)
+        self.CreateOAuthGrant = channel.unary_unary(
+                '/qdrant.cloud.auth.v1.OAuthService/CreateOAuthGrant',
+                request_serializer=qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.CreateOAuthGrantRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.CreateOAuthGrantResponse.FromString,
+                _registered_method=True)
         self.RevokeMyOAuthGrant = channel.unary_unary(
                 '/qdrant.cloud.auth.v1.OAuthService/RevokeMyOAuthGrant',
                 request_serializer=qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.RevokeMyOAuthGrantRequest.SerializeToString,
@@ -58,6 +63,23 @@ class OAuthServiceServicer(object):
         """Lists the active OAuth grants that cover the account identified by the given ID.
         Required permissions:
         - read:oauth_grants
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateOAuthGrant(self, request, context):
+        """Creates an OAuth grant for the authenticated user, from the OAuth consent page.
+        The client and the requested scope come from the auth0_session_token, which the
+        authorization server (Auth0) signs when it redirects the user to the consent page; the
+        request only carries what the user chose there: the accounts, and optionally a narrower
+        scope. The user must be a member of every account.
+        If the user already has an active grant for the client, it is revoked and replaced by
+        the new one, so a grant always reflects the latest consent.
+        The response carries the continuation_token, which the consent page passes back to the
+        authorization server to resume the login; the issued tokens then reference the grant.
+        Required permissions:
+        - None (authenticated only)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -97,6 +119,11 @@ def add_OAuthServiceServicer_to_server(servicer, server):
                     servicer.ListAccountOAuthGrants,
                     request_deserializer=qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.ListAccountOAuthGrantsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.ListAccountOAuthGrantsResponse.SerializeToString,
+            ),
+            'CreateOAuthGrant': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateOAuthGrant,
+                    request_deserializer=qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.CreateOAuthGrantRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.CreateOAuthGrantResponse.SerializeToString,
             ),
             'RevokeMyOAuthGrant': grpc.unary_unary_rpc_method_handler(
                     servicer.RevokeMyOAuthGrant,
@@ -166,6 +193,33 @@ class OAuthService(object):
             '/qdrant.cloud.auth.v1.OAuthService/ListAccountOAuthGrants',
             qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.ListAccountOAuthGrantsRequest.SerializeToString,
             qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.ListAccountOAuthGrantsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreateOAuthGrant(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.auth.v1.OAuthService/CreateOAuthGrant',
+            qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.CreateOAuthGrantRequest.SerializeToString,
+            qdrant_dot_cloud_dot_auth_dot_v1_dot_oauth__pb2.CreateOAuthGrantResponse.FromString,
             options,
             channel_credentials,
             insecure,

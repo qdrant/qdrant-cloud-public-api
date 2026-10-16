@@ -21,6 +21,22 @@ export const listMyOAuthGrants: typeof OAuthService["method"]["listMyOAuthGrants
  */
 export const listAccountOAuthGrants: typeof OAuthService["method"]["listAccountOAuthGrants"];
 /**
+ * Creates an OAuth grant for the authenticated user, from the OAuth consent page.
+ * The client and the requested scope come from the auth0_session_token, which the
+ * authorization server (Auth0) signs when it redirects the user to the consent page; the
+ * request only carries what the user chose there: the accounts, and optionally a narrower
+ * scope. The user must be a member of every account.
+ * If the user already has an active grant for the client, it is revoked and replaced by
+ * the new one, so a grant always reflects the latest consent.
+ * The response carries the continuation_token, which the consent page passes back to the
+ * authorization server to resume the login; the issued tokens then reference the grant.
+ * Required permissions:
+ * - None (authenticated only)
+ *
+ * @generated from rpc qdrant.cloud.auth.v1.OAuthService.CreateOAuthGrant
+ */
+export const createOAuthGrant: typeof OAuthService["method"]["createOAuthGrant"];
+/**
  * Revokes an OAuth grant of the authenticated user, for all accounts it covers.
  * The client loses access to every one of those accounts, and its refresh tokens are revoked.
  * Required permissions:

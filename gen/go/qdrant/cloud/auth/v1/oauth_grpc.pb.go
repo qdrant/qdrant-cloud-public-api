@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	OAuthService_ListMyOAuthGrants_FullMethodName       = "/qdrant.cloud.auth.v1.OAuthService/ListMyOAuthGrants"
 	OAuthService_ListAccountOAuthGrants_FullMethodName  = "/qdrant.cloud.auth.v1.OAuthService/ListAccountOAuthGrants"
+	OAuthService_CreateOAuthGrant_FullMethodName        = "/qdrant.cloud.auth.v1.OAuthService/CreateOAuthGrant"
 	OAuthService_RevokeMyOAuthGrant_FullMethodName      = "/qdrant.cloud.auth.v1.OAuthService/RevokeMyOAuthGrant"
 	OAuthService_RevokeAccountOAuthGrant_FullMethodName = "/qdrant.cloud.auth.v1.OAuthService/RevokeAccountOAuthGrant"
 )
@@ -41,6 +42,18 @@ type OAuthServiceClient interface {
 	// Required permissions:
 	// - read:oauth_grants
 	ListAccountOAuthGrants(ctx context.Context, in *ListAccountOAuthGrantsRequest, opts ...grpc.CallOption) (*ListAccountOAuthGrantsResponse, error)
+	// Creates an OAuth grant for the authenticated user, from the OAuth consent page.
+	// The client and the requested scope come from the auth0_session_token, which the
+	// authorization server (Auth0) signs when it redirects the user to the consent page; the
+	// request only carries what the user chose there: the accounts, and optionally a narrower
+	// scope. The user must be a member of every account.
+	// If the user already has an active grant for the client, it is revoked and replaced by
+	// the new one, so a grant always reflects the latest consent.
+	// The response carries the continuation_token, which the consent page passes back to the
+	// authorization server to resume the login; the issued tokens then reference the grant.
+	// Required permissions:
+	// - None (authenticated only)
+	CreateOAuthGrant(ctx context.Context, in *CreateOAuthGrantRequest, opts ...grpc.CallOption) (*CreateOAuthGrantResponse, error)
 	// Revokes an OAuth grant of the authenticated user, for all accounts it covers.
 	// The client loses access to every one of those accounts, and its refresh tokens are revoked.
 	// Required permissions:
@@ -83,6 +96,16 @@ func (c *oAuthServiceClient) ListAccountOAuthGrants(ctx context.Context, in *Lis
 	return out, nil
 }
 
+func (c *oAuthServiceClient) CreateOAuthGrant(ctx context.Context, in *CreateOAuthGrantRequest, opts ...grpc.CallOption) (*CreateOAuthGrantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateOAuthGrantResponse)
+	err := c.cc.Invoke(ctx, OAuthService_CreateOAuthGrant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *oAuthServiceClient) RevokeMyOAuthGrant(ctx context.Context, in *RevokeMyOAuthGrantRequest, opts ...grpc.CallOption) (*RevokeMyOAuthGrantResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RevokeMyOAuthGrantResponse)
@@ -119,6 +142,18 @@ type OAuthServiceServer interface {
 	// Required permissions:
 	// - read:oauth_grants
 	ListAccountOAuthGrants(context.Context, *ListAccountOAuthGrantsRequest) (*ListAccountOAuthGrantsResponse, error)
+	// Creates an OAuth grant for the authenticated user, from the OAuth consent page.
+	// The client and the requested scope come from the auth0_session_token, which the
+	// authorization server (Auth0) signs when it redirects the user to the consent page; the
+	// request only carries what the user chose there: the accounts, and optionally a narrower
+	// scope. The user must be a member of every account.
+	// If the user already has an active grant for the client, it is revoked and replaced by
+	// the new one, so a grant always reflects the latest consent.
+	// The response carries the continuation_token, which the consent page passes back to the
+	// authorization server to resume the login; the issued tokens then reference the grant.
+	// Required permissions:
+	// - None (authenticated only)
+	CreateOAuthGrant(context.Context, *CreateOAuthGrantRequest) (*CreateOAuthGrantResponse, error)
 	// Revokes an OAuth grant of the authenticated user, for all accounts it covers.
 	// The client loses access to every one of those accounts, and its refresh tokens are revoked.
 	// Required permissions:
@@ -146,6 +181,9 @@ func (UnimplementedOAuthServiceServer) ListMyOAuthGrants(context.Context, *ListM
 }
 func (UnimplementedOAuthServiceServer) ListAccountOAuthGrants(context.Context, *ListAccountOAuthGrantsRequest) (*ListAccountOAuthGrantsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAccountOAuthGrants not implemented")
+}
+func (UnimplementedOAuthServiceServer) CreateOAuthGrant(context.Context, *CreateOAuthGrantRequest) (*CreateOAuthGrantResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateOAuthGrant not implemented")
 }
 func (UnimplementedOAuthServiceServer) RevokeMyOAuthGrant(context.Context, *RevokeMyOAuthGrantRequest) (*RevokeMyOAuthGrantResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RevokeMyOAuthGrant not implemented")
@@ -210,6 +248,24 @@ func _OAuthService_ListAccountOAuthGrants_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OAuthService_CreateOAuthGrant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOAuthGrantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAuthServiceServer).CreateOAuthGrant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OAuthService_CreateOAuthGrant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAuthServiceServer).CreateOAuthGrant(ctx, req.(*CreateOAuthGrantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OAuthService_RevokeMyOAuthGrant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RevokeMyOAuthGrantRequest)
 	if err := dec(in); err != nil {
@@ -260,6 +316,10 @@ var OAuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAccountOAuthGrants",
 			Handler:    _OAuthService_ListAccountOAuthGrants_Handler,
+		},
+		{
+			MethodName: "CreateOAuthGrant",
+			Handler:    _OAuthService_CreateOAuthGrant_Handler,
 		},
 		{
 			MethodName: "RevokeMyOAuthGrant",

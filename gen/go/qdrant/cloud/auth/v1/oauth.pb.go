@@ -206,6 +206,134 @@ func (x *ListAccountOAuthGrantsResponse) GetItems() []*OAuthGrant {
 	return nil
 }
 
+// CreateOAuthGrantRequest is the request for the CreateOAuthGrant function
+type CreateOAuthGrantRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The session token the authorization server (Auth0) passed to the consent page.
+	// It is signed by the authorization server and identifies the user, the OAuth client, the
+	// requested scope and the login transaction to resume.
+	// This is a required field.
+	Auth0SessionToken string `protobuf:"bytes,1,opt,name=auth0_session_token,json=auth0SessionToken,proto3" json:"auth0_session_token,omitempty"`
+	// The identifiers of the accounts the client may act in (in GUID format).
+	// The user must be a member of every account.
+	// This is a required field.
+	AccountIds []string `protobuf:"bytes,2,rep,name=account_ids,json=accountIds,proto3" json:"account_ids,omitempty"`
+	// The OAuth scope to grant, when narrower than the requested scope.
+	// If omitted, the requested scope from the session token is granted. A scope wider than
+	// the requested one is rejected.
+	Scope         *v1.OauthScope `protobuf:"varint,3,opt,name=scope,proto3,enum=qdrant.cloud.common.v1.OauthScope,oneof" json:"scope,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateOAuthGrantRequest) Reset() {
+	*x = CreateOAuthGrantRequest{}
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOAuthGrantRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOAuthGrantRequest) ProtoMessage() {}
+
+func (x *CreateOAuthGrantRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOAuthGrantRequest.ProtoReflect.Descriptor instead.
+func (*CreateOAuthGrantRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateOAuthGrantRequest) GetAuth0SessionToken() string {
+	if x != nil {
+		return x.Auth0SessionToken
+	}
+	return ""
+}
+
+func (x *CreateOAuthGrantRequest) GetAccountIds() []string {
+	if x != nil {
+		return x.AccountIds
+	}
+	return nil
+}
+
+func (x *CreateOAuthGrantRequest) GetScope() v1.OauthScope {
+	if x != nil && x.Scope != nil {
+		return *x.Scope
+	}
+	return v1.OauthScope(0)
+}
+
+// CreateOAuthGrantResponse is the response from the CreateOAuthGrant function
+type CreateOAuthGrantResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The created OAuth grant.
+	OauthGrant *OAuthGrant `protobuf:"bytes,1,opt,name=oauth_grant,json=oauthGrant,proto3" json:"oauth_grant,omitempty"`
+	// The token the consent page passes back to the authorization server to resume the login
+	// (as a query parameter of its /continue endpoint, together with the original state).
+	// It is signed by Qdrant Cloud and binds the grant to the login transaction.
+	ContinuationToken string `protobuf:"bytes,2,opt,name=continuation_token,json=continuationToken,proto3" json:"continuation_token,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *CreateOAuthGrantResponse) Reset() {
+	*x = CreateOAuthGrantResponse{}
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOAuthGrantResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOAuthGrantResponse) ProtoMessage() {}
+
+func (x *CreateOAuthGrantResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOAuthGrantResponse.ProtoReflect.Descriptor instead.
+func (*CreateOAuthGrantResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateOAuthGrantResponse) GetOauthGrant() *OAuthGrant {
+	if x != nil {
+		return x.OauthGrant
+	}
+	return nil
+}
+
+func (x *CreateOAuthGrantResponse) GetContinuationToken() string {
+	if x != nil {
+		return x.ContinuationToken
+	}
+	return ""
+}
+
 // RevokeMyOAuthGrantRequest is the request for the RevokeMyOAuthGrant function
 type RevokeMyOAuthGrantRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -218,7 +346,7 @@ type RevokeMyOAuthGrantRequest struct {
 
 func (x *RevokeMyOAuthGrantRequest) Reset() {
 	*x = RevokeMyOAuthGrantRequest{}
-	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[4]
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -230,7 +358,7 @@ func (x *RevokeMyOAuthGrantRequest) String() string {
 func (*RevokeMyOAuthGrantRequest) ProtoMessage() {}
 
 func (x *RevokeMyOAuthGrantRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[4]
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -243,7 +371,7 @@ func (x *RevokeMyOAuthGrantRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeMyOAuthGrantRequest.ProtoReflect.Descriptor instead.
 func (*RevokeMyOAuthGrantRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{4}
+	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *RevokeMyOAuthGrantRequest) GetOauthGrantId() string {
@@ -262,7 +390,7 @@ type RevokeMyOAuthGrantResponse struct {
 
 func (x *RevokeMyOAuthGrantResponse) Reset() {
 	*x = RevokeMyOAuthGrantResponse{}
-	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[5]
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -274,7 +402,7 @@ func (x *RevokeMyOAuthGrantResponse) String() string {
 func (*RevokeMyOAuthGrantResponse) ProtoMessage() {}
 
 func (x *RevokeMyOAuthGrantResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[5]
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -287,7 +415,7 @@ func (x *RevokeMyOAuthGrantResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeMyOAuthGrantResponse.ProtoReflect.Descriptor instead.
 func (*RevokeMyOAuthGrantResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{5}
+	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{7}
 }
 
 // RevokeAccountOAuthGrantRequest is the request for the RevokeAccountOAuthGrant function
@@ -305,7 +433,7 @@ type RevokeAccountOAuthGrantRequest struct {
 
 func (x *RevokeAccountOAuthGrantRequest) Reset() {
 	*x = RevokeAccountOAuthGrantRequest{}
-	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[6]
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -317,7 +445,7 @@ func (x *RevokeAccountOAuthGrantRequest) String() string {
 func (*RevokeAccountOAuthGrantRequest) ProtoMessage() {}
 
 func (x *RevokeAccountOAuthGrantRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[6]
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -330,7 +458,7 @@ func (x *RevokeAccountOAuthGrantRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeAccountOAuthGrantRequest.ProtoReflect.Descriptor instead.
 func (*RevokeAccountOAuthGrantRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{6}
+	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *RevokeAccountOAuthGrantRequest) GetAccountId() string {
@@ -356,7 +484,7 @@ type RevokeAccountOAuthGrantResponse struct {
 
 func (x *RevokeAccountOAuthGrantResponse) Reset() {
 	*x = RevokeAccountOAuthGrantResponse{}
-	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[7]
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -368,7 +496,7 @@ func (x *RevokeAccountOAuthGrantResponse) String() string {
 func (*RevokeAccountOAuthGrantResponse) ProtoMessage() {}
 
 func (x *RevokeAccountOAuthGrantResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[7]
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -381,12 +509,13 @@ func (x *RevokeAccountOAuthGrantResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeAccountOAuthGrantResponse.ProtoReflect.Descriptor instead.
 func (*RevokeAccountOAuthGrantResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{7}
+	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{9}
 }
 
+// An OAuthGrant has no name, and belongs to a user rather than one account (account_ids).
 // An OAuthGrant represents a user's consent that an OAuth client may act on their behalf
 // in one or more Qdrant Cloud accounts.
-// Grants are created through the OAuth consent flow, not through this API.
+// Grants are created through the OAuth consent flow (CreateOAuthGrant on the consent page).
 type OAuthGrant struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the OAuth grant (in GUID format).
@@ -425,7 +554,7 @@ type OAuthGrant struct {
 
 func (x *OAuthGrant) Reset() {
 	*x = OAuthGrant{}
-	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -437,7 +566,7 @@ func (x *OAuthGrant) String() string {
 func (*OAuthGrant) ProtoMessage() {}
 
 func (x *OAuthGrant) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[8]
+	mi := &file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -450,7 +579,7 @@ func (x *OAuthGrant) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OAuthGrant.ProtoReflect.Descriptor instead.
 func (*OAuthGrant) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{8}
+	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *OAuthGrant) GetId() string {
@@ -528,7 +657,19 @@ const file_qdrant_cloud_auth_v1_oauth_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"X\n" +
 	"\x1eListAccountOAuthGrantsResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.auth.v1.OAuthGrantR\x05items\"K\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.auth.v1.OAuthGrantR\x05items\"\xe0\x01\n" +
+	"\x17CreateOAuthGrantRequest\x12:\n" +
+	"\x13auth0_session_token\x18\x01 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80@R\x11auth0SessionToken\x124\n" +
+	"\vaccount_ids\x18\x02 \x03(\tB\x13\xbaH\x10\x92\x01\r\b\x01\x10d\x18\x01\"\x05r\x03\xb0\x01\x01R\n" +
+	"accountIds\x12I\n" +
+	"\x05scope\x18\x03 \x01(\x0e2\".qdrant.cloud.common.v1.OauthScopeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\x05scope\x88\x01\x01B\b\n" +
+	"\x06_scope\"\x9d\x01\n" +
+	"\x18CreateOAuthGrantResponse\x12I\n" +
+	"\voauth_grant\x18\x01 \x01(\v2 .qdrant.cloud.auth.v1.OAuthGrantB\x06\xbaH\x03\xc8\x01\x01R\n" +
+	"oauthGrant\x126\n" +
+	"\x12continuation_token\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x11continuationToken\"K\n" +
 	"\x19RevokeMyOAuthGrantRequest\x12.\n" +
 	"\x0eoauth_grant_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\foauthGrantId\"\x1c\n" +
 	"\x1aRevokeMyOAuthGrantResponse\"y\n" +
@@ -553,17 +694,17 @@ const file_qdrant_cloud_auth_v1_oauth_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12A\n" +
 	"\flast_used_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\n" +
-	"lastUsedAt2\xc6\n" +
-	"\n" +
+	"lastUsedAt2\xe5\f\n" +
 	"\fOAuthService\x12\xb1\x01\n" +
 	"\x11ListMyOAuthGrants\x12..qdrant.cloud.auth.v1.ListMyOAuthGrantsRequest\x1a/.qdrant.cloud.auth.v1.ListMyOAuthGrantsResponse\";\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\x82\xd3\xe4\x93\x02$\x12\"/api/auth/v1/users/me/oauth-grants\x12\xf3\x02\n" +
 	"\x16ListAccountOAuthGrants\x123.qdrant.cloud.auth.v1.ListAccountOAuthGrantsRequest\x1a4.qdrant.cloud.auth.v1.ListAccountOAuthGrantsResponse\"\xed\x01\x8a\xb5\x18\x11read:oauth_grants\x8a\xb2\x19~\n" +
 	"aLists the active OAuth grants (connected apps) that cover the account identified by the given ID.\x12\x19List account OAuth grants\xaa\xb8\x19\x1b\n" +
-	"\x19list_account_oauth_grants\x82\xd3\xe4\x93\x021\x12//api/auth/v1/accounts/{account_id}/oauth-grants\x12\xee\x02\n" +
+	"\x19list_account_oauth_grants\x82\xd3\xe4\x93\x021\x12//api/auth/v1/accounts/{account_id}/oauth-grants\x12\x9a\x02\n" +
+	"\x10CreateOAuthGrant\x12-.qdrant.cloud.auth.v1.CreateOAuthGrantRequest\x1a..qdrant.cloud.auth.v1.CreateOAuthGrantResponse\"\xa6\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xe0\xb5\x18\x01\xca\xf3\x18d\b\x01\x12\voauth-grant\"\x13resp.oauth_grant.id*>/users/{req-md.qc-actor-id}/oauth-grants/{resp.oauth_grant.id}\x82\xd3\xe4\x93\x02':\x01*\"\"/api/auth/v1/users/me/oauth-grants\x12\xee\x02\n" +
 	"\x12RevokeMyOAuthGrant\x12/.qdrant.cloud.auth.v1.RevokeMyOAuthGrantRequest\x1a0.qdrant.cloud.auth.v1.RevokeMyOAuthGrantResponse\"\xf4\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18 \n" +
 	"\x0eoauth_grant_id\x12\x0eoauth_grant_id\xe0\xb5\x18\x01\xca\xf3\x18v\b\x04\x12\voauth-grant\"\x12req.oauth_grant_id*=/users/{req-md.qc-actor-id}/oauth-grants/{req.oauth_grant_id}2\x12revoke-oauth-grant\x82\xd3\xe4\x93\x02?:\x01*\":/api/auth/v1/users/me/oauth-grants/{oauth_grant_id}/revoke\x12\x92\x03\n" +
 	"\x17RevokeAccountOAuthGrant\x124.qdrant.cloud.auth.v1.RevokeAccountOAuthGrantRequest\x1a5.qdrant.cloud.auth.v1.RevokeAccountOAuthGrantResponse\"\x89\x02\x8a\xb5\x18\x12write:oauth_grants\xba\xb5\x18 \n" +
-	"\x0eoauth_grant_id\x12\x0eoauth_grant_id\xe0\xb5\x18\x01\xca\xf3\x18u\b\x04\x12\voauth-grant\"\x12req.oauth_grant_id*</accounts/{req.account_id}/oauth-grants/{req.oauth_grant_id}2\x12revoke-oauth-grant\x82\xd3\xe4\x93\x02L:\x01*\"G/api/auth/v1/accounts/{account_id}/oauth-grants/{oauth_grant_id}/revoke\x1a\x06µ\x18\x02\b\x01B\xe7\x01\n" +
+	"\x0eoauth_grant_id\x12\x0eoauth_grant_id\xe0\xb5\x18\x01\xca\xf3\x18u\b\x04\x12\voauth-grant\"\x12req.oauth_grant_id*</accounts/{req.account_id}/oauth-grants/{req.oauth_grant_id}2\x12revoke-oauth-grant\x82\xd3\xe4\x93\x02L:\x01*\"G/api/auth/v1/accounts/{account_id}/oauth-grants/{oauth_grant_id}/revoke\x1a\bµ\x18\x04\b\x01\x10\x01B\xe7\x01\n" +
 	"\x18com.qdrant.cloud.auth.v1B\n" +
 	"OauthProtoP\x01ZLgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/auth/v1;authv1\xa2\x02\x03QCA\xaa\x02\x14Qdrant.Cloud.Auth.V1\xca\x02\x14Qdrant\\Cloud\\Auth\\V1\xe2\x02 Qdrant\\Cloud\\Auth\\V1\\GPBMetadata\xea\x02\x17Qdrant::Cloud::Auth::V1b\x06proto3"
 
@@ -579,39 +720,45 @@ func file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescData
 }
 
-var file_qdrant_cloud_auth_v1_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_qdrant_cloud_auth_v1_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_qdrant_cloud_auth_v1_oauth_proto_goTypes = []any{
 	(*ListMyOAuthGrantsRequest)(nil),        // 0: qdrant.cloud.auth.v1.ListMyOAuthGrantsRequest
 	(*ListMyOAuthGrantsResponse)(nil),       // 1: qdrant.cloud.auth.v1.ListMyOAuthGrantsResponse
 	(*ListAccountOAuthGrantsRequest)(nil),   // 2: qdrant.cloud.auth.v1.ListAccountOAuthGrantsRequest
 	(*ListAccountOAuthGrantsResponse)(nil),  // 3: qdrant.cloud.auth.v1.ListAccountOAuthGrantsResponse
-	(*RevokeMyOAuthGrantRequest)(nil),       // 4: qdrant.cloud.auth.v1.RevokeMyOAuthGrantRequest
-	(*RevokeMyOAuthGrantResponse)(nil),      // 5: qdrant.cloud.auth.v1.RevokeMyOAuthGrantResponse
-	(*RevokeAccountOAuthGrantRequest)(nil),  // 6: qdrant.cloud.auth.v1.RevokeAccountOAuthGrantRequest
-	(*RevokeAccountOAuthGrantResponse)(nil), // 7: qdrant.cloud.auth.v1.RevokeAccountOAuthGrantResponse
-	(*OAuthGrant)(nil),                      // 8: qdrant.cloud.auth.v1.OAuthGrant
-	(v1.OauthScope)(0),                      // 9: qdrant.cloud.common.v1.OauthScope
-	(*timestamppb.Timestamp)(nil),           // 10: google.protobuf.Timestamp
+	(*CreateOAuthGrantRequest)(nil),         // 4: qdrant.cloud.auth.v1.CreateOAuthGrantRequest
+	(*CreateOAuthGrantResponse)(nil),        // 5: qdrant.cloud.auth.v1.CreateOAuthGrantResponse
+	(*RevokeMyOAuthGrantRequest)(nil),       // 6: qdrant.cloud.auth.v1.RevokeMyOAuthGrantRequest
+	(*RevokeMyOAuthGrantResponse)(nil),      // 7: qdrant.cloud.auth.v1.RevokeMyOAuthGrantResponse
+	(*RevokeAccountOAuthGrantRequest)(nil),  // 8: qdrant.cloud.auth.v1.RevokeAccountOAuthGrantRequest
+	(*RevokeAccountOAuthGrantResponse)(nil), // 9: qdrant.cloud.auth.v1.RevokeAccountOAuthGrantResponse
+	(*OAuthGrant)(nil),                      // 10: qdrant.cloud.auth.v1.OAuthGrant
+	(v1.OauthScope)(0),                      // 11: qdrant.cloud.common.v1.OauthScope
+	(*timestamppb.Timestamp)(nil),           // 12: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_auth_v1_oauth_proto_depIdxs = []int32{
-	8,  // 0: qdrant.cloud.auth.v1.ListMyOAuthGrantsResponse.items:type_name -> qdrant.cloud.auth.v1.OAuthGrant
-	8,  // 1: qdrant.cloud.auth.v1.ListAccountOAuthGrantsResponse.items:type_name -> qdrant.cloud.auth.v1.OAuthGrant
-	9,  // 2: qdrant.cloud.auth.v1.OAuthGrant.scope:type_name -> qdrant.cloud.common.v1.OauthScope
-	10, // 3: qdrant.cloud.auth.v1.OAuthGrant.created_at:type_name -> google.protobuf.Timestamp
-	10, // 4: qdrant.cloud.auth.v1.OAuthGrant.last_used_at:type_name -> google.protobuf.Timestamp
-	0,  // 5: qdrant.cloud.auth.v1.OAuthService.ListMyOAuthGrants:input_type -> qdrant.cloud.auth.v1.ListMyOAuthGrantsRequest
-	2,  // 6: qdrant.cloud.auth.v1.OAuthService.ListAccountOAuthGrants:input_type -> qdrant.cloud.auth.v1.ListAccountOAuthGrantsRequest
-	4,  // 7: qdrant.cloud.auth.v1.OAuthService.RevokeMyOAuthGrant:input_type -> qdrant.cloud.auth.v1.RevokeMyOAuthGrantRequest
-	6,  // 8: qdrant.cloud.auth.v1.OAuthService.RevokeAccountOAuthGrant:input_type -> qdrant.cloud.auth.v1.RevokeAccountOAuthGrantRequest
-	1,  // 9: qdrant.cloud.auth.v1.OAuthService.ListMyOAuthGrants:output_type -> qdrant.cloud.auth.v1.ListMyOAuthGrantsResponse
-	3,  // 10: qdrant.cloud.auth.v1.OAuthService.ListAccountOAuthGrants:output_type -> qdrant.cloud.auth.v1.ListAccountOAuthGrantsResponse
-	5,  // 11: qdrant.cloud.auth.v1.OAuthService.RevokeMyOAuthGrant:output_type -> qdrant.cloud.auth.v1.RevokeMyOAuthGrantResponse
-	7,  // 12: qdrant.cloud.auth.v1.OAuthService.RevokeAccountOAuthGrant:output_type -> qdrant.cloud.auth.v1.RevokeAccountOAuthGrantResponse
-	9,  // [9:13] is the sub-list for method output_type
-	5,  // [5:9] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	10, // 0: qdrant.cloud.auth.v1.ListMyOAuthGrantsResponse.items:type_name -> qdrant.cloud.auth.v1.OAuthGrant
+	10, // 1: qdrant.cloud.auth.v1.ListAccountOAuthGrantsResponse.items:type_name -> qdrant.cloud.auth.v1.OAuthGrant
+	11, // 2: qdrant.cloud.auth.v1.CreateOAuthGrantRequest.scope:type_name -> qdrant.cloud.common.v1.OauthScope
+	10, // 3: qdrant.cloud.auth.v1.CreateOAuthGrantResponse.oauth_grant:type_name -> qdrant.cloud.auth.v1.OAuthGrant
+	11, // 4: qdrant.cloud.auth.v1.OAuthGrant.scope:type_name -> qdrant.cloud.common.v1.OauthScope
+	12, // 5: qdrant.cloud.auth.v1.OAuthGrant.created_at:type_name -> google.protobuf.Timestamp
+	12, // 6: qdrant.cloud.auth.v1.OAuthGrant.last_used_at:type_name -> google.protobuf.Timestamp
+	0,  // 7: qdrant.cloud.auth.v1.OAuthService.ListMyOAuthGrants:input_type -> qdrant.cloud.auth.v1.ListMyOAuthGrantsRequest
+	2,  // 8: qdrant.cloud.auth.v1.OAuthService.ListAccountOAuthGrants:input_type -> qdrant.cloud.auth.v1.ListAccountOAuthGrantsRequest
+	4,  // 9: qdrant.cloud.auth.v1.OAuthService.CreateOAuthGrant:input_type -> qdrant.cloud.auth.v1.CreateOAuthGrantRequest
+	6,  // 10: qdrant.cloud.auth.v1.OAuthService.RevokeMyOAuthGrant:input_type -> qdrant.cloud.auth.v1.RevokeMyOAuthGrantRequest
+	8,  // 11: qdrant.cloud.auth.v1.OAuthService.RevokeAccountOAuthGrant:input_type -> qdrant.cloud.auth.v1.RevokeAccountOAuthGrantRequest
+	1,  // 12: qdrant.cloud.auth.v1.OAuthService.ListMyOAuthGrants:output_type -> qdrant.cloud.auth.v1.ListMyOAuthGrantsResponse
+	3,  // 13: qdrant.cloud.auth.v1.OAuthService.ListAccountOAuthGrants:output_type -> qdrant.cloud.auth.v1.ListAccountOAuthGrantsResponse
+	5,  // 14: qdrant.cloud.auth.v1.OAuthService.CreateOAuthGrant:output_type -> qdrant.cloud.auth.v1.CreateOAuthGrantResponse
+	7,  // 15: qdrant.cloud.auth.v1.OAuthService.RevokeMyOAuthGrant:output_type -> qdrant.cloud.auth.v1.RevokeMyOAuthGrantResponse
+	9,  // 16: qdrant.cloud.auth.v1.OAuthService.RevokeAccountOAuthGrant:output_type -> qdrant.cloud.auth.v1.RevokeAccountOAuthGrantResponse
+	12, // [12:17] is the sub-list for method output_type
+	7,  // [7:12] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_auth_v1_oauth_proto_init() }
@@ -619,13 +766,14 @@ func file_qdrant_cloud_auth_v1_oauth_proto_init() {
 	if File_qdrant_cloud_auth_v1_oauth_proto != nil {
 		return
 	}
+	file_qdrant_cloud_auth_v1_oauth_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_auth_v1_oauth_proto_rawDesc), len(file_qdrant_cloud_auth_v1_oauth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
