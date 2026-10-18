@@ -38,7 +38,8 @@ export const getOAuthConsentRequest: typeof OAuthService["method"]["getOAuthCons
  * The client and the requested scope come from the auth0_session_token, which the
  * authorization server (Auth0) signs when it redirects the user to the consent page; the
  * request only carries what the user chose there: the accounts, and optionally a narrower
- * scope. The user must be a member of every account.
+ * scope, plus the redirect state from the consent page URL. The user must be a member of
+ * every account.
  * If the user already has an active grant for the client, it is revoked and replaced by
  * the new one, so a grant always reflects the latest consent.
  * The response carries the continuation_token, which the consent page passes back to the

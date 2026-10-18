@@ -165,8 +165,8 @@ export declare const GetOAuthConsentRequestResponseSchema: GenMessage<GetOAuthCo
 export declare type CreateOAuthGrantRequest = Message<"qdrant.cloud.auth.v1.CreateOAuthGrantRequest"> & {
   /**
    * The session token the authorization server (Auth0) passed to the consent page.
-   * It is signed by the authorization server and identifies the user, the OAuth client, the
-   * requested scope and the login transaction to resume.
+   * It is signed by the authorization server and identifies the user, the OAuth client and
+   * the requested scope. It does not carry the redirect state.
    * This is a required field.
    *
    * @generated from field: string auth0_session_token = 1;
@@ -190,6 +190,17 @@ export declare type CreateOAuthGrantRequest = Message<"qdrant.cloud.auth.v1.Crea
    * @generated from field: optional qdrant.cloud.common.v1.OauthScope scope = 3;
    */
   scope?: OauthScope | undefined;
+
+  /**
+   * The redirect state Auth0 appended to the consent page URL.
+   * iam-service copies it into the continuation token. Auth0's validateToken requires that
+   * claim to match the state query parameter on /continue. This is not the client's
+   * /authorize state, and it is not inside the session token.
+   * This is a required field.
+   *
+   * @generated from field: string state = 4;
+   */
+  state: string;
 };
 
 export declare type CreateOAuthGrantRequestValid = CreateOAuthGrantRequest;
@@ -214,9 +225,9 @@ export declare type CreateOAuthGrantResponse = Message<"qdrant.cloud.auth.v1.Cre
   oauthGrant?: OAuthGrant | undefined;
 
   /**
-   * The token the consent page passes back to the authorization server to resume the login
-   * (as a query parameter of its /continue endpoint, together with the original state).
-   * It is signed by Qdrant Cloud and binds the grant to the login transaction.
+   * The token the consent page POSTs to the authorization server's /continue endpoint,
+   * together with the same state as a query parameter, to resume the login.
+   * It is signed by Qdrant Cloud and binds the grant to that redirect state.
    *
    * @generated from field: string continuation_token = 2;
    */
@@ -237,9 +248,9 @@ export declare type CreateOAuthGrantResponseValid = Message<"qdrant.cloud.auth.v
   oauthGrant: OAuthGrantValid;
 
   /**
-   * The token the consent page passes back to the authorization server to resume the login
-   * (as a query parameter of its /continue endpoint, together with the original state).
-   * It is signed by Qdrant Cloud and binds the grant to the login transaction.
+   * The token the consent page POSTs to the authorization server's /continue endpoint,
+   * together with the same state as a query parameter, to resume the login.
+   * It is signed by Qdrant Cloud and binds the grant to that redirect state.
    *
    * @generated from field: string continuation_token = 2;
    */
@@ -559,7 +570,8 @@ export declare const OAuthService: GenService<{
    * The client and the requested scope come from the auth0_session_token, which the
    * authorization server (Auth0) signs when it redirects the user to the consent page; the
    * request only carries what the user chose there: the accounts, and optionally a narrower
-   * scope. The user must be a member of every account.
+   * scope, plus the redirect state from the consent page URL. The user must be a member of
+   * every account.
    * If the user already has an active grant for the client, it is revoked and replaced by
    * the new one, so a grant always reflects the latest consent.
    * The response carries the continuation_token, which the consent page passes back to the

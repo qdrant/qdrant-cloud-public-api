@@ -304,8 +304,8 @@ func (x *GetOAuthConsentRequestResponse) GetConsentRequest() *OAuthConsentReques
 type CreateOAuthGrantRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The session token the authorization server (Auth0) passed to the consent page.
-	// It is signed by the authorization server and identifies the user, the OAuth client, the
-	// requested scope and the login transaction to resume.
+	// It is signed by the authorization server and identifies the user, the OAuth client and
+	// the requested scope. It does not carry the redirect state.
 	// This is a required field.
 	Auth0SessionToken string `protobuf:"bytes,1,opt,name=auth0_session_token,json=auth0SessionToken,proto3" json:"auth0_session_token,omitempty"`
 	// The identifiers of the accounts the client may act in (in GUID format).
@@ -315,7 +315,13 @@ type CreateOAuthGrantRequest struct {
 	// The OAuth scope to grant, when narrower than the requested scope.
 	// If omitted, the requested scope from the session token is granted. A scope wider than
 	// the requested one is rejected.
-	Scope         *v1.OauthScope `protobuf:"varint,3,opt,name=scope,proto3,enum=qdrant.cloud.common.v1.OauthScope,oneof" json:"scope,omitempty"`
+	Scope *v1.OauthScope `protobuf:"varint,3,opt,name=scope,proto3,enum=qdrant.cloud.common.v1.OauthScope,oneof" json:"scope,omitempty"`
+	// The redirect state Auth0 appended to the consent page URL.
+	// iam-service copies it into the continuation token. Auth0's validateToken requires that
+	// claim to match the state query parameter on /continue. This is not the client's
+	// /authorize state, and it is not inside the session token.
+	// This is a required field.
+	State         string `protobuf:"bytes,4,opt,name=state,proto3" json:"state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -371,14 +377,21 @@ func (x *CreateOAuthGrantRequest) GetScope() v1.OauthScope {
 	return v1.OauthScope(0)
 }
 
+func (x *CreateOAuthGrantRequest) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
 // CreateOAuthGrantResponse is the response from the CreateOAuthGrant function
 type CreateOAuthGrantResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The created OAuth grant.
 	OauthGrant *OAuthGrant `protobuf:"bytes,1,opt,name=oauth_grant,json=oauthGrant,proto3" json:"oauth_grant,omitempty"`
-	// The token the consent page passes back to the authorization server to resume the login
-	// (as a query parameter of its /continue endpoint, together with the original state).
-	// It is signed by Qdrant Cloud and binds the grant to the login transaction.
+	// The token the consent page POSTs to the authorization server's /continue endpoint,
+	// together with the same state as a query parameter, to resume the login.
+	// It is signed by Qdrant Cloud and binds the grant to that redirect state.
 	ContinuationToken string `protobuf:"bytes,2,opt,name=continuation_token,json=continuationToken,proto3" json:"continuation_token,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -862,14 +875,16 @@ const file_qdrant_cloud_auth_v1_oauth_proto_rawDesc = "" +
 	"\x13auth0_session_token\x18\x01 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\x80@R\x11auth0SessionToken\"|\n" +
 	"\x1eGetOAuthConsentRequestResponse\x12Z\n" +
-	"\x0fconsent_request\x18\x01 \x01(\v2).qdrant.cloud.auth.v1.OAuthConsentRequestB\x06\xbaH\x03\xc8\x01\x01R\x0econsentRequest\"\xe0\x01\n" +
+	"\x0fconsent_request\x18\x01 \x01(\v2).qdrant.cloud.auth.v1.OAuthConsentRequestB\x06\xbaH\x03\xc8\x01\x01R\x0econsentRequest\"\x82\x02\n" +
 	"\x17CreateOAuthGrantRequest\x12:\n" +
 	"\x13auth0_session_token\x18\x01 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\x80@R\x11auth0SessionToken\x124\n" +
 	"\vaccount_ids\x18\x02 \x03(\tB\x13\xbaH\x10\x92\x01\r\b\x01\x10d\x18\x01\"\x05r\x03\xb0\x01\x01R\n" +
 	"accountIds\x12I\n" +
 	"\x05scope\x18\x03 \x01(\x0e2\".qdrant.cloud.common.v1.OauthScopeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\x05scope\x88\x01\x01B\b\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x00R\x05scope\x88\x01\x01\x12 \n" +
+	"\x05state\x18\x04 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80 R\x05stateB\b\n" +
 	"\x06_scope\"\x9d\x01\n" +
 	"\x18CreateOAuthGrantResponse\x12I\n" +
 	"\voauth_grant\x18\x01 \x01(\v2 .qdrant.cloud.auth.v1.OAuthGrantB\x06\xbaH\x03\xc8\x01\x01R\n" +
@@ -924,7 +939,7 @@ const file_qdrant_cloud_auth_v1_oauth_proto_rawDesc = "" +
 	"\x12RevokeMyOAuthGrant\x12/.qdrant.cloud.auth.v1.RevokeMyOAuthGrantRequest\x1a0.qdrant.cloud.auth.v1.RevokeMyOAuthGrantResponse\"\xf4\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\xba\xb5\x18 \n" +
 	"\x0eoauth_grant_id\x12\x0eoauth_grant_id\xe0\xb5\x18\x01\xca\xf3\x18v\b\x04\x12\voauth-grant\"\x12req.oauth_grant_id*=/users/{req-md.qc-actor-id}/oauth-grants/{req.oauth_grant_id}2\x12revoke-oauth-grant\x82\xd3\xe4\x93\x02?:\x01*\":/api/auth/v1/users/me/oauth-grants/{oauth_grant_id}/revoke\x12\x92\x03\n" +
 	"\x17RevokeAccountOAuthGrant\x124.qdrant.cloud.auth.v1.RevokeAccountOAuthGrantRequest\x1a5.qdrant.cloud.auth.v1.RevokeAccountOAuthGrantResponse\"\x89\x02\x8a\xb5\x18\x12write:oauth_grants\xba\xb5\x18 \n" +
-	"\x0eoauth_grant_id\x12\x0eoauth_grant_id\xe0\xb5\x18\x01\xca\xf3\x18u\b\x04\x12\voauth-grant\"\x12req.oauth_grant_id*</accounts/{req.account_id}/oauth-grants/{req.oauth_grant_id}2\x12revoke-oauth-grant\x82\xd3\xe4\x93\x02L:\x01*\"G/api/auth/v1/accounts/{account_id}/oauth-grants/{oauth_grant_id}/revoke\x1a\bµ\x18\x04\b\x01\x10\x01B\xe7\x01\n" +
+	"\x0eoauth_grant_id\x12\x0eoauth_grant_id\xe0\xb5\x18\x01\xca\xf3\x18u\b\x04\x12\voauth-grant\"\x12req.oauth_grant_id*</accounts/{req.account_id}/oauth-grants/{req.oauth_grant_id}2\x12revoke-oauth-grant\x82\xd3\xe4\x93\x02L:\x01*\"G/api/auth/v1/accounts/{account_id}/oauth-grants/{oauth_grant_id}/revoke\x1a\bµ\x18\x04\b\x01\x10\x02B\xe7\x01\n" +
 	"\x18com.qdrant.cloud.auth.v1B\n" +
 	"OauthProtoP\x01ZLgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/auth/v1;authv1\xa2\x02\x03QCA\xaa\x02\x14Qdrant.Cloud.Auth.V1\xca\x02\x14Qdrant\\Cloud\\Auth\\V1\xe2\x02 Qdrant\\Cloud\\Auth\\V1\\GPBMetadata\xea\x02\x17Qdrant::Cloud::Auth::V1b\x06proto3"
 
