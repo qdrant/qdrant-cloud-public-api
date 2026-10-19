@@ -21,8 +21,8 @@ export const listMyOAuthGrants: typeof OAuthService["method"]["listMyOAuthGrants
  */
 export const listAccountOAuthGrants: typeof OAuthService["method"]["listAccountOAuthGrants"];
 /**
- * Gets the OAuth consent request the authorization server (Auth0) sent the user to the
- * consent page for, from the auth0_session_token, so the page can show verified details
+ * Gets the OAuth consent request the authorization server sent the user to the
+ * consent page for, from the session_token, so the page can show verified details
  * before the user decides: the client, the requested scope, and the user's active grant
  * for the client, if any. The session token is verified the same way as in CreateOAuthGrant,
  * and must belong to the authenticated user. Nothing is created or changed.
@@ -35,8 +35,8 @@ export const listAccountOAuthGrants: typeof OAuthService["method"]["listAccountO
 export const getOAuthConsentRequest: typeof OAuthService["method"]["getOAuthConsentRequest"];
 /**
  * Creates an OAuth grant for the authenticated user, from the OAuth consent page.
- * The client and the requested scope come from the auth0_session_token, which the
- * authorization server (Auth0) signs when it redirects the user to the consent page; the
+ * The client and the requested scope come from the session_token, which the
+ * authorization server signs when it redirects the user to the consent page; the
  * request only carries what the user chose there: the accounts, and optionally a narrower
  * scope, plus the redirect state from the consent page URL. The user must be a member of
  * every account.

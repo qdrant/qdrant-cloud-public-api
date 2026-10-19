@@ -210,11 +210,11 @@ func (x *ListAccountOAuthGrantsResponse) GetItems() []*OAuthGrant {
 // It has no account_id: the user picks the accounts on the consent page.
 type GetOAuthConsentRequestRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The session token the authorization server (Auth0) passed to the consent page.
+	// The session token the authorization server passed to the consent page.
 	// This is a required field.
-	Auth0SessionToken string `protobuf:"bytes,1,opt,name=auth0_session_token,json=auth0SessionToken,proto3" json:"auth0_session_token,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	SessionToken  string `protobuf:"bytes,1,opt,name=session_token,json=sessionToken,proto3" json:"session_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetOAuthConsentRequestRequest) Reset() {
@@ -247,9 +247,9 @@ func (*GetOAuthConsentRequestRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetOAuthConsentRequestRequest) GetAuth0SessionToken() string {
+func (x *GetOAuthConsentRequestRequest) GetSessionToken() string {
 	if x != nil {
-		return x.Auth0SessionToken
+		return x.SessionToken
 	}
 	return ""
 }
@@ -303,11 +303,11 @@ func (x *GetOAuthConsentRequestResponse) GetConsentRequest() *OAuthConsentReques
 // CreateOAuthGrantRequest is the request for the CreateOAuthGrant function
 type CreateOAuthGrantRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The session token the authorization server (Auth0) passed to the consent page.
+	// The session token the authorization server passed to the consent page.
 	// It is signed by the authorization server and identifies the user, the OAuth client and
-	// the requested scope. It does not carry the redirect state.
+	// the requested scope. It does not carry the state.
 	// This is a required field.
-	Auth0SessionToken string `protobuf:"bytes,1,opt,name=auth0_session_token,json=auth0SessionToken,proto3" json:"auth0_session_token,omitempty"`
+	SessionToken string `protobuf:"bytes,1,opt,name=session_token,json=sessionToken,proto3" json:"session_token,omitempty"`
 	// The identifiers of the accounts the client may act in (in GUID format).
 	// The user must be a member of every account.
 	// This is a required field.
@@ -316,10 +316,11 @@ type CreateOAuthGrantRequest struct {
 	// If omitted, the requested scope from the session token is granted. A scope wider than
 	// the requested one is rejected.
 	Scope *v1.OauthScope `protobuf:"varint,3,opt,name=scope,proto3,enum=qdrant.cloud.common.v1.OauthScope,oneof" json:"scope,omitempty"`
-	// The redirect state Auth0 appended to the consent page URL.
-	// iam-service copies it into the continuation token. Auth0's validateToken requires that
-	// claim to match the state query parameter on /continue. This is not the client's
-	// /authorize state, and it is not inside the session token.
+	// The state parameter the authorization server appended to the consent page URL. It
+	// identifies the login in progress. Qdrant Cloud copies it into the continuation token, and
+	// the authorization server only resumes the login when the two match.
+	// This is not the state the OAuth client sent when it started the login, and it is not
+	// inside the session token.
 	// This is a required field.
 	State         string `protobuf:"bytes,4,opt,name=state,proto3" json:"state,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -356,9 +357,9 @@ func (*CreateOAuthGrantRequest) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_auth_v1_oauth_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *CreateOAuthGrantRequest) GetAuth0SessionToken() string {
+func (x *CreateOAuthGrantRequest) GetSessionToken() string {
 	if x != nil {
-		return x.Auth0SessionToken
+		return x.SessionToken
 	}
 	return ""
 }
@@ -389,9 +390,9 @@ type CreateOAuthGrantResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The created OAuth grant.
 	OauthGrant *OAuthGrant `protobuf:"bytes,1,opt,name=oauth_grant,json=oauthGrant,proto3" json:"oauth_grant,omitempty"`
-	// The token the consent page POSTs to the authorization server's /continue endpoint,
-	// together with the same state as a query parameter, to resume the login.
-	// It is signed by Qdrant Cloud and binds the grant to that redirect state.
+	// The token the consent page sends back to the authorization server, together with the
+	// same state, to resume the login. It is sent in a POST body so it stays out of URLs.
+	// It is signed by Qdrant Cloud and binds the grant to that state.
 	ContinuationToken string `protobuf:"bytes,2,opt,name=continuation_token,json=continuationToken,proto3" json:"continuation_token,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -870,15 +871,15 @@ const file_qdrant_cloud_auth_v1_oauth_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"X\n" +
 	"\x1eListAccountOAuthGrantsResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.auth.v1.OAuthGrantR\x05items\"[\n" +
-	"\x1dGetOAuthConsentRequestRequest\x12:\n" +
-	"\x13auth0_session_token\x18\x01 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\x80@R\x11auth0SessionToken\"|\n" +
+	"\x05items\x18\x01 \x03(\v2 .qdrant.cloud.auth.v1.OAuthGrantR\x05items\"P\n" +
+	"\x1dGetOAuthConsentRequestRequest\x12/\n" +
+	"\rsession_token\x18\x01 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80@R\fsessionToken\"|\n" +
 	"\x1eGetOAuthConsentRequestResponse\x12Z\n" +
-	"\x0fconsent_request\x18\x01 \x01(\v2).qdrant.cloud.auth.v1.OAuthConsentRequestB\x06\xbaH\x03\xc8\x01\x01R\x0econsentRequest\"\x82\x02\n" +
-	"\x17CreateOAuthGrantRequest\x12:\n" +
-	"\x13auth0_session_token\x18\x01 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\x80@R\x11auth0SessionToken\x124\n" +
+	"\x0fconsent_request\x18\x01 \x01(\v2).qdrant.cloud.auth.v1.OAuthConsentRequestB\x06\xbaH\x03\xc8\x01\x01R\x0econsentRequest\"\xf7\x01\n" +
+	"\x17CreateOAuthGrantRequest\x12/\n" +
+	"\rsession_token\x18\x01 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80@R\fsessionToken\x124\n" +
 	"\vaccount_ids\x18\x02 \x03(\tB\x13\xbaH\x10\x92\x01\r\b\x01\x10d\x18\x01\"\x05r\x03\xb0\x01\x01R\n" +
 	"accountIds\x12I\n" +
 	"\x05scope\x18\x03 \x01(\x0e2\".qdrant.cloud.common.v1.OauthScopeB\n" +

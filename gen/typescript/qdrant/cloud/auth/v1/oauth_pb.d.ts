@@ -107,12 +107,12 @@ export declare const ListAccountOAuthGrantsResponseSchema: GenMessage<ListAccoun
  */
 export declare type GetOAuthConsentRequestRequest = Message<"qdrant.cloud.auth.v1.GetOAuthConsentRequestRequest"> & {
   /**
-   * The session token the authorization server (Auth0) passed to the consent page.
+   * The session token the authorization server passed to the consent page.
    * This is a required field.
    *
-   * @generated from field: string auth0_session_token = 1;
+   * @generated from field: string session_token = 1;
    */
-  auth0SessionToken: string;
+  sessionToken: string;
 };
 
 export declare type GetOAuthConsentRequestRequestValid = GetOAuthConsentRequestRequest;
@@ -164,14 +164,14 @@ export declare const GetOAuthConsentRequestResponseSchema: GenMessage<GetOAuthCo
  */
 export declare type CreateOAuthGrantRequest = Message<"qdrant.cloud.auth.v1.CreateOAuthGrantRequest"> & {
   /**
-   * The session token the authorization server (Auth0) passed to the consent page.
+   * The session token the authorization server passed to the consent page.
    * It is signed by the authorization server and identifies the user, the OAuth client and
-   * the requested scope. It does not carry the redirect state.
+   * the requested scope. It does not carry the state.
    * This is a required field.
    *
-   * @generated from field: string auth0_session_token = 1;
+   * @generated from field: string session_token = 1;
    */
-  auth0SessionToken: string;
+  sessionToken: string;
 
   /**
    * The identifiers of the accounts the client may act in (in GUID format).
@@ -192,10 +192,11 @@ export declare type CreateOAuthGrantRequest = Message<"qdrant.cloud.auth.v1.Crea
   scope?: OauthScope | undefined;
 
   /**
-   * The redirect state Auth0 appended to the consent page URL.
-   * iam-service copies it into the continuation token. Auth0's validateToken requires that
-   * claim to match the state query parameter on /continue. This is not the client's
-   * /authorize state, and it is not inside the session token.
+   * The state parameter the authorization server appended to the consent page URL. It
+   * identifies the login in progress. Qdrant Cloud copies it into the continuation token, and
+   * the authorization server only resumes the login when the two match.
+   * This is not the state the OAuth client sent when it started the login, and it is not
+   * inside the session token.
    * This is a required field.
    *
    * @generated from field: string state = 4;
@@ -225,9 +226,9 @@ export declare type CreateOAuthGrantResponse = Message<"qdrant.cloud.auth.v1.Cre
   oauthGrant?: OAuthGrant | undefined;
 
   /**
-   * The token the consent page POSTs to the authorization server's /continue endpoint,
-   * together with the same state as a query parameter, to resume the login.
-   * It is signed by Qdrant Cloud and binds the grant to that redirect state.
+   * The token the consent page sends back to the authorization server, together with the
+   * same state, to resume the login. It is sent in a POST body so it stays out of URLs.
+   * It is signed by Qdrant Cloud and binds the grant to that state.
    *
    * @generated from field: string continuation_token = 2;
    */
@@ -248,9 +249,9 @@ export declare type CreateOAuthGrantResponseValid = Message<"qdrant.cloud.auth.v
   oauthGrant: OAuthGrantValid;
 
   /**
-   * The token the consent page POSTs to the authorization server's /continue endpoint,
-   * together with the same state as a query parameter, to resume the login.
-   * It is signed by Qdrant Cloud and binds the grant to that redirect state.
+   * The token the consent page sends back to the authorization server, together with the
+   * same state, to resume the login. It is sent in a POST body so it stays out of URLs.
+   * It is signed by Qdrant Cloud and binds the grant to that state.
    *
    * @generated from field: string continuation_token = 2;
    */
@@ -549,8 +550,8 @@ export declare const OAuthService: GenService<{
     output: typeof ListAccountOAuthGrantsResponseSchema;
   },
   /**
-   * Gets the OAuth consent request the authorization server (Auth0) sent the user to the
-   * consent page for, from the auth0_session_token, so the page can show verified details
+   * Gets the OAuth consent request the authorization server sent the user to the
+   * consent page for, from the session_token, so the page can show verified details
    * before the user decides: the client, the requested scope, and the user's active grant
    * for the client, if any. The session token is verified the same way as in CreateOAuthGrant,
    * and must belong to the authenticated user. Nothing is created or changed.
@@ -567,8 +568,8 @@ export declare const OAuthService: GenService<{
   },
   /**
    * Creates an OAuth grant for the authenticated user, from the OAuth consent page.
-   * The client and the requested scope come from the auth0_session_token, which the
-   * authorization server (Auth0) signs when it redirects the user to the consent page; the
+   * The client and the requested scope come from the session_token, which the
+   * authorization server signs when it redirects the user to the consent page; the
    * request only carries what the user chose there: the accounts, and optionally a narrower
    * scope, plus the redirect state from the consent page URL. The user must be a member of
    * every account.
