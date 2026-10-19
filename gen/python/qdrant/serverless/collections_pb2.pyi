@@ -31,6 +31,11 @@ class Tokenizer(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     WHITESPACE: _ClassVar[Tokenizer]
     WORD: _ClassVar[Tokenizer]
     MULTILINGUAL: _ClassVar[Tokenizer]
+
+class TextScoringType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    TEXT_SCORING_TYPE_UNSPECIFIED: _ClassVar[TextScoringType]
+    BM25: _ClassVar[TextScoringType]
 DISTANCE_UNSPECIFIED: Distance
 COSINE: Distance
 EUCLID: Distance
@@ -46,6 +51,8 @@ PREFIX: Tokenizer
 WHITESPACE: Tokenizer
 WORD: Tokenizer
 MULTILINGUAL: Tokenizer
+TEXT_SCORING_TYPE_UNSPECIFIED: TextScoringType
+BM25: TextScoringType
 
 class DenseVectorConfig(_message.Message):
     __slots__ = ("size", "distance", "multivector", "precision_tier")
@@ -68,34 +75,44 @@ class SparseVectorConfig(_message.Message):
     def __init__(self, use_idf: _Optional[bool] = ..., precision_tier: _Optional[_Union[PrecisionTier, str]] = ...) -> None: ...
 
 class KeywordIndex(_message.Message):
-    __slots__ = ("prefix",)
+    __slots__ = ("prefix", "nested")
     PREFIX_FIELD_NUMBER: _ClassVar[int]
+    NESTED_FIELD_NUMBER: _ClassVar[int]
     prefix: KeywordPrefixParams
-    def __init__(self, prefix: _Optional[_Union[KeywordPrefixParams, _Mapping]] = ...) -> None: ...
+    nested: str
+    def __init__(self, prefix: _Optional[_Union[KeywordPrefixParams, _Mapping]] = ..., nested: _Optional[str] = ...) -> None: ...
 
 class KeywordPrefixParams(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
 class IntegerIndex(_message.Message):
-    __slots__ = ("lookup", "range")
+    __slots__ = ("lookup", "range", "nested")
     LOOKUP_FIELD_NUMBER: _ClassVar[int]
     RANGE_FIELD_NUMBER: _ClassVar[int]
+    NESTED_FIELD_NUMBER: _ClassVar[int]
     lookup: bool
     range: bool
-    def __init__(self, lookup: _Optional[bool] = ..., range: _Optional[bool] = ...) -> None: ...
+    nested: str
+    def __init__(self, lookup: _Optional[bool] = ..., range: _Optional[bool] = ..., nested: _Optional[str] = ...) -> None: ...
 
 class FloatIndex(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("nested",)
+    NESTED_FIELD_NUMBER: _ClassVar[int]
+    nested: str
+    def __init__(self, nested: _Optional[str] = ...) -> None: ...
 
 class UuidIndex(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("nested",)
+    NESTED_FIELD_NUMBER: _ClassVar[int]
+    nested: str
+    def __init__(self, nested: _Optional[str] = ...) -> None: ...
 
 class DatetimeIndex(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("nested",)
+    NESTED_FIELD_NUMBER: _ClassVar[int]
+    nested: str
+    def __init__(self, nested: _Optional[str] = ...) -> None: ...
 
 class StopwordsSet(_message.Message):
     __slots__ = ("languages", "custom")
@@ -123,8 +140,14 @@ class StemmingAlgorithm(_message.Message):
     disabled: DisabledStemmer
     def __init__(self, snowball: _Optional[_Union[SnowballParams, _Mapping]] = ..., disabled: _Optional[_Union[DisabledStemmer, _Mapping]] = ...) -> None: ...
 
+class TextScoringParams(_message.Message):
+    __slots__ = ("type",)
+    TYPE_FIELD_NUMBER: _ClassVar[int]
+    type: TextScoringType
+    def __init__(self, type: _Optional[_Union[TextScoringType, str]] = ...) -> None: ...
+
 class TextIndex(_message.Message):
-    __slots__ = ("tokenizer", "lowercase", "phrase_matching", "min_token_len", "max_token_len", "ascii_folding", "stopwords", "stemmer")
+    __slots__ = ("tokenizer", "lowercase", "phrase_matching", "min_token_len", "max_token_len", "ascii_folding", "stopwords", "stemmer", "scoring", "nested")
     TOKENIZER_FIELD_NUMBER: _ClassVar[int]
     LOWERCASE_FIELD_NUMBER: _ClassVar[int]
     PHRASE_MATCHING_FIELD_NUMBER: _ClassVar[int]
@@ -133,6 +156,8 @@ class TextIndex(_message.Message):
     ASCII_FOLDING_FIELD_NUMBER: _ClassVar[int]
     STOPWORDS_FIELD_NUMBER: _ClassVar[int]
     STEMMER_FIELD_NUMBER: _ClassVar[int]
+    SCORING_FIELD_NUMBER: _ClassVar[int]
+    NESTED_FIELD_NUMBER: _ClassVar[int]
     tokenizer: Tokenizer
     lowercase: bool
     phrase_matching: bool
@@ -141,15 +166,21 @@ class TextIndex(_message.Message):
     ascii_folding: bool
     stopwords: StopwordsSet
     stemmer: StemmingAlgorithm
-    def __init__(self, tokenizer: _Optional[_Union[Tokenizer, str]] = ..., lowercase: _Optional[bool] = ..., phrase_matching: _Optional[bool] = ..., min_token_len: _Optional[int] = ..., max_token_len: _Optional[int] = ..., ascii_folding: _Optional[bool] = ..., stopwords: _Optional[_Union[StopwordsSet, _Mapping]] = ..., stemmer: _Optional[_Union[StemmingAlgorithm, _Mapping]] = ...) -> None: ...
+    scoring: TextScoringParams
+    nested: str
+    def __init__(self, tokenizer: _Optional[_Union[Tokenizer, str]] = ..., lowercase: _Optional[bool] = ..., phrase_matching: _Optional[bool] = ..., min_token_len: _Optional[int] = ..., max_token_len: _Optional[int] = ..., ascii_folding: _Optional[bool] = ..., stopwords: _Optional[_Union[StopwordsSet, _Mapping]] = ..., stemmer: _Optional[_Union[StemmingAlgorithm, _Mapping]] = ..., scoring: _Optional[_Union[TextScoringParams, _Mapping]] = ..., nested: _Optional[str] = ...) -> None: ...
 
 class GeoIndex(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("nested",)
+    NESTED_FIELD_NUMBER: _ClassVar[int]
+    nested: str
+    def __init__(self, nested: _Optional[str] = ...) -> None: ...
 
 class BoolIndex(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("nested",)
+    NESTED_FIELD_NUMBER: _ClassVar[int]
+    nested: str
+    def __init__(self, nested: _Optional[str] = ...) -> None: ...
 
 class PayloadIndexConfig(_message.Message):
     __slots__ = ("keyword", "integer", "float", "uuid", "datetime", "text", "geo", "bool")

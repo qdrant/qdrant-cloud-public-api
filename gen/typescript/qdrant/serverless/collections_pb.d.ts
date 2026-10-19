@@ -97,6 +97,15 @@ export declare type KeywordIndex = Message<"qdrant.serverless.KeywordIndex"> & {
    * @generated from field: optional qdrant.serverless.KeywordPrefixParams prefix = 1;
    */
   prefix?: KeywordPrefixParams | undefined;
+
+  /**
+   * Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].price`.
+   * The field must be inside the array's elements. `is_empty` on the field matches a point when one of
+   * its elements lacks the field, and never a point without elements. Default: disabled.
+   *
+   * @generated from field: optional string nested = 2;
+   */
+  nested?: string | undefined;
 };
 
 export declare type KeywordIndexValid = KeywordIndex;
@@ -144,6 +153,15 @@ export declare type IntegerIndex = Message<"qdrant.serverless.IntegerIndex"> & {
    * @generated from field: optional bool range = 2;
    */
   range?: boolean | undefined;
+
+  /**
+   * Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].price`.
+   * The field must be inside the array's elements. `is_empty` on the field matches a point when one of
+   * its elements lacks the field, and never a point without elements. Default: disabled.
+   *
+   * @generated from field: optional string nested = 3;
+   */
+  nested?: string | undefined;
 };
 
 export declare type IntegerIndexValid = IntegerIndex;
@@ -160,6 +178,14 @@ export declare const IntegerIndexSchema: GenMessage<IntegerIndex, {validType: In
  * @generated from message qdrant.serverless.FloatIndex
  */
 export declare type FloatIndex = Message<"qdrant.serverless.FloatIndex"> & {
+  /**
+   * Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].price`.
+   * The field must be inside the array's elements. `is_empty` on the field matches a point when one of
+   * its elements lacks the field, and never a point without elements. Default: disabled.
+   *
+   * @generated from field: optional string nested = 1;
+   */
+  nested?: string | undefined;
 };
 
 export declare type FloatIndexValid = FloatIndex;
@@ -176,6 +202,14 @@ export declare const FloatIndexSchema: GenMessage<FloatIndex, {validType: FloatI
  * @generated from message qdrant.serverless.UuidIndex
  */
 export declare type UuidIndex = Message<"qdrant.serverless.UuidIndex"> & {
+  /**
+   * Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].id`.
+   * The field must be inside the array's elements. `is_empty` on the field matches a point when one of
+   * its elements lacks the field, and never a point without elements. Default: disabled.
+   *
+   * @generated from field: optional string nested = 1;
+   */
+  nested?: string | undefined;
 };
 
 export declare type UuidIndexValid = UuidIndex;
@@ -192,6 +226,14 @@ export declare const UuidIndexSchema: GenMessage<UuidIndex, {validType: UuidInde
  * @generated from message qdrant.serverless.DatetimeIndex
  */
 export declare type DatetimeIndex = Message<"qdrant.serverless.DatetimeIndex"> & {
+  /**
+   * Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].updated_at`.
+   * The field must be inside the array's elements. `is_empty` on the field matches a point when one of
+   * its elements lacks the field, and never a point without elements. Default: disabled.
+   *
+   * @generated from field: optional string nested = 1;
+   */
+  nested?: string | undefined;
 };
 
 export declare type DatetimeIndexValid = DatetimeIndex;
@@ -309,6 +351,30 @@ export declare type StemmingAlgorithmValid = StemmingAlgorithm;
 export declare const StemmingAlgorithmSchema: GenMessage<StemmingAlgorithm, {validType: StemmingAlgorithmValid}>;
 
 /**
+ * Parameters of ranking over a text index.
+ * Presence of this message enables scoring. An unset type means BM25.
+ * On the REST API, `true` is the same as an empty object and `false` disables scoring.
+ *
+ * @generated from message qdrant.serverless.TextScoringParams
+ */
+export declare type TextScoringParams = Message<"qdrant.serverless.TextScoringParams"> & {
+  /**
+   * How documents are ranked. Unset: BM25.
+   *
+   * @generated from field: optional qdrant.serverless.TextScoringType type = 1;
+   */
+  type?: TextScoringType | undefined;
+};
+
+export declare type TextScoringParamsValid = TextScoringParams;
+
+/**
+ * Describes the message qdrant.serverless.TextScoringParams.
+ * Use `create(TextScoringParamsSchema)` to create a new message.
+ */
+export declare const TextScoringParamsSchema: GenMessage<TextScoringParams, {validType: TextScoringParamsValid}>;
+
+/**
  * Full-text filtering on string values.
  *
  * @generated from message qdrant.serverless.TextIndex
@@ -369,6 +435,25 @@ export declare type TextIndex = Message<"qdrant.serverless.TextIndex"> & {
    * @generated from field: optional qdrant.serverless.StemmingAlgorithm stemmer = 8;
    */
   stemmer?: StemmingAlgorithm | undefined;
+
+  /**
+   * Enable ranking points by BM25 over this field.
+   * Changing it rebuilds the index. Default: disabled.
+   *
+   * @generated from field: optional qdrant.serverless.TextScoringParams scoring = 9;
+   */
+  scoring?: TextScoringParams | undefined;
+
+  /**
+   * Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].title`.
+   * The field must be inside the array's elements. Every query on the field, not only nested filters,
+   * treats each element as its own document: a condition matches a point when a single element
+   * matches it, and BM25 scores elements separately. `is_empty` on the field matches a point when
+   * one of its elements lacks the field, and never a point without elements. Default: disabled.
+   *
+   * @generated from field: optional string nested = 10;
+   */
+  nested?: string | undefined;
 };
 
 export declare type TextIndexValid = TextIndex;
@@ -385,6 +470,14 @@ export declare const TextIndexSchema: GenMessage<TextIndex, {validType: TextInde
  * @generated from message qdrant.serverless.GeoIndex
  */
 export declare type GeoIndex = Message<"qdrant.serverless.GeoIndex"> & {
+  /**
+   * Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].location`.
+   * The field must be inside the array's elements. `is_empty` on the field matches a point when one of
+   * its elements lacks the field, and never a point without elements. Default: disabled.
+   *
+   * @generated from field: optional string nested = 1;
+   */
+  nested?: string | undefined;
 };
 
 export declare type GeoIndexValid = GeoIndex;
@@ -401,6 +494,14 @@ export declare const GeoIndexSchema: GenMessage<GeoIndex, {validType: GeoIndexVa
  * @generated from message qdrant.serverless.BoolIndex
  */
 export declare type BoolIndex = Message<"qdrant.serverless.BoolIndex"> & {
+  /**
+   * Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].in_stock`.
+   * The field must be inside the array's elements. `is_empty` on the field matches a point when one of
+   * its elements lacks the field, and never a point without elements. Default: disabled.
+   *
+   * @generated from field: optional string nested = 1;
+   */
+  nested?: string | undefined;
 };
 
 export declare type BoolIndexValid = BoolIndex;
@@ -961,6 +1062,32 @@ export enum Tokenizer {
  * Describes the enum qdrant.serverless.Tokenizer.
  */
 export declare const TokenizerSchema: GenEnum<Tokenizer>;
+
+/**
+ * How a text index ranks documents.
+ *
+ * @generated from enum qdrant.serverless.TextScoringType
+ */
+export enum TextScoringType {
+  /**
+   * Unset: BM25.
+   *
+   * @generated from enum value: TEXT_SCORING_TYPE_UNSPECIFIED = 0;
+   */
+  TEXT_SCORING_TYPE_UNSPECIFIED = 0,
+
+  /**
+   * Okapi BM25. The index records each document's length; `k` and `b` are set per query.
+   *
+   * @generated from enum value: BM25 = 1;
+   */
+  BM25 = 1,
+}
+
+/**
+ * Describes the enum qdrant.serverless.TextScoringType.
+ */
+export declare const TextScoringTypeSchema: GenEnum<TextScoringType>;
 
 /**
  * CollectionsService manages the collections of a qdrant serverless space.
