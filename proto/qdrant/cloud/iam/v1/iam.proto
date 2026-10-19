@@ -310,6 +310,10 @@ service IAMService {
       resource_type: "role"
       resource_id_field: "resp.role.id"
       resource_url_template: "/accounts/{req.role.account_id}/roles/{resp.role.id}"
+      additional_payload_fields: {
+        key: "role"
+        value: "req.role"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -343,6 +347,14 @@ service IAMService {
       resource_type: "role"
       resource_id_field: "req.role.id"
       resource_url_template: "/accounts/{req.role.account_id}/roles/{req.role.id}"
+      additional_payload_fields: {
+        key: "role"
+        value: "req.role"
+      }
+      additional_payload_fields: {
+        key: "update_mask"
+        value: "req.update_mask"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
@@ -507,6 +519,14 @@ service IAMService {
       resource_type: "user"
       resource_id_field: "req.user_id"
       resource_url_template: "/accounts/{req.account_id}/users/{req.user_id}/roles"
+      additional_payload_fields: {
+        key: "role_ids_to_add"
+        value: "req.role_ids_to_add"
+      }
+      additional_payload_fields: {
+        key: "role_ids_to_delete"
+        value: "req.role_ids_to_delete"
+      }
     };
     // log fields
     option (common.v1.log_fields) = {
