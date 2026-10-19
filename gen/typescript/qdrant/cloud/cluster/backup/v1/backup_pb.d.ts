@@ -1049,6 +1049,22 @@ export declare type Backup = Message<"qdrant.cloud.cluster.backup.v1.Backup"> & 
    * @generated from field: optional qdrant.cloud.cluster.backup.v1.BackupPrice price = 13;
    */
   price?: BackupPrice | undefined;
+
+  /**
+   * The storage the backup currently occupies and is billed for, in bytes.
+   *
+   * This is a read-only field. Absent — not zero — when the size is not known:
+   * a backup that is deleted or not metered yet, a hybrid cloud backup, or a
+   * cluster that is not on a paid package.
+   *
+   * Backups are incremental on AWS and GCP, so a backup reports only what it
+   * adds over the backups before it, and the value can rise when an older
+   * backup is removed. On Azure it is the figure the Azure price is applied to,
+   * which is half the disk usage recorded when the backup was taken.
+   *
+   * @generated from field: optional int64 size_bytes = 14;
+   */
+  sizeBytes?: bigint | undefined;
 };
 
 /**
@@ -1181,6 +1197,22 @@ export declare type BackupValid = Message<"qdrant.cloud.cluster.backup.v1.Backup
    * @generated from field: optional qdrant.cloud.cluster.backup.v1.BackupPrice price = 13;
    */
   price?: BackupPriceValid | undefined;
+
+  /**
+   * The storage the backup currently occupies and is billed for, in bytes.
+   *
+   * This is a read-only field. Absent — not zero — when the size is not known:
+   * a backup that is deleted or not metered yet, a hybrid cloud backup, or a
+   * cluster that is not on a paid package.
+   *
+   * Backups are incremental on AWS and GCP, so a backup reports only what it
+   * adds over the backups before it, and the value can rise when an older
+   * backup is removed. On Azure it is the figure the Azure price is applied to,
+   * which is half the disk usage recorded when the backup was taken.
+   *
+   * @generated from field: optional int64 size_bytes = 14;
+   */
+  sizeBytes?: bigint | undefined;
 };
 
 /**

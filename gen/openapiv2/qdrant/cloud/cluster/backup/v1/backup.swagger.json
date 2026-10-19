@@ -637,6 +637,12 @@
               "$ref": "#/definitions/v1BackupPrice",
               "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price.",
               "readOnly": true
+            },
+            "sizeBytes": {
+              "type": "string",
+              "format": "int64",
+              "description": "The storage the backup currently occupies and is billed for, in bytes.\n\nThis is a read-only field. Absent — not zero — when the size is not known:\na backup that is deleted or not metered yet, a hybrid cloud backup, or a\ncluster that is not on a paid package.\n\nBackups are incremental on AWS and GCP, so a backup reports only what it\nadds over the backups before it, and the value can rise when an older\nbackup is removed. On Azure it is the figure the Azure price is applied to,\nwhich is half the disk usage recorded when the backup was taken.",
+              "readOnly": true
             }
           },
           "description": "The actual backup.",
@@ -754,6 +760,12 @@
             "price": {
               "$ref": "#/definitions/v1BackupPrice",
               "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price.",
+              "readOnly": true
+            },
+            "sizeBytes": {
+              "type": "string",
+              "format": "int64",
+              "description": "The storage the backup currently occupies and is billed for, in bytes.\n\nThis is a read-only field. Absent — not zero — when the size is not known:\na backup that is deleted or not metered yet, a hybrid cloud backup, or a\ncluster that is not on a paid package.\n\nBackups are incremental on AWS and GCP, so a backup reports only what it\nadds over the backups before it, and the value can rise when an older\nbackup is removed. On Azure it is the figure the Azure price is applied to,\nwhich is half the disk usage recorded when the backup was taken.",
               "readOnly": true
             }
           },
@@ -925,6 +937,12 @@
         "price": {
           "$ref": "#/definitions/v1BackupPrice",
           "description": "What keeping this backup stored costs the account that owns it.\nThis is a read-only field. Absent — not zero — when the cost cannot be determined:\na backup not metered yet, or a region with no backup-storage price.",
+          "readOnly": true
+        },
+        "sizeBytes": {
+          "type": "string",
+          "format": "int64",
+          "description": "The storage the backup currently occupies and is billed for, in bytes.\n\nThis is a read-only field. Absent — not zero — when the size is not known:\na backup that is deleted or not metered yet, a hybrid cloud backup, or a\ncluster that is not on a paid package.\n\nBackups are incremental on AWS and GCP, so a backup reports only what it\nadds over the backups before it, and the value can rise when an older\nbackup is removed. On Azure it is the figure the Azure price is applied to,\nwhich is half the disk usage recorded when the backup was taken.",
           "readOnly": true
         }
       },
