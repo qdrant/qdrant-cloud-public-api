@@ -1527,6 +1527,16 @@
       },
       "title": "DatabaseConfigurationInference contains cloud inferencing configuration"
     },
+    "v1DatabaseConfigurationIoUringMode": {
+      "type": "string",
+      "enum": [
+        "DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED",
+        "DATABASE_CONFIGURATION_IO_URING_MODE_DISABLED",
+        "DATABASE_CONFIGURATION_IO_URING_MODE_AUTO"
+      ],
+      "default": "DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED",
+      "description": "The async I/O mode of a Qdrant database, available from Qdrant v1.19.0.\n\n - DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED: Unspecified, Qdrant decides based on async_scorer.\n - DATABASE_CONFIGURATION_IO_URING_MODE_DISABLED: No structure uses io_uring.\n - DATABASE_CONFIGURATION_IO_URING_MODE_AUTO: Every structure in the cold memory tier uses io_uring."
+    },
     "v1DatabaseConfigurationLogLevel": {
       "type": "string",
       "enum": [
@@ -1580,7 +1590,12 @@
         },
         "asyncScorer": {
           "type": "boolean",
+          "description": "Hybrid cloud clusters only. On managed clusters this is ignored on write;\nthe stored value is still returned.",
           "title": "Enable async scorer which uses io_uring when rescoring.\nOnly supported on Linux, must be enabled in your kernel.\nSee: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant"
+        },
+        "ioUring": {
+          "$ref": "#/definitions/v1DatabaseConfigurationIoUringMode",
+          "description": "Async I/O mode, available from Qdrant v1.19.0. When set it overrides async_scorer.\nOnly supported on Linux, must be enabled in your kernel.\n\nHybrid cloud clusters only. On managed clusters this is ignored on write;\nQdrant v1.20.0 and later default to auto."
         }
       },
       "title": "The performance related Qdrant database storage configuration"

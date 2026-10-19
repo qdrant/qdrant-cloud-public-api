@@ -1029,6 +1029,16 @@ message DatabaseConfigurationStorage {
   optional DatabaseConfigurationStoragePerformance performance = 1;
 }
 
+// The async I/O mode of a Qdrant database, available from Qdrant v1.19.0.
+enum DatabaseConfigurationIoUringMode {
+  // Unspecified, Qdrant decides based on async_scorer.
+  DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED = 0;
+  // No structure uses io_uring.
+  DATABASE_CONFIGURATION_IO_URING_MODE_DISABLED = 1;
+  // Every structure in the cold memory tier uses io_uring.
+  DATABASE_CONFIGURATION_IO_URING_MODE_AUTO = 2;
+}
+
 // The performance related Qdrant database storage configuration
 message DatabaseConfigurationStoragePerformance {
   // CPU budget, how many CPUs (threads) to allocate for an optimization job.
@@ -1039,7 +1049,16 @@ message DatabaseConfigurationStoragePerformance {
   // Enable async scorer which uses io_uring when rescoring.
   // Only supported on Linux, must be enabled in your kernel.
   // See: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant
+  //
+  // Hybrid cloud clusters only. On managed clusters this is ignored on write;
+  // the stored value is still returned.
   optional bool async_scorer = 2;
+  // Async I/O mode, available from Qdrant v1.19.0. When set it overrides async_scorer.
+  // Only supported on Linux, must be enabled in your kernel.
+  //
+  // Hybrid cloud clusters only. On managed clusters this is ignored on write;
+  // Qdrant v1.20.0 and later default to auto.
+  optional DatabaseConfigurationIoUringMode io_uring = 3;
 }
 
 // The Qdrant database service configuration

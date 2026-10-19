@@ -1806,9 +1806,23 @@ export declare type DatabaseConfigurationStoragePerformance = Message<"qdrant.cl
    * Only supported on Linux, must be enabled in your kernel.
    * See: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant
    *
+   * Hybrid cloud clusters only. On managed clusters this is ignored on write;
+   * the stored value is still returned.
+   *
    * @generated from field: optional bool async_scorer = 2;
    */
   asyncScorer?: boolean | undefined;
+
+  /**
+   * Async I/O mode, available from Qdrant v1.19.0. When set it overrides async_scorer.
+   * Only supported on Linux, must be enabled in your kernel.
+   *
+   * Hybrid cloud clusters only. On managed clusters this is ignored on write;
+   * Qdrant v1.20.0 and later default to auto.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.DatabaseConfigurationIoUringMode io_uring = 3;
+   */
+  ioUring?: DatabaseConfigurationIoUringMode | undefined;
 };
 
 export declare type DatabaseConfigurationStoragePerformanceValid = DatabaseConfigurationStoragePerformance;
@@ -3246,6 +3260,39 @@ export enum DatabaseConfigurationLogLevel {
  * Describes the enum qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel.
  */
 export declare const DatabaseConfigurationLogLevelSchema: GenEnum<DatabaseConfigurationLogLevel>;
+
+/**
+ * The async I/O mode of a Qdrant database, available from Qdrant v1.19.0.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.DatabaseConfigurationIoUringMode
+ */
+export enum DatabaseConfigurationIoUringMode {
+  /**
+   * Unspecified, Qdrant decides based on async_scorer.
+   *
+   * @generated from enum value: DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * No structure uses io_uring.
+   *
+   * @generated from enum value: DATABASE_CONFIGURATION_IO_URING_MODE_DISABLED = 1;
+   */
+  DISABLED = 1,
+
+  /**
+   * Every structure in the cold memory tier uses io_uring.
+   *
+   * @generated from enum value: DATABASE_CONFIGURATION_IO_URING_MODE_AUTO = 2;
+   */
+  AUTO = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.DatabaseConfigurationIoUringMode.
+ */
+export declare const DatabaseConfigurationIoUringModeSchema: GenEnum<DatabaseConfigurationIoUringMode>;
 
 /**
  * AuditLogRotation defines the rotation interval for audit logs.

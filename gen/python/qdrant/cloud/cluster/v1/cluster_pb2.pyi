@@ -57,6 +57,12 @@ class DatabaseConfigurationLogLevel(int, metaclass=_enum_type_wrapper.EnumTypeWr
     DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: _ClassVar[DatabaseConfigurationLogLevel]
     DATABASE_CONFIGURATION_LOG_LEVEL_OFF: _ClassVar[DatabaseConfigurationLogLevel]
 
+class DatabaseConfigurationIoUringMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED: _ClassVar[DatabaseConfigurationIoUringMode]
+    DATABASE_CONFIGURATION_IO_URING_MODE_DISABLED: _ClassVar[DatabaseConfigurationIoUringMode]
+    DATABASE_CONFIGURATION_IO_URING_MODE_AUTO: _ClassVar[DatabaseConfigurationIoUringMode]
+
 class AuditLogRotation(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     AUDIT_LOG_ROTATION_UNSPECIFIED: _ClassVar[AuditLogRotation]
@@ -193,6 +199,9 @@ DATABASE_CONFIGURATION_LOG_LEVEL_INFO: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_WARN: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_OFF: DatabaseConfigurationLogLevel
+DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED: DatabaseConfigurationIoUringMode
+DATABASE_CONFIGURATION_IO_URING_MODE_DISABLED: DatabaseConfigurationIoUringMode
+DATABASE_CONFIGURATION_IO_URING_MODE_AUTO: DatabaseConfigurationIoUringMode
 AUDIT_LOG_ROTATION_UNSPECIFIED: AuditLogRotation
 AUDIT_LOG_ROTATION_DAILY: AuditLogRotation
 AUDIT_LOG_ROTATION_HOURLY: AuditLogRotation
@@ -583,12 +592,14 @@ class DatabaseConfigurationStorage(_message.Message):
     def __init__(self, performance: _Optional[_Union[DatabaseConfigurationStoragePerformance, _Mapping]] = ...) -> None: ...
 
 class DatabaseConfigurationStoragePerformance(_message.Message):
-    __slots__ = ("optimizer_cpu_budget", "async_scorer")
+    __slots__ = ("optimizer_cpu_budget", "async_scorer", "io_uring")
     OPTIMIZER_CPU_BUDGET_FIELD_NUMBER: _ClassVar[int]
     ASYNC_SCORER_FIELD_NUMBER: _ClassVar[int]
+    IO_URING_FIELD_NUMBER: _ClassVar[int]
     optimizer_cpu_budget: int
     async_scorer: bool
-    def __init__(self, optimizer_cpu_budget: _Optional[int] = ..., async_scorer: _Optional[bool] = ...) -> None: ...
+    io_uring: DatabaseConfigurationIoUringMode
+    def __init__(self, optimizer_cpu_budget: _Optional[int] = ..., async_scorer: _Optional[bool] = ..., io_uring: _Optional[_Union[DatabaseConfigurationIoUringMode, str]] = ...) -> None: ...
 
 class DatabaseConfigurationService(_message.Message):
     __slots__ = ("api_key", "read_only_api_key", "enable_tls")

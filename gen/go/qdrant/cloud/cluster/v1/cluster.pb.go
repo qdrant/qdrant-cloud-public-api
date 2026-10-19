@@ -329,6 +329,59 @@ func (DatabaseConfigurationLogLevel) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{4}
 }
 
+// The async I/O mode of a Qdrant database, available from Qdrant v1.19.0.
+type DatabaseConfigurationIoUringMode int32
+
+const (
+	// Unspecified, Qdrant decides based on async_scorer.
+	DatabaseConfigurationIoUringMode_DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED DatabaseConfigurationIoUringMode = 0
+	// No structure uses io_uring.
+	DatabaseConfigurationIoUringMode_DATABASE_CONFIGURATION_IO_URING_MODE_DISABLED DatabaseConfigurationIoUringMode = 1
+	// Every structure in the cold memory tier uses io_uring.
+	DatabaseConfigurationIoUringMode_DATABASE_CONFIGURATION_IO_URING_MODE_AUTO DatabaseConfigurationIoUringMode = 2
+)
+
+// Enum value maps for DatabaseConfigurationIoUringMode.
+var (
+	DatabaseConfigurationIoUringMode_name = map[int32]string{
+		0: "DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED",
+		1: "DATABASE_CONFIGURATION_IO_URING_MODE_DISABLED",
+		2: "DATABASE_CONFIGURATION_IO_URING_MODE_AUTO",
+	}
+	DatabaseConfigurationIoUringMode_value = map[string]int32{
+		"DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED": 0,
+		"DATABASE_CONFIGURATION_IO_URING_MODE_DISABLED":    1,
+		"DATABASE_CONFIGURATION_IO_URING_MODE_AUTO":        2,
+	}
+)
+
+func (x DatabaseConfigurationIoUringMode) Enum() *DatabaseConfigurationIoUringMode {
+	p := new(DatabaseConfigurationIoUringMode)
+	*p = x
+	return p
+}
+
+func (x DatabaseConfigurationIoUringMode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DatabaseConfigurationIoUringMode) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[5].Descriptor()
+}
+
+func (DatabaseConfigurationIoUringMode) Type() protoreflect.EnumType {
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[5]
+}
+
+func (x DatabaseConfigurationIoUringMode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DatabaseConfigurationIoUringMode.Descriptor instead.
+func (DatabaseConfigurationIoUringMode) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{5}
+}
+
 // AuditLogRotation defines the rotation interval for audit logs.
 type AuditLogRotation int32
 
@@ -366,11 +419,11 @@ func (x AuditLogRotation) String() string {
 }
 
 func (AuditLogRotation) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[5].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[6].Descriptor()
 }
 
 func (AuditLogRotation) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[5]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[6]
 }
 
 func (x AuditLogRotation) Number() protoreflect.EnumNumber {
@@ -379,7 +432,7 @@ func (x AuditLogRotation) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AuditLogRotation.Descriptor instead.
 func (AuditLogRotation) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{5}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{6}
 }
 
 // TolerationOperator defines the valid operators for tolerations.
@@ -420,11 +473,11 @@ func (x TolerationOperator) String() string {
 }
 
 func (TolerationOperator) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[6].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[7].Descriptor()
 }
 
 func (TolerationOperator) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[6]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[7]
 }
 
 func (x TolerationOperator) Number() protoreflect.EnumNumber {
@@ -433,7 +486,7 @@ func (x TolerationOperator) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TolerationOperator.Descriptor instead.
 func (TolerationOperator) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{6}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{7}
 }
 
 // TolerationEffect represents the effects a taint has on pod scheduling and eviction.
@@ -478,11 +531,11 @@ func (x TolerationEffect) String() string {
 }
 
 func (TolerationEffect) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[7].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[8].Descriptor()
 }
 
 func (TolerationEffect) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[7]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[8]
 }
 
 func (x TolerationEffect) Number() protoreflect.EnumNumber {
@@ -491,7 +544,7 @@ func (x TolerationEffect) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TolerationEffect.Descriptor instead.
 func (TolerationEffect) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{7}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{8}
 }
 
 // Defines the operational or transitional state of the Qdrant cluster.
@@ -603,11 +656,11 @@ func (x ClusterPhase) String() string {
 }
 
 func (ClusterPhase) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[8].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[9].Descriptor()
 }
 
 func (ClusterPhase) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[8]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[9]
 }
 
 func (x ClusterPhase) Number() protoreflect.EnumNumber {
@@ -616,7 +669,7 @@ func (x ClusterPhase) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterPhase.Descriptor instead.
 func (ClusterPhase) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{8}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{9}
 }
 
 // ClusterNodeState represents the state of a cluster node.
@@ -668,11 +721,11 @@ func (x ClusterNodeState) String() string {
 }
 
 func (ClusterNodeState) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[9].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[10].Descriptor()
 }
 
 func (ClusterNodeState) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[9]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[10]
 }
 
 func (x ClusterNodeState) Number() protoreflect.EnumNumber {
@@ -681,7 +734,7 @@ func (x ClusterNodeState) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterNodeState.Descriptor instead.
 func (ClusterNodeState) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{9}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{10}
 }
 
 // ClusterNodeNotReadyCondition describes why a node is not ready right now.
@@ -747,11 +800,11 @@ func (x ClusterNodeNotReadyCondition) String() string {
 }
 
 func (ClusterNodeNotReadyCondition) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[10].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[11].Descriptor()
 }
 
 func (ClusterNodeNotReadyCondition) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[10]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[11]
 }
 
 func (x ClusterNodeNotReadyCondition) Number() protoreflect.EnumNumber {
@@ -760,7 +813,7 @@ func (x ClusterNodeNotReadyCondition) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterNodeNotReadyCondition.Descriptor instead.
 func (ClusterNodeNotReadyCondition) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{10}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{11}
 }
 
 // ClusterNodeNotReadyReason describes why a node is in its current not-ready
@@ -842,11 +895,11 @@ func (x ClusterNodeNotReadyReason) String() string {
 }
 
 func (ClusterNodeNotReadyReason) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[11].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[12].Descriptor()
 }
 
 func (ClusterNodeNotReadyReason) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[11]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[12]
 }
 
 func (x ClusterNodeNotReadyReason) Number() protoreflect.EnumNumber {
@@ -855,7 +908,7 @@ func (x ClusterNodeNotReadyReason) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterNodeNotReadyReason.Descriptor instead.
 func (ClusterNodeNotReadyReason) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{11}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{12}
 }
 
 // ClusterNodeTerminationEvent describes what terminated a node's container the
@@ -903,11 +956,11 @@ func (x ClusterNodeTerminationEvent) String() string {
 }
 
 func (ClusterNodeTerminationEvent) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[12].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[13].Descriptor()
 }
 
 func (ClusterNodeTerminationEvent) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[12]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[13]
 }
 
 func (x ClusterNodeTerminationEvent) Number() protoreflect.EnumNumber {
@@ -916,7 +969,7 @@ func (x ClusterNodeTerminationEvent) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterNodeTerminationEvent.Descriptor instead.
 func (ClusterNodeTerminationEvent) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{13}
 }
 
 // ClusterNodeActionKind describes what a ClusterNodeAction asks the user to do.
@@ -961,11 +1014,11 @@ func (x ClusterNodeActionKind) String() string {
 }
 
 func (ClusterNodeActionKind) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[13].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[14].Descriptor()
 }
 
 func (ClusterNodeActionKind) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[13]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[14]
 }
 
 func (x ClusterNodeActionKind) Number() protoreflect.EnumNumber {
@@ -974,7 +1027,7 @@ func (x ClusterNodeActionKind) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterNodeActionKind.Descriptor instead.
 func (ClusterNodeActionKind) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{13}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{14}
 }
 
 // ClusterScalabilityStatus defines the scalability states of a cluster.
@@ -1014,11 +1067,11 @@ func (x ClusterScalabilityStatus) String() string {
 }
 
 func (ClusterScalabilityStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[14].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[15].Descriptor()
 }
 
 func (ClusterScalabilityStatus) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[14]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[15]
 }
 
 func (x ClusterScalabilityStatus) Number() protoreflect.EnumNumber {
@@ -1027,7 +1080,7 @@ func (x ClusterScalabilityStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterScalabilityStatus.Descriptor instead.
 func (ClusterScalabilityStatus) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{14}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{15}
 }
 
 // ClusterDownscaleRiskResource defines the cluster resources a downscale risk is assessed for.
@@ -1063,11 +1116,11 @@ func (x ClusterDownscaleRiskResource) String() string {
 }
 
 func (ClusterDownscaleRiskResource) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[15].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[16].Descriptor()
 }
 
 func (ClusterDownscaleRiskResource) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[15]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[16]
 }
 
 func (x ClusterDownscaleRiskResource) Number() protoreflect.EnumNumber {
@@ -1076,7 +1129,7 @@ func (x ClusterDownscaleRiskResource) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterDownscaleRiskResource.Descriptor instead.
 func (ClusterDownscaleRiskResource) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{15}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{16}
 }
 
 // ClusterDownscaleRiskStatus defines the risk states of applying properties that leave a
@@ -1123,11 +1176,11 @@ func (x ClusterDownscaleRiskStatus) String() string {
 }
 
 func (ClusterDownscaleRiskStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[16].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[17].Descriptor()
 }
 
 func (ClusterDownscaleRiskStatus) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[16]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[17]
 }
 
 func (x ClusterDownscaleRiskStatus) Number() protoreflect.EnumNumber {
@@ -1136,7 +1189,7 @@ func (x ClusterDownscaleRiskStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterDownscaleRiskStatus.Descriptor instead.
 func (ClusterDownscaleRiskStatus) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{16}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{17}
 }
 
 // ClusterDiskExpansionSupportStatus defines the disk expansion support states of a cluster.
@@ -1176,11 +1229,11 @@ func (x ClusterDiskExpansionSupportStatus) String() string {
 }
 
 func (ClusterDiskExpansionSupportStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[17].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[18].Descriptor()
 }
 
 func (ClusterDiskExpansionSupportStatus) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[17]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[18]
 }
 
 func (x ClusterDiskExpansionSupportStatus) Number() protoreflect.EnumNumber {
@@ -1189,7 +1242,7 @@ func (x ClusterDiskExpansionSupportStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterDiskExpansionSupportStatus.Descriptor instead.
 func (ClusterDiskExpansionSupportStatus) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{17}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{18}
 }
 
 // ClusterBackupSupportStatus defines the backup support states of a cluster.
@@ -1229,11 +1282,11 @@ func (x ClusterBackupSupportStatus) String() string {
 }
 
 func (ClusterBackupSupportStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[18].Descriptor()
+	return file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[19].Descriptor()
 }
 
 func (ClusterBackupSupportStatus) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[18]
+	return &file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes[19]
 }
 
 func (x ClusterBackupSupportStatus) Number() protoreflect.EnumNumber {
@@ -1242,7 +1295,7 @@ func (x ClusterBackupSupportStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClusterBackupSupportStatus.Descriptor instead.
 func (ClusterBackupSupportStatus) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{18}
+	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP(), []int{19}
 }
 
 // ListClustersRequest is the request for the ListClusters function
@@ -3445,7 +3498,16 @@ type DatabaseConfigurationStoragePerformance struct {
 	// Enable async scorer which uses io_uring when rescoring.
 	// Only supported on Linux, must be enabled in your kernel.
 	// See: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant
-	AsyncScorer   *bool `protobuf:"varint,2,opt,name=async_scorer,json=asyncScorer,proto3,oneof" json:"async_scorer,omitempty"`
+	//
+	// Hybrid cloud clusters only. On managed clusters this is ignored on write;
+	// the stored value is still returned.
+	AsyncScorer *bool `protobuf:"varint,2,opt,name=async_scorer,json=asyncScorer,proto3,oneof" json:"async_scorer,omitempty"`
+	// Async I/O mode, available from Qdrant v1.19.0. When set it overrides async_scorer.
+	// Only supported on Linux, must be enabled in your kernel.
+	//
+	// Hybrid cloud clusters only. On managed clusters this is ignored on write;
+	// Qdrant v1.20.0 and later default to auto.
+	IoUring       *DatabaseConfigurationIoUringMode `protobuf:"varint,3,opt,name=io_uring,json=ioUring,proto3,enum=qdrant.cloud.cluster.v1.DatabaseConfigurationIoUringMode,oneof" json:"io_uring,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3492,6 +3554,13 @@ func (x *DatabaseConfigurationStoragePerformance) GetAsyncScorer() bool {
 		return *x.AsyncScorer
 	}
 	return false
+}
+
+func (x *DatabaseConfigurationStoragePerformance) GetIoUring() DatabaseConfigurationIoUringMode {
+	if x != nil && x.IoUring != nil {
+		return *x.IoUring
+	}
+	return DatabaseConfigurationIoUringMode_DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED
 }
 
 // The Qdrant database service configuration
@@ -5401,12 +5470,14 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\b_on_disk\"\x97\x01\n" +
 	"\x1cDatabaseConfigurationStorage\x12g\n" +
 	"\vperformance\x18\x01 \x01(\v2@.qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformanceH\x00R\vperformance\x88\x01\x01B\x0e\n" +
-	"\f_performance\"\xb2\x01\n" +
+	"\f_performance\"\x9a\x02\n" +
 	"'DatabaseConfigurationStoragePerformance\x125\n" +
 	"\x14optimizer_cpu_budget\x18\x01 \x01(\x05H\x00R\x12optimizerCpuBudget\x88\x01\x01\x12&\n" +
-	"\fasync_scorer\x18\x02 \x01(\bH\x01R\vasyncScorer\x88\x01\x01B\x17\n" +
+	"\fasync_scorer\x18\x02 \x01(\bH\x01R\vasyncScorer\x88\x01\x01\x12Y\n" +
+	"\bio_uring\x18\x03 \x01(\x0e29.qdrant.cloud.cluster.v1.DatabaseConfigurationIoUringModeH\x02R\aioUring\x88\x01\x01B\x17\n" +
 	"\x15_optimizer_cpu_budgetB\x0f\n" +
-	"\r_async_scorer\"\x93\x02\n" +
+	"\r_async_scorerB\v\n" +
+	"\t_io_uring\"\x93\x02\n" +
 	"\x1cDatabaseConfigurationService\x12B\n" +
 	"\aapi_key\x18\x01 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefH\x00R\x06apiKey\x88\x01\x01\x12T\n" +
 	"\x11read_only_api_key\x18\x02 \x01(\v2$.qdrant.cloud.common.v1.SecretKeyRefH\x01R\x0ereadOnlyApiKey\x88\x01\x01\x12\"\n" +
@@ -5599,7 +5670,11 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"%DATABASE_CONFIGURATION_LOG_LEVEL_INFO\x10\x03\x12)\n" +
 	"%DATABASE_CONFIGURATION_LOG_LEVEL_WARN\x10\x04\x12*\n" +
 	"&DATABASE_CONFIGURATION_LOG_LEVEL_ERROR\x10\x05\x12(\n" +
-	"$DATABASE_CONFIGURATION_LOG_LEVEL_OFF\x10\x06*s\n" +
+	"$DATABASE_CONFIGURATION_LOG_LEVEL_OFF\x10\x06*\xba\x01\n" +
+	" DatabaseConfigurationIoUringMode\x124\n" +
+	"0DATABASE_CONFIGURATION_IO_URING_MODE_UNSPECIFIED\x10\x00\x121\n" +
+	"-DATABASE_CONFIGURATION_IO_URING_MODE_DISABLED\x10\x01\x12-\n" +
+	")DATABASE_CONFIGURATION_IO_URING_MODE_AUTO\x10\x02*s\n" +
 	"\x10AuditLogRotation\x12\"\n" +
 	"\x1eAUDIT_LOG_ROTATION_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18AUDIT_LOG_ROTATION_DAILY\x10\x01\x12\x1d\n" +
@@ -5790,7 +5865,7 @@ func file_qdrant_cloud_cluster_v1_cluster_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_cluster_v1_cluster_proto_rawDescData
 }
 
-var file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 19)
+var file_qdrant_cloud_cluster_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 20)
 var file_qdrant_cloud_cluster_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
 var file_qdrant_cloud_cluster_v1_cluster_proto_goTypes = []any{
 	(ClusterServiceType)(0),                         // 0: qdrant.cloud.cluster.v1.ClusterServiceType
@@ -5798,195 +5873,197 @@ var file_qdrant_cloud_cluster_v1_cluster_proto_goTypes = []any{
 	(ClusterConfigurationRestartPolicy)(0),          // 2: qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicy
 	(ClusterConfigurationRebalanceStrategy)(0),      // 3: qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy
 	(DatabaseConfigurationLogLevel)(0),              // 4: qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel
-	(AuditLogRotation)(0),                           // 5: qdrant.cloud.cluster.v1.AuditLogRotation
-	(TolerationOperator)(0),                         // 6: qdrant.cloud.cluster.v1.TolerationOperator
-	(TolerationEffect)(0),                           // 7: qdrant.cloud.cluster.v1.TolerationEffect
-	(ClusterPhase)(0),                               // 8: qdrant.cloud.cluster.v1.ClusterPhase
-	(ClusterNodeState)(0),                           // 9: qdrant.cloud.cluster.v1.ClusterNodeState
-	(ClusterNodeNotReadyCondition)(0),               // 10: qdrant.cloud.cluster.v1.ClusterNodeNotReadyCondition
-	(ClusterNodeNotReadyReason)(0),                  // 11: qdrant.cloud.cluster.v1.ClusterNodeNotReadyReason
-	(ClusterNodeTerminationEvent)(0),                // 12: qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent
-	(ClusterNodeActionKind)(0),                      // 13: qdrant.cloud.cluster.v1.ClusterNodeActionKind
-	(ClusterScalabilityStatus)(0),                   // 14: qdrant.cloud.cluster.v1.ClusterScalabilityStatus
-	(ClusterDownscaleRiskResource)(0),               // 15: qdrant.cloud.cluster.v1.ClusterDownscaleRiskResource
-	(ClusterDownscaleRiskStatus)(0),                 // 16: qdrant.cloud.cluster.v1.ClusterDownscaleRiskStatus
-	(ClusterDiskExpansionSupportStatus)(0),          // 17: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
-	(ClusterBackupSupportStatus)(0),                 // 18: qdrant.cloud.cluster.v1.ClusterBackupSupportStatus
-	(*ListClustersRequest)(nil),                     // 19: qdrant.cloud.cluster.v1.ListClustersRequest
-	(*ListClustersResponse)(nil),                    // 20: qdrant.cloud.cluster.v1.ListClustersResponse
-	(*GetClusterRequest)(nil),                       // 21: qdrant.cloud.cluster.v1.GetClusterRequest
-	(*GetClusterResponse)(nil),                      // 22: qdrant.cloud.cluster.v1.GetClusterResponse
-	(*GetClusterDownscaleRiskRequest)(nil),          // 23: qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest
-	(*GetClusterDownscaleRiskResponse)(nil),         // 24: qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse
-	(*CreateClusterRequest)(nil),                    // 25: qdrant.cloud.cluster.v1.CreateClusterRequest
-	(*CreateClusterResponse)(nil),                   // 26: qdrant.cloud.cluster.v1.CreateClusterResponse
-	(*UpdateClusterRequest)(nil),                    // 27: qdrant.cloud.cluster.v1.UpdateClusterRequest
-	(*UpdateClusterResponse)(nil),                   // 28: qdrant.cloud.cluster.v1.UpdateClusterResponse
-	(*DeleteClusterRequest)(nil),                    // 29: qdrant.cloud.cluster.v1.DeleteClusterRequest
-	(*DeleteClusterResponse)(nil),                   // 30: qdrant.cloud.cluster.v1.DeleteClusterResponse
-	(*RestartClusterRequest)(nil),                   // 31: qdrant.cloud.cluster.v1.RestartClusterRequest
-	(*RestartClusterResponse)(nil),                  // 32: qdrant.cloud.cluster.v1.RestartClusterResponse
-	(*SuspendClusterRequest)(nil),                   // 33: qdrant.cloud.cluster.v1.SuspendClusterRequest
-	(*SuspendClusterResponse)(nil),                  // 34: qdrant.cloud.cluster.v1.SuspendClusterResponse
-	(*UnsuspendClusterRequest)(nil),                 // 35: qdrant.cloud.cluster.v1.UnsuspendClusterRequest
-	(*UnsuspendClusterResponse)(nil),                // 36: qdrant.cloud.cluster.v1.UnsuspendClusterResponse
-	(*EnableClusterJwtRbacRequest)(nil),             // 37: qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest
-	(*EnableClusterJwtRbacResponse)(nil),            // 38: qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse
-	(*SuggestClusterNameRequest)(nil),               // 39: qdrant.cloud.cluster.v1.SuggestClusterNameRequest
-	(*SuggestClusterNameResponse)(nil),              // 40: qdrant.cloud.cluster.v1.SuggestClusterNameResponse
-	(*ListQdrantReleasesRequest)(nil),               // 41: qdrant.cloud.cluster.v1.ListQdrantReleasesRequest
-	(*ListQdrantReleasesResponse)(nil),              // 42: qdrant.cloud.cluster.v1.ListQdrantReleasesResponse
-	(*GetQdrantReleaseRequest)(nil),                 // 43: qdrant.cloud.cluster.v1.GetQdrantReleaseRequest
-	(*GetQdrantReleaseResponse)(nil),                // 44: qdrant.cloud.cluster.v1.GetQdrantReleaseResponse
-	(*Cluster)(nil),                                 // 45: qdrant.cloud.cluster.v1.Cluster
-	(*ClusterConfigurationGpuConfiguration)(nil),    // 46: qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration
-	(*ClusterConfiguration)(nil),                    // 47: qdrant.cloud.cluster.v1.ClusterConfiguration
-	(*DatabaseConfiguration)(nil),                   // 48: qdrant.cloud.cluster.v1.DatabaseConfiguration
-	(*DatabaseConfigurationCollection)(nil),         // 49: qdrant.cloud.cluster.v1.DatabaseConfigurationCollection
-	(*DatabaseConfigurationCollectionVectors)(nil),  // 50: qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectors
-	(*DatabaseConfigurationStorage)(nil),            // 51: qdrant.cloud.cluster.v1.DatabaseConfigurationStorage
-	(*DatabaseConfigurationStoragePerformance)(nil), // 52: qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformance
-	(*DatabaseConfigurationService)(nil),            // 53: qdrant.cloud.cluster.v1.DatabaseConfigurationService
-	(*DatabaseConfigurationTls)(nil),                // 54: qdrant.cloud.cluster.v1.DatabaseConfigurationTls
-	(*DatabaseConfigurationInference)(nil),          // 55: qdrant.cloud.cluster.v1.DatabaseConfigurationInference
-	(*AdditionalResources)(nil),                     // 56: qdrant.cloud.cluster.v1.AdditionalResources
-	(*DatabaseConfigurationAuditLogging)(nil),       // 57: qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging
-	(*Toleration)(nil),                              // 58: qdrant.cloud.cluster.v1.Toleration
-	(*ClusterStorageConfiguration)(nil),             // 59: qdrant.cloud.cluster.v1.ClusterStorageConfiguration
-	(*ClusterState)(nil),                            // 60: qdrant.cloud.cluster.v1.ClusterState
-	(*ClusterNodeInfo)(nil),                         // 61: qdrant.cloud.cluster.v1.ClusterNodeInfo
-	(*ClusterNodeAction)(nil),                       // 62: qdrant.cloud.cluster.v1.ClusterNodeAction
-	(*ClusterNodeNotReadyInfo)(nil),                 // 63: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo
-	(*ClusterEndpoint)(nil),                         // 64: qdrant.cloud.cluster.v1.ClusterEndpoint
-	(*ClusterNodeResourcesSummary)(nil),             // 65: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary
-	(*ClusterNodeResources)(nil),                    // 66: qdrant.cloud.cluster.v1.ClusterNodeResources
-	(*ClusterScalabilityInfo)(nil),                  // 67: qdrant.cloud.cluster.v1.ClusterScalabilityInfo
-	(*ClusterDownscaleRiskInfo)(nil),                // 68: qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo
-	(*ClusterDiskExpansionSupportInfo)(nil),         // 69: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo
-	(*ClusterBackupSupportInfo)(nil),                // 70: qdrant.cloud.cluster.v1.ClusterBackupSupportInfo
-	(*ClusterCapabilities)(nil),                     // 71: qdrant.cloud.cluster.v1.ClusterCapabilities
-	(*QdrantRelease)(nil),                           // 72: qdrant.cloud.cluster.v1.QdrantRelease
-	(*CreateClusterFromBackupRequest)(nil),          // 73: qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest
-	(*CreateClusterFromBackupResponse)(nil),         // 74: qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse
-	(*fieldmaskpb.FieldMask)(nil),                   // 75: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),                   // 76: google.protobuf.Timestamp
-	(*v1.KeyValue)(nil),                             // 77: qdrant.cloud.common.v1.KeyValue
-	(*v1.TopologySpreadConstraint)(nil),             // 78: qdrant.cloud.common.v1.TopologySpreadConstraint
-	(*v1.SecretKeyRef)(nil),                         // 79: qdrant.cloud.common.v1.SecretKeyRef
-	(v1.StorageTierType)(0),                         // 80: qdrant.cloud.common.v1.StorageTierType
+	(DatabaseConfigurationIoUringMode)(0),           // 5: qdrant.cloud.cluster.v1.DatabaseConfigurationIoUringMode
+	(AuditLogRotation)(0),                           // 6: qdrant.cloud.cluster.v1.AuditLogRotation
+	(TolerationOperator)(0),                         // 7: qdrant.cloud.cluster.v1.TolerationOperator
+	(TolerationEffect)(0),                           // 8: qdrant.cloud.cluster.v1.TolerationEffect
+	(ClusterPhase)(0),                               // 9: qdrant.cloud.cluster.v1.ClusterPhase
+	(ClusterNodeState)(0),                           // 10: qdrant.cloud.cluster.v1.ClusterNodeState
+	(ClusterNodeNotReadyCondition)(0),               // 11: qdrant.cloud.cluster.v1.ClusterNodeNotReadyCondition
+	(ClusterNodeNotReadyReason)(0),                  // 12: qdrant.cloud.cluster.v1.ClusterNodeNotReadyReason
+	(ClusterNodeTerminationEvent)(0),                // 13: qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent
+	(ClusterNodeActionKind)(0),                      // 14: qdrant.cloud.cluster.v1.ClusterNodeActionKind
+	(ClusterScalabilityStatus)(0),                   // 15: qdrant.cloud.cluster.v1.ClusterScalabilityStatus
+	(ClusterDownscaleRiskResource)(0),               // 16: qdrant.cloud.cluster.v1.ClusterDownscaleRiskResource
+	(ClusterDownscaleRiskStatus)(0),                 // 17: qdrant.cloud.cluster.v1.ClusterDownscaleRiskStatus
+	(ClusterDiskExpansionSupportStatus)(0),          // 18: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
+	(ClusterBackupSupportStatus)(0),                 // 19: qdrant.cloud.cluster.v1.ClusterBackupSupportStatus
+	(*ListClustersRequest)(nil),                     // 20: qdrant.cloud.cluster.v1.ListClustersRequest
+	(*ListClustersResponse)(nil),                    // 21: qdrant.cloud.cluster.v1.ListClustersResponse
+	(*GetClusterRequest)(nil),                       // 22: qdrant.cloud.cluster.v1.GetClusterRequest
+	(*GetClusterResponse)(nil),                      // 23: qdrant.cloud.cluster.v1.GetClusterResponse
+	(*GetClusterDownscaleRiskRequest)(nil),          // 24: qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest
+	(*GetClusterDownscaleRiskResponse)(nil),         // 25: qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse
+	(*CreateClusterRequest)(nil),                    // 26: qdrant.cloud.cluster.v1.CreateClusterRequest
+	(*CreateClusterResponse)(nil),                   // 27: qdrant.cloud.cluster.v1.CreateClusterResponse
+	(*UpdateClusterRequest)(nil),                    // 28: qdrant.cloud.cluster.v1.UpdateClusterRequest
+	(*UpdateClusterResponse)(nil),                   // 29: qdrant.cloud.cluster.v1.UpdateClusterResponse
+	(*DeleteClusterRequest)(nil),                    // 30: qdrant.cloud.cluster.v1.DeleteClusterRequest
+	(*DeleteClusterResponse)(nil),                   // 31: qdrant.cloud.cluster.v1.DeleteClusterResponse
+	(*RestartClusterRequest)(nil),                   // 32: qdrant.cloud.cluster.v1.RestartClusterRequest
+	(*RestartClusterResponse)(nil),                  // 33: qdrant.cloud.cluster.v1.RestartClusterResponse
+	(*SuspendClusterRequest)(nil),                   // 34: qdrant.cloud.cluster.v1.SuspendClusterRequest
+	(*SuspendClusterResponse)(nil),                  // 35: qdrant.cloud.cluster.v1.SuspendClusterResponse
+	(*UnsuspendClusterRequest)(nil),                 // 36: qdrant.cloud.cluster.v1.UnsuspendClusterRequest
+	(*UnsuspendClusterResponse)(nil),                // 37: qdrant.cloud.cluster.v1.UnsuspendClusterResponse
+	(*EnableClusterJwtRbacRequest)(nil),             // 38: qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest
+	(*EnableClusterJwtRbacResponse)(nil),            // 39: qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse
+	(*SuggestClusterNameRequest)(nil),               // 40: qdrant.cloud.cluster.v1.SuggestClusterNameRequest
+	(*SuggestClusterNameResponse)(nil),              // 41: qdrant.cloud.cluster.v1.SuggestClusterNameResponse
+	(*ListQdrantReleasesRequest)(nil),               // 42: qdrant.cloud.cluster.v1.ListQdrantReleasesRequest
+	(*ListQdrantReleasesResponse)(nil),              // 43: qdrant.cloud.cluster.v1.ListQdrantReleasesResponse
+	(*GetQdrantReleaseRequest)(nil),                 // 44: qdrant.cloud.cluster.v1.GetQdrantReleaseRequest
+	(*GetQdrantReleaseResponse)(nil),                // 45: qdrant.cloud.cluster.v1.GetQdrantReleaseResponse
+	(*Cluster)(nil),                                 // 46: qdrant.cloud.cluster.v1.Cluster
+	(*ClusterConfigurationGpuConfiguration)(nil),    // 47: qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration
+	(*ClusterConfiguration)(nil),                    // 48: qdrant.cloud.cluster.v1.ClusterConfiguration
+	(*DatabaseConfiguration)(nil),                   // 49: qdrant.cloud.cluster.v1.DatabaseConfiguration
+	(*DatabaseConfigurationCollection)(nil),         // 50: qdrant.cloud.cluster.v1.DatabaseConfigurationCollection
+	(*DatabaseConfigurationCollectionVectors)(nil),  // 51: qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectors
+	(*DatabaseConfigurationStorage)(nil),            // 52: qdrant.cloud.cluster.v1.DatabaseConfigurationStorage
+	(*DatabaseConfigurationStoragePerformance)(nil), // 53: qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformance
+	(*DatabaseConfigurationService)(nil),            // 54: qdrant.cloud.cluster.v1.DatabaseConfigurationService
+	(*DatabaseConfigurationTls)(nil),                // 55: qdrant.cloud.cluster.v1.DatabaseConfigurationTls
+	(*DatabaseConfigurationInference)(nil),          // 56: qdrant.cloud.cluster.v1.DatabaseConfigurationInference
+	(*AdditionalResources)(nil),                     // 57: qdrant.cloud.cluster.v1.AdditionalResources
+	(*DatabaseConfigurationAuditLogging)(nil),       // 58: qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging
+	(*Toleration)(nil),                              // 59: qdrant.cloud.cluster.v1.Toleration
+	(*ClusterStorageConfiguration)(nil),             // 60: qdrant.cloud.cluster.v1.ClusterStorageConfiguration
+	(*ClusterState)(nil),                            // 61: qdrant.cloud.cluster.v1.ClusterState
+	(*ClusterNodeInfo)(nil),                         // 62: qdrant.cloud.cluster.v1.ClusterNodeInfo
+	(*ClusterNodeAction)(nil),                       // 63: qdrant.cloud.cluster.v1.ClusterNodeAction
+	(*ClusterNodeNotReadyInfo)(nil),                 // 64: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo
+	(*ClusterEndpoint)(nil),                         // 65: qdrant.cloud.cluster.v1.ClusterEndpoint
+	(*ClusterNodeResourcesSummary)(nil),             // 66: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary
+	(*ClusterNodeResources)(nil),                    // 67: qdrant.cloud.cluster.v1.ClusterNodeResources
+	(*ClusterScalabilityInfo)(nil),                  // 68: qdrant.cloud.cluster.v1.ClusterScalabilityInfo
+	(*ClusterDownscaleRiskInfo)(nil),                // 69: qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo
+	(*ClusterDiskExpansionSupportInfo)(nil),         // 70: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo
+	(*ClusterBackupSupportInfo)(nil),                // 71: qdrant.cloud.cluster.v1.ClusterBackupSupportInfo
+	(*ClusterCapabilities)(nil),                     // 72: qdrant.cloud.cluster.v1.ClusterCapabilities
+	(*QdrantRelease)(nil),                           // 73: qdrant.cloud.cluster.v1.QdrantRelease
+	(*CreateClusterFromBackupRequest)(nil),          // 74: qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest
+	(*CreateClusterFromBackupResponse)(nil),         // 75: qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse
+	(*fieldmaskpb.FieldMask)(nil),                   // 76: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),                   // 77: google.protobuf.Timestamp
+	(*v1.KeyValue)(nil),                             // 78: qdrant.cloud.common.v1.KeyValue
+	(*v1.TopologySpreadConstraint)(nil),             // 79: qdrant.cloud.common.v1.TopologySpreadConstraint
+	(*v1.SecretKeyRef)(nil),                         // 80: qdrant.cloud.common.v1.SecretKeyRef
+	(v1.StorageTierType)(0),                         // 81: qdrant.cloud.common.v1.StorageTierType
 }
 var file_qdrant_cloud_cluster_v1_cluster_proto_depIdxs = []int32{
-	45, // 0: qdrant.cloud.cluster.v1.ListClustersResponse.items:type_name -> qdrant.cloud.cluster.v1.Cluster
-	45, // 1: qdrant.cloud.cluster.v1.GetClusterResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
-	68, // 2: qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse.downscale_risks:type_name -> qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo
-	45, // 3: qdrant.cloud.cluster.v1.CreateClusterRequest.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
-	45, // 4: qdrant.cloud.cluster.v1.CreateClusterResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
-	45, // 5: qdrant.cloud.cluster.v1.UpdateClusterRequest.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
-	75, // 6: qdrant.cloud.cluster.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	45, // 7: qdrant.cloud.cluster.v1.UpdateClusterResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
-	72, // 8: qdrant.cloud.cluster.v1.ListQdrantReleasesResponse.items:type_name -> qdrant.cloud.cluster.v1.QdrantRelease
-	72, // 9: qdrant.cloud.cluster.v1.GetQdrantReleaseResponse.release:type_name -> qdrant.cloud.cluster.v1.QdrantRelease
-	76, // 10: qdrant.cloud.cluster.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	76, // 11: qdrant.cloud.cluster.v1.Cluster.deleted_at:type_name -> google.protobuf.Timestamp
-	77, // 12: qdrant.cloud.cluster.v1.Cluster.labels:type_name -> qdrant.cloud.common.v1.KeyValue
-	47, // 13: qdrant.cloud.cluster.v1.Cluster.configuration:type_name -> qdrant.cloud.cluster.v1.ClusterConfiguration
-	60, // 14: qdrant.cloud.cluster.v1.Cluster.state:type_name -> qdrant.cloud.cluster.v1.ClusterState
-	76, // 15: qdrant.cloud.cluster.v1.ClusterConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
-	56, // 16: qdrant.cloud.cluster.v1.ClusterConfiguration.additional_resources:type_name -> qdrant.cloud.cluster.v1.AdditionalResources
-	48, // 17: qdrant.cloud.cluster.v1.ClusterConfiguration.database_configuration:type_name -> qdrant.cloud.cluster.v1.DatabaseConfiguration
-	77, // 18: qdrant.cloud.cluster.v1.ClusterConfiguration.node_selector:type_name -> qdrant.cloud.common.v1.KeyValue
-	58, // 19: qdrant.cloud.cluster.v1.ClusterConfiguration.tolerations:type_name -> qdrant.cloud.cluster.v1.Toleration
-	77, // 20: qdrant.cloud.cluster.v1.ClusterConfiguration.annotations:type_name -> qdrant.cloud.common.v1.KeyValue
+	46, // 0: qdrant.cloud.cluster.v1.ListClustersResponse.items:type_name -> qdrant.cloud.cluster.v1.Cluster
+	46, // 1: qdrant.cloud.cluster.v1.GetClusterResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
+	69, // 2: qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse.downscale_risks:type_name -> qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo
+	46, // 3: qdrant.cloud.cluster.v1.CreateClusterRequest.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
+	46, // 4: qdrant.cloud.cluster.v1.CreateClusterResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
+	46, // 5: qdrant.cloud.cluster.v1.UpdateClusterRequest.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
+	76, // 6: qdrant.cloud.cluster.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	46, // 7: qdrant.cloud.cluster.v1.UpdateClusterResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
+	73, // 8: qdrant.cloud.cluster.v1.ListQdrantReleasesResponse.items:type_name -> qdrant.cloud.cluster.v1.QdrantRelease
+	73, // 9: qdrant.cloud.cluster.v1.GetQdrantReleaseResponse.release:type_name -> qdrant.cloud.cluster.v1.QdrantRelease
+	77, // 10: qdrant.cloud.cluster.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	77, // 11: qdrant.cloud.cluster.v1.Cluster.deleted_at:type_name -> google.protobuf.Timestamp
+	78, // 12: qdrant.cloud.cluster.v1.Cluster.labels:type_name -> qdrant.cloud.common.v1.KeyValue
+	48, // 13: qdrant.cloud.cluster.v1.Cluster.configuration:type_name -> qdrant.cloud.cluster.v1.ClusterConfiguration
+	61, // 14: qdrant.cloud.cluster.v1.Cluster.state:type_name -> qdrant.cloud.cluster.v1.ClusterState
+	77, // 15: qdrant.cloud.cluster.v1.ClusterConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
+	57, // 16: qdrant.cloud.cluster.v1.ClusterConfiguration.additional_resources:type_name -> qdrant.cloud.cluster.v1.AdditionalResources
+	49, // 17: qdrant.cloud.cluster.v1.ClusterConfiguration.database_configuration:type_name -> qdrant.cloud.cluster.v1.DatabaseConfiguration
+	78, // 18: qdrant.cloud.cluster.v1.ClusterConfiguration.node_selector:type_name -> qdrant.cloud.common.v1.KeyValue
+	59, // 19: qdrant.cloud.cluster.v1.ClusterConfiguration.tolerations:type_name -> qdrant.cloud.cluster.v1.Toleration
+	78, // 20: qdrant.cloud.cluster.v1.ClusterConfiguration.annotations:type_name -> qdrant.cloud.common.v1.KeyValue
 	0,  // 21: qdrant.cloud.cluster.v1.ClusterConfiguration.service_type:type_name -> qdrant.cloud.cluster.v1.ClusterServiceType
-	77, // 22: qdrant.cloud.cluster.v1.ClusterConfiguration.service_annotations:type_name -> qdrant.cloud.common.v1.KeyValue
-	77, // 23: qdrant.cloud.cluster.v1.ClusterConfiguration.pod_labels:type_name -> qdrant.cloud.common.v1.KeyValue
+	78, // 22: qdrant.cloud.cluster.v1.ClusterConfiguration.service_annotations:type_name -> qdrant.cloud.common.v1.KeyValue
+	78, // 23: qdrant.cloud.cluster.v1.ClusterConfiguration.pod_labels:type_name -> qdrant.cloud.common.v1.KeyValue
 	1,  // 24: qdrant.cloud.cluster.v1.ClusterConfiguration.gpu_type:type_name -> qdrant.cloud.cluster.v1.ClusterConfigurationGpuType
 	2,  // 25: qdrant.cloud.cluster.v1.ClusterConfiguration.restart_policy:type_name -> qdrant.cloud.cluster.v1.ClusterConfigurationRestartPolicy
 	3,  // 26: qdrant.cloud.cluster.v1.ClusterConfiguration.rebalance_strategy:type_name -> qdrant.cloud.cluster.v1.ClusterConfigurationRebalanceStrategy
-	78, // 27: qdrant.cloud.cluster.v1.ClusterConfiguration.topology_spread_constraints:type_name -> qdrant.cloud.common.v1.TopologySpreadConstraint
-	59, // 28: qdrant.cloud.cluster.v1.ClusterConfiguration.cluster_storage_configuration:type_name -> qdrant.cloud.cluster.v1.ClusterStorageConfiguration
-	46, // 29: qdrant.cloud.cluster.v1.ClusterConfiguration.gpu_configuration:type_name -> qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration
-	76, // 30: qdrant.cloud.cluster.v1.ClusterConfiguration.created_at:type_name -> google.protobuf.Timestamp
-	49, // 31: qdrant.cloud.cluster.v1.DatabaseConfiguration.collection:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationCollection
-	51, // 32: qdrant.cloud.cluster.v1.DatabaseConfiguration.storage:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationStorage
-	53, // 33: qdrant.cloud.cluster.v1.DatabaseConfiguration.service:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationService
+	79, // 27: qdrant.cloud.cluster.v1.ClusterConfiguration.topology_spread_constraints:type_name -> qdrant.cloud.common.v1.TopologySpreadConstraint
+	60, // 28: qdrant.cloud.cluster.v1.ClusterConfiguration.cluster_storage_configuration:type_name -> qdrant.cloud.cluster.v1.ClusterStorageConfiguration
+	47, // 29: qdrant.cloud.cluster.v1.ClusterConfiguration.gpu_configuration:type_name -> qdrant.cloud.cluster.v1.ClusterConfigurationGpuConfiguration
+	77, // 30: qdrant.cloud.cluster.v1.ClusterConfiguration.created_at:type_name -> google.protobuf.Timestamp
+	50, // 31: qdrant.cloud.cluster.v1.DatabaseConfiguration.collection:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationCollection
+	52, // 32: qdrant.cloud.cluster.v1.DatabaseConfiguration.storage:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationStorage
+	54, // 33: qdrant.cloud.cluster.v1.DatabaseConfiguration.service:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationService
 	4,  // 34: qdrant.cloud.cluster.v1.DatabaseConfiguration.log_level:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel
-	54, // 35: qdrant.cloud.cluster.v1.DatabaseConfiguration.tls:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationTls
-	55, // 36: qdrant.cloud.cluster.v1.DatabaseConfiguration.inference:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationInference
-	57, // 37: qdrant.cloud.cluster.v1.DatabaseConfiguration.audit_logging:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging
-	50, // 38: qdrant.cloud.cluster.v1.DatabaseConfigurationCollection.vectors:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectors
-	52, // 39: qdrant.cloud.cluster.v1.DatabaseConfigurationStorage.performance:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformance
-	79, // 40: qdrant.cloud.cluster.v1.DatabaseConfigurationService.api_key:type_name -> qdrant.cloud.common.v1.SecretKeyRef
-	79, // 41: qdrant.cloud.cluster.v1.DatabaseConfigurationService.read_only_api_key:type_name -> qdrant.cloud.common.v1.SecretKeyRef
-	79, // 42: qdrant.cloud.cluster.v1.DatabaseConfigurationTls.cert:type_name -> qdrant.cloud.common.v1.SecretKeyRef
-	79, // 43: qdrant.cloud.cluster.v1.DatabaseConfigurationTls.key:type_name -> qdrant.cloud.common.v1.SecretKeyRef
-	5,  // 44: qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging.rotation:type_name -> qdrant.cloud.cluster.v1.AuditLogRotation
-	6,  // 45: qdrant.cloud.cluster.v1.Toleration.operator:type_name -> qdrant.cloud.cluster.v1.TolerationOperator
-	7,  // 46: qdrant.cloud.cluster.v1.Toleration.effect:type_name -> qdrant.cloud.cluster.v1.TolerationEffect
-	80, // 47: qdrant.cloud.cluster.v1.ClusterStorageConfiguration.storage_tier_type:type_name -> qdrant.cloud.common.v1.StorageTierType
-	76, // 48: qdrant.cloud.cluster.v1.ClusterState.restarted_at:type_name -> google.protobuf.Timestamp
-	8,  // 49: qdrant.cloud.cluster.v1.ClusterState.phase:type_name -> qdrant.cloud.cluster.v1.ClusterPhase
-	64, // 50: qdrant.cloud.cluster.v1.ClusterState.endpoint:type_name -> qdrant.cloud.cluster.v1.ClusterEndpoint
-	65, // 51: qdrant.cloud.cluster.v1.ClusterState.resources:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary
-	67, // 52: qdrant.cloud.cluster.v1.ClusterState.scalability_info:type_name -> qdrant.cloud.cluster.v1.ClusterScalabilityInfo
-	61, // 53: qdrant.cloud.cluster.v1.ClusterState.nodes:type_name -> qdrant.cloud.cluster.v1.ClusterNodeInfo
-	71, // 54: qdrant.cloud.cluster.v1.ClusterState.capabilities:type_name -> qdrant.cloud.cluster.v1.ClusterCapabilities
-	76, // 55: qdrant.cloud.cluster.v1.ClusterNodeInfo.started_at:type_name -> google.protobuf.Timestamp
-	64, // 56: qdrant.cloud.cluster.v1.ClusterNodeInfo.endpoint:type_name -> qdrant.cloud.cluster.v1.ClusterEndpoint
-	9,  // 57: qdrant.cloud.cluster.v1.ClusterNodeInfo.state:type_name -> qdrant.cloud.cluster.v1.ClusterNodeState
-	63, // 58: qdrant.cloud.cluster.v1.ClusterNodeInfo.not_ready_info:type_name -> qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo
-	13, // 59: qdrant.cloud.cluster.v1.ClusterNodeAction.kind:type_name -> qdrant.cloud.cluster.v1.ClusterNodeActionKind
-	10, // 60: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.condition:type_name -> qdrant.cloud.cluster.v1.ClusterNodeNotReadyCondition
-	11, // 61: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.reason:type_name -> qdrant.cloud.cluster.v1.ClusterNodeNotReadyReason
-	12, // 62: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.event:type_name -> qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent
-	62, // 63: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.actions:type_name -> qdrant.cloud.cluster.v1.ClusterNodeAction
-	66, // 64: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.disk:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
-	66, // 65: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.ram:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
-	66, // 66: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.cpu:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
-	66, // 67: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
-	66, // 68: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu_ram:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
-	14, // 69: qdrant.cloud.cluster.v1.ClusterScalabilityInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterScalabilityStatus
-	15, // 70: qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo.resource:type_name -> qdrant.cloud.cluster.v1.ClusterDownscaleRiskResource
-	16, // 71: qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterDownscaleRiskStatus
-	17, // 72: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
-	18, // 73: qdrant.cloud.cluster.v1.ClusterBackupSupportInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterBackupSupportStatus
-	69, // 74: qdrant.cloud.cluster.v1.ClusterCapabilities.disk_expansion:type_name -> qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo
-	70, // 75: qdrant.cloud.cluster.v1.ClusterCapabilities.backup:type_name -> qdrant.cloud.cluster.v1.ClusterBackupSupportInfo
-	67, // 76: qdrant.cloud.cluster.v1.ClusterCapabilities.scalability_info:type_name -> qdrant.cloud.cluster.v1.ClusterScalabilityInfo
-	45, // 77: qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
-	19, // 78: qdrant.cloud.cluster.v1.ClusterService.ListClusters:input_type -> qdrant.cloud.cluster.v1.ListClustersRequest
-	21, // 79: qdrant.cloud.cluster.v1.ClusterService.GetCluster:input_type -> qdrant.cloud.cluster.v1.GetClusterRequest
-	23, // 80: qdrant.cloud.cluster.v1.ClusterService.GetClusterDownscaleRisk:input_type -> qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest
-	25, // 81: qdrant.cloud.cluster.v1.ClusterService.CreateCluster:input_type -> qdrant.cloud.cluster.v1.CreateClusterRequest
-	73, // 82: qdrant.cloud.cluster.v1.ClusterService.CreateClusterFromBackup:input_type -> qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest
-	27, // 83: qdrant.cloud.cluster.v1.ClusterService.UpdateCluster:input_type -> qdrant.cloud.cluster.v1.UpdateClusterRequest
-	29, // 84: qdrant.cloud.cluster.v1.ClusterService.DeleteCluster:input_type -> qdrant.cloud.cluster.v1.DeleteClusterRequest
-	31, // 85: qdrant.cloud.cluster.v1.ClusterService.RestartCluster:input_type -> qdrant.cloud.cluster.v1.RestartClusterRequest
-	33, // 86: qdrant.cloud.cluster.v1.ClusterService.SuspendCluster:input_type -> qdrant.cloud.cluster.v1.SuspendClusterRequest
-	35, // 87: qdrant.cloud.cluster.v1.ClusterService.UnsuspendCluster:input_type -> qdrant.cloud.cluster.v1.UnsuspendClusterRequest
-	37, // 88: qdrant.cloud.cluster.v1.ClusterService.EnableClusterJwtRbac:input_type -> qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest
-	39, // 89: qdrant.cloud.cluster.v1.ClusterService.SuggestClusterName:input_type -> qdrant.cloud.cluster.v1.SuggestClusterNameRequest
-	41, // 90: qdrant.cloud.cluster.v1.ClusterService.ListQdrantReleases:input_type -> qdrant.cloud.cluster.v1.ListQdrantReleasesRequest
-	43, // 91: qdrant.cloud.cluster.v1.ClusterService.GetQdrantRelease:input_type -> qdrant.cloud.cluster.v1.GetQdrantReleaseRequest
-	20, // 92: qdrant.cloud.cluster.v1.ClusterService.ListClusters:output_type -> qdrant.cloud.cluster.v1.ListClustersResponse
-	22, // 93: qdrant.cloud.cluster.v1.ClusterService.GetCluster:output_type -> qdrant.cloud.cluster.v1.GetClusterResponse
-	24, // 94: qdrant.cloud.cluster.v1.ClusterService.GetClusterDownscaleRisk:output_type -> qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse
-	26, // 95: qdrant.cloud.cluster.v1.ClusterService.CreateCluster:output_type -> qdrant.cloud.cluster.v1.CreateClusterResponse
-	74, // 96: qdrant.cloud.cluster.v1.ClusterService.CreateClusterFromBackup:output_type -> qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse
-	28, // 97: qdrant.cloud.cluster.v1.ClusterService.UpdateCluster:output_type -> qdrant.cloud.cluster.v1.UpdateClusterResponse
-	30, // 98: qdrant.cloud.cluster.v1.ClusterService.DeleteCluster:output_type -> qdrant.cloud.cluster.v1.DeleteClusterResponse
-	32, // 99: qdrant.cloud.cluster.v1.ClusterService.RestartCluster:output_type -> qdrant.cloud.cluster.v1.RestartClusterResponse
-	34, // 100: qdrant.cloud.cluster.v1.ClusterService.SuspendCluster:output_type -> qdrant.cloud.cluster.v1.SuspendClusterResponse
-	36, // 101: qdrant.cloud.cluster.v1.ClusterService.UnsuspendCluster:output_type -> qdrant.cloud.cluster.v1.UnsuspendClusterResponse
-	38, // 102: qdrant.cloud.cluster.v1.ClusterService.EnableClusterJwtRbac:output_type -> qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse
-	40, // 103: qdrant.cloud.cluster.v1.ClusterService.SuggestClusterName:output_type -> qdrant.cloud.cluster.v1.SuggestClusterNameResponse
-	42, // 104: qdrant.cloud.cluster.v1.ClusterService.ListQdrantReleases:output_type -> qdrant.cloud.cluster.v1.ListQdrantReleasesResponse
-	44, // 105: qdrant.cloud.cluster.v1.ClusterService.GetQdrantRelease:output_type -> qdrant.cloud.cluster.v1.GetQdrantReleaseResponse
-	92, // [92:106] is the sub-list for method output_type
-	78, // [78:92] is the sub-list for method input_type
-	78, // [78:78] is the sub-list for extension type_name
-	78, // [78:78] is the sub-list for extension extendee
-	0,  // [0:78] is the sub-list for field type_name
+	55, // 35: qdrant.cloud.cluster.v1.DatabaseConfiguration.tls:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationTls
+	56, // 36: qdrant.cloud.cluster.v1.DatabaseConfiguration.inference:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationInference
+	58, // 37: qdrant.cloud.cluster.v1.DatabaseConfiguration.audit_logging:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging
+	51, // 38: qdrant.cloud.cluster.v1.DatabaseConfigurationCollection.vectors:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationCollectionVectors
+	53, // 39: qdrant.cloud.cluster.v1.DatabaseConfigurationStorage.performance:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformance
+	5,  // 40: qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformance.io_uring:type_name -> qdrant.cloud.cluster.v1.DatabaseConfigurationIoUringMode
+	80, // 41: qdrant.cloud.cluster.v1.DatabaseConfigurationService.api_key:type_name -> qdrant.cloud.common.v1.SecretKeyRef
+	80, // 42: qdrant.cloud.cluster.v1.DatabaseConfigurationService.read_only_api_key:type_name -> qdrant.cloud.common.v1.SecretKeyRef
+	80, // 43: qdrant.cloud.cluster.v1.DatabaseConfigurationTls.cert:type_name -> qdrant.cloud.common.v1.SecretKeyRef
+	80, // 44: qdrant.cloud.cluster.v1.DatabaseConfigurationTls.key:type_name -> qdrant.cloud.common.v1.SecretKeyRef
+	6,  // 45: qdrant.cloud.cluster.v1.DatabaseConfigurationAuditLogging.rotation:type_name -> qdrant.cloud.cluster.v1.AuditLogRotation
+	7,  // 46: qdrant.cloud.cluster.v1.Toleration.operator:type_name -> qdrant.cloud.cluster.v1.TolerationOperator
+	8,  // 47: qdrant.cloud.cluster.v1.Toleration.effect:type_name -> qdrant.cloud.cluster.v1.TolerationEffect
+	81, // 48: qdrant.cloud.cluster.v1.ClusterStorageConfiguration.storage_tier_type:type_name -> qdrant.cloud.common.v1.StorageTierType
+	77, // 49: qdrant.cloud.cluster.v1.ClusterState.restarted_at:type_name -> google.protobuf.Timestamp
+	9,  // 50: qdrant.cloud.cluster.v1.ClusterState.phase:type_name -> qdrant.cloud.cluster.v1.ClusterPhase
+	65, // 51: qdrant.cloud.cluster.v1.ClusterState.endpoint:type_name -> qdrant.cloud.cluster.v1.ClusterEndpoint
+	66, // 52: qdrant.cloud.cluster.v1.ClusterState.resources:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary
+	68, // 53: qdrant.cloud.cluster.v1.ClusterState.scalability_info:type_name -> qdrant.cloud.cluster.v1.ClusterScalabilityInfo
+	62, // 54: qdrant.cloud.cluster.v1.ClusterState.nodes:type_name -> qdrant.cloud.cluster.v1.ClusterNodeInfo
+	72, // 55: qdrant.cloud.cluster.v1.ClusterState.capabilities:type_name -> qdrant.cloud.cluster.v1.ClusterCapabilities
+	77, // 56: qdrant.cloud.cluster.v1.ClusterNodeInfo.started_at:type_name -> google.protobuf.Timestamp
+	65, // 57: qdrant.cloud.cluster.v1.ClusterNodeInfo.endpoint:type_name -> qdrant.cloud.cluster.v1.ClusterEndpoint
+	10, // 58: qdrant.cloud.cluster.v1.ClusterNodeInfo.state:type_name -> qdrant.cloud.cluster.v1.ClusterNodeState
+	64, // 59: qdrant.cloud.cluster.v1.ClusterNodeInfo.not_ready_info:type_name -> qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo
+	14, // 60: qdrant.cloud.cluster.v1.ClusterNodeAction.kind:type_name -> qdrant.cloud.cluster.v1.ClusterNodeActionKind
+	11, // 61: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.condition:type_name -> qdrant.cloud.cluster.v1.ClusterNodeNotReadyCondition
+	12, // 62: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.reason:type_name -> qdrant.cloud.cluster.v1.ClusterNodeNotReadyReason
+	13, // 63: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.event:type_name -> qdrant.cloud.cluster.v1.ClusterNodeTerminationEvent
+	63, // 64: qdrant.cloud.cluster.v1.ClusterNodeNotReadyInfo.actions:type_name -> qdrant.cloud.cluster.v1.ClusterNodeAction
+	67, // 65: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.disk:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
+	67, // 66: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.ram:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
+	67, // 67: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.cpu:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
+	67, // 68: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
+	67, // 69: qdrant.cloud.cluster.v1.ClusterNodeResourcesSummary.gpu_ram:type_name -> qdrant.cloud.cluster.v1.ClusterNodeResources
+	15, // 70: qdrant.cloud.cluster.v1.ClusterScalabilityInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterScalabilityStatus
+	16, // 71: qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo.resource:type_name -> qdrant.cloud.cluster.v1.ClusterDownscaleRiskResource
+	17, // 72: qdrant.cloud.cluster.v1.ClusterDownscaleRiskInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterDownscaleRiskStatus
+	18, // 73: qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportStatus
+	19, // 74: qdrant.cloud.cluster.v1.ClusterBackupSupportInfo.status:type_name -> qdrant.cloud.cluster.v1.ClusterBackupSupportStatus
+	70, // 75: qdrant.cloud.cluster.v1.ClusterCapabilities.disk_expansion:type_name -> qdrant.cloud.cluster.v1.ClusterDiskExpansionSupportInfo
+	71, // 76: qdrant.cloud.cluster.v1.ClusterCapabilities.backup:type_name -> qdrant.cloud.cluster.v1.ClusterBackupSupportInfo
+	68, // 77: qdrant.cloud.cluster.v1.ClusterCapabilities.scalability_info:type_name -> qdrant.cloud.cluster.v1.ClusterScalabilityInfo
+	46, // 78: qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse.cluster:type_name -> qdrant.cloud.cluster.v1.Cluster
+	20, // 79: qdrant.cloud.cluster.v1.ClusterService.ListClusters:input_type -> qdrant.cloud.cluster.v1.ListClustersRequest
+	22, // 80: qdrant.cloud.cluster.v1.ClusterService.GetCluster:input_type -> qdrant.cloud.cluster.v1.GetClusterRequest
+	24, // 81: qdrant.cloud.cluster.v1.ClusterService.GetClusterDownscaleRisk:input_type -> qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest
+	26, // 82: qdrant.cloud.cluster.v1.ClusterService.CreateCluster:input_type -> qdrant.cloud.cluster.v1.CreateClusterRequest
+	74, // 83: qdrant.cloud.cluster.v1.ClusterService.CreateClusterFromBackup:input_type -> qdrant.cloud.cluster.v1.CreateClusterFromBackupRequest
+	28, // 84: qdrant.cloud.cluster.v1.ClusterService.UpdateCluster:input_type -> qdrant.cloud.cluster.v1.UpdateClusterRequest
+	30, // 85: qdrant.cloud.cluster.v1.ClusterService.DeleteCluster:input_type -> qdrant.cloud.cluster.v1.DeleteClusterRequest
+	32, // 86: qdrant.cloud.cluster.v1.ClusterService.RestartCluster:input_type -> qdrant.cloud.cluster.v1.RestartClusterRequest
+	34, // 87: qdrant.cloud.cluster.v1.ClusterService.SuspendCluster:input_type -> qdrant.cloud.cluster.v1.SuspendClusterRequest
+	36, // 88: qdrant.cloud.cluster.v1.ClusterService.UnsuspendCluster:input_type -> qdrant.cloud.cluster.v1.UnsuspendClusterRequest
+	38, // 89: qdrant.cloud.cluster.v1.ClusterService.EnableClusterJwtRbac:input_type -> qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest
+	40, // 90: qdrant.cloud.cluster.v1.ClusterService.SuggestClusterName:input_type -> qdrant.cloud.cluster.v1.SuggestClusterNameRequest
+	42, // 91: qdrant.cloud.cluster.v1.ClusterService.ListQdrantReleases:input_type -> qdrant.cloud.cluster.v1.ListQdrantReleasesRequest
+	44, // 92: qdrant.cloud.cluster.v1.ClusterService.GetQdrantRelease:input_type -> qdrant.cloud.cluster.v1.GetQdrantReleaseRequest
+	21, // 93: qdrant.cloud.cluster.v1.ClusterService.ListClusters:output_type -> qdrant.cloud.cluster.v1.ListClustersResponse
+	23, // 94: qdrant.cloud.cluster.v1.ClusterService.GetCluster:output_type -> qdrant.cloud.cluster.v1.GetClusterResponse
+	25, // 95: qdrant.cloud.cluster.v1.ClusterService.GetClusterDownscaleRisk:output_type -> qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse
+	27, // 96: qdrant.cloud.cluster.v1.ClusterService.CreateCluster:output_type -> qdrant.cloud.cluster.v1.CreateClusterResponse
+	75, // 97: qdrant.cloud.cluster.v1.ClusterService.CreateClusterFromBackup:output_type -> qdrant.cloud.cluster.v1.CreateClusterFromBackupResponse
+	29, // 98: qdrant.cloud.cluster.v1.ClusterService.UpdateCluster:output_type -> qdrant.cloud.cluster.v1.UpdateClusterResponse
+	31, // 99: qdrant.cloud.cluster.v1.ClusterService.DeleteCluster:output_type -> qdrant.cloud.cluster.v1.DeleteClusterResponse
+	33, // 100: qdrant.cloud.cluster.v1.ClusterService.RestartCluster:output_type -> qdrant.cloud.cluster.v1.RestartClusterResponse
+	35, // 101: qdrant.cloud.cluster.v1.ClusterService.SuspendCluster:output_type -> qdrant.cloud.cluster.v1.SuspendClusterResponse
+	37, // 102: qdrant.cloud.cluster.v1.ClusterService.UnsuspendCluster:output_type -> qdrant.cloud.cluster.v1.UnsuspendClusterResponse
+	39, // 103: qdrant.cloud.cluster.v1.ClusterService.EnableClusterJwtRbac:output_type -> qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse
+	41, // 104: qdrant.cloud.cluster.v1.ClusterService.SuggestClusterName:output_type -> qdrant.cloud.cluster.v1.SuggestClusterNameResponse
+	43, // 105: qdrant.cloud.cluster.v1.ClusterService.ListQdrantReleases:output_type -> qdrant.cloud.cluster.v1.ListQdrantReleasesResponse
+	45, // 106: qdrant.cloud.cluster.v1.ClusterService.GetQdrantRelease:output_type -> qdrant.cloud.cluster.v1.GetQdrantReleaseResponse
+	93, // [93:107] is the sub-list for method output_type
+	79, // [79:93] is the sub-list for method input_type
+	79, // [79:79] is the sub-list for extension type_name
+	79, // [79:79] is the sub-list for extension extendee
+	0,  // [0:79] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_cluster_v1_cluster_proto_init() }
@@ -6024,7 +6101,7 @@ func file_qdrant_cloud_cluster_v1_cluster_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc), len(file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc)),
-			NumEnums:      19,
+			NumEnums:      20,
 			NumMessages:   56,
 			NumExtensions: 0,
 			NumServices:   1,
