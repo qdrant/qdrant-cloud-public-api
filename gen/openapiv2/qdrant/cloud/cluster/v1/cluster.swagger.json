@@ -780,6 +780,17 @@
       },
       "title": "AdditionalResources contains the information about additional resources"
     },
+    "v1AuditLogOutput": {
+      "type": "string",
+      "enum": [
+        "AUDIT_LOG_OUTPUT_UNSPECIFIED",
+        "AUDIT_LOG_OUTPUT_FILE",
+        "AUDIT_LOG_OUTPUT_STDOUT",
+        "AUDIT_LOG_OUTPUT_FILE_AND_STDOUT"
+      ],
+      "default": "AUDIT_LOG_OUTPUT_UNSPECIFIED",
+      "description": "AuditLogOutput defines where audit log entries are written.\n\n - AUDIT_LOG_OUTPUT_UNSPECIFIED: Unspecified output.\n - AUDIT_LOG_OUTPUT_FILE: Write audit log entries to a file on the cluster storage disk.\n - AUDIT_LOG_OUTPUT_STDOUT: Write audit log entries as JSON lines to the standard output of the container.\n - AUDIT_LOG_OUTPUT_FILE_AND_STDOUT: Write audit log entries to both file and standard output."
+    },
     "v1AuditLogRotation": {
       "type": "string",
       "enum": [
@@ -1633,6 +1644,10 @@
         "trustForwardedHeaders": {
           "type": "boolean",
           "description": "TrustForwardedHeaders specifies whether to use X-Forwarded-For header to\ndetermine the client address recorded in audit log entries.\nFor managed cloud clusters, this is always true and the field is ignored.\nFor hybrid cloud clusters, this is an optional field, default is false."
+        },
+        "output": {
+          "$ref": "#/definitions/v1AuditLogOutput",
+          "description": "Output specifies where audit log entries are written.\nOnly available for hybrid cloud clusters; managed cloud clusters accept only unset or AUDIT_LOG_OUTPUT_FILE.\nIf not set, audit log entries are written to file.\nRequires Qdrant v1.20.0 or later for any value other than AUDIT_LOG_OUTPUT_FILE.\nThe rotation and max_log_files settings only apply when the output includes file."
         }
       },
       "description": "Configuration for Audit logging for qdrant cluster."
