@@ -1994,6 +1994,17 @@ export declare type DatabaseConfigurationAuditLogging = Message<"qdrant.cloud.cl
    * @generated from field: optional bool trust_forwarded_headers = 4;
    */
   trustForwardedHeaders?: boolean | undefined;
+
+  /**
+   * Output specifies where audit log entries are written.
+   * Only available for hybrid cloud clusters; managed cloud clusters accept only unset or AUDIT_LOG_OUTPUT_FILE.
+   * If not set, audit log entries are written to file.
+   * Requires Qdrant v1.20.0 or later for any value other than AUDIT_LOG_OUTPUT_FILE.
+   * The rotation and max_log_files settings only apply when the output includes file.
+   *
+   * @generated from field: optional qdrant.cloud.cluster.v1.AuditLogOutput output = 5;
+   */
+  output?: AuditLogOutput | undefined;
 };
 
 export declare type DatabaseConfigurationAuditLoggingValid = DatabaseConfigurationAuditLogging;
@@ -3246,6 +3257,46 @@ export enum DatabaseConfigurationLogLevel {
  * Describes the enum qdrant.cloud.cluster.v1.DatabaseConfigurationLogLevel.
  */
 export declare const DatabaseConfigurationLogLevelSchema: GenEnum<DatabaseConfigurationLogLevel>;
+
+/**
+ * AuditLogOutput defines where audit log entries are written.
+ *
+ * @generated from enum qdrant.cloud.cluster.v1.AuditLogOutput
+ */
+export enum AuditLogOutput {
+  /**
+   * Unspecified output.
+   *
+   * @generated from enum value: AUDIT_LOG_OUTPUT_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Write audit log entries to a file on the cluster storage disk.
+   *
+   * @generated from enum value: AUDIT_LOG_OUTPUT_FILE = 1;
+   */
+  FILE = 1,
+
+  /**
+   * Write audit log entries as JSON lines to the standard output of the container.
+   *
+   * @generated from enum value: AUDIT_LOG_OUTPUT_STDOUT = 2;
+   */
+  STDOUT = 2,
+
+  /**
+   * Write audit log entries to both file and standard output.
+   *
+   * @generated from enum value: AUDIT_LOG_OUTPUT_FILE_AND_STDOUT = 3;
+   */
+  FILE_AND_STDOUT = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.cluster.v1.AuditLogOutput.
+ */
+export declare const AuditLogOutputSchema: GenEnum<AuditLogOutput>;
 
 /**
  * AuditLogRotation defines the rotation interval for audit logs.

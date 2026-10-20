@@ -57,6 +57,13 @@ class DatabaseConfigurationLogLevel(int, metaclass=_enum_type_wrapper.EnumTypeWr
     DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: _ClassVar[DatabaseConfigurationLogLevel]
     DATABASE_CONFIGURATION_LOG_LEVEL_OFF: _ClassVar[DatabaseConfigurationLogLevel]
 
+class AuditLogOutput(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    AUDIT_LOG_OUTPUT_UNSPECIFIED: _ClassVar[AuditLogOutput]
+    AUDIT_LOG_OUTPUT_FILE: _ClassVar[AuditLogOutput]
+    AUDIT_LOG_OUTPUT_STDOUT: _ClassVar[AuditLogOutput]
+    AUDIT_LOG_OUTPUT_FILE_AND_STDOUT: _ClassVar[AuditLogOutput]
+
 class AuditLogRotation(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     AUDIT_LOG_ROTATION_UNSPECIFIED: _ClassVar[AuditLogRotation]
@@ -193,6 +200,10 @@ DATABASE_CONFIGURATION_LOG_LEVEL_INFO: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_WARN: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_ERROR: DatabaseConfigurationLogLevel
 DATABASE_CONFIGURATION_LOG_LEVEL_OFF: DatabaseConfigurationLogLevel
+AUDIT_LOG_OUTPUT_UNSPECIFIED: AuditLogOutput
+AUDIT_LOG_OUTPUT_FILE: AuditLogOutput
+AUDIT_LOG_OUTPUT_STDOUT: AuditLogOutput
+AUDIT_LOG_OUTPUT_FILE_AND_STDOUT: AuditLogOutput
 AUDIT_LOG_ROTATION_UNSPECIFIED: AuditLogRotation
 AUDIT_LOG_ROTATION_DAILY: AuditLogRotation
 AUDIT_LOG_ROTATION_HOURLY: AuditLogRotation
@@ -621,16 +632,18 @@ class AdditionalResources(_message.Message):
     def __init__(self, disk: _Optional[int] = ...) -> None: ...
 
 class DatabaseConfigurationAuditLogging(_message.Message):
-    __slots__ = ("enabled", "rotation", "max_log_files", "trust_forwarded_headers")
+    __slots__ = ("enabled", "rotation", "max_log_files", "trust_forwarded_headers", "output")
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     ROTATION_FIELD_NUMBER: _ClassVar[int]
     MAX_LOG_FILES_FIELD_NUMBER: _ClassVar[int]
     TRUST_FORWARDED_HEADERS_FIELD_NUMBER: _ClassVar[int]
+    OUTPUT_FIELD_NUMBER: _ClassVar[int]
     enabled: bool
     rotation: AuditLogRotation
     max_log_files: int
     trust_forwarded_headers: bool
-    def __init__(self, enabled: _Optional[bool] = ..., rotation: _Optional[_Union[AuditLogRotation, str]] = ..., max_log_files: _Optional[int] = ..., trust_forwarded_headers: _Optional[bool] = ...) -> None: ...
+    output: AuditLogOutput
+    def __init__(self, enabled: _Optional[bool] = ..., rotation: _Optional[_Union[AuditLogRotation, str]] = ..., max_log_files: _Optional[int] = ..., trust_forwarded_headers: _Optional[bool] = ..., output: _Optional[_Union[AuditLogOutput, str]] = ...) -> None: ...
 
 class Toleration(_message.Message):
     __slots__ = ("key", "operator", "value", "effect", "toleration_seconds")
