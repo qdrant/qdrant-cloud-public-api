@@ -1066,9 +1066,9 @@ type Commitment struct {
 	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	// The timestamp when the term starts.
 	ActiveFrom *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=active_from,json=activeFrom,proto3" json:"active_from,omitempty"`
-	// The timestamp when the term ends.
+	// The timestamp when the term ends. The commitment no longer applies from this moment.
 	ActiveTo *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=active_to,json=activeTo,proto3" json:"active_to,omitempty"`
-	// Amount used against the commitment so far. Never more than `total_amount`.
+	// Amount used against the commitment so far.
 	UsedAmount float64 `protobuf:"fixed64,7,opt,name=used_amount,json=usedAmount,proto3" json:"used_amount,omitempty"`
 	// Amount remaining.
 	RemainingAmount float64 `protobuf:"fixed64,8,opt,name=remaining_amount,json=remainingAmount,proto3" json:"remaining_amount,omitempty"`
@@ -1473,7 +1473,7 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n" +
 	"\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n" +
 	"\x13INVOICE_STATUS_PAID\x10\x04\x12 \n" +
-	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\xaa\x11\n" +
+	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\xcc\x11\n" +
 	"\x0eBillingService\x12\xa6\x02\n" +
 	"\fListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"\xb8\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19O\n" +
 	">Lists all invoices for the account identified by the given ID.\x12\rList invoices\xaa\xb8\x19\x0f\n" +
@@ -1483,9 +1483,9 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x0elist_discounts\x82\xd3\xe4\x93\x021\x12//api/billing/v1/accounts/{account_id}/discounts\x12\xdb\x02\n" +
 	"\x13ListCreditContracts\x123.qdrant.cloud.billing.v1.ListCreditContractsRequest\x1a4.qdrant.cloud.billing.v1.ListCreditContractsResponse\"\xd8\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19_\n" +
 	"FLists all credit contracts for the account identified by the given ID.\x12\x15List credit contracts\xaa\xb8\x19\x17\n" +
-	"\x15list_credit_contracts\x82\xd3\xe4\x93\x028\x126/api/billing/v1/accounts/{account_id}/credit-contracts\x12\xf5\x02\n" +
-	"\x0fListCommitments\x12/.qdrant.cloud.billing.v1.ListCommitmentsRequest\x1a0.qdrant.cloud.billing.v1.ListCommitmentsResponse\"\xfe\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19\x8e\x01\n" +
-	"zLists the running postpaid commitments for the parent account identified by the given ID. Child accounts are not accepted.\x12\x10List commitments\xaa\xb8\x19\x12\n" +
+	"\x15list_credit_contracts\x82\xd3\xe4\x93\x028\x126/api/billing/v1/accounts/{account_id}/credit-contracts\x12\x97\x03\n" +
+	"\x0fListCommitments\x12/.qdrant.cloud.billing.v1.ListCommitmentsRequest\x1a0.qdrant.cloud.billing.v1.ListCommitmentsResponse\"\xa0\x02\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19\xb0\x01\n" +
+	"\x9b\x01Lists the postpaid commitments active today (started and not yet ended) for the parent account identified by the given ID. Child accounts are not accepted.\x12\x10List commitments\xaa\xb8\x19\x12\n" +
 	"\x10list_commitments\x82\xd3\xe4\x93\x023\x121/api/billing/v1/accounts/{account_id}/commitments\x12\xa0\x03\n" +
 	"\x17GetBillingAccountParent\x127.qdrant.cloud.billing.v1.GetBillingAccountParentRequest\x1a8.qdrant.cloud.billing.v1.GetBillingAccountParentResponse\"\x91\x02\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19\x9c\x01\n" +
 	"~Returns the parent billing account for the account identified by the given ID. Returns NOT_FOUND if the account has no parent.\x12\x1aGet billing account parent\xaa\xb8\x19\x1c\n" +

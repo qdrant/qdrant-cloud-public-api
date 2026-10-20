@@ -79,8 +79,8 @@ class BillingServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListCommitments(self, request, context):
-        """Lists the running postpaid commitments for the parent account identified by the given ID.
-        Child accounts are not accepted.
+        """Lists the postpaid commitments active today (started and not yet ended) for the parent
+        account identified by the given ID. Child accounts are not accepted.
         Required permissions:
         - read:payment_information
         """

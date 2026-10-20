@@ -878,14 +878,14 @@ export declare type Commitment = Message<"qdrant.cloud.billing.v1.Commitment"> &
   activeFrom?: Timestamp | undefined;
 
   /**
-   * The timestamp when the term ends.
+   * The timestamp when the term ends. The commitment no longer applies from this moment.
    *
    * @generated from field: google.protobuf.Timestamp active_to = 6;
    */
   activeTo?: Timestamp | undefined;
 
   /**
-   * Amount used against the commitment so far. Never more than `total_amount`.
+   * Amount used against the commitment so far.
    *
    * @generated from field: double used_amount = 7;
    */
@@ -942,14 +942,14 @@ export declare type CommitmentValid = Message<"qdrant.cloud.billing.v1.Commitmen
   activeFrom: Timestamp;
 
   /**
-   * The timestamp when the term ends.
+   * The timestamp when the term ends. The commitment no longer applies from this moment.
    *
    * @generated from field: google.protobuf.Timestamp active_to = 6;
    */
   activeTo: Timestamp;
 
   /**
-   * Amount used against the commitment so far. Never more than `total_amount`.
+   * Amount used against the commitment so far.
    *
    * @generated from field: double used_amount = 7;
    */
@@ -1156,8 +1156,8 @@ export declare const BillingService: GenService<{
     output: typeof ListCreditContractsResponseSchema;
   },
   /**
-   * Lists the running postpaid commitments for the parent account identified by the given ID.
-   * Child accounts are not accepted.
+   * Lists the postpaid commitments active today (started and not yet ended) for the parent
+   * account identified by the given ID. Child accounts are not accepted.
    * Required permissions:
    * - read:payment_information
    *
