@@ -959,6 +959,209 @@ func (x *CreditContract) GetOverageExempt() bool {
 	return false
 }
 
+// ListCommitmentsRequest is the request for the ListCommitments function
+type ListCommitmentsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The identifier of the organization's parent account (in GUID format).
+	// This is a required field.
+	AccountId     string `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCommitmentsRequest) Reset() {
+	*x = ListCommitmentsRequest{}
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCommitmentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCommitmentsRequest) ProtoMessage() {}
+
+func (x *ListCommitmentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCommitmentsRequest.ProtoReflect.Descriptor instead.
+func (*ListCommitmentsRequest) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListCommitmentsRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+// ListCommitmentsResponse is the response from the ListCommitments function
+type ListCommitmentsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The list of running commitments.
+	Items         []*Commitment `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCommitmentsResponse) Reset() {
+	*x = ListCommitmentsResponse{}
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCommitmentsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCommitmentsResponse) ProtoMessage() {}
+
+func (x *ListCommitmentsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCommitmentsResponse.ProtoReflect.Descriptor instead.
+func (*ListCommitmentsResponse) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ListCommitmentsResponse) GetItems() []*Commitment {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+// Commitment represents a postpaid commitment for an organization.
+type Commitment struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique identifier for the commitment.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The identifier of the parent account this commitment belongs to.
+	AccountId string `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	// The committed amount for the whole term.
+	TotalAmount float64 `protobuf:"fixed64,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	// The currency of the commitment amounts.
+	// Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	// The timestamp when the term starts.
+	ActiveFrom *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=active_from,json=activeFrom,proto3" json:"active_from,omitempty"`
+	// The timestamp when the term ends.
+	ActiveTo *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=active_to,json=activeTo,proto3" json:"active_to,omitempty"`
+	// Amount used against the commitment so far. Never more than `total_amount`.
+	UsedAmount float64 `protobuf:"fixed64,7,opt,name=used_amount,json=usedAmount,proto3" json:"used_amount,omitempty"`
+	// Amount remaining.
+	RemainingAmount float64 `protobuf:"fixed64,8,opt,name=remaining_amount,json=remainingAmount,proto3" json:"remaining_amount,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *Commitment) Reset() {
+	*x = Commitment{}
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Commitment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Commitment) ProtoMessage() {}
+
+func (x *Commitment) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Commitment.ProtoReflect.Descriptor instead.
+func (*Commitment) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *Commitment) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Commitment) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *Commitment) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *Commitment) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *Commitment) GetActiveFrom() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ActiveFrom
+	}
+	return nil
+}
+
+func (x *Commitment) GetActiveTo() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ActiveTo
+	}
+	return nil
+}
+
+func (x *Commitment) GetUsedAmount() float64 {
+	if x != nil {
+		return x.UsedAmount
+	}
+	return 0
+}
+
+func (x *Commitment) GetRemainingAmount() float64 {
+	if x != nil {
+		return x.RemainingAmount
+	}
+	return 0
+}
+
 // GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.
 type GetBillingAccountParentRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -971,7 +1174,7 @@ type GetBillingAccountParentRequest struct {
 
 func (x *GetBillingAccountParentRequest) Reset() {
 	*x = GetBillingAccountParentRequest{}
-	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -983,7 +1186,7 @@ func (x *GetBillingAccountParentRequest) String() string {
 func (*GetBillingAccountParentRequest) ProtoMessage() {}
 
 func (x *GetBillingAccountParentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -996,7 +1199,7 @@ func (x *GetBillingAccountParentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBillingAccountParentRequest.ProtoReflect.Descriptor instead.
 func (*GetBillingAccountParentRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetBillingAccountParentRequest) GetAccountId() string {
@@ -1017,7 +1220,7 @@ type GetBillingAccountParentResponse struct {
 
 func (x *GetBillingAccountParentResponse) Reset() {
 	*x = GetBillingAccountParentResponse{}
-	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1029,7 +1232,7 @@ func (x *GetBillingAccountParentResponse) String() string {
 func (*GetBillingAccountParentResponse) ProtoMessage() {}
 
 func (x *GetBillingAccountParentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1042,7 +1245,7 @@ func (x *GetBillingAccountParentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBillingAccountParentResponse.ProtoReflect.Descriptor instead.
 func (*GetBillingAccountParentResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{13}
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetBillingAccountParentResponse) GetParentAccountId() string {
@@ -1064,7 +1267,7 @@ type ListBillingAccountChildrenRequest struct {
 
 func (x *ListBillingAccountChildrenRequest) Reset() {
 	*x = ListBillingAccountChildrenRequest{}
-	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[14]
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1076,7 +1279,7 @@ func (x *ListBillingAccountChildrenRequest) String() string {
 func (*ListBillingAccountChildrenRequest) ProtoMessage() {}
 
 func (x *ListBillingAccountChildrenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[14]
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1089,7 +1292,7 @@ func (x *ListBillingAccountChildrenRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ListBillingAccountChildrenRequest.ProtoReflect.Descriptor instead.
 func (*ListBillingAccountChildrenRequest) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{14}
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListBillingAccountChildrenRequest) GetAccountId() string {
@@ -1110,7 +1313,7 @@ type ListBillingAccountChildrenResponse struct {
 
 func (x *ListBillingAccountChildrenResponse) Reset() {
 	*x = ListBillingAccountChildrenResponse{}
-	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[15]
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1122,7 +1325,7 @@ func (x *ListBillingAccountChildrenResponse) String() string {
 func (*ListBillingAccountChildrenResponse) ProtoMessage() {}
 
 func (x *ListBillingAccountChildrenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[15]
+	mi := &file_qdrant_cloud_billing_v1_billing_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1135,7 +1338,7 @@ func (x *ListBillingAccountChildrenResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ListBillingAccountChildrenResponse.ProtoReflect.Descriptor instead.
 func (*ListBillingAccountChildrenResponse) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{15}
+	return file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ListBillingAccountChildrenResponse) GetChildAccountIds() []string {
@@ -1233,7 +1436,26 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\fexhausted_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\vexhaustedAt\x123\n" +
 	"\rvoided_amount\x18\f \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\fvoidedAmount\x12%\n" +
 	"\x0eoverage_exempt\x18\r \x01(\bR\roverageExemptB\b\n" +
-	"\x06_notes\"I\n" +
+	"\x06_notes\"A\n" +
+	"\x16ListCommitmentsRequest\x12'\n" +
+	"\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"T\n" +
+	"\x17ListCommitmentsResponse\x129\n" +
+	"\x05items\x18\x01 \x03(\v2#.qdrant.cloud.billing.v1.CommitmentR\x05items\"\xa2\x03\n" +
+	"\n" +
+	"Commitment\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12'\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x121\n" +
+	"\ftotal_amount\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\vtotalAmount\x12-\n" +
+	"\bcurrency\x18\x04 \x01(\tB\x11\xbaH\x0er\f2\n" +
+	"^[A-Z]{3}$R\bcurrency\x12C\n" +
+	"\vactive_from\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\n" +
+	"activeFrom\x12?\n" +
+	"\tactive_to\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\bactiveTo\x12/\n" +
+	"\vused_amount\x18\a \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\n" +
+	"usedAmount\x129\n" +
+	"\x10remaining_amount\x18\b \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x0fremainingAmount\"I\n" +
 	"\x1eGetBillingAccountParentRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"W\n" +
@@ -1251,7 +1473,7 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x13INVOICE_STATUS_OPEN\x10\x02\x12\x17\n" +
 	"\x13INVOICE_STATUS_VOID\x10\x03\x12\x17\n" +
 	"\x13INVOICE_STATUS_PAID\x10\x04\x12 \n" +
-	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\xb2\x0e\n" +
+	"\x1cINVOICE_STATUS_UNCOLLECTIBLE\x10\x052\xaa\x11\n" +
 	"\x0eBillingService\x12\xa6\x02\n" +
 	"\fListInvoices\x12,.qdrant.cloud.billing.v1.ListInvoicesRequest\x1a-.qdrant.cloud.billing.v1.ListInvoicesResponse\"\xb8\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19O\n" +
 	">Lists all invoices for the account identified by the given ID.\x12\rList invoices\xaa\xb8\x19\x0f\n" +
@@ -1261,7 +1483,10 @@ const file_qdrant_cloud_billing_v1_billing_proto_rawDesc = "" +
 	"\x0elist_discounts\x82\xd3\xe4\x93\x021\x12//api/billing/v1/accounts/{account_id}/discounts\x12\xdb\x02\n" +
 	"\x13ListCreditContracts\x123.qdrant.cloud.billing.v1.ListCreditContractsRequest\x1a4.qdrant.cloud.billing.v1.ListCreditContractsResponse\"\xd8\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19_\n" +
 	"FLists all credit contracts for the account identified by the given ID.\x12\x15List credit contracts\xaa\xb8\x19\x17\n" +
-	"\x15list_credit_contracts\x82\xd3\xe4\x93\x028\x126/api/billing/v1/accounts/{account_id}/credit-contracts\x12\xa0\x03\n" +
+	"\x15list_credit_contracts\x82\xd3\xe4\x93\x028\x126/api/billing/v1/accounts/{account_id}/credit-contracts\x12\xf5\x02\n" +
+	"\x0fListCommitments\x12/.qdrant.cloud.billing.v1.ListCommitmentsRequest\x1a0.qdrant.cloud.billing.v1.ListCommitmentsResponse\"\xfe\x01\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19\x8e\x01\n" +
+	"zLists the running postpaid commitments for the parent account identified by the given ID. Child accounts are not accepted.\x12\x10List commitments\xaa\xb8\x19\x12\n" +
+	"\x10list_commitments\x82\xd3\xe4\x93\x023\x121/api/billing/v1/accounts/{account_id}/commitments\x12\xa0\x03\n" +
 	"\x17GetBillingAccountParent\x127.qdrant.cloud.billing.v1.GetBillingAccountParentRequest\x1a8.qdrant.cloud.billing.v1.GetBillingAccountParentResponse\"\x91\x02\x8a\xb5\x18\x18read:payment_information\x8a\xb2\x19\x9c\x01\n" +
 	"~Returns the parent billing account for the account identified by the given ID. Returns NOT_FOUND if the account has no parent.\x12\x1aGet billing account parent\xaa\xb8\x19\x1c\n" +
 	"\x1aget_billing_account_parent\x82\xd3\xe4\x93\x02.\x12,/api/billing/v1/accounts/{account_id}/parent\x12\xbd\x03\n" +
@@ -1283,7 +1508,7 @@ func file_qdrant_cloud_billing_v1_billing_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_billing_v1_billing_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_qdrant_cloud_billing_v1_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_qdrant_cloud_billing_v1_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_qdrant_cloud_billing_v1_billing_proto_goTypes = []any{
 	(InvoiceStatus)(0),                         // 0: qdrant.cloud.billing.v1.InvoiceStatus
 	(*ListInvoicesRequest)(nil),                // 1: qdrant.cloud.billing.v1.ListInvoicesRequest
@@ -1298,43 +1523,51 @@ var file_qdrant_cloud_billing_v1_billing_proto_goTypes = []any{
 	(*ListCreditContractsResponse)(nil),        // 10: qdrant.cloud.billing.v1.ListCreditContractsResponse
 	(*MonthlyCreditConsumption)(nil),           // 11: qdrant.cloud.billing.v1.MonthlyCreditConsumption
 	(*CreditContract)(nil),                     // 12: qdrant.cloud.billing.v1.CreditContract
-	(*GetBillingAccountParentRequest)(nil),     // 13: qdrant.cloud.billing.v1.GetBillingAccountParentRequest
-	(*GetBillingAccountParentResponse)(nil),    // 14: qdrant.cloud.billing.v1.GetBillingAccountParentResponse
-	(*ListBillingAccountChildrenRequest)(nil),  // 15: qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
-	(*ListBillingAccountChildrenResponse)(nil), // 16: qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
-	(*timestamppb.Timestamp)(nil),              // 17: google.protobuf.Timestamp
+	(*ListCommitmentsRequest)(nil),             // 13: qdrant.cloud.billing.v1.ListCommitmentsRequest
+	(*ListCommitmentsResponse)(nil),            // 14: qdrant.cloud.billing.v1.ListCommitmentsResponse
+	(*Commitment)(nil),                         // 15: qdrant.cloud.billing.v1.Commitment
+	(*GetBillingAccountParentRequest)(nil),     // 16: qdrant.cloud.billing.v1.GetBillingAccountParentRequest
+	(*GetBillingAccountParentResponse)(nil),    // 17: qdrant.cloud.billing.v1.GetBillingAccountParentResponse
+	(*ListBillingAccountChildrenRequest)(nil),  // 18: qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
+	(*ListBillingAccountChildrenResponse)(nil), // 19: qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
+	(*timestamppb.Timestamp)(nil),              // 20: google.protobuf.Timestamp
 }
 var file_qdrant_cloud_billing_v1_billing_proto_depIdxs = []int32{
 	5,  // 0: qdrant.cloud.billing.v1.ListInvoicesResponse.items:type_name -> qdrant.cloud.billing.v1.Invoice
 	6,  // 1: qdrant.cloud.billing.v1.ListDiscountsResponse.items:type_name -> qdrant.cloud.billing.v1.Discount
-	17, // 2: qdrant.cloud.billing.v1.Invoice.created_at:type_name -> google.protobuf.Timestamp
+	20, // 2: qdrant.cloud.billing.v1.Invoice.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 3: qdrant.cloud.billing.v1.Invoice.status:type_name -> qdrant.cloud.billing.v1.InvoiceStatus
-	17, // 4: qdrant.cloud.billing.v1.Invoice.paid_at:type_name -> google.protobuf.Timestamp
-	17, // 5: qdrant.cloud.billing.v1.Invoice.payment_failed_at:type_name -> google.protobuf.Timestamp
+	20, // 4: qdrant.cloud.billing.v1.Invoice.paid_at:type_name -> google.protobuf.Timestamp
+	20, // 5: qdrant.cloud.billing.v1.Invoice.payment_failed_at:type_name -> google.protobuf.Timestamp
 	7,  // 6: qdrant.cloud.billing.v1.Discount.percentage:type_name -> qdrant.cloud.billing.v1.DiscountPercentage
 	8,  // 7: qdrant.cloud.billing.v1.Discount.fixed:type_name -> qdrant.cloud.billing.v1.DiscountFixed
-	17, // 8: qdrant.cloud.billing.v1.Discount.valid_from:type_name -> google.protobuf.Timestamp
-	17, // 9: qdrant.cloud.billing.v1.Discount.valid_until:type_name -> google.protobuf.Timestamp
+	20, // 8: qdrant.cloud.billing.v1.Discount.valid_from:type_name -> google.protobuf.Timestamp
+	20, // 9: qdrant.cloud.billing.v1.Discount.valid_until:type_name -> google.protobuf.Timestamp
 	12, // 10: qdrant.cloud.billing.v1.ListCreditContractsResponse.items:type_name -> qdrant.cloud.billing.v1.CreditContract
 	11, // 11: qdrant.cloud.billing.v1.ListCreditContractsResponse.consumption_history:type_name -> qdrant.cloud.billing.v1.MonthlyCreditConsumption
-	17, // 12: qdrant.cloud.billing.v1.CreditContract.active_from:type_name -> google.protobuf.Timestamp
-	17, // 13: qdrant.cloud.billing.v1.CreditContract.active_to:type_name -> google.protobuf.Timestamp
-	17, // 14: qdrant.cloud.billing.v1.CreditContract.exhausted_at:type_name -> google.protobuf.Timestamp
-	1,  // 15: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
-	3,  // 16: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
-	9,  // 17: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:input_type -> qdrant.cloud.billing.v1.ListCreditContractsRequest
-	13, // 18: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:input_type -> qdrant.cloud.billing.v1.GetBillingAccountParentRequest
-	15, // 19: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:input_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
-	2,  // 20: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
-	4,  // 21: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
-	10, // 22: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:output_type -> qdrant.cloud.billing.v1.ListCreditContractsResponse
-	14, // 23: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:output_type -> qdrant.cloud.billing.v1.GetBillingAccountParentResponse
-	16, // 24: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:output_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
-	20, // [20:25] is the sub-list for method output_type
-	15, // [15:20] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	20, // 12: qdrant.cloud.billing.v1.CreditContract.active_from:type_name -> google.protobuf.Timestamp
+	20, // 13: qdrant.cloud.billing.v1.CreditContract.active_to:type_name -> google.protobuf.Timestamp
+	20, // 14: qdrant.cloud.billing.v1.CreditContract.exhausted_at:type_name -> google.protobuf.Timestamp
+	15, // 15: qdrant.cloud.billing.v1.ListCommitmentsResponse.items:type_name -> qdrant.cloud.billing.v1.Commitment
+	20, // 16: qdrant.cloud.billing.v1.Commitment.active_from:type_name -> google.protobuf.Timestamp
+	20, // 17: qdrant.cloud.billing.v1.Commitment.active_to:type_name -> google.protobuf.Timestamp
+	1,  // 18: qdrant.cloud.billing.v1.BillingService.ListInvoices:input_type -> qdrant.cloud.billing.v1.ListInvoicesRequest
+	3,  // 19: qdrant.cloud.billing.v1.BillingService.ListDiscounts:input_type -> qdrant.cloud.billing.v1.ListDiscountsRequest
+	9,  // 20: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:input_type -> qdrant.cloud.billing.v1.ListCreditContractsRequest
+	13, // 21: qdrant.cloud.billing.v1.BillingService.ListCommitments:input_type -> qdrant.cloud.billing.v1.ListCommitmentsRequest
+	16, // 22: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:input_type -> qdrant.cloud.billing.v1.GetBillingAccountParentRequest
+	18, // 23: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:input_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenRequest
+	2,  // 24: qdrant.cloud.billing.v1.BillingService.ListInvoices:output_type -> qdrant.cloud.billing.v1.ListInvoicesResponse
+	4,  // 25: qdrant.cloud.billing.v1.BillingService.ListDiscounts:output_type -> qdrant.cloud.billing.v1.ListDiscountsResponse
+	10, // 26: qdrant.cloud.billing.v1.BillingService.ListCreditContracts:output_type -> qdrant.cloud.billing.v1.ListCreditContractsResponse
+	14, // 27: qdrant.cloud.billing.v1.BillingService.ListCommitments:output_type -> qdrant.cloud.billing.v1.ListCommitmentsResponse
+	17, // 28: qdrant.cloud.billing.v1.BillingService.GetBillingAccountParent:output_type -> qdrant.cloud.billing.v1.GetBillingAccountParentResponse
+	19, // 29: qdrant.cloud.billing.v1.BillingService.ListBillingAccountChildren:output_type -> qdrant.cloud.billing.v1.ListBillingAccountChildrenResponse
+	24, // [24:30] is the sub-list for method output_type
+	18, // [18:24] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_billing_v1_billing_proto_init() }
@@ -1354,7 +1587,7 @@ func file_qdrant_cloud_billing_v1_billing_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_billing_v1_billing_proto_rawDesc), len(file_qdrant_cloud_billing_v1_billing_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   16,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

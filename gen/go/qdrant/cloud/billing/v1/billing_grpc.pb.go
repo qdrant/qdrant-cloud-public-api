@@ -22,6 +22,7 @@ const (
 	BillingService_ListInvoices_FullMethodName               = "/qdrant.cloud.billing.v1.BillingService/ListInvoices"
 	BillingService_ListDiscounts_FullMethodName              = "/qdrant.cloud.billing.v1.BillingService/ListDiscounts"
 	BillingService_ListCreditContracts_FullMethodName        = "/qdrant.cloud.billing.v1.BillingService/ListCreditContracts"
+	BillingService_ListCommitments_FullMethodName            = "/qdrant.cloud.billing.v1.BillingService/ListCommitments"
 	BillingService_GetBillingAccountParent_FullMethodName    = "/qdrant.cloud.billing.v1.BillingService/GetBillingAccountParent"
 	BillingService_ListBillingAccountChildren_FullMethodName = "/qdrant.cloud.billing.v1.BillingService/ListBillingAccountChildren"
 )
@@ -44,6 +45,11 @@ type BillingServiceClient interface {
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContracts(ctx context.Context, in *ListCreditContractsRequest, opts ...grpc.CallOption) (*ListCreditContractsResponse, error)
+	// Lists the running postpaid commitments for the parent account identified by the given ID.
+	// Child accounts are not accepted.
+	// Required permissions:
+	// - read:payment_information
+	ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error)
 	// Returns the parent billing account for the account identified by the given ID.
 	// Returns NOT_FOUND if the account has no parent.
 	// Required permissions:
@@ -94,6 +100,16 @@ func (c *billingServiceClient) ListCreditContracts(ctx context.Context, in *List
 	return out, nil
 }
 
+func (c *billingServiceClient) ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCommitmentsResponse)
+	err := c.cc.Invoke(ctx, BillingService_ListCommitments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingServiceClient) GetBillingAccountParent(ctx context.Context, in *GetBillingAccountParentRequest, opts ...grpc.CallOption) (*GetBillingAccountParentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetBillingAccountParentResponse)
@@ -132,6 +148,11 @@ type BillingServiceServer interface {
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContracts(context.Context, *ListCreditContractsRequest) (*ListCreditContractsResponse, error)
+	// Lists the running postpaid commitments for the parent account identified by the given ID.
+	// Child accounts are not accepted.
+	// Required permissions:
+	// - read:payment_information
+	ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error)
 	// Returns the parent billing account for the account identified by the given ID.
 	// Returns NOT_FOUND if the account has no parent.
 	// Required permissions:
@@ -160,6 +181,9 @@ func (UnimplementedBillingServiceServer) ListDiscounts(context.Context, *ListDis
 }
 func (UnimplementedBillingServiceServer) ListCreditContracts(context.Context, *ListCreditContractsRequest) (*ListCreditContractsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListCreditContracts not implemented")
+}
+func (UnimplementedBillingServiceServer) ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCommitments not implemented")
 }
 func (UnimplementedBillingServiceServer) GetBillingAccountParent(context.Context, *GetBillingAccountParentRequest) (*GetBillingAccountParentResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetBillingAccountParent not implemented")
@@ -242,6 +266,24 @@ func _BillingService_ListCreditContracts_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_ListCommitments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCommitmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).ListCommitments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_ListCommitments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).ListCommitments(ctx, req.(*ListCommitmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BillingService_GetBillingAccountParent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBillingAccountParentRequest)
 	if err := dec(in); err != nil {
@@ -296,6 +338,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCreditContracts",
 			Handler:    _BillingService_ListCreditContracts_Handler,
+		},
+		{
+			MethodName: "ListCommitments",
+			Handler:    _BillingService_ListCommitments_Handler,
 		},
 		{
 			MethodName: "GetBillingAccountParent",
