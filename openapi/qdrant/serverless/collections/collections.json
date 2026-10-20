@@ -235,10 +235,15 @@
                         "tokenizer": "word",
                         "lowercase": true,
                         "stopwords": "english",
+                        "scoring": true,
                         "stemmer": {
                           "type": "snowball",
                           "language": "english"
                         }
+                      },
+                      "offers.price": {
+                        "type": "float",
+                        "nested": "offers"
                       }
                     }
                   }
@@ -612,6 +617,9 @@
             "description": "Enable prefix matching (`match: { \"prefix\": ... }`) on this field. Default: false.",
             "type": "boolean",
             "default": false
+          },
+          "nested": {
+            "$ref": "#/components/schemas/NestedPayloadIndex"
           }
         }
       },
@@ -637,6 +645,9 @@
             "description": "Support range filters. Default: true.",
             "type": "boolean",
             "default": true
+          },
+          "nested": {
+            "$ref": "#/components/schemas/NestedPayloadIndex"
           }
         }
       },
@@ -652,6 +663,9 @@
             "enum": [
               "float"
             ]
+          },
+          "nested": {
+            "$ref": "#/components/schemas/NestedPayloadIndex"
           }
         }
       },
@@ -667,6 +681,9 @@
             "enum": [
               "uuid"
             ]
+          },
+          "nested": {
+            "$ref": "#/components/schemas/NestedPayloadIndex"
           }
         }
       },
@@ -682,6 +699,9 @@
             "enum": [
               "datetime"
             ]
+          },
+          "nested": {
+            "$ref": "#/components/schemas/NestedPayloadIndex"
           }
         }
       },
@@ -697,6 +717,9 @@
             "enum": [
               "geo"
             ]
+          },
+          "nested": {
+            "$ref": "#/components/schemas/NestedPayloadIndex"
           }
         }
       },
@@ -712,6 +735,9 @@
             "enum": [
               "bool"
             ]
+          },
+          "nested": {
+            "$ref": "#/components/schemas/NestedPayloadIndex"
           }
         }
       },
@@ -798,6 +824,42 @@
           }
         }
       },
+      "NestedPayloadIndex": {
+        "description": "Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].price`. The indexed field must be inside the array's elements. `is_empty` on the field matches a point when one of its elements lacks the field, and never a point without elements. Unset: disabled.",
+        "type": "string",
+        "minLength": 1,
+        "example": "offers"
+      },
+      "TextScoringType": {
+        "description": "How a text index ranks documents.",
+        "type": "string",
+        "enum": [
+          "bm25"
+        ]
+      },
+      "TextScoringParams": {
+        "description": "Parameters of ranking over a text index. The index records the length of each document, which BM25 normalizes by. `k` and `b` are set per query.",
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/TextScoringType"
+          }
+        }
+      },
+      "TextScoring": {
+        "description": "BM25 scoring for a text index: `true` for the default parameters, `false` to disable it, or the parameters themselves. Changing it rebuilds the index. Default: disabled.",
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/components/schemas/TextScoringParams"
+          }
+        ]
+      },
       "StemmingAlgorithm": {
         "description": "Stemming algorithm for a full-text index. Unset: no stemming.",
         "oneOf": [
@@ -864,6 +926,15 @@
           },
           "stemmer": {
             "$ref": "#/components/schemas/StemmingAlgorithm"
+          },
+          "scoring": {
+            "$ref": "#/components/schemas/TextScoring"
+          },
+          "nested": {
+            "description": "Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].title`. The field must be inside the array's elements. Every query on the field, not only nested filters, treats each element as its own document: a condition matches a point when a single element matches it, and BM25 scores elements separately. `is_empty` on the field matches a point when one of its elements lacks the field, and never a point without elements. Default: disabled.",
+            "type": "string",
+            "minLength": 1,
+            "example": "offers"
           }
         }
       },
@@ -968,10 +1039,15 @@
               "tokenizer": "word",
               "lowercase": true,
               "stopwords": "english",
+              "scoring": true,
               "stemmer": {
                 "type": "snowball",
                 "language": "english"
               }
+            },
+            "offers.price": {
+              "type": "float",
+              "nested": "offers"
             }
           }
         }
