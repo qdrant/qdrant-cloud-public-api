@@ -48,6 +48,38 @@
         ]
       }
     },
+    "/api/billing/v1/accounts/{accountId}/commitments": {
+      "get": {
+        "summary": "Lists the running postpaid commitments for the parent account identified by the given ID.\nChild accounts are not accepted.\nRequired permissions:\n- read:payment_information",
+        "operationId": "BillingService_ListCommitments",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCommitmentsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the organization's parent account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/api/billing/v1/accounts/{accountId}/credit-contracts": {
       "get": {
         "summary": "Lists all credit contracts for the account identified by the given ID.\nRequired permissions:\n- read:payment_information",
@@ -205,6 +237,49 @@
           }
         }
       }
+    },
+    "v1Commitment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the commitment."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the parent account this commitment belongs to."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "The committed amount for the whole term."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of the commitment amounts.\nMust be a 3-letter ISO 4217 currency code (e.g., \"USD\")."
+        },
+        "activeFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the term starts."
+        },
+        "activeTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the term ends."
+        },
+        "usedAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Amount used against the commitment so far. Never more than `total_amount`."
+        },
+        "remainingAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Amount remaining."
+        }
+      },
+      "description": "Commitment represents a postpaid commitment for an organization."
     },
     "v1CreditContract": {
       "type": "object",
@@ -412,6 +487,20 @@
         }
       },
       "description": "ListBillingAccountChildrenResponse contains the child accounts for the requested account."
+    },
+    "v1ListCommitmentsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Commitment"
+          },
+          "description": "The list of running commitments."
+        }
+      },
+      "title": "ListCommitmentsResponse is the response from the ListCommitments function"
     },
     "v1ListCreditContractsResponse": {
       "type": "object",

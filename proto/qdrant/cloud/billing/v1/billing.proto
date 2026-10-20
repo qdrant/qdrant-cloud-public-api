@@ -58,6 +58,21 @@ service BillingService {
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_credit_contracts"};
   }
+  // Lists the running postpaid commitments for the parent account identified by the given ID.
+  // Child accounts are not accepted.
+  // Required permissions:
+  // - read:payment_information
+  rpc ListCommitments(ListCommitmentsRequest) returns (ListCommitmentsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:payment_information";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/billing/v1/accounts/{account_id}/commitments"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Lists the running postpaid commitments for the parent account identified by the given ID. Child accounts are not accepted."
+      title: "List commitments"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_commitments"};
+  }
   // Returns the parent billing account for the account identified by the given ID.
   // Returns NOT_FOUND if the account has no parent.
   // Required permissions:
@@ -260,6 +275,41 @@ message CreditContract {
   // Independent of `exhausted_at` so a client can show the exhaustion date without implying the
   // customer owes anything for usage since then.
   bool overage_exempt = 13;
+}
+
+// ListCommitmentsRequest is the request for the ListCommitments function
+message ListCommitmentsRequest {
+  // The identifier of the organization's parent account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListCommitmentsResponse is the response from the ListCommitments function
+message ListCommitmentsResponse {
+  // The list of running commitments.
+  repeated Commitment items = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// Commitment represents a postpaid commitment for an organization.
+message Commitment {
+  // Unique identifier for the commitment.
+  string id = 1 [(buf.validate.field).string.min_len = 1];
+  // The identifier of the parent account this commitment belongs to.
+  string account_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The committed amount for the whole term.
+  double total_amount = 3 [(buf.validate.field).double.gt = 0.0];
+  // The currency of the commitment amounts.
+  // Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+  string currency = 4 [(buf.validate.field).string = {pattern: "^[A-Z]{3}$"}];
+  // The timestamp when the term starts.
+  google.protobuf.Timestamp active_from = 5 [(buf.validate.field).required = true];
+  // The timestamp when the term ends.
+  google.protobuf.Timestamp active_to = 6 [(buf.validate.field).required = true];
+  // Amount used against the commitment so far. Never more than `total_amount`.
+  double used_amount = 7 [(buf.validate.field).double.gte = 0.0];
+  // Amount remaining.
+  double remaining_amount = 8 [(buf.validate.field).double.gte = 0.0];
 }
 
 // GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.

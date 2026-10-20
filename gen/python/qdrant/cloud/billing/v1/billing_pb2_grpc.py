@@ -30,6 +30,11 @@ class BillingServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsResponse.FromString,
                 _registered_method=True)
+        self.ListCommitments = channel.unary_unary(
+                '/qdrant.cloud.billing.v1.BillingService/ListCommitments',
+                request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCommitmentsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCommitmentsResponse.FromString,
+                _registered_method=True)
         self.GetBillingAccountParent = channel.unary_unary(
                 '/qdrant.cloud.billing.v1.BillingService/GetBillingAccountParent',
                 request_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.GetBillingAccountParentRequest.SerializeToString,
@@ -66,6 +71,16 @@ class BillingServiceServicer(object):
 
     def ListCreditContracts(self, request, context):
         """Lists all credit contracts for the account identified by the given ID.
+        Required permissions:
+        - read:payment_information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListCommitments(self, request, context):
+        """Lists the running postpaid commitments for the parent account identified by the given ID.
+        Child accounts are not accepted.
         Required permissions:
         - read:payment_information
         """
@@ -110,6 +125,11 @@ def add_BillingServiceServicer_to_server(servicer, server):
                     servicer.ListCreditContracts,
                     request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsResponse.SerializeToString,
+            ),
+            'ListCommitments': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListCommitments,
+                    request_deserializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCommitmentsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCommitmentsResponse.SerializeToString,
             ),
             'GetBillingAccountParent': grpc.unary_unary_rpc_method_handler(
                     servicer.GetBillingAccountParent,
@@ -204,6 +224,33 @@ class BillingService(object):
             '/qdrant.cloud.billing.v1.BillingService/ListCreditContracts',
             qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsRequest.SerializeToString,
             qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCreditContractsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListCommitments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.billing.v1.BillingService/ListCommitments',
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCommitmentsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_billing_dot_v1_dot_billing__pb2.ListCommitmentsResponse.FromString,
             options,
             channel_credentials,
             insecure,

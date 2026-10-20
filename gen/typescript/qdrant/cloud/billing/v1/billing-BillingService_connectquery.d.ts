@@ -29,6 +29,15 @@ export const listDiscounts: typeof BillingService["method"]["listDiscounts"];
  */
 export const listCreditContracts: typeof BillingService["method"]["listCreditContracts"];
 /**
+ * Lists the running postpaid commitments for the parent account identified by the given ID.
+ * Child accounts are not accepted.
+ * Required permissions:
+ * - read:payment_information
+ *
+ * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCommitments
+ */
+export const listCommitments: typeof BillingService["method"]["listCommitments"];
+/**
  * Returns the parent billing account for the account identified by the given ID.
  * Returns NOT_FOUND if the account has no parent.
  * Required permissions:

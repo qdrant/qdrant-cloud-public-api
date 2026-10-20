@@ -779,6 +779,197 @@ export declare type CreditContractValid = Message<"qdrant.cloud.billing.v1.Credi
 export declare const CreditContractSchema: GenMessage<CreditContract, {validType: CreditContractValid}>;
 
 /**
+ * ListCommitmentsRequest is the request for the ListCommitments function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListCommitmentsRequest
+ */
+export declare type ListCommitmentsRequest = Message<"qdrant.cloud.billing.v1.ListCommitmentsRequest"> & {
+  /**
+   * The identifier of the organization's parent account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type ListCommitmentsRequestValid = ListCommitmentsRequest;
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListCommitmentsRequest.
+ * Use `create(ListCommitmentsRequestSchema)` to create a new message.
+ */
+export declare const ListCommitmentsRequestSchema: GenMessage<ListCommitmentsRequest, {validType: ListCommitmentsRequestValid}>;
+
+/**
+ * ListCommitmentsResponse is the response from the ListCommitments function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListCommitmentsResponse
+ */
+export declare type ListCommitmentsResponse = Message<"qdrant.cloud.billing.v1.ListCommitmentsResponse"> & {
+  /**
+   * The list of running commitments.
+   *
+   * @generated from field: repeated qdrant.cloud.billing.v1.Commitment items = 1;
+   */
+  items: Commitment[];
+};
+
+/**
+ * ListCommitmentsResponse is the response from the ListCommitments function
+ *
+ * @generated from message qdrant.cloud.billing.v1.ListCommitmentsResponse
+ */
+export declare type ListCommitmentsResponseValid = Message<"qdrant.cloud.billing.v1.ListCommitmentsResponse"> & {
+  /**
+   * The list of running commitments.
+   *
+   * @generated from field: repeated qdrant.cloud.billing.v1.Commitment items = 1;
+   */
+  items: CommitmentValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.ListCommitmentsResponse.
+ * Use `create(ListCommitmentsResponseSchema)` to create a new message.
+ */
+export declare const ListCommitmentsResponseSchema: GenMessage<ListCommitmentsResponse, {validType: ListCommitmentsResponseValid}>;
+
+/**
+ * Commitment represents a postpaid commitment for an organization.
+ *
+ * @generated from message qdrant.cloud.billing.v1.Commitment
+ */
+export declare type Commitment = Message<"qdrant.cloud.billing.v1.Commitment"> & {
+  /**
+   * Unique identifier for the commitment.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The identifier of the parent account this commitment belongs to.
+   *
+   * @generated from field: string account_id = 2;
+   */
+  accountId: string;
+
+  /**
+   * The committed amount for the whole term.
+   *
+   * @generated from field: double total_amount = 3;
+   */
+  totalAmount: number;
+
+  /**
+   * The currency of the commitment amounts.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 4;
+   */
+  currency: string;
+
+  /**
+   * The timestamp when the term starts.
+   *
+   * @generated from field: google.protobuf.Timestamp active_from = 5;
+   */
+  activeFrom?: Timestamp | undefined;
+
+  /**
+   * The timestamp when the term ends.
+   *
+   * @generated from field: google.protobuf.Timestamp active_to = 6;
+   */
+  activeTo?: Timestamp | undefined;
+
+  /**
+   * Amount used against the commitment so far. Never more than `total_amount`.
+   *
+   * @generated from field: double used_amount = 7;
+   */
+  usedAmount: number;
+
+  /**
+   * Amount remaining.
+   *
+   * @generated from field: double remaining_amount = 8;
+   */
+  remainingAmount: number;
+};
+
+/**
+ * Commitment represents a postpaid commitment for an organization.
+ *
+ * @generated from message qdrant.cloud.billing.v1.Commitment
+ */
+export declare type CommitmentValid = Message<"qdrant.cloud.billing.v1.Commitment"> & {
+  /**
+   * Unique identifier for the commitment.
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The identifier of the parent account this commitment belongs to.
+   *
+   * @generated from field: string account_id = 2;
+   */
+  accountId: string;
+
+  /**
+   * The committed amount for the whole term.
+   *
+   * @generated from field: double total_amount = 3;
+   */
+  totalAmount: number;
+
+  /**
+   * The currency of the commitment amounts.
+   * Must be a 3-letter ISO 4217 currency code (e.g., "USD").
+   *
+   * @generated from field: string currency = 4;
+   */
+  currency: string;
+
+  /**
+   * The timestamp when the term starts.
+   *
+   * @generated from field: google.protobuf.Timestamp active_from = 5;
+   */
+  activeFrom: Timestamp;
+
+  /**
+   * The timestamp when the term ends.
+   *
+   * @generated from field: google.protobuf.Timestamp active_to = 6;
+   */
+  activeTo: Timestamp;
+
+  /**
+   * Amount used against the commitment so far. Never more than `total_amount`.
+   *
+   * @generated from field: double used_amount = 7;
+   */
+  usedAmount: number;
+
+  /**
+   * Amount remaining.
+   *
+   * @generated from field: double remaining_amount = 8;
+   */
+  remainingAmount: number;
+};
+
+/**
+ * Describes the message qdrant.cloud.billing.v1.Commitment.
+ * Use `create(CommitmentSchema)` to create a new message.
+ */
+export declare const CommitmentSchema: GenMessage<Commitment, {validType: CommitmentValid}>;
+
+/**
  * GetBillingAccountParentRequest is the request for the GetBillingAccountParent RPC.
  *
  * @generated from message qdrant.cloud.billing.v1.GetBillingAccountParentRequest
@@ -963,6 +1154,19 @@ export declare const BillingService: GenService<{
     methodKind: "unary";
     input: typeof ListCreditContractsRequestSchema;
     output: typeof ListCreditContractsResponseSchema;
+  },
+  /**
+   * Lists the running postpaid commitments for the parent account identified by the given ID.
+   * Child accounts are not accepted.
+   * Required permissions:
+   * - read:payment_information
+   *
+   * @generated from rpc qdrant.cloud.billing.v1.BillingService.ListCommitments
+   */
+  listCommitments: {
+    methodKind: "unary";
+    input: typeof ListCommitmentsRequestSchema;
+    output: typeof ListCommitmentsResponseSchema;
   },
   /**
    * Returns the parent billing account for the account identified by the given ID.

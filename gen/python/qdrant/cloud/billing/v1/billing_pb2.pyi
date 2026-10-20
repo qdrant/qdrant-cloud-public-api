@@ -162,6 +162,38 @@ class CreditContract(_message.Message):
     overage_exempt: bool
     def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., total_amount: _Optional[float] = ..., currency: _Optional[str] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., notes: _Optional[str] = ..., used_amount: _Optional[float] = ..., remaining_amount: _Optional[float] = ..., exhausted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., voided_amount: _Optional[float] = ..., overage_exempt: _Optional[bool] = ...) -> None: ...
 
+class ListCommitmentsRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class ListCommitmentsResponse(_message.Message):
+    __slots__ = ("items",)
+    ITEMS_FIELD_NUMBER: _ClassVar[int]
+    items: _containers.RepeatedCompositeFieldContainer[Commitment]
+    def __init__(self, items: _Optional[_Iterable[_Union[Commitment, _Mapping]]] = ...) -> None: ...
+
+class Commitment(_message.Message):
+    __slots__ = ("id", "account_id", "total_amount", "currency", "active_from", "active_to", "used_amount", "remaining_amount")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    ACTIVE_FROM_FIELD_NUMBER: _ClassVar[int]
+    ACTIVE_TO_FIELD_NUMBER: _ClassVar[int]
+    USED_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    REMAINING_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    account_id: str
+    total_amount: float
+    currency: str
+    active_from: _timestamp_pb2.Timestamp
+    active_to: _timestamp_pb2.Timestamp
+    used_amount: float
+    remaining_amount: float
+    def __init__(self, id: _Optional[str] = ..., account_id: _Optional[str] = ..., total_amount: _Optional[float] = ..., currency: _Optional[str] = ..., active_from: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., active_to: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., used_amount: _Optional[float] = ..., remaining_amount: _Optional[float] = ...) -> None: ...
+
 class GetBillingAccountParentRequest(_message.Message):
     __slots__ = ("account_id",)
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
