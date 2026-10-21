@@ -3502,6 +3502,14 @@ type DatabaseConfigurationStoragePerformance struct {
 	// Enable async scorer which uses io_uring when rescoring.
 	// Only supported on Linux, must be enabled in your kernel.
 	// See: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant
+	//
+	// Deprecated: superseded from Qdrant v1.19.0 by the database's own async I/O
+	// mode, which takes precedence over this field wherever it is set. On managed
+	// cloud clusters the platform sets that mode from Qdrant v1.20.0, so this
+	// field stops having an effect there. Below Qdrant v1.19.0 it is still the
+	// only async I/O control and is honoured. Not scheduled for removal.
+	//
+	// Deprecated: Marked as deprecated in qdrant/cloud/cluster/v1/cluster.proto.
 	AsyncScorer   *bool `protobuf:"varint,2,opt,name=async_scorer,json=asyncScorer,proto3,oneof" json:"async_scorer,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3544,6 +3552,7 @@ func (x *DatabaseConfigurationStoragePerformance) GetOptimizerCpuBudget() int32 
 	return 0
 }
 
+// Deprecated: Marked as deprecated in qdrant/cloud/cluster/v1/cluster.proto.
 func (x *DatabaseConfigurationStoragePerformance) GetAsyncScorer() bool {
 	if x != nil && x.AsyncScorer != nil {
 		return *x.AsyncScorer
@@ -5471,10 +5480,10 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\b_on_disk\"\x97\x01\n" +
 	"\x1cDatabaseConfigurationStorage\x12g\n" +
 	"\vperformance\x18\x01 \x01(\v2@.qdrant.cloud.cluster.v1.DatabaseConfigurationStoragePerformanceH\x00R\vperformance\x88\x01\x01B\x0e\n" +
-	"\f_performance\"\xb2\x01\n" +
+	"\f_performance\"\xb6\x01\n" +
 	"'DatabaseConfigurationStoragePerformance\x125\n" +
-	"\x14optimizer_cpu_budget\x18\x01 \x01(\x05H\x00R\x12optimizerCpuBudget\x88\x01\x01\x12&\n" +
-	"\fasync_scorer\x18\x02 \x01(\bH\x01R\vasyncScorer\x88\x01\x01B\x17\n" +
+	"\x14optimizer_cpu_budget\x18\x01 \x01(\x05H\x00R\x12optimizerCpuBudget\x88\x01\x01\x12*\n" +
+	"\fasync_scorer\x18\x02 \x01(\bB\x02\x18\x01H\x01R\vasyncScorer\x88\x01\x01B\x17\n" +
 	"\x15_optimizer_cpu_budgetB\x0f\n" +
 	"\r_async_scorer\"\x93\x02\n" +
 	"\x1cDatabaseConfigurationService\x12B\n" +
