@@ -1806,7 +1806,14 @@ export declare type DatabaseConfigurationStoragePerformance = Message<"qdrant.cl
    * Only supported on Linux, must be enabled in your kernel.
    * See: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant
    *
-   * @generated from field: optional bool async_scorer = 2;
+   * Deprecated: superseded from Qdrant v1.19.0 by the database's own async I/O
+   * mode, which takes precedence over this field wherever it is set. On managed
+   * cloud clusters the platform sets that mode from Qdrant v1.20.0, so this
+   * field stops having an effect there. Below Qdrant v1.19.0 it is still the
+   * only async I/O control and is honoured. Not scheduled for removal.
+   *
+   * @generated from field: optional bool async_scorer = 2 [deprecated = true];
+   * @deprecated
    */
   asyncScorer?: boolean | undefined;
 };

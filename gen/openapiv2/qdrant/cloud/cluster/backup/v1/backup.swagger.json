@@ -1595,6 +1595,7 @@
         },
         "asyncScorer": {
           "type": "boolean",
+          "description": "Deprecated: superseded from Qdrant v1.19.0 by the database's own async I/O\nmode, which takes precedence over this field wherever it is set. On managed\ncloud clusters the platform sets that mode from Qdrant v1.20.0, so this\nfield stops having an effect there. Below Qdrant v1.19.0 it is still the\nonly async I/O control and is honoured. Not scheduled for removal.",
           "title": "Enable async scorer which uses io_uring when rescoring.\nOnly supported on Linux, must be enabled in your kernel.\nSee: https://qdrant.tech/articles/io_uring/#and-what-about-qdrant"
         }
       },
