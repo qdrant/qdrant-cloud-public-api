@@ -1,6 +1,6 @@
 module github.com/qdrant/qdrant-cloud-public-api
 
-go 1.26.6
+go 1.26.10
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260825204119-511051f7f437.2
