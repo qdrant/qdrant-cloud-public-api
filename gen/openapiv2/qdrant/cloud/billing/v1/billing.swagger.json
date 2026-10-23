@@ -50,7 +50,7 @@
     },
     "/api/billing/v1/accounts/{accountId}/commitments": {
       "get": {
-        "summary": "Lists the running postpaid commitments for the parent account identified by the given ID.\nChild accounts are not accepted.\nRequired permissions:\n- read:payment_information",
+        "summary": "Lists the postpaid commitments active today (started and not yet ended) for the parent\naccount identified by the given ID. Child accounts are not accepted.\nRequired permissions:\n- read:payment_information",
         "operationId": "BillingService_ListCommitments",
         "responses": {
           "200": {
@@ -266,12 +266,12 @@
         "activeTo": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the term ends."
+          "description": "The timestamp when the term ends. The commitment no longer applies from this moment."
         },
         "usedAmount": {
           "type": "number",
           "format": "double",
-          "description": "Amount used against the commitment so far. Never more than `total_amount`."
+          "description": "Amount used against the commitment so far."
         },
         "remainingAmount": {
           "type": "number",

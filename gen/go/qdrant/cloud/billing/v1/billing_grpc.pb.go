@@ -45,8 +45,8 @@ type BillingServiceClient interface {
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContracts(ctx context.Context, in *ListCreditContractsRequest, opts ...grpc.CallOption) (*ListCreditContractsResponse, error)
-	// Lists the running postpaid commitments for the parent account identified by the given ID.
-	// Child accounts are not accepted.
+	// Lists the postpaid commitments active today (started and not yet ended) for the parent
+	// account identified by the given ID. Child accounts are not accepted.
 	// Required permissions:
 	// - read:payment_information
 	ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error)
@@ -148,8 +148,8 @@ type BillingServiceServer interface {
 	// Required permissions:
 	// - read:payment_information
 	ListCreditContracts(context.Context, *ListCreditContractsRequest) (*ListCreditContractsResponse, error)
-	// Lists the running postpaid commitments for the parent account identified by the given ID.
-	// Child accounts are not accepted.
+	// Lists the postpaid commitments active today (started and not yet ended) for the parent
+	// account identified by the given ID. Child accounts are not accepted.
 	// Required permissions:
 	// - read:payment_information
 	ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error)
