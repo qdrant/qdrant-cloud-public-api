@@ -659,15 +659,15 @@
         },
         "searchRequests": {
           "$ref": "#/definitions/v1SpaceMetricOverview",
-          "description": "Overview of search request rates for the collection."
+          "description": "Overview of search request rates for the collection, in requests per second."
         },
         "writeRequests": {
           "$ref": "#/definitions/v1SpaceMetricOverview",
-          "description": "Overview of write (CRUD) request rates for the collection."
+          "description": "Overview of write (CRUD) request rates for the collection, in requests per second."
         },
         "searchLatency": {
           "$ref": "#/definitions/v1SpaceMetricOverview",
-          "description": "Overview of search latency for the collection."
+          "description": "Overview of search latency for the collection, in milliseconds."
         },
         "pointCount": {
           "type": "string",
@@ -700,7 +700,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of search request rates for the collection."
+          "description": "Timeseries of search request rates for the collection, in requests per second."
         },
         "writeRequests": {
           "type": "array",
@@ -708,7 +708,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of write (CRUD) request rates for the collection."
+          "description": "Timeseries of write (CRUD) request rates for the collection, in requests per second."
         },
         "searchLatency": {
           "type": "array",
@@ -716,7 +716,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of search latency for the collection."
+          "description": "Timeseries of search latency for the collection, in milliseconds."
         },
         "pointCount": {
           "type": "array",
@@ -758,7 +758,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Aggregated histogram values for the inference model."
+          "description": "Aggregated histogram values for the inference model, in tokens."
         }
       },
       "description": "SpaceInferenceModelMetrics groups histogram data for a single inference model."

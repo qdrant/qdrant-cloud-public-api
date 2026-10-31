@@ -23,12 +23,179 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// ChartType is how the series are drawn.
+type TimeseriesView_ChartType int32
+
+const (
+	// Unspecified; treated as CHART_TYPE_LINE.
+	TimeseriesView_CHART_TYPE_UNSPECIFIED TimeseriesView_ChartType = 0
+	// Lines, for rates and gauges.
+	TimeseriesView_CHART_TYPE_LINE TimeseriesView_ChartType = 1
+	// Filled areas, for rates and gauges.
+	TimeseriesView_CHART_TYPE_AREA TimeseriesView_ChartType = 2
+	// Bars, for per-interval totals such as inference tokens.
+	TimeseriesView_CHART_TYPE_BAR TimeseriesView_ChartType = 3
+)
+
+// Enum value maps for TimeseriesView_ChartType.
+var (
+	TimeseriesView_ChartType_name = map[int32]string{
+		0: "CHART_TYPE_UNSPECIFIED",
+		1: "CHART_TYPE_LINE",
+		2: "CHART_TYPE_AREA",
+		3: "CHART_TYPE_BAR",
+	}
+	TimeseriesView_ChartType_value = map[string]int32{
+		"CHART_TYPE_UNSPECIFIED": 0,
+		"CHART_TYPE_LINE":        1,
+		"CHART_TYPE_AREA":        2,
+		"CHART_TYPE_BAR":         3,
+	}
+)
+
+func (x TimeseriesView_ChartType) Enum() *TimeseriesView_ChartType {
+	p := new(TimeseriesView_ChartType)
+	*p = x
+	return p
+}
+
+func (x TimeseriesView_ChartType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TimeseriesView_ChartType) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_enumTypes[0].Descriptor()
+}
+
+func (TimeseriesView_ChartType) Type() protoreflect.EnumType {
+	return &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_enumTypes[0]
+}
+
+func (x TimeseriesView_ChartType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TimeseriesView_ChartType.Descriptor instead.
+func (TimeseriesView_ChartType) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{2, 0}
+}
+
+// Axis is the y-axis a series is plotted against.
+type TimeseriesSeries_Axis int32
+
+const (
+	// Unspecified; treated as AXIS_LEFT.
+	TimeseriesSeries_AXIS_UNSPECIFIED TimeseriesSeries_Axis = 0
+	// The left y-axis.
+	TimeseriesSeries_AXIS_LEFT TimeseriesSeries_Axis = 1
+	// The right y-axis.
+	TimeseriesSeries_AXIS_RIGHT TimeseriesSeries_Axis = 2
+)
+
+// Enum value maps for TimeseriesSeries_Axis.
+var (
+	TimeseriesSeries_Axis_name = map[int32]string{
+		0: "AXIS_UNSPECIFIED",
+		1: "AXIS_LEFT",
+		2: "AXIS_RIGHT",
+	}
+	TimeseriesSeries_Axis_value = map[string]int32{
+		"AXIS_UNSPECIFIED": 0,
+		"AXIS_LEFT":        1,
+		"AXIS_RIGHT":       2,
+	}
+)
+
+func (x TimeseriesSeries_Axis) Enum() *TimeseriesSeries_Axis {
+	p := new(TimeseriesSeries_Axis)
+	*p = x
+	return p
+}
+
+func (x TimeseriesSeries_Axis) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TimeseriesSeries_Axis) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_enumTypes[1].Descriptor()
+}
+
+func (TimeseriesSeries_Axis) Type() protoreflect.EnumType {
+	return &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_enumTypes[1]
+}
+
+func (x TimeseriesSeries_Axis) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TimeseriesSeries_Axis.Descriptor instead.
+func (TimeseriesSeries_Axis) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{3, 0}
+}
+
+// Subject is the kind of resource the dashboard is about.
+type HealthView_Subject int32
+
+const (
+	// Unspecified; not allowed.
+	HealthView_SUBJECT_UNSPECIFIED HealthView_Subject = 0
+	// A cluster (account_id and cluster_id).
+	HealthView_SUBJECT_CLUSTER HealthView_Subject = 1
+	// A serverless space (account_id and space_id).
+	HealthView_SUBJECT_SPACE HealthView_Subject = 2
+)
+
+// Enum value maps for HealthView_Subject.
+var (
+	HealthView_Subject_name = map[int32]string{
+		0: "SUBJECT_UNSPECIFIED",
+		1: "SUBJECT_CLUSTER",
+		2: "SUBJECT_SPACE",
+	}
+	HealthView_Subject_value = map[string]int32{
+		"SUBJECT_UNSPECIFIED": 0,
+		"SUBJECT_CLUSTER":     1,
+		"SUBJECT_SPACE":       2,
+	}
+)
+
+func (x HealthView_Subject) Enum() *HealthView_Subject {
+	p := new(HealthView_Subject)
+	*p = x
+	return p
+}
+
+func (x HealthView_Subject) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (HealthView_Subject) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_enumTypes[2].Descriptor()
+}
+
+func (HealthView_Subject) Type() protoreflect.EnumType {
+	return &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_enumTypes[2]
+}
+
+func (x HealthView_Subject) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use HealthView_Subject.Descriptor instead.
+func (HealthView_Subject) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{4, 0}
+}
+
 // McpToolOptions holds MCP-only tool metadata that does not apply to GraphQL
 // or other facades.
 type McpToolOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Stable MCP tool name: [A-Za-z0-9_-]+, unique across the public catalog.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Optional MCP Apps view, rendered next to the tool result by hosts that
+	// support the MCP Apps UI extension. Only allowed on
+	// read-only RPCs.
+	UiView        *McpUiView `protobuf:"bytes,2,opt,name=ui_view,json=uiView,proto3,oneof" json:"ui_view,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -70,6 +237,307 @@ func (x *McpToolOptions) GetName() string {
 	return ""
 }
 
+func (x *McpToolOptions) GetUiView() *McpUiView {
+	if x != nil {
+		return x.UiView
+	}
+	return nil
+}
+
+// McpUiView selects the MCP Apps view for a tool and configures it.
+type McpUiView struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The kind of view.
+	//
+	// Types that are valid to be assigned to Kind:
+	//
+	//	*McpUiView_Timeseries
+	//	*McpUiView_Health
+	Kind          isMcpUiView_Kind `protobuf_oneof:"kind"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *McpUiView) Reset() {
+	*x = McpUiView{}
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *McpUiView) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*McpUiView) ProtoMessage() {}
+
+func (x *McpUiView) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use McpUiView.ProtoReflect.Descriptor instead.
+func (*McpUiView) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *McpUiView) GetKind() isMcpUiView_Kind {
+	if x != nil {
+		return x.Kind
+	}
+	return nil
+}
+
+func (x *McpUiView) GetTimeseries() *TimeseriesView {
+	if x != nil {
+		if x, ok := x.Kind.(*McpUiView_Timeseries); ok {
+			return x.Timeseries
+		}
+	}
+	return nil
+}
+
+func (x *McpUiView) GetHealth() *HealthView {
+	if x != nil {
+		if x, ok := x.Kind.(*McpUiView_Health); ok {
+			return x.Health
+		}
+	}
+	return nil
+}
+
+type isMcpUiView_Kind interface {
+	isMcpUiView_Kind()
+}
+
+type McpUiView_Timeseries struct {
+	// A chart of repeated Metric series from the tool's response.
+	Timeseries *TimeseriesView `protobuf:"bytes,1,opt,name=timeseries,proto3,oneof"`
+}
+
+type McpUiView_Health struct {
+	// A small health dashboard for one cluster or space.
+	Health *HealthView `protobuf:"bytes,2,opt,name=health,proto3,oneof"`
+}
+
+func (*McpUiView_Timeseries) isMcpUiView_Kind() {}
+
+func (*McpUiView_Health) isMcpUiView_Kind() {}
+
+// TimeseriesView charts repeated Metric series from the tool's response.
+// Units come from the (qdrant.cloud.common.v1.unit) option on each series field.
+type TimeseriesView struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Chart title shown in the view (defaults to the facade title).
+	Title string `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	// Series to plot. Each field is a repeated Metric in the response (relative
+	// to group_path when set) and must carry (qdrant.cloud.common.v1.unit).
+	Series []*TimeseriesSeries `protobuf:"bytes,2,rep,name=series,proto3" json:"series,omitempty"`
+	// Optional JSON path (lowerCamelCase) to a repeated parent, for example
+	// "items", "nodes", or "models". Each element becomes one selectable group.
+	GroupPath string `protobuf:"bytes,3,opt,name=group_path,json=groupPath,proto3" json:"group_path,omitempty"`
+	// Field on the group element used as its label, for example "collectionName".
+	GroupLabelField string `protobuf:"bytes,4,opt,name=group_label_field,json=groupLabelField,proto3" json:"group_label_field,omitempty"`
+	// How values are drawn.
+	ChartType     TimeseriesView_ChartType `protobuf:"varint,5,opt,name=chart_type,json=chartType,proto3,enum=qdrant.cloud.facade.mcp.v1.TimeseriesView_ChartType" json:"chart_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeseriesView) Reset() {
+	*x = TimeseriesView{}
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeseriesView) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeseriesView) ProtoMessage() {}
+
+func (x *TimeseriesView) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeseriesView.ProtoReflect.Descriptor instead.
+func (*TimeseriesView) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *TimeseriesView) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *TimeseriesView) GetSeries() []*TimeseriesSeries {
+	if x != nil {
+		return x.Series
+	}
+	return nil
+}
+
+func (x *TimeseriesView) GetGroupPath() string {
+	if x != nil {
+		return x.GroupPath
+	}
+	return ""
+}
+
+func (x *TimeseriesView) GetGroupLabelField() string {
+	if x != nil {
+		return x.GroupLabelField
+	}
+	return ""
+}
+
+func (x *TimeseriesView) GetChartType() TimeseriesView_ChartType {
+	if x != nil {
+		return x.ChartType
+	}
+	return TimeseriesView_CHART_TYPE_UNSPECIFIED
+}
+
+// TimeseriesSeries is one plotted series of a TimeseriesView.
+type TimeseriesSeries struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// JSON name (lowerCamelCase) of the repeated Metric field, for example "rps".
+	Field string `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
+	// Legend label, for example "Requests".
+	Label string `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	// The y-axis to plot against.
+	Axis          TimeseriesSeries_Axis `protobuf:"varint,3,opt,name=axis,proto3,enum=qdrant.cloud.facade.mcp.v1.TimeseriesSeries_Axis" json:"axis,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeseriesSeries) Reset() {
+	*x = TimeseriesSeries{}
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeseriesSeries) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeseriesSeries) ProtoMessage() {}
+
+func (x *TimeseriesSeries) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeseriesSeries.ProtoReflect.Descriptor instead.
+func (*TimeseriesSeries) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TimeseriesSeries) GetField() string {
+	if x != nil {
+		return x.Field
+	}
+	return ""
+}
+
+func (x *TimeseriesSeries) GetLabel() string {
+	if x != nil {
+		return x.Label
+	}
+	return ""
+}
+
+func (x *TimeseriesSeries) GetAxis() TimeseriesSeries_Axis {
+	if x != nil {
+		return x.Axis
+	}
+	return TimeseriesSeries_AXIS_UNSPECIFIED
+}
+
+// HealthView is a small dashboard for one cluster or space. It renders the
+// annotated tool's result and loads the rest through the host by calling the
+// companion tools.
+type HealthView struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The kind of resource.
+	Subject HealthView_Subject `protobuf:"varint,1,opt,name=subject,proto3,enum=qdrant.cloud.facade.mcp.v1.HealthView_Subject" json:"subject,omitempty"`
+	// Read-only MCP tool names the view calls through the host to complete the
+	// dashboard. Each must take the same identifiers as the annotated tool.
+	CompanionTools []string `protobuf:"bytes,2,rep,name=companion_tools,json=companionTools,proto3" json:"companion_tools,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *HealthView) Reset() {
+	*x = HealthView{}
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HealthView) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HealthView) ProtoMessage() {}
+
+func (x *HealthView) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HealthView.ProtoReflect.Descriptor instead.
+func (*HealthView) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *HealthView) GetSubject() HealthView_Subject {
+	if x != nil {
+		return x.Subject
+	}
+	return HealthView_SUBJECT_UNSPECIFIED
+}
+
+func (x *HealthView) GetCompanionTools() []string {
+	if x != nil {
+		return x.CompanionTools
+	}
+	return nil
+}
+
 var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
@@ -94,9 +562,49 @@ var File_qdrant_cloud_facade_mcp_v1_mcp_options_proto protoreflect.FileDescripto
 
 const file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDesc = "" +
 	"\n" +
-	",qdrant/cloud/facade/mcp/v1/mcp_options.proto\x12\x1aqdrant.cloud.facade.mcp.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"?\n" +
+	",qdrant/cloud/facade/mcp/v1/mcp_options.proto\x12\x1aqdrant.cloud.facade.mcp.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\x90\x01\n" +
 	"\x0eMcpToolOptions\x12-\n" +
-	"\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x012\x10^[A-Za-z0-9_-]+$R\x04name:g\n" +
+	"\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x012\x10^[A-Za-z0-9_-]+$R\x04name\x12C\n" +
+	"\aui_view\x18\x02 \x01(\v2%.qdrant.cloud.facade.mcp.v1.McpUiViewH\x00R\x06uiView\x88\x01\x01B\n" +
+	"\n" +
+	"\b_ui_view\"\xaa\x01\n" +
+	"\tMcpUiView\x12L\n" +
+	"\n" +
+	"timeseries\x18\x01 \x01(\v2*.qdrant.cloud.facade.mcp.v1.TimeseriesViewH\x00R\n" +
+	"timeseries\x12@\n" +
+	"\x06health\x18\x02 \x01(\v2&.qdrant.cloud.facade.mcp.v1.HealthViewH\x00R\x06healthB\r\n" +
+	"\x04kind\x12\x05\xbaH\x02\b\x01\"\xdb\x03\n" +
+	"\x0eTimeseriesView\x12\x14\n" +
+	"\x05title\x18\x01 \x01(\tR\x05title\x12N\n" +
+	"\x06series\x18\x02 \x03(\v2,.qdrant.cloud.facade.mcp.v1.TimeseriesSeriesB\b\xbaH\x05\x92\x01\x02\b\x01R\x06series\x12R\n" +
+	"\n" +
+	"group_path\x18\x03 \x01(\tB3\xbaH0r.2,^([a-z][A-Za-z0-9]*(\\.[a-z][A-Za-z0-9]*)*)?$R\tgroupPath\x12I\n" +
+	"\x11group_label_field\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x182\x16^([a-z][A-Za-z0-9]*)?$R\x0fgroupLabelField\x12]\n" +
+	"\n" +
+	"chart_type\x18\x05 \x01(\x0e24.qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\tchartType\"e\n" +
+	"\tChartType\x12\x1a\n" +
+	"\x16CHART_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fCHART_TYPE_LINE\x10\x01\x12\x13\n" +
+	"\x0fCHART_TYPE_AREA\x10\x02\x12\x12\n" +
+	"\x0eCHART_TYPE_BAR\x10\x03\"\xf1\x01\n" +
+	"\x10TimeseriesSeries\x120\n" +
+	"\x05field\x18\x01 \x01(\tB\x1a\xbaH\x17r\x152\x13^[a-z][A-Za-z0-9]*$R\x05field\x12\x1d\n" +
+	"\x05label\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05label\x12O\n" +
+	"\x04axis\x18\x03 \x01(\x0e21.qdrant.cloud.facade.mcp.v1.TimeseriesSeries.AxisB\b\xbaH\x05\x82\x01\x02\x10\x01R\x04axis\";\n" +
+	"\x04Axis\x12\x14\n" +
+	"\x10AXIS_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\tAXIS_LEFT\x10\x01\x12\x0e\n" +
+	"\n" +
+	"AXIS_RIGHT\x10\x02\"\xf7\x01\n" +
+	"\n" +
+	"HealthView\x12T\n" +
+	"\asubject\x18\x01 \x01(\x0e2..qdrant.cloud.facade.mcp.v1.HealthView.SubjectB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\asubject\x12G\n" +
+	"\x0fcompanion_tools\x18\x02 \x03(\tB\x1e\xbaH\x1b\x92\x01\x18\b\x01\"\x14r\x122\x10^[A-Za-z0-9_-]+$R\x0ecompanionTools\"J\n" +
+	"\aSubject\x12\x17\n" +
+	"\x13SUBJECT_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fSUBJECT_CLUSTER\x10\x01\x12\x11\n" +
+	"\rSUBJECT_SPACE\x10\x02:g\n" +
 	"\bmcp_tool\x12\x1e.google.protobuf.MethodOptions\x18\x85\x97\x03 \x01(\v2*.qdrant.cloud.facade.mcp.v1.McpToolOptionsR\amcpToolB\x91\x02\n" +
 	"\x1ecom.qdrant.cloud.facade.mcp.v1B\x0fMcpOptionsProtoP\x01ZQgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1;mcpv1\xa2\x02\x04QCFM\xaa\x02\x1aQdrant.Cloud.Facade.Mcp.V1\xca\x02\x1aQdrant\\Cloud\\Facade\\Mcp\\V1\xe2\x02&Qdrant\\Cloud\\Facade\\Mcp\\V1\\GPBMetadata\xea\x02\x1eQdrant::Cloud::Facade::Mcp::V1b\x06proto3"
 
@@ -112,19 +620,34 @@ func file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescData
 }
 
-var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_goTypes = []any{
-	(*McpToolOptions)(nil),             // 0: qdrant.cloud.facade.mcp.v1.McpToolOptions
-	(*descriptorpb.MethodOptions)(nil), // 1: google.protobuf.MethodOptions
+	(TimeseriesView_ChartType)(0),      // 0: qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartType
+	(TimeseriesSeries_Axis)(0),         // 1: qdrant.cloud.facade.mcp.v1.TimeseriesSeries.Axis
+	(HealthView_Subject)(0),            // 2: qdrant.cloud.facade.mcp.v1.HealthView.Subject
+	(*McpToolOptions)(nil),             // 3: qdrant.cloud.facade.mcp.v1.McpToolOptions
+	(*McpUiView)(nil),                  // 4: qdrant.cloud.facade.mcp.v1.McpUiView
+	(*TimeseriesView)(nil),             // 5: qdrant.cloud.facade.mcp.v1.TimeseriesView
+	(*TimeseriesSeries)(nil),           // 6: qdrant.cloud.facade.mcp.v1.TimeseriesSeries
+	(*HealthView)(nil),                 // 7: qdrant.cloud.facade.mcp.v1.HealthView
+	(*descriptorpb.MethodOptions)(nil), // 8: google.protobuf.MethodOptions
 }
 var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_depIdxs = []int32{
-	1, // 0: qdrant.cloud.facade.mcp.v1.mcp_tool:extendee -> google.protobuf.MethodOptions
-	0, // 1: qdrant.cloud.facade.mcp.v1.mcp_tool:type_name -> qdrant.cloud.facade.mcp.v1.McpToolOptions
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	1, // [1:2] is the sub-list for extension type_name
-	0, // [0:1] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: qdrant.cloud.facade.mcp.v1.McpToolOptions.ui_view:type_name -> qdrant.cloud.facade.mcp.v1.McpUiView
+	5, // 1: qdrant.cloud.facade.mcp.v1.McpUiView.timeseries:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesView
+	7, // 2: qdrant.cloud.facade.mcp.v1.McpUiView.health:type_name -> qdrant.cloud.facade.mcp.v1.HealthView
+	6, // 3: qdrant.cloud.facade.mcp.v1.TimeseriesView.series:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesSeries
+	0, // 4: qdrant.cloud.facade.mcp.v1.TimeseriesView.chart_type:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartType
+	1, // 5: qdrant.cloud.facade.mcp.v1.TimeseriesSeries.axis:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesSeries.Axis
+	2, // 6: qdrant.cloud.facade.mcp.v1.HealthView.subject:type_name -> qdrant.cloud.facade.mcp.v1.HealthView.Subject
+	8, // 7: qdrant.cloud.facade.mcp.v1.mcp_tool:extendee -> google.protobuf.MethodOptions
+	3, // 8: qdrant.cloud.facade.mcp.v1.mcp_tool:type_name -> qdrant.cloud.facade.mcp.v1.McpToolOptions
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	8, // [8:9] is the sub-list for extension type_name
+	7, // [7:8] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_init() }
@@ -132,18 +655,24 @@ func file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_init() {
 	if File_qdrant_cloud_facade_mcp_v1_mcp_options_proto != nil {
 		return
 	}
+	file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[0].OneofWrappers = []any{}
+	file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[1].OneofWrappers = []any{
+		(*McpUiView_Timeseries)(nil),
+		(*McpUiView_Health)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDesc), len(file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   1,
+			NumEnums:      3,
+			NumMessages:   5,
 			NumExtensions: 1,
 			NumServices:   0,
 		},
 		GoTypes:           file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_goTypes,
 		DependencyIndexes: file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_depIdxs,
+		EnumInfos:         file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_enumTypes,
 		MessageInfos:      file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes,
 		ExtensionInfos:    file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_extTypes,
 	}.Build()

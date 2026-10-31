@@ -57,6 +57,12 @@ type FacadeMethodOptions struct {
 	// allow_mutation. Set allow_mutation only for true side-effecting RPCs that
 	// should appear when expose-mutations is enabled.
 	AllowMutation bool `protobuf:"varint,7,opt,name=allow_mutation,json=allowMutation,proto3" json:"allow_mutation,omitempty"`
+	// Optional Cloud Console page for the resource this RPC returns, as a page
+	// key published by the console (qdrant.cloud.internal_api.console.v1
+	// ConsoleService.GetDashboardUrlTemplates), for example "cluster.metrics".
+	// The page's URL template is filled in from request fields of the same
+	// name. Facades use it to add an "Open in Qdrant Cloud" link.
+	ConsolePage   *string `protobuf:"bytes,8,opt,name=console_page,json=consolePage,proto3,oneof" json:"console_page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -138,6 +144,13 @@ func (x *FacadeMethodOptions) GetAllowMutation() bool {
 		return x.AllowMutation
 	}
 	return false
+}
+
+func (x *FacadeMethodOptions) GetConsolePage() string {
+	if x != nil && x.ConsolePage != nil {
+		return *x.ConsolePage
+	}
+	return ""
 }
 
 // FacadeFieldOptions holds per-field hints for facade input schemas.
@@ -237,7 +250,7 @@ var File_qdrant_cloud_facade_v1_facade_options_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_facade_v1_facade_options_proto_rawDesc = "" +
 	"\n" +
-	"+qdrant/cloud/facade/v1/facade_options.proto\x12\x16qdrant.cloud.facade.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\xf1\x02\n" +
+	"+qdrant/cloud/facade/v1/facade_options.proto\x12\x16qdrant.cloud.facade.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\xd8\x03\n" +
 	"\x13FacadeMethodOptions\x12)\n" +
 	"\vdescription\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vdescription\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12-\n" +
@@ -245,10 +258,12 @@ const file_qdrant_cloud_facade_v1_facade_options_proto_rawDesc = "" +
 	"\x0eread_only_hint\x18\x04 \x01(\bH\x00R\freadOnlyHint\x88\x01\x01\x12.\n" +
 	"\x10destructive_hint\x18\x05 \x01(\bH\x01R\x0fdestructiveHint\x88\x01\x01\x12,\n" +
 	"\x0fidempotent_hint\x18\x06 \x01(\bH\x02R\x0eidempotentHint\x88\x01\x01\x12%\n" +
-	"\x0eallow_mutation\x18\a \x01(\bR\rallowMutationB\x11\n" +
+	"\x0eallow_mutation\x18\a \x01(\bR\rallowMutation\x12T\n" +
+	"\fconsole_page\x18\b \x01(\tB,\xbaH)r'2%^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$H\x03R\vconsolePage\x88\x01\x01B\x11\n" +
 	"\x0f_read_only_hintB\x13\n" +
 	"\x11_destructive_hintB\x12\n" +
-	"\x10_idempotent_hint\"J\n" +
+	"\x10_idempotent_hintB\x0f\n" +
+	"\r_console_page\"J\n" +
 	"\x12FacadeFieldOptions\x12\x12\n" +
 	"\x04hide\x18\x01 \x01(\bR\x04hide\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription:e\n" +
