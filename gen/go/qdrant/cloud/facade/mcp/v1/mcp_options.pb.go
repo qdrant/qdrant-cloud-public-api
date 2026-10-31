@@ -193,7 +193,7 @@ type McpToolOptions struct {
 	// Stable MCP tool name: [A-Za-z0-9_-]+, unique across the public catalog.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional MCP Apps view, rendered next to the tool result by hosts that
-	// support the io.modelcontextprotocol/ui extension. Only allowed on
+	// support the MCP Apps UI extension. Only allowed on
 	// read-only RPCs.
 	UiView        *McpUiView `protobuf:"bytes,2,opt,name=ui_view,json=uiView,proto3,oneof" json:"ui_view,omitempty"`
 	unknownFields protoimpl.UnknownFields

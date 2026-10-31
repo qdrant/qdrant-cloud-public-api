@@ -60,8 +60,8 @@ type FacadeMethodOptions struct {
 	// Optional Cloud Console page for the resource this RPC returns, as a page
 	// key published by the console (qdrant.cloud.internal_api.console.v1
 	// ConsoleService.GetDashboardUrlTemplates), for example "cluster.metrics".
-	// Placeholders in the page's URL template are filled from request fields of
-	// the same name. Facades use it to add an "Open in Qdrant Cloud" link.
+	// The page's URL template is filled in from request fields of the same
+	// name. Facades use it to add an "Open in Qdrant Cloud" link.
 	ConsolePage   *string `protobuf:"bytes,8,opt,name=console_page,json=consolePage,proto3,oneof" json:"console_page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

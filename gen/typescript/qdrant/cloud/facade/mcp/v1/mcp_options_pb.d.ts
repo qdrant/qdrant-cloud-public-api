@@ -27,7 +27,7 @@ export declare type McpToolOptions = Message<"qdrant.cloud.facade.mcp.v1.McpTool
 
   /**
    * Optional MCP Apps view, rendered next to the tool result by hosts that
-   * support the io.modelcontextprotocol/ui extension. Only allowed on
+   * support the MCP Apps UI extension. Only allowed on
    * read-only RPCs.
    *
    * @generated from field: optional qdrant.cloud.facade.mcp.v1.McpUiView ui_view = 2;
