@@ -83,6 +83,12 @@ message FacadeMethodOptions {
   // allow_mutation. Set allow_mutation only for true side-effecting RPCs that
   // should appear when expose-mutations is enabled.
   bool allow_mutation = 7;
+  // Optional Cloud Console page for the resource this RPC returns, as a page
+  // key published by the console (qdrant.cloud.internal_api.console.v1
+  // ConsoleService.GetDashboardUrlTemplates), for example "cluster.metrics".
+  // Placeholders in the page's URL template are filled from request fields of
+  // the same name. Facades use it to add an "Open in Qdrant Cloud" link.
+  optional string console_page = 8 [(buf.validate.field).string.pattern = "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"];
 }
 
 // FacadeFieldOptions holds per-field hints for facade input schemas.

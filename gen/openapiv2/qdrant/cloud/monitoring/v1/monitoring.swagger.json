@@ -503,7 +503,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Aggregated histogram values for the inference model."
+          "description": "Aggregated histogram values for the inference model, in tokens."
         }
       },
       "description": "ClusterInferenceModelMetrics groups histogram data for a single inference model."
@@ -535,35 +535,35 @@
         },
         "cpu": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
-          "description": "Overview of CPU usage."
+          "description": "Overview of CPU usage, in CPU cores."
         },
         "ram": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
-          "description": "Overview of RAM usage."
+          "description": "Overview of RAM usage, in bytes."
         },
         "ramCache": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
-          "description": "Overview of RAM cache usage."
+          "description": "Overview of RAM cache usage, in bytes."
         },
         "ramRss": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
-          "description": "Overview of RSS memory usage."
+          "description": "Overview of RSS memory usage, in bytes."
         },
         "ramQdrantRss": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
-          "description": "Overview of RSS memory usage by the Qdrant database."
+          "description": "Overview of RSS memory usage by the Qdrant database, in bytes."
         },
         "disk": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
-          "description": "Overview of disk usage."
+          "description": "Overview of disk usage, in bytes."
         },
         "gpu": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
-          "description": "optional Overview of GPU usage."
+          "description": "optional Overview of GPU usage, in percent (0-100)."
         },
         "gpuRam": {
           "$ref": "#/definitions/v1ClusterMetricOverview",
-          "description": "Overview of GPU RAM usage."
+          "description": "Overview of GPU RAM usage, in bytes."
         }
       },
       "description": "ClusterNodeMetrics contains metric overview for a node."
@@ -581,7 +581,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of CPU usage for the node."
+          "description": "Timeseries of CPU usage for the node, in CPU cores."
         },
         "ram": {
           "type": "array",
@@ -589,7 +589,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of RAM usage for the node."
+          "description": "Timeseries of RAM usage for the node, in bytes."
         },
         "ramCache": {
           "type": "array",
@@ -597,7 +597,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of RAM cache usage for the node."
+          "description": "Timeseries of RAM cache usage for the node, in bytes."
         },
         "ramRss": {
           "type": "array",
@@ -605,7 +605,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of RSS memory usage for the node."
+          "description": "Timeseries of RSS memory usage for the node, in bytes."
         },
         "ramQdrantRss": {
           "type": "array",
@@ -613,7 +613,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of RSS memory usage by the Qdrant database for the node."
+          "description": "Timeseries of RSS memory usage by the Qdrant database for the node, in bytes."
         },
         "disk": {
           "type": "array",
@@ -621,7 +621,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of disk usage for the node."
+          "description": "Timeseries of disk usage for the node, in bytes."
         },
         "gpu": {
           "type": "array",
@@ -629,7 +629,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of gpu usage for the node."
+          "description": "Timeseries of gpu usage for the node, in percent (0-100)."
         },
         "gpuRam": {
           "type": "array",
@@ -637,7 +637,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of GPU RAM usage for the node."
+          "description": "Timeseries of GPU RAM usage for the node, in bytes."
         }
       },
       "description": "ClusterNodeUsageMetrics defines per-node usage metrics."
@@ -707,7 +707,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of overall CPU usage across the cluster."
+          "description": "Timeseries of overall CPU usage across the cluster, in CPU cores."
         },
         "ram": {
           "type": "array",
@@ -715,7 +715,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of overall RAM usage across the cluster."
+          "description": "Timeseries of overall RAM usage across the cluster, in bytes."
         },
         "ramCache": {
           "type": "array",
@@ -723,7 +723,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of RAM used for cache across the cluster."
+          "description": "Timeseries of RAM used for cache across the cluster, in bytes."
         },
         "ramRss": {
           "type": "array",
@@ -731,7 +731,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of RSS memory used across the cluster."
+          "description": "Timeseries of RSS memory used across the cluster, in bytes."
         },
         "ramQdrantRss": {
           "type": "array",
@@ -739,7 +739,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of RSS memory used by the Qdrant database across the cluster."
+          "description": "Timeseries of RSS memory used by the Qdrant database across the cluster, in bytes."
         },
         "disk": {
           "type": "array",
@@ -747,7 +747,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of disk usage across the cluster."
+          "description": "Timeseries of disk usage across the cluster, in bytes."
         },
         "rps": {
           "type": "array",
@@ -763,7 +763,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of request latency across the cluster."
+          "description": "Timeseries of request latency across the cluster, in milliseconds."
         },
         "nodes": {
           "type": "array",
@@ -779,7 +779,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of overall GPU usage across the cluster."
+          "description": "Timeseries of overall GPU usage across the cluster, in percent (0-100)."
         },
         "gpuRam": {
           "type": "array",
@@ -787,7 +787,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of overall GPU RAM usage across the cluster."
+          "description": "Timeseries of overall GPU RAM usage across the cluster, in bytes."
         }
       },
       "title": "GetClusterUsageMetricsResponse is the response from the GetClusterUsageMetrics function"

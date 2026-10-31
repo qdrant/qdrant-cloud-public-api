@@ -82,6 +82,17 @@ export declare type FacadeMethodOptions = Message<"qdrant.cloud.facade.v1.Facade
    * @generated from field: bool allow_mutation = 7;
    */
   allowMutation: boolean;
+
+  /**
+   * Optional Cloud Console page for the resource this RPC returns, as a page
+   * key published by the console (qdrant.cloud.internal_api.console.v1
+   * ConsoleService.GetDashboardUrlTemplates), for example "cluster.metrics".
+   * Placeholders in the page's URL template are filled from request fields of
+   * the same name. Facades use it to add an "Open in Qdrant Cloud" link.
+   *
+   * @generated from field: optional string console_page = 8;
+   */
+  consolePage?: string | undefined;
 };
 
 export declare type FacadeMethodOptionsValid = FacadeMethodOptions;

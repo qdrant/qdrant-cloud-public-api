@@ -55,6 +55,7 @@ service SpaceService {
     option (qdrant.cloud.facade.v1.facade) = {
       description: "Get a single serverless space by ID."
       title: "Get serverless space"
+      console_page: "space.overview"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space"};
     option (qdrant.cloud.facade.graphql.v1.graphql) = {

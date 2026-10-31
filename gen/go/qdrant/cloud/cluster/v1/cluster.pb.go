@@ -5773,18 +5773,18 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1aClusterBackupSupportStatus\x12-\n" +
 	")CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED\x10\x01\x12/\n" +
-	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xbe4\n" +
+	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xd04\n" +
 	"\x0eClusterService\x12\x80\x03\n" +
 	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"\x92\x02\x8a\xb5\x18\rread:clusters\x8a\xb2\x19\x9e\x01\n" +
 	"\x8c\x01List all clusters in an account. Use list_accounts first if the account ID is unknown. Returns cluster IDs, names, state, and endpoint URLs.\x12\rList clusters\xaa\xb8\x19\x0f\n" +
 	"\rlist_clustersʾ\x19\x11\n" +
-	"\bclusters\x12\x05items\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xc4\x02\n" +
+	"\bclusters\x12\x05items\x82\xd3\xe4\x93\x020\x12./api/cluster/v1/accounts/{account_id}/clusters\x12\xd6\x02\n" +
 	"\n" +
-	"GetCluster\x12*.qdrant.cloud.cluster.v1.GetClusterRequest\x1a+.qdrant.cloud.cluster.v1.GetClusterResponse\"\xdc\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
+	"GetCluster\x12*.qdrant.cloud.cluster.v1.GetClusterRequest\x1a+.qdrant.cloud.cluster.v1.GetClusterResponse\"\xee\x01\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\x8a\xb2\x19A\n" +
-	"2Get a single cluster by account ID and cluster ID.\x12\vGet cluster\xaa\xb8\x19\r\n" +
+	"cluster_id\x8a\xb2\x19S\n" +
+	"2Get a single cluster by account ID and cluster ID.\x12\vGet clusterB\x10cluster.overview\xaa\xb8\x19\r\n" +
 	"\vget_clusterʾ\x19\x12\n" +
 	"\acluster\x12\acluster\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\x93\x05\n" +
 	"\x17GetClusterDownscaleRisk\x127.qdrant.cloud.cluster.v1.GetClusterDownscaleRiskRequest\x1a8.qdrant.cloud.cluster.v1.GetClusterDownscaleRiskResponse\"\x84\x04\x8a\xb5\x18\rread:clusters\xba\xb5\x18\x18\n" +
