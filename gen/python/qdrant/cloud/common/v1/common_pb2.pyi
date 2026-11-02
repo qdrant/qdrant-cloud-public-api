@@ -9,6 +9,17 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class Unit(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    UNIT_UNSPECIFIED: _ClassVar[Unit]
+    UNIT_COUNT: _ClassVar[Unit]
+    UNIT_BYTES: _ClassVar[Unit]
+    UNIT_MILLISECONDS: _ClassVar[Unit]
+    UNIT_REQUESTS_PER_SECOND: _ClassVar[Unit]
+    UNIT_CPU_CORES: _ClassVar[Unit]
+    UNIT_PERCENT: _ClassVar[Unit]
+    UNIT_TOKENS: _ClassVar[Unit]
+
 class ActorType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     ACTOR_TYPE_UNSPECIFIED: _ClassVar[ActorType]
@@ -53,6 +64,14 @@ class TopologySpreadConstraintWhenUnsatisfiable(int, metaclass=_enum_type_wrappe
     TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_UNSPECIFIED: _ClassVar[TopologySpreadConstraintWhenUnsatisfiable]
     TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_DO_NOT_SCHEDULE: _ClassVar[TopologySpreadConstraintWhenUnsatisfiable]
     TOPOLOGY_SPREAD_CONSTRAINT_WHEN_UNSATISFIABLE_SCHEDULE_ANYWAY: _ClassVar[TopologySpreadConstraintWhenUnsatisfiable]
+UNIT_UNSPECIFIED: Unit
+UNIT_COUNT: Unit
+UNIT_BYTES: Unit
+UNIT_MILLISECONDS: Unit
+UNIT_REQUESTS_PER_SECOND: Unit
+UNIT_CPU_CORES: Unit
+UNIT_PERCENT: Unit
+UNIT_TOKENS: Unit
 ACTOR_TYPE_UNSPECIFIED: ActorType
 ACTOR_TYPE_USER: ActorType
 ACTOR_TYPE_MANAGEMENT_KEY: ActorType
@@ -100,6 +119,8 @@ PATCH_SOURCE_FIELD_NUMBER: _ClassVar[int]
 patch_source: _descriptor.FieldDescriptor
 INTERACTIVE_ONLY_FIELD_NUMBER: _ClassVar[int]
 interactive_only: _descriptor.FieldDescriptor
+UNIT_FIELD_NUMBER: _ClassVar[int]
+unit: _descriptor.FieldDescriptor
 
 class PatchSource(_message.Message):
     __slots__ = ("get_method", "field_mapping", "response_resource_field", "request_resource_field")

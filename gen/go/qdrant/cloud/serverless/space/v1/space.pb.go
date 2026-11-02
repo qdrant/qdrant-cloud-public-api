@@ -1491,16 +1491,16 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
 	"\x17SPACE_STATE_PHASE_READY\x10\x02\x12\x1e\n" +
 	"\x1aSPACE_STATE_PHASE_DISABLED\x10\x03\x12\x1e\n" +
-	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xbe\x1a\n" +
+	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xce\x1a\n" +
 	"\fSpaceService\x12\xc9\x02\n" +
 	"\n" +
 	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"\xcf\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19V\n" +
 	"<List serverless spaces with optional filters and pagination.\x12\x16List serverless spaces\xaa\xb8\x19\r\n" +
 	"\vlist_spacesʾ\x19\x0f\n" +
-	"\x06spaces\x12\x05items\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/spaces\x12\xc9\x02\n" +
-	"\bGetSpace\x121.qdrant.cloud.serverless.space.v1.GetSpaceRequest\x1a2.qdrant.cloud.serverless.space.v1.GetSpaceResponse\"\xd5\x01\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
-	"\bspace_id\x12\bspace_id\x8a\xb2\x19<\n" +
-	"$Get a single serverless space by ID.\x12\x14Get serverless space\xaa\xb8\x19\v\n" +
+	"\x06spaces\x12\x05items\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/spaces\x12\xd9\x02\n" +
+	"\bGetSpace\x121.qdrant.cloud.serverless.space.v1.GetSpaceRequest\x1a2.qdrant.cloud.serverless.space.v1.GetSpaceResponse\"\xe5\x01\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
+	"\bspace_id\x12\bspace_id\x8a\xb2\x19L\n" +
+	"$Get a single serverless space by ID.\x12\x14Get serverless spaceB\x0espace.overview\xaa\xb8\x19\v\n" +
 	"\tget_spaceʾ\x19\x0e\n" +
 	"\x05space\x12\x05space\x82\xd3\xe4\x93\x02<\x12:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xbe\x04\n" +
 	"\vCreateSpace\x124.qdrant.cloud.serverless.space.v1.CreateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.CreateSpaceResponse\"\xc1\x03\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x18\n" +

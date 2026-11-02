@@ -31,10 +31,23 @@ service MonitoringService {
       field_expression: "cluster_id"
     };
     option (qdrant.cloud.facade.v1.facade) = {
-      description: "Gets the summary metrics of a cluster in the account identified by the given ID."
+      description: "Gets the summary metrics of a cluster in the account identified by the given ID. Use it to check the health of a cluster: current CPU, RAM, disk, and GPU usage per node against capacity."
       title: "Get cluster summary metrics"
+      console_page: "cluster.metrics"
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster_summary_metrics"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "get_cluster_summary_metrics"
+      ui_view: {
+        health: {
+          subject: SUBJECT_CLUSTER
+          companion_tools: [
+            "get_cluster",
+            "list_cluster_alerts",
+            "get_cluster_usage_metrics"
+          ]
+        }
+      }
+    };
   }
   // Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID.
   // Required permissions:
@@ -50,10 +63,51 @@ service MonitoringService {
       field_expression: "cluster_id"
     };
     option (qdrant.cloud.facade.v1.facade) = {
-      description: "Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID."
+      description: "Gets the detailed usage metrics (as timeseries) of a cluster in the account identified by the given ID. Use it for performance trends: request rate, latency, and CPU, RAM, and disk usage."
       title: "Get cluster usage metrics"
+      console_page: "cluster.metrics"
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster_usage_metrics"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "get_cluster_usage_metrics"
+      ui_view: {
+        timeseries: {
+          title: "Requests"
+          chart_type: CHART_TYPE_AREA
+          series: [
+            {
+              field: "latency"
+              label: "Latency"
+              axis: AXIS_LEFT
+            },
+            {
+              field: "rps"
+              label: "Requests"
+              axis: AXIS_RIGHT
+            },
+            {
+              field: "cpu"
+              label: "CPU"
+            },
+            {
+              field: "ram"
+              label: "RAM"
+            },
+            {
+              field: "disk"
+              label: "Disk"
+            },
+            {
+              field: "gpu"
+              label: "GPU"
+            },
+            {
+              field: "gpuRam"
+              label: "GPU RAM"
+            }
+          ]
+        }
+      }
+    };
   }
   // Gets the logs of a cluster in the account identified by the given ID.
   // Required permissions:
@@ -111,8 +165,25 @@ service MonitoringService {
     option (qdrant.cloud.facade.v1.facade) = {
       description: "Gets the inference token usage metrics for a cluster. Provide `inference_model_id` to limit the response to a single model."
       title: "Get cluster inference metrics"
+      console_page: "cluster.inference"
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster_inference_metrics"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "get_cluster_inference_metrics"
+      ui_view: {
+        timeseries: {
+          title: "Inference tokens"
+          chart_type: CHART_TYPE_BAR
+          group_path: "models"
+          group_label_field: "inferenceModelId"
+          series: [
+            {
+              field: "values"
+              label: "Tokens"
+            }
+          ]
+        }
+      }
+    };
   }
   // Lists the alerts for a cluster in the account identified by the given ID.
   // Sorted by last_firing_at (most recent first).
@@ -131,6 +202,7 @@ service MonitoringService {
     option (qdrant.cloud.facade.v1.facade) = {
       description: "Lists the alerts for a cluster in the account identified by the given ID. Sorted by last_firing_at (most recent first)."
       title: "List cluster alerts"
+      console_page: "cluster.alerts"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_cluster_alerts"};
   }
@@ -183,28 +255,28 @@ message GetClusterUsageMetricsRequest {
 
 // GetClusterUsageMetricsResponse is the response from the GetClusterUsageMetrics function
 message GetClusterUsageMetricsResponse {
-  // Timeseries of overall CPU usage across the cluster.
-  repeated Metric cpu = 1;
-  // Timeseries of overall RAM usage across the cluster.
-  repeated Metric ram = 2;
-  // Timeseries of RAM used for cache across the cluster.
-  repeated Metric ram_cache = 3;
-  // Timeseries of RSS memory used across the cluster.
-  repeated Metric ram_rss = 4;
-  // Timeseries of RSS memory used by the Qdrant database across the cluster.
-  repeated Metric ram_qdrant_rss = 5;
-  // Timeseries of disk usage across the cluster.
-  repeated Metric disk = 6;
+  // Timeseries of overall CPU usage across the cluster, in CPU cores.
+  repeated Metric cpu = 1 [(common.v1.unit) = UNIT_CPU_CORES];
+  // Timeseries of overall RAM usage across the cluster, in bytes.
+  repeated Metric ram = 2 [(common.v1.unit) = UNIT_BYTES];
+  // Timeseries of RAM used for cache across the cluster, in bytes.
+  repeated Metric ram_cache = 3 [(common.v1.unit) = UNIT_BYTES];
+  // Timeseries of RSS memory used across the cluster, in bytes.
+  repeated Metric ram_rss = 4 [(common.v1.unit) = UNIT_BYTES];
+  // Timeseries of RSS memory used by the Qdrant database across the cluster, in bytes.
+  repeated Metric ram_qdrant_rss = 5 [(common.v1.unit) = UNIT_BYTES];
+  // Timeseries of disk usage across the cluster, in bytes.
+  repeated Metric disk = 6 [(common.v1.unit) = UNIT_BYTES];
   // Timeseries of requests per second (RPS) across the cluster.
-  repeated Metric rps = 7;
-  // Timeseries of request latency across the cluster.
-  repeated Metric latency = 8;
+  repeated Metric rps = 7 [(common.v1.unit) = UNIT_REQUESTS_PER_SECOND];
+  // Timeseries of request latency across the cluster, in milliseconds.
+  repeated Metric latency = 8 [(common.v1.unit) = UNIT_MILLISECONDS];
   // Per-node metrics.
   repeated ClusterNodeUsageMetrics nodes = 9;
-  // Timeseries of overall GPU usage across the cluster.
-  repeated Metric gpu = 10;
-  // Timeseries of overall GPU RAM usage across the cluster.
-  repeated Metric gpu_ram = 11;
+  // Timeseries of overall GPU usage across the cluster, in percent (0-100).
+  repeated Metric gpu = 10 [(common.v1.unit) = UNIT_PERCENT];
+  // Timeseries of overall GPU RAM usage across the cluster, in bytes.
+  repeated Metric gpu_ram = 11 [(common.v1.unit) = UNIT_BYTES];
 }
 
 // GetClusterLogsRequest is the request for the GetClusterLogs function
@@ -308,30 +380,54 @@ message GetClusterInferenceMetricsResponse {
 message ClusterInferenceModelMetrics {
   // Identifier of the inference model.
   string inference_model_id = 1 [(buf.validate.field).string.min_len = 1];
-  // Aggregated histogram values for the inference model.
-  repeated Metric values = 2;
+  // Aggregated histogram values for the inference model, in tokens.
+  repeated Metric values = 2 [(common.v1.unit) = UNIT_TOKENS];
 }
 
 // ClusterNodeMetrics contains metric overview for a node.
 message ClusterNodeMetrics {
   // Unique identifier of the node.
   string node_id = 1 [(buf.validate.field).string.min_len = 1];
-  // Overview of CPU usage.
-  ClusterMetricOverview cpu = 2 [(buf.validate.field).required = true];
-  // Overview of RAM usage.
-  ClusterMetricOverview ram = 3 [(buf.validate.field).required = true];
-  // Overview of RAM cache usage.
-  ClusterMetricOverview ram_cache = 4 [(buf.validate.field).required = true];
-  // Overview of RSS memory usage.
-  ClusterMetricOverview ram_rss = 5 [(buf.validate.field).required = true];
-  // Overview of RSS memory usage by the Qdrant database.
-  ClusterMetricOverview ram_qdrant_rss = 6 [(buf.validate.field).required = true];
-  // Overview of disk usage.
-  ClusterMetricOverview disk = 7 [(buf.validate.field).required = true];
-  // optional Overview of GPU usage.
-  optional ClusterMetricOverview gpu = 8 [(buf.validate.field).required = false];
-  // Overview of GPU RAM usage.
-  optional ClusterMetricOverview gpu_ram = 9 [(buf.validate.field).required = false];
+  // Overview of CPU usage, in CPU cores.
+  ClusterMetricOverview cpu = 2 [
+    (buf.validate.field).required = true,
+    (common.v1.unit) = UNIT_CPU_CORES
+  ];
+  // Overview of RAM usage, in bytes.
+  ClusterMetricOverview ram = 3 [
+    (buf.validate.field).required = true,
+    (common.v1.unit) = UNIT_BYTES
+  ];
+  // Overview of RAM cache usage, in bytes.
+  ClusterMetricOverview ram_cache = 4 [
+    (buf.validate.field).required = true,
+    (common.v1.unit) = UNIT_BYTES
+  ];
+  // Overview of RSS memory usage, in bytes.
+  ClusterMetricOverview ram_rss = 5 [
+    (buf.validate.field).required = true,
+    (common.v1.unit) = UNIT_BYTES
+  ];
+  // Overview of RSS memory usage by the Qdrant database, in bytes.
+  ClusterMetricOverview ram_qdrant_rss = 6 [
+    (buf.validate.field).required = true,
+    (common.v1.unit) = UNIT_BYTES
+  ];
+  // Overview of disk usage, in bytes.
+  ClusterMetricOverview disk = 7 [
+    (buf.validate.field).required = true,
+    (common.v1.unit) = UNIT_BYTES
+  ];
+  // optional Overview of GPU usage, in percent (0-100).
+  optional ClusterMetricOverview gpu = 8 [
+    (buf.validate.field).required = false,
+    (common.v1.unit) = UNIT_PERCENT
+  ];
+  // Overview of GPU RAM usage, in bytes.
+  optional ClusterMetricOverview gpu_ram = 9 [
+    (buf.validate.field).required = false,
+    (common.v1.unit) = UNIT_BYTES
+  ];
 }
 
 // ClusterMetricOverview contains both the average values of a metric over
@@ -363,22 +459,22 @@ message ResourceValue {
 message ClusterNodeUsageMetrics {
   // Unique identifier of the node.
   string node_id = 1 [(buf.validate.field).string.min_len = 1];
-  // Timeseries of CPU usage for the node.
-  repeated Metric cpu = 2;
-  // Timeseries of RAM usage for the node.
-  repeated Metric ram = 3;
-  // Timeseries of RAM cache usage for the node.
-  repeated Metric ram_cache = 4;
-  // Timeseries of RSS memory usage for the node.
-  repeated Metric ram_rss = 5;
-  // Timeseries of RSS memory usage by the Qdrant database for the node.
-  repeated Metric ram_qdrant_rss = 6;
-  // Timeseries of disk usage for the node.
-  repeated Metric disk = 7;
-  // Timeseries of gpu usage for the node.
-  repeated Metric gpu = 8;
-  // Timeseries of GPU RAM usage for the node.
-  repeated Metric gpu_ram = 9;
+  // Timeseries of CPU usage for the node, in CPU cores.
+  repeated Metric cpu = 2 [(common.v1.unit) = UNIT_CPU_CORES];
+  // Timeseries of RAM usage for the node, in bytes.
+  repeated Metric ram = 3 [(common.v1.unit) = UNIT_BYTES];
+  // Timeseries of RAM cache usage for the node, in bytes.
+  repeated Metric ram_cache = 4 [(common.v1.unit) = UNIT_BYTES];
+  // Timeseries of RSS memory usage for the node, in bytes.
+  repeated Metric ram_rss = 5 [(common.v1.unit) = UNIT_BYTES];
+  // Timeseries of RSS memory usage by the Qdrant database for the node, in bytes.
+  repeated Metric ram_qdrant_rss = 6 [(common.v1.unit) = UNIT_BYTES];
+  // Timeseries of disk usage for the node, in bytes.
+  repeated Metric disk = 7 [(common.v1.unit) = UNIT_BYTES];
+  // Timeseries of gpu usage for the node, in percent (0-100).
+  repeated Metric gpu = 8 [(common.v1.unit) = UNIT_PERCENT];
+  // Timeseries of GPU RAM usage for the node, in bytes.
+  repeated Metric gpu_ram = 9 [(common.v1.unit) = UNIT_BYTES];
 }
 
 // A single metric data point.

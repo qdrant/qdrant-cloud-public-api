@@ -36,10 +36,23 @@ service MonitoringService {
       field_expression: "space_id"
     };
     option (qdrant.cloud.facade.v1.facade) = {
-      description: "Get per-collection summary metrics for a serverless space."
+      description: "Get per-collection summary metrics for a serverless space. Use it to check the health of a space: request rates, search latency, and storage and searcher workers against the quota."
       title: "Get space summary metrics"
+      console_page: "space.metrics"
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space_summary_metrics"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "get_space_summary_metrics"
+      ui_view: {
+        health: {
+          subject: SUBJECT_SPACE
+          companion_tools: [
+            "get_space",
+            "list_space_alerts",
+            "get_space_usage_metrics"
+          ]
+        }
+      }
+    };
     option (qdrant.cloud.facade.graphql.v1.graphql) = {
       field: "spaceSummaryMetrics"
       response_path: "items"
@@ -79,8 +92,48 @@ service MonitoringService {
     option (qdrant.cloud.facade.v1.facade) = {
       description: "Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID. Metrics are aggregated per collection and may be paginated (a space can have many collections)."
       title: "Get space usage metrics"
+      console_page: "space.metrics"
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space_usage_metrics"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "get_space_usage_metrics"
+      ui_view: {
+        timeseries: {
+          title: "Requests"
+          chart_type: CHART_TYPE_AREA
+          group_path: "items"
+          group_label_field: "collectionName"
+          series: [
+            {
+              field: "searchLatency"
+              label: "Search latency"
+              axis: AXIS_LEFT
+            },
+            {
+              field: "searchRequests"
+              label: "Search requests"
+              axis: AXIS_RIGHT
+            },
+            {
+              field: "writeRequests"
+              label: "Write requests"
+              axis: AXIS_RIGHT
+            },
+            {
+              field: "pointCount"
+              label: "Points"
+            },
+            {
+              field: "usedStorageBytes"
+              label: "Storage"
+            },
+            {
+              field: "currentSearcherWorkers"
+              label: "Searcher workers"
+            }
+          ]
+        }
+      }
+    };
   }
   // Gets the inference token usage metrics for a space.
   // Metrics are aggregated per collection and may be paginated (a space can have many collections).
@@ -358,8 +411,8 @@ message SpaceCollectionInferenceMetrics {
 message SpaceInferenceModelMetrics {
   // Identifier of the inference model.
   string inference_model_id = 1 [(buf.validate.field).string.min_len = 1];
-  // Aggregated histogram values for the inference model.
-  repeated Metric values = 2;
+  // Aggregated histogram values for the inference model, in tokens.
+  repeated Metric values = 2 [(common.v1.unit) = UNIT_TOKENS];
 }
 
 // ListSpaceAlertsRequest is the request for the ListSpaceAlerts function.
@@ -454,14 +507,26 @@ message SpaceAlert {
 // dimension (same semantics as serverless-quota-sidecar GetSpaceLimits).
 message SpaceQuotaSnapshot {
   // Maximum number of collections allowed in the space. 0 means unlimited.
-  uint64 max_collections = 1 [(buf.validate.field).uint64.gte = 0];
+  uint64 max_collections = 1 [
+    (buf.validate.field).uint64.gte = 0,
+    (common.v1.unit) = UNIT_COUNT
+  ];
   // Current number of collections in the space.
-  uint64 current_collections = 2 [(buf.validate.field).uint64.gte = 0];
+  uint64 current_collections = 2 [
+    (buf.validate.field).uint64.gte = 0,
+    (common.v1.unit) = UNIT_COUNT
+  ];
   // Effective maximum size in bytes per collection (platform ceiling reduced by
   // an optional customer cap). 0 means unlimited.
-  uint64 effective_max_size_per_collection_bytes = 3 [(buf.validate.field).uint64.gte = 0];
+  uint64 effective_max_size_per_collection_bytes = 3 [
+    (buf.validate.field).uint64.gte = 0,
+    (common.v1.unit) = UNIT_BYTES
+  ];
   // Effective maximum search workers per collection. 0 means unlimited.
-  uint64 searcher_effective_max_workers = 4 [(buf.validate.field).uint64.gte = 0];
+  uint64 searcher_effective_max_workers = 4 [
+    (buf.validate.field).uint64.gte = 0,
+    (common.v1.unit) = UNIT_COUNT
+  ];
 }
 
 // SpaceCollectionMetrics contains a metric overview for a single collection.
@@ -472,22 +537,40 @@ message SpaceCollectionMetrics {
     max_len: 255
     pattern: "^[a-zA-Z0-9-_.]+$"
   }];
-  // Overview of search request rates for the collection.
-  SpaceMetricOverview search_requests = 2 [(buf.validate.field).required = true];
-  // Overview of write (CRUD) request rates for the collection.
-  SpaceMetricOverview write_requests = 3 [(buf.validate.field).required = true];
-  // Overview of search latency for the collection.
-  SpaceMetricOverview search_latency = 4 [(buf.validate.field).required = true];
+  // Overview of search request rates for the collection, in requests per second.
+  SpaceMetricOverview search_requests = 2 [
+    (buf.validate.field).required = true,
+    (common.v1.unit) = UNIT_REQUESTS_PER_SECOND
+  ];
+  // Overview of write (CRUD) request rates for the collection, in requests per second.
+  SpaceMetricOverview write_requests = 3 [
+    (buf.validate.field).required = true,
+    (common.v1.unit) = UNIT_REQUESTS_PER_SECOND
+  ];
+  // Overview of search latency for the collection, in milliseconds.
+  SpaceMetricOverview search_latency = 4 [
+    (buf.validate.field).required = true,
+    (common.v1.unit) = UNIT_MILLISECONDS
+  ];
   // Current number of points stored in the collection.
-  uint64 point_count = 5 [(buf.validate.field).uint64.gte = 0];
+  uint64 point_count = 5 [
+    (buf.validate.field).uint64.gte = 0,
+    (common.v1.unit) = UNIT_COUNT
+  ];
   // Current used (active) storage size of the collection, in bytes.
   // Compare against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes
   // for headroom (0 on that field means unlimited).
-  uint64 used_storage_bytes = 6 [(buf.validate.field).uint64.gte = 0];
+  uint64 used_storage_bytes = 6 [
+    (buf.validate.field).uint64.gte = 0,
+    (common.v1.unit) = UNIT_BYTES
+  ];
   // Current number of search workers (active + downloading) hosting this collection.
   // Compare against SpaceQuotaSnapshot.searcher_effective_max_workers for headroom
   // (0 on that field means unlimited).
-  uint64 current_searcher_workers = 7 [(buf.validate.field).uint64.gte = 0];
+  uint64 current_searcher_workers = 7 [
+    (buf.validate.field).uint64.gte = 0,
+    (common.v1.unit) = UNIT_COUNT
+  ];
 }
 
 // SpaceMetricOverview contains average values of a metric over predefined intervals.
@@ -512,18 +595,18 @@ message SpaceCollectionUsageMetrics {
     max_len: 255
     pattern: "^[a-zA-Z0-9-_.]+$"
   }];
-  // Timeseries of search request rates for the collection.
-  repeated Metric search_requests = 2;
-  // Timeseries of write (CRUD) request rates for the collection.
-  repeated Metric write_requests = 3;
-  // Timeseries of search latency for the collection.
-  repeated Metric search_latency = 4;
+  // Timeseries of search request rates for the collection, in requests per second.
+  repeated Metric search_requests = 2 [(common.v1.unit) = UNIT_REQUESTS_PER_SECOND];
+  // Timeseries of write (CRUD) request rates for the collection, in requests per second.
+  repeated Metric write_requests = 3 [(common.v1.unit) = UNIT_REQUESTS_PER_SECOND];
+  // Timeseries of search latency for the collection, in milliseconds.
+  repeated Metric search_latency = 4 [(common.v1.unit) = UNIT_MILLISECONDS];
   // Timeseries of point counts for the collection.
-  repeated Metric point_count = 5;
+  repeated Metric point_count = 5 [(common.v1.unit) = UNIT_COUNT];
   // Timeseries of used (active) storage size for the collection, in bytes.
-  repeated Metric used_storage_bytes = 6;
+  repeated Metric used_storage_bytes = 6 [(common.v1.unit) = UNIT_BYTES];
   // Timeseries of search workers (active + downloading) hosting this collection.
-  repeated Metric current_searcher_workers = 7;
+  repeated Metric current_searcher_workers = 7 [(common.v1.unit) = UNIT_COUNT];
 }
 
 // A single metric data point.

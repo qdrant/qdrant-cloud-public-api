@@ -2,7 +2,7 @@
 // @generated from file qdrant/cloud/facade/mcp/v1/mcp_options.proto (package qdrant.cloud.facade.mcp.v1, syntax proto3)
 /* eslint-disable */
 
-import { extDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, extDesc, fileDesc, messageDesc, tsEnum } from "@bufbuild/protobuf/codegenv2";
 import { file_buf_validate_validate } from "../../../../../buf/validate/validate_pb.js";
 import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
 
@@ -10,7 +10,7 @@ import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
  * Describes the file qdrant/cloud/facade/mcp/v1/mcp_options.proto.
  */
 export const file_qdrant_cloud_facade_mcp_v1_mcp_options = /*@__PURE__*/
-  fileDesc("CixxZHJhbnQvY2xvdWQvZmFjYWRlL21jcC92MS9tY3Bfb3B0aW9ucy5wcm90bxIacWRyYW50LmNsb3VkLmZhY2FkZS5tY3AudjEiOQoOTWNwVG9vbE9wdGlvbnMSJwoEbmFtZRgBIAEoCUIZukgWchQQATIQXltBLVphLXowLTlfLV0rJDpnCghtY3BfdG9vbBIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGIWXAyABKAsyKi5xZHJhbnQuY2xvdWQuZmFjYWRlLm1jcC52MS5NY3BUb29sT3B0aW9uc1IHbWNwVG9vbEKRAgoeY29tLnFkcmFudC5jbG91ZC5mYWNhZGUubWNwLnYxQg9NY3BPcHRpb25zUHJvdG9QAVpRZ2l0aHViLmNvbS9xZHJhbnQvcWRyYW50LWNsb3VkLXB1YmxpYy1hcGkvZ2VuL2dvL3FkcmFudC9jbG91ZC9mYWNhZGUvbWNwL3YxO21jcHYxogIEUUNGTaoCGlFkcmFudC5DbG91ZC5GYWNhZGUuTWNwLlYxygIaUWRyYW50XENsb3VkXEZhY2FkZVxNY3BcVjHiAiZRZHJhbnRcQ2xvdWRcRmFjYWRlXE1jcFxWMVxHUEJNZXRhZGF0YeoCHlFkcmFudDo6Q2xvdWQ6OkZhY2FkZTo6TWNwOjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_protobuf_descriptor]);
+  fileDesc("CixxZHJhbnQvY2xvdWQvZmFjYWRlL21jcC92MS9tY3Bfb3B0aW9ucy5wcm90bxIacWRyYW50LmNsb3VkLmZhY2FkZS5tY3AudjEiggEKDk1jcFRvb2xPcHRpb25zEicKBG5hbWUYASABKAlCGbpIFnIUEAEyEF5bQS1aYS16MC05Xy1dKyQSOwoHdWlfdmlldxgCIAEoCzIlLnFkcmFudC5jbG91ZC5mYWNhZGUubWNwLnYxLk1jcFVpVmlld0gAiAEBQgoKCF91aV92aWV3IpYBCglNY3BVaVZpZXcSQAoKdGltZXNlcmllcxgBIAEoCzIqLnFkcmFudC5jbG91ZC5mYWNhZGUubWNwLnYxLlRpbWVzZXJpZXNWaWV3SAASOAoGaGVhbHRoGAIgASgLMiYucWRyYW50LmNsb3VkLmZhY2FkZS5tY3AudjEuSGVhbHRoVmlld0gAQg0KBGtpbmQSBbpIAggBIqUDCg5UaW1lc2VyaWVzVmlldxINCgV0aXRsZRgBIAEoCRJGCgZzZXJpZXMYAiADKAsyLC5xZHJhbnQuY2xvdWQuZmFjYWRlLm1jcC52MS5UaW1lc2VyaWVzU2VyaWVzQgi6SAWSAQIIARJHCgpncm91cF9wYXRoGAMgASgJQjO6SDByLjIsXihbYS16XVtBLVphLXowLTldKihcLlthLXpdW0EtWmEtejAtOV0qKSopPyQSOAoRZ3JvdXBfbGFiZWxfZmllbGQYBCABKAlCHbpIGnIYMhZeKFthLXpdW0EtWmEtejAtOV0qKT8kElIKCmNoYXJ0X3R5cGUYBSABKA4yNC5xZHJhbnQuY2xvdWQuZmFjYWRlLm1jcC52MS5UaW1lc2VyaWVzVmlldy5DaGFydFR5cGVCCLpIBYIBAhABImUKCUNoYXJ0VHlwZRIaChZDSEFSVF9UWVBFX1VOU1BFQ0lGSUVEEAASEwoPQ0hBUlRfVFlQRV9MSU5FEAESEwoPQ0hBUlRfVFlQRV9BUkVBEAISEgoOQ0hBUlRfVFlQRV9CQVIQAyLdAQoQVGltZXNlcmllc1NlcmllcxIpCgVmaWVsZBgBIAEoCUIaukgXchUyE15bYS16XVtBLVphLXowLTldKiQSFgoFbGFiZWwYAiABKAlCB7pIBHICEAESSQoEYXhpcxgDIAEoDjIxLnFkcmFudC5jbG91ZC5mYWNhZGUubWNwLnYxLlRpbWVzZXJpZXNTZXJpZXMuQXhpc0IIukgFggECEAEiOwoEQXhpcxIUChBBWElTX1VOU1BFQ0lGSUVEEAASDQoJQVhJU19MRUZUEAESDgoKQVhJU19SSUdIVBACIt4BCgpIZWFsdGhWaWV3EksKB3N1YmplY3QYASABKA4yLi5xZHJhbnQuY2xvdWQuZmFjYWRlLm1jcC52MS5IZWFsdGhWaWV3LlN1YmplY3RCCrpIB4IBBBABIAASNwoPY29tcGFuaW9uX3Rvb2xzGAIgAygJQh66SBuSARgIASIUchIyEF5bQS1aYS16MC05Xy1dKyQiSgoHU3ViamVjdBIXChNTVUJKRUNUX1VOU1BFQ0lGSUVEEAASEwoPU1VCSkVDVF9DTFVTVEVSEAESEQoNU1VCSkVDVF9TUEFDRRACOmcKCG1jcF90b29sEh4uZ29vZ2xlLnByb3RvYnVmLk1ldGhvZE9wdGlvbnMYhZcDIAEoCzIqLnFkcmFudC5jbG91ZC5mYWNhZGUubWNwLnYxLk1jcFRvb2xPcHRpb25zUgdtY3BUb29sQpECCh5jb20ucWRyYW50LmNsb3VkLmZhY2FkZS5tY3AudjFCD01jcE9wdGlvbnNQcm90b1ABWlFnaXRodWIuY29tL3FkcmFudC9xZHJhbnQtY2xvdWQtcHVibGljLWFwaS9nZW4vZ28vcWRyYW50L2Nsb3VkL2ZhY2FkZS9tY3AvdjE7bWNwdjGiAgRRQ0ZNqgIaUWRyYW50LkNsb3VkLkZhY2FkZS5NY3AuVjHKAhpRZHJhbnRcQ2xvdWRcRmFjYWRlXE1jcFxWMeICJlFkcmFudFxDbG91ZFxGYWNhZGVcTWNwXFYxXEdQQk1ldGFkYXRh6gIeUWRyYW50OjpDbG91ZDo6RmFjYWRlOjpNY3A6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_protobuf_descriptor]);
 
 /**
  * Describes the message qdrant.cloud.facade.mcp.v1.McpToolOptions.
@@ -18,6 +18,76 @@ export const file_qdrant_cloud_facade_mcp_v1_mcp_options = /*@__PURE__*/
  */
 export const McpToolOptionsSchema = /*@__PURE__*/
   messageDesc(file_qdrant_cloud_facade_mcp_v1_mcp_options, 0);
+
+/**
+ * Describes the message qdrant.cloud.facade.mcp.v1.McpUiView.
+ * Use `create(McpUiViewSchema)` to create a new message.
+ */
+export const McpUiViewSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_facade_mcp_v1_mcp_options, 1);
+
+/**
+ * Describes the message qdrant.cloud.facade.mcp.v1.TimeseriesView.
+ * Use `create(TimeseriesViewSchema)` to create a new message.
+ */
+export const TimeseriesViewSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_facade_mcp_v1_mcp_options, 2);
+
+/**
+ * Describes the enum qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartType.
+ */
+export const TimeseriesView_ChartTypeSchema = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_facade_mcp_v1_mcp_options, 2, 0);
+
+/**
+ * ChartType is how the series are drawn.
+ *
+ * @generated from enum qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartType
+ */
+export const TimeseriesView_ChartType = /*@__PURE__*/
+  tsEnum(TimeseriesView_ChartTypeSchema);
+
+/**
+ * Describes the message qdrant.cloud.facade.mcp.v1.TimeseriesSeries.
+ * Use `create(TimeseriesSeriesSchema)` to create a new message.
+ */
+export const TimeseriesSeriesSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_facade_mcp_v1_mcp_options, 3);
+
+/**
+ * Describes the enum qdrant.cloud.facade.mcp.v1.TimeseriesSeries.Axis.
+ */
+export const TimeseriesSeries_AxisSchema = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_facade_mcp_v1_mcp_options, 3, 0);
+
+/**
+ * Axis is the y-axis a series is plotted against.
+ *
+ * @generated from enum qdrant.cloud.facade.mcp.v1.TimeseriesSeries.Axis
+ */
+export const TimeseriesSeries_Axis = /*@__PURE__*/
+  tsEnum(TimeseriesSeries_AxisSchema);
+
+/**
+ * Describes the message qdrant.cloud.facade.mcp.v1.HealthView.
+ * Use `create(HealthViewSchema)` to create a new message.
+ */
+export const HealthViewSchema = /*@__PURE__*/
+  messageDesc(file_qdrant_cloud_facade_mcp_v1_mcp_options, 4);
+
+/**
+ * Describes the enum qdrant.cloud.facade.mcp.v1.HealthView.Subject.
+ */
+export const HealthView_SubjectSchema = /*@__PURE__*/
+  enumDesc(file_qdrant_cloud_facade_mcp_v1_mcp_options, 4, 0);
+
+/**
+ * Subject is the kind of resource the dashboard is about.
+ *
+ * @generated from enum qdrant.cloud.facade.mcp.v1.HealthView.Subject
+ */
+export const HealthView_Subject = /*@__PURE__*/
+  tsEnum(HealthView_SubjectSchema);
 
 /**
  * MCP tool overlay for this RPC (stable tool name).

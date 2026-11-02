@@ -140,42 +140,42 @@ export declare const GetClusterUsageMetricsRequestSchema: GenMessage<GetClusterU
  */
 export declare type GetClusterUsageMetricsResponse = Message<"qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse"> & {
   /**
-   * Timeseries of overall CPU usage across the cluster.
+   * Timeseries of overall CPU usage across the cluster, in CPU cores.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric cpu = 1;
    */
   cpu: Metric[];
 
   /**
-   * Timeseries of overall RAM usage across the cluster.
+   * Timeseries of overall RAM usage across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram = 2;
    */
   ram: Metric[];
 
   /**
-   * Timeseries of RAM used for cache across the cluster.
+   * Timeseries of RAM used for cache across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_cache = 3;
    */
   ramCache: Metric[];
 
   /**
-   * Timeseries of RSS memory used across the cluster.
+   * Timeseries of RSS memory used across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_rss = 4;
    */
   ramRss: Metric[];
 
   /**
-   * Timeseries of RSS memory used by the Qdrant database across the cluster.
+   * Timeseries of RSS memory used by the Qdrant database across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_qdrant_rss = 5;
    */
   ramQdrantRss: Metric[];
 
   /**
-   * Timeseries of disk usage across the cluster.
+   * Timeseries of disk usage across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric disk = 6;
    */
@@ -189,7 +189,7 @@ export declare type GetClusterUsageMetricsResponse = Message<"qdrant.cloud.monit
   rps: Metric[];
 
   /**
-   * Timeseries of request latency across the cluster.
+   * Timeseries of request latency across the cluster, in milliseconds.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric latency = 8;
    */
@@ -203,14 +203,14 @@ export declare type GetClusterUsageMetricsResponse = Message<"qdrant.cloud.monit
   nodes: ClusterNodeUsageMetrics[];
 
   /**
-   * Timeseries of overall GPU usage across the cluster.
+   * Timeseries of overall GPU usage across the cluster, in percent (0-100).
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 10;
    */
   gpu: Metric[];
 
   /**
-   * Timeseries of overall GPU RAM usage across the cluster.
+   * Timeseries of overall GPU RAM usage across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_ram = 11;
    */
@@ -224,42 +224,42 @@ export declare type GetClusterUsageMetricsResponse = Message<"qdrant.cloud.monit
  */
 export declare type GetClusterUsageMetricsResponseValid = Message<"qdrant.cloud.monitoring.v1.GetClusterUsageMetricsResponse"> & {
   /**
-   * Timeseries of overall CPU usage across the cluster.
+   * Timeseries of overall CPU usage across the cluster, in CPU cores.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric cpu = 1;
    */
   cpu: MetricValid[];
 
   /**
-   * Timeseries of overall RAM usage across the cluster.
+   * Timeseries of overall RAM usage across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram = 2;
    */
   ram: MetricValid[];
 
   /**
-   * Timeseries of RAM used for cache across the cluster.
+   * Timeseries of RAM used for cache across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_cache = 3;
    */
   ramCache: MetricValid[];
 
   /**
-   * Timeseries of RSS memory used across the cluster.
+   * Timeseries of RSS memory used across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_rss = 4;
    */
   ramRss: MetricValid[];
 
   /**
-   * Timeseries of RSS memory used by the Qdrant database across the cluster.
+   * Timeseries of RSS memory used by the Qdrant database across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_qdrant_rss = 5;
    */
   ramQdrantRss: MetricValid[];
 
   /**
-   * Timeseries of disk usage across the cluster.
+   * Timeseries of disk usage across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric disk = 6;
    */
@@ -273,7 +273,7 @@ export declare type GetClusterUsageMetricsResponseValid = Message<"qdrant.cloud.
   rps: MetricValid[];
 
   /**
-   * Timeseries of request latency across the cluster.
+   * Timeseries of request latency across the cluster, in milliseconds.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric latency = 8;
    */
@@ -287,14 +287,14 @@ export declare type GetClusterUsageMetricsResponseValid = Message<"qdrant.cloud.
   nodes: ClusterNodeUsageMetricsValid[];
 
   /**
-   * Timeseries of overall GPU usage across the cluster.
+   * Timeseries of overall GPU usage across the cluster, in percent (0-100).
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 10;
    */
   gpu: MetricValid[];
 
   /**
-   * Timeseries of overall GPU RAM usage across the cluster.
+   * Timeseries of overall GPU RAM usage across the cluster, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_ram = 11;
    */
@@ -589,7 +589,7 @@ export declare type ClusterInferenceModelMetrics = Message<"qdrant.cloud.monitor
   inferenceModelId: string;
 
   /**
-   * Aggregated histogram values for the inference model.
+   * Aggregated histogram values for the inference model, in tokens.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric values = 2;
    */
@@ -610,7 +610,7 @@ export declare type ClusterInferenceModelMetricsValid = Message<"qdrant.cloud.mo
   inferenceModelId: string;
 
   /**
-   * Aggregated histogram values for the inference model.
+   * Aggregated histogram values for the inference model, in tokens.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric values = 2;
    */
@@ -637,56 +637,56 @@ export declare type ClusterNodeMetrics = Message<"qdrant.cloud.monitoring.v1.Clu
   nodeId: string;
 
   /**
-   * Overview of CPU usage.
+   * Overview of CPU usage, in CPU cores.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview cpu = 2;
    */
   cpu?: ClusterMetricOverview | undefined;
 
   /**
-   * Overview of RAM usage.
+   * Overview of RAM usage, in bytes.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview ram = 3;
    */
   ram?: ClusterMetricOverview | undefined;
 
   /**
-   * Overview of RAM cache usage.
+   * Overview of RAM cache usage, in bytes.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview ram_cache = 4;
    */
   ramCache?: ClusterMetricOverview | undefined;
 
   /**
-   * Overview of RSS memory usage.
+   * Overview of RSS memory usage, in bytes.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview ram_rss = 5;
    */
   ramRss?: ClusterMetricOverview | undefined;
 
   /**
-   * Overview of RSS memory usage by the Qdrant database.
+   * Overview of RSS memory usage by the Qdrant database, in bytes.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview ram_qdrant_rss = 6;
    */
   ramQdrantRss?: ClusterMetricOverview | undefined;
 
   /**
-   * Overview of disk usage.
+   * Overview of disk usage, in bytes.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview disk = 7;
    */
   disk?: ClusterMetricOverview | undefined;
 
   /**
-   * optional Overview of GPU usage.
+   * optional Overview of GPU usage, in percent (0-100).
    *
    * @generated from field: optional qdrant.cloud.monitoring.v1.ClusterMetricOverview gpu = 8;
    */
   gpu?: ClusterMetricOverview | undefined;
 
   /**
-   * Overview of GPU RAM usage.
+   * Overview of GPU RAM usage, in bytes.
    *
    * @generated from field: optional qdrant.cloud.monitoring.v1.ClusterMetricOverview gpu_ram = 9;
    */
@@ -707,56 +707,56 @@ export declare type ClusterNodeMetricsValid = Message<"qdrant.cloud.monitoring.v
   nodeId: string;
 
   /**
-   * Overview of CPU usage.
+   * Overview of CPU usage, in CPU cores.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview cpu = 2;
    */
   cpu: ClusterMetricOverviewValid;
 
   /**
-   * Overview of RAM usage.
+   * Overview of RAM usage, in bytes.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview ram = 3;
    */
   ram: ClusterMetricOverviewValid;
 
   /**
-   * Overview of RAM cache usage.
+   * Overview of RAM cache usage, in bytes.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview ram_cache = 4;
    */
   ramCache: ClusterMetricOverviewValid;
 
   /**
-   * Overview of RSS memory usage.
+   * Overview of RSS memory usage, in bytes.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview ram_rss = 5;
    */
   ramRss: ClusterMetricOverviewValid;
 
   /**
-   * Overview of RSS memory usage by the Qdrant database.
+   * Overview of RSS memory usage by the Qdrant database, in bytes.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview ram_qdrant_rss = 6;
    */
   ramQdrantRss: ClusterMetricOverviewValid;
 
   /**
-   * Overview of disk usage.
+   * Overview of disk usage, in bytes.
    *
    * @generated from field: qdrant.cloud.monitoring.v1.ClusterMetricOverview disk = 7;
    */
   disk: ClusterMetricOverviewValid;
 
   /**
-   * optional Overview of GPU usage.
+   * optional Overview of GPU usage, in percent (0-100).
    *
    * @generated from field: optional qdrant.cloud.monitoring.v1.ClusterMetricOverview gpu = 8;
    */
   gpu?: ClusterMetricOverviewValid | undefined;
 
   /**
-   * Overview of GPU RAM usage.
+   * Overview of GPU RAM usage, in bytes.
    *
    * @generated from field: optional qdrant.cloud.monitoring.v1.ClusterMetricOverview gpu_ram = 9;
    */
@@ -910,56 +910,56 @@ export declare type ClusterNodeUsageMetrics = Message<"qdrant.cloud.monitoring.v
   nodeId: string;
 
   /**
-   * Timeseries of CPU usage for the node.
+   * Timeseries of CPU usage for the node, in CPU cores.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric cpu = 2;
    */
   cpu: Metric[];
 
   /**
-   * Timeseries of RAM usage for the node.
+   * Timeseries of RAM usage for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram = 3;
    */
   ram: Metric[];
 
   /**
-   * Timeseries of RAM cache usage for the node.
+   * Timeseries of RAM cache usage for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_cache = 4;
    */
   ramCache: Metric[];
 
   /**
-   * Timeseries of RSS memory usage for the node.
+   * Timeseries of RSS memory usage for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_rss = 5;
    */
   ramRss: Metric[];
 
   /**
-   * Timeseries of RSS memory usage by the Qdrant database for the node.
+   * Timeseries of RSS memory usage by the Qdrant database for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_qdrant_rss = 6;
    */
   ramQdrantRss: Metric[];
 
   /**
-   * Timeseries of disk usage for the node.
+   * Timeseries of disk usage for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric disk = 7;
    */
   disk: Metric[];
 
   /**
-   * Timeseries of gpu usage for the node.
+   * Timeseries of gpu usage for the node, in percent (0-100).
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 8;
    */
   gpu: Metric[];
 
   /**
-   * Timeseries of GPU RAM usage for the node.
+   * Timeseries of GPU RAM usage for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_ram = 9;
    */
@@ -980,56 +980,56 @@ export declare type ClusterNodeUsageMetricsValid = Message<"qdrant.cloud.monitor
   nodeId: string;
 
   /**
-   * Timeseries of CPU usage for the node.
+   * Timeseries of CPU usage for the node, in CPU cores.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric cpu = 2;
    */
   cpu: MetricValid[];
 
   /**
-   * Timeseries of RAM usage for the node.
+   * Timeseries of RAM usage for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram = 3;
    */
   ram: MetricValid[];
 
   /**
-   * Timeseries of RAM cache usage for the node.
+   * Timeseries of RAM cache usage for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_cache = 4;
    */
   ramCache: MetricValid[];
 
   /**
-   * Timeseries of RSS memory usage for the node.
+   * Timeseries of RSS memory usage for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_rss = 5;
    */
   ramRss: MetricValid[];
 
   /**
-   * Timeseries of RSS memory usage by the Qdrant database for the node.
+   * Timeseries of RSS memory usage by the Qdrant database for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric ram_qdrant_rss = 6;
    */
   ramQdrantRss: MetricValid[];
 
   /**
-   * Timeseries of disk usage for the node.
+   * Timeseries of disk usage for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric disk = 7;
    */
   disk: MetricValid[];
 
   /**
-   * Timeseries of gpu usage for the node.
+   * Timeseries of gpu usage for the node, in percent (0-100).
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu = 8;
    */
   gpu: MetricValid[];
 
   /**
-   * Timeseries of GPU RAM usage for the node.
+   * Timeseries of GPU RAM usage for the node, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.monitoring.v1.Metric gpu_ram = 9;
    */

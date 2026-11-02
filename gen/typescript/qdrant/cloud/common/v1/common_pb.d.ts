@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
-import type { MethodOptions, ServiceOptions } from "@bufbuild/protobuf/wkt";
+import type { FieldOptions, MethodOptions, ServiceOptions } from "@bufbuild/protobuf/wkt";
 
 /**
  * Describes the file qdrant/cloud/common/v1/common.proto.
@@ -663,6 +663,76 @@ export declare type NetworkPolicyEgressRuleValid = NetworkPolicyEgressRule;
 export declare const NetworkPolicyEgressRuleSchema: GenMessage<NetworkPolicyEgressRule, {validType: NetworkPolicyEgressRuleValid}>;
 
 /**
+ * Unit is the unit of a numeric or time-series field, declared with the
+ * (qdrant.cloud.common.v1.unit) field option. Each value names its UCUM code.
+ *
+ * @generated from enum qdrant.cloud.common.v1.Unit
+ */
+export enum Unit {
+  /**
+   * Unit is unspecified.
+   *
+   * @generated from enum value: UNIT_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Dimensionless count of items (points, workers, collections). UCUM "{count}".
+   *
+   * @generated from enum value: UNIT_COUNT = 1;
+   */
+  COUNT = 1,
+
+  /**
+   * Bytes. Formatters should use IEC prefixes (KiB, MiB, GiB). UCUM "By".
+   *
+   * @generated from enum value: UNIT_BYTES = 2;
+   */
+  BYTES = 2,
+
+  /**
+   * Milliseconds. UCUM "ms".
+   *
+   * @generated from enum value: UNIT_MILLISECONDS = 3;
+   */
+  MILLISECONDS = 3,
+
+  /**
+   * Requests per second. UCUM "{request}/s".
+   *
+   * @generated from enum value: UNIT_REQUESTS_PER_SECOND = 4;
+   */
+  REQUESTS_PER_SECOND = 4,
+
+  /**
+   * CPU cores (CPU-seconds per second); 1.0 is one fully used vCPU. UCUM "{cpu}".
+   *
+   * @generated from enum value: UNIT_CPU_CORES = 5;
+   */
+  CPU_CORES = 5,
+
+  /**
+   * Percentage on a 0-100 scale (not 0-1). Aggregations such as SUM can
+   * exceed 100. UCUM "%".
+   *
+   * @generated from enum value: UNIT_PERCENT = 6;
+   */
+  PERCENT = 6,
+
+  /**
+   * Inference tokens. UCUM "{token}".
+   *
+   * @generated from enum value: UNIT_TOKENS = 7;
+   */
+  TOKENS = 7,
+}
+
+/**
+ * Describes the enum qdrant.cloud.common.v1.Unit.
+ */
+export declare const UnitSchema: GenEnum<Unit>;
+
+/**
  * ActorType specifies the type of actor that can call a method.
  *
  * @generated from enum qdrant.cloud.common.v1.ActorType
@@ -1015,4 +1085,14 @@ export declare const patch_source: GenExtension<MethodOptions, PatchSource>;
  * @generated from extension: bool interactive_only = 50012;
  */
 export declare const interactive_only: GenExtension<MethodOptions, boolean>;
+
+/**
+ * The unit of this field's numeric value. For repeated Metric fields it is
+ * the unit of Metric.value. For metric overview messages (for example
+ * ClusterMetricOverview or SpaceMetricOverview) it is the unit of their
+ * IntervalAverage values.
+ *
+ * @generated from extension: optional qdrant.cloud.common.v1.Unit unit = 50013;
+ */
+export declare const unit: GenExtension<FieldOptions, Unit>;
 

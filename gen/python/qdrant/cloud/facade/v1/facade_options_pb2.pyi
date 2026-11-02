@@ -11,7 +11,7 @@ FACADE_FIELD_FIELD_NUMBER: _ClassVar[int]
 facade_field: _descriptor.FieldDescriptor
 
 class FacadeMethodOptions(_message.Message):
-    __slots__ = ("description", "title", "sensitive_response", "read_only_hint", "destructive_hint", "idempotent_hint", "allow_mutation")
+    __slots__ = ("description", "title", "sensitive_response", "read_only_hint", "destructive_hint", "idempotent_hint", "allow_mutation", "console_page")
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
     TITLE_FIELD_NUMBER: _ClassVar[int]
     SENSITIVE_RESPONSE_FIELD_NUMBER: _ClassVar[int]
@@ -19,6 +19,7 @@ class FacadeMethodOptions(_message.Message):
     DESTRUCTIVE_HINT_FIELD_NUMBER: _ClassVar[int]
     IDEMPOTENT_HINT_FIELD_NUMBER: _ClassVar[int]
     ALLOW_MUTATION_FIELD_NUMBER: _ClassVar[int]
+    CONSOLE_PAGE_FIELD_NUMBER: _ClassVar[int]
     description: str
     title: str
     sensitive_response: bool
@@ -26,7 +27,8 @@ class FacadeMethodOptions(_message.Message):
     destructive_hint: bool
     idempotent_hint: bool
     allow_mutation: bool
-    def __init__(self, description: _Optional[str] = ..., title: _Optional[str] = ..., sensitive_response: _Optional[bool] = ..., read_only_hint: _Optional[bool] = ..., destructive_hint: _Optional[bool] = ..., idempotent_hint: _Optional[bool] = ..., allow_mutation: _Optional[bool] = ...) -> None: ...
+    console_page: str
+    def __init__(self, description: _Optional[str] = ..., title: _Optional[str] = ..., sensitive_response: _Optional[bool] = ..., read_only_hint: _Optional[bool] = ..., destructive_hint: _Optional[bool] = ..., idempotent_hint: _Optional[bool] = ..., allow_mutation: _Optional[bool] = ..., console_page: _Optional[str] = ...) -> None: ...
 
 class FacadeFieldOptions(_message.Message):
     __slots__ = ("hide", "description")

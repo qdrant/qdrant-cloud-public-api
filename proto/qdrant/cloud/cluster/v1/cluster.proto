@@ -54,6 +54,7 @@ service ClusterService {
     option (qdrant.cloud.facade.v1.facade) = {
       description: "Get a single cluster by account ID and cluster ID."
       title: "Get cluster"
+      console_page: "cluster.overview"
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_cluster"};
     option (qdrant.cloud.facade.graphql.v1.graphql) = {

@@ -2,7 +2,7 @@
 // @generated from file qdrant/cloud/facade/mcp/v1/mcp_options.proto (package qdrant.cloud.facade.mcp.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { MethodOptions } from "@bufbuild/protobuf/wkt";
 
@@ -24,6 +24,15 @@ export declare type McpToolOptions = Message<"qdrant.cloud.facade.mcp.v1.McpTool
    * @generated from field: string name = 1;
    */
   name: string;
+
+  /**
+   * Optional MCP Apps view, rendered next to the tool result by hosts that
+   * support the MCP Apps UI extension. Only allowed on
+   * read-only RPCs.
+   *
+   * @generated from field: optional qdrant.cloud.facade.mcp.v1.McpUiView ui_view = 2;
+   */
+  uiView?: McpUiView | undefined;
 };
 
 export declare type McpToolOptionsValid = McpToolOptions;
@@ -33,6 +42,271 @@ export declare type McpToolOptionsValid = McpToolOptions;
  * Use `create(McpToolOptionsSchema)` to create a new message.
  */
 export declare const McpToolOptionsSchema: GenMessage<McpToolOptions, {validType: McpToolOptionsValid}>;
+
+/**
+ * McpUiView selects the MCP Apps view for a tool and configures it.
+ *
+ * @generated from message qdrant.cloud.facade.mcp.v1.McpUiView
+ */
+export declare type McpUiView = Message<"qdrant.cloud.facade.mcp.v1.McpUiView"> & {
+  /**
+   * The kind of view.
+   *
+   * @generated from oneof qdrant.cloud.facade.mcp.v1.McpUiView.kind
+   */
+  kind: {
+    /**
+     * A chart of repeated Metric series from the tool's response.
+     *
+     * @generated from field: qdrant.cloud.facade.mcp.v1.TimeseriesView timeseries = 1;
+     */
+    value: TimeseriesView;
+    case: "timeseries";
+  } | {
+    /**
+     * A small health dashboard for one cluster or space.
+     *
+     * @generated from field: qdrant.cloud.facade.mcp.v1.HealthView health = 2;
+     */
+    value: HealthView;
+    case: "health";
+  } | { case: undefined; value?: undefined };
+};
+
+export declare type McpUiViewValid = McpUiView;
+
+/**
+ * Describes the message qdrant.cloud.facade.mcp.v1.McpUiView.
+ * Use `create(McpUiViewSchema)` to create a new message.
+ */
+export declare const McpUiViewSchema: GenMessage<McpUiView, {validType: McpUiViewValid}>;
+
+/**
+ * TimeseriesView charts repeated Metric series from the tool's response.
+ * Units come from the (qdrant.cloud.common.v1.unit) option on each series field.
+ *
+ * @generated from message qdrant.cloud.facade.mcp.v1.TimeseriesView
+ */
+export declare type TimeseriesView = Message<"qdrant.cloud.facade.mcp.v1.TimeseriesView"> & {
+  /**
+   * Chart title shown in the view (defaults to the facade title).
+   *
+   * @generated from field: string title = 1;
+   */
+  title: string;
+
+  /**
+   * Series to plot. Each field is a repeated Metric in the response (relative
+   * to group_path when set) and must carry (qdrant.cloud.common.v1.unit).
+   *
+   * @generated from field: repeated qdrant.cloud.facade.mcp.v1.TimeseriesSeries series = 2;
+   */
+  series: TimeseriesSeries[];
+
+  /**
+   * Optional JSON path (lowerCamelCase) to a repeated parent, for example
+   * "items", "nodes", or "models". Each element becomes one selectable group.
+   *
+   * @generated from field: string group_path = 3;
+   */
+  groupPath: string;
+
+  /**
+   * Field on the group element used as its label, for example "collectionName".
+   *
+   * @generated from field: string group_label_field = 4;
+   */
+  groupLabelField: string;
+
+  /**
+   * How values are drawn.
+   *
+   * @generated from field: qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartType chart_type = 5;
+   */
+  chartType: TimeseriesView_ChartType;
+};
+
+export declare type TimeseriesViewValid = TimeseriesView;
+
+/**
+ * Describes the message qdrant.cloud.facade.mcp.v1.TimeseriesView.
+ * Use `create(TimeseriesViewSchema)` to create a new message.
+ */
+export declare const TimeseriesViewSchema: GenMessage<TimeseriesView, {validType: TimeseriesViewValid}>;
+
+/**
+ * ChartType is how the series are drawn.
+ *
+ * @generated from enum qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartType
+ */
+export enum TimeseriesView_ChartType {
+  /**
+   * Unspecified; treated as CHART_TYPE_LINE.
+   *
+   * @generated from enum value: CHART_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Lines, for rates and gauges.
+   *
+   * @generated from enum value: CHART_TYPE_LINE = 1;
+   */
+  LINE = 1,
+
+  /**
+   * Filled areas, for rates and gauges.
+   *
+   * @generated from enum value: CHART_TYPE_AREA = 2;
+   */
+  AREA = 2,
+
+  /**
+   * Bars, for per-interval totals such as inference tokens.
+   *
+   * @generated from enum value: CHART_TYPE_BAR = 3;
+   */
+  BAR = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartType.
+ */
+export declare const TimeseriesView_ChartTypeSchema: GenEnum<TimeseriesView_ChartType>;
+
+/**
+ * TimeseriesSeries is one plotted series of a TimeseriesView.
+ *
+ * @generated from message qdrant.cloud.facade.mcp.v1.TimeseriesSeries
+ */
+export declare type TimeseriesSeries = Message<"qdrant.cloud.facade.mcp.v1.TimeseriesSeries"> & {
+  /**
+   * JSON name (lowerCamelCase) of the repeated Metric field, for example "rps".
+   *
+   * @generated from field: string field = 1;
+   */
+  field: string;
+
+  /**
+   * Legend label, for example "Requests".
+   *
+   * @generated from field: string label = 2;
+   */
+  label: string;
+
+  /**
+   * The y-axis to plot against.
+   *
+   * @generated from field: qdrant.cloud.facade.mcp.v1.TimeseriesSeries.Axis axis = 3;
+   */
+  axis: TimeseriesSeries_Axis;
+};
+
+export declare type TimeseriesSeriesValid = TimeseriesSeries;
+
+/**
+ * Describes the message qdrant.cloud.facade.mcp.v1.TimeseriesSeries.
+ * Use `create(TimeseriesSeriesSchema)` to create a new message.
+ */
+export declare const TimeseriesSeriesSchema: GenMessage<TimeseriesSeries, {validType: TimeseriesSeriesValid}>;
+
+/**
+ * Axis is the y-axis a series is plotted against.
+ *
+ * @generated from enum qdrant.cloud.facade.mcp.v1.TimeseriesSeries.Axis
+ */
+export enum TimeseriesSeries_Axis {
+  /**
+   * Unspecified; treated as AXIS_LEFT.
+   *
+   * @generated from enum value: AXIS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The left y-axis.
+   *
+   * @generated from enum value: AXIS_LEFT = 1;
+   */
+  LEFT = 1,
+
+  /**
+   * The right y-axis.
+   *
+   * @generated from enum value: AXIS_RIGHT = 2;
+   */
+  RIGHT = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.facade.mcp.v1.TimeseriesSeries.Axis.
+ */
+export declare const TimeseriesSeries_AxisSchema: GenEnum<TimeseriesSeries_Axis>;
+
+/**
+ * HealthView is a small dashboard for one cluster or space. It renders the
+ * annotated tool's result and loads the rest through the host by calling the
+ * companion tools.
+ *
+ * @generated from message qdrant.cloud.facade.mcp.v1.HealthView
+ */
+export declare type HealthView = Message<"qdrant.cloud.facade.mcp.v1.HealthView"> & {
+  /**
+   * The kind of resource.
+   *
+   * @generated from field: qdrant.cloud.facade.mcp.v1.HealthView.Subject subject = 1;
+   */
+  subject: HealthView_Subject;
+
+  /**
+   * Read-only MCP tool names the view calls through the host to complete the
+   * dashboard. Each must take the same identifiers as the annotated tool.
+   *
+   * @generated from field: repeated string companion_tools = 2;
+   */
+  companionTools: string[];
+};
+
+export declare type HealthViewValid = HealthView;
+
+/**
+ * Describes the message qdrant.cloud.facade.mcp.v1.HealthView.
+ * Use `create(HealthViewSchema)` to create a new message.
+ */
+export declare const HealthViewSchema: GenMessage<HealthView, {validType: HealthViewValid}>;
+
+/**
+ * Subject is the kind of resource the dashboard is about.
+ *
+ * @generated from enum qdrant.cloud.facade.mcp.v1.HealthView.Subject
+ */
+export enum HealthView_Subject {
+  /**
+   * Unspecified; not allowed.
+   *
+   * @generated from enum value: SUBJECT_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * A cluster (account_id and cluster_id).
+   *
+   * @generated from enum value: SUBJECT_CLUSTER = 1;
+   */
+  CLUSTER = 1,
+
+  /**
+   * A serverless space (account_id and space_id).
+   *
+   * @generated from enum value: SUBJECT_SPACE = 2;
+   */
+  SPACE = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.facade.mcp.v1.HealthView.Subject.
+ */
+export declare const HealthView_SubjectSchema: GenEnum<HealthView_Subject>;
 
 /**
  * MCP tool overlay for this RPC (stable tool name).

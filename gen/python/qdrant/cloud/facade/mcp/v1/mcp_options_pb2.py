@@ -26,7 +26,7 @@ from buf.validate import validate_pb2 as buf_dot_validate_dot_validate__pb2
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x12\x1aqdrant.cloud.facade.mcp.v1\x1a\x1b\x62uf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"?\n\x0eMcpToolOptions\x12-\n\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x01\x32\x10^[A-Za-z0-9_-]+$R\x04name:g\n\x08mcp_tool\x12\x1e.google.protobuf.MethodOptions\x18\x85\x97\x03 \x01(\x0b\x32*.qdrant.cloud.facade.mcp.v1.McpToolOptionsR\x07mcpToolB\x91\x02\n\x1e\x63om.qdrant.cloud.facade.mcp.v1B\x0fMcpOptionsProtoP\x01ZQgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1;mcpv1\xa2\x02\x04QCFM\xaa\x02\x1aQdrant.Cloud.Facade.Mcp.V1\xca\x02\x1aQdrant\\Cloud\\Facade\\Mcp\\V1\xe2\x02&Qdrant\\Cloud\\Facade\\Mcp\\V1\\GPBMetadata\xea\x02\x1eQdrant::Cloud::Facade::Mcp::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x12\x1aqdrant.cloud.facade.mcp.v1\x1a\x1b\x62uf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\x90\x01\n\x0eMcpToolOptions\x12-\n\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x01\x32\x10^[A-Za-z0-9_-]+$R\x04name\x12\x43\n\x07ui_view\x18\x02 \x01(\x0b\x32%.qdrant.cloud.facade.mcp.v1.McpUiViewH\x00R\x06uiView\x88\x01\x01\x42\n\n\x08_ui_view\"\xaa\x01\n\tMcpUiView\x12L\n\ntimeseries\x18\x01 \x01(\x0b\x32*.qdrant.cloud.facade.mcp.v1.TimeseriesViewH\x00R\ntimeseries\x12@\n\x06health\x18\x02 \x01(\x0b\x32&.qdrant.cloud.facade.mcp.v1.HealthViewH\x00R\x06healthB\r\n\x04kind\x12\x05\xbaH\x02\x08\x01\"\xdb\x03\n\x0eTimeseriesView\x12\x14\n\x05title\x18\x01 \x01(\tR\x05title\x12N\n\x06series\x18\x02 \x03(\x0b\x32,.qdrant.cloud.facade.mcp.v1.TimeseriesSeriesB\x08\xbaH\x05\x92\x01\x02\x08\x01R\x06series\x12R\n\ngroup_path\x18\x03 \x01(\tB3\xbaH0r.2,^([a-z][A-Za-z0-9]*(\\.[a-z][A-Za-z0-9]*)*)?$R\tgroupPath\x12I\n\x11group_label_field\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x18\x32\x16^([a-z][A-Za-z0-9]*)?$R\x0fgroupLabelField\x12]\n\nchart_type\x18\x05 \x01(\x0e\x32\x34.qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartTypeB\x08\xbaH\x05\x82\x01\x02\x10\x01R\tchartType\"e\n\tChartType\x12\x1a\n\x16\x43HART_TYPE_UNSPECIFIED\x10\x00\x12\x13\n\x0f\x43HART_TYPE_LINE\x10\x01\x12\x13\n\x0f\x43HART_TYPE_AREA\x10\x02\x12\x12\n\x0e\x43HART_TYPE_BAR\x10\x03\"\xf1\x01\n\x10TimeseriesSeries\x12\x30\n\x05\x66ield\x18\x01 \x01(\tB\x1a\xbaH\x17r\x15\x32\x13^[a-z][A-Za-z0-9]*$R\x05\x66ield\x12\x1d\n\x05label\x18\x02 \x01(\tB\x07\xbaH\x04r\x02\x10\x01R\x05label\x12O\n\x04\x61xis\x18\x03 \x01(\x0e\x32\x31.qdrant.cloud.facade.mcp.v1.TimeseriesSeries.AxisB\x08\xbaH\x05\x82\x01\x02\x10\x01R\x04\x61xis\";\n\x04\x41xis\x12\x14\n\x10\x41XIS_UNSPECIFIED\x10\x00\x12\r\n\tAXIS_LEFT\x10\x01\x12\x0e\n\nAXIS_RIGHT\x10\x02\"\xf7\x01\n\nHealthView\x12T\n\x07subject\x18\x01 \x01(\x0e\x32..qdrant.cloud.facade.mcp.v1.HealthView.SubjectB\n\xbaH\x07\x82\x01\x04\x10\x01 \x00R\x07subject\x12G\n\x0f\x63ompanion_tools\x18\x02 \x03(\tB\x1e\xbaH\x1b\x92\x01\x18\x08\x01\"\x14r\x12\x32\x10^[A-Za-z0-9_-]+$R\x0e\x63ompanionTools\"J\n\x07Subject\x12\x17\n\x13SUBJECT_UNSPECIFIED\x10\x00\x12\x13\n\x0fSUBJECT_CLUSTER\x10\x01\x12\x11\n\rSUBJECT_SPACE\x10\x02:g\n\x08mcp_tool\x12\x1e.google.protobuf.MethodOptions\x18\x85\x97\x03 \x01(\x0b\x32*.qdrant.cloud.facade.mcp.v1.McpToolOptionsR\x07mcpToolB\x91\x02\n\x1e\x63om.qdrant.cloud.facade.mcp.v1B\x0fMcpOptionsProtoP\x01ZQgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1;mcpv1\xa2\x02\x04QCFM\xaa\x02\x1aQdrant.Cloud.Facade.Mcp.V1\xca\x02\x1aQdrant\\Cloud\\Facade\\Mcp\\V1\xe2\x02&Qdrant\\Cloud\\Facade\\Mcp\\V1\\GPBMetadata\xea\x02\x1eQdrant::Cloud::Facade::Mcp::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -36,6 +36,40 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._serialized_options = b'\n\036com.qdrant.cloud.facade.mcp.v1B\017McpOptionsProtoP\001ZQgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1;mcpv1\242\002\004QCFM\252\002\032Qdrant.Cloud.Facade.Mcp.V1\312\002\032Qdrant\\Cloud\\Facade\\Mcp\\V1\342\002&Qdrant\\Cloud\\Facade\\Mcp\\V1\\GPBMetadata\352\002\036Qdrant::Cloud::Facade::Mcp::V1'
   _globals['_MCPTOOLOPTIONS'].fields_by_name['name']._loaded_options = None
   _globals['_MCPTOOLOPTIONS'].fields_by_name['name']._serialized_options = b'\272H\026r\024\020\0012\020^[A-Za-z0-9_-]+$'
-  _globals['_MCPTOOLOPTIONS']._serialized_start=139
-  _globals['_MCPTOOLOPTIONS']._serialized_end=202
+  _globals['_MCPUIVIEW'].oneofs_by_name['kind']._loaded_options = None
+  _globals['_MCPUIVIEW'].oneofs_by_name['kind']._serialized_options = b'\272H\002\010\001'
+  _globals['_TIMESERIESVIEW'].fields_by_name['series']._loaded_options = None
+  _globals['_TIMESERIESVIEW'].fields_by_name['series']._serialized_options = b'\272H\005\222\001\002\010\001'
+  _globals['_TIMESERIESVIEW'].fields_by_name['group_path']._loaded_options = None
+  _globals['_TIMESERIESVIEW'].fields_by_name['group_path']._serialized_options = b'\272H0r.2,^([a-z][A-Za-z0-9]*(\\.[a-z][A-Za-z0-9]*)*)?$'
+  _globals['_TIMESERIESVIEW'].fields_by_name['group_label_field']._loaded_options = None
+  _globals['_TIMESERIESVIEW'].fields_by_name['group_label_field']._serialized_options = b'\272H\032r\0302\026^([a-z][A-Za-z0-9]*)?$'
+  _globals['_TIMESERIESVIEW'].fields_by_name['chart_type']._loaded_options = None
+  _globals['_TIMESERIESVIEW'].fields_by_name['chart_type']._serialized_options = b'\272H\005\202\001\002\020\001'
+  _globals['_TIMESERIESSERIES'].fields_by_name['field']._loaded_options = None
+  _globals['_TIMESERIESSERIES'].fields_by_name['field']._serialized_options = b'\272H\027r\0252\023^[a-z][A-Za-z0-9]*$'
+  _globals['_TIMESERIESSERIES'].fields_by_name['label']._loaded_options = None
+  _globals['_TIMESERIESSERIES'].fields_by_name['label']._serialized_options = b'\272H\004r\002\020\001'
+  _globals['_TIMESERIESSERIES'].fields_by_name['axis']._loaded_options = None
+  _globals['_TIMESERIESSERIES'].fields_by_name['axis']._serialized_options = b'\272H\005\202\001\002\020\001'
+  _globals['_HEALTHVIEW'].fields_by_name['subject']._loaded_options = None
+  _globals['_HEALTHVIEW'].fields_by_name['subject']._serialized_options = b'\272H\007\202\001\004\020\001 \000'
+  _globals['_HEALTHVIEW'].fields_by_name['companion_tools']._loaded_options = None
+  _globals['_HEALTHVIEW'].fields_by_name['companion_tools']._serialized_options = b'\272H\033\222\001\030\010\001\"\024r\0222\020^[A-Za-z0-9_-]+$'
+  _globals['_MCPTOOLOPTIONS']._serialized_start=140
+  _globals['_MCPTOOLOPTIONS']._serialized_end=284
+  _globals['_MCPUIVIEW']._serialized_start=287
+  _globals['_MCPUIVIEW']._serialized_end=457
+  _globals['_TIMESERIESVIEW']._serialized_start=460
+  _globals['_TIMESERIESVIEW']._serialized_end=935
+  _globals['_TIMESERIESVIEW_CHARTTYPE']._serialized_start=834
+  _globals['_TIMESERIESVIEW_CHARTTYPE']._serialized_end=935
+  _globals['_TIMESERIESSERIES']._serialized_start=938
+  _globals['_TIMESERIESSERIES']._serialized_end=1179
+  _globals['_TIMESERIESSERIES_AXIS']._serialized_start=1120
+  _globals['_TIMESERIESSERIES_AXIS']._serialized_end=1179
+  _globals['_HEALTHVIEW']._serialized_start=1182
+  _globals['_HEALTHVIEW']._serialized_end=1429
+  _globals['_HEALTHVIEW_SUBJECT']._serialized_start=1355
+  _globals['_HEALTHVIEW_SUBJECT']._serialized_end=1429
 # @@protoc_insertion_point(module_scope)

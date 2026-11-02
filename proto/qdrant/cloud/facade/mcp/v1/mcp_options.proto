@@ -37,4 +37,96 @@ message McpToolOptions {
     min_len: 1
     pattern: "^[A-Za-z0-9_-]+$"
   }];
+  // Optional MCP Apps view, rendered next to the tool result by hosts that
+  // support the MCP Apps UI extension. Only allowed on
+  // read-only RPCs.
+  optional McpUiView ui_view = 2;
+}
+
+// McpUiView selects the MCP Apps view for a tool and configures it.
+message McpUiView {
+  // The kind of view.
+  oneof kind {
+    option (buf.validate.oneof).required = true;
+    // A chart of repeated Metric series from the tool's response.
+    TimeseriesView timeseries = 1;
+    // A small health dashboard for one cluster or space.
+    HealthView health = 2;
+  }
+}
+
+// TimeseriesView charts repeated Metric series from the tool's response.
+// Units come from the (qdrant.cloud.common.v1.unit) option on each series field.
+message TimeseriesView {
+  // ChartType is how the series are drawn.
+  enum ChartType {
+    // Unspecified; treated as CHART_TYPE_LINE.
+    CHART_TYPE_UNSPECIFIED = 0;
+    // Lines, for rates and gauges.
+    CHART_TYPE_LINE = 1;
+    // Filled areas, for rates and gauges.
+    CHART_TYPE_AREA = 2;
+    // Bars, for per-interval totals such as inference tokens.
+    CHART_TYPE_BAR = 3;
+  }
+
+  // Chart title shown in the view (defaults to the facade title).
+  string title = 1;
+  // Series to plot. Each field is a repeated Metric in the response (relative
+  // to group_path when set) and must carry (qdrant.cloud.common.v1.unit).
+  repeated TimeseriesSeries series = 2 [(buf.validate.field).repeated.min_items = 1];
+  // Optional JSON path (lowerCamelCase) to a repeated parent, for example
+  // "items", "nodes", or "models". Each element becomes one selectable group.
+  string group_path = 3 [(buf.validate.field).string.pattern = "^([a-z][A-Za-z0-9]*(\\.[a-z][A-Za-z0-9]*)*)?$"];
+  // Field on the group element used as its label, for example "collectionName".
+  string group_label_field = 4 [(buf.validate.field).string.pattern = "^([a-z][A-Za-z0-9]*)?$"];
+  // How values are drawn.
+  ChartType chart_type = 5 [(buf.validate.field).enum.defined_only = true];
+}
+
+// TimeseriesSeries is one plotted series of a TimeseriesView.
+message TimeseriesSeries {
+  // Axis is the y-axis a series is plotted against.
+  enum Axis {
+    // Unspecified; treated as AXIS_LEFT.
+    AXIS_UNSPECIFIED = 0;
+    // The left y-axis.
+    AXIS_LEFT = 1;
+    // The right y-axis.
+    AXIS_RIGHT = 2;
+  }
+
+  // JSON name (lowerCamelCase) of the repeated Metric field, for example "rps".
+  string field = 1 [(buf.validate.field).string.pattern = "^[a-z][A-Za-z0-9]*$"];
+  // Legend label, for example "Requests".
+  string label = 2 [(buf.validate.field).string.min_len = 1];
+  // The y-axis to plot against.
+  Axis axis = 3 [(buf.validate.field).enum.defined_only = true];
+}
+
+// HealthView is a small dashboard for one cluster or space. It renders the
+// annotated tool's result and loads the rest through the host by calling the
+// companion tools.
+message HealthView {
+  // Subject is the kind of resource the dashboard is about.
+  enum Subject {
+    // Unspecified; not allowed.
+    SUBJECT_UNSPECIFIED = 0;
+    // A cluster (account_id and cluster_id).
+    SUBJECT_CLUSTER = 1;
+    // A serverless space (account_id and space_id).
+    SUBJECT_SPACE = 2;
+  }
+
+  // The kind of resource.
+  Subject subject = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // Read-only MCP tool names the view calls through the host to complete the
+  // dashboard. Each must take the same identifiers as the annotated tool.
+  repeated string companion_tools = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    items: {string: {pattern: "^[A-Za-z0-9_-]+$"}}
+  }];
 }

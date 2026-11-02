@@ -584,7 +584,7 @@ export declare type SpaceInferenceModelMetrics = Message<"qdrant.cloud.serverles
   inferenceModelId: string;
 
   /**
-   * Aggregated histogram values for the inference model.
+   * Aggregated histogram values for the inference model, in tokens.
    *
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric values = 2;
    */
@@ -605,7 +605,7 @@ export declare type SpaceInferenceModelMetricsValid = Message<"qdrant.cloud.serv
   inferenceModelId: string;
 
   /**
-   * Aggregated histogram values for the inference model.
+   * Aggregated histogram values for the inference model, in tokens.
    *
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric values = 2;
    */
@@ -884,21 +884,21 @@ export declare type SpaceCollectionMetrics = Message<"qdrant.cloud.serverless.mo
   collectionName: string;
 
   /**
-   * Overview of search request rates for the collection.
+   * Overview of search request rates for the collection, in requests per second.
    *
    * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview search_requests = 2;
    */
   searchRequests?: SpaceMetricOverview | undefined;
 
   /**
-   * Overview of write (CRUD) request rates for the collection.
+   * Overview of write (CRUD) request rates for the collection, in requests per second.
    *
    * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview write_requests = 3;
    */
   writeRequests?: SpaceMetricOverview | undefined;
 
   /**
-   * Overview of search latency for the collection.
+   * Overview of search latency for the collection, in milliseconds.
    *
    * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview search_latency = 4;
    */
@@ -944,21 +944,21 @@ export declare type SpaceCollectionMetricsValid = Message<"qdrant.cloud.serverle
   collectionName: string;
 
   /**
-   * Overview of search request rates for the collection.
+   * Overview of search request rates for the collection, in requests per second.
    *
    * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview search_requests = 2;
    */
   searchRequests: SpaceMetricOverviewValid;
 
   /**
-   * Overview of write (CRUD) request rates for the collection.
+   * Overview of write (CRUD) request rates for the collection, in requests per second.
    *
    * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview write_requests = 3;
    */
   writeRequests: SpaceMetricOverviewValid;
 
   /**
-   * Overview of search latency for the collection.
+   * Overview of search latency for the collection, in milliseconds.
    *
    * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview search_latency = 4;
    */
@@ -1092,21 +1092,21 @@ export declare type SpaceCollectionUsageMetrics = Message<"qdrant.cloud.serverle
   collectionName: string;
 
   /**
-   * Timeseries of search request rates for the collection.
+   * Timeseries of search request rates for the collection, in requests per second.
    *
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric search_requests = 2;
    */
   searchRequests: Metric[];
 
   /**
-   * Timeseries of write (CRUD) request rates for the collection.
+   * Timeseries of write (CRUD) request rates for the collection, in requests per second.
    *
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric write_requests = 3;
    */
   writeRequests: Metric[];
 
   /**
-   * Timeseries of search latency for the collection.
+   * Timeseries of search latency for the collection, in milliseconds.
    *
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric search_latency = 4;
    */
@@ -1148,21 +1148,21 @@ export declare type SpaceCollectionUsageMetricsValid = Message<"qdrant.cloud.ser
   collectionName: string;
 
   /**
-   * Timeseries of search request rates for the collection.
+   * Timeseries of search request rates for the collection, in requests per second.
    *
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric search_requests = 2;
    */
   searchRequests: MetricValid[];
 
   /**
-   * Timeseries of write (CRUD) request rates for the collection.
+   * Timeseries of write (CRUD) request rates for the collection, in requests per second.
    *
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric write_requests = 3;
    */
   writeRequests: MetricValid[];
 
   /**
-   * Timeseries of search latency for the collection.
+   * Timeseries of search latency for the collection, in milliseconds.
    *
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric search_latency = 4;
    */
