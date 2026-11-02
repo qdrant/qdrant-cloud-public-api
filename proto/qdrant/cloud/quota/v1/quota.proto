@@ -91,4 +91,7 @@ message GetAccountQuotasResponse {
   // Maximum number of free-tier clusters this account can create.
   // Returns 0 if the actor is missing the `write:clusters` permission.
   uint32 max_free_tier_clusters = 5 [(buf.validate.field).uint32.gte = 0];
+  // Maximum disk size a single cluster node can be configured with. The per-node disk is the package's base disk plus any extra disk booked on top of it.
+  // Returns 0 if the actor is missing the `write:clusters` permission.
+  uint32 max_cluster_node_disk = 6 [(buf.validate.field).uint32.gte = 0];
 }

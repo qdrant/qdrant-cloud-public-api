@@ -187,8 +187,11 @@ type GetAccountQuotasResponse struct {
 	// Maximum number of free-tier clusters this account can create.
 	// Returns 0 if the actor is missing the `write:clusters` permission.
 	MaxFreeTierClusters uint32 `protobuf:"varint,5,opt,name=max_free_tier_clusters,json=maxFreeTierClusters,proto3" json:"max_free_tier_clusters,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Maximum disk size a single cluster node can be configured with. The per-node disk is the package's base disk plus any extra disk booked on top of it.
+	// Returns 0 if the actor is missing the `write:clusters` permission.
+	MaxClusterNodeDisk uint32 `protobuf:"varint,6,opt,name=max_cluster_node_disk,json=maxClusterNodeDisk,proto3" json:"max_cluster_node_disk,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *GetAccountQuotasResponse) Reset() {
@@ -256,6 +259,13 @@ func (x *GetAccountQuotasResponse) GetMaxFreeTierClusters() uint32 {
 	return 0
 }
 
+func (x *GetAccountQuotasResponse) GetMaxClusterNodeDisk() uint32 {
+	if x != nil {
+		return x.MaxClusterNodeDisk
+	}
+	return 0
+}
+
 var File_qdrant_cloud_quota_v1_quota_proto protoreflect.FileDescriptor
 
 const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
@@ -267,14 +277,15 @@ const file_qdrant_cloud_quota_v1_quota_proto_rawDesc = "" +
 	"\x13max_member_accounts\x18\x02 \x01(\rB\a\xbaH\x04*\x02 \x00R\x11maxMemberAccounts\"B\n" +
 	"\x17GetAccountQuotasRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xad\x02\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xe9\x02\n" +
 	"\x18GetAccountQuotasResponse\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12*\n" +
 	"\fmax_clusters\x18\x02 \x01(\rB\a\xbaH\x04*\x02(\x00R\vmaxClusters\x123\n" +
 	"\x11max_cluster_nodes\x18\x03 \x01(\rB\a\xbaH\x04*\x02(\x00R\x0fmaxClusterNodes\x12I\n" +
 	"\x1dmax_cluster_database_api_keys\x18\x04 \x01(\rB\a\xbaH\x04*\x02(\x00R\x19maxClusterDatabaseApiKeys\x12<\n" +
-	"\x16max_free_tier_clusters\x18\x05 \x01(\rB\a\xbaH\x04*\x02(\x00R\x13maxFreeTierClusters2\xec\x04\n" +
+	"\x16max_free_tier_clusters\x18\x05 \x01(\rB\a\xbaH\x04*\x02(\x00R\x13maxFreeTierClusters\x12:\n" +
+	"\x15max_cluster_node_disk\x18\x06 \x01(\rB\a\xbaH\x04*\x02(\x00R\x12maxClusterNodeDisk2\xec\x04\n" +
 	"\fQuotaService\x12\xb4\x02\n" +
 	"\x1aGetAuthenticatedUserQuotas\x128.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasRequest\x1a9.qdrant.cloud.quota.v1.GetAuthenticatedUserQuotasResponse\"\xa0\x01\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x8a\xb2\x19G\n" +
 	"&Get quotas for the authenticated user.\x12\x1dGet authenticated user quotas\xaa\xb8\x19\x1f\n" +
