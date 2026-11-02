@@ -189,7 +189,6 @@ type GetAccountQuotasResponse struct {
 	MaxFreeTierClusters uint32 `protobuf:"varint,5,opt,name=max_free_tier_clusters,json=maxFreeTierClusters,proto3" json:"max_free_tier_clusters,omitempty"`
 	// Maximum disk size a single cluster node can be configured with. The per-node disk is the package's base disk plus any extra disk booked on top of it.
 	// Returns 0 if the actor is missing the `write:clusters` permission.
-	// To get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.additional_resources.disk`.
 	MaxClusterNodeDisk uint32 `protobuf:"varint,6,opt,name=max_cluster_node_disk,json=maxClusterNodeDisk,proto3" json:"max_cluster_node_disk,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
