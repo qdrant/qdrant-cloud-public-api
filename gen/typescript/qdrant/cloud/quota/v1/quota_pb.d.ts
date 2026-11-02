@@ -129,6 +129,15 @@ export declare type GetAccountQuotasResponse = Message<"qdrant.cloud.quota.v1.Ge
    * @generated from field: uint32 max_free_tier_clusters = 5;
    */
   maxFreeTierClusters: number;
+
+  /**
+   * Maximum disk size a single cluster node can be configured with. The per-node disk is the package's base disk plus any extra disk booked on top of it.
+   * Returns 0 if the actor is missing the `write:clusters` permission.
+   * To get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.additional_resources.disk`.
+   *
+   * @generated from field: uint32 max_cluster_node_disk = 6;
+   */
+  maxClusterNodeDisk: number;
 };
 
 export declare type GetAccountQuotasResponseValid = GetAccountQuotasResponse;

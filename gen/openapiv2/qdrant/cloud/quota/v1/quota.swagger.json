@@ -127,6 +127,11 @@
           "type": "integer",
           "format": "int64",
           "description": "Maximum number of free-tier clusters this account can create.\nReturns 0 if the actor is missing the `write:clusters` permission."
+        },
+        "maxClusterNodeDisk": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum disk size a single cluster node can be configured with. The per-node disk is the package's base disk plus any extra disk booked on top of it.\nReturns 0 if the actor is missing the `write:clusters` permission.\nTo get the actual field: `qdrant.cloud.cluster.v1.Cluster.configuration.additional_resources.disk`."
         }
       },
       "description": "GetAccountQuotasResponse is the response from the GetAccountQuotas function."
