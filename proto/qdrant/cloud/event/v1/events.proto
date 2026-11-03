@@ -102,7 +102,7 @@ enum ResultStatus {
   RESULT_STATUS_DENIED = 4;
 }
 
-// EventSource identifies which API surface produced the event.
+// EventSource identifies what produced the event.
 enum EventSource {
   // Unspecified; not a valid event source.
   EVENT_SOURCE_UNSPECIFIED = 0;
@@ -110,6 +110,8 @@ enum EventSource {
   EVENT_SOURCE_PUBLIC_API = 1;
   // The event was produced from an internal API RPC.
   EVENT_SOURCE_INTERNAL_API = 2;
+  // The event was produced from a Kubernetes event, recorded by the k8s-governance recorder.
+  EVENT_SOURCE_KUBERNETES = 3;
 }
 
 // Result describes the outcome of the RPC that produced this event.
@@ -158,7 +160,7 @@ message Event {
   // The fullname of the RPC which was invoked.
   // E.g 'qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup'
   string source_rpc = 6 [(buf.validate.field).string.min_len = 1];
-  // Which API surface produced this event (public vs internal).
+  // What produced this event (public API, internal API or Kubernetes).
   // Omitted on legacy events published before this field existed;
   // new publishers should set it.
   optional EventSource source = 16 [(buf.validate.field).enum = {

@@ -149,7 +149,7 @@ func (ResultStatus) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_event_v1_events_proto_rawDescGZIP(), []int{1}
 }
 
-// EventSource identifies which API surface produced the event.
+// EventSource identifies what produced the event.
 type EventSource int32
 
 const (
@@ -159,6 +159,8 @@ const (
 	EventSource_EVENT_SOURCE_PUBLIC_API EventSource = 1
 	// The event was produced from an internal API RPC.
 	EventSource_EVENT_SOURCE_INTERNAL_API EventSource = 2
+	// The event was produced from a Kubernetes event, recorded by the k8s-governance recorder.
+	EventSource_EVENT_SOURCE_KUBERNETES EventSource = 3
 )
 
 // Enum value maps for EventSource.
@@ -167,11 +169,13 @@ var (
 		0: "EVENT_SOURCE_UNSPECIFIED",
 		1: "EVENT_SOURCE_PUBLIC_API",
 		2: "EVENT_SOURCE_INTERNAL_API",
+		3: "EVENT_SOURCE_KUBERNETES",
 	}
 	EventSource_value = map[string]int32{
 		"EVENT_SOURCE_UNSPECIFIED":  0,
 		"EVENT_SOURCE_PUBLIC_API":   1,
 		"EVENT_SOURCE_INTERNAL_API": 2,
+		"EVENT_SOURCE_KUBERNETES":   3,
 	}
 )
 
@@ -423,7 +427,7 @@ type Event struct {
 	// The fullname of the RPC which was invoked.
 	// E.g 'qdrant.cloud.cluster.v1.ClusterService/CreateClusterFromBackup'
 	SourceRpc string `protobuf:"bytes,6,opt,name=source_rpc,json=sourceRpc,proto3" json:"source_rpc,omitempty"`
-	// Which API surface produced this event (public vs internal).
+	// What produced this event (public API, internal API or Kubernetes).
 	// Omitted on legacy events published before this field existed;
 	// new publishers should set it.
 	Source *EventSource `protobuf:"varint,16,opt,name=source,proto3,enum=qdrant.cloud.event.v1.EventSource,oneof" json:"source,omitempty"`
@@ -729,11 +733,12 @@ const file_qdrant_cloud_event_v1_events_proto_rawDesc = "" +
 	"\x15RESULT_STATUS_SUCCESS\x10\x01\x12\x19\n" +
 	"\x15RESULT_STATUS_FAILURE\x10\x02\x12\x1a\n" +
 	"\x16RESULT_STATUS_REJECTED\x10\x03\x12\x18\n" +
-	"\x14RESULT_STATUS_DENIED\x10\x04*g\n" +
+	"\x14RESULT_STATUS_DENIED\x10\x04*\x84\x01\n" +
 	"\vEventSource\x12\x1c\n" +
 	"\x18EVENT_SOURCE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17EVENT_SOURCE_PUBLIC_API\x10\x01\x12\x1d\n" +
-	"\x19EVENT_SOURCE_INTERNAL_API\x10\x02:j\n" +
+	"\x19EVENT_SOURCE_INTERNAL_API\x10\x02\x12\x1b\n" +
+	"\x17EVENT_SOURCE_KUBERNETES\x10\x03:j\n" +
 	"\revent_options\x12\x1e.google.protobuf.MethodOptions\x18\xb9\x8e\x03 \x01(\v2#.qdrant.cloud.event.v1.EventOptionsR\feventOptionsB\xef\x01\n" +
 	"\x19com.qdrant.cloud.event.v1B\vEventsProtoP\x01ZNgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1;eventv1\xa2\x02\x03QCE\xaa\x02\x15Qdrant.Cloud.Event.V1\xca\x02\x15Qdrant\\Cloud\\Event\\V1\xe2\x02!Qdrant\\Cloud\\Event\\V1\\GPBMetadata\xea\x02\x18Qdrant::Cloud::Event::V1b\x06proto3"
 
