@@ -1223,6 +1223,9 @@ func (x *CollectionSettings) GetSizeWarningThresholdPercent() uint32 {
 // SearcherSettings configures search-worker behavior for a space.
 type SearcherSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Platform-defined minimum time a search worker stays idle before it may be scaled down.
+	// This is a read-only field. Defaults to 5 minutes.
+	MinIdleTimeout *durationpb.Duration `protobuf:"bytes,1,opt,name=min_idle_timeout,json=minIdleTimeout,proto3" json:"min_idle_timeout,omitempty"`
 	// Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.
 	// This is a read-only field. A value of 0 means unlimited.
 	PlatformMaxWorkers uint64 `protobuf:"varint,2,opt,name=platform_max_workers,json=platformMaxWorkers,proto3" json:"platform_max_workers,omitempty"`
@@ -1230,12 +1233,9 @@ type SearcherSettings struct {
 	// For example, if set to 2 and the space has 3 collections, the total maximum is 6.
 	// Valid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.
 	// This field is writable via UpdateSpace.
-	MaxWorkers *uint64 `protobuf:"varint,3,opt,name=max_workers,json=maxWorkers,proto3,oneof" json:"max_workers,omitempty"`
-	// Platform-defined minimum time a search worker stays idle before it may be scaled down.
-	// This is a read-only field. Defaults to 5 minutes.
-	MinIdleTimeout *durationpb.Duration `protobuf:"bytes,4,opt,name=min_idle_timeout,json=minIdleTimeout,proto3" json:"min_idle_timeout,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	MaxWorkers    *uint64 `protobuf:"varint,3,opt,name=max_workers,json=maxWorkers,proto3,oneof" json:"max_workers,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SearcherSettings) Reset() {
@@ -1268,6 +1268,13 @@ func (*SearcherSettings) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{17}
 }
 
+func (x *SearcherSettings) GetMinIdleTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.MinIdleTimeout
+	}
+	return nil
+}
+
 func (x *SearcherSettings) GetPlatformMaxWorkers() uint64 {
 	if x != nil {
 		return x.PlatformMaxWorkers
@@ -1280,13 +1287,6 @@ func (x *SearcherSettings) GetMaxWorkers() uint64 {
 		return *x.MaxWorkers
 	}
 	return 0
-}
-
-func (x *SearcherSettings) GetMinIdleTimeout() *durationpb.Duration {
-	if x != nil {
-		return x.MinIdleTimeout
-	}
-	return nil
 }
 
 // SpaceState represents the operational state of a space in the Qdrant serverless environment.
@@ -1510,13 +1510,13 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1esize_warning_threshold_percent\x18\x05 \x01(\rB\t\xbaH\x06*\x04\x18d((H\x02R\x1bsizeWarningThresholdPercent\x88\x01\x01B\v\n" +
 	"\t_max_sizeB\x13\n" +
 	"\x11_max_indexed_sizeB!\n" +
-	"\x1f_size_warning_threshold_percent\"\xef\x01\n" +
-	"\x10SearcherSettings\x12=\n" +
+	"\x1f_size_warning_threshold_percent\"\xdb\x01\n" +
+	"\x10SearcherSettings\x12I\n" +
+	"\x10min_idle_timeout\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x04\xe2A\x01\x03R\x0eminIdleTimeout\x12=\n" +
 	"\x14platform_max_workers\x18\x02 \x01(\x04B\v\xe2A\x01\x03\xbaH\x042\x02(\x00R\x12platformMaxWorkers\x12-\n" +
 	"\vmax_workers\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x01H\x00R\n" +
-	"maxWorkers\x88\x01\x01\x12I\n" +
-	"\x10min_idle_timeout\x18\x04 \x01(\v2\x19.google.protobuf.DurationB\x04\xe2A\x01\x03R\x0eminIdleTimeoutB\x0e\n" +
-	"\f_max_workersJ\x04\b\x01\x10\x02R\fidle_timeout\"\xe6\x01\n" +
+	"maxWorkers\x88\x01\x01B\x0e\n" +
+	"\f_max_workers\"\xe6\x01\n" +
 	"\n" +
 	"SpaceState\x12U\n" +
 	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\f\xe2A\x01\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x1c\n" +

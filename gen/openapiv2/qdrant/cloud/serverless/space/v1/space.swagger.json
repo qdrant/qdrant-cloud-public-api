@@ -698,6 +698,11 @@
     "v1SearcherSettings": {
       "type": "object",
       "properties": {
+        "minIdleTimeout": {
+          "type": "string",
+          "description": "Platform-defined minimum time a search worker stays idle before it may be scaled down.\nThis is a read-only field. Defaults to 5 minutes.",
+          "readOnly": true
+        },
         "platformMaxWorkers": {
           "type": "string",
           "format": "uint64",
@@ -708,11 +713,6 @@
           "type": "string",
           "format": "uint64",
           "description": "Maximum number of search workers per collection in this space.\nFor example, if set to 2 and the space has 3 collections, the total maximum is 6.\nValid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.\nThis field is writable via UpdateSpace."
-        },
-        "minIdleTimeout": {
-          "type": "string",
-          "description": "Platform-defined minimum time a search worker stays idle before it may be scaled down.\nThis is a read-only field. Defaults to 5 minutes.",
-          "readOnly": true
         }
       },
       "description": "SearcherSettings configures search-worker behavior for a space."

@@ -562,6 +562,9 @@ message CollectionSettings {
 
 // SearcherSettings configures search-worker behavior for a space.
 message SearcherSettings {
+  // Platform-defined minimum time a search worker stays idle before it may be scaled down.
+  // This is a read-only field. Defaults to 5 minutes.
+  google.protobuf.Duration min_idle_timeout = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.
   // This is a read-only field. A value of 0 means unlimited.
   uint64 platform_max_workers = 2 [
@@ -573,13 +576,6 @@ message SearcherSettings {
   // Valid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.
   // This field is writable via UpdateSpace.
   optional uint64 max_workers = 3 [(buf.validate.field).uint64 = {gte: 1}];
-  // Platform-defined minimum time a search worker stays idle before it may be scaled down.
-  // This is a read-only field. Defaults to 5 minutes.
-  google.protobuf.Duration min_idle_timeout = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
-  // Removed: idle_timeout (1), which was writable via UpdateSpace.
-  // Replaced by the read-only min_idle_timeout.
-  reserved 1;
-  reserved "idle_timeout";
 }
 
 // SpaceStatePhase defines the operational phases of a Qdrant serverless space.

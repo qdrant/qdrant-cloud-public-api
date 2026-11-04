@@ -198,14 +198,14 @@ class CollectionSettings(_message.Message):
     def __init__(self, platform_max_size: _Optional[int] = ..., max_size: _Optional[int] = ..., max_indexed_size: _Optional[int] = ..., platform_max_indexed_size: _Optional[int] = ..., size_warning_threshold_percent: _Optional[int] = ...) -> None: ...
 
 class SearcherSettings(_message.Message):
-    __slots__ = ("platform_max_workers", "max_workers", "min_idle_timeout")
+    __slots__ = ("min_idle_timeout", "platform_max_workers", "max_workers")
+    MIN_IDLE_TIMEOUT_FIELD_NUMBER: _ClassVar[int]
     PLATFORM_MAX_WORKERS_FIELD_NUMBER: _ClassVar[int]
     MAX_WORKERS_FIELD_NUMBER: _ClassVar[int]
-    MIN_IDLE_TIMEOUT_FIELD_NUMBER: _ClassVar[int]
+    min_idle_timeout: _duration_pb2.Duration
     platform_max_workers: int
     max_workers: int
-    min_idle_timeout: _duration_pb2.Duration
-    def __init__(self, platform_max_workers: _Optional[int] = ..., max_workers: _Optional[int] = ..., min_idle_timeout: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ...) -> None: ...
+    def __init__(self, min_idle_timeout: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., platform_max_workers: _Optional[int] = ..., max_workers: _Optional[int] = ...) -> None: ...
 
 class SpaceState(_message.Message):
     __slots__ = ("phase", "reason", "endpoint")

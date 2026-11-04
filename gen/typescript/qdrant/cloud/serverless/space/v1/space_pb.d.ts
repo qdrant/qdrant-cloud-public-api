@@ -905,6 +905,14 @@ export declare const CollectionSettingsSchema: GenMessage<CollectionSettings, {v
  */
 export declare type SearcherSettings = Message<"qdrant.cloud.serverless.space.v1.SearcherSettings"> & {
   /**
+   * Platform-defined minimum time a search worker stays idle before it may be scaled down.
+   * This is a read-only field. Defaults to 5 minutes.
+   *
+   * @generated from field: google.protobuf.Duration min_idle_timeout = 1;
+   */
+  minIdleTimeout?: Duration | undefined;
+
+  /**
    * Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.
    * This is a read-only field. A value of 0 means unlimited.
    *
@@ -921,14 +929,6 @@ export declare type SearcherSettings = Message<"qdrant.cloud.serverless.space.v1
    * @generated from field: optional uint64 max_workers = 3;
    */
   maxWorkers?: bigint | undefined;
-
-  /**
-   * Platform-defined minimum time a search worker stays idle before it may be scaled down.
-   * This is a read-only field. Defaults to 5 minutes.
-   *
-   * @generated from field: google.protobuf.Duration min_idle_timeout = 4;
-   */
-  minIdleTimeout?: Duration | undefined;
 };
 
 export declare type SearcherSettingsValid = SearcherSettings;
