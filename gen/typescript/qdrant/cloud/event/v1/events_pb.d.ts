@@ -216,7 +216,7 @@ export declare type Event = Message<"qdrant.cloud.event.v1.Event"> & {
   sourceRpc: string;
 
   /**
-   * Which API surface produced this event (public vs internal).
+   * What produced this event (public API, internal API or Kubernetes).
    * Omitted on legacy events published before this field existed;
    * new publishers should set it.
    *
@@ -376,7 +376,7 @@ export declare type EventValid = Message<"qdrant.cloud.event.v1.Event"> & {
   sourceRpc: string;
 
   /**
-   * Which API surface produced this event (public vs internal).
+   * What produced this event (public API, internal API or Kubernetes).
    * Omitted on legacy events published before this field existed;
    * new publishers should set it.
    *
@@ -558,7 +558,7 @@ export enum ResultStatus {
 export declare const ResultStatusSchema: GenEnum<ResultStatus>;
 
 /**
- * EventSource identifies which API surface produced the event.
+ * EventSource identifies what produced the event.
  *
  * @generated from enum qdrant.cloud.event.v1.EventSource
  */
@@ -583,6 +583,13 @@ export enum EventSource {
    * @generated from enum value: EVENT_SOURCE_INTERNAL_API = 2;
    */
   INTERNAL_API = 2,
+
+  /**
+   * The event was produced from a Kubernetes event, recorded by the k8s-governance recorder.
+   *
+   * @generated from enum value: EVENT_SOURCE_KUBERNETES = 3;
+   */
+  KUBERNETES = 3,
 }
 
 /**

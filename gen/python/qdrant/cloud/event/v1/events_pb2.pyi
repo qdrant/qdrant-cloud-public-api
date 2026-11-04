@@ -36,6 +36,7 @@ class EventSource(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     EVENT_SOURCE_UNSPECIFIED: _ClassVar[EventSource]
     EVENT_SOURCE_PUBLIC_API: _ClassVar[EventSource]
     EVENT_SOURCE_INTERNAL_API: _ClassVar[EventSource]
+    EVENT_SOURCE_KUBERNETES: _ClassVar[EventSource]
 EVENT_TYPE_UNSPECIFIED: EventType
 EVENT_TYPE_CREATED: EventType
 EVENT_TYPE_UPDATED: EventType
@@ -49,6 +50,7 @@ RESULT_STATUS_DENIED: ResultStatus
 EVENT_SOURCE_UNSPECIFIED: EventSource
 EVENT_SOURCE_PUBLIC_API: EventSource
 EVENT_SOURCE_INTERNAL_API: EventSource
+EVENT_SOURCE_KUBERNETES: EventSource
 EVENT_OPTIONS_FIELD_NUMBER: _ClassVar[int]
 event_options: _descriptor.FieldDescriptor
 
