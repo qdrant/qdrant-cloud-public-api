@@ -91,8 +91,11 @@ type AccountQuota struct {
 	// Platform limit: maximum search workers per collection (copied into each Space.configuration.searcher_settings).
 	// A value of 0 means unlimited.
 	PlatformMaxWorkersPerCollection uint64 `protobuf:"varint,8,opt,name=platform_max_workers_per_collection,json=platformMaxWorkersPerCollection,proto3" json:"platform_max_workers_per_collection,omitempty"`
-	unknownFields                   protoimpl.UnknownFields
-	sizeCache                       protoimpl.SizeCache
+	// Platform limit: maximum indexed size in bytes per collection (copied into each Space.configuration.collection_settings).
+	// A value of 0 means unlimited.
+	PlatformMaxIndexedSizePerCollection uint64 `protobuf:"varint,9,opt,name=platform_max_indexed_size_per_collection,json=platformMaxIndexedSizePerCollection,proto3" json:"platform_max_indexed_size_per_collection,omitempty"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
 }
 
 func (x *AccountQuota) Reset() {
@@ -167,6 +170,13 @@ func (x *AccountQuota) GetPlatformMaxWorkersPerCollection() uint64 {
 	return 0
 }
 
+func (x *AccountQuota) GetPlatformMaxIndexedSizePerCollection() uint64 {
+	if x != nil {
+		return x.PlatformMaxIndexedSizePerCollection
+	}
+	return 0
+}
+
 // GetQuotasResponse is the response message for the GetQuotas method.
 type GetQuotasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -220,7 +230,7 @@ const file_qdrant_cloud_serverless_quota_v1_quota_proto_rawDesc = "" +
 	",qdrant/cloud/serverless/quota/v1/quota.proto\x12 qdrant.cloud.serverless.quota.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\";\n" +
 	"\x10GetQuotasRequest\x12'\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\xbb\x03\n" +
+	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\"\x9b\x04\n" +
 	"\fAccountQuota\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12&\n" +
@@ -230,14 +240,15 @@ const file_qdrant_cloud_serverless_quota_v1_quota_proto_rawDesc = "" +
 	"\vused_spaces\x18\x05 \x01(\x04B\a\xbaH\x042\x02(\x00R\n" +
 	"usedSpaces\x12O\n" +
 	" platform_max_size_per_collection\x18\a \x01(\x04B\a\xbaH\x042\x02(\x00R\x1cplatformMaxSizePerCollection\x12U\n" +
-	"#platform_max_workers_per_collection\x18\b \x01(\x04B\a\xbaH\x042\x02(\x00R\x1fplatformMaxWorkersPerCollectionJ\x04\b\x04\x10\x05J\x04\b\x06\x10\aR$platform_max_storage_bytes_per_spaceR\x12used_storage_bytes\"Y\n" +
+	"#platform_max_workers_per_collection\x18\b \x01(\x04B\a\xbaH\x042\x02(\x00R\x1fplatformMaxWorkersPerCollection\x12^\n" +
+	"(platform_max_indexed_size_per_collection\x18\t \x01(\x04B\a\xbaH\x042\x02(\x00R#platformMaxIndexedSizePerCollectionJ\x04\b\x04\x10\x05J\x04\b\x06\x10\aR$platform_max_storage_bytes_per_spaceR\x12used_storage_bytes\"Y\n" +
 	"\x11GetQuotasResponse\x12D\n" +
 	"\x05quota\x18\x01 \x01(\v2..qdrant.cloud.serverless.quota.v1.AccountQuotaR\x05quota2\xfa\x02\n" +
 	"\fQuotaService\x12\xdf\x02\n" +
 	"\tGetQuotas\x122.qdrant.cloud.serverless.quota.v1.GetQuotasRequest\x1a3.qdrant.cloud.serverless.quota.v1.GetQuotasResponse\"\xe8\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19[\n" +
 	"BGet account-level serverless platform quotas and aggregated usage.\x12\x15Get serverless quotas\xaa\xb8\x19\x17\n" +
 	"\x15get_serverless_quotasʾ\x19\x19\n" +
-	"\x10serverlessQuotas\x12\x05quota\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/quotas\x1a\bµ\x18\x04\b\x01\x10\x01B\xb2\x02\n" +
+	"\x10serverlessQuotas\x12\x05quota\x82\xd3\xe4\x93\x021\x12//api/serverless/v1/accounts/{account_id}/quotas\x1a\bµ\x18\x04\b\x01\x10\x02B\xb2\x02\n" +
 	"$com.qdrant.cloud.serverless.quota.v1B\n" +
 	"QuotaProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/quota/v1;quotav1\xa2\x02\x04QCSQ\xaa\x02 Qdrant.Cloud.Serverless.Quota.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Quota\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Quota\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Quota::V1b\x06proto3"
 

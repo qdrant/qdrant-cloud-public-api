@@ -1048,7 +1048,7 @@ type SpaceConfiguration struct {
 	// Platform ceilings are derived from the account's quota; customer caps are writable via UpdateSpace.
 	CollectionSettings *CollectionSettings `protobuf:"bytes,16,opt,name=collection_settings,json=collectionSettings,proto3" json:"collection_settings,omitempty"`
 	// Search-worker settings for this space.
-	// Platform worker ceilings are derived from the account's quota; idle timeout and worker count are writable via UpdateSpace.
+	// Platform worker ceilings are derived from the account's quota; the worker count is writable via UpdateSpace.
 	SearcherSettings *SearcherSettings `protobuf:"bytes,17,opt,name=searcher_settings,json=searcherSettings,proto3" json:"searcher_settings,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -1134,10 +1134,25 @@ type CollectionSettings struct {
 	PlatformMaxSize uint64 `protobuf:"varint,1,opt,name=platform_max_size,json=platformMaxSize,proto3" json:"platform_max_size,omitempty"`
 	// Optional customer-defined maximum size in bytes per collection, used for cost control.
 	// When set, it must not exceed `platform_max_size`.
-	// This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
-	MaxSize       *uint64 `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3,oneof" json:"max_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// This field is writable via UpdateSpace. Defaults to 2 GiB (2147483648 bytes) when unset,
+	// capped by `platform_max_size` when that is lower.
+	MaxSize *uint64 `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3,oneof" json:"max_size,omitempty"`
+	// Optional customer-defined maximum indexed size in bytes per collection.
+	// When set, it must not exceed `platform_max_indexed_size` or the effective maximum size
+	// (`max_size`, or `platform_max_size` when `max_size` is unset).
+	// This field is writable via UpdateSpace. Defaults to 1 GiB (1073741824 bytes) when unset,
+	// capped by `platform_max_indexed_size` when that is lower.
+	MaxIndexedSize *uint64 `protobuf:"varint,3,opt,name=max_indexed_size,json=maxIndexedSize,proto3,oneof" json:"max_indexed_size,omitempty"`
+	// Platform-enforced maximum indexed size in bytes per collection, derived from the account's quota and platform defaults.
+	// This is a read-only field. A value of 0 means unlimited.
+	PlatformMaxIndexedSize uint64 `protobuf:"varint,4,opt,name=platform_max_indexed_size,json=platformMaxIndexedSize,proto3" json:"platform_max_indexed_size,omitempty"`
+	// Optional customer-defined threshold, as a percentage of the effective maximum size,
+	// at which a size warning is sent for a collection.
+	// Valid range: 40 to 100. Defaults to 80 when unset.
+	// This field is writable via UpdateSpace.
+	SizeWarningThresholdPercent *uint32 `protobuf:"varint,5,opt,name=size_warning_threshold_percent,json=sizeWarningThresholdPercent,proto3,oneof" json:"size_warning_threshold_percent,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *CollectionSettings) Reset() {
@@ -1184,13 +1199,30 @@ func (x *CollectionSettings) GetMaxSize() uint64 {
 	return 0
 }
 
+func (x *CollectionSettings) GetMaxIndexedSize() uint64 {
+	if x != nil && x.MaxIndexedSize != nil {
+		return *x.MaxIndexedSize
+	}
+	return 0
+}
+
+func (x *CollectionSettings) GetPlatformMaxIndexedSize() uint64 {
+	if x != nil {
+		return x.PlatformMaxIndexedSize
+	}
+	return 0
+}
+
+func (x *CollectionSettings) GetSizeWarningThresholdPercent() uint32 {
+	if x != nil && x.SizeWarningThresholdPercent != nil {
+		return *x.SizeWarningThresholdPercent
+	}
+	return 0
+}
+
 // SearcherSettings configures search-worker behavior for a space.
 type SearcherSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Idle timeout after which idle search workers may be scaled down.
-	// Valid range: 1 minute to 15 minutes. Defaults to 5 minutes when unset.
-	// This field is writable via UpdateSpace.
-	IdleTimeout *durationpb.Duration `protobuf:"bytes,1,opt,name=idle_timeout,json=idleTimeout,proto3,oneof" json:"idle_timeout,omitempty"`
 	// Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.
 	// This is a read-only field. A value of 0 means unlimited.
 	PlatformMaxWorkers uint64 `protobuf:"varint,2,opt,name=platform_max_workers,json=platformMaxWorkers,proto3" json:"platform_max_workers,omitempty"`
@@ -1198,9 +1230,12 @@ type SearcherSettings struct {
 	// For example, if set to 2 and the space has 3 collections, the total maximum is 6.
 	// Valid range: 1 to `platform_max_workers` when the platform ceiling is set (non-zero). Defaults to 2 when unset.
 	// This field is writable via UpdateSpace.
-	MaxWorkers    *uint64 `protobuf:"varint,3,opt,name=max_workers,json=maxWorkers,proto3,oneof" json:"max_workers,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	MaxWorkers *uint64 `protobuf:"varint,3,opt,name=max_workers,json=maxWorkers,proto3,oneof" json:"max_workers,omitempty"`
+	// Platform-defined minimum time a search worker stays idle before it may be scaled down.
+	// This is a read-only field. Defaults to 5 minutes.
+	MinIdleTimeout *durationpb.Duration `protobuf:"bytes,4,opt,name=min_idle_timeout,json=minIdleTimeout,proto3" json:"min_idle_timeout,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *SearcherSettings) Reset() {
@@ -1233,13 +1268,6 @@ func (*SearcherSettings) Descriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_space_v1_space_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *SearcherSettings) GetIdleTimeout() *durationpb.Duration {
-	if x != nil {
-		return x.IdleTimeout
-	}
-	return nil
-}
-
 func (x *SearcherSettings) GetPlatformMaxWorkers() uint64 {
 	if x != nil {
 		return x.PlatformMaxWorkers
@@ -1252,6 +1280,13 @@ func (x *SearcherSettings) GetMaxWorkers() uint64 {
 		return *x.MaxWorkers
 	}
 	return 0
+}
+
+func (x *SearcherSettings) GetMinIdleTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.MinIdleTimeout
+	}
+	return nil
 }
 
 // SpaceState represents the operational state of a space in the Qdrant serverless environment.
@@ -1466,18 +1501,22 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x18\x01\"\\rZ\x10\x01\x18\xfd\x012S^https?:\\/\\/([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(:[0-9]+)?$R\x0eallowedOrigins\x12F\n" +
 	"\x19max_collections_per_space\x18\x0f \x01(\x04B\v\xe2A\x01\x03\xbaH\x042\x02(\x00R\x16maxCollectionsPerSpace\x12e\n" +
 	"\x13collection_settings\x18\x10 \x01(\v24.qdrant.cloud.serverless.space.v1.CollectionSettingsR\x12collectionSettings\x12_\n" +
-	"\x11searcher_settings\x18\x11 \x01(\v22.qdrant.cloud.serverless.space.v1.SearcherSettingsR\x10searcherSettingsJ\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0fR\x1aplatform_max_storage_bytesR\x11max_storage_bytes\"\x83\x01\n" +
+	"\x11searcher_settings\x18\x11 \x01(\v22.qdrant.cloud.serverless.space.v1.SearcherSettingsR\x10searcherSettingsJ\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0fR\x1aplatform_max_storage_bytesR\x11max_storage_bytes\"\x90\x03\n" +
 	"\x12CollectionSettings\x127\n" +
 	"\x11platform_max_size\x18\x01 \x01(\x04B\v\xe2A\x01\x03\xbaH\x042\x02(\x00R\x0fplatformMaxSize\x12'\n" +
-	"\bmax_size\x18\x02 \x01(\x04B\a\xbaH\x042\x02(\x00H\x00R\amaxSize\x88\x01\x01B\v\n" +
-	"\t_max_size\"\xf5\x01\n" +
-	"\x10SearcherSettings\x12R\n" +
-	"\fidle_timeout\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x0f\xbaH\f\xaa\x01\t\"\x03\b\x84\a2\x02\b<H\x00R\vidleTimeout\x88\x01\x01\x12=\n" +
+	"\bmax_size\x18\x02 \x01(\x04B\a\xbaH\x042\x02(\x00H\x00R\amaxSize\x88\x01\x01\x126\n" +
+	"\x10max_indexed_size\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00H\x01R\x0emaxIndexedSize\x88\x01\x01\x12F\n" +
+	"\x19platform_max_indexed_size\x18\x04 \x01(\x04B\v\xe2A\x01\x03\xbaH\x042\x02(\x00R\x16platformMaxIndexedSize\x12S\n" +
+	"\x1esize_warning_threshold_percent\x18\x05 \x01(\rB\t\xbaH\x06*\x04\x18d((H\x02R\x1bsizeWarningThresholdPercent\x88\x01\x01B\v\n" +
+	"\t_max_sizeB\x13\n" +
+	"\x11_max_indexed_sizeB!\n" +
+	"\x1f_size_warning_threshold_percent\"\xef\x01\n" +
+	"\x10SearcherSettings\x12=\n" +
 	"\x14platform_max_workers\x18\x02 \x01(\x04B\v\xe2A\x01\x03\xbaH\x042\x02(\x00R\x12platformMaxWorkers\x12-\n" +
-	"\vmax_workers\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x01H\x01R\n" +
-	"maxWorkers\x88\x01\x01B\x0f\n" +
-	"\r_idle_timeoutB\x0e\n" +
-	"\f_max_workers\"\xe6\x01\n" +
+	"\vmax_workers\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x01H\x00R\n" +
+	"maxWorkers\x88\x01\x01\x12I\n" +
+	"\x10min_idle_timeout\x18\x04 \x01(\v2\x19.google.protobuf.DurationB\x04\xe2A\x01\x03R\x0eminIdleTimeoutB\x0e\n" +
+	"\f_max_workersJ\x04\b\x01\x10\x02R\fidle_timeout\"\xe6\x01\n" +
 	"\n" +
 	"SpaceState\x12U\n" +
 	"\x05phase\x18\x01 \x01(\x0e21.qdrant.cloud.serverless.space.v1.SpaceStatePhaseB\f\xe2A\x01\x03\xbaH\x05\x82\x01\x02\x10\x01R\x05phase\x12\x1c\n" +
@@ -1491,7 +1530,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
 	"\x17SPACE_STATE_PHASE_READY\x10\x02\x12\x1e\n" +
 	"\x1aSPACE_STATE_PHASE_DISABLED\x10\x03\x12\x1e\n" +
-	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xce\x1a\n" +
+	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xd0\x1a\n" +
 	"\fSpaceService\x12\xc9\x02\n" +
 	"\n" +
 	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"\xcf\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19V\n" +
@@ -1539,7 +1578,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"\xd0\x01\x8a\xb5\x18\x00\x8a\xb2\x19V\n" +
 	"@Suggest a unique human-friendly name for a new serverless space.\x12\x12Suggest space name\xaa\xb8\x19\x14\n" +
 	"\x12suggest_space_nameʾ\x19\x12\n" +
-	"\x10suggestSpaceName\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\x06µ\x18\x02\b\x02B\xb2\x02\n" +
+	"\x10suggestSpaceName\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\bµ\x18\x04\b\x02\x10\x01B\xb2\x02\n" +
 	"$com.qdrant.cloud.serverless.space.v1B\n" +
 	"SpaceProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/v1;spacev1\xa2\x02\x04QCSS\xaa\x02 Qdrant.Cloud.Serverless.Space.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Space\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Space\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Space::V1b\x06proto3"
 
@@ -1605,7 +1644,7 @@ var file_qdrant_cloud_serverless_space_v1_space_proto_depIdxs = []int32{
 	22, // 16: qdrant.cloud.serverless.space.v1.SpaceConfiguration.last_modified_at:type_name -> google.protobuf.Timestamp
 	17, // 17: qdrant.cloud.serverless.space.v1.SpaceConfiguration.collection_settings:type_name -> qdrant.cloud.serverless.space.v1.CollectionSettings
 	18, // 18: qdrant.cloud.serverless.space.v1.SpaceConfiguration.searcher_settings:type_name -> qdrant.cloud.serverless.space.v1.SearcherSettings
-	25, // 19: qdrant.cloud.serverless.space.v1.SearcherSettings.idle_timeout:type_name -> google.protobuf.Duration
+	25, // 19: qdrant.cloud.serverless.space.v1.SearcherSettings.min_idle_timeout:type_name -> google.protobuf.Duration
 	0,  // 20: qdrant.cloud.serverless.space.v1.SpaceState.phase:type_name -> qdrant.cloud.serverless.space.v1.SpaceStatePhase
 	20, // 21: qdrant.cloud.serverless.space.v1.SpaceState.endpoint:type_name -> qdrant.cloud.serverless.space.v1.SpaceEndpoint
 	1,  // 22: qdrant.cloud.serverless.space.v1.SpaceService.ListSpaces:input_type -> qdrant.cloud.serverless.space.v1.ListSpacesRequest
