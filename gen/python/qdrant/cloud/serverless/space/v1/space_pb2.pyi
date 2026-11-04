@@ -184,22 +184,28 @@ class SpaceConfiguration(_message.Message):
     def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., allowed_origins: _Optional[_Iterable[str]] = ..., max_collections_per_space: _Optional[int] = ..., collection_settings: _Optional[_Union[CollectionSettings, _Mapping]] = ..., searcher_settings: _Optional[_Union[SearcherSettings, _Mapping]] = ...) -> None: ...
 
 class CollectionSettings(_message.Message):
-    __slots__ = ("platform_max_size", "max_size")
+    __slots__ = ("platform_max_size", "max_size", "max_indexed_size", "platform_max_indexed_size", "size_warning_threshold_percent")
     PLATFORM_MAX_SIZE_FIELD_NUMBER: _ClassVar[int]
     MAX_SIZE_FIELD_NUMBER: _ClassVar[int]
+    MAX_INDEXED_SIZE_FIELD_NUMBER: _ClassVar[int]
+    PLATFORM_MAX_INDEXED_SIZE_FIELD_NUMBER: _ClassVar[int]
+    SIZE_WARNING_THRESHOLD_PERCENT_FIELD_NUMBER: _ClassVar[int]
     platform_max_size: int
     max_size: int
-    def __init__(self, platform_max_size: _Optional[int] = ..., max_size: _Optional[int] = ...) -> None: ...
+    max_indexed_size: int
+    platform_max_indexed_size: int
+    size_warning_threshold_percent: int
+    def __init__(self, platform_max_size: _Optional[int] = ..., max_size: _Optional[int] = ..., max_indexed_size: _Optional[int] = ..., platform_max_indexed_size: _Optional[int] = ..., size_warning_threshold_percent: _Optional[int] = ...) -> None: ...
 
 class SearcherSettings(_message.Message):
-    __slots__ = ("idle_timeout", "platform_max_workers", "max_workers")
-    IDLE_TIMEOUT_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("min_idle_timeout", "platform_max_workers", "max_workers")
+    MIN_IDLE_TIMEOUT_FIELD_NUMBER: _ClassVar[int]
     PLATFORM_MAX_WORKERS_FIELD_NUMBER: _ClassVar[int]
     MAX_WORKERS_FIELD_NUMBER: _ClassVar[int]
-    idle_timeout: _duration_pb2.Duration
+    min_idle_timeout: _duration_pb2.Duration
     platform_max_workers: int
     max_workers: int
-    def __init__(self, idle_timeout: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., platform_max_workers: _Optional[int] = ..., max_workers: _Optional[int] = ...) -> None: ...
+    def __init__(self, min_idle_timeout: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., platform_max_workers: _Optional[int] = ..., max_workers: _Optional[int] = ...) -> None: ...
 
 class SpaceState(_message.Message):
     __slots__ = ("phase", "reason", "endpoint")

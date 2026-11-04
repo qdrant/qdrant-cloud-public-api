@@ -82,6 +82,14 @@ export declare type AccountQuota = Message<"qdrant.cloud.serverless.quota.v1.Acc
    * @generated from field: uint64 platform_max_workers_per_collection = 8;
    */
   platformMaxWorkersPerCollection: bigint;
+
+  /**
+   * Platform limit: maximum indexed size in bytes per collection (copied into each Space.configuration.collection_settings).
+   * A value of 0 means unlimited.
+   *
+   * @generated from field: uint64 platform_max_indexed_size_per_collection = 9;
+   */
+  platformMaxIndexedSizePerCollection: bigint;
 };
 
 export declare type AccountQuotaValid = AccountQuota;

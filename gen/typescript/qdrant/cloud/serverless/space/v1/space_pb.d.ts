@@ -821,7 +821,7 @@ export declare type SpaceConfiguration = Message<"qdrant.cloud.serverless.space.
 
   /**
    * Search-worker settings for this space.
-   * Platform worker ceilings are derived from the account's quota; idle timeout and worker count are writable via UpdateSpace.
+   * Platform worker ceilings are derived from the account's quota; the worker count is writable via UpdateSpace.
    *
    * @generated from field: qdrant.cloud.serverless.space.v1.SearcherSettings searcher_settings = 17;
    */
@@ -853,11 +853,41 @@ export declare type CollectionSettings = Message<"qdrant.cloud.serverless.space.
   /**
    * Optional customer-defined maximum size in bytes per collection, used for cost control.
    * When set, it must not exceed `platform_max_size`.
-   * This field is writable via UpdateSpace. If left unset, only the platform ceiling applies.
+   * This field is writable via UpdateSpace. Defaults to 2 GiB (2147483648 bytes) when unset,
+   * capped by `platform_max_size` when that is lower.
    *
    * @generated from field: optional uint64 max_size = 2;
    */
   maxSize?: bigint | undefined;
+
+  /**
+   * Optional customer-defined maximum indexed size in bytes per collection.
+   * When set, it must not exceed `platform_max_indexed_size` or the effective maximum size
+   * (`max_size`, or `platform_max_size` when `max_size` is unset).
+   * This field is writable via UpdateSpace. Defaults to 1 GiB (1073741824 bytes) when unset,
+   * capped by `platform_max_indexed_size` when that is lower.
+   *
+   * @generated from field: optional uint64 max_indexed_size = 3;
+   */
+  maxIndexedSize?: bigint | undefined;
+
+  /**
+   * Platform-enforced maximum indexed size in bytes per collection, derived from the account's quota and platform defaults.
+   * This is a read-only field. A value of 0 means unlimited.
+   *
+   * @generated from field: uint64 platform_max_indexed_size = 4;
+   */
+  platformMaxIndexedSize: bigint;
+
+  /**
+   * Optional customer-defined threshold, as a percentage of the effective maximum size,
+   * at which a size warning is sent for a collection.
+   * Valid range: 40 to 100. Defaults to 80 when unset.
+   * This field is writable via UpdateSpace.
+   *
+   * @generated from field: optional uint32 size_warning_threshold_percent = 5;
+   */
+  sizeWarningThresholdPercent?: number | undefined;
 };
 
 export declare type CollectionSettingsValid = CollectionSettings;
@@ -875,13 +905,12 @@ export declare const CollectionSettingsSchema: GenMessage<CollectionSettings, {v
  */
 export declare type SearcherSettings = Message<"qdrant.cloud.serverless.space.v1.SearcherSettings"> & {
   /**
-   * Idle timeout after which idle search workers may be scaled down.
-   * Valid range: 1 minute to 15 minutes. Defaults to 5 minutes when unset.
-   * This field is writable via UpdateSpace.
+   * Platform-defined minimum time a search worker stays idle before it may be scaled down.
+   * This is a read-only field. Defaults to 5 minutes.
    *
-   * @generated from field: optional google.protobuf.Duration idle_timeout = 1;
+   * @generated from field: google.protobuf.Duration min_idle_timeout = 1;
    */
-  idleTimeout?: Duration | undefined;
+  minIdleTimeout?: Duration | undefined;
 
   /**
    * Platform-enforced maximum number of search workers per collection, derived from the account's quota and platform defaults.

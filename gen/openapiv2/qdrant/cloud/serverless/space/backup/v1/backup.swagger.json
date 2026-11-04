@@ -1151,7 +1151,23 @@
         "maxSize": {
           "type": "string",
           "format": "uint64",
-          "description": "Optional customer-defined maximum size in bytes per collection, used for cost control.\nWhen set, it must not exceed `platform_max_size`.\nThis field is writable via UpdateSpace. If left unset, only the platform ceiling applies."
+          "description": "Optional customer-defined maximum size in bytes per collection, used for cost control.\nWhen set, it must not exceed `platform_max_size`.\nThis field is writable via UpdateSpace. Defaults to 2 GiB (2147483648 bytes) when unset,\ncapped by `platform_max_size` when that is lower."
+        },
+        "maxIndexedSize": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional customer-defined maximum indexed size in bytes per collection.\nWhen set, it must not exceed `platform_max_indexed_size` or the effective maximum size\n(`max_size`, or `platform_max_size` when `max_size` is unset).\nThis field is writable via UpdateSpace. Defaults to 1 GiB (1073741824 bytes) when unset,\ncapped by `platform_max_indexed_size` when that is lower."
+        },
+        "platformMaxIndexedSize": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Platform-enforced maximum indexed size in bytes per collection, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.",
+          "readOnly": true
+        },
+        "sizeWarningThresholdPercent": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional customer-defined threshold, as a percentage of the effective maximum size,\nat which a size warning is sent for a collection.\nValid range: 40 to 100. Defaults to 80 when unset.\nThis field is writable via UpdateSpace."
         }
       },
       "description": "CollectionSettings configures per-collection size limits for a space."
@@ -1317,9 +1333,10 @@
     "v1SearcherSettings": {
       "type": "object",
       "properties": {
-        "idleTimeout": {
+        "minIdleTimeout": {
           "type": "string",
-          "description": "Idle timeout after which idle search workers may be scaled down.\nValid range: 1 minute to 15 minutes. Defaults to 5 minutes when unset.\nThis field is writable via UpdateSpace."
+          "description": "Platform-defined minimum time a search worker stays idle before it may be scaled down.\nThis is a read-only field. Defaults to 5 minutes.",
+          "readOnly": true
         },
         "platformMaxWorkers": {
           "type": "string",
@@ -1370,7 +1387,7 @@
         },
         "searcherSettings": {
           "$ref": "#/definitions/v1SearcherSettings",
-          "description": "Search-worker settings for this space.\nPlatform worker ceilings are derived from the account's quota; idle timeout and worker count are writable via UpdateSpace."
+          "description": "Search-worker settings for this space.\nPlatform worker ceilings are derived from the account's quota; the worker count is writable via UpdateSpace."
         }
       },
       "description": "A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment."

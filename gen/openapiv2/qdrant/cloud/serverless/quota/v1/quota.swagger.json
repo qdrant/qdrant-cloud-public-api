@@ -109,6 +109,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Platform limit: maximum search workers per collection (copied into each Space.configuration.searcher_settings).\nA value of 0 means unlimited."
+        },
+        "platformMaxIndexedSizePerCollection": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Platform limit: maximum indexed size in bytes per collection (copied into each Space.configuration.collection_settings).\nA value of 0 means unlimited."
         }
       },
       "description": "AccountQuota represents the serverless platform limits and aggregated usage for an account."
