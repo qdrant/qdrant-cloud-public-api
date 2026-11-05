@@ -507,6 +507,23 @@ export declare type OAuthConsentRequest = Message<"qdrant.cloud.auth.v1.OAuthCon
    * @generated from field: google.protobuf.Timestamp expires_at = 7;
    */
   expiresAt?: Timestamp | undefined;
+
+  /**
+   * The email of the user the login is for, so the page can show who is consenting.
+   * It is empty when the user has no email.
+   *
+   * @generated from field: string user_email = 8;
+   */
+  userEmail: string;
+
+  /**
+   * The accounts the user is a member of, which CreateOAuthGrant accepts, in the order the
+   * consent page lists them: the user's default account first, then the accounts the user
+   * owns, then the others, each group oldest first.
+   *
+   * @generated from field: repeated qdrant.cloud.auth.v1.OAuthConsentAccount accounts = 9;
+   */
+  accounts: OAuthConsentAccount[];
 };
 
 export declare type OAuthConsentRequestValid = OAuthConsentRequest;
@@ -516,6 +533,36 @@ export declare type OAuthConsentRequestValid = OAuthConsentRequest;
  * Use `create(OAuthConsentRequestSchema)` to create a new message.
  */
 export declare const OAuthConsentRequestSchema: GenMessage<OAuthConsentRequest, {validType: OAuthConsentRequestValid}>;
+
+/**
+ * An OAuthConsentAccount has no timestamps: it only names an account on the consent page.
+ * An OAuthConsentAccount is an account the user of a consent request is a member of.
+ *
+ * @generated from message qdrant.cloud.auth.v1.OAuthConsentAccount
+ */
+export declare type OAuthConsentAccount = Message<"qdrant.cloud.auth.v1.OAuthConsentAccount"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * The name of the account.
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+};
+
+export declare type OAuthConsentAccountValid = OAuthConsentAccount;
+
+/**
+ * Describes the message qdrant.cloud.auth.v1.OAuthConsentAccount.
+ * Use `create(OAuthConsentAccountSchema)` to create a new message.
+ */
+export declare const OAuthConsentAccountSchema: GenMessage<OAuthConsentAccount, {validType: OAuthConsentAccountValid}>;
 
 /**
  * OAuthService is the API used to manage OAuth grants ("Connected apps") in Qdrant Cloud.
@@ -552,12 +599,12 @@ export declare const OAuthService: GenService<{
   /**
    * Gets the OAuth consent request the authorization server sent the user to the
    * consent page for, from the session_token, so the page can show verified details
-   * before the user decides: the client, the requested scope, and the user's active grant
-   * for the client, if any. The session token is verified the same way as in CreateOAuthGrant,
-   * and must belong to the authenticated user. Nothing is created or changed.
+   * before the user decides: the client, the requested scope, the user and their accounts,
+   * and the user's active grant for the client, if any. The session token is verified the
+   * same way as in CreateOAuthGrant. Nothing is created or changed.
    * The token is sent in the body (POST) to keep it out of URLs and access logs.
-   * Required permissions:
-   * - None (authenticated only)
+   * Authentication not required: the session token is the credential. It identifies the user
+   * of the login in progress, so the consent page works without a Qdrant Cloud session.
    *
    * @generated from rpc qdrant.cloud.auth.v1.OAuthService.GetOAuthConsentRequest
    */
@@ -567,8 +614,8 @@ export declare const OAuthService: GenService<{
     output: typeof GetOAuthConsentRequestResponseSchema;
   },
   /**
-   * Creates an OAuth grant for the authenticated user, from the OAuth consent page.
-   * The client and the requested scope come from the session_token, which the
+   * Creates an OAuth grant for the user of the login in progress, from the OAuth consent page.
+   * The user, the client and the requested scope come from the session_token, which the
    * authorization server signs when it redirects the user to the consent page; the
    * request only carries what the user chose there: the accounts, and optionally a narrower
    * scope, plus the redirect state from the consent page URL. The user must be a member of
@@ -577,8 +624,8 @@ export declare const OAuthService: GenService<{
    * the new one, so a grant always reflects the latest consent.
    * The response carries the continuation_token, which the consent page passes back to the
    * authorization server to resume the login; the issued tokens then reference the grant.
-   * Required permissions:
-   * - None (authenticated only)
+   * Authentication not required: the session token is the credential, as in
+   * GetOAuthConsentRequest.
    *
    * @generated from rpc qdrant.cloud.auth.v1.OAuthService.CreateOAuthGrant
    */

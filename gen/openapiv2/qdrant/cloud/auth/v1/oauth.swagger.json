@@ -97,7 +97,7 @@
     },
     "/api/auth/v1/users/me/oauth-consent-request": {
       "post": {
-        "summary": "Gets the OAuth consent request the authorization server sent the user to the\nconsent page for, from the session_token, so the page can show verified details\nbefore the user decides: the client, the requested scope, and the user's active grant\nfor the client, if any. The session token is verified the same way as in CreateOAuthGrant,\nand must belong to the authenticated user. Nothing is created or changed.\nThe token is sent in the body (POST) to keep it out of URLs and access logs.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Gets the OAuth consent request the authorization server sent the user to the\nconsent page for, from the session_token, so the page can show verified details\nbefore the user decides: the client, the requested scope, the user and their accounts,\nand the user's active grant for the client, if any. The session token is verified the\nsame way as in CreateOAuthGrant. Nothing is created or changed.\nThe token is sent in the body (POST) to keep it out of URLs and access logs.\nAuthentication not required: the session token is the credential. It identifies the user\nof the login in progress, so the consent page works without a Qdrant Cloud session.",
         "operationId": "OAuthService_GetOAuthConsentRequest",
         "responses": {
           "200": {
@@ -152,7 +152,7 @@
         ]
       },
       "post": {
-        "summary": "Creates an OAuth grant for the authenticated user, from the OAuth consent page.\nThe client and the requested scope come from the session_token, which the\nauthorization server signs when it redirects the user to the consent page; the\nrequest only carries what the user chose there: the accounts, and optionally a narrower\nscope, plus the redirect state from the consent page URL. The user must be a member of\nevery account.\nIf the user already has an active grant for the client, it is revoked and replaced by\nthe new one, so a grant always reflects the latest consent.\nThe response carries the continuation_token, which the consent page passes back to the\nauthorization server to resume the login; the issued tokens then reference the grant.\nRequired permissions:\n- None (authenticated only)",
+        "summary": "Creates an OAuth grant for the user of the login in progress, from the OAuth consent page.\nThe user, the client and the requested scope come from the session_token, which the\nauthorization server signs when it redirects the user to the consent page; the\nrequest only carries what the user chose there: the accounts, and optionally a narrower\nscope, plus the redirect state from the consent page URL. The user must be a member of\nevery account.\nIf the user already has an active grant for the client, it is revoked and replaced by\nthe new one, so a grant always reflects the latest consent.\nThe response carries the continuation_token, which the consent page passes back to the\nauthorization server to resume the login; the issued tokens then reference the grant.\nAuthentication not required: the session token is the credential, as in\nGetOAuthConsentRequest.",
         "operationId": "OAuthService_CreateOAuthGrant",
         "responses": {
           "200": {
@@ -348,6 +348,20 @@
       },
       "title": "ListMyOAuthGrantsResponse is the response from the ListMyOAuthGrants function"
     },
+    "v1OAuthConsentAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the account (in GUID format)."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the account."
+        }
+      },
+      "description": "An OAuthConsentAccount has no timestamps: it only names an account on the consent page.\nAn OAuthConsentAccount is an account the user of a consent request is a member of."
+    },
     "v1OAuthConsentRequest": {
       "type": "object",
       "properties": {
@@ -379,6 +393,18 @@
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the session token expires. CreateOAuthGrant must be called before then."
+        },
+        "userEmail": {
+          "type": "string",
+          "description": "The email of the user the login is for, so the page can show who is consenting.\nIt is empty when the user has no email."
+        },
+        "accounts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1OAuthConsentAccount"
+          },
+          "description": "The accounts the user is a member of, which CreateOAuthGrant accepts, in the order the\nconsent page lists them: the user's default account first, then the accounts the user\nowns, then the others, each group oldest first."
         }
       },
       "description": "An OAuthConsentRequest has no id, name or account: it describes a login in progress.\nAn OAuthConsentRequest is an OAuth client's pending request to act on behalf of the\nauthenticated user, as verified from the authorization server's session token."

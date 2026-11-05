@@ -45,15 +45,15 @@ type OAuthServiceClient interface {
 	ListAccountOAuthGrants(ctx context.Context, in *ListAccountOAuthGrantsRequest, opts ...grpc.CallOption) (*ListAccountOAuthGrantsResponse, error)
 	// Gets the OAuth consent request the authorization server sent the user to the
 	// consent page for, from the session_token, so the page can show verified details
-	// before the user decides: the client, the requested scope, and the user's active grant
-	// for the client, if any. The session token is verified the same way as in CreateOAuthGrant,
-	// and must belong to the authenticated user. Nothing is created or changed.
+	// before the user decides: the client, the requested scope, the user and their accounts,
+	// and the user's active grant for the client, if any. The session token is verified the
+	// same way as in CreateOAuthGrant. Nothing is created or changed.
 	// The token is sent in the body (POST) to keep it out of URLs and access logs.
-	// Required permissions:
-	// - None (authenticated only)
+	// Authentication not required: the session token is the credential. It identifies the user
+	// of the login in progress, so the consent page works without a Qdrant Cloud session.
 	GetOAuthConsentRequest(ctx context.Context, in *GetOAuthConsentRequestRequest, opts ...grpc.CallOption) (*GetOAuthConsentRequestResponse, error)
-	// Creates an OAuth grant for the authenticated user, from the OAuth consent page.
-	// The client and the requested scope come from the session_token, which the
+	// Creates an OAuth grant for the user of the login in progress, from the OAuth consent page.
+	// The user, the client and the requested scope come from the session_token, which the
 	// authorization server signs when it redirects the user to the consent page; the
 	// request only carries what the user chose there: the accounts, and optionally a narrower
 	// scope, plus the redirect state from the consent page URL. The user must be a member of
@@ -62,8 +62,8 @@ type OAuthServiceClient interface {
 	// the new one, so a grant always reflects the latest consent.
 	// The response carries the continuation_token, which the consent page passes back to the
 	// authorization server to resume the login; the issued tokens then reference the grant.
-	// Required permissions:
-	// - None (authenticated only)
+	// Authentication not required: the session token is the credential, as in
+	// GetOAuthConsentRequest.
 	CreateOAuthGrant(ctx context.Context, in *CreateOAuthGrantRequest, opts ...grpc.CallOption) (*CreateOAuthGrantResponse, error)
 	// Revokes an OAuth grant of the authenticated user, for all accounts it covers.
 	// The client loses access to every one of those accounts, and its refresh tokens are revoked.
@@ -165,15 +165,15 @@ type OAuthServiceServer interface {
 	ListAccountOAuthGrants(context.Context, *ListAccountOAuthGrantsRequest) (*ListAccountOAuthGrantsResponse, error)
 	// Gets the OAuth consent request the authorization server sent the user to the
 	// consent page for, from the session_token, so the page can show verified details
-	// before the user decides: the client, the requested scope, and the user's active grant
-	// for the client, if any. The session token is verified the same way as in CreateOAuthGrant,
-	// and must belong to the authenticated user. Nothing is created or changed.
+	// before the user decides: the client, the requested scope, the user and their accounts,
+	// and the user's active grant for the client, if any. The session token is verified the
+	// same way as in CreateOAuthGrant. Nothing is created or changed.
 	// The token is sent in the body (POST) to keep it out of URLs and access logs.
-	// Required permissions:
-	// - None (authenticated only)
+	// Authentication not required: the session token is the credential. It identifies the user
+	// of the login in progress, so the consent page works without a Qdrant Cloud session.
 	GetOAuthConsentRequest(context.Context, *GetOAuthConsentRequestRequest) (*GetOAuthConsentRequestResponse, error)
-	// Creates an OAuth grant for the authenticated user, from the OAuth consent page.
-	// The client and the requested scope come from the session_token, which the
+	// Creates an OAuth grant for the user of the login in progress, from the OAuth consent page.
+	// The user, the client and the requested scope come from the session_token, which the
 	// authorization server signs when it redirects the user to the consent page; the
 	// request only carries what the user chose there: the accounts, and optionally a narrower
 	// scope, plus the redirect state from the consent page URL. The user must be a member of
@@ -182,8 +182,8 @@ type OAuthServiceServer interface {
 	// the new one, so a grant always reflects the latest consent.
 	// The response carries the continuation_token, which the consent page passes back to the
 	// authorization server to resume the login; the issued tokens then reference the grant.
-	// Required permissions:
-	// - None (authenticated only)
+	// Authentication not required: the session token is the credential, as in
+	// GetOAuthConsentRequest.
 	CreateOAuthGrant(context.Context, *CreateOAuthGrantRequest) (*CreateOAuthGrantResponse, error)
 	// Revokes an OAuth grant of the authenticated user, for all accounts it covers.
 	// The client loses access to every one of those accounts, and its refresh tokens are revoked.
