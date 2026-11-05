@@ -36,6 +36,7 @@ const (
 	AccountService_GetAccountMember_FullMethodName           = "/qdrant.cloud.account.v1.AccountService/GetAccountMember"
 	AccountService_DeleteAccountMember_FullMethodName        = "/qdrant.cloud.account.v1.AccountService/DeleteAccountMember"
 	AccountService_SuggestCompanies_FullMethodName           = "/qdrant.cloud.account.v1.AccountService/SuggestCompanies"
+	AccountService_GetAccountSupportTerms_FullMethodName     = "/qdrant.cloud.account.v1.AccountService/GetAccountSupportTerms"
 )
 
 // AccountServiceClient is the client API for AccountService service.
@@ -123,6 +124,12 @@ type AccountServiceClient interface {
 	// Required permissions:
 	// - None (authenticated only)
 	SuggestCompanies(ctx context.Context, in *SuggestCompaniesRequest, opts ...grpc.CallOption) (*SuggestCompaniesResponse, error)
+	// Gets the uptime and support terms that apply to the account identified by the given ID.
+	// The returned values are the effective terms: the defaults of the account's
+	// support tier, with any terms negotiated for the account applied on top.
+	// Required permissions:
+	// - read:account
+	GetAccountSupportTerms(ctx context.Context, in *GetAccountSupportTermsRequest, opts ...grpc.CallOption) (*GetAccountSupportTermsResponse, error)
 }
 
 type accountServiceClient struct {
@@ -303,6 +310,16 @@ func (c *accountServiceClient) SuggestCompanies(ctx context.Context, in *Suggest
 	return out, nil
 }
 
+func (c *accountServiceClient) GetAccountSupportTerms(ctx context.Context, in *GetAccountSupportTermsRequest, opts ...grpc.CallOption) (*GetAccountSupportTermsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountSupportTermsResponse)
+	err := c.cc.Invoke(ctx, AccountService_GetAccountSupportTerms_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountServiceServer is the server API for AccountService service.
 // All implementations must embed UnimplementedAccountServiceServer
 // for forward compatibility.
@@ -388,6 +405,12 @@ type AccountServiceServer interface {
 	// Required permissions:
 	// - None (authenticated only)
 	SuggestCompanies(context.Context, *SuggestCompaniesRequest) (*SuggestCompaniesResponse, error)
+	// Gets the uptime and support terms that apply to the account identified by the given ID.
+	// The returned values are the effective terms: the defaults of the account's
+	// support tier, with any terms negotiated for the account applied on top.
+	// Required permissions:
+	// - read:account
+	GetAccountSupportTerms(context.Context, *GetAccountSupportTermsRequest) (*GetAccountSupportTermsResponse, error)
 	mustEmbedUnimplementedAccountServiceServer()
 }
 
@@ -448,6 +471,9 @@ func (UnimplementedAccountServiceServer) DeleteAccountMember(context.Context, *D
 }
 func (UnimplementedAccountServiceServer) SuggestCompanies(context.Context, *SuggestCompaniesRequest) (*SuggestCompaniesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SuggestCompanies not implemented")
+}
+func (UnimplementedAccountServiceServer) GetAccountSupportTerms(context.Context, *GetAccountSupportTermsRequest) (*GetAccountSupportTermsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAccountSupportTerms not implemented")
 }
 func (UnimplementedAccountServiceServer) mustEmbedUnimplementedAccountServiceServer() {}
 func (UnimplementedAccountServiceServer) testEmbeddedByValue()                        {}
@@ -776,6 +802,24 @@ func _AccountService_SuggestCompanies_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountService_GetAccountSupportTerms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountSupportTermsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).GetAccountSupportTerms(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountService_GetAccountSupportTerms_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).GetAccountSupportTerms(ctx, req.(*GetAccountSupportTermsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountService_ServiceDesc is the grpc.ServiceDesc for AccountService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -850,6 +894,10 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SuggestCompanies",
 			Handler:    _AccountService_SuggestCompanies_Handler,
+		},
+		{
+			MethodName: "GetAccountSupportTerms",
+			Handler:    _AccountService_GetAccountSupportTerms_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -151,3 +151,13 @@ export const deleteAccountMember: typeof AccountService["method"]["deleteAccount
  * @generated from rpc qdrant.cloud.account.v1.AccountService.SuggestCompanies
  */
 export const suggestCompanies: typeof AccountService["method"]["suggestCompanies"];
+/**
+ * Gets the uptime and support terms that apply to the account identified by the given ID.
+ * The returned values are the effective terms: the defaults of the account's
+ * support tier, with any terms negotiated for the account applied on top.
+ * Required permissions:
+ * - read:account
+ *
+ * @generated from rpc qdrant.cloud.account.v1.AccountService.GetAccountSupportTerms
+ */
+export const getAccountSupportTerms: typeof AccountService["method"]["getAccountSupportTerms"];

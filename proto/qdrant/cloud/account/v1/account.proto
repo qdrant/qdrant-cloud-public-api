@@ -18,7 +18,7 @@ service AccountService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 1
+    minor: 2
     patch: 0
   };
   // Lists all accounts associated with the authenticated actor.
@@ -441,6 +441,21 @@ service AccountService {
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "suggest_companies"};
   }
+  // Gets the uptime and support terms that apply to the account identified by the given ID.
+  // The returned values are the effective terms: the defaults of the account's
+  // support tier, with any terms negotiated for the account applied on top.
+  // Required permissions:
+  // - read:account
+  rpc GetAccountSupportTerms(GetAccountSupportTermsRequest) returns (GetAccountSupportTermsResponse) {
+    // permissions
+    option (common.v1.permissions) = "read:account"; // not 'read:accounts' for historical reasons
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/account/v1/accounts/{account_id}/support-terms"};
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Gets the uptime and support terms that apply to the account."
+      title: "Get account support terms"
+    };
+  }
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_REQUEST_FIELDS
@@ -709,6 +724,20 @@ message SuggestCompaniesResponse {
   repeated Company items = 1;
 }
 
+// GetAccountSupportTermsRequest is the request for the GetAccountSupportTerms function
+message GetAccountSupportTermsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetAccountSupportTermsResponse is the response from the GetAccountSupportTerms function
+message GetAccountSupportTermsResponse {
+  // The effective support terms of the account: its support tier's defaults,
+  // with any account override applied on top.
+  SupportTerms terms = 1;
+}
+
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
 // An Account represents an account in the Qdrant cloud.
 message Account {
@@ -873,4 +902,21 @@ message Company {
 message AccountSettings {
   // Whether MFA is required to interact with the account's resources.
   bool mfa_required = 1;
+}
+
+// SupportTerms represents the uptime commitments that apply to an account.
+// The values are the effective terms: the defaults of the account's support tier,
+// with any terms negotiated for the account (an account override) applied on top.
+message SupportTerms {
+  // The uptime commitment per cluster, in percent (e.g. 99.9).
+  double uptime_percent = 1 [(buf.validate.field).double = {
+    gt: 0
+    lte: 100
+  }];
+  // The uptime commitment for Multi-AZ clusters, in percent (e.g. 99.95).
+  // Unset when Multi-AZ doesn't apply to the account.
+  optional double multi_az_uptime_percent = 2 [(buf.validate.field).double = {
+    gt: 0
+    lte: 100
+  }];
 }
