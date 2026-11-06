@@ -991,6 +991,16 @@
           }
         ]
       },
+      "CollectionStatus": {
+        "description": "Collection status as in the qdrant server API. A serverless space returns only `green` and `yellow`.\n\n- `green`: all segments are optimized.\n- `yellow`: optimization is pending or running; the collection stays searchable.\n- `red`: not returned by a serverless space.\n- `grey`: not returned by a serverless space.",
+        "type": "string",
+        "enum": [
+          "green",
+          "yellow",
+          "red",
+          "grey"
+        ]
+      },
       "CollectionConfig": {
         "description": "The tenant-facing configuration of a collection. Unlike the Qdrant server API it is deliberately small: the serverless manager turns it into concrete Qdrant settings (HNSW, quantization, storage placement, ...), which are never exposed.\n\nAt least one dense or sparse vector is required.",
         "type": "object",
@@ -1093,6 +1103,28 @@
             "format": "uint64",
             "minimum": 0,
             "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/CollectionStatus"
+          },
+          "size_bytes": {
+            "description": "Estimated stored bytes, which the collection size limit applies to: indexed segments as of the last optimization plus a fixed estimate per unindexed one.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          },
+          "indexed_vectors_count": {
+            "description": "Approximate number of vectors in indexed segments; the rest are searched exhaustively until an optimization indexes them.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          },
+          "pending_writes": {
+            "description": "Whether acknowledged writes are still waiting to be applied, and so not yet visible to search.",
+            "type": "boolean",
+            "nullable": true
           }
         },
         "example": {
@@ -1122,7 +1154,11 @@
               }
             }
           },
-          "points_count": 12873
+          "points_count": 12873,
+          "status": "green",
+          "size_bytes": 481203712,
+          "indexed_vectors_count": 12873,
+          "pending_writes": false
         }
       },
       "CollectionSummary": {
@@ -1138,6 +1174,13 @@
           },
           "points_count": {
             "description": "Number of available points as of the last applied write (eventually consistent). `null` until the first statistics have been collected for the collection.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          },
+          "size_bytes": {
+            "description": "Estimated stored bytes, which the collection size limit applies to: indexed segments as of the last optimization plus a fixed estimate per unindexed one.",
             "type": "integer",
             "format": "uint64",
             "minimum": 0,

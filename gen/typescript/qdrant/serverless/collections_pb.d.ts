@@ -807,6 +807,37 @@ export declare type GetCollectionResponse = Message<"qdrant.serverless.GetCollec
   pointCount?: bigint | undefined;
 
   /**
+   * Optimization status of the collection.
+   *
+   * @generated from field: qdrant.serverless.CollectionStatus status = 5;
+   */
+  status: CollectionStatus;
+
+  /**
+   * Estimated stored bytes, which the collection size limit applies to: indexed
+   * segments as of the last optimization plus a fixed estimate per unindexed one.
+   *
+   * @generated from field: optional uint64 size_bytes = 6;
+   */
+  sizeBytes?: bigint | undefined;
+
+  /**
+   * Approximate number of vectors in indexed segments; the rest are searched
+   * exhaustively until an optimization indexes them.
+   *
+   * @generated from field: optional uint64 indexed_vectors_count = 7;
+   */
+  indexedVectorsCount?: bigint | undefined;
+
+  /**
+   * Whether acknowledged writes are still waiting to be applied, and so not yet
+   * visible to search.
+   *
+   * @generated from field: optional bool pending_writes = 8;
+   */
+  pendingWrites?: boolean | undefined;
+
+  /**
    * Time spent to process
    *
    * @generated from field: double time = 4;
@@ -873,6 +904,13 @@ export declare type CollectionSummary = Message<"qdrant.serverless.CollectionSum
    * @generated from field: optional uint64 point_count = 2;
    */
   pointCount?: bigint | undefined;
+
+  /**
+   * Estimated stored bytes, as in GetCollectionResponse.
+   *
+   * @generated from field: optional uint64 size_bytes = 3;
+   */
+  sizeBytes?: bigint | undefined;
 };
 
 export declare type CollectionSummaryValid = CollectionSummary;
@@ -1088,6 +1126,54 @@ export enum TextScoringType {
  * Describes the enum qdrant.serverless.TextScoringType.
  */
 export declare const TextScoringTypeSchema: GenEnum<TextScoringType>;
+
+/**
+ * Collection status as in the qdrant server API. A serverless space returns
+ * only GREEN and YELLOW.
+ *
+ * @generated from enum qdrant.serverless.CollectionStatus
+ */
+export enum CollectionStatus {
+  /**
+   * Could not be determined.
+   *
+   * @generated from enum value: COLLECTION_STATUS_UNSPECIFIED = 0;
+   */
+  COLLECTION_STATUS_UNSPECIFIED = 0,
+
+  /**
+   * All segments are optimized.
+   *
+   * @generated from enum value: GREEN = 1;
+   */
+  GREEN = 1,
+
+  /**
+   * Optimization is pending or running; the collection stays searchable.
+   *
+   * @generated from enum value: YELLOW = 2;
+   */
+  YELLOW = 2,
+
+  /**
+   * Not returned by a serverless space.
+   *
+   * @generated from enum value: RED = 3;
+   */
+  RED = 3,
+
+  /**
+   * Not returned by a serverless space.
+   *
+   * @generated from enum value: GREY = 4;
+   */
+  GREY = 4,
+}
+
+/**
+ * Describes the enum qdrant.serverless.CollectionStatus.
+ */
+export declare const CollectionStatusSchema: GenEnum<CollectionStatus>;
 
 /**
  * CollectionsService manages the collections of a qdrant serverless space.
