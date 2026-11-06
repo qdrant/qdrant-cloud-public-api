@@ -517,6 +517,38 @@
         ]
       }
     },
+    "/api/account/v1/accounts/{accountId}/support-terms": {
+      "get": {
+        "summary": "Gets the uptime and support terms that apply to the account identified by the given ID.\nThe returned values are the effective terms: the defaults of the account's\nsupport tier, with any terms negotiated for the account applied on top.\nRequired permissions:\n- read:account",
+        "operationId": "AccountService_GetAccountSupportTerms",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAccountSupportTermsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
     "/api/account/v1/accounts/{accountInvite.accountId}/invites": {
       "post": {
         "summary": "Creates a new account invite.\nRequired permissions:\n- write:invites",
@@ -1011,6 +1043,16 @@
       },
       "title": "GetAccountResponse is the response from the GetAccount function"
     },
+    "v1GetAccountSupportTermsResponse": {
+      "type": "object",
+      "properties": {
+        "terms": {
+          "$ref": "#/definitions/v1SupportTerms",
+          "description": "The effective support terms of the account: its support tier's defaults,\nwith any account override applied on top."
+        }
+      },
+      "title": "GetAccountSupportTermsResponse is the response from the GetAccountSupportTerms function"
+    },
     "v1LeaveAccountResponse": {
       "type": "object",
       "description": "LeaveAccountResponse is the response from the LeaveAccount function.\n\nEmpty"
@@ -1104,6 +1146,22 @@
         }
       },
       "description": "SuggestCompaniesResponse is the response from the SuggestCompanies function."
+    },
+    "v1SupportTerms": {
+      "type": "object",
+      "properties": {
+        "uptimePercent": {
+          "type": "number",
+          "format": "double",
+          "description": "The uptime commitment per cluster, in percent (e.g. 99.9)."
+        },
+        "multiAzUptimePercent": {
+          "type": "number",
+          "format": "double",
+          "description": "The uptime commitment for Multi-AZ clusters, in percent (e.g. 99.95).\nUnset when Multi-AZ doesn't apply to the account."
+        }
+      },
+      "description": "SupportTerms represents the uptime commitments that apply to an account.\nThe values are the effective terms: the defaults of the account's support tier,\nwith any terms negotiated for the account (an account override) applied on top."
     },
     "v1UpdateAccountResponse": {
       "type": "object",

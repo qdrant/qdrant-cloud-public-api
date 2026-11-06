@@ -100,6 +100,11 @@ class AccountServiceStub(object):
                 request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesRequest.SerializeToString,
                 response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesResponse.FromString,
                 _registered_method=True)
+        self.GetAccountSupportTerms = channel.unary_unary(
+                '/qdrant.cloud.account.v1.AccountService/GetAccountSupportTerms',
+                request_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSupportTermsRequest.SerializeToString,
+                response_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSupportTermsResponse.FromString,
+                _registered_method=True)
 
 
 class AccountServiceServicer(object):
@@ -270,6 +275,17 @@ class AccountServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetAccountSupportTerms(self, request, context):
+        """Gets the uptime and support terms that apply to the account identified by the given ID.
+        The returned values are the effective terms: the defaults of the account's
+        support tier, with any terms negotiated for the account applied on top.
+        Required permissions:
+        - read:account
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AccountServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -357,6 +373,11 @@ def add_AccountServiceServicer_to_server(servicer, server):
                     servicer.SuggestCompanies,
                     request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesRequest.FromString,
                     response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesResponse.SerializeToString,
+            ),
+            'GetAccountSupportTerms': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAccountSupportTerms,
+                    request_deserializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSupportTermsRequest.FromString,
+                    response_serializer=qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSupportTermsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -819,6 +840,33 @@ class AccountService(object):
             '/qdrant.cloud.account.v1.AccountService/SuggestCompanies',
             qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesRequest.SerializeToString,
             qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.SuggestCompaniesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetAccountSupportTerms(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.cloud.account.v1.AccountService/GetAccountSupportTerms',
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSupportTermsRequest.SerializeToString,
+            qdrant_dot_cloud_dot_account_dot_v1_dot_account__pb2.GetAccountSupportTermsResponse.FromString,
             options,
             channel_credentials,
             insecure,

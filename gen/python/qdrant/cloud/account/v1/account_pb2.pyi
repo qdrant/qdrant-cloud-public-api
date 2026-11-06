@@ -243,6 +243,18 @@ class SuggestCompaniesResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[Company]
     def __init__(self, items: _Optional[_Iterable[_Union[Company, _Mapping]]] = ...) -> None: ...
 
+class GetAccountSupportTermsRequest(_message.Message):
+    __slots__ = ("account_id",)
+    ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
+    account_id: str
+    def __init__(self, account_id: _Optional[str] = ...) -> None: ...
+
+class GetAccountSupportTermsResponse(_message.Message):
+    __slots__ = ("terms",)
+    TERMS_FIELD_NUMBER: _ClassVar[int]
+    terms: SupportTerms
+    def __init__(self, terms: _Optional[_Union[SupportTerms, _Mapping]] = ...) -> None: ...
+
 class Account(_message.Message):
     __slots__ = ("id", "created_at", "last_modified_at", "name", "external_owner_id", "owner_email", "privileges", "company", "settings")
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -310,3 +322,11 @@ class AccountSettings(_message.Message):
     MFA_REQUIRED_FIELD_NUMBER: _ClassVar[int]
     mfa_required: bool
     def __init__(self, mfa_required: _Optional[bool] = ...) -> None: ...
+
+class SupportTerms(_message.Message):
+    __slots__ = ("uptime_percent", "multi_az_uptime_percent")
+    UPTIME_PERCENT_FIELD_NUMBER: _ClassVar[int]
+    MULTI_AZ_UPTIME_PERCENT_FIELD_NUMBER: _ClassVar[int]
+    uptime_percent: float
+    multi_az_uptime_percent: float
+    def __init__(self, uptime_percent: _Optional[float] = ..., multi_az_uptime_percent: _Optional[float] = ...) -> None: ...

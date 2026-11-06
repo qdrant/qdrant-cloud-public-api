@@ -995,6 +995,52 @@ export declare type SuggestCompaniesResponseValid = SuggestCompaniesResponse;
 export declare const SuggestCompaniesResponseSchema: GenMessage<SuggestCompaniesResponse, {validType: SuggestCompaniesResponseValid}>;
 
 /**
+ * GetAccountSupportTermsRequest is the request for the GetAccountSupportTerms function
+ *
+ * @generated from message qdrant.cloud.account.v1.GetAccountSupportTermsRequest
+ */
+export declare type GetAccountSupportTermsRequest = Message<"qdrant.cloud.account.v1.GetAccountSupportTermsRequest"> & {
+  /**
+   * The identifier of the account (in GUID format).
+   * This is a required field.
+   *
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
+};
+
+export declare type GetAccountSupportTermsRequestValid = GetAccountSupportTermsRequest;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.GetAccountSupportTermsRequest.
+ * Use `create(GetAccountSupportTermsRequestSchema)` to create a new message.
+ */
+export declare const GetAccountSupportTermsRequestSchema: GenMessage<GetAccountSupportTermsRequest, {validType: GetAccountSupportTermsRequestValid}>;
+
+/**
+ * GetAccountSupportTermsResponse is the response from the GetAccountSupportTerms function
+ *
+ * @generated from message qdrant.cloud.account.v1.GetAccountSupportTermsResponse
+ */
+export declare type GetAccountSupportTermsResponse = Message<"qdrant.cloud.account.v1.GetAccountSupportTermsResponse"> & {
+  /**
+   * The effective support terms of the account: its support tier's defaults,
+   * with any account override applied on top.
+   *
+   * @generated from field: qdrant.cloud.account.v1.SupportTerms terms = 1;
+   */
+  terms?: SupportTerms | undefined;
+};
+
+export declare type GetAccountSupportTermsResponseValid = GetAccountSupportTermsResponse;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.GetAccountSupportTermsResponse.
+ * Use `create(GetAccountSupportTermsResponseSchema)` to create a new message.
+ */
+export declare const GetAccountSupportTermsResponseSchema: GenMessage<GetAccountSupportTermsResponse, {validType: GetAccountSupportTermsResponseValid}>;
+
+/**
  * An Account represents an account in the Qdrant cloud.
  *
  * @generated from message qdrant.cloud.account.v1.Account
@@ -1283,6 +1329,38 @@ export declare type AccountSettingsValid = AccountSettings;
 export declare const AccountSettingsSchema: GenMessage<AccountSettings, {validType: AccountSettingsValid}>;
 
 /**
+ * SupportTerms represents the uptime commitments that apply to an account.
+ * The values are the effective terms: the defaults of the account's support tier,
+ * with any terms negotiated for the account (an account override) applied on top.
+ *
+ * @generated from message qdrant.cloud.account.v1.SupportTerms
+ */
+export declare type SupportTerms = Message<"qdrant.cloud.account.v1.SupportTerms"> & {
+  /**
+   * The uptime commitment per cluster, in percent (e.g. 99.9).
+   *
+   * @generated from field: double uptime_percent = 1;
+   */
+  uptimePercent: number;
+
+  /**
+   * The uptime commitment for Multi-AZ clusters, in percent (e.g. 99.95).
+   * Unset when Multi-AZ doesn't apply to the account.
+   *
+   * @generated from field: optional double multi_az_uptime_percent = 2;
+   */
+  multiAzUptimePercent?: number | undefined;
+};
+
+export declare type SupportTermsValid = SupportTerms;
+
+/**
+ * Describes the message qdrant.cloud.account.v1.SupportTerms.
+ * Use `create(SupportTermsSchema)` to create a new message.
+ */
+export declare const SupportTermsSchema: GenMessage<SupportTerms, {validType: SupportTermsValid}>;
+
+/**
  * AccountInviteStatus defines the possible statuses of an account invitation.
  *
  * @generated from enum qdrant.cloud.account.v1.AccountInviteStatus
@@ -1549,6 +1627,20 @@ export declare const AccountService: GenService<{
     methodKind: "unary";
     input: typeof SuggestCompaniesRequestSchema;
     output: typeof SuggestCompaniesResponseSchema;
+  },
+  /**
+   * Gets the uptime and support terms that apply to the account identified by the given ID.
+   * The returned values are the effective terms: the defaults of the account's
+   * support tier, with any terms negotiated for the account applied on top.
+   * Required permissions:
+   * - read:account
+   *
+   * @generated from rpc qdrant.cloud.account.v1.AccountService.GetAccountSupportTerms
+   */
+  getAccountSupportTerms: {
+    methodKind: "unary";
+    input: typeof GetAccountSupportTermsRequestSchema;
+    output: typeof GetAccountSupportTermsResponseSchema;
   },
 }>;
 
