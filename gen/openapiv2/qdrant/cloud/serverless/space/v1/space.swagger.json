@@ -581,7 +581,7 @@
         "sizeWarningThresholdPercent": {
           "type": "integer",
           "format": "int64",
-          "description": "Optional customer-defined threshold, as a percentage of the effective maximum size,\nat which a size warning is sent for a collection.\nValid range: 40 to 100. Defaults to 80 when unset.\nThis field is writable via UpdateSpace."
+          "description": "Optional customer-defined threshold, as a percentage, at which a size warning is sent\nfor a collection. Applied independently to the effective maximum total size and to the\neffective maximum indexed size; each limit raises its own warning.\nValid range: 40 to 100. Defaults to 80 when unset.\nThis field is writable via UpdateSpace."
         }
       },
       "description": "CollectionSettings configures per-collection size limits for a space."

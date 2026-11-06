@@ -19,7 +19,7 @@ service SpaceService {
   option (qdrant.cloud.common.v1.api_version) = {
     major: 2
     minor: 1
-    patch: 0
+    patch: 1
   };
   // ListSpaces returns all spaces for the authenticated user
   // Required Permissions:
@@ -550,8 +550,9 @@ message CollectionSettings {
     (buf.validate.field).uint64.gte = 0,
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
-  // Optional customer-defined threshold, as a percentage of the effective maximum size,
-  // at which a size warning is sent for a collection.
+  // Optional customer-defined threshold, as a percentage, at which a size warning is sent
+  // for a collection. Applied independently to the effective maximum total size and to the
+  // effective maximum indexed size; each limit raises its own warning.
   // Valid range: 40 to 100. Defaults to 80 when unset.
   // This field is writable via UpdateSpace.
   optional uint32 size_warning_threshold_percent = 5 [(buf.validate.field).uint32 = {

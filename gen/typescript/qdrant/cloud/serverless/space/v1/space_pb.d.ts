@@ -880,8 +880,9 @@ export declare type CollectionSettings = Message<"qdrant.cloud.serverless.space.
   platformMaxIndexedSize: bigint;
 
   /**
-   * Optional customer-defined threshold, as a percentage of the effective maximum size,
-   * at which a size warning is sent for a collection.
+   * Optional customer-defined threshold, as a percentage, at which a size warning is sent
+   * for a collection. Applied independently to the effective maximum total size and to the
+   * effective maximum indexed size; each limit raises its own warning.
    * Valid range: 40 to 100. Defaults to 80 when unset.
    * This field is writable via UpdateSpace.
    *
