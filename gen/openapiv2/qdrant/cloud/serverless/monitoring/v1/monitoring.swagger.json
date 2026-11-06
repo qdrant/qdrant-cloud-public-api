@@ -627,10 +627,11 @@
         "SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED",
         "SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS",
         "SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE",
-        "SPACE_ALERT_TYPE_SPACE_UNHEALTHY"
+        "SPACE_ALERT_TYPE_SPACE_UNHEALTHY",
+        "SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED"
       ],
       "default": "SPACE_ALERT_TYPE_UNSPECIFIED",
-      "description": "SpaceAlertType is the category of a space alert. Mirrors the backend alert types.\n\n - SPACE_ALERT_TYPE_UNSPECIFIED: The alert type is unspecified.\n - SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED: Collection storage usage is over the configured size threshold.\n - SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS: The space has too many collections.\n - SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE: A space API key is about to expire.\n - SPACE_ALERT_TYPE_SPACE_UNHEALTHY: The serverless space is unhealthy."
+      "description": "SpaceAlertType is the category of a space alert. Mirrors the backend alert types.\n\n - SPACE_ALERT_TYPE_UNSPECIFIED: The alert type is unspecified.\n - SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED: Collection total storage usage is over the size warning threshold\n(size_warning_threshold_percent of the effective maximum total size).\n - SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS: The space has too many collections.\n - SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE: A space API key is about to expire.\n - SPACE_ALERT_TYPE_SPACE_UNHEALTHY: The serverless space is unhealthy.\n - SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED: Collection indexed storage usage is over the size warning threshold\n(size_warning_threshold_percent of the effective maximum indexed size)."
     },
     "v1SpaceCollectionInferenceMetrics": {
       "type": "object",
@@ -677,12 +678,17 @@
         "usedStorageBytes": {
           "type": "string",
           "format": "uint64",
-          "description": "Current used (active) storage size of the collection, in bytes.\nCompare against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes\nfor headroom (0 on that field means unlimited)."
+          "description": "Current used (active) total storage size of the collection, in bytes.\nCompare against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes\nfor headroom (0 on that field means unlimited)."
         },
         "currentSearcherWorkers": {
           "type": "string",
           "format": "uint64",
           "description": "Current number of search workers (active + downloading) hosting this collection.\nCompare against SpaceQuotaSnapshot.searcher_effective_max_workers for headroom\n(0 on that field means unlimited)."
+        },
+        "usedIndexedStorageBytes": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Current used indexed storage size of the collection, in bytes.\nCompare against SpaceQuotaSnapshot.effective_max_indexed_size_per_collection_bytes\nfor headroom (0 on that field means unlimited)."
         }
       },
       "description": "SpaceCollectionMetrics contains a metric overview for a single collection."
@@ -732,7 +738,7 @@
             "type": "object",
             "$ref": "#/definitions/v1Metric"
           },
-          "description": "Timeseries of used (active) storage size for the collection, in bytes."
+          "description": "Timeseries of used (active) total storage size for the collection, in bytes."
         },
         "currentSearcherWorkers": {
           "type": "array",
@@ -741,6 +747,14 @@
             "$ref": "#/definitions/v1Metric"
           },
           "description": "Timeseries of search workers (active + downloading) hosting this collection."
+        },
+        "usedIndexedStorageBytes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Metric"
+          },
+          "description": "Timeseries of used indexed storage size for the collection, in bytes."
         }
       },
       "description": "SpaceCollectionUsageMetrics defines per-collection usage metrics as timeseries."
@@ -793,12 +807,17 @@
         "effectiveMaxSizePerCollectionBytes": {
           "type": "string",
           "format": "uint64",
-          "description": "Effective maximum size in bytes per collection (platform ceiling reduced by\nan optional customer cap). 0 means unlimited."
+          "description": "Effective maximum total size in bytes per collection (platform ceiling reduced by\nan optional customer cap). 0 means unlimited.\nEnforced independently from effective_max_indexed_size_per_collection_bytes."
         },
         "searcherEffectiveMaxWorkers": {
           "type": "string",
           "format": "uint64",
           "description": "Effective maximum search workers per collection. 0 means unlimited."
+        },
+        "effectiveMaxIndexedSizePerCollectionBytes": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Effective maximum indexed size in bytes per collection (platform ceiling reduced by\nan optional customer cap). 0 means unlimited.\nEnforced independently from effective_max_size_per_collection_bytes."
         }
       },
       "description": "SpaceQuotaSnapshot holds space-scoped effective quota ceilings and current\ncollection count. A value of 0 on a ceiling field means unlimited for that\ndimension (same semantics as serverless-quota-sidecar GetSpaceLimits)."

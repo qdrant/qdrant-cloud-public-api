@@ -1146,8 +1146,9 @@ type CollectionSettings struct {
 	// Platform-enforced maximum indexed size in bytes per collection, derived from the account's quota and platform defaults.
 	// This is a read-only field. A value of 0 means unlimited.
 	PlatformMaxIndexedSize uint64 `protobuf:"varint,4,opt,name=platform_max_indexed_size,json=platformMaxIndexedSize,proto3" json:"platform_max_indexed_size,omitempty"`
-	// Optional customer-defined threshold, as a percentage of the effective maximum size,
-	// at which a size warning is sent for a collection.
+	// Optional customer-defined threshold, as a percentage, at which a size warning is sent
+	// for a collection. Applied independently to the effective maximum total size and to the
+	// effective maximum indexed size; each limit raises its own warning.
 	// Valid range: 40 to 100. Defaults to 80 when unset.
 	// This field is writable via UpdateSpace.
 	SizeWarningThresholdPercent *uint32 `protobuf:"varint,5,opt,name=size_warning_threshold_percent,json=sizeWarningThresholdPercent,proto3,oneof" json:"size_warning_threshold_percent,omitempty"`
@@ -1530,7 +1531,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1cSPACE_STATE_PHASE_PROCESSING\x10\x01\x12\x1b\n" +
 	"\x17SPACE_STATE_PHASE_READY\x10\x02\x12\x1e\n" +
 	"\x1aSPACE_STATE_PHASE_DISABLED\x10\x03\x12\x1e\n" +
-	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xd0\x1a\n" +
+	"\x1aSPACE_STATE_PHASE_DELETING\x10\x042\xd2\x1a\n" +
 	"\fSpaceService\x12\xc9\x02\n" +
 	"\n" +
 	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"\xcf\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19V\n" +
@@ -1578,7 +1579,8 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"\xd0\x01\x8a\xb5\x18\x00\x8a\xb2\x19V\n" +
 	"@Suggest a unique human-friendly name for a new serverless space.\x12\x12Suggest space name\xaa\xb8\x19\x14\n" +
 	"\x12suggest_space_nameʾ\x19\x12\n" +
-	"\x10suggestSpaceName\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\bµ\x18\x04\b\x02\x10\x01B\xb2\x02\n" +
+	"\x10suggestSpaceName\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\n" +
+	"µ\x18\x06\b\x02\x10\x01\x18\x01B\xb2\x02\n" +
 	"$com.qdrant.cloud.serverless.space.v1B\n" +
 	"SpaceProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/v1;spacev1\xa2\x02\x04QCSS\xaa\x02 Qdrant.Cloud.Serverless.Space.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Space\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Space\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Space::V1b\x06proto3"
 

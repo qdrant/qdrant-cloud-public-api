@@ -847,8 +847,9 @@ export declare type SpaceQuotaSnapshot = Message<"qdrant.cloud.serverless.monito
   currentCollections: bigint;
 
   /**
-   * Effective maximum size in bytes per collection (platform ceiling reduced by
+   * Effective maximum total size in bytes per collection (platform ceiling reduced by
    * an optional customer cap). 0 means unlimited.
+   * Enforced independently from effective_max_indexed_size_per_collection_bytes.
    *
    * @generated from field: uint64 effective_max_size_per_collection_bytes = 3;
    */
@@ -860,6 +861,15 @@ export declare type SpaceQuotaSnapshot = Message<"qdrant.cloud.serverless.monito
    * @generated from field: uint64 searcher_effective_max_workers = 4;
    */
   searcherEffectiveMaxWorkers: bigint;
+
+  /**
+   * Effective maximum indexed size in bytes per collection (platform ceiling reduced by
+   * an optional customer cap). 0 means unlimited.
+   * Enforced independently from effective_max_size_per_collection_bytes.
+   *
+   * @generated from field: uint64 effective_max_indexed_size_per_collection_bytes = 5;
+   */
+  effectiveMaxIndexedSizePerCollectionBytes: bigint;
 };
 
 export declare type SpaceQuotaSnapshotValid = SpaceQuotaSnapshot;
@@ -912,7 +922,7 @@ export declare type SpaceCollectionMetrics = Message<"qdrant.cloud.serverless.mo
   pointCount: bigint;
 
   /**
-   * Current used (active) storage size of the collection, in bytes.
+   * Current used (active) total storage size of the collection, in bytes.
    * Compare against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes
    * for headroom (0 on that field means unlimited).
    *
@@ -928,6 +938,15 @@ export declare type SpaceCollectionMetrics = Message<"qdrant.cloud.serverless.mo
    * @generated from field: uint64 current_searcher_workers = 7;
    */
   currentSearcherWorkers: bigint;
+
+  /**
+   * Current used indexed storage size of the collection, in bytes.
+   * Compare against SpaceQuotaSnapshot.effective_max_indexed_size_per_collection_bytes
+   * for headroom (0 on that field means unlimited).
+   *
+   * @generated from field: uint64 used_indexed_storage_bytes = 8;
+   */
+  usedIndexedStorageBytes: bigint;
 };
 
 /**
@@ -972,7 +991,7 @@ export declare type SpaceCollectionMetricsValid = Message<"qdrant.cloud.serverle
   pointCount: bigint;
 
   /**
-   * Current used (active) storage size of the collection, in bytes.
+   * Current used (active) total storage size of the collection, in bytes.
    * Compare against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes
    * for headroom (0 on that field means unlimited).
    *
@@ -988,6 +1007,15 @@ export declare type SpaceCollectionMetricsValid = Message<"qdrant.cloud.serverle
    * @generated from field: uint64 current_searcher_workers = 7;
    */
   currentSearcherWorkers: bigint;
+
+  /**
+   * Current used indexed storage size of the collection, in bytes.
+   * Compare against SpaceQuotaSnapshot.effective_max_indexed_size_per_collection_bytes
+   * for headroom (0 on that field means unlimited).
+   *
+   * @generated from field: uint64 used_indexed_storage_bytes = 8;
+   */
+  usedIndexedStorageBytes: bigint;
 };
 
 /**
@@ -1120,7 +1148,7 @@ export declare type SpaceCollectionUsageMetrics = Message<"qdrant.cloud.serverle
   pointCount: Metric[];
 
   /**
-   * Timeseries of used (active) storage size for the collection, in bytes.
+   * Timeseries of used (active) total storage size for the collection, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric used_storage_bytes = 6;
    */
@@ -1132,6 +1160,13 @@ export declare type SpaceCollectionUsageMetrics = Message<"qdrant.cloud.serverle
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric current_searcher_workers = 7;
    */
   currentSearcherWorkers: Metric[];
+
+  /**
+   * Timeseries of used indexed storage size for the collection, in bytes.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric used_indexed_storage_bytes = 8;
+   */
+  usedIndexedStorageBytes: Metric[];
 };
 
 /**
@@ -1176,7 +1211,7 @@ export declare type SpaceCollectionUsageMetricsValid = Message<"qdrant.cloud.ser
   pointCount: MetricValid[];
 
   /**
-   * Timeseries of used (active) storage size for the collection, in bytes.
+   * Timeseries of used (active) total storage size for the collection, in bytes.
    *
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric used_storage_bytes = 6;
    */
@@ -1188,6 +1223,13 @@ export declare type SpaceCollectionUsageMetricsValid = Message<"qdrant.cloud.ser
    * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric current_searcher_workers = 7;
    */
   currentSearcherWorkers: MetricValid[];
+
+  /**
+   * Timeseries of used indexed storage size for the collection, in bytes.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric used_indexed_storage_bytes = 8;
+   */
+  usedIndexedStorageBytes: MetricValid[];
 };
 
 /**
@@ -1379,7 +1421,8 @@ export enum SpaceAlertType {
   UNSPECIFIED = 0,
 
   /**
-   * Collection storage usage is over the configured size threshold.
+   * Collection total storage usage is over the size warning threshold
+   * (size_warning_threshold_percent of the effective maximum total size).
    *
    * @generated from enum value: SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED = 1;
    */
@@ -1405,6 +1448,14 @@ export enum SpaceAlertType {
    * @generated from enum value: SPACE_ALERT_TYPE_SPACE_UNHEALTHY = 4;
    */
   SPACE_UNHEALTHY = 4,
+
+  /**
+   * Collection indexed storage usage is over the size warning threshold
+   * (size_warning_threshold_percent of the effective maximum indexed size).
+   *
+   * @generated from enum value: SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED = 5;
+   */
+  COLLECTION_INDEXED_STORAGE_OVERUTILIZED = 5,
 }
 
 /**

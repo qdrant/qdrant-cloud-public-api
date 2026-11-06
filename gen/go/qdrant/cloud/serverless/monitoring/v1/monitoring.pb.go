@@ -207,7 +207,8 @@ type SpaceAlertType int32
 const (
 	// The alert type is unspecified.
 	SpaceAlertType_SPACE_ALERT_TYPE_UNSPECIFIED SpaceAlertType = 0
-	// Collection storage usage is over the configured size threshold.
+	// Collection total storage usage is over the size warning threshold
+	// (size_warning_threshold_percent of the effective maximum total size).
 	SpaceAlertType_SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED SpaceAlertType = 1
 	// The space has too many collections.
 	SpaceAlertType_SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS SpaceAlertType = 2
@@ -215,6 +216,9 @@ const (
 	SpaceAlertType_SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE SpaceAlertType = 3
 	// The serverless space is unhealthy.
 	SpaceAlertType_SPACE_ALERT_TYPE_SPACE_UNHEALTHY SpaceAlertType = 4
+	// Collection indexed storage usage is over the size warning threshold
+	// (size_warning_threshold_percent of the effective maximum indexed size).
+	SpaceAlertType_SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED SpaceAlertType = 5
 )
 
 // Enum value maps for SpaceAlertType.
@@ -225,13 +229,15 @@ var (
 		2: "SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS",
 		3: "SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE",
 		4: "SPACE_ALERT_TYPE_SPACE_UNHEALTHY",
+		5: "SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED",
 	}
 	SpaceAlertType_value = map[string]int32{
-		"SPACE_ALERT_TYPE_UNSPECIFIED":                     0,
-		"SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED": 1,
-		"SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS":            2,
-		"SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE":   3,
-		"SPACE_ALERT_TYPE_SPACE_UNHEALTHY":                 4,
+		"SPACE_ALERT_TYPE_UNSPECIFIED":                             0,
+		"SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED":         1,
+		"SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS":                    2,
+		"SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE":           3,
+		"SPACE_ALERT_TYPE_SPACE_UNHEALTHY":                         4,
+		"SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED": 5,
 	}
 )
 
@@ -1468,13 +1474,18 @@ type SpaceQuotaSnapshot struct {
 	MaxCollections uint64 `protobuf:"varint,1,opt,name=max_collections,json=maxCollections,proto3" json:"max_collections,omitempty"`
 	// Current number of collections in the space.
 	CurrentCollections uint64 `protobuf:"varint,2,opt,name=current_collections,json=currentCollections,proto3" json:"current_collections,omitempty"`
-	// Effective maximum size in bytes per collection (platform ceiling reduced by
+	// Effective maximum total size in bytes per collection (platform ceiling reduced by
 	// an optional customer cap). 0 means unlimited.
+	// Enforced independently from effective_max_indexed_size_per_collection_bytes.
 	EffectiveMaxSizePerCollectionBytes uint64 `protobuf:"varint,3,opt,name=effective_max_size_per_collection_bytes,json=effectiveMaxSizePerCollectionBytes,proto3" json:"effective_max_size_per_collection_bytes,omitempty"`
 	// Effective maximum search workers per collection. 0 means unlimited.
 	SearcherEffectiveMaxWorkers uint64 `protobuf:"varint,4,opt,name=searcher_effective_max_workers,json=searcherEffectiveMaxWorkers,proto3" json:"searcher_effective_max_workers,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	// Effective maximum indexed size in bytes per collection (platform ceiling reduced by
+	// an optional customer cap). 0 means unlimited.
+	// Enforced independently from effective_max_size_per_collection_bytes.
+	EffectiveMaxIndexedSizePerCollectionBytes uint64 `protobuf:"varint,5,opt,name=effective_max_indexed_size_per_collection_bytes,json=effectiveMaxIndexedSizePerCollectionBytes,proto3" json:"effective_max_indexed_size_per_collection_bytes,omitempty"`
+	unknownFields                             protoimpl.UnknownFields
+	sizeCache                                 protoimpl.SizeCache
 }
 
 func (x *SpaceQuotaSnapshot) Reset() {
@@ -1535,6 +1546,13 @@ func (x *SpaceQuotaSnapshot) GetSearcherEffectiveMaxWorkers() uint64 {
 	return 0
 }
 
+func (x *SpaceQuotaSnapshot) GetEffectiveMaxIndexedSizePerCollectionBytes() uint64 {
+	if x != nil {
+		return x.EffectiveMaxIndexedSizePerCollectionBytes
+	}
+	return 0
+}
+
 // SpaceCollectionMetrics contains a metric overview for a single collection.
 type SpaceCollectionMetrics struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1548,7 +1566,7 @@ type SpaceCollectionMetrics struct {
 	SearchLatency *SpaceMetricOverview `protobuf:"bytes,4,opt,name=search_latency,json=searchLatency,proto3" json:"search_latency,omitempty"`
 	// Current number of points stored in the collection.
 	PointCount uint64 `protobuf:"varint,5,opt,name=point_count,json=pointCount,proto3" json:"point_count,omitempty"`
-	// Current used (active) storage size of the collection, in bytes.
+	// Current used (active) total storage size of the collection, in bytes.
 	// Compare against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes
 	// for headroom (0 on that field means unlimited).
 	UsedStorageBytes uint64 `protobuf:"varint,6,opt,name=used_storage_bytes,json=usedStorageBytes,proto3" json:"used_storage_bytes,omitempty"`
@@ -1556,8 +1574,12 @@ type SpaceCollectionMetrics struct {
 	// Compare against SpaceQuotaSnapshot.searcher_effective_max_workers for headroom
 	// (0 on that field means unlimited).
 	CurrentSearcherWorkers uint64 `protobuf:"varint,7,opt,name=current_searcher_workers,json=currentSearcherWorkers,proto3" json:"current_searcher_workers,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Current used indexed storage size of the collection, in bytes.
+	// Compare against SpaceQuotaSnapshot.effective_max_indexed_size_per_collection_bytes
+	// for headroom (0 on that field means unlimited).
+	UsedIndexedStorageBytes uint64 `protobuf:"varint,8,opt,name=used_indexed_storage_bytes,json=usedIndexedStorageBytes,proto3" json:"used_indexed_storage_bytes,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *SpaceCollectionMetrics) Reset() {
@@ -1635,6 +1657,13 @@ func (x *SpaceCollectionMetrics) GetUsedStorageBytes() uint64 {
 func (x *SpaceCollectionMetrics) GetCurrentSearcherWorkers() uint64 {
 	if x != nil {
 		return x.CurrentSearcherWorkers
+	}
+	return 0
+}
+
+func (x *SpaceCollectionMetrics) GetUsedIndexedStorageBytes() uint64 {
+	if x != nil {
+		return x.UsedIndexedStorageBytes
 	}
 	return 0
 }
@@ -1753,12 +1782,14 @@ type SpaceCollectionUsageMetrics struct {
 	SearchLatency []*Metric `protobuf:"bytes,4,rep,name=search_latency,json=searchLatency,proto3" json:"search_latency,omitempty"`
 	// Timeseries of point counts for the collection.
 	PointCount []*Metric `protobuf:"bytes,5,rep,name=point_count,json=pointCount,proto3" json:"point_count,omitempty"`
-	// Timeseries of used (active) storage size for the collection, in bytes.
+	// Timeseries of used (active) total storage size for the collection, in bytes.
 	UsedStorageBytes []*Metric `protobuf:"bytes,6,rep,name=used_storage_bytes,json=usedStorageBytes,proto3" json:"used_storage_bytes,omitempty"`
 	// Timeseries of search workers (active + downloading) hosting this collection.
 	CurrentSearcherWorkers []*Metric `protobuf:"bytes,7,rep,name=current_searcher_workers,json=currentSearcherWorkers,proto3" json:"current_searcher_workers,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Timeseries of used indexed storage size for the collection, in bytes.
+	UsedIndexedStorageBytes []*Metric `protobuf:"bytes,8,rep,name=used_indexed_storage_bytes,json=usedIndexedStorageBytes,proto3" json:"used_indexed_storage_bytes,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *SpaceCollectionUsageMetrics) Reset() {
@@ -1836,6 +1867,13 @@ func (x *SpaceCollectionUsageMetrics) GetUsedStorageBytes() []*Metric {
 func (x *SpaceCollectionUsageMetrics) GetCurrentSearcherWorkers() []*Metric {
 	if x != nil {
 		return x.CurrentSearcherWorkers
+	}
+	return nil
+}
+
+func (x *SpaceCollectionUsageMetrics) GetUsedIndexedStorageBytes() []*Metric {
+	if x != nil {
+		return x.UsedIndexedStorageBytes
 	}
 	return nil
 }
@@ -2029,12 +2067,13 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x0elast_firing_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\flastFiringAt\x12L\n" +
 	"\x05state\x18\a \x01(\x0e26.qdrant.cloud.serverless.monitoring.v1.SpaceAlertStateR\x05state\x12K\n" +
 	"\x0fcollection_name\x18\b \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x88\x01\x01B\x12\n" +
-	"\x10_collection_name\"\xbc\x02\n" +
+	"\x10_collection_name\"\xad\x03\n" +
 	"\x12SpaceQuotaSnapshot\x124\n" +
 	"\x0fmax_collections\x18\x01 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x01R\x0emaxCollections\x12<\n" +
 	"\x13current_collections\x18\x02 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x01R\x12currentCollections\x12`\n" +
 	"'effective_max_size_per_collection_bytes\x18\x03 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x02R\"effectiveMaxSizePerCollectionBytes\x12P\n" +
-	"\x1esearcher_effective_max_workers\x18\x04 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x01R\x1bsearcherEffectiveMaxWorkers\"\xdf\x04\n" +
+	"\x1esearcher_effective_max_workers\x18\x04 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x01R\x1bsearcherEffectiveMaxWorkers\x12o\n" +
+	"/effective_max_indexed_size_per_collection_bytes\x18\x05 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x02R)effectiveMaxIndexedSizePerCollectionBytes\"\xa9\x05\n" +
 	"\x16SpaceCollectionMetrics\x12F\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$R\x0ecollectionName\x12o\n" +
 	"\x0fsearch_requests\x18\x02 \x01(\v2:.qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverviewB\n" +
@@ -2046,12 +2085,13 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\vpoint_count\x18\x05 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x01R\n" +
 	"pointCount\x129\n" +
 	"\x12used_storage_bytes\x18\x06 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x02R\x10usedStorageBytes\x12E\n" +
-	"\x18current_searcher_workers\x18\a \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x01R\x16currentSearcherWorkers\"_\n" +
+	"\x18current_searcher_workers\x18\a \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x01R\x16currentSearcherWorkers\x12H\n" +
+	"\x1aused_indexed_storage_bytes\x18\b \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x02R\x17usedIndexedStorageBytes\"_\n" +
 	"\x13SpaceMetricOverview\x12H\n" +
 	"\x03avg\x18\x01 \x03(\v26.qdrant.cloud.serverless.monitoring.v1.IntervalAverageR\x03avg\"v\n" +
 	"\x0fIntervalAverage\x12=\n" +
 	"\binterval\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x06\xbaH\x03\xc8\x01\x01R\binterval\x12$\n" +
-	"\x05value\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"\xa3\x05\n" +
+	"\x05value\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value\"\x95\x06\n" +
 	"\x1bSpaceCollectionUsageMetrics\x12F\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$R\x0ecollectionName\x12\\\n" +
 	"\x0fsearch_requests\x18\x02 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x04R\x0esearchRequests\x12Z\n" +
@@ -2060,7 +2100,8 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\vpoint_count\x18\x05 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x01R\n" +
 	"pointCount\x12a\n" +
 	"\x12used_storage_bytes\x18\x06 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x02R\x10usedStorageBytes\x12m\n" +
-	"\x18current_searcher_workers\x18\a \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x01R\x16currentSearcherWorkers\"p\n" +
+	"\x18current_searcher_workers\x18\a \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x01R\x16currentSearcherWorkers\x12p\n" +
+	"\x1aused_indexed_storage_bytes\x18\b \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x02R\x17usedIndexedStorageBytes\"p\n" +
 	"\x06Metric\x12@\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\ttimestamp\x12$\n" +
 	"\x05value\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value*x\n" +
@@ -2079,34 +2120,35 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x0fSpaceAlertState\x12!\n" +
 	"\x1dSPACE_ALERT_STATE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18SPACE_ALERT_STATE_FIRING\x10\x01\x12\x1e\n" +
-	"\x1aSPACE_ALERT_STATE_RESOLVED\x10\x02*\xed\x01\n" +
+	"\x1aSPACE_ALERT_STATE_RESOLVED\x10\x02*\xab\x02\n" +
 	"\x0eSpaceAlertType\x12 \n" +
 	"\x1cSPACE_ALERT_TYPE_UNSPECIFIED\x10\x00\x124\n" +
 	"0SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED\x10\x01\x12)\n" +
 	"%SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS\x10\x02\x122\n" +
 	".SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE\x10\x03\x12$\n" +
-	" SPACE_ALERT_TYPE_SPACE_UNHEALTHY\x10\x04*\x9e\x01\n" +
+	" SPACE_ALERT_TYPE_SPACE_UNHEALTHY\x10\x04\x12<\n" +
+	"8SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED\x10\x05*\x9e\x01\n" +
 	"\x12SpaceAlertSeverity\x12$\n" +
 	" SPACE_ALERT_SEVERITY_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19SPACE_ALERT_SEVERITY_INFO\x10\x01\x12 \n" +
 	"\x1cSPACE_ALERT_SEVERITY_WARNING\x10\x02\x12!\n" +
-	"\x1dSPACE_ALERT_SEVERITY_CRITICAL\x10\x032\x8d\x16\n" +
-	"\x11MonitoringService\x12\xb8\x06\n" +
-	"\x16GetSpaceSummaryMetrics\x12D.qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest\x1aE.qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse\"\x90\x05\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
-	"\bspace_id\x12\bspace_id\x8a\xb2\x19\xe1\x01\n" +
-	"\xb4\x01Get per-collection summary metrics for a serverless space. Use it to check the health of a space: request rates, search latency, and storage and searcher workers against the quota.\x12\x19Get space summary metricsB\rspace.metrics\xaa\xb8\x19X\n" +
+	"\x1dSPACE_ALERT_SEVERITY_CRITICAL\x10\x032\xd0\x16\n" +
+	"\x11MonitoringService\x12\xcf\x06\n" +
+	"\x16GetSpaceSummaryMetrics\x12D.qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest\x1aE.qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse\"\xa7\x05\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
+	"\bspace_id\x12\bspace_id\x8a\xb2\x19\xf8\x01\n" +
+	"\xcb\x01Get per-collection summary metrics for a serverless space. Use it to check the health of a space: request rates, search latency, and total storage, indexed storage and searcher workers against the quota.\x12\x19Get space summary metricsB\rspace.metrics\xaa\xb8\x19X\n" +
 	"\x19get_space_summary_metrics\x12;\x129\b\x02\x12\tget_space\x12\x11list_space_alerts\x12\x17get_space_usage_metricsʾ\x19\x1c\n" +
 	"\x13spaceSummaryMetrics\x12\x05itemsҾ\x19\xa5\x01\n" +
 	"&qdrant.cloud.serverless.space.v1.Space\x12\x0esummaryMetrics\x1a\x05items\"\x0e\n" +
 	"\bspace_id\x12\x02id\"\x18\n" +
 	"\n" +
 	"account_id\x12\n" +
-	"account_id(\x0128Per-collection summary metrics for this serverless space\x82\xd3\xe4\x93\x02L\x12J/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/summary-metrics\x12\xaa\x06\n" +
-	"\x14GetSpaceUsageMetrics\x12B.qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest\x1aC.qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse\"\x88\x05\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
+	"account_id(\x0128Per-collection summary metrics for this serverless space\x82\xd3\xe4\x93\x02L\x12J/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/summary-metrics\x12\xd6\x06\n" +
+	"\x14GetSpaceUsageMetrics\x12B.qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest\x1aC.qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse\"\xb4\x05\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\x8a\xb2\x19\xf0\x01\n" +
-	"\xc5\x01Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID. Metrics are aggregated per collection and may be paginated (a space can have many collections).\x12\x17Get space usage metricsB\rspace.metrics\xaa\xb8\x19\x8c\x02\n" +
-	"\x17get_space_usage_metrics\x12\xf0\x01\n" +
-	"\xed\x01\n" +
+	"\xc5\x01Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID. Metrics are aggregated per collection and may be paginated (a space can have many collections).\x12\x17Get space usage metricsB\rspace.metrics\xaa\xb8\x19\xb8\x02\n" +
+	"\x17get_space_usage_metrics\x12\x9c\x02\n" +
+	"\x99\x02\n" +
 	"\bRequests\x12!\n" +
 	"\rsearchLatency\x12\x0eSearch latency\x18\x01\x12#\n" +
 	"\x0esearchRequests\x12\x0fSearch requests\x18\x02\x12!\n" +
@@ -2114,6 +2156,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
 	"pointCount\x12\x06Points\x12\x1b\n" +
 	"\x10usedStorageBytes\x12\aStorage\x12*\n" +
+	"\x17usedIndexedStorageBytes\x12\x0fIndexed storage\x12*\n" +
 	"\x16currentSearcherWorkers\x12\x10Searcher workers\x1a\x05items\"\x0ecollectionName(\x02\x82\xd3\xe4\x93\x02J\x12H/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/usage-metrics\x12\xd3\x04\n" +
 	"\x18GetSpaceInferenceMetrics\x12F.qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest\x1aG.qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse\"\xa5\x03\x8a\xb5\x18\x16read:serverless_spaces\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\x8a\xb2\x19\xf9\x01\n" +
@@ -2128,7 +2171,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\bspace_id\x12\x02id\"\x18\n" +
 	"\n" +
 	"account_id\x12\n" +
-	"account_id(\x012 Alerts for this serverless space\x82\xd3\xe4\x93\x02C\x12A/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts\x1a\bµ\x18\x04\b\x02\x10\x01B\xda\x02\n" +
+	"account_id(\x012 Alerts for this serverless space\x82\xd3\xe4\x93\x02C\x12A/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts\x1a\bµ\x18\x04\b\x02\x10\x02B\xda\x02\n" +
 	")com.qdrant.cloud.serverless.monitoring.v1B\x0fMonitoringProtoP\x01Zcgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/monitoring/v1;monitoringv1\xa2\x02\x04QCSM\xaa\x02%Qdrant.Cloud.Serverless.Monitoring.V1\xca\x02%Qdrant\\Cloud\\Serverless\\Monitoring\\V1\xe2\x021Qdrant\\Cloud\\Serverless\\Monitoring\\V1\\GPBMetadata\xea\x02)Qdrant::Cloud::Serverless::Monitoring::V1b\x06proto3"
 
 var (
@@ -2202,20 +2245,21 @@ var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_depIdxs = []int3
 	21, // 27: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.point_count:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
 	21, // 28: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.used_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
 	21, // 29: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.current_searcher_workers:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	22, // 30: qdrant.cloud.serverless.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
-	5,  // 31: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest
-	7,  // 32: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest
-	9,  // 33: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest
-	13, // 34: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:input_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest
-	6,  // 35: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse
-	8,  // 36: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse
-	10, // 37: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse
-	14, // 38: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:output_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse
-	35, // [35:39] is the sub-list for method output_type
-	31, // [31:35] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	21, // 30: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.used_indexed_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	22, // 31: qdrant.cloud.serverless.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
+	5,  // 32: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest
+	7,  // 33: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest
+	9,  // 34: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest
+	13, // 35: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:input_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest
+	6,  // 36: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse
+	8,  // 37: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse
+	10, // 38: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse
+	14, // 39: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:output_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse
+	36, // [36:40] is the sub-list for method output_type
+	32, // [32:36] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_init() }
