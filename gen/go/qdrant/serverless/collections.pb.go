@@ -256,6 +256,68 @@ func (TextScoringType) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{3}
 }
 
+// Collection status as in the qdrant server API. A serverless space returns
+// only GREEN and YELLOW.
+type CollectionStatus int32
+
+const (
+	// Could not be determined.
+	CollectionStatus_COLLECTION_STATUS_UNSPECIFIED CollectionStatus = 0
+	// All segments are optimized.
+	CollectionStatus_GREEN CollectionStatus = 1
+	// Optimization is pending or running; the collection stays searchable.
+	CollectionStatus_YELLOW CollectionStatus = 2
+	// Not returned by a serverless space.
+	CollectionStatus_RED CollectionStatus = 3
+	// Not returned by a serverless space.
+	CollectionStatus_GREY CollectionStatus = 4
+)
+
+// Enum value maps for CollectionStatus.
+var (
+	CollectionStatus_name = map[int32]string{
+		0: "COLLECTION_STATUS_UNSPECIFIED",
+		1: "GREEN",
+		2: "YELLOW",
+		3: "RED",
+		4: "GREY",
+	}
+	CollectionStatus_value = map[string]int32{
+		"COLLECTION_STATUS_UNSPECIFIED": 0,
+		"GREEN":                         1,
+		"YELLOW":                        2,
+		"RED":                           3,
+		"GREY":                          4,
+	}
+)
+
+func (x CollectionStatus) Enum() *CollectionStatus {
+	p := new(CollectionStatus)
+	*p = x
+	return p
+}
+
+func (x CollectionStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CollectionStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_serverless_collections_proto_enumTypes[4].Descriptor()
+}
+
+func (CollectionStatus) Type() protoreflect.EnumType {
+	return &file_qdrant_serverless_collections_proto_enumTypes[4]
+}
+
+func (x CollectionStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CollectionStatus.Descriptor instead.
+func (CollectionStatus) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{4}
+}
+
 // Configuration of a single dense (embedding) vector.
 type DenseVectorConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1730,6 +1792,17 @@ type GetCollectionResponse struct {
 	// Available points as of the last applied write (eventually consistent);
 	// absent until the updater has written stats for the collection.
 	PointCount *uint64 `protobuf:"varint,3,opt,name=point_count,json=pointCount,proto3,oneof" json:"point_count,omitempty"`
+	// Optimization status of the collection.
+	Status CollectionStatus `protobuf:"varint,5,opt,name=status,proto3,enum=qdrant.serverless.CollectionStatus" json:"status,omitempty"`
+	// Estimated stored bytes, which the collection size limit applies to: indexed
+	// segments as of the last optimization plus a fixed estimate per unindexed one.
+	SizeBytes *uint64 `protobuf:"varint,6,opt,name=size_bytes,json=sizeBytes,proto3,oneof" json:"size_bytes,omitempty"`
+	// Approximate number of vectors in indexed segments; the rest are searched
+	// exhaustively until an optimization indexes them.
+	IndexedVectorsCount *uint64 `protobuf:"varint,7,opt,name=indexed_vectors_count,json=indexedVectorsCount,proto3,oneof" json:"indexed_vectors_count,omitempty"`
+	// Whether acknowledged writes are still waiting to be applied, and so not yet
+	// visible to search.
+	PendingWrites *bool `protobuf:"varint,8,opt,name=pending_writes,json=pendingWrites,proto3,oneof" json:"pending_writes,omitempty"`
 	// Time spent to process
 	Time          float64 `protobuf:"fixed64,4,opt,name=time,proto3" json:"time,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1785,6 +1858,34 @@ func (x *GetCollectionResponse) GetPointCount() uint64 {
 		return *x.PointCount
 	}
 	return 0
+}
+
+func (x *GetCollectionResponse) GetStatus() CollectionStatus {
+	if x != nil {
+		return x.Status
+	}
+	return CollectionStatus_COLLECTION_STATUS_UNSPECIFIED
+}
+
+func (x *GetCollectionResponse) GetSizeBytes() uint64 {
+	if x != nil && x.SizeBytes != nil {
+		return *x.SizeBytes
+	}
+	return 0
+}
+
+func (x *GetCollectionResponse) GetIndexedVectorsCount() uint64 {
+	if x != nil && x.IndexedVectorsCount != nil {
+		return *x.IndexedVectorsCount
+	}
+	return 0
+}
+
+func (x *GetCollectionResponse) GetPendingWrites() bool {
+	if x != nil && x.PendingWrites != nil {
+		return *x.PendingWrites
+	}
+	return false
 }
 
 func (x *GetCollectionResponse) GetTime() float64 {
@@ -1858,7 +1959,9 @@ type CollectionSummary struct {
 	CollectionName string `protobuf:"bytes,1,opt,name=collection_name,json=collectionName,proto3" json:"collection_name,omitempty"`
 	// Available points as of the last applied write (eventually consistent);
 	// absent until the updater has written stats for the collection.
-	PointCount    *uint64 `protobuf:"varint,2,opt,name=point_count,json=pointCount,proto3,oneof" json:"point_count,omitempty"`
+	PointCount *uint64 `protobuf:"varint,2,opt,name=point_count,json=pointCount,proto3,oneof" json:"point_count,omitempty"`
+	// Estimated stored bytes, as in GetCollectionResponse.
+	SizeBytes     *uint64 `protobuf:"varint,3,opt,name=size_bytes,json=sizeBytes,proto3,oneof" json:"size_bytes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1903,6 +2006,13 @@ func (x *CollectionSummary) GetCollectionName() string {
 func (x *CollectionSummary) GetPointCount() uint64 {
 	if x != nil && x.PointCount != nil {
 		return *x.PointCount
+	}
+	return 0
+}
+
+func (x *CollectionSummary) GetSizeBytes() uint64 {
+	if x != nil && x.SizeBytes != nil {
+		return *x.SizeBytes
 	}
 	return 0
 }
@@ -2093,25 +2203,36 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\adeleted\x18\x01 \x01(\bR\adeleted\x12\x12\n" +
 	"\x04time\x18\x02 \x01(\x01R\x04time\"?\n" +
 	"\x14GetCollectionRequest\x12'\n" +
-	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"\xc6\x01\n" +
+	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\"\xc8\x03\n" +
 	"\x15GetCollectionResponse\x12\x16\n" +
 	"\x06exists\x18\x01 \x01(\bR\x06exists\x12@\n" +
 	"\x06config\x18\x02 \x01(\v2#.qdrant.serverless.CollectionConfigH\x00R\x06config\x88\x01\x01\x12$\n" +
 	"\vpoint_count\x18\x03 \x01(\x04H\x01R\n" +
-	"pointCount\x88\x01\x01\x12\x12\n" +
+	"pointCount\x88\x01\x01\x12;\n" +
+	"\x06status\x18\x05 \x01(\x0e2#.qdrant.serverless.CollectionStatusR\x06status\x12\"\n" +
+	"\n" +
+	"size_bytes\x18\x06 \x01(\x04H\x02R\tsizeBytes\x88\x01\x01\x127\n" +
+	"\x15indexed_vectors_count\x18\a \x01(\x04H\x03R\x13indexedVectorsCount\x88\x01\x01\x12*\n" +
+	"\x0epending_writes\x18\b \x01(\bH\x04R\rpendingWrites\x88\x01\x01\x12\x12\n" +
 	"\x04time\x18\x04 \x01(\x01R\x04timeB\t\n" +
 	"\a_configB\x0e\n" +
-	"\f_point_count\"\x81\x01\n" +
+	"\f_point_countB\r\n" +
+	"\v_size_bytesB\x18\n" +
+	"\x16_indexed_vectors_countB\x11\n" +
+	"\x0f_pending_writes\"\x81\x01\n" +
 	"\x16ListCollectionsRequest\x12$\n" +
 	"\x05limit\x18\x01 \x01(\rB\t\xbaH\x06*\x04\x18d \x00H\x00R\x05limit\x88\x01\x01\x12&\n" +
 	"\foffset_token\x18\x02 \x01(\tH\x01R\voffsetToken\x88\x01\x01B\b\n" +
 	"\x06_limitB\x0f\n" +
-	"\r_offset_token\"r\n" +
+	"\r_offset_token\"\xa5\x01\n" +
 	"\x11CollectionSummary\x12'\n" +
 	"\x0fcollection_name\x18\x01 \x01(\tR\x0ecollectionName\x12$\n" +
 	"\vpoint_count\x18\x02 \x01(\x04H\x00R\n" +
-	"pointCount\x88\x01\x01B\x0e\n" +
-	"\f_point_count\"\xbc\x01\n" +
+	"pointCount\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"size_bytes\x18\x03 \x01(\x04H\x01R\tsizeBytes\x88\x01\x01B\x0e\n" +
+	"\f_point_countB\r\n" +
+	"\v_size_bytes\"\xbc\x01\n" +
 	"\x17ListCollectionsResponse\x12F\n" +
 	"\vcollections\x18\x01 \x03(\v2$.qdrant.serverless.CollectionSummaryR\vcollections\x12/\n" +
 	"\x11next_offset_token\x18\x02 \x01(\tH\x00R\x0fnextOffsetToken\x88\x01\x01\x12\x12\n" +
@@ -2142,7 +2263,14 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\fMULTILINGUAL\x10\x04*>\n" +
 	"\x0fTextScoringType\x12!\n" +
 	"\x1dTEXT_SCORING_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04BM25\x10\x012\xbc\x03\n" +
+	"\x04BM25\x10\x01*_\n" +
+	"\x10CollectionStatus\x12!\n" +
+	"\x1dCOLLECTION_STATUS_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05GREEN\x10\x01\x12\n" +
+	"\n" +
+	"\x06YELLOW\x10\x02\x12\a\n" +
+	"\x03RED\x10\x03\x12\b\n" +
+	"\x04GREY\x10\x042\xbc\x03\n" +
 	"\x12CollectionsService\x12k\n" +
 	"\x10CreateCollection\x12*.qdrant.serverless.CreateCollectionRequest\x1a+.qdrant.serverless.CreateCollectionResponse\x12k\n" +
 	"\x10DeleteCollection\x12*.qdrant.serverless.DeleteCollectionRequest\x1a+.qdrant.serverless.DeleteCollectionResponse\x12b\n" +
@@ -2162,86 +2290,88 @@ func file_qdrant_serverless_collections_proto_rawDescGZIP() []byte {
 	return file_qdrant_serverless_collections_proto_rawDescData
 }
 
-var file_qdrant_serverless_collections_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_qdrant_serverless_collections_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_qdrant_serverless_collections_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_qdrant_serverless_collections_proto_goTypes = []any{
 	(Distance)(0),                    // 0: qdrant.serverless.Distance
 	(PrecisionTier)(0),               // 1: qdrant.serverless.PrecisionTier
 	(Tokenizer)(0),                   // 2: qdrant.serverless.Tokenizer
 	(TextScoringType)(0),             // 3: qdrant.serverless.TextScoringType
-	(*DenseVectorConfig)(nil),        // 4: qdrant.serverless.DenseVectorConfig
-	(*SparseVectorConfig)(nil),       // 5: qdrant.serverless.SparseVectorConfig
-	(*KeywordIndex)(nil),             // 6: qdrant.serverless.KeywordIndex
-	(*KeywordPrefixParams)(nil),      // 7: qdrant.serverless.KeywordPrefixParams
-	(*IntegerIndex)(nil),             // 8: qdrant.serverless.IntegerIndex
-	(*FloatIndex)(nil),               // 9: qdrant.serverless.FloatIndex
-	(*UuidIndex)(nil),                // 10: qdrant.serverless.UuidIndex
-	(*DatetimeIndex)(nil),            // 11: qdrant.serverless.DatetimeIndex
-	(*StopwordsSet)(nil),             // 12: qdrant.serverless.StopwordsSet
-	(*SnowballParams)(nil),           // 13: qdrant.serverless.SnowballParams
-	(*DisabledStemmer)(nil),          // 14: qdrant.serverless.DisabledStemmer
-	(*StemmingAlgorithm)(nil),        // 15: qdrant.serverless.StemmingAlgorithm
-	(*TextScoringParams)(nil),        // 16: qdrant.serverless.TextScoringParams
-	(*TextIndex)(nil),                // 17: qdrant.serverless.TextIndex
-	(*GeoIndex)(nil),                 // 18: qdrant.serverless.GeoIndex
-	(*BoolIndex)(nil),                // 19: qdrant.serverless.BoolIndex
-	(*PayloadIndexConfig)(nil),       // 20: qdrant.serverless.PayloadIndexConfig
-	(*CollectionConfig)(nil),         // 21: qdrant.serverless.CollectionConfig
-	(*CreateCollectionRequest)(nil),  // 22: qdrant.serverless.CreateCollectionRequest
-	(*CreateCollectionResponse)(nil), // 23: qdrant.serverless.CreateCollectionResponse
-	(*DeleteCollectionRequest)(nil),  // 24: qdrant.serverless.DeleteCollectionRequest
-	(*DeleteCollectionResponse)(nil), // 25: qdrant.serverless.DeleteCollectionResponse
-	(*GetCollectionRequest)(nil),     // 26: qdrant.serverless.GetCollectionRequest
-	(*GetCollectionResponse)(nil),    // 27: qdrant.serverless.GetCollectionResponse
-	(*ListCollectionsRequest)(nil),   // 28: qdrant.serverless.ListCollectionsRequest
-	(*CollectionSummary)(nil),        // 29: qdrant.serverless.CollectionSummary
-	(*ListCollectionsResponse)(nil),  // 30: qdrant.serverless.ListCollectionsResponse
-	nil,                              // 31: qdrant.serverless.CollectionConfig.DenseVectorsEntry
-	nil,                              // 32: qdrant.serverless.CollectionConfig.SparseVectorsEntry
-	nil,                              // 33: qdrant.serverless.CollectionConfig.PayloadIndexesEntry
+	(CollectionStatus)(0),            // 4: qdrant.serverless.CollectionStatus
+	(*DenseVectorConfig)(nil),        // 5: qdrant.serverless.DenseVectorConfig
+	(*SparseVectorConfig)(nil),       // 6: qdrant.serverless.SparseVectorConfig
+	(*KeywordIndex)(nil),             // 7: qdrant.serverless.KeywordIndex
+	(*KeywordPrefixParams)(nil),      // 8: qdrant.serverless.KeywordPrefixParams
+	(*IntegerIndex)(nil),             // 9: qdrant.serverless.IntegerIndex
+	(*FloatIndex)(nil),               // 10: qdrant.serverless.FloatIndex
+	(*UuidIndex)(nil),                // 11: qdrant.serverless.UuidIndex
+	(*DatetimeIndex)(nil),            // 12: qdrant.serverless.DatetimeIndex
+	(*StopwordsSet)(nil),             // 13: qdrant.serverless.StopwordsSet
+	(*SnowballParams)(nil),           // 14: qdrant.serverless.SnowballParams
+	(*DisabledStemmer)(nil),          // 15: qdrant.serverless.DisabledStemmer
+	(*StemmingAlgorithm)(nil),        // 16: qdrant.serverless.StemmingAlgorithm
+	(*TextScoringParams)(nil),        // 17: qdrant.serverless.TextScoringParams
+	(*TextIndex)(nil),                // 18: qdrant.serverless.TextIndex
+	(*GeoIndex)(nil),                 // 19: qdrant.serverless.GeoIndex
+	(*BoolIndex)(nil),                // 20: qdrant.serverless.BoolIndex
+	(*PayloadIndexConfig)(nil),       // 21: qdrant.serverless.PayloadIndexConfig
+	(*CollectionConfig)(nil),         // 22: qdrant.serverless.CollectionConfig
+	(*CreateCollectionRequest)(nil),  // 23: qdrant.serverless.CreateCollectionRequest
+	(*CreateCollectionResponse)(nil), // 24: qdrant.serverless.CreateCollectionResponse
+	(*DeleteCollectionRequest)(nil),  // 25: qdrant.serverless.DeleteCollectionRequest
+	(*DeleteCollectionResponse)(nil), // 26: qdrant.serverless.DeleteCollectionResponse
+	(*GetCollectionRequest)(nil),     // 27: qdrant.serverless.GetCollectionRequest
+	(*GetCollectionResponse)(nil),    // 28: qdrant.serverless.GetCollectionResponse
+	(*ListCollectionsRequest)(nil),   // 29: qdrant.serverless.ListCollectionsRequest
+	(*CollectionSummary)(nil),        // 30: qdrant.serverless.CollectionSummary
+	(*ListCollectionsResponse)(nil),  // 31: qdrant.serverless.ListCollectionsResponse
+	nil,                              // 32: qdrant.serverless.CollectionConfig.DenseVectorsEntry
+	nil,                              // 33: qdrant.serverless.CollectionConfig.SparseVectorsEntry
+	nil,                              // 34: qdrant.serverless.CollectionConfig.PayloadIndexesEntry
 }
 var file_qdrant_serverless_collections_proto_depIdxs = []int32{
 	0,  // 0: qdrant.serverless.DenseVectorConfig.distance:type_name -> qdrant.serverless.Distance
 	1,  // 1: qdrant.serverless.DenseVectorConfig.precision_tier:type_name -> qdrant.serverless.PrecisionTier
 	1,  // 2: qdrant.serverless.SparseVectorConfig.precision_tier:type_name -> qdrant.serverless.PrecisionTier
-	7,  // 3: qdrant.serverless.KeywordIndex.prefix:type_name -> qdrant.serverless.KeywordPrefixParams
-	13, // 4: qdrant.serverless.StemmingAlgorithm.snowball:type_name -> qdrant.serverless.SnowballParams
-	14, // 5: qdrant.serverless.StemmingAlgorithm.disabled:type_name -> qdrant.serverless.DisabledStemmer
+	8,  // 3: qdrant.serverless.KeywordIndex.prefix:type_name -> qdrant.serverless.KeywordPrefixParams
+	14, // 4: qdrant.serverless.StemmingAlgorithm.snowball:type_name -> qdrant.serverless.SnowballParams
+	15, // 5: qdrant.serverless.StemmingAlgorithm.disabled:type_name -> qdrant.serverless.DisabledStemmer
 	3,  // 6: qdrant.serverless.TextScoringParams.type:type_name -> qdrant.serverless.TextScoringType
 	2,  // 7: qdrant.serverless.TextIndex.tokenizer:type_name -> qdrant.serverless.Tokenizer
-	12, // 8: qdrant.serverless.TextIndex.stopwords:type_name -> qdrant.serverless.StopwordsSet
-	15, // 9: qdrant.serverless.TextIndex.stemmer:type_name -> qdrant.serverless.StemmingAlgorithm
-	16, // 10: qdrant.serverless.TextIndex.scoring:type_name -> qdrant.serverless.TextScoringParams
-	6,  // 11: qdrant.serverless.PayloadIndexConfig.keyword:type_name -> qdrant.serverless.KeywordIndex
-	8,  // 12: qdrant.serverless.PayloadIndexConfig.integer:type_name -> qdrant.serverless.IntegerIndex
-	9,  // 13: qdrant.serverless.PayloadIndexConfig.float:type_name -> qdrant.serverless.FloatIndex
-	10, // 14: qdrant.serverless.PayloadIndexConfig.uuid:type_name -> qdrant.serverless.UuidIndex
-	11, // 15: qdrant.serverless.PayloadIndexConfig.datetime:type_name -> qdrant.serverless.DatetimeIndex
-	17, // 16: qdrant.serverless.PayloadIndexConfig.text:type_name -> qdrant.serverless.TextIndex
-	18, // 17: qdrant.serverless.PayloadIndexConfig.geo:type_name -> qdrant.serverless.GeoIndex
-	19, // 18: qdrant.serverless.PayloadIndexConfig.bool:type_name -> qdrant.serverless.BoolIndex
-	31, // 19: qdrant.serverless.CollectionConfig.dense_vectors:type_name -> qdrant.serverless.CollectionConfig.DenseVectorsEntry
-	32, // 20: qdrant.serverless.CollectionConfig.sparse_vectors:type_name -> qdrant.serverless.CollectionConfig.SparseVectorsEntry
-	33, // 21: qdrant.serverless.CollectionConfig.payload_indexes:type_name -> qdrant.serverless.CollectionConfig.PayloadIndexesEntry
-	21, // 22: qdrant.serverless.CreateCollectionRequest.config:type_name -> qdrant.serverless.CollectionConfig
-	21, // 23: qdrant.serverless.GetCollectionResponse.config:type_name -> qdrant.serverless.CollectionConfig
-	29, // 24: qdrant.serverless.ListCollectionsResponse.collections:type_name -> qdrant.serverless.CollectionSummary
-	4,  // 25: qdrant.serverless.CollectionConfig.DenseVectorsEntry.value:type_name -> qdrant.serverless.DenseVectorConfig
-	5,  // 26: qdrant.serverless.CollectionConfig.SparseVectorsEntry.value:type_name -> qdrant.serverless.SparseVectorConfig
-	20, // 27: qdrant.serverless.CollectionConfig.PayloadIndexesEntry.value:type_name -> qdrant.serverless.PayloadIndexConfig
-	22, // 28: qdrant.serverless.CollectionsService.CreateCollection:input_type -> qdrant.serverless.CreateCollectionRequest
-	24, // 29: qdrant.serverless.CollectionsService.DeleteCollection:input_type -> qdrant.serverless.DeleteCollectionRequest
-	26, // 30: qdrant.serverless.CollectionsService.GetCollection:input_type -> qdrant.serverless.GetCollectionRequest
-	28, // 31: qdrant.serverless.CollectionsService.ListCollections:input_type -> qdrant.serverless.ListCollectionsRequest
-	23, // 32: qdrant.serverless.CollectionsService.CreateCollection:output_type -> qdrant.serverless.CreateCollectionResponse
-	25, // 33: qdrant.serverless.CollectionsService.DeleteCollection:output_type -> qdrant.serverless.DeleteCollectionResponse
-	27, // 34: qdrant.serverless.CollectionsService.GetCollection:output_type -> qdrant.serverless.GetCollectionResponse
-	30, // 35: qdrant.serverless.CollectionsService.ListCollections:output_type -> qdrant.serverless.ListCollectionsResponse
-	32, // [32:36] is the sub-list for method output_type
-	28, // [28:32] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	13, // 8: qdrant.serverless.TextIndex.stopwords:type_name -> qdrant.serverless.StopwordsSet
+	16, // 9: qdrant.serverless.TextIndex.stemmer:type_name -> qdrant.serverless.StemmingAlgorithm
+	17, // 10: qdrant.serverless.TextIndex.scoring:type_name -> qdrant.serverless.TextScoringParams
+	7,  // 11: qdrant.serverless.PayloadIndexConfig.keyword:type_name -> qdrant.serverless.KeywordIndex
+	9,  // 12: qdrant.serverless.PayloadIndexConfig.integer:type_name -> qdrant.serverless.IntegerIndex
+	10, // 13: qdrant.serverless.PayloadIndexConfig.float:type_name -> qdrant.serverless.FloatIndex
+	11, // 14: qdrant.serverless.PayloadIndexConfig.uuid:type_name -> qdrant.serverless.UuidIndex
+	12, // 15: qdrant.serverless.PayloadIndexConfig.datetime:type_name -> qdrant.serverless.DatetimeIndex
+	18, // 16: qdrant.serverless.PayloadIndexConfig.text:type_name -> qdrant.serverless.TextIndex
+	19, // 17: qdrant.serverless.PayloadIndexConfig.geo:type_name -> qdrant.serverless.GeoIndex
+	20, // 18: qdrant.serverless.PayloadIndexConfig.bool:type_name -> qdrant.serverless.BoolIndex
+	32, // 19: qdrant.serverless.CollectionConfig.dense_vectors:type_name -> qdrant.serverless.CollectionConfig.DenseVectorsEntry
+	33, // 20: qdrant.serverless.CollectionConfig.sparse_vectors:type_name -> qdrant.serverless.CollectionConfig.SparseVectorsEntry
+	34, // 21: qdrant.serverless.CollectionConfig.payload_indexes:type_name -> qdrant.serverless.CollectionConfig.PayloadIndexesEntry
+	22, // 22: qdrant.serverless.CreateCollectionRequest.config:type_name -> qdrant.serverless.CollectionConfig
+	22, // 23: qdrant.serverless.GetCollectionResponse.config:type_name -> qdrant.serverless.CollectionConfig
+	4,  // 24: qdrant.serverless.GetCollectionResponse.status:type_name -> qdrant.serverless.CollectionStatus
+	30, // 25: qdrant.serverless.ListCollectionsResponse.collections:type_name -> qdrant.serverless.CollectionSummary
+	5,  // 26: qdrant.serverless.CollectionConfig.DenseVectorsEntry.value:type_name -> qdrant.serverless.DenseVectorConfig
+	6,  // 27: qdrant.serverless.CollectionConfig.SparseVectorsEntry.value:type_name -> qdrant.serverless.SparseVectorConfig
+	21, // 28: qdrant.serverless.CollectionConfig.PayloadIndexesEntry.value:type_name -> qdrant.serverless.PayloadIndexConfig
+	23, // 29: qdrant.serverless.CollectionsService.CreateCollection:input_type -> qdrant.serverless.CreateCollectionRequest
+	25, // 30: qdrant.serverless.CollectionsService.DeleteCollection:input_type -> qdrant.serverless.DeleteCollectionRequest
+	27, // 31: qdrant.serverless.CollectionsService.GetCollection:input_type -> qdrant.serverless.GetCollectionRequest
+	29, // 32: qdrant.serverless.CollectionsService.ListCollections:input_type -> qdrant.serverless.ListCollectionsRequest
+	24, // 33: qdrant.serverless.CollectionsService.CreateCollection:output_type -> qdrant.serverless.CreateCollectionResponse
+	26, // 34: qdrant.serverless.CollectionsService.DeleteCollection:output_type -> qdrant.serverless.DeleteCollectionResponse
+	28, // 35: qdrant.serverless.CollectionsService.GetCollection:output_type -> qdrant.serverless.GetCollectionResponse
+	31, // 36: qdrant.serverless.CollectionsService.ListCollections:output_type -> qdrant.serverless.ListCollectionsResponse
+	33, // [33:37] is the sub-list for method output_type
+	29, // [29:33] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_serverless_collections_proto_init() }
@@ -2283,7 +2413,7 @@ func file_qdrant_serverless_collections_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_serverless_collections_proto_rawDesc), len(file_qdrant_serverless_collections_proto_rawDesc)),
-			NumEnums:      4,
+			NumEnums:      5,
 			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   1,
