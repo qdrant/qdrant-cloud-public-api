@@ -44,6 +44,12 @@ class CollectionStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     YELLOW: _ClassVar[CollectionStatus]
     RED: _ClassVar[CollectionStatus]
     GREY: _ClassVar[CollectionStatus]
+
+class UpdatesStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    UPDATES_STATUS_UNSPECIFIED: _ClassVar[UpdatesStatus]
+    APPLIED: _ClassVar[UpdatesStatus]
+    PENDING: _ClassVar[UpdatesStatus]
 DISTANCE_UNSPECIFIED: Distance
 COSINE: Distance
 EUCLID: Distance
@@ -66,6 +72,9 @@ GREEN: CollectionStatus
 YELLOW: CollectionStatus
 RED: CollectionStatus
 GREY: CollectionStatus
+UPDATES_STATUS_UNSPECIFIED: UpdatesStatus
+APPLIED: UpdatesStatus
+PENDING: UpdatesStatus
 
 class DenseVectorConfig(_message.Message):
     __slots__ = ("size", "distance", "multivector", "precision_tier")
@@ -278,6 +287,12 @@ class DeleteCollectionResponse(_message.Message):
     time: float
     def __init__(self, deleted: _Optional[bool] = ..., time: _Optional[float] = ...) -> None: ...
 
+class UpdatesInfo(_message.Message):
+    __slots__ = ("status",)
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    status: UpdatesStatus
+    def __init__(self, status: _Optional[_Union[UpdatesStatus, str]] = ...) -> None: ...
+
 class GetCollectionRequest(_message.Message):
     __slots__ = ("collection_name",)
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
@@ -285,14 +300,14 @@ class GetCollectionRequest(_message.Message):
     def __init__(self, collection_name: _Optional[str] = ...) -> None: ...
 
 class GetCollectionResponse(_message.Message):
-    __slots__ = ("exists", "config", "point_count", "status", "size_bytes", "indexed_vectors_count", "pending_writes", "time")
+    __slots__ = ("exists", "config", "point_count", "status", "size_bytes", "indexed_vectors_count", "updates", "time")
     EXISTS_FIELD_NUMBER: _ClassVar[int]
     CONFIG_FIELD_NUMBER: _ClassVar[int]
     POINT_COUNT_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     SIZE_BYTES_FIELD_NUMBER: _ClassVar[int]
     INDEXED_VECTORS_COUNT_FIELD_NUMBER: _ClassVar[int]
-    PENDING_WRITES_FIELD_NUMBER: _ClassVar[int]
+    UPDATES_FIELD_NUMBER: _ClassVar[int]
     TIME_FIELD_NUMBER: _ClassVar[int]
     exists: bool
     config: CollectionConfig
@@ -300,9 +315,9 @@ class GetCollectionResponse(_message.Message):
     status: CollectionStatus
     size_bytes: int
     indexed_vectors_count: int
-    pending_writes: bool
+    updates: UpdatesInfo
     time: float
-    def __init__(self, exists: _Optional[bool] = ..., config: _Optional[_Union[CollectionConfig, _Mapping]] = ..., point_count: _Optional[int] = ..., status: _Optional[_Union[CollectionStatus, str]] = ..., size_bytes: _Optional[int] = ..., indexed_vectors_count: _Optional[int] = ..., pending_writes: _Optional[bool] = ..., time: _Optional[float] = ...) -> None: ...
+    def __init__(self, exists: _Optional[bool] = ..., config: _Optional[_Union[CollectionConfig, _Mapping]] = ..., point_count: _Optional[int] = ..., status: _Optional[_Union[CollectionStatus, str]] = ..., size_bytes: _Optional[int] = ..., indexed_vectors_count: _Optional[int] = ..., updates: _Optional[_Union[UpdatesInfo, _Mapping]] = ..., time: _Optional[float] = ...) -> None: ...
 
 class ListCollectionsRequest(_message.Message):
     __slots__ = ("limit", "offset_token")

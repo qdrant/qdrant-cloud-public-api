@@ -757,6 +757,28 @@ export declare type DeleteCollectionResponseValid = DeleteCollectionResponse;
 export declare const DeleteCollectionResponseSchema: GenMessage<DeleteCollectionResponse, {validType: DeleteCollectionResponseValid}>;
 
 /**
+ * Progress of acknowledged writes to a collection.
+ *
+ * @generated from message qdrant.serverless.UpdatesInfo
+ */
+export declare type UpdatesInfo = Message<"qdrant.serverless.UpdatesInfo"> & {
+  /**
+   * Whether acknowledged writes are applied or still pending.
+   *
+   * @generated from field: qdrant.serverless.UpdatesStatus status = 1;
+   */
+  status: UpdatesStatus;
+};
+
+export declare type UpdatesInfoValid = UpdatesInfo;
+
+/**
+ * Describes the message qdrant.serverless.UpdatesInfo.
+ * Use `create(UpdatesInfoSchema)` to create a new message.
+ */
+export declare const UpdatesInfoSchema: GenMessage<UpdatesInfo, {validType: UpdatesInfoValid}>;
+
+/**
  * Names the collection to fetch.
  *
  * @generated from message qdrant.serverless.GetCollectionRequest
@@ -830,12 +852,11 @@ export declare type GetCollectionResponse = Message<"qdrant.serverless.GetCollec
   indexedVectorsCount?: bigint | undefined;
 
   /**
-   * Whether acknowledged writes are still waiting to be applied, and so not yet
-   * visible to search.
+   * Progress of acknowledged writes; absent when it could not be determined.
    *
-   * @generated from field: optional bool pending_writes = 8;
+   * @generated from field: optional qdrant.serverless.UpdatesInfo updates = 8;
    */
-  pendingWrites?: boolean | undefined;
+  updates?: UpdatesInfo | undefined;
 
   /**
    * Time spent to process
@@ -1174,6 +1195,40 @@ export enum CollectionStatus {
  * Describes the enum qdrant.serverless.CollectionStatus.
  */
 export declare const CollectionStatusSchema: GenEnum<CollectionStatus>;
+
+/**
+ * Whether acknowledged writes have been applied.
+ *
+ * @generated from enum qdrant.serverless.UpdatesStatus
+ */
+export enum UpdatesStatus {
+  /**
+   * Placeholder required by proto3; never sent. An undetermined state is
+   * reported by omitting `updates` instead.
+   *
+   * @generated from enum value: UPDATES_STATUS_UNSPECIFIED = 0;
+   */
+  UPDATES_STATUS_UNSPECIFIED = 0,
+
+  /**
+   * Every acknowledged write is applied and visible to search.
+   *
+   * @generated from enum value: APPLIED = 1;
+   */
+  APPLIED = 1,
+
+  /**
+   * Some acknowledged writes are still queued and not yet visible to search.
+   *
+   * @generated from enum value: PENDING = 2;
+   */
+  PENDING = 2,
+}
+
+/**
+ * Describes the enum qdrant.serverless.UpdatesStatus.
+ */
+export declare const UpdatesStatusSchema: GenEnum<UpdatesStatus>;
 
 /**
  * CollectionsService manages the collections of a qdrant serverless space.

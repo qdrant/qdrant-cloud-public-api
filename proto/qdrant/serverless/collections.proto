@@ -318,6 +318,23 @@ enum CollectionStatus {
   GREY = 4;
 }
 
+// Whether acknowledged writes have been applied.
+enum UpdatesStatus {
+  // Placeholder required by proto3; never sent. An undetermined state is
+  // reported by omitting `updates` instead.
+  UPDATES_STATUS_UNSPECIFIED = 0;
+  // Every acknowledged write is applied and visible to search.
+  APPLIED = 1;
+  // Some acknowledged writes are still queued and not yet visible to search.
+  PENDING = 2;
+}
+
+// Progress of acknowledged writes to a collection.
+message UpdatesInfo {
+  // Whether acknowledged writes are applied or still pending.
+  UpdatesStatus status = 1;
+}
+
 // Names the collection to fetch.
 message GetCollectionRequest {
   // Tenant-facing name of the collection.
@@ -341,9 +358,8 @@ message GetCollectionResponse {
   // Approximate number of vectors in indexed segments; the rest are searched
   // exhaustively until an optimization indexes them.
   optional uint64 indexed_vectors_count = 7;
-  // Whether acknowledged writes are still waiting to be applied, and so not yet
-  // visible to search.
-  optional bool pending_writes = 8;
+  // Progress of acknowledged writes; absent when it could not be determined.
+  optional UpdatesInfo updates = 8;
   // Time spent to process
   double time = 4;
 }

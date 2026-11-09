@@ -1001,6 +1001,26 @@
           "grey"
         ]
       },
+      "UpdatesStatus": {
+        "description": "Whether acknowledged writes have been applied.\n\n- `applied`: every acknowledged write is applied and visible to search.\n- `pending`: some acknowledged writes are still queued and not yet visible to search.",
+        "type": "string",
+        "enum": [
+          "applied",
+          "pending"
+        ]
+      },
+      "UpdatesInfo": {
+        "description": "Progress of acknowledged writes to a collection.",
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/UpdatesStatus"
+          }
+        }
+      },
       "CollectionConfig": {
         "description": "The tenant-facing configuration of a collection. Unlike the Qdrant server API it is deliberately small: the serverless manager turns it into concrete Qdrant settings (HNSW, quantization, storage placement, ...), which are never exposed.\n\nAt least one dense or sparse vector is required.",
         "type": "object",
@@ -1121,10 +1141,14 @@
             "minimum": 0,
             "nullable": true
           },
-          "pending_writes": {
-            "description": "Whether acknowledged writes are still waiting to be applied, and so not yet visible to search.",
-            "type": "boolean",
-            "nullable": true
+          "updates": {
+            "description": "Progress of acknowledged writes. `null` when it could not be determined.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UpdatesInfo"
+              }
+            ]
           }
         },
         "example": {
@@ -1158,7 +1182,9 @@
           "status": "green",
           "size_bytes": 481203712,
           "indexed_vectors_count": 12873,
-          "pending_writes": false
+          "updates": {
+            "status": "applied"
+          }
         }
       },
       "CollectionSummary": {
