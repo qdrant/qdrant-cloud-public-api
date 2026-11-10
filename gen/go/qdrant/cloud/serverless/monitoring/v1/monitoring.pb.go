@@ -346,7 +346,7 @@ type GetSpaceSummaryMetricsRequest struct {
 	//	*GetSpaceSummaryMetricsRequest_CollectionNameContains
 	CollectionFilter isGetSpaceSummaryMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
 	// Maximum number of collection metrics to return.
-	// If not specified, all matching items are returned.
+	// If not specified, a default of 50 is used (also the maximum).
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// A page token, received from a previous call.
 	// Provide this to retrieve the subsequent page.
@@ -471,7 +471,7 @@ type GetSpaceSummaryMetricsResponse struct {
 	// Values come from product Prometheus gauges (same ceilings the data plane enforces).
 	Quota *SpaceQuotaSnapshot `protobuf:"bytes,2,opt,name=quota,proto3" json:"quota,omitempty"`
 	// The total number of items available (useful in relation with pagination).
-	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	// Always populated, also when the request did not set `page_size`.
 	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
 	// A token that can be sent as `page_token` to retrieve the next page.
 	// If this field is omitted, there are no subsequent pages.
@@ -566,7 +566,7 @@ type GetSpaceUsageMetricsRequest struct {
 	//	*GetSpaceUsageMetricsRequest_CollectionNameContains
 	CollectionFilter isGetSpaceUsageMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
 	// Maximum number of collection metrics to return.
-	// If not specified, all matching items are returned.
+	// If not specified, a default of 50 is used (also the maximum).
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// A page token, received from a previous call.
 	// Provide this to retrieve the subsequent page.
@@ -710,7 +710,7 @@ type GetSpaceUsageMetricsResponse struct {
 	// Always populated for the requested space (including on paginated pages).
 	Quota *SpaceQuotaSnapshot `protobuf:"bytes,2,opt,name=quota,proto3" json:"quota,omitempty"`
 	// The total number of items available (useful in relation with pagination).
-	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	// Always populated, also when the request did not set `page_size`.
 	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
 	// A token that can be sent as `page_token` to retrieve the next page.
 	// If this field is omitted, there are no subsequent pages.
@@ -806,7 +806,7 @@ type GetSpaceInferenceMetricsRequest struct {
 	//	*GetSpaceInferenceMetricsRequest_CollectionNameContains
 	CollectionFilter isGetSpaceInferenceMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
 	// Maximum number of collection metrics to return.
-	// If not specified, all matching items are returned.
+	// If not specified, a default of 50 is used (also the maximum).
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// A page token, received from a previous call.
 	// Provide this to retrieve the subsequent page.
@@ -955,7 +955,7 @@ type GetSpaceInferenceMetricsResponse struct {
 	// Per-collection inference token usage metrics for the space.
 	Items []*SpaceCollectionInferenceMetrics `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	// The total number of items available (useful in relation with pagination).
-	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	// Always populated, also when the request did not set `page_size`.
 	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
 	// A token that can be sent as `page_token` to retrieve the next page.
 	// If this field is omitted, there are no subsequent pages.

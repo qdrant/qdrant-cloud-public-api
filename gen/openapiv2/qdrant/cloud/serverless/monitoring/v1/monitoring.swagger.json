@@ -190,7 +190,7 @@
           },
           {
             "name": "pageSize",
-            "description": "Maximum number of collection metrics to return.\nIf not specified, all matching items are returned.",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, a default of 50 is used (also the maximum).",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -258,7 +258,7 @@
           },
           {
             "name": "pageSize",
-            "description": "Maximum number of collection metrics to return.\nIf not specified, all matching items are returned.",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, a default of 50 is used (also the maximum).",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -357,7 +357,7 @@
           },
           {
             "name": "pageSize",
-            "description": "Maximum number of collection metrics to return.\nIf not specified, all matching items are returned.",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, a default of 50 is used (also the maximum).",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -432,7 +432,7 @@
         "totalSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+          "description": "The total number of items available (useful in relation with pagination).\nAlways populated, also when the request did not set `page_size`."
         },
         "nextPageToken": {
           "type": "string",
@@ -459,7 +459,7 @@
         "totalSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+          "description": "The total number of items available (useful in relation with pagination).\nAlways populated, also when the request did not set `page_size`."
         },
         "nextPageToken": {
           "type": "string",
@@ -486,7 +486,7 @@
         "totalSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+          "description": "The total number of items available (useful in relation with pagination).\nAlways populated, also when the request did not set `page_size`."
         },
         "nextPageToken": {
           "type": "string",

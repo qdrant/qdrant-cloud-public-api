@@ -231,7 +231,7 @@ message GetSpaceSummaryMetricsRequest {
     }];
   }
   // Maximum number of collection metrics to return.
-  // If not specified, all matching items are returned.
+  // If not specified, a default of 50 is used (also the maximum).
   optional int32 page_size = 20 [(buf.validate.field).int32 = {
     gt: 0
     lte: 50
@@ -252,7 +252,7 @@ message GetSpaceSummaryMetricsResponse {
   // Values come from product Prometheus gauges (same ceilings the data plane enforces).
   SpaceQuotaSnapshot quota = 2 [(buf.validate.field).required = true];
   // The total number of items available (useful in relation with pagination).
-  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  // Always populated, also when the request did not set `page_size`.
   optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
   // A token that can be sent as `page_token` to retrieve the next page.
   // If this field is omitted, there are no subsequent pages.
@@ -303,7 +303,7 @@ message GetSpaceUsageMetricsRequest {
     }];
   }
   // Maximum number of collection metrics to return.
-  // If not specified, all matching items are returned.
+  // If not specified, a default of 50 is used (also the maximum).
   optional int32 page_size = 20 [(buf.validate.field).int32 = {
     gt: 0
     lte: 50
@@ -323,7 +323,7 @@ message GetSpaceUsageMetricsResponse {
   // Always populated for the requested space (including on paginated pages).
   SpaceQuotaSnapshot quota = 2 [(buf.validate.field).required = true];
   // The total number of items available (useful in relation with pagination).
-  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  // Always populated, also when the request did not set `page_size`.
   optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
   // A token that can be sent as `page_token` to retrieve the next page.
   // If this field is omitted, there are no subsequent pages.
@@ -375,7 +375,7 @@ message GetSpaceInferenceMetricsRequest {
     }];
   }
   // Maximum number of collection metrics to return.
-  // If not specified, all matching items are returned.
+  // If not specified, a default of 50 is used (also the maximum).
   optional int32 page_size = 20 [(buf.validate.field).int32 = {
     gt: 0
     lte: 50
@@ -392,7 +392,7 @@ message GetSpaceInferenceMetricsResponse {
   // Per-collection inference token usage metrics for the space.
   repeated SpaceCollectionInferenceMetrics items = 1;
   // The total number of items available (useful in relation with pagination).
-  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  // Always populated, also when the request did not set `page_size`.
   optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
   // A token that can be sent as `page_token` to retrieve the next page.
   // If this field is omitted, there are no subsequent pages.

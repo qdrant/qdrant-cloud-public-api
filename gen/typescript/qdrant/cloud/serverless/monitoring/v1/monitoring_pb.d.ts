@@ -61,7 +61,7 @@ export declare type GetSpaceSummaryMetricsRequest = Message<"qdrant.cloud.server
 
   /**
    * Maximum number of collection metrics to return.
-   * If not specified, all matching items are returned.
+   * If not specified, a default of 50 is used (also the maximum).
    *
    * @generated from field: optional int32 page_size = 20;
    */
@@ -110,7 +110,7 @@ export declare type GetSpaceSummaryMetricsResponse = Message<"qdrant.cloud.serve
 
   /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -149,7 +149,7 @@ export declare type GetSpaceSummaryMetricsResponseValid = Message<"qdrant.cloud.
 
   /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -244,7 +244,7 @@ export declare type GetSpaceUsageMetricsRequest = Message<"qdrant.cloud.serverle
 
   /**
    * Maximum number of collection metrics to return.
-   * If not specified, all matching items are returned.
+   * If not specified, a default of 50 is used (also the maximum).
    *
    * @generated from field: optional int32 page_size = 20;
    */
@@ -292,7 +292,7 @@ export declare type GetSpaceUsageMetricsResponse = Message<"qdrant.cloud.serverl
 
   /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -330,7 +330,7 @@ export declare type GetSpaceUsageMetricsResponseValid = Message<"qdrant.cloud.se
 
   /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -431,7 +431,7 @@ export declare type GetSpaceInferenceMetricsRequest = Message<"qdrant.cloud.serv
 
   /**
    * Maximum number of collection metrics to return.
-   * If not specified, all matching items are returned.
+   * If not specified, a default of 50 is used (also the maximum).
    *
    * @generated from field: optional int32 page_size = 20;
    */
@@ -471,7 +471,7 @@ export declare type GetSpaceInferenceMetricsResponse = Message<"qdrant.cloud.ser
 
   /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -501,7 +501,7 @@ export declare type GetSpaceInferenceMetricsResponseValid = Message<"qdrant.clou
 
   /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
