@@ -303,6 +303,34 @@ message DeleteCollectionResponse {
   double time = 2;
 }
 
+// Collection status, numbered as in the qdrant server API. 3 (RED) and 4 (GREY)
+// are left free so they can be added later with the same numbers.
+enum CollectionStatus {
+  // Could not be determined.
+  COLLECTION_STATUS_UNSPECIFIED = 0;
+  // All segments are optimized.
+  GREEN = 1;
+  // Optimization is pending or running; the collection stays searchable.
+  YELLOW = 2;
+}
+
+// Whether acknowledged writes have been applied.
+enum UpdatesStatus {
+  // Placeholder required by proto3; never sent. An undetermined state is
+  // reported by omitting `updates` instead.
+  UPDATES_STATUS_UNSPECIFIED = 0;
+  // Every acknowledged write is applied and visible to search.
+  APPLIED = 1;
+  // Some acknowledged writes are still queued and not yet visible to search.
+  PENDING = 2;
+}
+
+// Progress of acknowledged writes to a collection.
+message UpdatesInfo {
+  // Whether acknowledged writes are applied or still pending.
+  UpdatesStatus status = 1;
+}
+
 // Names the collection to fetch.
 message GetCollectionRequest {
   // Tenant-facing name of the collection.
@@ -318,6 +346,16 @@ message GetCollectionResponse {
   // Available points as of the last applied write (eventually consistent);
   // absent until the updater has written stats for the collection.
   optional uint64 point_count = 3;
+  // Optimization status of the collection.
+  CollectionStatus status = 5;
+  // Estimated stored bytes, which the collection size limit applies to: indexed
+  // segments as of the last optimization plus a fixed estimate per unindexed one.
+  optional uint64 size_bytes = 6;
+  // Approximate number of vectors in indexed segments; the rest are searched
+  // exhaustively until an optimization indexes them.
+  optional uint64 indexed_vectors_count = 7;
+  // Progress of acknowledged writes; absent when it could not be determined.
+  optional UpdatesInfo updates = 8;
   // Time spent to process
   double time = 4;
 }
@@ -342,6 +380,8 @@ message CollectionSummary {
   // Available points as of the last applied write (eventually consistent);
   // absent until the updater has written stats for the collection.
   optional uint64 point_count = 2;
+  // Estimated stored bytes, as in GetCollectionResponse.
+  optional uint64 size_bytes = 3;
 }
 
 // The caller's collections.

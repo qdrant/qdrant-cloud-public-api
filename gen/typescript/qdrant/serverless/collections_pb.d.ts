@@ -757,6 +757,28 @@ export declare type DeleteCollectionResponseValid = DeleteCollectionResponse;
 export declare const DeleteCollectionResponseSchema: GenMessage<DeleteCollectionResponse, {validType: DeleteCollectionResponseValid}>;
 
 /**
+ * Progress of acknowledged writes to a collection.
+ *
+ * @generated from message qdrant.serverless.UpdatesInfo
+ */
+export declare type UpdatesInfo = Message<"qdrant.serverless.UpdatesInfo"> & {
+  /**
+   * Whether acknowledged writes are applied or still pending.
+   *
+   * @generated from field: qdrant.serverless.UpdatesStatus status = 1;
+   */
+  status: UpdatesStatus;
+};
+
+export declare type UpdatesInfoValid = UpdatesInfo;
+
+/**
+ * Describes the message qdrant.serverless.UpdatesInfo.
+ * Use `create(UpdatesInfoSchema)` to create a new message.
+ */
+export declare const UpdatesInfoSchema: GenMessage<UpdatesInfo, {validType: UpdatesInfoValid}>;
+
+/**
  * Names the collection to fetch.
  *
  * @generated from message qdrant.serverless.GetCollectionRequest
@@ -805,6 +827,36 @@ export declare type GetCollectionResponse = Message<"qdrant.serverless.GetCollec
    * @generated from field: optional uint64 point_count = 3;
    */
   pointCount?: bigint | undefined;
+
+  /**
+   * Optimization status of the collection.
+   *
+   * @generated from field: qdrant.serverless.CollectionStatus status = 5;
+   */
+  status: CollectionStatus;
+
+  /**
+   * Estimated stored bytes, which the collection size limit applies to: indexed
+   * segments as of the last optimization plus a fixed estimate per unindexed one.
+   *
+   * @generated from field: optional uint64 size_bytes = 6;
+   */
+  sizeBytes?: bigint | undefined;
+
+  /**
+   * Approximate number of vectors in indexed segments; the rest are searched
+   * exhaustively until an optimization indexes them.
+   *
+   * @generated from field: optional uint64 indexed_vectors_count = 7;
+   */
+  indexedVectorsCount?: bigint | undefined;
+
+  /**
+   * Progress of acknowledged writes; absent when it could not be determined.
+   *
+   * @generated from field: optional qdrant.serverless.UpdatesInfo updates = 8;
+   */
+  updates?: UpdatesInfo | undefined;
 
   /**
    * Time spent to process
@@ -873,6 +925,13 @@ export declare type CollectionSummary = Message<"qdrant.serverless.CollectionSum
    * @generated from field: optional uint64 point_count = 2;
    */
   pointCount?: bigint | undefined;
+
+  /**
+   * Estimated stored bytes, as in GetCollectionResponse.
+   *
+   * @generated from field: optional uint64 size_bytes = 3;
+   */
+  sizeBytes?: bigint | undefined;
 };
 
 export declare type CollectionSummaryValid = CollectionSummary;
@@ -1088,6 +1147,74 @@ export enum TextScoringType {
  * Describes the enum qdrant.serverless.TextScoringType.
  */
 export declare const TextScoringTypeSchema: GenEnum<TextScoringType>;
+
+/**
+ * Collection status, numbered as in the qdrant server API. 3 (RED) and 4 (GREY)
+ * are left free so they can be added later with the same numbers.
+ *
+ * @generated from enum qdrant.serverless.CollectionStatus
+ */
+export enum CollectionStatus {
+  /**
+   * Could not be determined.
+   *
+   * @generated from enum value: COLLECTION_STATUS_UNSPECIFIED = 0;
+   */
+  COLLECTION_STATUS_UNSPECIFIED = 0,
+
+  /**
+   * All segments are optimized.
+   *
+   * @generated from enum value: GREEN = 1;
+   */
+  GREEN = 1,
+
+  /**
+   * Optimization is pending or running; the collection stays searchable.
+   *
+   * @generated from enum value: YELLOW = 2;
+   */
+  YELLOW = 2,
+}
+
+/**
+ * Describes the enum qdrant.serverless.CollectionStatus.
+ */
+export declare const CollectionStatusSchema: GenEnum<CollectionStatus>;
+
+/**
+ * Whether acknowledged writes have been applied.
+ *
+ * @generated from enum qdrant.serverless.UpdatesStatus
+ */
+export enum UpdatesStatus {
+  /**
+   * Placeholder required by proto3; never sent. An undetermined state is
+   * reported by omitting `updates` instead.
+   *
+   * @generated from enum value: UPDATES_STATUS_UNSPECIFIED = 0;
+   */
+  UPDATES_STATUS_UNSPECIFIED = 0,
+
+  /**
+   * Every acknowledged write is applied and visible to search.
+   *
+   * @generated from enum value: APPLIED = 1;
+   */
+  APPLIED = 1,
+
+  /**
+   * Some acknowledged writes are still queued and not yet visible to search.
+   *
+   * @generated from enum value: PENDING = 2;
+   */
+  PENDING = 2,
+}
+
+/**
+ * Describes the enum qdrant.serverless.UpdatesStatus.
+ */
+export declare const UpdatesStatusSchema: GenEnum<UpdatesStatus>;
 
 /**
  * CollectionsService manages the collections of a qdrant serverless space.

@@ -991,6 +991,34 @@
           }
         ]
       },
+      "CollectionStatus": {
+        "description": "Collection status, as in the qdrant server API.\n\n- `green`: all segments are optimized.\n- `yellow`: optimization is pending or running; the collection stays searchable.",
+        "type": "string",
+        "enum": [
+          "green",
+          "yellow"
+        ]
+      },
+      "UpdatesStatus": {
+        "description": "Whether acknowledged writes have been applied.\n\n- `applied`: every acknowledged write is applied and visible to search.\n- `pending`: some acknowledged writes are still queued and not yet visible to search.",
+        "type": "string",
+        "enum": [
+          "applied",
+          "pending"
+        ]
+      },
+      "UpdatesInfo": {
+        "description": "Progress of acknowledged writes to a collection.",
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/UpdatesStatus"
+          }
+        }
+      },
       "CollectionConfig": {
         "description": "The tenant-facing configuration of a collection. Unlike the Qdrant server API it is deliberately small: the serverless manager turns it into concrete Qdrant settings (HNSW, quantization, storage placement, ...), which are never exposed.\n\nAt least one dense or sparse vector is required.",
         "type": "object",
@@ -1093,6 +1121,32 @@
             "format": "uint64",
             "minimum": 0,
             "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/CollectionStatus"
+          },
+          "size_bytes": {
+            "description": "Estimated stored bytes, which the collection size limit applies to: indexed segments as of the last optimization plus a fixed estimate per unindexed one.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          },
+          "indexed_vectors_count": {
+            "description": "Approximate number of vectors in indexed segments; the rest are searched exhaustively until an optimization indexes them.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          },
+          "updates": {
+            "description": "Progress of acknowledged writes. `null` when it could not be determined.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UpdatesInfo"
+              }
+            ]
           }
         },
         "example": {
@@ -1122,7 +1176,13 @@
               }
             }
           },
-          "points_count": 12873
+          "points_count": 12873,
+          "status": "green",
+          "size_bytes": 481203712,
+          "indexed_vectors_count": 12873,
+          "updates": {
+            "status": "applied"
+          }
         }
       },
       "CollectionSummary": {
@@ -1138,6 +1198,13 @@
           },
           "points_count": {
             "description": "Number of available points as of the last applied write (eventually consistent). `null` until the first statistics have been collected for the collection.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0,
+            "nullable": true
+          },
+          "size_bytes": {
+            "description": "Estimated stored bytes, which the collection size limit applies to: indexed segments as of the last optimization plus a fixed estimate per unindexed one.",
             "type": "integer",
             "format": "uint64",
             "minimum": 0,
