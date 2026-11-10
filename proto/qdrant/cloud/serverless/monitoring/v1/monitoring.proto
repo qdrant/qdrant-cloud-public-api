@@ -234,7 +234,7 @@ message GetSpaceSummaryMetricsRequest {
   // If not specified, all matching items are returned.
   optional int32 page_size = 20 [(buf.validate.field).int32 = {
     gt: 0
-    lte: 250
+    lte: 50
   }];
   // A page token, received from a previous call.
   // Provide this to retrieve the subsequent page.
@@ -306,7 +306,7 @@ message GetSpaceUsageMetricsRequest {
   // If not specified, all matching items are returned.
   optional int32 page_size = 20 [(buf.validate.field).int32 = {
     gt: 0
-    lte: 250
+    lte: 50
   }];
   // A page token, received from a previous call.
   // Provide this to retrieve the subsequent page.
@@ -378,7 +378,7 @@ message GetSpaceInferenceMetricsRequest {
   // If not specified, all matching items are returned.
   optional int32 page_size = 20 [(buf.validate.field).int32 = {
     gt: 0
-    lte: 250
+    lte: 50
   }];
   // A page token, received from a previous call.
   // Provide this to retrieve the subsequent page.

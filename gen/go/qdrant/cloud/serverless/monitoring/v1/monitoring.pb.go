@@ -1937,15 +1937,14 @@ var File_qdrant_cloud_serverless_monitoring_v1_monitoring_proto protoreflect.Fil
 
 const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
-	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\x9f\x03\n" +
+	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\x9e\x03\n" +
 	"\x1dGetSpaceSummaryMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12H\n" +
 	"\x0fcollection_name\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
-	"\x18collection_name_contains\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12,\n" +
-	"\tpage_size\x18\x14 \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
+	"\x18collection_name_contains\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12+\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x182 \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tpageToken\x88\x01\x01B\x13\n" +
 	"\x11collection_filterB\f\n" +
@@ -1960,7 +1959,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
 	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
 	"\v_total_sizeB\x12\n" +
-	"\x10_next_page_token\"\xa0\x06\n" +
+	"\x10_next_page_token\"\x9f\x06\n" +
 	"\x1bGetSpaceUsageMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
@@ -1972,9 +1971,8 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\n" +
 	"aggregator\x88\x01\x01\x12H\n" +
 	"\x0fcollection_name\x18\x06 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
-	"\x18collection_name_contains\x18\a \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12,\n" +
-	"\tpage_size\x18\x14 \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x04R\bpageSize\x88\x01\x01\x12+\n" +
+	"\x18collection_name_contains\x18\a \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12+\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x182 \x00H\x04R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\tpageToken\x88\x01\x01:\x8b\x01\xbaH\x87\x01\x1a\x84\x01\n" +
 	"&get_space_usage_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\x13\n" +
@@ -1993,7 +1991,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
 	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
 	"\v_total_sizeB\x12\n" +
-	"\x10_next_page_token\"\x83\a\n" +
+	"\x10_next_page_token\"\x82\a\n" +
 	"\x1fGetSpaceInferenceMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
@@ -2004,9 +2002,8 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\binterval\x88\x01\x01\x12:\n" +
 	"\x12inference_model_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x10inferenceModelId\x88\x01\x01\x12H\n" +
 	"\x0fcollection_name\x18\a \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
-	"\x18collection_name_contains\x18\b \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12,\n" +
-	"\tpage_size\x18\x14 \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x05R\bpageSize\x88\x01\x01\x12+\n" +
+	"\x18collection_name_contains\x18\b \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12+\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x182 \x00H\x05R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\tpageToken\x88\x01\x01:\x8f\x01\xbaH\x8b\x01\x1a\x88\x01\n" +
 	"*get_space_inference_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\x13\n" +
