@@ -345,8 +345,12 @@ type GetSpaceSummaryMetricsRequest struct {
 	//	*GetSpaceSummaryMetricsRequest_CollectionName
 	//	*GetSpaceSummaryMetricsRequest_CollectionNameContains
 	CollectionFilter isGetSpaceSummaryMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
+	// When true, only `totals` (plus `quota` and `total_size`) are returned and `items` is left
+	// empty; `page_size` and `page_token` are ignored.
+	// Use it when only space-level figures are needed.
+	TotalsOnly bool `protobuf:"varint,5,opt,name=totals_only,json=totalsOnly,proto3" json:"totals_only,omitempty"`
 	// Maximum number of collection metrics to return.
-	// If not specified, all matching items are returned.
+	// If not specified, a default of 100 is used (also the maximum).
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// A page token, received from a previous call.
 	// Provide this to retrieve the subsequent page.
@@ -426,6 +430,13 @@ func (x *GetSpaceSummaryMetricsRequest) GetCollectionNameContains() string {
 	return ""
 }
 
+func (x *GetSpaceSummaryMetricsRequest) GetTotalsOnly() bool {
+	if x != nil {
+		return x.TotalsOnly
+	}
+	return false
+}
+
 func (x *GetSpaceSummaryMetricsRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
@@ -470,8 +481,11 @@ type GetSpaceSummaryMetricsResponse struct {
 	// Always populated for the requested space (including on paginated pages).
 	// Values come from product Prometheus gauges (same ceilings the data plane enforces).
 	Quota *SpaceQuotaSnapshot `protobuf:"bytes,2,opt,name=quota,proto3" json:"quota,omitempty"`
+	// Metrics totalled over all collections matching `collection_filter`, independent of
+	// pagination (the same on every page).
+	Totals *SpaceSummaryTotals `protobuf:"bytes,3,opt,name=totals,proto3" json:"totals,omitempty"`
 	// The total number of items available (useful in relation with pagination).
-	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	// Always populated, also when the request did not set `page_size`.
 	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
 	// A token that can be sent as `page_token` to retrieve the next page.
 	// If this field is omitted, there are no subsequent pages.
@@ -524,6 +538,13 @@ func (x *GetSpaceSummaryMetricsResponse) GetQuota() *SpaceQuotaSnapshot {
 	return nil
 }
 
+func (x *GetSpaceSummaryMetricsResponse) GetTotals() *SpaceSummaryTotals {
+	if x != nil {
+		return x.Totals
+	}
+	return nil
+}
+
 func (x *GetSpaceSummaryMetricsResponse) GetTotalSize() int32 {
 	if x != nil && x.TotalSize != nil {
 		return *x.TotalSize
@@ -565,8 +586,12 @@ type GetSpaceUsageMetricsRequest struct {
 	//	*GetSpaceUsageMetricsRequest_CollectionName
 	//	*GetSpaceUsageMetricsRequest_CollectionNameContains
 	CollectionFilter isGetSpaceUsageMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
+	// When true, only `totals` (plus `quota` and `total_size`) are returned and `items` is left
+	// empty; `page_size` and `page_token` are ignored.
+	// Use it when only space-level timeseries are needed.
+	TotalsOnly bool `protobuf:"varint,8,opt,name=totals_only,json=totalsOnly,proto3" json:"totals_only,omitempty"`
 	// Maximum number of collection metrics to return.
-	// If not specified, all matching items are returned.
+	// If not specified, a default of 100 is used (also the maximum).
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// A page token, received from a previous call.
 	// Provide this to retrieve the subsequent page.
@@ -667,6 +692,13 @@ func (x *GetSpaceUsageMetricsRequest) GetCollectionNameContains() string {
 	return ""
 }
 
+func (x *GetSpaceUsageMetricsRequest) GetTotalsOnly() bool {
+	if x != nil {
+		return x.TotalsOnly
+	}
+	return false
+}
+
 func (x *GetSpaceUsageMetricsRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
@@ -709,8 +741,11 @@ type GetSpaceUsageMetricsResponse struct {
 	// Space-level effective quotas and current collection count at query time.
 	// Always populated for the requested space (including on paginated pages).
 	Quota *SpaceQuotaSnapshot `protobuf:"bytes,2,opt,name=quota,proto3" json:"quota,omitempty"`
+	// Timeseries totalled over all collections matching `collection_filter`, independent of
+	// pagination (the same on every page). Uses the same timestamps as `items`.
+	Totals *SpaceUsageTotals `protobuf:"bytes,3,opt,name=totals,proto3" json:"totals,omitempty"`
 	// The total number of items available (useful in relation with pagination).
-	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	// Always populated, also when the request did not set `page_size`.
 	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
 	// A token that can be sent as `page_token` to retrieve the next page.
 	// If this field is omitted, there are no subsequent pages.
@@ -763,6 +798,13 @@ func (x *GetSpaceUsageMetricsResponse) GetQuota() *SpaceQuotaSnapshot {
 	return nil
 }
 
+func (x *GetSpaceUsageMetricsResponse) GetTotals() *SpaceUsageTotals {
+	if x != nil {
+		return x.Totals
+	}
+	return nil
+}
+
 func (x *GetSpaceUsageMetricsResponse) GetTotalSize() int32 {
 	if x != nil && x.TotalSize != nil {
 		return *x.TotalSize
@@ -806,7 +848,7 @@ type GetSpaceInferenceMetricsRequest struct {
 	//	*GetSpaceInferenceMetricsRequest_CollectionNameContains
 	CollectionFilter isGetSpaceInferenceMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
 	// Maximum number of collection metrics to return.
-	// If not specified, all matching items are returned.
+	// If not specified, a default of 100 is used (also the maximum).
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// A page token, received from a previous call.
 	// Provide this to retrieve the subsequent page.
@@ -955,7 +997,7 @@ type GetSpaceInferenceMetricsResponse struct {
 	// Per-collection inference token usage metrics for the space.
 	Items []*SpaceCollectionInferenceMetrics `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	// The total number of items available (useful in relation with pagination).
-	// This field is fill out when pagination is used (aka in the request `page_size` was provided).
+	// Always populated, also when the request did not set `page_size`.
 	TotalSize *int32 `protobuf:"varint,10,opt,name=total_size,json=totalSize,proto3,oneof" json:"total_size,omitempty"`
 	// A token that can be sent as `page_token` to retrieve the next page.
 	// If this field is omitted, there are no subsequent pages.
@@ -1878,6 +1920,208 @@ func (x *SpaceCollectionUsageMetrics) GetUsedIndexedStorageBytes() []*Metric {
 	return nil
 }
 
+// SpaceSummaryTotals contains summary metrics totalled over a set of collections.
+type SpaceSummaryTotals struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Overview of search request rates summed over the collections, in requests per second.
+	SearchRequests *SpaceMetricOverview `protobuf:"bytes,1,opt,name=search_requests,json=searchRequests,proto3" json:"search_requests,omitempty"`
+	// Overview of write (CRUD) request rates summed over the collections, in requests per second.
+	WriteRequests *SpaceMetricOverview `protobuf:"bytes,2,opt,name=write_requests,json=writeRequests,proto3" json:"write_requests,omitempty"`
+	// Overview of search latency over the collections, in milliseconds.
+	// Weighted by search rate: the total search time divided by the total number of searches.
+	SearchLatency *SpaceMetricOverview `protobuf:"bytes,3,opt,name=search_latency,json=searchLatency,proto3" json:"search_latency,omitempty"`
+	// Current number of points summed over the collections.
+	PointCount uint64 `protobuf:"varint,4,opt,name=point_count,json=pointCount,proto3" json:"point_count,omitempty"`
+	// Current used (active) total storage size summed over the collections, in bytes.
+	UsedStorageBytes uint64 `protobuf:"varint,5,opt,name=used_storage_bytes,json=usedStorageBytes,proto3" json:"used_storage_bytes,omitempty"`
+	// Current number of search workers (active + downloading) summed over the collections.
+	CurrentSearcherWorkers uint64 `protobuf:"varint,6,opt,name=current_searcher_workers,json=currentSearcherWorkers,proto3" json:"current_searcher_workers,omitempty"`
+	// Current used indexed storage size summed over the collections, in bytes.
+	UsedIndexedStorageBytes uint64 `protobuf:"varint,7,opt,name=used_indexed_storage_bytes,json=usedIndexedStorageBytes,proto3" json:"used_indexed_storage_bytes,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *SpaceSummaryTotals) Reset() {
+	*x = SpaceSummaryTotals{}
+	mi := &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpaceSummaryTotals) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpaceSummaryTotals) ProtoMessage() {}
+
+func (x *SpaceSummaryTotals) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpaceSummaryTotals.ProtoReflect.Descriptor instead.
+func (*SpaceSummaryTotals) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *SpaceSummaryTotals) GetSearchRequests() *SpaceMetricOverview {
+	if x != nil {
+		return x.SearchRequests
+	}
+	return nil
+}
+
+func (x *SpaceSummaryTotals) GetWriteRequests() *SpaceMetricOverview {
+	if x != nil {
+		return x.WriteRequests
+	}
+	return nil
+}
+
+func (x *SpaceSummaryTotals) GetSearchLatency() *SpaceMetricOverview {
+	if x != nil {
+		return x.SearchLatency
+	}
+	return nil
+}
+
+func (x *SpaceSummaryTotals) GetPointCount() uint64 {
+	if x != nil {
+		return x.PointCount
+	}
+	return 0
+}
+
+func (x *SpaceSummaryTotals) GetUsedStorageBytes() uint64 {
+	if x != nil {
+		return x.UsedStorageBytes
+	}
+	return 0
+}
+
+func (x *SpaceSummaryTotals) GetCurrentSearcherWorkers() uint64 {
+	if x != nil {
+		return x.CurrentSearcherWorkers
+	}
+	return 0
+}
+
+func (x *SpaceSummaryTotals) GetUsedIndexedStorageBytes() uint64 {
+	if x != nil {
+		return x.UsedIndexedStorageBytes
+	}
+	return 0
+}
+
+// SpaceUsageTotals contains usage timeseries totalled over a set of collections.
+type SpaceUsageTotals struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Timeseries of search request rates summed over the collections, in requests per second.
+	SearchRequests []*Metric `protobuf:"bytes,1,rep,name=search_requests,json=searchRequests,proto3" json:"search_requests,omitempty"`
+	// Timeseries of write (CRUD) request rates summed over the collections, in requests per second.
+	WriteRequests []*Metric `protobuf:"bytes,2,rep,name=write_requests,json=writeRequests,proto3" json:"write_requests,omitempty"`
+	// Timeseries of search latency over the collections, in milliseconds.
+	// Weighted by search rate: the total search time divided by the total number of searches.
+	SearchLatency []*Metric `protobuf:"bytes,3,rep,name=search_latency,json=searchLatency,proto3" json:"search_latency,omitempty"`
+	// Timeseries of point counts summed over the collections.
+	PointCount []*Metric `protobuf:"bytes,4,rep,name=point_count,json=pointCount,proto3" json:"point_count,omitempty"`
+	// Timeseries of used (active) total storage size summed over the collections, in bytes.
+	UsedStorageBytes []*Metric `protobuf:"bytes,5,rep,name=used_storage_bytes,json=usedStorageBytes,proto3" json:"used_storage_bytes,omitempty"`
+	// Timeseries of search workers (active + downloading) summed over the collections.
+	CurrentSearcherWorkers []*Metric `protobuf:"bytes,6,rep,name=current_searcher_workers,json=currentSearcherWorkers,proto3" json:"current_searcher_workers,omitempty"`
+	// Timeseries of used indexed storage size summed over the collections, in bytes.
+	UsedIndexedStorageBytes []*Metric `protobuf:"bytes,7,rep,name=used_indexed_storage_bytes,json=usedIndexedStorageBytes,proto3" json:"used_indexed_storage_bytes,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *SpaceUsageTotals) Reset() {
+	*x = SpaceUsageTotals{}
+	mi := &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpaceUsageTotals) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpaceUsageTotals) ProtoMessage() {}
+
+func (x *SpaceUsageTotals) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpaceUsageTotals.ProtoReflect.Descriptor instead.
+func (*SpaceUsageTotals) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *SpaceUsageTotals) GetSearchRequests() []*Metric {
+	if x != nil {
+		return x.SearchRequests
+	}
+	return nil
+}
+
+func (x *SpaceUsageTotals) GetWriteRequests() []*Metric {
+	if x != nil {
+		return x.WriteRequests
+	}
+	return nil
+}
+
+func (x *SpaceUsageTotals) GetSearchLatency() []*Metric {
+	if x != nil {
+		return x.SearchLatency
+	}
+	return nil
+}
+
+func (x *SpaceUsageTotals) GetPointCount() []*Metric {
+	if x != nil {
+		return x.PointCount
+	}
+	return nil
+}
+
+func (x *SpaceUsageTotals) GetUsedStorageBytes() []*Metric {
+	if x != nil {
+		return x.UsedStorageBytes
+	}
+	return nil
+}
+
+func (x *SpaceUsageTotals) GetCurrentSearcherWorkers() []*Metric {
+	if x != nil {
+		return x.CurrentSearcherWorkers
+	}
+	return nil
+}
+
+func (x *SpaceUsageTotals) GetUsedIndexedStorageBytes() []*Metric {
+	if x != nil {
+		return x.UsedIndexedStorageBytes
+	}
+	return nil
+}
+
 // A single metric data point.
 type Metric struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1891,7 +2135,7 @@ type Metric struct {
 
 func (x *Metric) Reset() {
 	*x = Metric{}
-	mi := &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[16]
+	mi := &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1903,7 +2147,7 @@ func (x *Metric) String() string {
 func (*Metric) ProtoMessage() {}
 
 func (x *Metric) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[16]
+	mi := &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1916,7 +2160,7 @@ func (x *Metric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Metric.ProtoReflect.Descriptor instead.
 func (*Metric) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{16}
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *Metric) GetTimestamp() *timestamppb.Timestamp {
@@ -1937,30 +2181,32 @@ var File_qdrant_cloud_serverless_monitoring_v1_monitoring_proto protoreflect.Fil
 
 const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
-	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\x9f\x03\n" +
+	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xbf\x03\n" +
 	"\x1dGetSpaceSummaryMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12H\n" +
 	"\x0fcollection_name\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
-	"\x18collection_name_contains\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12,\n" +
-	"\tpage_size\x18\x14 \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
+	"\x18collection_name_contains\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12\x1f\n" +
+	"\vtotals_only\x18\x05 \x01(\bR\n" +
+	"totalsOnly\x12+\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x18d \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tpageToken\x88\x01\x01B\x13\n" +
 	"\x11collection_filterB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_page_token\"\xd4\x02\n" +
+	"\v_page_token\"\xaf\x03\n" +
 	"\x1eGetSpaceSummaryMetricsResponse\x12S\n" +
 	"\x05items\x18\x01 \x03(\v2=.qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetricsR\x05items\x12W\n" +
-	"\x05quota\x18\x02 \x01(\v29.qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshotB\x06\xbaH\x03\xc8\x01\x01R\x05quota\x12+\n" +
+	"\x05quota\x18\x02 \x01(\v29.qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshotB\x06\xbaH\x03\xc8\x01\x01R\x05quota\x12Y\n" +
+	"\x06totals\x18\x03 \x01(\v29.qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotalsB\x06\xbaH\x03\xc8\x01\x01R\x06totals\x12+\n" +
 	"\n" +
 	"total_size\x18\n" +
 	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
 	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
 	"\v_total_sizeB\x12\n" +
-	"\x10_next_page_token\"\xa0\x06\n" +
+	"\x10_next_page_token\"\xc0\x06\n" +
 	"\x1bGetSpaceUsageMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
@@ -1972,9 +2218,10 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\n" +
 	"aggregator\x88\x01\x01\x12H\n" +
 	"\x0fcollection_name\x18\x06 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
-	"\x18collection_name_contains\x18\a \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12,\n" +
-	"\tpage_size\x18\x14 \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x04R\bpageSize\x88\x01\x01\x12+\n" +
+	"\x18collection_name_contains\x18\a \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12\x1f\n" +
+	"\vtotals_only\x18\b \x01(\bR\n" +
+	"totalsOnly\x12+\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x18d \x00H\x04R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\tpageToken\x88\x01\x01:\x8b\x01\xbaH\x87\x01\x1a\x84\x01\n" +
 	"&get_space_usage_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\x13\n" +
@@ -1984,16 +2231,17 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\v_aggregatorB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_page_token\"\xd7\x02\n" +
+	"\v_page_token\"\xb0\x03\n" +
 	"\x1cGetSpaceUsageMetricsResponse\x12X\n" +
 	"\x05items\x18\x01 \x03(\v2B.qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetricsR\x05items\x12W\n" +
-	"\x05quota\x18\x02 \x01(\v29.qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshotB\x06\xbaH\x03\xc8\x01\x01R\x05quota\x12+\n" +
+	"\x05quota\x18\x02 \x01(\v29.qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshotB\x06\xbaH\x03\xc8\x01\x01R\x05quota\x12W\n" +
+	"\x06totals\x18\x03 \x01(\v27.qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotalsB\x06\xbaH\x03\xc8\x01\x01R\x06totals\x12+\n" +
 	"\n" +
 	"total_size\x18\n" +
 	" \x01(\x05B\a\xbaH\x04\x1a\x02(\x00H\x00R\ttotalSize\x88\x01\x01\x124\n" +
 	"\x0fnext_page_token\x18\v \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\rnextPageToken\x88\x01\x01B\r\n" +
 	"\v_total_sizeB\x12\n" +
-	"\x10_next_page_token\"\x83\a\n" +
+	"\x10_next_page_token\"\x82\a\n" +
 	"\x1fGetSpaceInferenceMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
@@ -2004,9 +2252,8 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x03R\binterval\x88\x01\x01\x12:\n" +
 	"\x12inference_model_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x10inferenceModelId\x88\x01\x01\x12H\n" +
 	"\x0fcollection_name\x18\a \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
-	"\x18collection_name_contains\x18\b \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12,\n" +
-	"\tpage_size\x18\x14 \x01(\x05B\n" +
-	"\xbaH\a\x1a\x05\x18\xfa\x01 \x00H\x05R\bpageSize\x88\x01\x01\x12+\n" +
+	"\x18collection_name_contains\x18\b \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12+\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x18d \x00H\x05R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\tpageToken\x88\x01\x01:\x8f\x01\xbaH\x8b\x01\x1a\x88\x01\n" +
 	"*get_space_inference_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\x13\n" +
@@ -2101,7 +2348,28 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"pointCount\x12a\n" +
 	"\x12used_storage_bytes\x18\x06 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x02R\x10usedStorageBytes\x12m\n" +
 	"\x18current_searcher_workers\x18\a \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x01R\x16currentSearcherWorkers\x12p\n" +
-	"\x1aused_indexed_storage_bytes\x18\b \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x02R\x17usedIndexedStorageBytes\"p\n" +
+	"\x1aused_indexed_storage_bytes\x18\b \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x02R\x17usedIndexedStorageBytes\"\xdd\x04\n" +
+	"\x12SpaceSummaryTotals\x12o\n" +
+	"\x0fsearch_requests\x18\x01 \x01(\v2:.qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverviewB\n" +
+	"\xbaH\x03\xc8\x01\x01\xe8\xb5\x18\x04R\x0esearchRequests\x12m\n" +
+	"\x0ewrite_requests\x18\x02 \x01(\v2:.qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverviewB\n" +
+	"\xbaH\x03\xc8\x01\x01\xe8\xb5\x18\x04R\rwriteRequests\x12m\n" +
+	"\x0esearch_latency\x18\x03 \x01(\v2:.qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverviewB\n" +
+	"\xbaH\x03\xc8\x01\x01\xe8\xb5\x18\x03R\rsearchLatency\x12,\n" +
+	"\vpoint_count\x18\x04 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x01R\n" +
+	"pointCount\x129\n" +
+	"\x12used_storage_bytes\x18\x05 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x02R\x10usedStorageBytes\x12E\n" +
+	"\x18current_searcher_workers\x18\x06 \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x01R\x16currentSearcherWorkers\x12H\n" +
+	"\x1aused_indexed_storage_bytes\x18\a \x01(\x04B\v\xbaH\x042\x02(\x00\xe8\xb5\x18\x02R\x17usedIndexedStorageBytes\"\xc2\x05\n" +
+	"\x10SpaceUsageTotals\x12\\\n" +
+	"\x0fsearch_requests\x18\x01 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x04R\x0esearchRequests\x12Z\n" +
+	"\x0ewrite_requests\x18\x02 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x04R\rwriteRequests\x12Z\n" +
+	"\x0esearch_latency\x18\x03 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x03R\rsearchLatency\x12T\n" +
+	"\vpoint_count\x18\x04 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x01R\n" +
+	"pointCount\x12a\n" +
+	"\x12used_storage_bytes\x18\x05 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x02R\x10usedStorageBytes\x12m\n" +
+	"\x18current_searcher_workers\x18\x06 \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x01R\x16currentSearcherWorkers\x12p\n" +
+	"\x1aused_indexed_storage_bytes\x18\a \x03(\v2-.qdrant.cloud.serverless.monitoring.v1.MetricB\x04\xe8\xb5\x18\x02R\x17usedIndexedStorageBytes\"p\n" +
 	"\x06Metric\x12@\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\ttimestamp\x12$\n" +
 	"\x05value\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x05value*x\n" +
@@ -2171,7 +2439,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\bspace_id\x12\x02id\"\x18\n" +
 	"\n" +
 	"account_id\x12\n" +
-	"account_id(\x012 Alerts for this serverless space\x82\xd3\xe4\x93\x02C\x12A/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts\x1a\bµ\x18\x04\b\x02\x10\x02B\xda\x02\n" +
+	"account_id(\x012 Alerts for this serverless space\x82\xd3\xe4\x93\x02C\x12A/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts\x1a\bµ\x18\x04\b\x02\x10\x03B\xda\x02\n" +
 	")com.qdrant.cloud.serverless.monitoring.v1B\x0fMonitoringProtoP\x01Zcgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/monitoring/v1;monitoringv1\xa2\x02\x04QCSM\xaa\x02%Qdrant.Cloud.Serverless.Monitoring.V1\xca\x02%Qdrant\\Cloud\\Serverless\\Monitoring\\V1\xe2\x021Qdrant\\Cloud\\Serverless\\Monitoring\\V1\\GPBMetadata\xea\x02)Qdrant::Cloud::Serverless::Monitoring::V1b\x06proto3"
 
 var (
@@ -2187,7 +2455,7 @@ func file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP() [
 }
 
 var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_goTypes = []any{
 	(Aggregator)(0),                          // 0: qdrant.cloud.serverless.monitoring.v1.Aggregator
 	(InferenceMetricsInterval)(0),            // 1: qdrant.cloud.serverless.monitoring.v1.InferenceMetricsInterval
@@ -2210,56 +2478,70 @@ var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_goTypes = []any{
 	(*SpaceMetricOverview)(nil),              // 18: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
 	(*IntervalAverage)(nil),                  // 19: qdrant.cloud.serverless.monitoring.v1.IntervalAverage
 	(*SpaceCollectionUsageMetrics)(nil),      // 20: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics
-	(*Metric)(nil),                           // 21: qdrant.cloud.serverless.monitoring.v1.Metric
-	(*timestamppb.Timestamp)(nil),            // 22: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),              // 23: google.protobuf.Duration
+	(*SpaceSummaryTotals)(nil),               // 21: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals
+	(*SpaceUsageTotals)(nil),                 // 22: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals
+	(*Metric)(nil),                           // 23: qdrant.cloud.serverless.monitoring.v1.Metric
+	(*timestamppb.Timestamp)(nil),            // 24: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),              // 25: google.protobuf.Duration
 }
 var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_depIdxs = []int32{
 	17, // 0: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics
 	16, // 1: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.quota:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot
-	22, // 2: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.since:type_name -> google.protobuf.Timestamp
-	22, // 3: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.until:type_name -> google.protobuf.Timestamp
-	0,  // 4: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.aggregator:type_name -> qdrant.cloud.serverless.monitoring.v1.Aggregator
-	20, // 5: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics
-	16, // 6: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.quota:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot
-	22, // 7: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.since:type_name -> google.protobuf.Timestamp
-	22, // 8: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.until:type_name -> google.protobuf.Timestamp
-	1,  // 9: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.interval:type_name -> qdrant.cloud.serverless.monitoring.v1.InferenceMetricsInterval
-	11, // 10: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics
-	12, // 11: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics.models:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics
-	21, // 12: qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics.values:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	2,  // 13: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest.state:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
-	15, // 14: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlert
-	3,  // 15: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.type:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertType
-	4,  // 16: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.severity:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertSeverity
-	22, // 17: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.last_firing_at:type_name -> google.protobuf.Timestamp
-	2,  // 18: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.state:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
-	18, // 19: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
-	18, // 20: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
-	18, // 21: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
-	19, // 22: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview.avg:type_name -> qdrant.cloud.serverless.monitoring.v1.IntervalAverage
-	23, // 23: qdrant.cloud.serverless.monitoring.v1.IntervalAverage.interval:type_name -> google.protobuf.Duration
-	21, // 24: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	21, // 25: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	21, // 26: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	21, // 27: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.point_count:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	21, // 28: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.used_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	21, // 29: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.current_searcher_workers:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	21, // 30: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.used_indexed_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	22, // 31: qdrant.cloud.serverless.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
-	5,  // 32: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest
-	7,  // 33: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest
-	9,  // 34: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest
-	13, // 35: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:input_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest
-	6,  // 36: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse
-	8,  // 37: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse
-	10, // 38: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse
-	14, // 39: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:output_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse
-	36, // [36:40] is the sub-list for method output_type
-	32, // [32:36] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	21, // 2: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.totals:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals
+	24, // 3: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.since:type_name -> google.protobuf.Timestamp
+	24, // 4: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.until:type_name -> google.protobuf.Timestamp
+	0,  // 5: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.aggregator:type_name -> qdrant.cloud.serverless.monitoring.v1.Aggregator
+	20, // 6: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics
+	16, // 7: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.quota:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot
+	22, // 8: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.totals:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals
+	24, // 9: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.since:type_name -> google.protobuf.Timestamp
+	24, // 10: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.until:type_name -> google.protobuf.Timestamp
+	1,  // 11: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.interval:type_name -> qdrant.cloud.serverless.monitoring.v1.InferenceMetricsInterval
+	11, // 12: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics
+	12, // 13: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics.models:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics
+	23, // 14: qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics.values:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	2,  // 15: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest.state:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
+	15, // 16: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlert
+	3,  // 17: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.type:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertType
+	4,  // 18: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.severity:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertSeverity
+	24, // 19: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.last_firing_at:type_name -> google.protobuf.Timestamp
+	2,  // 20: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.state:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
+	18, // 21: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	18, // 22: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	18, // 23: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	19, // 24: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview.avg:type_name -> qdrant.cloud.serverless.monitoring.v1.IntervalAverage
+	25, // 25: qdrant.cloud.serverless.monitoring.v1.IntervalAverage.interval:type_name -> google.protobuf.Duration
+	23, // 26: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 27: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 28: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 29: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.point_count:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 30: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.used_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 31: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.current_searcher_workers:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 32: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.used_indexed_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	18, // 33: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	18, // 34: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	18, // 35: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	23, // 36: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 37: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 38: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 39: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.point_count:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 40: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.used_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 41: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.current_searcher_workers:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	23, // 42: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.used_indexed_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 43: qdrant.cloud.serverless.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
+	5,  // 44: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest
+	7,  // 45: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest
+	9,  // 46: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest
+	13, // 47: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:input_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest
+	6,  // 48: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse
+	8,  // 49: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse
+	10, // 50: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse
+	14, // 51: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:output_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse
+	48, // [48:52] is the sub-list for method output_type
+	44, // [44:48] is the sub-list for method input_type
+	44, // [44:44] is the sub-list for extension type_name
+	44, // [44:44] is the sub-list for extension extendee
+	0,  // [0:44] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_init() }
@@ -2295,7 +2577,7 @@ func file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc), len(file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   17,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

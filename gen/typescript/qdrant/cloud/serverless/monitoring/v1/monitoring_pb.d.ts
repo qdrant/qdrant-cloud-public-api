@@ -60,8 +60,17 @@ export declare type GetSpaceSummaryMetricsRequest = Message<"qdrant.cloud.server
   } | { case: undefined; value?: undefined };
 
   /**
+   * When true, only `totals` (plus `quota` and `total_size`) are returned and `items` is left
+   * empty; `page_size` and `page_token` are ignored.
+   * Use it when only space-level figures are needed.
+   *
+   * @generated from field: bool totals_only = 5;
+   */
+  totalsOnly: boolean;
+
+  /**
    * Maximum number of collection metrics to return.
-   * If not specified, all matching items are returned.
+   * If not specified, a default of 100 is used (also the maximum).
    *
    * @generated from field: optional int32 page_size = 20;
    */
@@ -109,8 +118,16 @@ export declare type GetSpaceSummaryMetricsResponse = Message<"qdrant.cloud.serve
   quota?: SpaceQuotaSnapshot | undefined;
 
   /**
+   * Metrics totalled over all collections matching `collection_filter`, independent of
+   * pagination (the same on every page).
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals totals = 3;
+   */
+  totals?: SpaceSummaryTotals | undefined;
+
+  /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -148,8 +165,16 @@ export declare type GetSpaceSummaryMetricsResponseValid = Message<"qdrant.cloud.
   quota: SpaceQuotaSnapshotValid;
 
   /**
+   * Metrics totalled over all collections matching `collection_filter`, independent of
+   * pagination (the same on every page).
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals totals = 3;
+   */
+  totals: SpaceSummaryTotalsValid;
+
+  /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -243,8 +268,17 @@ export declare type GetSpaceUsageMetricsRequest = Message<"qdrant.cloud.serverle
   } | { case: undefined; value?: undefined };
 
   /**
+   * When true, only `totals` (plus `quota` and `total_size`) are returned and `items` is left
+   * empty; `page_size` and `page_token` are ignored.
+   * Use it when only space-level timeseries are needed.
+   *
+   * @generated from field: bool totals_only = 8;
+   */
+  totalsOnly: boolean;
+
+  /**
    * Maximum number of collection metrics to return.
-   * If not specified, all matching items are returned.
+   * If not specified, a default of 100 is used (also the maximum).
    *
    * @generated from field: optional int32 page_size = 20;
    */
@@ -291,8 +325,16 @@ export declare type GetSpaceUsageMetricsResponse = Message<"qdrant.cloud.serverl
   quota?: SpaceQuotaSnapshot | undefined;
 
   /**
+   * Timeseries totalled over all collections matching `collection_filter`, independent of
+   * pagination (the same on every page). Uses the same timestamps as `items`.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals totals = 3;
+   */
+  totals?: SpaceUsageTotals | undefined;
+
+  /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -329,8 +371,16 @@ export declare type GetSpaceUsageMetricsResponseValid = Message<"qdrant.cloud.se
   quota: SpaceQuotaSnapshotValid;
 
   /**
+   * Timeseries totalled over all collections matching `collection_filter`, independent of
+   * pagination (the same on every page). Uses the same timestamps as `items`.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals totals = 3;
+   */
+  totals: SpaceUsageTotalsValid;
+
+  /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -431,7 +481,7 @@ export declare type GetSpaceInferenceMetricsRequest = Message<"qdrant.cloud.serv
 
   /**
    * Maximum number of collection metrics to return.
-   * If not specified, all matching items are returned.
+   * If not specified, a default of 100 is used (also the maximum).
    *
    * @generated from field: optional int32 page_size = 20;
    */
@@ -471,7 +521,7 @@ export declare type GetSpaceInferenceMetricsResponse = Message<"qdrant.cloud.ser
 
   /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -501,7 +551,7 @@ export declare type GetSpaceInferenceMetricsResponseValid = Message<"qdrant.clou
 
   /**
    * The total number of items available (useful in relation with pagination).
-   * This field is fill out when pagination is used (aka in the request `page_size` was provided).
+   * Always populated, also when the request did not set `page_size`.
    *
    * @generated from field: optional int32 total_size = 10;
    */
@@ -1239,6 +1289,246 @@ export declare type SpaceCollectionUsageMetricsValid = Message<"qdrant.cloud.ser
 export declare const SpaceCollectionUsageMetricsSchema: GenMessage<SpaceCollectionUsageMetrics, {validType: SpaceCollectionUsageMetricsValid}>;
 
 /**
+ * SpaceSummaryTotals contains summary metrics totalled over a set of collections.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals
+ */
+export declare type SpaceSummaryTotals = Message<"qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals"> & {
+  /**
+   * Overview of search request rates summed over the collections, in requests per second.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview search_requests = 1;
+   */
+  searchRequests?: SpaceMetricOverview | undefined;
+
+  /**
+   * Overview of write (CRUD) request rates summed over the collections, in requests per second.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview write_requests = 2;
+   */
+  writeRequests?: SpaceMetricOverview | undefined;
+
+  /**
+   * Overview of search latency over the collections, in milliseconds.
+   * Weighted by search rate: the total search time divided by the total number of searches.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview search_latency = 3;
+   */
+  searchLatency?: SpaceMetricOverview | undefined;
+
+  /**
+   * Current number of points summed over the collections.
+   *
+   * @generated from field: uint64 point_count = 4;
+   */
+  pointCount: bigint;
+
+  /**
+   * Current used (active) total storage size summed over the collections, in bytes.
+   *
+   * @generated from field: uint64 used_storage_bytes = 5;
+   */
+  usedStorageBytes: bigint;
+
+  /**
+   * Current number of search workers (active + downloading) summed over the collections.
+   *
+   * @generated from field: uint64 current_searcher_workers = 6;
+   */
+  currentSearcherWorkers: bigint;
+
+  /**
+   * Current used indexed storage size summed over the collections, in bytes.
+   *
+   * @generated from field: uint64 used_indexed_storage_bytes = 7;
+   */
+  usedIndexedStorageBytes: bigint;
+};
+
+/**
+ * SpaceSummaryTotals contains summary metrics totalled over a set of collections.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals
+ */
+export declare type SpaceSummaryTotalsValid = Message<"qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals"> & {
+  /**
+   * Overview of search request rates summed over the collections, in requests per second.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview search_requests = 1;
+   */
+  searchRequests: SpaceMetricOverviewValid;
+
+  /**
+   * Overview of write (CRUD) request rates summed over the collections, in requests per second.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview write_requests = 2;
+   */
+  writeRequests: SpaceMetricOverviewValid;
+
+  /**
+   * Overview of search latency over the collections, in milliseconds.
+   * Weighted by search rate: the total search time divided by the total number of searches.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview search_latency = 3;
+   */
+  searchLatency: SpaceMetricOverviewValid;
+
+  /**
+   * Current number of points summed over the collections.
+   *
+   * @generated from field: uint64 point_count = 4;
+   */
+  pointCount: bigint;
+
+  /**
+   * Current used (active) total storage size summed over the collections, in bytes.
+   *
+   * @generated from field: uint64 used_storage_bytes = 5;
+   */
+  usedStorageBytes: bigint;
+
+  /**
+   * Current number of search workers (active + downloading) summed over the collections.
+   *
+   * @generated from field: uint64 current_searcher_workers = 6;
+   */
+  currentSearcherWorkers: bigint;
+
+  /**
+   * Current used indexed storage size summed over the collections, in bytes.
+   *
+   * @generated from field: uint64 used_indexed_storage_bytes = 7;
+   */
+  usedIndexedStorageBytes: bigint;
+};
+
+/**
+ * Describes the message qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals.
+ * Use `create(SpaceSummaryTotalsSchema)` to create a new message.
+ */
+export declare const SpaceSummaryTotalsSchema: GenMessage<SpaceSummaryTotals, {validType: SpaceSummaryTotalsValid}>;
+
+/**
+ * SpaceUsageTotals contains usage timeseries totalled over a set of collections.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals
+ */
+export declare type SpaceUsageTotals = Message<"qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals"> & {
+  /**
+   * Timeseries of search request rates summed over the collections, in requests per second.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric search_requests = 1;
+   */
+  searchRequests: Metric[];
+
+  /**
+   * Timeseries of write (CRUD) request rates summed over the collections, in requests per second.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric write_requests = 2;
+   */
+  writeRequests: Metric[];
+
+  /**
+   * Timeseries of search latency over the collections, in milliseconds.
+   * Weighted by search rate: the total search time divided by the total number of searches.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric search_latency = 3;
+   */
+  searchLatency: Metric[];
+
+  /**
+   * Timeseries of point counts summed over the collections.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric point_count = 4;
+   */
+  pointCount: Metric[];
+
+  /**
+   * Timeseries of used (active) total storage size summed over the collections, in bytes.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric used_storage_bytes = 5;
+   */
+  usedStorageBytes: Metric[];
+
+  /**
+   * Timeseries of search workers (active + downloading) summed over the collections.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric current_searcher_workers = 6;
+   */
+  currentSearcherWorkers: Metric[];
+
+  /**
+   * Timeseries of used indexed storage size summed over the collections, in bytes.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric used_indexed_storage_bytes = 7;
+   */
+  usedIndexedStorageBytes: Metric[];
+};
+
+/**
+ * SpaceUsageTotals contains usage timeseries totalled over a set of collections.
+ *
+ * @generated from message qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals
+ */
+export declare type SpaceUsageTotalsValid = Message<"qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals"> & {
+  /**
+   * Timeseries of search request rates summed over the collections, in requests per second.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric search_requests = 1;
+   */
+  searchRequests: MetricValid[];
+
+  /**
+   * Timeseries of write (CRUD) request rates summed over the collections, in requests per second.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric write_requests = 2;
+   */
+  writeRequests: MetricValid[];
+
+  /**
+   * Timeseries of search latency over the collections, in milliseconds.
+   * Weighted by search rate: the total search time divided by the total number of searches.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric search_latency = 3;
+   */
+  searchLatency: MetricValid[];
+
+  /**
+   * Timeseries of point counts summed over the collections.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric point_count = 4;
+   */
+  pointCount: MetricValid[];
+
+  /**
+   * Timeseries of used (active) total storage size summed over the collections, in bytes.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric used_storage_bytes = 5;
+   */
+  usedStorageBytes: MetricValid[];
+
+  /**
+   * Timeseries of search workers (active + downloading) summed over the collections.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric current_searcher_workers = 6;
+   */
+  currentSearcherWorkers: MetricValid[];
+
+  /**
+   * Timeseries of used indexed storage size summed over the collections, in bytes.
+   *
+   * @generated from field: repeated qdrant.cloud.serverless.monitoring.v1.Metric used_indexed_storage_bytes = 7;
+   */
+  usedIndexedStorageBytes: MetricValid[];
+};
+
+/**
+ * Describes the message qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.
+ * Use `create(SpaceUsageTotalsSchema)` to create a new message.
+ */
+export declare const SpaceUsageTotalsSchema: GenMessage<SpaceUsageTotals, {validType: SpaceUsageTotalsValid}>;
+
+/**
  * A single metric data point.
  *
  * @generated from message qdrant.cloud.serverless.monitoring.v1.Metric
@@ -1515,8 +1805,9 @@ export declare const SpaceAlertSeveritySchema: GenEnum<SpaceAlertSeverity>;
 export declare const MonitoringService: GenService<{
   /**
    * Gets the summary metrics of a space in the account identified by the given ID.
-   * Metrics are aggregated per collection and may be paginated (a space can have many collections).
-   * The response also includes space-level effective quotas and current collection count.
+   * Metrics are aggregated per collection and paginated (a space can have many collections).
+   * The response also includes the metrics totalled over all matching collections (independent
+   * of pagination), space-level effective quotas and current collection count.
    * Required permissions:
    * - read:serverless_spaces
    *
@@ -1529,7 +1820,9 @@ export declare const MonitoringService: GenService<{
   },
   /**
    * Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
-   * Metrics are aggregated per collection and may be paginated (a space can have many collections).
+   * Metrics are aggregated per collection and paginated (a space can have many collections).
+   * The response also includes the timeseries totalled over all matching collections (independent
+   * of pagination); set `totals_only` when only those are needed.
    * Required permissions:
    * - read:serverless_spaces
    *

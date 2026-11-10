@@ -34,13 +34,16 @@ const (
 // Unlike cluster monitoring, this service does not expose logs or events.
 type MonitoringServiceClient interface {
 	// Gets the summary metrics of a space in the account identified by the given ID.
-	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
-	// The response also includes space-level effective quotas and current collection count.
+	// Metrics are aggregated per collection and paginated (a space can have many collections).
+	// The response also includes the metrics totalled over all matching collections (independent
+	// of pagination), space-level effective quotas and current collection count.
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceSummaryMetrics(ctx context.Context, in *GetSpaceSummaryMetricsRequest, opts ...grpc.CallOption) (*GetSpaceSummaryMetricsResponse, error)
 	// Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
-	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
+	// Metrics are aggregated per collection and paginated (a space can have many collections).
+	// The response also includes the timeseries totalled over all matching collections (independent
+	// of pagination); set `totals_only` when only those are needed.
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceUsageMetrics(ctx context.Context, in *GetSpaceUsageMetricsRequest, opts ...grpc.CallOption) (*GetSpaceUsageMetricsResponse, error)
@@ -115,13 +118,16 @@ func (c *monitoringServiceClient) ListSpaceAlerts(ctx context.Context, in *ListS
 // Unlike cluster monitoring, this service does not expose logs or events.
 type MonitoringServiceServer interface {
 	// Gets the summary metrics of a space in the account identified by the given ID.
-	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
-	// The response also includes space-level effective quotas and current collection count.
+	// Metrics are aggregated per collection and paginated (a space can have many collections).
+	// The response also includes the metrics totalled over all matching collections (independent
+	// of pagination), space-level effective quotas and current collection count.
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceSummaryMetrics(context.Context, *GetSpaceSummaryMetricsRequest) (*GetSpaceSummaryMetricsResponse, error)
 	// Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
-	// Metrics are aggregated per collection and may be paginated (a space can have many collections).
+	// Metrics are aggregated per collection and paginated (a space can have many collections).
+	// The response also includes the timeseries totalled over all matching collections (independent
+	// of pagination); set `totals_only` when only those are needed.
 	// Required permissions:
 	// - read:serverless_spaces
 	GetSpaceUsageMetrics(context.Context, *GetSpaceUsageMetricsRequest) (*GetSpaceUsageMetricsResponse, error)

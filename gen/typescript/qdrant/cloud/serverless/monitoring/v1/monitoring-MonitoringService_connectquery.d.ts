@@ -6,8 +6,9 @@ import { MonitoringService } from "./monitoring_pb.js";
 
 /**
  * Gets the summary metrics of a space in the account identified by the given ID.
- * Metrics are aggregated per collection and may be paginated (a space can have many collections).
- * The response also includes space-level effective quotas and current collection count.
+ * Metrics are aggregated per collection and paginated (a space can have many collections).
+ * The response also includes the metrics totalled over all matching collections (independent
+ * of pagination), space-level effective quotas and current collection count.
  * Required permissions:
  * - read:serverless_spaces
  *
@@ -16,7 +17,9 @@ import { MonitoringService } from "./monitoring_pb.js";
 export const getSpaceSummaryMetrics: typeof MonitoringService["method"]["getSpaceSummaryMetrics"];
 /**
  * Gets the detailed usage metrics (as timeseries) of a space in the account identified by the given ID.
- * Metrics are aggregated per collection and may be paginated (a space can have many collections).
+ * Metrics are aggregated per collection and paginated (a space can have many collections).
+ * The response also includes the timeseries totalled over all matching collections (independent
+ * of pagination); set `totals_only` when only those are needed.
  * Required permissions:
  * - read:serverless_spaces
  *
