@@ -190,7 +190,7 @@
           },
           {
             "name": "pageSize",
-            "description": "Maximum number of collection metrics to return.\nIf not specified, a default of 50 is used (also the maximum).",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, a default of 100 is used (also the maximum).",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -258,7 +258,7 @@
           },
           {
             "name": "pageSize",
-            "description": "Maximum number of collection metrics to return.\nIf not specified, a default of 50 is used (also the maximum).",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, a default of 100 is used (also the maximum).",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -357,7 +357,7 @@
           },
           {
             "name": "pageSize",
-            "description": "Maximum number of collection metrics to return.\nIf not specified, a default of 50 is used (also the maximum).",
+            "description": "Maximum number of collection metrics to return.\nIf not specified, a default of 100 is used (also the maximum).",
             "in": "query",
             "required": false,
             "type": "integer",

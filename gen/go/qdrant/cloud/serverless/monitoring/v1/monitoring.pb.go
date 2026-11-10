@@ -346,7 +346,7 @@ type GetSpaceSummaryMetricsRequest struct {
 	//	*GetSpaceSummaryMetricsRequest_CollectionNameContains
 	CollectionFilter isGetSpaceSummaryMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
 	// Maximum number of collection metrics to return.
-	// If not specified, a default of 50 is used (also the maximum).
+	// If not specified, a default of 100 is used (also the maximum).
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// A page token, received from a previous call.
 	// Provide this to retrieve the subsequent page.
@@ -566,7 +566,7 @@ type GetSpaceUsageMetricsRequest struct {
 	//	*GetSpaceUsageMetricsRequest_CollectionNameContains
 	CollectionFilter isGetSpaceUsageMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
 	// Maximum number of collection metrics to return.
-	// If not specified, a default of 50 is used (also the maximum).
+	// If not specified, a default of 100 is used (also the maximum).
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// A page token, received from a previous call.
 	// Provide this to retrieve the subsequent page.
@@ -806,7 +806,7 @@ type GetSpaceInferenceMetricsRequest struct {
 	//	*GetSpaceInferenceMetricsRequest_CollectionNameContains
 	CollectionFilter isGetSpaceInferenceMetricsRequest_CollectionFilter `protobuf_oneof:"collection_filter"`
 	// Maximum number of collection metrics to return.
-	// If not specified, a default of 50 is used (also the maximum).
+	// If not specified, a default of 100 is used (also the maximum).
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// A page token, received from a previous call.
 	// Provide this to retrieve the subsequent page.
@@ -1944,7 +1944,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\bspace_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12H\n" +
 	"\x0fcollection_name\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
 	"\x18collection_name_contains\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12+\n" +
-	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x182 \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x18d \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tpageToken\x88\x01\x01B\x13\n" +
 	"\x11collection_filterB\f\n" +
@@ -1972,7 +1972,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"aggregator\x88\x01\x01\x12H\n" +
 	"\x0fcollection_name\x18\x06 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
 	"\x18collection_name_contains\x18\a \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12+\n" +
-	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x182 \x00H\x04R\bpageSize\x88\x01\x01\x12+\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x18d \x00H\x04R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\tpageToken\x88\x01\x01:\x8b\x01\xbaH\x87\x01\x1a\x84\x01\n" +
 	"&get_space_usage_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\x13\n" +
@@ -2003,7 +2003,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x12inference_model_id\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x10inferenceModelId\x88\x01\x01\x12H\n" +
 	"\x0fcollection_name\x18\a \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
 	"\x18collection_name_contains\x18\b \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12+\n" +
-	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x182 \x00H\x05R\bpageSize\x88\x01\x01\x12+\n" +
+	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x18d \x00H\x05R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\tpageToken\x88\x01\x01:\x8f\x01\xbaH\x8b\x01\x1a\x88\x01\n" +
 	"*get_space_inference_metrics.until_gt_since\x12\x19until must be after since\x1a?!has(this.since) || !has(this.until) || this.until > this.sinceB\x13\n" +

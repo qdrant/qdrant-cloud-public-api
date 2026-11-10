@@ -61,7 +61,7 @@ export declare type GetSpaceSummaryMetricsRequest = Message<"qdrant.cloud.server
 
   /**
    * Maximum number of collection metrics to return.
-   * If not specified, a default of 50 is used (also the maximum).
+   * If not specified, a default of 100 is used (also the maximum).
    *
    * @generated from field: optional int32 page_size = 20;
    */
@@ -244,7 +244,7 @@ export declare type GetSpaceUsageMetricsRequest = Message<"qdrant.cloud.serverle
 
   /**
    * Maximum number of collection metrics to return.
-   * If not specified, a default of 50 is used (also the maximum).
+   * If not specified, a default of 100 is used (also the maximum).
    *
    * @generated from field: optional int32 page_size = 20;
    */
@@ -431,7 +431,7 @@ export declare type GetSpaceInferenceMetricsRequest = Message<"qdrant.cloud.serv
 
   /**
    * Maximum number of collection metrics to return.
-   * If not specified, a default of 50 is used (also the maximum).
+   * If not specified, a default of 100 is used (also the maximum).
    *
    * @generated from field: optional int32 page_size = 20;
    */
