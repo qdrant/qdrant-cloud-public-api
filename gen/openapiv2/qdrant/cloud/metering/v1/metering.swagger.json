@@ -623,7 +623,7 @@
       "properties": {
         "spaceId": {
           "type": "string",
-          "description": "The identifier of the serverless space."
+          "description": "The identifier of the serverless space (in GUID format)."
         },
         "startTime": {
           "type": "string",

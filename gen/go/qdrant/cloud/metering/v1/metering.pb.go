@@ -1502,7 +1502,7 @@ func (*UsageBreakdownCluster_InferenceConfig) isUsageBreakdownCluster_Config() {
 // serverless space within a month.
 type UsageBreakdownSpace struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The identifier of the serverless space.
+	// The identifier of the serverless space (in GUID format).
 	SpaceId string `protobuf:"bytes,1,opt,name=space_id,json=spaceId,proto3" json:"space_id,omitempty"`
 	// The start time of the metering window (UTC).
 	StartTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
@@ -1765,9 +1765,9 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x06configB\x18\n" +
 	"\x16_cost_allocation_labelB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
-	"\x18_discount_amount_percent\"\xfd\x05\n" +
-	"\x13UsageBreakdownSpace\x12\"\n" +
-	"\bspace_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\aspaceId\x12A\n" +
+	"\x18_discount_amount_percent\"\xfe\x05\n" +
+	"\x13UsageBreakdownSpace\x12#\n" +
+	"\bspace_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12A\n" +
 	"\n" +
 	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tstartTime\x12=\n" +
 	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\aendTime\x124\n" +

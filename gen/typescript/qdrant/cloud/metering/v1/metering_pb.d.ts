@@ -1262,7 +1262,7 @@ export declare const UsageBreakdownClusterSchema: GenMessage<UsageBreakdownClust
  */
 export declare type UsageBreakdownSpace = Message<"qdrant.cloud.metering.v1.UsageBreakdownSpace"> & {
   /**
-   * The identifier of the serverless space.
+   * The identifier of the serverless space (in GUID format).
    *
    * @generated from field: string space_id = 1;
    */
@@ -1341,7 +1341,7 @@ export declare type UsageBreakdownSpace = Message<"qdrant.cloud.metering.v1.Usag
  */
 export declare type UsageBreakdownSpaceValid = Message<"qdrant.cloud.metering.v1.UsageBreakdownSpace"> & {
   /**
-   * The identifier of the serverless space.
+   * The identifier of the serverless space (in GUID format).
    *
    * @generated from field: string space_id = 1;
    */

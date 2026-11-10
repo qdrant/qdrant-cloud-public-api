@@ -381,8 +381,8 @@ message UsageBreakdownCluster {
 // UsageBreakdownSpace represents the usage of one serverless billable item for a single
 // serverless space within a month.
 message UsageBreakdownSpace {
-  // The identifier of the serverless space.
-  string space_id = 1 [(buf.validate.field).string.min_len = 1];
+  // The identifier of the serverless space (in GUID format).
+  string space_id = 1 [(buf.validate.field).string = {uuid: true}];
   // The start time of the metering window (UTC).
   google.protobuf.Timestamp start_time = 2 [(buf.validate.field).required = true];
   // The end time of the metering window (UTC).
