@@ -303,8 +303,8 @@ message DeleteCollectionResponse {
   double time = 2;
 }
 
-// Collection status as in the qdrant server API. A serverless space returns
-// only GREEN and YELLOW.
+// Collection status, numbered as in the qdrant server API. 3 (RED) and 4 (GREY)
+// are left free so they can be added later with the same numbers.
 enum CollectionStatus {
   // Could not be determined.
   COLLECTION_STATUS_UNSPECIFIED = 0;
@@ -312,10 +312,6 @@ enum CollectionStatus {
   GREEN = 1;
   // Optimization is pending or running; the collection stays searchable.
   YELLOW = 2;
-  // Not returned by a serverless space.
-  RED = 3;
-  // Not returned by a serverless space.
-  GREY = 4;
 }
 
 // Whether acknowledged writes have been applied.

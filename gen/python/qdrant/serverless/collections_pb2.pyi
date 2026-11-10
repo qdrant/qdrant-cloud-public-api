@@ -42,8 +42,6 @@ class CollectionStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     COLLECTION_STATUS_UNSPECIFIED: _ClassVar[CollectionStatus]
     GREEN: _ClassVar[CollectionStatus]
     YELLOW: _ClassVar[CollectionStatus]
-    RED: _ClassVar[CollectionStatus]
-    GREY: _ClassVar[CollectionStatus]
 
 class UpdatesStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -70,8 +68,6 @@ BM25: TextScoringType
 COLLECTION_STATUS_UNSPECIFIED: CollectionStatus
 GREEN: CollectionStatus
 YELLOW: CollectionStatus
-RED: CollectionStatus
-GREY: CollectionStatus
 UPDATES_STATUS_UNSPECIFIED: UpdatesStatus
 APPLIED: UpdatesStatus
 PENDING: UpdatesStatus

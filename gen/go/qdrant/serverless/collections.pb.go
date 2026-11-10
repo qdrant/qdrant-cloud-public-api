@@ -256,8 +256,8 @@ func (TextScoringType) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_serverless_collections_proto_rawDescGZIP(), []int{3}
 }
 
-// Collection status as in the qdrant server API. A serverless space returns
-// only GREEN and YELLOW.
+// Collection status, numbered as in the qdrant server API. 3 (RED) and 4 (GREY)
+// are left free so they can be added later with the same numbers.
 type CollectionStatus int32
 
 const (
@@ -267,10 +267,6 @@ const (
 	CollectionStatus_GREEN CollectionStatus = 1
 	// Optimization is pending or running; the collection stays searchable.
 	CollectionStatus_YELLOW CollectionStatus = 2
-	// Not returned by a serverless space.
-	CollectionStatus_RED CollectionStatus = 3
-	// Not returned by a serverless space.
-	CollectionStatus_GREY CollectionStatus = 4
 )
 
 // Enum value maps for CollectionStatus.
@@ -279,15 +275,11 @@ var (
 		0: "COLLECTION_STATUS_UNSPECIFIED",
 		1: "GREEN",
 		2: "YELLOW",
-		3: "RED",
-		4: "GREY",
 	}
 	CollectionStatus_value = map[string]int32{
 		"COLLECTION_STATUS_UNSPECIFIED": 0,
 		"GREEN":                         1,
 		"YELLOW":                        2,
-		"RED":                           3,
-		"GREY":                          4,
 	}
 )
 
@@ -2365,14 +2357,12 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\fMULTILINGUAL\x10\x04*>\n" +
 	"\x0fTextScoringType\x12!\n" +
 	"\x1dTEXT_SCORING_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04BM25\x10\x01*_\n" +
+	"\x04BM25\x10\x01*L\n" +
 	"\x10CollectionStatus\x12!\n" +
 	"\x1dCOLLECTION_STATUS_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05GREEN\x10\x01\x12\n" +
 	"\n" +
-	"\x06YELLOW\x10\x02\x12\a\n" +
-	"\x03RED\x10\x03\x12\b\n" +
-	"\x04GREY\x10\x04*I\n" +
+	"\x06YELLOW\x10\x02*I\n" +
 	"\rUpdatesStatus\x12\x1e\n" +
 	"\x1aUPDATES_STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aAPPLIED\x10\x01\x12\v\n" +

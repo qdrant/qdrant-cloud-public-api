@@ -1149,8 +1149,8 @@ export enum TextScoringType {
 export declare const TextScoringTypeSchema: GenEnum<TextScoringType>;
 
 /**
- * Collection status as in the qdrant server API. A serverless space returns
- * only GREEN and YELLOW.
+ * Collection status, numbered as in the qdrant server API. 3 (RED) and 4 (GREY)
+ * are left free so they can be added later with the same numbers.
  *
  * @generated from enum qdrant.serverless.CollectionStatus
  */
@@ -1175,20 +1175,6 @@ export enum CollectionStatus {
    * @generated from enum value: YELLOW = 2;
    */
   YELLOW = 2,
-
-  /**
-   * Not returned by a serverless space.
-   *
-   * @generated from enum value: RED = 3;
-   */
-  RED = 3,
-
-  /**
-   * Not returned by a serverless space.
-   *
-   * @generated from enum value: GREY = 4;
-   */
-  GREY = 4,
 }
 
 /**

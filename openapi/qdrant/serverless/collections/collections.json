@@ -992,13 +992,11 @@
         ]
       },
       "CollectionStatus": {
-        "description": "Collection status as in the qdrant server API. A serverless space returns only `green` and `yellow`.\n\n- `green`: all segments are optimized.\n- `yellow`: optimization is pending or running; the collection stays searchable.\n- `red`: not returned by a serverless space.\n- `grey`: not returned by a serverless space.",
+        "description": "Collection status, as in the qdrant server API.\n\n- `green`: all segments are optimized.\n- `yellow`: optimization is pending or running; the collection stays searchable.",
         "type": "string",
         "enum": [
           "green",
-          "yellow",
-          "red",
-          "grey"
+          "yellow"
         ]
       },
       "UpdatesStatus": {
