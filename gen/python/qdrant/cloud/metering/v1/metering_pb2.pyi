@@ -138,14 +138,16 @@ class CreditDrawdown(_message.Message):
     def __init__(self, credit_contract_id: _Optional[str] = ..., amount_millicents: _Optional[int] = ...) -> None: ...
 
 class UsageBreakdownAccount(_message.Message):
-    __slots__ = ("account_id", "account_name", "clusters")
+    __slots__ = ("account_id", "account_name", "clusters", "spaces")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     ACCOUNT_NAME_FIELD_NUMBER: _ClassVar[int]
     CLUSTERS_FIELD_NUMBER: _ClassVar[int]
+    SPACES_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     account_name: str
     clusters: _containers.RepeatedCompositeFieldContainer[UsageBreakdownCluster]
-    def __init__(self, account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., clusters: _Optional[_Iterable[_Union[UsageBreakdownCluster, _Mapping]]] = ...) -> None: ...
+    spaces: _containers.RepeatedCompositeFieldContainer[UsageBreakdownSpace]
+    def __init__(self, account_id: _Optional[str] = ..., account_name: _Optional[str] = ..., clusters: _Optional[_Iterable[_Union[UsageBreakdownCluster, _Mapping]]] = ..., spaces: _Optional[_Iterable[_Union[UsageBreakdownSpace, _Mapping]]] = ...) -> None: ...
 
 class ClusterUsageConfig(_message.Message):
     __slots__ = ("cloud_provider", "region", "cpu_vcpu", "ram_gib", "disk_gib", "multi_az", "gpu_enabled", "pricing_tier", "node_count")
@@ -259,3 +261,27 @@ class UsageBreakdownCluster(_message.Message):
     discount_amount_millicents: int
     discount_amount_percent: float
     def __init__(self, cluster_id: _Optional[str] = ..., cluster_name: _Optional[str] = ..., cluster_labels: _Optional[_Mapping[str, str]] = ..., cost_allocation_label: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., amount_millicents: _Optional[int] = ..., currency: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., cluster_usage_config: _Optional[_Union[ClusterUsageConfig, _Mapping]] = ..., cluster_extra_disk_config: _Optional[_Union[ClusterExtraDiskConfig, _Mapping]] = ..., cluster_storage_tier_config: _Optional[_Union[ClusterStorageTierConfig, _Mapping]] = ..., backup_storage_config: _Optional[_Union[BackupStorageConfig, _Mapping]] = ..., inference_config: _Optional[_Union[InferenceConfig, _Mapping]] = ..., quantity: _Optional[float] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ...) -> None: ...
+
+class UsageBreakdownSpace(_message.Message):
+    __slots__ = ("space_id", "start_time", "end_time", "amount_millicents", "currency", "billable_entity_type", "quantity", "unit", "discount_amount_millicents", "discount_amount_percent")
+    SPACE_ID_FIELD_NUMBER: _ClassVar[int]
+    START_TIME_FIELD_NUMBER: _ClassVar[int]
+    END_TIME_FIELD_NUMBER: _ClassVar[int]
+    AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    BILLABLE_ENTITY_TYPE_FIELD_NUMBER: _ClassVar[int]
+    QUANTITY_FIELD_NUMBER: _ClassVar[int]
+    UNIT_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
+    DISCOUNT_AMOUNT_PERCENT_FIELD_NUMBER: _ClassVar[int]
+    space_id: str
+    start_time: _timestamp_pb2.Timestamp
+    end_time: _timestamp_pb2.Timestamp
+    amount_millicents: int
+    currency: str
+    billable_entity_type: str
+    quantity: float
+    unit: str
+    discount_amount_millicents: int
+    discount_amount_percent: float
+    def __init__(self, space_id: _Optional[str] = ..., start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., amount_millicents: _Optional[int] = ..., currency: _Optional[str] = ..., billable_entity_type: _Optional[str] = ..., quantity: _Optional[float] = ..., unit: _Optional[str] = ..., discount_amount_millicents: _Optional[int] = ..., discount_amount_percent: _Optional[float] = ...) -> None: ...

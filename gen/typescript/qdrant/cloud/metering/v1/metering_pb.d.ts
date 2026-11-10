@@ -654,6 +654,14 @@ export declare type UsageBreakdownAccount = Message<"qdrant.cloud.metering.v1.Us
    * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownCluster clusters = 3;
    */
   clusters: UsageBreakdownCluster[];
+
+  /**
+   * The serverless spaces that had usage in this month for this account.
+   * Empty when serverless usage is not enabled for the account.
+   *
+   * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownSpace spaces = 4;
+   */
+  spaces: UsageBreakdownSpace[];
 };
 
 /**
@@ -682,6 +690,14 @@ export declare type UsageBreakdownAccountValid = Message<"qdrant.cloud.metering.
    * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownCluster clusters = 3;
    */
   clusters: UsageBreakdownClusterValid[];
+
+  /**
+   * The serverless spaces that had usage in this month for this account.
+   * Empty when serverless usage is not enabled for the account.
+   *
+   * @generated from field: repeated qdrant.cloud.metering.v1.UsageBreakdownSpace spaces = 4;
+   */
+  spaces: UsageBreakdownSpaceValid[];
 };
 
 /**
@@ -1237,6 +1253,170 @@ export declare type UsageBreakdownClusterValid = Message<"qdrant.cloud.metering.
  * Use `create(UsageBreakdownClusterSchema)` to create a new message.
  */
 export declare const UsageBreakdownClusterSchema: GenMessage<UsageBreakdownCluster, {validType: UsageBreakdownClusterValid}>;
+
+/**
+ * UsageBreakdownSpace represents the usage of one serverless billable item for a single
+ * serverless space within a month.
+ *
+ * @generated from message qdrant.cloud.metering.v1.UsageBreakdownSpace
+ */
+export declare type UsageBreakdownSpace = Message<"qdrant.cloud.metering.v1.UsageBreakdownSpace"> & {
+  /**
+   * The identifier of the serverless space (in GUID format).
+   *
+   * @generated from field: string space_id = 1;
+   */
+  spaceId: string;
+
+  /**
+   * The start time of the metering window (UTC).
+   *
+   * @generated from field: google.protobuf.Timestamp start_time = 2;
+   */
+  startTime?: Timestamp | undefined;
+
+  /**
+   * The end time of the metering window (UTC).
+   *
+   * @generated from field: google.protobuf.Timestamp end_time = 3;
+   */
+  endTime?: Timestamp | undefined;
+
+  /**
+   * The total charge for this entry, in millicents.
+   *
+   * @generated from field: int64 amount_millicents = 4;
+   */
+  amountMillicents: bigint;
+
+  /**
+   * Currency of the amount, in ISO 4217 format (e.g., "USD").
+   *
+   * @generated from field: string currency = 5;
+   */
+  currency: string;
+
+  /**
+   * The billable item, as named on the invoice (e.g., "Serverless Updated Data (GiB)").
+   *
+   * @generated from field: string billable_entity_type = 6;
+   */
+  billableEntityType: string;
+
+  /**
+   * Quantity of the item consumed during the period, in `unit`.
+   *
+   * @generated from field: double quantity = 7;
+   */
+  quantity: number;
+
+  /**
+   * The unit of `quantity` (e.g., "GiB", "GiB-month", "TiB").
+   *
+   * @generated from field: string unit = 8;
+   */
+  unit: string;
+
+  /**
+   * The total discount applied to this entry, in millicents.
+   * Net charge = amount_millicents - discount_amount_millicents.
+   *
+   * @generated from field: optional int64 discount_amount_millicents = 9;
+   */
+  discountAmountMillicents?: bigint | undefined;
+
+  /**
+   * The discount applied as a percentage (e.g., 12.5).
+   *
+   * @generated from field: optional double discount_amount_percent = 10;
+   */
+  discountAmountPercent?: number | undefined;
+};
+
+/**
+ * UsageBreakdownSpace represents the usage of one serverless billable item for a single
+ * serverless space within a month.
+ *
+ * @generated from message qdrant.cloud.metering.v1.UsageBreakdownSpace
+ */
+export declare type UsageBreakdownSpaceValid = Message<"qdrant.cloud.metering.v1.UsageBreakdownSpace"> & {
+  /**
+   * The identifier of the serverless space (in GUID format).
+   *
+   * @generated from field: string space_id = 1;
+   */
+  spaceId: string;
+
+  /**
+   * The start time of the metering window (UTC).
+   *
+   * @generated from field: google.protobuf.Timestamp start_time = 2;
+   */
+  startTime: Timestamp;
+
+  /**
+   * The end time of the metering window (UTC).
+   *
+   * @generated from field: google.protobuf.Timestamp end_time = 3;
+   */
+  endTime: Timestamp;
+
+  /**
+   * The total charge for this entry, in millicents.
+   *
+   * @generated from field: int64 amount_millicents = 4;
+   */
+  amountMillicents: bigint;
+
+  /**
+   * Currency of the amount, in ISO 4217 format (e.g., "USD").
+   *
+   * @generated from field: string currency = 5;
+   */
+  currency: string;
+
+  /**
+   * The billable item, as named on the invoice (e.g., "Serverless Updated Data (GiB)").
+   *
+   * @generated from field: string billable_entity_type = 6;
+   */
+  billableEntityType: string;
+
+  /**
+   * Quantity of the item consumed during the period, in `unit`.
+   *
+   * @generated from field: double quantity = 7;
+   */
+  quantity: number;
+
+  /**
+   * The unit of `quantity` (e.g., "GiB", "GiB-month", "TiB").
+   *
+   * @generated from field: string unit = 8;
+   */
+  unit: string;
+
+  /**
+   * The total discount applied to this entry, in millicents.
+   * Net charge = amount_millicents - discount_amount_millicents.
+   *
+   * @generated from field: optional int64 discount_amount_millicents = 9;
+   */
+  discountAmountMillicents?: bigint | undefined;
+
+  /**
+   * The discount applied as a percentage (e.g., 12.5).
+   *
+   * @generated from field: optional double discount_amount_percent = 10;
+   */
+  discountAmountPercent?: number | undefined;
+};
+
+/**
+ * Describes the message qdrant.cloud.metering.v1.UsageBreakdownSpace.
+ * Use `create(UsageBreakdownSpaceSchema)` to create a new message.
+ */
+export declare const UsageBreakdownSpaceSchema: GenMessage<UsageBreakdownSpace, {validType: UsageBreakdownSpaceValid}>;
 
 /**
  * MeteringService is the API to retrieve usage data used for billing purposes.

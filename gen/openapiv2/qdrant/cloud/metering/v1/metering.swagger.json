@@ -481,6 +481,14 @@
             "$ref": "#/definitions/v1UsageBreakdownCluster"
           },
           "description": "The clusters that had usage in this month for this account."
+        },
+        "spaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UsageBreakdownSpace"
+          },
+          "description": "The serverless spaces that had usage in this month for this account.\nEmpty when serverless usage is not enabled for the account."
         }
       },
       "description": "UsageBreakdownAccount groups per-cluster usage for a single account in a given month."
@@ -609,6 +617,58 @@
         }
       },
       "description": "UsageBreakdownMonth groups usage for a single calendar month."
+    },
+    "v1UsageBreakdownSpace": {
+      "type": "object",
+      "properties": {
+        "spaceId": {
+          "type": "string",
+          "description": "The identifier of the serverless space (in GUID format)."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the metering window (UTC)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the metering window (UTC)."
+        },
+        "amountMillicents": {
+          "type": "string",
+          "format": "int64",
+          "description": "The total charge for this entry, in millicents."
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency of the amount, in ISO 4217 format (e.g., \"USD\")."
+        },
+        "billableEntityType": {
+          "type": "string",
+          "description": "The billable item, as named on the invoice (e.g., \"Serverless Updated Data (GiB)\")."
+        },
+        "quantity": {
+          "type": "number",
+          "format": "double",
+          "description": "Quantity of the item consumed during the period, in `unit`."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of `quantity` (e.g., \"GiB\", \"GiB-month\", \"TiB\")."
+        },
+        "discountAmountMillicents": {
+          "type": "string",
+          "format": "int64",
+          "description": "The total discount applied to this entry, in millicents.\nNet charge = amount_millicents - discount_amount_millicents."
+        },
+        "discountAmountPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "The discount applied as a percentage (e.g., 12.5)."
+        }
+      },
+      "description": "UsageBreakdownSpace represents the usage of one serverless billable item for a single\nserverless space within a month."
     }
   }
 }
