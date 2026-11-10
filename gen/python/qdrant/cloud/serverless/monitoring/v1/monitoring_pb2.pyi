@@ -77,35 +77,39 @@ SPACE_ALERT_SEVERITY_WARNING: SpaceAlertSeverity
 SPACE_ALERT_SEVERITY_CRITICAL: SpaceAlertSeverity
 
 class GetSpaceSummaryMetricsRequest(_message.Message):
-    __slots__ = ("account_id", "space_id", "collection_name", "collection_name_contains", "page_size", "page_token")
+    __slots__ = ("account_id", "space_id", "collection_name", "collection_name_contains", "totals_only", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SPACE_ID_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_CONTAINS_FIELD_NUMBER: _ClassVar[int]
+    TOTALS_ONLY_FIELD_NUMBER: _ClassVar[int]
     PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
     PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     space_id: str
     collection_name: str
     collection_name_contains: str
+    totals_only: bool
     page_size: int
     page_token: str
-    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., collection_name: _Optional[str] = ..., collection_name_contains: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., collection_name: _Optional[str] = ..., collection_name_contains: _Optional[str] = ..., totals_only: _Optional[bool] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class GetSpaceSummaryMetricsResponse(_message.Message):
-    __slots__ = ("items", "quota", "total_size", "next_page_token")
+    __slots__ = ("items", "quota", "totals", "total_size", "next_page_token")
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     QUOTA_FIELD_NUMBER: _ClassVar[int]
+    TOTALS_FIELD_NUMBER: _ClassVar[int]
     TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
     NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[SpaceCollectionMetrics]
     quota: SpaceQuotaSnapshot
+    totals: SpaceSummaryTotals
     total_size: int
     next_page_token: str
-    def __init__(self, items: _Optional[_Iterable[_Union[SpaceCollectionMetrics, _Mapping]]] = ..., quota: _Optional[_Union[SpaceQuotaSnapshot, _Mapping]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
+    def __init__(self, items: _Optional[_Iterable[_Union[SpaceCollectionMetrics, _Mapping]]] = ..., quota: _Optional[_Union[SpaceQuotaSnapshot, _Mapping]] = ..., totals: _Optional[_Union[SpaceSummaryTotals, _Mapping]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
 
 class GetSpaceUsageMetricsRequest(_message.Message):
-    __slots__ = ("account_id", "space_id", "since", "until", "aggregator", "collection_name", "collection_name_contains", "page_size", "page_token")
+    __slots__ = ("account_id", "space_id", "since", "until", "aggregator", "collection_name", "collection_name_contains", "totals_only", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SPACE_ID_FIELD_NUMBER: _ClassVar[int]
     SINCE_FIELD_NUMBER: _ClassVar[int]
@@ -113,6 +117,7 @@ class GetSpaceUsageMetricsRequest(_message.Message):
     AGGREGATOR_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_CONTAINS_FIELD_NUMBER: _ClassVar[int]
+    TOTALS_ONLY_FIELD_NUMBER: _ClassVar[int]
     PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
     PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -122,21 +127,24 @@ class GetSpaceUsageMetricsRequest(_message.Message):
     aggregator: Aggregator
     collection_name: str
     collection_name_contains: str
+    totals_only: bool
     page_size: int
     page_token: str
-    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., aggregator: _Optional[_Union[Aggregator, str]] = ..., collection_name: _Optional[str] = ..., collection_name_contains: _Optional[str] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., since: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., until: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., aggregator: _Optional[_Union[Aggregator, str]] = ..., collection_name: _Optional[str] = ..., collection_name_contains: _Optional[str] = ..., totals_only: _Optional[bool] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class GetSpaceUsageMetricsResponse(_message.Message):
-    __slots__ = ("items", "quota", "total_size", "next_page_token")
+    __slots__ = ("items", "quota", "totals", "total_size", "next_page_token")
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     QUOTA_FIELD_NUMBER: _ClassVar[int]
+    TOTALS_FIELD_NUMBER: _ClassVar[int]
     TOTAL_SIZE_FIELD_NUMBER: _ClassVar[int]
     NEXT_PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     items: _containers.RepeatedCompositeFieldContainer[SpaceCollectionUsageMetrics]
     quota: SpaceQuotaSnapshot
+    totals: SpaceUsageTotals
     total_size: int
     next_page_token: str
-    def __init__(self, items: _Optional[_Iterable[_Union[SpaceCollectionUsageMetrics, _Mapping]]] = ..., quota: _Optional[_Union[SpaceQuotaSnapshot, _Mapping]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
+    def __init__(self, items: _Optional[_Iterable[_Union[SpaceCollectionUsageMetrics, _Mapping]]] = ..., quota: _Optional[_Union[SpaceQuotaSnapshot, _Mapping]] = ..., totals: _Optional[_Union[SpaceUsageTotals, _Mapping]] = ..., total_size: _Optional[int] = ..., next_page_token: _Optional[str] = ...) -> None: ...
 
 class GetSpaceInferenceMetricsRequest(_message.Message):
     __slots__ = ("account_id", "space_id", "since", "until", "interval", "inference_model_id", "collection_name", "collection_name_contains", "page_size", "page_token")
@@ -305,6 +313,42 @@ class SpaceCollectionUsageMetrics(_message.Message):
     current_searcher_workers: _containers.RepeatedCompositeFieldContainer[Metric]
     used_indexed_storage_bytes: _containers.RepeatedCompositeFieldContainer[Metric]
     def __init__(self, collection_name: _Optional[str] = ..., search_requests: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., write_requests: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., search_latency: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., point_count: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., used_storage_bytes: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., current_searcher_workers: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., used_indexed_storage_bytes: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
+
+class SpaceSummaryTotals(_message.Message):
+    __slots__ = ("search_requests", "write_requests", "search_latency", "point_count", "used_storage_bytes", "current_searcher_workers", "used_indexed_storage_bytes")
+    SEARCH_REQUESTS_FIELD_NUMBER: _ClassVar[int]
+    WRITE_REQUESTS_FIELD_NUMBER: _ClassVar[int]
+    SEARCH_LATENCY_FIELD_NUMBER: _ClassVar[int]
+    POINT_COUNT_FIELD_NUMBER: _ClassVar[int]
+    USED_STORAGE_BYTES_FIELD_NUMBER: _ClassVar[int]
+    CURRENT_SEARCHER_WORKERS_FIELD_NUMBER: _ClassVar[int]
+    USED_INDEXED_STORAGE_BYTES_FIELD_NUMBER: _ClassVar[int]
+    search_requests: SpaceMetricOverview
+    write_requests: SpaceMetricOverview
+    search_latency: SpaceMetricOverview
+    point_count: int
+    used_storage_bytes: int
+    current_searcher_workers: int
+    used_indexed_storage_bytes: int
+    def __init__(self, search_requests: _Optional[_Union[SpaceMetricOverview, _Mapping]] = ..., write_requests: _Optional[_Union[SpaceMetricOverview, _Mapping]] = ..., search_latency: _Optional[_Union[SpaceMetricOverview, _Mapping]] = ..., point_count: _Optional[int] = ..., used_storage_bytes: _Optional[int] = ..., current_searcher_workers: _Optional[int] = ..., used_indexed_storage_bytes: _Optional[int] = ...) -> None: ...
+
+class SpaceUsageTotals(_message.Message):
+    __slots__ = ("search_requests", "write_requests", "search_latency", "point_count", "used_storage_bytes", "current_searcher_workers", "used_indexed_storage_bytes")
+    SEARCH_REQUESTS_FIELD_NUMBER: _ClassVar[int]
+    WRITE_REQUESTS_FIELD_NUMBER: _ClassVar[int]
+    SEARCH_LATENCY_FIELD_NUMBER: _ClassVar[int]
+    POINT_COUNT_FIELD_NUMBER: _ClassVar[int]
+    USED_STORAGE_BYTES_FIELD_NUMBER: _ClassVar[int]
+    CURRENT_SEARCHER_WORKERS_FIELD_NUMBER: _ClassVar[int]
+    USED_INDEXED_STORAGE_BYTES_FIELD_NUMBER: _ClassVar[int]
+    search_requests: _containers.RepeatedCompositeFieldContainer[Metric]
+    write_requests: _containers.RepeatedCompositeFieldContainer[Metric]
+    search_latency: _containers.RepeatedCompositeFieldContainer[Metric]
+    point_count: _containers.RepeatedCompositeFieldContainer[Metric]
+    used_storage_bytes: _containers.RepeatedCompositeFieldContainer[Metric]
+    current_searcher_workers: _containers.RepeatedCompositeFieldContainer[Metric]
+    used_indexed_storage_bytes: _containers.RepeatedCompositeFieldContainer[Metric]
+    def __init__(self, search_requests: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., write_requests: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., search_latency: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., point_count: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., used_storage_bytes: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., current_searcher_workers: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ..., used_indexed_storage_bytes: _Optional[_Iterable[_Union[Metric, _Mapping]]] = ...) -> None: ...
 
 class Metric(_message.Message):
     __slots__ = ("timestamp", "value")
