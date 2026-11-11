@@ -9,7 +9,6 @@ from qdrant.cloud.common.v1 import common_pb2 as _common_pb2
 from qdrant.cloud.event.v1 import events_pb2 as _events_pb2
 from qdrant.cloud.facade.mcp.v1 import mcp_options_pb2 as _mcp_options_pb2
 from qdrant.cloud.facade.v1 import facade_options_pb2 as _facade_options_pb2
-from qdrant.serverless import collections_pb2 as _collections_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -18,6 +17,14 @@ from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
+
+class Distance(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    DISTANCE_UNSPECIFIED: _ClassVar[Distance]
+    DISTANCE_COSINE: _ClassVar[Distance]
+    DISTANCE_EUCLID: _ClassVar[Distance]
+    DISTANCE_DOT: _ClassVar[Distance]
+    DISTANCE_MANHATTAN: _ClassVar[Distance]
 
 class SampleDatasetLoadStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -28,6 +35,11 @@ class SampleDatasetLoadStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper)
     SAMPLE_DATASET_LOAD_STATUS_FAILED_TO_SYNC: _ClassVar[SampleDatasetLoadStatus]
     SAMPLE_DATASET_LOAD_STATUS_NOT_FOUND: _ClassVar[SampleDatasetLoadStatus]
     SAMPLE_DATASET_LOAD_STATUS_SKIPPED: _ClassVar[SampleDatasetLoadStatus]
+DISTANCE_UNSPECIFIED: Distance
+DISTANCE_COSINE: Distance
+DISTANCE_EUCLID: Distance
+DISTANCE_DOT: Distance
+DISTANCE_MANHATTAN: Distance
 SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED: SampleDatasetLoadStatus
 SAMPLE_DATASET_LOAD_STATUS_RUNNING: SampleDatasetLoadStatus
 SAMPLE_DATASET_LOAD_STATUS_FAILED: SampleDatasetLoadStatus
@@ -107,14 +119,7 @@ class LoadSampleDatasetResponse(_message.Message):
     def __init__(self, sample_dataset_load: _Optional[_Union[SampleDatasetLoad, _Mapping]] = ...) -> None: ...
 
 class SampleDataset(_message.Message):
-    __slots__ = ("id", "name", "description", "collection_config", "point_count", "size_bytes", "indexed_size_bytes", "version", "vector_models")
-    class VectorModelsEntry(_message.Message):
-        __slots__ = ("key", "value")
-        KEY_FIELD_NUMBER: _ClassVar[int]
-        VALUE_FIELD_NUMBER: _ClassVar[int]
-        key: str
-        value: str
-        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    __slots__ = ("id", "name", "description", "collection_config", "point_count", "size_bytes", "indexed_size_bytes", "version")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
@@ -123,17 +128,57 @@ class SampleDataset(_message.Message):
     SIZE_BYTES_FIELD_NUMBER: _ClassVar[int]
     INDEXED_SIZE_BYTES_FIELD_NUMBER: _ClassVar[int]
     VERSION_FIELD_NUMBER: _ClassVar[int]
-    VECTOR_MODELS_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     description: str
-    collection_config: _collections_pb2.CollectionConfig
+    collection_config: CollectionConfig
     point_count: int
     size_bytes: int
     indexed_size_bytes: int
     version: str
-    vector_models: _containers.ScalarMap[str, str]
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., collection_config: _Optional[_Union[_collections_pb2.CollectionConfig, _Mapping]] = ..., point_count: _Optional[int] = ..., size_bytes: _Optional[int] = ..., indexed_size_bytes: _Optional[int] = ..., version: _Optional[str] = ..., vector_models: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., collection_config: _Optional[_Union[CollectionConfig, _Mapping]] = ..., point_count: _Optional[int] = ..., size_bytes: _Optional[int] = ..., indexed_size_bytes: _Optional[int] = ..., version: _Optional[str] = ...) -> None: ...
+
+class CollectionConfig(_message.Message):
+    __slots__ = ("dense_vectors", "sparse_vectors")
+    class DenseVectorsEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: DenseVectorConfig
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[DenseVectorConfig, _Mapping]] = ...) -> None: ...
+    class SparseVectorsEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: SparseVectorConfig
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[SparseVectorConfig, _Mapping]] = ...) -> None: ...
+    DENSE_VECTORS_FIELD_NUMBER: _ClassVar[int]
+    SPARSE_VECTORS_FIELD_NUMBER: _ClassVar[int]
+    dense_vectors: _containers.MessageMap[str, DenseVectorConfig]
+    sparse_vectors: _containers.MessageMap[str, SparseVectorConfig]
+    def __init__(self, dense_vectors: _Optional[_Mapping[str, DenseVectorConfig]] = ..., sparse_vectors: _Optional[_Mapping[str, SparseVectorConfig]] = ...) -> None: ...
+
+class DenseVectorConfig(_message.Message):
+    __slots__ = ("size", "distance", "multivector", "model")
+    SIZE_FIELD_NUMBER: _ClassVar[int]
+    DISTANCE_FIELD_NUMBER: _ClassVar[int]
+    MULTIVECTOR_FIELD_NUMBER: _ClassVar[int]
+    MODEL_FIELD_NUMBER: _ClassVar[int]
+    size: int
+    distance: Distance
+    multivector: bool
+    model: str
+    def __init__(self, size: _Optional[int] = ..., distance: _Optional[_Union[Distance, str]] = ..., multivector: _Optional[bool] = ..., model: _Optional[str] = ...) -> None: ...
+
+class SparseVectorConfig(_message.Message):
+    __slots__ = ("use_idf", "model")
+    USE_IDF_FIELD_NUMBER: _ClassVar[int]
+    MODEL_FIELD_NUMBER: _ClassVar[int]
+    use_idf: bool
+    model: str
+    def __init__(self, use_idf: _Optional[bool] = ..., model: _Optional[str] = ...) -> None: ...
 
 class SampleDatasetLoad(_message.Message):
     __slots__ = ("id", "created_at", "account_id", "space_id", "sample_dataset_id", "sample_dataset_version", "collection_name", "status", "reason", "deleted_at", "created_by", "stats")

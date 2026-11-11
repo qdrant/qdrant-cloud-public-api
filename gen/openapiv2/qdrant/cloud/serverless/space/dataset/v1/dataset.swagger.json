@@ -249,345 +249,6 @@
         }
       }
     },
-    "serverlessBoolIndex": {
-      "type": "object",
-      "properties": {
-        "nested": {
-          "type": "string",
-          "description": "Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].in_stock`.\nThe field must be inside the array's elements. `is_empty` on the field matches a point when one of\nits elements lacks the field, and never a point without elements. Default: disabled."
-        }
-      },
-      "description": "Exact match on booleans, e.g. `is_active: true`."
-    },
-    "serverlessCollectionConfig": {
-      "type": "object",
-      "properties": {
-        "denseVectors": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/serverlessDenseVectorConfig"
-          },
-          "description": "Keyed by vector name. The empty name \"\" is the unnamed default vector, as\nin qdrant; a collection either has the single unnamed vector or named ones."
-        },
-        "sparseVectors": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/serverlessSparseVectorConfig"
-          },
-          "description": "Keyed by vector name."
-        },
-        "payloadIndexes": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/serverlessPayloadIndexConfig"
-          },
-          "description": "Keyed by payload field name (JSON path, e.g. `user_id` or `meta.tags`)."
-        }
-      },
-      "description": "The tenant's collection config. Persisted verbatim. At least one dense or\nsparse vector is required."
-    },
-    "serverlessDatetimeIndex": {
-      "type": "object",
-      "properties": {
-        "nested": {
-          "type": "string",
-          "description": "Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].updated_at`.\nThe field must be inside the array's elements. `is_empty` on the field matches a point when one of\nits elements lacks the field, and never a point without elements. Default: disabled."
-        }
-      },
-      "description": "Range filters on RFC 3339 datetimes, e.g. `created_at: \"2023-02-08T10:49:00Z\"`."
-    },
-    "serverlessDenseVectorConfig": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "string",
-          "format": "uint64",
-          "description": "Dimensionality of the embedding, e.g. 512 (CLIP), 1536, 3072."
-        },
-        "distance": {
-          "$ref": "#/definitions/serverlessDistance",
-          "description": "Distance metric used to compare vectors."
-        },
-        "multivector": {
-          "type": "boolean",
-          "description": "Store several sub-vectors per point and compare with max-sim, for\nlate-interaction models (ColBERT, ColPali, ...)."
-        },
-        "precisionTier": {
-          "$ref": "#/definitions/serverlessPrecisionTier",
-          "description": "Precision/cost trade-off for this vector. Unset: HIGH."
-        }
-      },
-      "description": "Configuration of a single dense (embedding) vector."
-    },
-    "serverlessDisabledStemmer": {
-      "type": "object",
-      "description": "Explicitly disable stemming (overrides any language default)."
-    },
-    "serverlessDistance": {
-      "type": "string",
-      "enum": [
-        "DISTANCE_UNSPECIFIED",
-        "COSINE",
-        "EUCLID",
-        "DOT",
-        "MANHATTAN"
-      ],
-      "default": "DISTANCE_UNSPECIFIED",
-      "description": "Distance metric used to compare dense vectors.\n\n - DISTANCE_UNSPECIFIED: Unset; a concrete metric is required.\n - COSINE: Cosine similarity.\n - EUCLID: Euclidean (L2) distance.\n - DOT: Dot product.\n - MANHATTAN: Manhattan (L1) distance."
-    },
-    "serverlessFloatIndex": {
-      "type": "object",
-      "properties": {
-        "nested": {
-          "type": "string",
-          "description": "Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].price`.\nThe field must be inside the array's elements. `is_empty` on the field matches a point when one of\nits elements lacks the field, and never a point without elements. Default: disabled."
-        }
-      },
-      "description": "Range filters on floating point (and integer) numbers, e.g. `price: 99.5`."
-    },
-    "serverlessGeoIndex": {
-      "type": "object",
-      "properties": {
-        "nested": {
-          "type": "string",
-          "description": "Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].location`.\nThe field must be inside the array's elements. `is_empty` on the field matches a point when one of\nits elements lacks the field, and never a point without elements. Default: disabled."
-        }
-      },
-      "description": "Geo radius / bounding box / polygon filters on `{lon, lat}` values."
-    },
-    "serverlessIntegerIndex": {
-      "type": "object",
-      "properties": {
-        "lookup": {
-          "type": "boolean",
-          "description": "Support exact-match filters."
-        },
-        "range": {
-          "type": "boolean",
-          "description": "Support range filters."
-        },
-        "nested": {
-          "type": "string",
-          "description": "Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].price`.\nThe field must be inside the array's elements. `is_empty` on the field matches a point when one of\nits elements lacks the field, and never a point without elements. Default: disabled."
-        }
-      },
-      "description": "Exact match and/or range filters on integers, e.g. `age: 25`. Both are on\nby default; turning one off shrinks the index."
-    },
-    "serverlessKeywordIndex": {
-      "type": "object",
-      "properties": {
-        "prefix": {
-          "$ref": "#/definitions/serverlessKeywordPrefixParams",
-          "description": "If set, enable prefix matching (`match: { \"prefix\": ... }`) on this field.\nPresence of this message enables prefix matching; it has no options yet."
-        },
-        "nested": {
-          "type": "string",
-          "description": "Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].price`.\nThe field must be inside the array's elements. `is_empty` on the field matches a point when one of\nits elements lacks the field, and never a point without elements. Default: disabled."
-        }
-      },
-      "description": "Exact match on string values, e.g. `color: \"red\"`."
-    },
-    "serverlessKeywordPrefixParams": {
-      "type": "object",
-      "description": "Prefix matching options for the keyword index. Has no options yet:\npresence of this message enables prefix matching."
-    },
-    "serverlessPayloadIndexConfig": {
-      "type": "object",
-      "properties": {
-        "keyword": {
-          "$ref": "#/definitions/serverlessKeywordIndex",
-          "description": "Exact match on strings."
-        },
-        "integer": {
-          "$ref": "#/definitions/serverlessIntegerIndex",
-          "description": "Exact match and/or range filters on integers."
-        },
-        "float": {
-          "$ref": "#/definitions/serverlessFloatIndex",
-          "description": "Range filters on numbers."
-        },
-        "uuid": {
-          "$ref": "#/definitions/serverlessUuidIndex",
-          "description": "Exact match on UUIDs."
-        },
-        "datetime": {
-          "$ref": "#/definitions/serverlessDatetimeIndex",
-          "description": "Range filters on datetimes."
-        },
-        "text": {
-          "$ref": "#/definitions/serverlessTextIndex",
-          "description": "Full-text filtering."
-        },
-        "geo": {
-          "$ref": "#/definitions/serverlessGeoIndex",
-          "description": "Geo filters."
-        },
-        "bool": {
-          "$ref": "#/definitions/serverlessBoolIndex",
-          "description": "Exact match on booleans."
-        }
-      },
-      "description": "One payload index. Only the *kind* of filter the field supports is chosen\nhere; storage placement of the index is the manager's decision."
-    },
-    "serverlessPrecisionTier": {
-      "type": "string",
-      "enum": [
-        "PRECISION_TIER_UNSPECIFIED",
-        "LOW",
-        "MEDIUM",
-        "HIGH",
-        "FULL"
-      ],
-      "default": "PRECISION_TIER_UNSPECIFIED",
-      "description": "How much of the original vector precision may be traded for cost. The manager\nturns this into a concrete quantization / datatype choice; the tenant never\npicks scalar/product/binary quantization or its parameters directly.\n\n - PRECISION_TIER_UNSPECIFIED: Unset: HIGH.\n - LOW: Aggressive compression, lowest cost, approximate results.\n - MEDIUM: Moderate compression with a small accuracy trade-off.\n - HIGH: Light compression, near-exact results.\n - FULL: No lossy compression: exact vectors, fully in memory. Highest cost."
-    },
-    "serverlessSnowballParams": {
-      "type": "object",
-      "properties": {
-        "language": {
-          "type": "string",
-          "description": "Language for the snowball algorithm, e.g. \"english\"."
-        }
-      },
-      "description": "Snowball stemming for a full-text index."
-    },
-    "serverlessSparseVectorConfig": {
-      "type": "object",
-      "properties": {
-        "useIdf": {
-          "type": "boolean",
-          "description": "Apply the IDF modifier at query time. Enable for BM25-style models that\nexpect inverse-document-frequency weighting."
-        },
-        "precisionTier": {
-          "$ref": "#/definitions/serverlessPrecisionTier",
-          "description": "Precision/cost trade-off for this vector. Unset: HIGH."
-        }
-      },
-      "description": "Configuration of a single sparse vector."
-    },
-    "serverlessStemmingAlgorithm": {
-      "type": "object",
-      "properties": {
-        "snowball": {
-          "$ref": "#/definitions/serverlessSnowballParams",
-          "description": "Snowball stemmer for the given language."
-        },
-        "disabled": {
-          "$ref": "#/definitions/serverlessDisabledStemmer",
-          "description": "Explicitly disable stemming."
-        }
-      },
-      "description": "Stemming algorithm for a full-text index. Unset: no stemming."
-    },
-    "serverlessStopwordsSet": {
-      "type": "object",
-      "properties": {
-        "languages": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Languages whose predefined stopword lists to apply."
-        },
-        "custom": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Extra stopwords to ignore, merged with the language lists."
-        }
-      },
-      "description": "Tokens ignored by a full-text index. Language names match qdrant (e.g.\n\"english\"); predefined lists and custom tokens are merged."
-    },
-    "serverlessTextIndex": {
-      "type": "object",
-      "properties": {
-        "tokenizer": {
-          "$ref": "#/definitions/serverlessTokenizer",
-          "description": "Tokenizer to split text with. Unset: WHITESPACE."
-        },
-        "lowercase": {
-          "type": "boolean",
-          "description": "Lowercase text before indexing. Default true."
-        },
-        "phraseMatching": {
-          "type": "boolean",
-          "description": "Support phrase queries; extra index structure. Default true."
-        },
-        "minTokenLen": {
-          "type": "string",
-          "format": "uint64",
-          "description": "Minimum token length to index."
-        },
-        "maxTokenLen": {
-          "type": "string",
-          "format": "uint64",
-          "description": "Maximum token length to index."
-        },
-        "asciiFolding": {
-          "type": "boolean",
-          "description": "Fold accented characters to ASCII. Default false."
-        },
-        "stopwords": {
-          "$ref": "#/definitions/serverlessStopwordsSet",
-          "description": "Tokens to ignore at index and query time."
-        },
-        "stemmer": {
-          "$ref": "#/definitions/serverlessStemmingAlgorithm",
-          "description": "Stemming algorithm. Unset: engine default (no stemming)."
-        },
-        "scoring": {
-          "$ref": "#/definitions/serverlessTextScoringParams",
-          "description": "Enable ranking points by BM25 over this field.\nChanging it rebuilds the index. Default: disabled."
-        },
-        "nested": {
-          "type": "string",
-          "description": "Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].title`.\nThe field must be inside the array's elements. Every query on the field, not only nested filters,\ntreats each element as its own document: a condition matches a point when a single element\nmatches it, and BM25 scores elements separately. `is_empty` on the field matches a point when\none of its elements lacks the field, and never a point without elements. Default: disabled."
-        }
-      },
-      "description": "Full-text filtering on string values."
-    },
-    "serverlessTextScoringParams": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/serverlessTextScoringType",
-          "description": "How documents are ranked. Unset: BM25."
-        }
-      },
-      "description": "Parameters of ranking over a text index.\nPresence of this message enables scoring. An unset type means BM25.\nOn the REST API, `true` is the same as an empty object and `false` disables scoring."
-    },
-    "serverlessTextScoringType": {
-      "type": "string",
-      "enum": [
-        "TEXT_SCORING_TYPE_UNSPECIFIED",
-        "BM25"
-      ],
-      "default": "TEXT_SCORING_TYPE_UNSPECIFIED",
-      "description": "How a text index ranks documents.\n\n - TEXT_SCORING_TYPE_UNSPECIFIED: Unset: BM25.\n - BM25: Okapi BM25. The index records each document's length; `k` and `b` are set per query."
-    },
-    "serverlessTokenizer": {
-      "type": "string",
-      "enum": [
-        "TOKENIZER_UNSPECIFIED",
-        "PREFIX",
-        "WHITESPACE",
-        "WORD",
-        "MULTILINGUAL"
-      ],
-      "default": "TOKENIZER_UNSPECIFIED",
-      "description": "Full-text tokenizer, mirrors qdrant's `TokenizerType`.\n\n - TOKENIZER_UNSPECIFIED: Unset: WHITESPACE.\n - PREFIX: Index every prefix of each token.\n - WHITESPACE: Split on whitespace.\n - WORD: Split on word boundaries.\n - MULTILINGUAL: Language-aware tokenization."
-    },
-    "serverlessUuidIndex": {
-      "type": "object",
-      "properties": {
-        "nested": {
-          "type": "string",
-          "description": "Index every object of this array as a separate entry, e.g. `offers` for the field `offers[].id`.\nThe field must be inside the array's elements. `is_empty` on the field matches a point when one of\nits elements lacks the field, and never a point without elements. Default: disabled."
-        }
-      },
-      "description": "Exact match on UUID strings; like keyword but stored compactly."
-    },
     "v1ActorType": {
       "type": "string",
       "enum": [
@@ -637,6 +298,28 @@
       },
       "description": "Caller identifies the authenticated actor that performed an action on a resource."
     },
+    "v1CollectionConfig": {
+      "type": "object",
+      "properties": {
+        "denseVectors": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1DenseVectorConfig"
+          },
+          "description": "The dense vectors of the collection, keyed by vector name.\nThe empty name \"\" is the default (unnamed) vector.",
+          "readOnly": true
+        },
+        "sparseVectors": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1SparseVectorConfig"
+          },
+          "description": "The sparse vectors of the collection, keyed by vector name.",
+          "readOnly": true
+        }
+      },
+      "description": "CollectionConfig is the configuration of the collection that a sample dataset load creates.\nIt mirrors qdrant.serverless.CollectionConfig, without the payload indexes.\nAll fields in this message are read-only."
+    },
     "v1CredentialType": {
       "type": "string",
       "enum": [
@@ -649,6 +332,45 @@
       ],
       "default": "CREDENTIAL_TYPE_UNSPECIFIED",
       "description": "CredentialType identifies how the caller authenticated. Distinct from ActorType:\npersonal API keys and OAuth delegated tokens still authenticate as ACTOR_TYPE_USER.\nUsed by IAM AuthenticateResponse, gateway interactive_only enforcement, and Event.caller.\n\n - CREDENTIAL_TYPE_UNSPECIFIED: Unspecified / unknown credential type (or omitted on legacy events).\n - CREDENTIAL_TYPE_SESSION: Interactive login session (first-party console JWT).\n - CREDENTIAL_TYPE_MANAGEMENT_KEY: Account management (programmatic access) key.\n - CREDENTIAL_TYPE_PERSONAL_API_KEY: Personal API key owned by a user.\n - CREDENTIAL_TYPE_SERVICE: Service-to-service credential.\n - CREDENTIAL_TYPE_OAUTH_DELEGATED: Short-lived delegated JWT from OAuth token exchange (MCP, qcloud CLI, …)."
+    },
+    "v1DenseVectorConfig": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The number of dimensions of the vector.",
+          "readOnly": true
+        },
+        "distance": {
+          "$ref": "#/definitions/v1Distance",
+          "description": "The distance function used to compare vectors.",
+          "readOnly": true
+        },
+        "multivector": {
+          "type": "boolean",
+          "description": "Whether each point stores several sub-vectors, compared with max-sim.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.\nUse the same model to make query vectors.",
+          "readOnly": true
+        }
+      },
+      "description": "DenseVectorConfig is the configuration of a dense vector.\nIt mirrors qdrant.serverless.DenseVectorConfig, without the precision tier.\nAll fields in this message are read-only."
+    },
+    "v1Distance": {
+      "type": "string",
+      "enum": [
+        "DISTANCE_UNSPECIFIED",
+        "DISTANCE_COSINE",
+        "DISTANCE_EUCLID",
+        "DISTANCE_DOT",
+        "DISTANCE_MANHATTAN"
+      ],
+      "default": "DISTANCE_UNSPECIFIED",
+      "description": "Distance represents the distance function of a dense vector.\nIt mirrors qdrant.serverless.Distance.\n\n - DISTANCE_UNSPECIFIED: The distance is unknown or not specified. This is the default value.\n - DISTANCE_COSINE: Cosine similarity.\n - DISTANCE_EUCLID: Euclidean distance.\n - DISTANCE_DOT: Dot product.\n - DISTANCE_MANHATTAN: Manhattan distance."
     },
     "v1GetSampleDatasetLoadResponse": {
       "type": "object",
@@ -750,7 +472,7 @@
           "readOnly": true
         },
         "collectionConfig": {
-          "$ref": "#/definitions/serverlessCollectionConfig",
+          "$ref": "#/definitions/v1CollectionConfig",
           "description": "The configuration of the collection that a load creates.",
           "readOnly": true
         },
@@ -775,14 +497,6 @@
         "version": {
           "type": "string",
           "description": "The version of the sample dataset that a load uses.",
-          "readOnly": true
-        },
-        "vectorModels": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The model that made the vectors, keyed by the vector name in `collection_config`,\nfor example `sentence-transformers/all-MiniLM-L6-v2` or `Qdrant/bm25`.\nUse the same model to make query vectors.",
           "readOnly": true
         }
       },
@@ -883,6 +597,22 @@
       ],
       "default": "SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED",
       "description": "SampleDatasetLoadStatus represents the current status of a sample dataset load.\n\n - SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED: The status is unknown or not specified. This is the default value.\n - SAMPLE_DATASET_LOAD_STATUS_RUNNING: The sample dataset load is running.\n - SAMPLE_DATASET_LOAD_STATUS_FAILED: The sample dataset load failed to complete successfully.\n - SAMPLE_DATASET_LOAD_STATUS_SUCCEEDED: The sample dataset load completed successfully.\n - SAMPLE_DATASET_LOAD_STATUS_FAILED_TO_SYNC: There was an error syncing the sample dataset load in the space's region.\n - SAMPLE_DATASET_LOAD_STATUS_NOT_FOUND: The sample dataset load is missing in the space's region.\n - SAMPLE_DATASET_LOAD_STATUS_SKIPPED: The sample dataset load is skipped."
+    },
+    "v1SparseVectorConfig": {
+      "type": "object",
+      "properties": {
+        "useIdf": {
+          "type": "boolean",
+          "description": "Whether the IDF modifier is applied at query time.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "The model that made the vectors, for example `Qdrant/bm25`.\nUse the same model to make query vectors.",
+          "readOnly": true
+        }
+      },
+      "description": "SparseVectorConfig is the configuration of a sparse vector.\nIt mirrors qdrant.serverless.SparseVectorConfig, without the precision tier.\nAll fields in this message are read-only."
     }
   }
 }
