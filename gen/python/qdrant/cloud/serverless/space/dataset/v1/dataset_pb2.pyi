@@ -18,19 +18,13 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class SampleDatasetVectorKind(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+class Distance(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
-    SAMPLE_DATASET_VECTOR_KIND_UNSPECIFIED: _ClassVar[SampleDatasetVectorKind]
-    SAMPLE_DATASET_VECTOR_KIND_DENSE: _ClassVar[SampleDatasetVectorKind]
-    SAMPLE_DATASET_VECTOR_KIND_SPARSE: _ClassVar[SampleDatasetVectorKind]
-
-class SampleDatasetVectorDistance(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    SAMPLE_DATASET_VECTOR_DISTANCE_UNSPECIFIED: _ClassVar[SampleDatasetVectorDistance]
-    SAMPLE_DATASET_VECTOR_DISTANCE_COSINE: _ClassVar[SampleDatasetVectorDistance]
-    SAMPLE_DATASET_VECTOR_DISTANCE_EUCLID: _ClassVar[SampleDatasetVectorDistance]
-    SAMPLE_DATASET_VECTOR_DISTANCE_DOT: _ClassVar[SampleDatasetVectorDistance]
-    SAMPLE_DATASET_VECTOR_DISTANCE_MANHATTAN: _ClassVar[SampleDatasetVectorDistance]
+    DISTANCE_UNSPECIFIED: _ClassVar[Distance]
+    DISTANCE_COSINE: _ClassVar[Distance]
+    DISTANCE_EUCLID: _ClassVar[Distance]
+    DISTANCE_DOT: _ClassVar[Distance]
+    DISTANCE_MANHATTAN: _ClassVar[Distance]
 
 class SampleDatasetLoadStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -41,14 +35,11 @@ class SampleDatasetLoadStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper)
     SAMPLE_DATASET_LOAD_STATUS_FAILED_TO_SYNC: _ClassVar[SampleDatasetLoadStatus]
     SAMPLE_DATASET_LOAD_STATUS_NOT_FOUND: _ClassVar[SampleDatasetLoadStatus]
     SAMPLE_DATASET_LOAD_STATUS_SKIPPED: _ClassVar[SampleDatasetLoadStatus]
-SAMPLE_DATASET_VECTOR_KIND_UNSPECIFIED: SampleDatasetVectorKind
-SAMPLE_DATASET_VECTOR_KIND_DENSE: SampleDatasetVectorKind
-SAMPLE_DATASET_VECTOR_KIND_SPARSE: SampleDatasetVectorKind
-SAMPLE_DATASET_VECTOR_DISTANCE_UNSPECIFIED: SampleDatasetVectorDistance
-SAMPLE_DATASET_VECTOR_DISTANCE_COSINE: SampleDatasetVectorDistance
-SAMPLE_DATASET_VECTOR_DISTANCE_EUCLID: SampleDatasetVectorDistance
-SAMPLE_DATASET_VECTOR_DISTANCE_DOT: SampleDatasetVectorDistance
-SAMPLE_DATASET_VECTOR_DISTANCE_MANHATTAN: SampleDatasetVectorDistance
+DISTANCE_UNSPECIFIED: Distance
+DISTANCE_COSINE: Distance
+DISTANCE_EUCLID: Distance
+DISTANCE_DOT: Distance
+DISTANCE_MANHATTAN: Distance
 SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED: SampleDatasetLoadStatus
 SAMPLE_DATASET_LOAD_STATUS_RUNNING: SampleDatasetLoadStatus
 SAMPLE_DATASET_LOAD_STATUS_FAILED: SampleDatasetLoadStatus
@@ -128,11 +119,11 @@ class LoadSampleDatasetResponse(_message.Message):
     def __init__(self, sample_dataset_load: _Optional[_Union[SampleDatasetLoad, _Mapping]] = ...) -> None: ...
 
 class SampleDataset(_message.Message):
-    __slots__ = ("id", "name", "description", "vectors", "point_count", "size_bytes", "indexed_size_bytes", "version")
+    __slots__ = ("id", "name", "description", "collection_config", "point_count", "size_bytes", "indexed_size_bytes", "version")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
-    VECTORS_FIELD_NUMBER: _ClassVar[int]
+    COLLECTION_CONFIG_FIELD_NUMBER: _ClassVar[int]
     POINT_COUNT_FIELD_NUMBER: _ClassVar[int]
     SIZE_BYTES_FIELD_NUMBER: _ClassVar[int]
     INDEXED_SIZE_BYTES_FIELD_NUMBER: _ClassVar[int]
@@ -140,26 +131,54 @@ class SampleDataset(_message.Message):
     id: str
     name: str
     description: str
-    vectors: _containers.RepeatedCompositeFieldContainer[SampleDatasetVector]
+    collection_config: CollectionConfig
     point_count: int
     size_bytes: int
     indexed_size_bytes: int
     version: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., vectors: _Optional[_Iterable[_Union[SampleDatasetVector, _Mapping]]] = ..., point_count: _Optional[int] = ..., size_bytes: _Optional[int] = ..., indexed_size_bytes: _Optional[int] = ..., version: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ..., collection_config: _Optional[_Union[CollectionConfig, _Mapping]] = ..., point_count: _Optional[int] = ..., size_bytes: _Optional[int] = ..., indexed_size_bytes: _Optional[int] = ..., version: _Optional[str] = ...) -> None: ...
 
-class SampleDatasetVector(_message.Message):
-    __slots__ = ("name", "kind", "size", "distance", "model")
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    KIND_FIELD_NUMBER: _ClassVar[int]
+class CollectionConfig(_message.Message):
+    __slots__ = ("dense_vectors", "sparse_vectors")
+    class DenseVectorsEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: DenseVectorConfig
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[DenseVectorConfig, _Mapping]] = ...) -> None: ...
+    class SparseVectorsEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: SparseVectorConfig
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[SparseVectorConfig, _Mapping]] = ...) -> None: ...
+    DENSE_VECTORS_FIELD_NUMBER: _ClassVar[int]
+    SPARSE_VECTORS_FIELD_NUMBER: _ClassVar[int]
+    dense_vectors: _containers.MessageMap[str, DenseVectorConfig]
+    sparse_vectors: _containers.MessageMap[str, SparseVectorConfig]
+    def __init__(self, dense_vectors: _Optional[_Mapping[str, DenseVectorConfig]] = ..., sparse_vectors: _Optional[_Mapping[str, SparseVectorConfig]] = ...) -> None: ...
+
+class DenseVectorConfig(_message.Message):
+    __slots__ = ("size", "distance", "multivector", "model")
     SIZE_FIELD_NUMBER: _ClassVar[int]
     DISTANCE_FIELD_NUMBER: _ClassVar[int]
+    MULTIVECTOR_FIELD_NUMBER: _ClassVar[int]
     MODEL_FIELD_NUMBER: _ClassVar[int]
-    name: str
-    kind: SampleDatasetVectorKind
     size: int
-    distance: SampleDatasetVectorDistance
+    distance: Distance
+    multivector: bool
     model: str
-    def __init__(self, name: _Optional[str] = ..., kind: _Optional[_Union[SampleDatasetVectorKind, str]] = ..., size: _Optional[int] = ..., distance: _Optional[_Union[SampleDatasetVectorDistance, str]] = ..., model: _Optional[str] = ...) -> None: ...
+    def __init__(self, size: _Optional[int] = ..., distance: _Optional[_Union[Distance, str]] = ..., multivector: _Optional[bool] = ..., model: _Optional[str] = ...) -> None: ...
+
+class SparseVectorConfig(_message.Message):
+    __slots__ = ("use_idf", "model")
+    USE_IDF_FIELD_NUMBER: _ClassVar[int]
+    MODEL_FIELD_NUMBER: _ClassVar[int]
+    use_idf: bool
+    model: str
+    def __init__(self, use_idf: _Optional[bool] = ..., model: _Optional[str] = ...) -> None: ...
 
 class SampleDatasetLoad(_message.Message):
     __slots__ = ("id", "created_at", "account_id", "space_id", "sample_dataset_id", "sample_dataset_version", "collection_name", "status", "reason", "deleted_at", "created_by", "stats")

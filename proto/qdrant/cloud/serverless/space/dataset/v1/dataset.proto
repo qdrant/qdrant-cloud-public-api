@@ -245,10 +245,8 @@ message SampleDataset {
   string name = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // A description of the content of the sample dataset.
   string description = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
-  // The vector configuration of the collection that a load creates: one entry
-  // for each named vector (or one entry for the default unnamed vector).
-  // The entries describe the collection schema, not individual points.
-  repeated SampleDatasetVector vectors = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The configuration of the collection that a load creates.
+  CollectionConfig collection_config = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The number of points in the sample dataset.
   uint64 point_count = 5 [
     (google.api.field_behavior) = OUTPUT_ONLY,
@@ -270,53 +268,65 @@ message SampleDataset {
   string version = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
-// SampleDatasetVector describes one named vector of a sample dataset.
+// CollectionConfig is the configuration of the collection that a sample dataset load creates.
+// It mirrors qdrant.serverless.CollectionConfig, without the payload indexes.
 // All fields in this message are read-only.
-message SampleDatasetVector {
-  // The name of the vector.
-  // Empty for the default (unnamed) vector.
-  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
-  // The kind of the vector.
-  SampleDatasetVectorKind kind = 2 [
+message CollectionConfig {
+  // The dense vectors of the collection, keyed by vector name.
+  // The empty name "" is the default (unnamed) vector.
+  map<string, DenseVectorConfig> dense_vectors = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The sparse vectors of the collection, keyed by vector name.
+  map<string, SparseVectorConfig> sparse_vectors = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Field 3 is payload_indexes in qdrant.serverless.CollectionConfig.
+  reserved 3;
+}
+
+// DenseVectorConfig is the configuration of a dense vector.
+// It mirrors qdrant.serverless.DenseVectorConfig, without the precision tier.
+// All fields in this message are read-only.
+message DenseVectorConfig {
+  // The number of dimensions of the vector.
+  uint64 size = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The distance function used to compare vectors.
+  Distance distance = 2 [
     (buf.validate.field).enum.defined_only = true,
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
-  // The number of dimensions of a dense vector.
-  // Not set for a sparse vector.
-  optional uint32 size = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
-  // The distance function of a dense vector.
-  // Not set for a sparse vector.
-  optional SampleDatasetVectorDistance distance = 4 [
-    (buf.validate.field).enum.defined_only = true,
-    (google.api.field_behavior) = OUTPUT_ONLY
-  ];
+  // Whether each point stores several sub-vectors, compared with max-sim.
+  bool multivector = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Field 4 is precision_tier in qdrant.serverless.DenseVectorConfig.
+  reserved 4;
   // The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.
   // Use the same model to make query vectors.
   string model = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
-// SampleDatasetVectorKind represents the kind of a sample dataset vector.
-enum SampleDatasetVectorKind {
-  // The kind is unknown or not specified. This is the default value.
-  SAMPLE_DATASET_VECTOR_KIND_UNSPECIFIED = 0;
-  // A dense vector.
-  SAMPLE_DATASET_VECTOR_KIND_DENSE = 1;
-  // A sparse vector.
-  SAMPLE_DATASET_VECTOR_KIND_SPARSE = 2;
+// SparseVectorConfig is the configuration of a sparse vector.
+// It mirrors qdrant.serverless.SparseVectorConfig, without the precision tier.
+// All fields in this message are read-only.
+message SparseVectorConfig {
+  // Whether the IDF modifier is applied at query time.
+  bool use_idf = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Field 2 is precision_tier in qdrant.serverless.SparseVectorConfig.
+  reserved 2;
+  // The model that made the vectors, for example `Qdrant/bm25`.
+  // Use the same model to make query vectors.
+  string model = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
-// SampleDatasetVectorDistance represents the distance function of a dense sample dataset vector.
-enum SampleDatasetVectorDistance {
+// Distance represents the distance function of a dense vector.
+// It mirrors qdrant.serverless.Distance.
+enum Distance {
   // The distance is unknown or not specified. This is the default value.
-  SAMPLE_DATASET_VECTOR_DISTANCE_UNSPECIFIED = 0;
+  DISTANCE_UNSPECIFIED = 0;
   // Cosine similarity.
-  SAMPLE_DATASET_VECTOR_DISTANCE_COSINE = 1;
+  DISTANCE_COSINE = 1;
   // Euclidean distance.
-  SAMPLE_DATASET_VECTOR_DISTANCE_EUCLID = 2;
+  DISTANCE_EUCLID = 2;
   // Dot product.
-  SAMPLE_DATASET_VECTOR_DISTANCE_DOT = 3;
+  DISTANCE_DOT = 3;
   // Manhattan distance.
-  SAMPLE_DATASET_VECTOR_DISTANCE_MANHATTAN = 4;
+  DISTANCE_MANHATTAN = 4;
 }
 
 // buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS

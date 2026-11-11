@@ -298,6 +298,28 @@
       },
       "description": "Caller identifies the authenticated actor that performed an action on a resource."
     },
+    "v1CollectionConfig": {
+      "type": "object",
+      "properties": {
+        "denseVectors": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1DenseVectorConfig"
+          },
+          "description": "The dense vectors of the collection, keyed by vector name.\nThe empty name \"\" is the default (unnamed) vector.",
+          "readOnly": true
+        },
+        "sparseVectors": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1SparseVectorConfig"
+          },
+          "description": "The sparse vectors of the collection, keyed by vector name.",
+          "readOnly": true
+        }
+      },
+      "description": "CollectionConfig is the configuration of the collection that a sample dataset load creates.\nIt mirrors qdrant.serverless.CollectionConfig, without the payload indexes.\nAll fields in this message are read-only."
+    },
     "v1CredentialType": {
       "type": "string",
       "enum": [
@@ -310,6 +332,45 @@
       ],
       "default": "CREDENTIAL_TYPE_UNSPECIFIED",
       "description": "CredentialType identifies how the caller authenticated. Distinct from ActorType:\npersonal API keys and OAuth delegated tokens still authenticate as ACTOR_TYPE_USER.\nUsed by IAM AuthenticateResponse, gateway interactive_only enforcement, and Event.caller.\n\n - CREDENTIAL_TYPE_UNSPECIFIED: Unspecified / unknown credential type (or omitted on legacy events).\n - CREDENTIAL_TYPE_SESSION: Interactive login session (first-party console JWT).\n - CREDENTIAL_TYPE_MANAGEMENT_KEY: Account management (programmatic access) key.\n - CREDENTIAL_TYPE_PERSONAL_API_KEY: Personal API key owned by a user.\n - CREDENTIAL_TYPE_SERVICE: Service-to-service credential.\n - CREDENTIAL_TYPE_OAUTH_DELEGATED: Short-lived delegated JWT from OAuth token exchange (MCP, qcloud CLI, …)."
+    },
+    "v1DenseVectorConfig": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The number of dimensions of the vector.",
+          "readOnly": true
+        },
+        "distance": {
+          "$ref": "#/definitions/v1Distance",
+          "description": "The distance function used to compare vectors.",
+          "readOnly": true
+        },
+        "multivector": {
+          "type": "boolean",
+          "description": "Whether each point stores several sub-vectors, compared with max-sim.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.\nUse the same model to make query vectors.",
+          "readOnly": true
+        }
+      },
+      "description": "DenseVectorConfig is the configuration of a dense vector.\nIt mirrors qdrant.serverless.DenseVectorConfig, without the precision tier.\nAll fields in this message are read-only."
+    },
+    "v1Distance": {
+      "type": "string",
+      "enum": [
+        "DISTANCE_UNSPECIFIED",
+        "DISTANCE_COSINE",
+        "DISTANCE_EUCLID",
+        "DISTANCE_DOT",
+        "DISTANCE_MANHATTAN"
+      ],
+      "default": "DISTANCE_UNSPECIFIED",
+      "description": "Distance represents the distance function of a dense vector.\nIt mirrors qdrant.serverless.Distance.\n\n - DISTANCE_UNSPECIFIED: The distance is unknown or not specified. This is the default value.\n - DISTANCE_COSINE: Cosine similarity.\n - DISTANCE_EUCLID: Euclidean distance.\n - DISTANCE_DOT: Dot product.\n - DISTANCE_MANHATTAN: Manhattan distance."
     },
     "v1GetSampleDatasetLoadResponse": {
       "type": "object",
@@ -410,13 +471,9 @@
           "description": "A description of the content of the sample dataset.",
           "readOnly": true
         },
-        "vectors": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v1SampleDatasetVector"
-          },
-          "description": "The vector configuration of the collection that a load creates: one entry\nfor each named vector (or one entry for the default unnamed vector).\nThe entries describe the collection schema, not individual points.",
+        "collectionConfig": {
+          "$ref": "#/definitions/v1CollectionConfig",
+          "description": "The configuration of the collection that a load creates.",
           "readOnly": true
         },
         "pointCount": {
@@ -541,59 +598,21 @@
       "default": "SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED",
       "description": "SampleDatasetLoadStatus represents the current status of a sample dataset load.\n\n - SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED: The status is unknown or not specified. This is the default value.\n - SAMPLE_DATASET_LOAD_STATUS_RUNNING: The sample dataset load is running.\n - SAMPLE_DATASET_LOAD_STATUS_FAILED: The sample dataset load failed to complete successfully.\n - SAMPLE_DATASET_LOAD_STATUS_SUCCEEDED: The sample dataset load completed successfully.\n - SAMPLE_DATASET_LOAD_STATUS_FAILED_TO_SYNC: There was an error syncing the sample dataset load in the space's region.\n - SAMPLE_DATASET_LOAD_STATUS_NOT_FOUND: The sample dataset load is missing in the space's region.\n - SAMPLE_DATASET_LOAD_STATUS_SKIPPED: The sample dataset load is skipped."
     },
-    "v1SampleDatasetVector": {
+    "v1SparseVectorConfig": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the vector.\nEmpty for the default (unnamed) vector.",
-          "readOnly": true
-        },
-        "kind": {
-          "$ref": "#/definitions/v1SampleDatasetVectorKind",
-          "description": "The kind of the vector.",
-          "readOnly": true
-        },
-        "size": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of dimensions of a dense vector.\nNot set for a sparse vector.",
-          "readOnly": true
-        },
-        "distance": {
-          "$ref": "#/definitions/v1SampleDatasetVectorDistance",
-          "description": "The distance function of a dense vector.\nNot set for a sparse vector.",
+        "useIdf": {
+          "type": "boolean",
+          "description": "Whether the IDF modifier is applied at query time.",
           "readOnly": true
         },
         "model": {
           "type": "string",
-          "description": "The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.\nUse the same model to make query vectors.",
+          "description": "The model that made the vectors, for example `Qdrant/bm25`.\nUse the same model to make query vectors.",
           "readOnly": true
         }
       },
-      "description": "SampleDatasetVector describes one named vector of a sample dataset.\nAll fields in this message are read-only."
-    },
-    "v1SampleDatasetVectorDistance": {
-      "type": "string",
-      "enum": [
-        "SAMPLE_DATASET_VECTOR_DISTANCE_UNSPECIFIED",
-        "SAMPLE_DATASET_VECTOR_DISTANCE_COSINE",
-        "SAMPLE_DATASET_VECTOR_DISTANCE_EUCLID",
-        "SAMPLE_DATASET_VECTOR_DISTANCE_DOT",
-        "SAMPLE_DATASET_VECTOR_DISTANCE_MANHATTAN"
-      ],
-      "default": "SAMPLE_DATASET_VECTOR_DISTANCE_UNSPECIFIED",
-      "description": "SampleDatasetVectorDistance represents the distance function of a dense sample dataset vector.\n\n - SAMPLE_DATASET_VECTOR_DISTANCE_UNSPECIFIED: The distance is unknown or not specified. This is the default value.\n - SAMPLE_DATASET_VECTOR_DISTANCE_COSINE: Cosine similarity.\n - SAMPLE_DATASET_VECTOR_DISTANCE_EUCLID: Euclidean distance.\n - SAMPLE_DATASET_VECTOR_DISTANCE_DOT: Dot product.\n - SAMPLE_DATASET_VECTOR_DISTANCE_MANHATTAN: Manhattan distance."
-    },
-    "v1SampleDatasetVectorKind": {
-      "type": "string",
-      "enum": [
-        "SAMPLE_DATASET_VECTOR_KIND_UNSPECIFIED",
-        "SAMPLE_DATASET_VECTOR_KIND_DENSE",
-        "SAMPLE_DATASET_VECTOR_KIND_SPARSE"
-      ],
-      "default": "SAMPLE_DATASET_VECTOR_KIND_UNSPECIFIED",
-      "description": "SampleDatasetVectorKind represents the kind of a sample dataset vector.\n\n - SAMPLE_DATASET_VECTOR_KIND_UNSPECIFIED: The kind is unknown or not specified. This is the default value.\n - SAMPLE_DATASET_VECTOR_KIND_DENSE: A dense vector.\n - SAMPLE_DATASET_VECTOR_KIND_SPARSE: A sparse vector."
+      "description": "SparseVectorConfig is the configuration of a sparse vector.\nIt mirrors qdrant.serverless.SparseVectorConfig, without the precision tier.\nAll fields in this message are read-only."
     }
   }
 }
