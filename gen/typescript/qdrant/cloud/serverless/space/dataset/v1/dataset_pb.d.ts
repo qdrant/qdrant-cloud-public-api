@@ -52,6 +52,8 @@ export declare const ListSampleDatasetsRequestSchema: GenMessage<ListSampleDatas
 export declare type ListSampleDatasetsResponse = Message<"qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsResponse"> & {
   /**
    * The sample datasets that can be loaded into the space.
+   * All items are returned in one response (no pagination), because the catalog
+   * holds only a few datasets.
    *
    * @generated from field: repeated qdrant.cloud.serverless.space.dataset.v1.SampleDataset items = 1;
    */
@@ -316,7 +318,9 @@ export declare type SampleDataset = Message<"qdrant.cloud.serverless.space.datas
   description: string;
 
   /**
-   * The vectors of each point in the sample dataset.
+   * The vector configuration of the collection that a load creates: one entry
+   * for each named vector (or one entry for the default unnamed vector).
+   * The entries describe the collection schema, not individual points.
    *
    * @generated from field: repeated qdrant.cloud.serverless.space.dataset.v1.SampleDatasetVector vectors = 4;
    */
@@ -701,6 +705,7 @@ export declare const SampleDatasetService: GenService<{
   /**
    * Lists the sample datasets that can be loaded into the space identified by the given ID.
    * Only datasets that are available in the region of the space are returned.
+   * The response is not paginated: the catalog holds only a few datasets.
    * Required permissions:
    * - read:serverless_sample_datasets
    *

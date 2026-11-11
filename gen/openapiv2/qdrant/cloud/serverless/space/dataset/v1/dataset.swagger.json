@@ -118,7 +118,7 @@
     },
     "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/sample-datasets": {
       "get": {
-        "summary": "Lists the sample datasets that can be loaded into the space identified by the given ID.\nOnly datasets that are available in the region of the space are returned.\nRequired permissions:\n- read:serverless_sample_datasets",
+        "summary": "Lists the sample datasets that can be loaded into the space identified by the given ID.\nOnly datasets that are available in the region of the space are returned.\nThe response is not paginated: the catalog holds only a few datasets.\nRequired permissions:\n- read:serverless_sample_datasets",
         "operationId": "SampleDatasetService_ListSampleDatasets",
         "responses": {
           "200": {
@@ -353,7 +353,7 @@
             "type": "object",
             "$ref": "#/definitions/v1SampleDataset"
           },
-          "description": "The sample datasets that can be loaded into the space."
+          "description": "The sample datasets that can be loaded into the space.\nAll items are returned in one response (no pagination), because the catalog\nholds only a few datasets."
         }
       },
       "description": "ListSampleDatasetsResponse is the response from the ListSampleDatasets function."
@@ -416,7 +416,7 @@
             "type": "object",
             "$ref": "#/definitions/v1SampleDatasetVector"
           },
-          "description": "The vectors of each point in the sample dataset.",
+          "description": "The vector configuration of the collection that a load creates: one entry\nfor each named vector (or one entry for the default unnamed vector).\nThe entries describe the collection schema, not individual points.",
           "readOnly": true
         },
         "pointCount": {

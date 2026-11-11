@@ -33,6 +33,7 @@ const (
 type SampleDatasetServiceClient interface {
 	// Lists the sample datasets that can be loaded into the space identified by the given ID.
 	// Only datasets that are available in the region of the space are returned.
+	// The response is not paginated: the catalog holds only a few datasets.
 	// Required permissions:
 	// - read:serverless_sample_datasets
 	ListSampleDatasets(ctx context.Context, in *ListSampleDatasetsRequest, opts ...grpc.CallOption) (*ListSampleDatasetsResponse, error)
@@ -109,6 +110,7 @@ func (c *sampleDatasetServiceClient) LoadSampleDataset(ctx context.Context, in *
 type SampleDatasetServiceServer interface {
 	// Lists the sample datasets that can be loaded into the space identified by the given ID.
 	// Only datasets that are available in the region of the space are returned.
+	// The response is not paginated: the catalog holds only a few datasets.
 	// Required permissions:
 	// - read:serverless_sample_datasets
 	ListSampleDatasets(context.Context, *ListSampleDatasetsRequest) (*ListSampleDatasetsResponse, error)

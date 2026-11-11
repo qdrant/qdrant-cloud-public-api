@@ -274,6 +274,8 @@ func (x *ListSampleDatasetsRequest) GetSpaceId() string {
 type ListSampleDatasetsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The sample datasets that can be loaded into the space.
+	// All items are returned in one response (no pagination), because the catalog
+	// holds only a few datasets.
 	Items         []*SampleDataset `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -711,7 +713,9 @@ type SampleDataset struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// A description of the content of the sample dataset.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// The vectors of each point in the sample dataset.
+	// The vector configuration of the collection that a load creates: one entry
+	// for each named vector (or one entry for the default unnamed vector).
+	// The entries describe the collection schema, not individual points.
 	Vectors []*SampleDatasetVector `protobuf:"bytes,4,rep,name=vectors,proto3" json:"vectors,omitempty"`
 	// The number of points in the sample dataset.
 	PointCount uint64 `protobuf:"varint,5,opt,name=point_count,json=pointCount,proto3" json:"point_count,omitempty"`
