@@ -277,8 +277,6 @@ message CollectionConfig {
   map<string, DenseVectorConfig> dense_vectors = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   // The sparse vectors of the collection, keyed by vector name.
   map<string, SparseVectorConfig> sparse_vectors = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
-  // Field 3 is payload_indexes in qdrant.serverless.CollectionConfig.
-  reserved 3;
 }
 
 // DenseVectorConfig is the configuration of a dense vector.
@@ -294,11 +292,9 @@ message DenseVectorConfig {
   ];
   // Whether each point stores several sub-vectors, compared with max-sim.
   bool multivector = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
-  // Field 4 is precision_tier in qdrant.serverless.DenseVectorConfig.
-  reserved 4;
   // The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.
   // Use the same model to make query vectors.
-  string model = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string model = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // SparseVectorConfig is the configuration of a sparse vector.
@@ -307,11 +303,9 @@ message DenseVectorConfig {
 message SparseVectorConfig {
   // Whether the IDF modifier is applied at query time.
   bool use_idf = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
-  // Field 2 is precision_tier in qdrant.serverless.SparseVectorConfig.
-  reserved 2;
   // The model that made the vectors, for example `Qdrant/bm25`.
   // Use the same model to make query vectors.
-  string model = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string model = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Distance represents the distance function of a dense vector.

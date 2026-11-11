@@ -428,7 +428,7 @@ export declare type DenseVectorConfig = Message<"qdrant.cloud.serverless.space.d
    * The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.
    * Use the same model to make query vectors.
    *
-   * @generated from field: string model = 5;
+   * @generated from field: string model = 4;
    */
   model: string;
 };
@@ -460,7 +460,7 @@ export declare type SparseVectorConfig = Message<"qdrant.cloud.serverless.space.
    * The model that made the vectors, for example `Qdrant/bm25`.
    * Use the same model to make query vectors.
    *
-   * @generated from field: string model = 3;
+   * @generated from field: string model = 2;
    */
   model: string;
 };

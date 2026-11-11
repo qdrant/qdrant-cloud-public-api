@@ -834,7 +834,7 @@ type DenseVectorConfig struct {
 	Multivector bool `protobuf:"varint,3,opt,name=multivector,proto3" json:"multivector,omitempty"`
 	// The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.
 	// Use the same model to make query vectors.
-	Model         string `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`
+	Model         string `protobuf:"bytes,4,opt,name=model,proto3" json:"model,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -906,7 +906,7 @@ type SparseVectorConfig struct {
 	UseIdf bool `protobuf:"varint,1,opt,name=use_idf,json=useIdf,proto3" json:"use_idf,omitempty"`
 	// The model that made the vectors, for example `Qdrant/bm25`.
 	// Use the same model to make query vectors.
-	Model         string `protobuf:"bytes,3,opt,name=model,proto3" json:"model,omitempty"`
+	Model         string `protobuf:"bytes,2,opt,name=model,proto3" json:"model,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1218,7 +1218,7 @@ const file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDesc = "" +
 	"\n" +
 	"size_bytes\x18\x06 \x01(\x04B\b\xe2A\x01\x03\xe8\xb5\x18\x02R\tsizeBytes\x126\n" +
 	"\x12indexed_size_bytes\x18\a \x01(\x04B\b\xe2A\x01\x03\xe8\xb5\x18\x02R\x10indexedSizeBytes\x12\x1e\n" +
-	"\aversion\x18\b \x01(\tB\x04\xe2A\x01\x03R\aversion\"\x8b\x04\n" +
+	"\aversion\x18\b \x01(\tB\x04\xe2A\x01\x03R\aversion\"\x85\x04\n" +
 	"\x10CollectionConfig\x12w\n" +
 	"\rdense_vectors\x18\x01 \x03(\v2L.qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.DenseVectorsEntryB\x04\xe2A\x01\x03R\fdenseVectors\x12z\n" +
 	"\x0esparse_vectors\x18\x02 \x03(\v2M.qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.SparseVectorsEntryB\x04\xe2A\x01\x03R\rsparseVectors\x1a|\n" +
@@ -1227,15 +1227,15 @@ const file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2;.qdrant.cloud.serverless.space.dataset.v1.DenseVectorConfigR\x05value:\x028\x01\x1a~\n" +
 	"\x12SparseVectorsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12R\n" +
-	"\x05value\x18\x02 \x01(\v2<.qdrant.cloud.serverless.space.dataset.v1.SparseVectorConfigR\x05value:\x028\x01J\x04\b\x03\x10\x04\"\xd5\x01\n" +
+	"\x05value\x18\x02 \x01(\v2<.qdrant.cloud.serverless.space.dataset.v1.SparseVectorConfigR\x05value:\x028\x01\"\xcf\x01\n" +
 	"\x11DenseVectorConfig\x12\x18\n" +
 	"\x04size\x18\x01 \x01(\x04B\x04\xe2A\x01\x03R\x04size\x12\\\n" +
 	"\bdistance\x18\x02 \x01(\x0e22.qdrant.cloud.serverless.space.dataset.v1.DistanceB\f\xe2A\x01\x03\xbaH\x05\x82\x01\x02\x10\x01R\bdistance\x12&\n" +
 	"\vmultivector\x18\x03 \x01(\bB\x04\xe2A\x01\x03R\vmultivector\x12\x1a\n" +
-	"\x05model\x18\x05 \x01(\tB\x04\xe2A\x01\x03R\x05modelJ\x04\b\x04\x10\x05\"U\n" +
+	"\x05model\x18\x04 \x01(\tB\x04\xe2A\x01\x03R\x05model\"O\n" +
 	"\x12SparseVectorConfig\x12\x1d\n" +
 	"\ause_idf\x18\x01 \x01(\bB\x04\xe2A\x01\x03R\x06useIdf\x12\x1a\n" +
-	"\x05model\x18\x03 \x01(\tB\x04\xe2A\x01\x03R\x05modelJ\x04\b\x02\x10\x03\"\xd0\x05\n" +
+	"\x05model\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x05model\"\xd0\x05\n" +
 	"\x11SampleDatasetLoad\x12\x1c\n" +
 	"\x02id\x18\x01 \x01(\tB\f\xe2A\x01\x03\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12?\n" +
 	"\n" +
