@@ -1,0 +1,599 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "qdrant/cloud/serverless/space/dataset/v1/dataset.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "SampleDatasetService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/sample-dataset-loads": {
+      "get": {
+        "summary": "Lists the sample dataset loads of the space identified by the given ID.\nOnly loads created in the last 30 days are returned.\nRequired permissions:\n- read:serverless_sample_datasets",
+        "operationId": "SampleDatasetService_ListSampleDatasetLoads",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListSampleDatasetLoadsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "The identifier of the space (in GUID format).\nThis space should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "Maximum number of items to return.\nIf not specified, all items are returned.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "A page token, received from a previous call.\nProvide this to retrieve the subsequent page.\nWhen paginating, all other parameters provided to the request must match\nthe call that provided the page token.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SampleDatasetService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/sample-dataset-loads/{sampleDatasetLoadId}": {
+      "get": {
+        "summary": "Gets a sample dataset load in the space identified by the given ID.\nRequired permissions:\n- read:serverless_sample_datasets",
+        "operationId": "SampleDatasetService_GetSampleDatasetLoad",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSampleDatasetLoadResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "The identifier of the space (in GUID format).\nThis space should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sampleDatasetLoadId",
+            "description": "The identifier of the sample dataset load (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SampleDatasetService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/sample-datasets": {
+      "get": {
+        "summary": "Lists the sample datasets that can be loaded into the space identified by the given ID.\nOnly datasets that are available in the region of the space are returned.\nRequired permissions:\n- read:serverless_sample_datasets",
+        "operationId": "SampleDatasetService_ListSampleDatasets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListSampleDatasetsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "The identifier of the space (in GUID format).\nThis space should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SampleDatasetService"
+        ]
+      }
+    },
+    "/api/serverless/v1/accounts/{accountId}/spaces/{spaceId}/sample-datasets/{sampleDatasetId}/load": {
+      "post": {
+        "summary": "Loads a sample dataset into a new collection in the space identified by the given ID.\nThe load is asynchronous: the response returns when the load is accepted.\nUse GetSampleDatasetLoad to follow its status.\nRequired permissions:\n- write:serverless_sample_datasets",
+        "operationId": "SampleDatasetService_LoadSampleDataset",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1LoadSampleDatasetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "The identifier of the account (in GUID format).\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "spaceId",
+            "description": "The identifier of the space (in GUID format).\nThis space should be part of the provided account.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sampleDatasetId",
+            "description": "The identifier of the sample dataset, for example `midjourney-styles`.\nThis is a required field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SampleDatasetServiceLoadSampleDatasetBody"
+            }
+          }
+        ],
+        "tags": [
+          "SampleDatasetService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SampleDatasetServiceLoadSampleDatasetBody": {
+      "type": "object",
+      "properties": {
+        "collectionName": {
+          "type": "string",
+          "description": "The name of the new collection.\nNo collection with this name may exist in the space.\nThis is a required field."
+        }
+      },
+      "description": "LoadSampleDatasetRequest is the request for the LoadSampleDataset function."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ActorType": {
+      "type": "string",
+      "enum": [
+        "ACTOR_TYPE_UNSPECIFIED",
+        "ACTOR_TYPE_USER",
+        "ACTOR_TYPE_MANAGEMENT_KEY",
+        "ACTOR_TYPE_SERVICE_ACCOUNT"
+      ],
+      "default": "ACTOR_TYPE_UNSPECIFIED",
+      "description": "ActorType specifies the type of actor that can call a method.\n\n - ACTOR_TYPE_UNSPECIFIED: Default, unspecified actor type. Should generally not be used explicitly in options\nunless to signify an error or uninitialized state.\n - ACTOR_TYPE_USER: Represents a human user, typically authenticated via an identity provider (Auth0).\n - ACTOR_TYPE_MANAGEMENT_KEY: Represents a programmatic access key, also called management key,\nthat is not be tied to a specific user or service account identity, but rather an account.\n - ACTOR_TYPE_SERVICE_ACCOUNT: Represents a service account or machine user, often used for M2M communication.\nThis is for internal platform use only."
+    },
+    "v1Caller": {
+      "type": "object",
+      "properties": {
+        "actorId": {
+          "type": "string",
+          "description": "Unique identifier of the actor (user UUID, management-key id, service-account id, …)."
+        },
+        "actorType": {
+          "$ref": "#/definitions/v1ActorType",
+          "description": "Type of the actor."
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "HTTP User-Agent of the client that initiated the request, when available.\nOmitted for internal/service-initiated actions without a client User-Agent."
+        },
+        "credentialType": {
+          "$ref": "#/definitions/v1CredentialType",
+          "description": "How the actor authenticated. Omitted on legacy events; distinct from actor_type\n(e.g. USER + OAUTH_DELEGATED or USER + PERSONAL_API_KEY)."
+        },
+        "credentialId": {
+          "type": "string",
+          "description": "Identifier of the credential (personal API key id, OAuth grant id, management key id).\nOmitted for interactive sessions and when unknown."
+        },
+        "actingClientId": {
+          "type": "string",
+          "description": "Acting OAuth client id when credential_type is OAUTH_DELEGATED (azp / CIMD URL)."
+        },
+        "scope": {
+          "$ref": "#/definitions/v1OauthScope",
+          "description": "OAuth access-class when credential_type is OAUTH_DELEGATED."
+        },
+        "platformHandler": {
+          "$ref": "#/definitions/v1PlatformHandler",
+          "description": "Which platform API handler received the request (gRPC, gRPC-Gateway, Connect, MCP, GraphQL).\nOmitted on legacy events; new publishers should set it when available."
+        }
+      },
+      "description": "Caller identifies the authenticated actor that performed an action on a resource."
+    },
+    "v1CredentialType": {
+      "type": "string",
+      "enum": [
+        "CREDENTIAL_TYPE_UNSPECIFIED",
+        "CREDENTIAL_TYPE_SESSION",
+        "CREDENTIAL_TYPE_MANAGEMENT_KEY",
+        "CREDENTIAL_TYPE_PERSONAL_API_KEY",
+        "CREDENTIAL_TYPE_SERVICE",
+        "CREDENTIAL_TYPE_OAUTH_DELEGATED"
+      ],
+      "default": "CREDENTIAL_TYPE_UNSPECIFIED",
+      "description": "CredentialType identifies how the caller authenticated. Distinct from ActorType:\npersonal API keys and OAuth delegated tokens still authenticate as ACTOR_TYPE_USER.\nUsed by IAM AuthenticateResponse, gateway interactive_only enforcement, and Event.caller.\n\n - CREDENTIAL_TYPE_UNSPECIFIED: Unspecified / unknown credential type (or omitted on legacy events).\n - CREDENTIAL_TYPE_SESSION: Interactive login session (first-party console JWT).\n - CREDENTIAL_TYPE_MANAGEMENT_KEY: Account management (programmatic access) key.\n - CREDENTIAL_TYPE_PERSONAL_API_KEY: Personal API key owned by a user.\n - CREDENTIAL_TYPE_SERVICE: Service-to-service credential.\n - CREDENTIAL_TYPE_OAUTH_DELEGATED: Short-lived delegated JWT from OAuth token exchange (MCP, qcloud CLI, …)."
+    },
+    "v1GetSampleDatasetLoadResponse": {
+      "type": "object",
+      "properties": {
+        "sampleDatasetLoad": {
+          "$ref": "#/definitions/v1SampleDatasetLoad",
+          "description": "The actual sample dataset load."
+        }
+      },
+      "description": "GetSampleDatasetLoadResponse is the response from the GetSampleDatasetLoad function."
+    },
+    "v1ListSampleDatasetLoadsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SampleDatasetLoad"
+          },
+          "description": "The actual sample dataset loads in this list."
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of items available (useful in relation with pagination).\nThis field is fill out when pagination is used (aka in the request `page_size` was provided)."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token that can be sent as `page_token` to retrieve the next page.\nIf this field is omitted, there are no subsequent pages."
+        }
+      },
+      "description": "ListSampleDatasetLoadsResponse is the response from the ListSampleDatasetLoads function."
+    },
+    "v1ListSampleDatasetsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SampleDataset"
+          },
+          "description": "The sample datasets that can be loaded into the space."
+        }
+      },
+      "description": "ListSampleDatasetsResponse is the response from the ListSampleDatasets function."
+    },
+    "v1LoadSampleDatasetResponse": {
+      "type": "object",
+      "properties": {
+        "sampleDatasetLoad": {
+          "$ref": "#/definitions/v1SampleDatasetLoad",
+          "description": "The sample dataset load that was started."
+        }
+      },
+      "description": "LoadSampleDatasetResponse is the response from the LoadSampleDataset function."
+    },
+    "v1OauthScope": {
+      "type": "string",
+      "enum": [
+        "OAUTH_SCOPE_UNSPECIFIED",
+        "OAUTH_SCOPE_READ_ONLY",
+        "OAUTH_SCOPE_MANAGE"
+      ],
+      "default": "OAUTH_SCOPE_UNSPECIFIED",
+      "description": "OauthScope is the OAuth access-class for delegated credentials.\nDistinct from permission verbs (read/write/delete) and from RBAC resource scope.\nWire scope strings stay \"read-only\" and \"manage\".\nNamed OauthScope (not OAuthScope) so enum values keep the OAUTH_SCOPE_ prefix under buf lint.\n\n - OAUTH_SCOPE_UNSPECIFIED: Unspecified / unknown (or omitted on legacy events).\n - OAUTH_SCOPE_READ_ONLY: Read-class access only (wire: \"read-only\").\n - OAUTH_SCOPE_MANAGE: Full manage-class access (wire: \"manage\")."
+    },
+    "v1PlatformHandler": {
+      "type": "string",
+      "enum": [
+        "PLATFORM_HANDLER_UNSPECIFIED",
+        "PLATFORM_HANDLER_GRPC",
+        "PLATFORM_HANDLER_GRPC_GATEWAY",
+        "PLATFORM_HANDLER_CONNECT",
+        "PLATFORM_HANDLER_MCP",
+        "PLATFORM_HANDLER_GRAPHQL",
+        "PLATFORM_HANDLER_UNKNOWN"
+      ],
+      "default": "PLATFORM_HANDLER_UNSPECIFIED",
+      "description": "PlatformHandler identifies which API gateway / protocol handler received the request.\nUsed on Caller for audit attribution of how the call entered the platform.\n\n - PLATFORM_HANDLER_UNSPECIFIED: Unspecified; not a valid platform handler (or omitted on legacy events).\n - PLATFORM_HANDLER_GRPC: Native gRPC.\n - PLATFORM_HANDLER_GRPC_GATEWAY: gRPC-Gateway (HTTP/JSON transcoding to gRPC).\n - PLATFORM_HANDLER_CONNECT: Connect protocol.\n - PLATFORM_HANDLER_MCP: Model Context Protocol (MCP).\n - PLATFORM_HANDLER_GRAPHQL: GraphQL.\n - PLATFORM_HANDLER_UNKNOWN: Handler could not be determined."
+    },
+    "v1SampleDataset": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the sample dataset, for example `midjourney-styles`.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the sample dataset.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the content of the sample dataset.",
+          "readOnly": true
+        },
+        "vectors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SampleDatasetVector"
+          },
+          "description": "The vectors of each point in the sample dataset.",
+          "readOnly": true
+        },
+        "pointCount": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The number of points in the sample dataset.",
+          "readOnly": true
+        },
+        "sizeBytes": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The total storage size of the loaded collection, in bytes.\nIt counts against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes.",
+          "readOnly": true
+        },
+        "indexedSizeBytes": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The indexed storage size of the loaded collection, in bytes.\nIt counts against SpaceQuotaSnapshot.effective_max_indexed_size_per_collection_bytes.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the sample dataset that a load uses.",
+          "readOnly": true
+        }
+      },
+      "description": "A SampleDataset is a prebuilt dataset that can be loaded into a new collection.\nAll fields in this message are read-only."
+    },
+    "v1SampleDatasetLoad": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the sample dataset load (in GUID format).",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the sample dataset load was created.",
+          "readOnly": true
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The identifier of the account (in GUID format).",
+          "readOnly": true
+        },
+        "spaceId": {
+          "type": "string",
+          "description": "The identifier of the space (in GUID format).",
+          "readOnly": true
+        },
+        "sampleDatasetId": {
+          "type": "string",
+          "description": "The identifier of the sample dataset.",
+          "readOnly": true
+        },
+        "sampleDatasetVersion": {
+          "type": "string",
+          "description": "The version of the sample dataset that this load uses.",
+          "readOnly": true
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "The name of the new collection.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/v1SampleDatasetLoadStatus",
+          "description": "The current status of the sample dataset load.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "Descriptive message explaining why the load failed, for example \"collection limit\".\nEmpty when the load did not fail.",
+          "readOnly": true
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the sample dataset load was deleted (or when deletion started).",
+          "readOnly": true
+        },
+        "createdBy": {
+          "$ref": "#/definitions/v1Caller",
+          "description": "The caller who initiated the sample dataset load.\nThis is a read-only field and will be available after a sample dataset load is created.",
+          "readOnly": true
+        },
+        "stats": {
+          "$ref": "#/definitions/v1SampleDatasetLoadStats",
+          "description": "Summary stats for this load (duration, mid-copy progress).\nPopulated by the control plane from the regional operator status.",
+          "readOnly": true
+        }
+      },
+      "description": "A SampleDatasetLoad represents the status of a sample dataset load into a new collection.\nAll fields in this message are read-only."
+    },
+    "v1SampleDatasetLoadStats": {
+      "type": "object",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "Wall-clock time from first load work until the load finished\n(succeeded or failed)."
+        },
+        "progress": {
+          "type": "string",
+          "description": "Humanized mid-copy progress string, e.g. \"35.2/75.4 MiB (46%)\".\nPresent while the load is running; may remain after completion."
+        }
+      },
+      "description": "SampleDatasetLoadStats summarizes sample dataset load progress.\nAll fields are read-only; values appear as the regional operator reports them."
+    },
+    "v1SampleDatasetLoadStatus": {
+      "type": "string",
+      "enum": [
+        "SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED",
+        "SAMPLE_DATASET_LOAD_STATUS_RUNNING",
+        "SAMPLE_DATASET_LOAD_STATUS_FAILED",
+        "SAMPLE_DATASET_LOAD_STATUS_SUCCEEDED",
+        "SAMPLE_DATASET_LOAD_STATUS_FAILED_TO_SYNC",
+        "SAMPLE_DATASET_LOAD_STATUS_NOT_FOUND",
+        "SAMPLE_DATASET_LOAD_STATUS_SKIPPED"
+      ],
+      "default": "SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED",
+      "description": "SampleDatasetLoadStatus represents the current status of a sample dataset load.\n\n - SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED: The status is unknown or not specified. This is the default value.\n - SAMPLE_DATASET_LOAD_STATUS_RUNNING: The sample dataset load is running.\n - SAMPLE_DATASET_LOAD_STATUS_FAILED: The sample dataset load failed to complete successfully.\n - SAMPLE_DATASET_LOAD_STATUS_SUCCEEDED: The sample dataset load completed successfully.\n - SAMPLE_DATASET_LOAD_STATUS_FAILED_TO_SYNC: There was an error syncing the sample dataset load in the space's region.\n - SAMPLE_DATASET_LOAD_STATUS_NOT_FOUND: The sample dataset load is missing in the space's region.\n - SAMPLE_DATASET_LOAD_STATUS_SKIPPED: The sample dataset load is skipped."
+    },
+    "v1SampleDatasetVector": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the vector.\nEmpty for the default (unnamed) vector.",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/v1SampleDatasetVectorKind",
+          "description": "The kind of the vector.",
+          "readOnly": true
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of dimensions of a dense vector.\nNot set for a sparse vector.",
+          "readOnly": true
+        },
+        "distance": {
+          "$ref": "#/definitions/v1SampleDatasetVectorDistance",
+          "description": "The distance function of a dense vector.\nNot set for a sparse vector.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.\nUse the same model to make query vectors.",
+          "readOnly": true
+        }
+      },
+      "description": "SampleDatasetVector describes one named vector of a sample dataset.\nAll fields in this message are read-only."
+    },
+    "v1SampleDatasetVectorDistance": {
+      "type": "string",
+      "enum": [
+        "SAMPLE_DATASET_VECTOR_DISTANCE_UNSPECIFIED",
+        "SAMPLE_DATASET_VECTOR_DISTANCE_COSINE",
+        "SAMPLE_DATASET_VECTOR_DISTANCE_EUCLID",
+        "SAMPLE_DATASET_VECTOR_DISTANCE_DOT",
+        "SAMPLE_DATASET_VECTOR_DISTANCE_MANHATTAN"
+      ],
+      "default": "SAMPLE_DATASET_VECTOR_DISTANCE_UNSPECIFIED",
+      "description": "SampleDatasetVectorDistance represents the distance function of a dense sample dataset vector.\n\n - SAMPLE_DATASET_VECTOR_DISTANCE_UNSPECIFIED: The distance is unknown or not specified. This is the default value.\n - SAMPLE_DATASET_VECTOR_DISTANCE_COSINE: Cosine similarity.\n - SAMPLE_DATASET_VECTOR_DISTANCE_EUCLID: Euclidean distance.\n - SAMPLE_DATASET_VECTOR_DISTANCE_DOT: Dot product.\n - SAMPLE_DATASET_VECTOR_DISTANCE_MANHATTAN: Manhattan distance."
+    },
+    "v1SampleDatasetVectorKind": {
+      "type": "string",
+      "enum": [
+        "SAMPLE_DATASET_VECTOR_KIND_UNSPECIFIED",
+        "SAMPLE_DATASET_VECTOR_KIND_DENSE",
+        "SAMPLE_DATASET_VECTOR_KIND_SPARSE"
+      ],
+      "default": "SAMPLE_DATASET_VECTOR_KIND_UNSPECIFIED",
+      "description": "SampleDatasetVectorKind represents the kind of a sample dataset vector.\n\n - SAMPLE_DATASET_VECTOR_KIND_UNSPECIFIED: The kind is unknown or not specified. This is the default value.\n - SAMPLE_DATASET_VECTOR_KIND_DENSE: A dense vector.\n - SAMPLE_DATASET_VECTOR_KIND_SPARSE: A sparse vector."
+    }
+  }
+}
