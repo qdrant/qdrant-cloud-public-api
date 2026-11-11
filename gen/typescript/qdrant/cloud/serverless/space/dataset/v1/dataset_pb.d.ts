@@ -4,6 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
+import type { CollectionConfig } from "../../../../../serverless/collections_pb.js";
 import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Caller } from "../../../../common/v1/common_pb.js";
 
@@ -320,7 +321,7 @@ export declare type SampleDataset = Message<"qdrant.cloud.serverless.space.datas
   /**
    * The configuration of the collection that a load creates.
    *
-   * @generated from field: qdrant.cloud.serverless.space.dataset.v1.CollectionConfig collection_config = 4;
+   * @generated from field: qdrant.serverless.CollectionConfig collection_config = 4;
    */
   collectionConfig?: CollectionConfig | undefined;
 
@@ -353,6 +354,15 @@ export declare type SampleDataset = Message<"qdrant.cloud.serverless.space.datas
    * @generated from field: string version = 8;
    */
   version: string;
+
+  /**
+   * The model that made the vectors, keyed by the vector name in `collection_config`,
+   * for example `sentence-transformers/all-MiniLM-L6-v2` or `Qdrant/bm25`.
+   * Use the same model to make query vectors.
+   *
+   * @generated from field: map<string, string> vector_models = 9;
+   */
+  vectorModels: { [key: string]: string };
 };
 
 export declare type SampleDatasetValid = SampleDataset;
@@ -362,116 +372,6 @@ export declare type SampleDatasetValid = SampleDataset;
  * Use `create(SampleDatasetSchema)` to create a new message.
  */
 export declare const SampleDatasetSchema: GenMessage<SampleDataset, {validType: SampleDatasetValid}>;
-
-/**
- * CollectionConfig is the configuration of the collection that a sample dataset load creates.
- * It mirrors qdrant.serverless.CollectionConfig, without the payload indexes.
- * All fields in this message are read-only.
- *
- * @generated from message qdrant.cloud.serverless.space.dataset.v1.CollectionConfig
- */
-export declare type CollectionConfig = Message<"qdrant.cloud.serverless.space.dataset.v1.CollectionConfig"> & {
-  /**
-   * The dense vectors of the collection, keyed by vector name.
-   * The empty name "" is the default (unnamed) vector.
-   *
-   * @generated from field: map<string, qdrant.cloud.serverless.space.dataset.v1.DenseVectorConfig> dense_vectors = 1;
-   */
-  denseVectors: { [key: string]: DenseVectorConfig };
-
-  /**
-   * The sparse vectors of the collection, keyed by vector name.
-   *
-   * @generated from field: map<string, qdrant.cloud.serverless.space.dataset.v1.SparseVectorConfig> sparse_vectors = 2;
-   */
-  sparseVectors: { [key: string]: SparseVectorConfig };
-};
-
-export declare type CollectionConfigValid = CollectionConfig;
-
-/**
- * Describes the message qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.
- * Use `create(CollectionConfigSchema)` to create a new message.
- */
-export declare const CollectionConfigSchema: GenMessage<CollectionConfig, {validType: CollectionConfigValid}>;
-
-/**
- * DenseVectorConfig is the configuration of a dense vector.
- * It mirrors qdrant.serverless.DenseVectorConfig, without the precision tier.
- * All fields in this message are read-only.
- *
- * @generated from message qdrant.cloud.serverless.space.dataset.v1.DenseVectorConfig
- */
-export declare type DenseVectorConfig = Message<"qdrant.cloud.serverless.space.dataset.v1.DenseVectorConfig"> & {
-  /**
-   * The number of dimensions of the vector.
-   *
-   * @generated from field: uint64 size = 1;
-   */
-  size: bigint;
-
-  /**
-   * The distance function used to compare vectors.
-   *
-   * @generated from field: qdrant.cloud.serverless.space.dataset.v1.Distance distance = 2;
-   */
-  distance: Distance;
-
-  /**
-   * Whether each point stores several sub-vectors, compared with max-sim.
-   *
-   * @generated from field: bool multivector = 3;
-   */
-  multivector: boolean;
-
-  /**
-   * The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.
-   * Use the same model to make query vectors.
-   *
-   * @generated from field: string model = 5;
-   */
-  model: string;
-};
-
-export declare type DenseVectorConfigValid = DenseVectorConfig;
-
-/**
- * Describes the message qdrant.cloud.serverless.space.dataset.v1.DenseVectorConfig.
- * Use `create(DenseVectorConfigSchema)` to create a new message.
- */
-export declare const DenseVectorConfigSchema: GenMessage<DenseVectorConfig, {validType: DenseVectorConfigValid}>;
-
-/**
- * SparseVectorConfig is the configuration of a sparse vector.
- * It mirrors qdrant.serverless.SparseVectorConfig, without the precision tier.
- * All fields in this message are read-only.
- *
- * @generated from message qdrant.cloud.serverless.space.dataset.v1.SparseVectorConfig
- */
-export declare type SparseVectorConfig = Message<"qdrant.cloud.serverless.space.dataset.v1.SparseVectorConfig"> & {
-  /**
-   * Whether the IDF modifier is applied at query time.
-   *
-   * @generated from field: bool use_idf = 1;
-   */
-  useIdf: boolean;
-
-  /**
-   * The model that made the vectors, for example `Qdrant/bm25`.
-   * Use the same model to make query vectors.
-   *
-   * @generated from field: string model = 3;
-   */
-  model: string;
-};
-
-export declare type SparseVectorConfigValid = SparseVectorConfig;
-
-/**
- * Describes the message qdrant.cloud.serverless.space.dataset.v1.SparseVectorConfig.
- * Use `create(SparseVectorConfigSchema)` to create a new message.
- */
-export declare const SparseVectorConfigSchema: GenMessage<SparseVectorConfig, {validType: SparseVectorConfigValid}>;
 
 /**
  * A SampleDatasetLoad represents the status of a sample dataset load into a new collection.
@@ -607,54 +507,6 @@ export declare type SampleDatasetLoadStatsValid = SampleDatasetLoadStats;
  * Use `create(SampleDatasetLoadStatsSchema)` to create a new message.
  */
 export declare const SampleDatasetLoadStatsSchema: GenMessage<SampleDatasetLoadStats, {validType: SampleDatasetLoadStatsValid}>;
-
-/**
- * Distance represents the distance function of a dense vector.
- * It mirrors qdrant.serverless.Distance.
- *
- * @generated from enum qdrant.cloud.serverless.space.dataset.v1.Distance
- */
-export enum Distance {
-  /**
-   * The distance is unknown or not specified. This is the default value.
-   *
-   * @generated from enum value: DISTANCE_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-
-  /**
-   * Cosine similarity.
-   *
-   * @generated from enum value: DISTANCE_COSINE = 1;
-   */
-  COSINE = 1,
-
-  /**
-   * Euclidean distance.
-   *
-   * @generated from enum value: DISTANCE_EUCLID = 2;
-   */
-  EUCLID = 2,
-
-  /**
-   * Dot product.
-   *
-   * @generated from enum value: DISTANCE_DOT = 3;
-   */
-  DOT = 3,
-
-  /**
-   * Manhattan distance.
-   *
-   * @generated from enum value: DISTANCE_MANHATTAN = 4;
-   */
-  MANHATTAN = 4,
-}
-
-/**
- * Describes the enum qdrant.cloud.serverless.space.dataset.v1.Distance.
- */
-export declare const DistanceSchema: GenEnum<Distance>;
 
 /**
  * SampleDatasetLoadStatus represents the current status of a sample dataset load.

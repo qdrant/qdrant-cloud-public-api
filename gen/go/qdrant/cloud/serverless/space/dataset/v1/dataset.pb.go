@@ -12,6 +12,7 @@ import (
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/event/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/mcp/v1"
 	_ "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/facade/v1"
+	serverless "github.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/serverless"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -28,68 +29,6 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
-
-// Distance represents the distance function of a dense vector.
-// It mirrors qdrant.serverless.Distance.
-type Distance int32
-
-const (
-	// The distance is unknown or not specified. This is the default value.
-	Distance_DISTANCE_UNSPECIFIED Distance = 0
-	// Cosine similarity.
-	Distance_DISTANCE_COSINE Distance = 1
-	// Euclidean distance.
-	Distance_DISTANCE_EUCLID Distance = 2
-	// Dot product.
-	Distance_DISTANCE_DOT Distance = 3
-	// Manhattan distance.
-	Distance_DISTANCE_MANHATTAN Distance = 4
-)
-
-// Enum value maps for Distance.
-var (
-	Distance_name = map[int32]string{
-		0: "DISTANCE_UNSPECIFIED",
-		1: "DISTANCE_COSINE",
-		2: "DISTANCE_EUCLID",
-		3: "DISTANCE_DOT",
-		4: "DISTANCE_MANHATTAN",
-	}
-	Distance_value = map[string]int32{
-		"DISTANCE_UNSPECIFIED": 0,
-		"DISTANCE_COSINE":      1,
-		"DISTANCE_EUCLID":      2,
-		"DISTANCE_DOT":         3,
-		"DISTANCE_MANHATTAN":   4,
-	}
-)
-
-func (x Distance) Enum() *Distance {
-	p := new(Distance)
-	*p = x
-	return p
-}
-
-func (x Distance) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Distance) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_enumTypes[0].Descriptor()
-}
-
-func (Distance) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_enumTypes[0]
-}
-
-func (x Distance) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Distance.Descriptor instead.
-func (Distance) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP(), []int{0}
-}
 
 // SampleDatasetLoadStatus represents the current status of a sample dataset load.
 type SampleDatasetLoadStatus int32
@@ -144,11 +83,11 @@ func (x SampleDatasetLoadStatus) String() string {
 }
 
 func (SampleDatasetLoadStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_enumTypes[1].Descriptor()
+	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_enumTypes[0].Descriptor()
 }
 
 func (SampleDatasetLoadStatus) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_enumTypes[1]
+	return &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_enumTypes[0]
 }
 
 func (x SampleDatasetLoadStatus) Number() protoreflect.EnumNumber {
@@ -157,7 +96,7 @@ func (x SampleDatasetLoadStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SampleDatasetLoadStatus.Descriptor instead.
 func (SampleDatasetLoadStatus) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP(), []int{0}
 }
 
 // ListSampleDatasetsRequest is the request for the ListSampleDatasets function.
@@ -662,7 +601,7 @@ type SampleDataset struct {
 	// A description of the content of the sample dataset.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// The configuration of the collection that a load creates.
-	CollectionConfig *CollectionConfig `protobuf:"bytes,4,opt,name=collection_config,json=collectionConfig,proto3" json:"collection_config,omitempty"`
+	CollectionConfig *serverless.CollectionConfig `protobuf:"bytes,4,opt,name=collection_config,json=collectionConfig,proto3" json:"collection_config,omitempty"`
 	// The number of points in the sample dataset.
 	PointCount uint64 `protobuf:"varint,5,opt,name=point_count,json=pointCount,proto3" json:"point_count,omitempty"`
 	// The total storage size of the loaded collection, in bytes.
@@ -672,7 +611,11 @@ type SampleDataset struct {
 	// It counts against SpaceQuotaSnapshot.effective_max_indexed_size_per_collection_bytes.
 	IndexedSizeBytes uint64 `protobuf:"varint,7,opt,name=indexed_size_bytes,json=indexedSizeBytes,proto3" json:"indexed_size_bytes,omitempty"`
 	// The version of the sample dataset that a load uses.
-	Version       string `protobuf:"bytes,8,opt,name=version,proto3" json:"version,omitempty"`
+	Version string `protobuf:"bytes,8,opt,name=version,proto3" json:"version,omitempty"`
+	// The model that made the vectors, keyed by the vector name in `collection_config`,
+	// for example `sentence-transformers/all-MiniLM-L6-v2` or `Qdrant/bm25`.
+	// Use the same model to make query vectors.
+	VectorModels  map[string]string `protobuf:"bytes,9,rep,name=vector_models,json=vectorModels,proto3" json:"vector_models,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -728,7 +671,7 @@ func (x *SampleDataset) GetDescription() string {
 	return ""
 }
 
-func (x *SampleDataset) GetCollectionConfig() *CollectionConfig {
+func (x *SampleDataset) GetCollectionConfig() *serverless.CollectionConfig {
 	if x != nil {
 		return x.CollectionConfig
 	}
@@ -763,196 +706,11 @@ func (x *SampleDataset) GetVersion() string {
 	return ""
 }
 
-// CollectionConfig is the configuration of the collection that a sample dataset load creates.
-// It mirrors qdrant.serverless.CollectionConfig, without the payload indexes.
-// All fields in this message are read-only.
-type CollectionConfig struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The dense vectors of the collection, keyed by vector name.
-	// The empty name "" is the default (unnamed) vector.
-	DenseVectors map[string]*DenseVectorConfig `protobuf:"bytes,1,rep,name=dense_vectors,json=denseVectors,proto3" json:"dense_vectors,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// The sparse vectors of the collection, keyed by vector name.
-	SparseVectors map[string]*SparseVectorConfig `protobuf:"bytes,2,rep,name=sparse_vectors,json=sparseVectors,proto3" json:"sparse_vectors,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CollectionConfig) Reset() {
-	*x = CollectionConfig{}
-	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CollectionConfig) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CollectionConfig) ProtoMessage() {}
-
-func (x *CollectionConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[9]
+func (x *SampleDataset) GetVectorModels() map[string]string {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CollectionConfig.ProtoReflect.Descriptor instead.
-func (*CollectionConfig) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *CollectionConfig) GetDenseVectors() map[string]*DenseVectorConfig {
-	if x != nil {
-		return x.DenseVectors
+		return x.VectorModels
 	}
 	return nil
-}
-
-func (x *CollectionConfig) GetSparseVectors() map[string]*SparseVectorConfig {
-	if x != nil {
-		return x.SparseVectors
-	}
-	return nil
-}
-
-// DenseVectorConfig is the configuration of a dense vector.
-// It mirrors qdrant.serverless.DenseVectorConfig, without the precision tier.
-// All fields in this message are read-only.
-type DenseVectorConfig struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of dimensions of the vector.
-	Size uint64 `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
-	// The distance function used to compare vectors.
-	Distance Distance `protobuf:"varint,2,opt,name=distance,proto3,enum=qdrant.cloud.serverless.space.dataset.v1.Distance" json:"distance,omitempty"`
-	// Whether each point stores several sub-vectors, compared with max-sim.
-	Multivector bool `protobuf:"varint,3,opt,name=multivector,proto3" json:"multivector,omitempty"`
-	// The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.
-	// Use the same model to make query vectors.
-	Model         string `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DenseVectorConfig) Reset() {
-	*x = DenseVectorConfig{}
-	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DenseVectorConfig) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DenseVectorConfig) ProtoMessage() {}
-
-func (x *DenseVectorConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DenseVectorConfig.ProtoReflect.Descriptor instead.
-func (*DenseVectorConfig) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *DenseVectorConfig) GetSize() uint64 {
-	if x != nil {
-		return x.Size
-	}
-	return 0
-}
-
-func (x *DenseVectorConfig) GetDistance() Distance {
-	if x != nil {
-		return x.Distance
-	}
-	return Distance_DISTANCE_UNSPECIFIED
-}
-
-func (x *DenseVectorConfig) GetMultivector() bool {
-	if x != nil {
-		return x.Multivector
-	}
-	return false
-}
-
-func (x *DenseVectorConfig) GetModel() string {
-	if x != nil {
-		return x.Model
-	}
-	return ""
-}
-
-// SparseVectorConfig is the configuration of a sparse vector.
-// It mirrors qdrant.serverless.SparseVectorConfig, without the precision tier.
-// All fields in this message are read-only.
-type SparseVectorConfig struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Whether the IDF modifier is applied at query time.
-	UseIdf bool `protobuf:"varint,1,opt,name=use_idf,json=useIdf,proto3" json:"use_idf,omitempty"`
-	// The model that made the vectors, for example `Qdrant/bm25`.
-	// Use the same model to make query vectors.
-	Model         string `protobuf:"bytes,3,opt,name=model,proto3" json:"model,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SparseVectorConfig) Reset() {
-	*x = SparseVectorConfig{}
-	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SparseVectorConfig) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SparseVectorConfig) ProtoMessage() {}
-
-func (x *SparseVectorConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SparseVectorConfig.ProtoReflect.Descriptor instead.
-func (*SparseVectorConfig) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *SparseVectorConfig) GetUseIdf() bool {
-	if x != nil {
-		return x.UseIdf
-	}
-	return false
-}
-
-func (x *SparseVectorConfig) GetModel() string {
-	if x != nil {
-		return x.Model
-	}
-	return ""
 }
 
 // A SampleDatasetLoad represents the status of a sample dataset load into a new collection.
@@ -992,7 +750,7 @@ type SampleDatasetLoad struct {
 
 func (x *SampleDatasetLoad) Reset() {
 	*x = SampleDatasetLoad{}
-	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1004,7 +762,7 @@ func (x *SampleDatasetLoad) String() string {
 func (*SampleDatasetLoad) ProtoMessage() {}
 
 func (x *SampleDatasetLoad) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[12]
+	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1017,7 +775,7 @@ func (x *SampleDatasetLoad) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SampleDatasetLoad.ProtoReflect.Descriptor instead.
 func (*SampleDatasetLoad) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP(), []int{12}
+	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SampleDatasetLoad) GetId() string {
@@ -1120,7 +878,7 @@ type SampleDatasetLoadStats struct {
 
 func (x *SampleDatasetLoadStats) Reset() {
 	*x = SampleDatasetLoadStats{}
-	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1132,7 +890,7 @@ func (x *SampleDatasetLoadStats) String() string {
 func (*SampleDatasetLoadStats) ProtoMessage() {}
 
 func (x *SampleDatasetLoadStats) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[13]
+	mi := &file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1145,7 +903,7 @@ func (x *SampleDatasetLoadStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SampleDatasetLoadStats.ProtoReflect.Descriptor instead.
 func (*SampleDatasetLoadStats) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP(), []int{13}
+	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SampleDatasetLoadStats) GetDuration() *durationpb.Duration {
@@ -1166,7 +924,7 @@ var File_qdrant_cloud_serverless_space_dataset_v1_dataset_proto protoreflect.Fil
 
 const file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDesc = "" +
 	"\n" +
-	"6qdrant/cloud/serverless/space/dataset/v1/dataset.proto\x12(qdrant.cloud.serverless.space.dataset.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"i\n" +
+	"6qdrant/cloud/serverless/space/dataset/v1/dataset.proto\x12(qdrant.cloud.serverless.space.dataset.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a\"qdrant/cloud/event/v1/events.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\x1a#qdrant/serverless/collections.proto\"i\n" +
 	"\x19ListSampleDatasetsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
@@ -1207,35 +965,22 @@ const file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDesc = "" +
 	"\x11sample_dataset_id\x18\x03 \x01(\tB*\xbaH'r%\x10\x01\x18?2\x1f^[a-z0-9]([a-z0-9-]*[a-z0-9])?$R\x0fsampleDatasetId\x12F\n" +
 	"\x0fcollection_name\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$R\x0ecollectionName\"\x88\x01\n" +
 	"\x19LoadSampleDatasetResponse\x12k\n" +
-	"\x13sample_dataset_load\x18\x01 \x01(\v2;.qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadR\x11sampleDatasetLoad\"\x82\x03\n" +
+	"\x13sample_dataset_load\x18\x01 \x01(\v2;.qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadR\x11sampleDatasetLoad\"\xa2\x04\n" +
 	"\rSampleDataset\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe2A\x01\x03R\x02id\x12\x18\n" +
 	"\x04name\x18\x02 \x01(\tB\x04\xe2A\x01\x03R\x04name\x12&\n" +
-	"\vdescription\x18\x03 \x01(\tB\x04\xe2A\x01\x03R\vdescription\x12m\n" +
-	"\x11collection_config\x18\x04 \x01(\v2:.qdrant.cloud.serverless.space.dataset.v1.CollectionConfigB\x04\xe2A\x01\x03R\x10collectionConfig\x12)\n" +
+	"\vdescription\x18\x03 \x01(\tB\x04\xe2A\x01\x03R\vdescription\x12V\n" +
+	"\x11collection_config\x18\x04 \x01(\v2#.qdrant.serverless.CollectionConfigB\x04\xe2A\x01\x03R\x10collectionConfig\x12)\n" +
 	"\vpoint_count\x18\x05 \x01(\x04B\b\xe2A\x01\x03\xe8\xb5\x18\x01R\n" +
 	"pointCount\x12'\n" +
 	"\n" +
 	"size_bytes\x18\x06 \x01(\x04B\b\xe2A\x01\x03\xe8\xb5\x18\x02R\tsizeBytes\x126\n" +
 	"\x12indexed_size_bytes\x18\a \x01(\x04B\b\xe2A\x01\x03\xe8\xb5\x18\x02R\x10indexedSizeBytes\x12\x1e\n" +
-	"\aversion\x18\b \x01(\tB\x04\xe2A\x01\x03R\aversion\"\x8b\x04\n" +
-	"\x10CollectionConfig\x12w\n" +
-	"\rdense_vectors\x18\x01 \x03(\v2L.qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.DenseVectorsEntryB\x04\xe2A\x01\x03R\fdenseVectors\x12z\n" +
-	"\x0esparse_vectors\x18\x02 \x03(\v2M.qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.SparseVectorsEntryB\x04\xe2A\x01\x03R\rsparseVectors\x1a|\n" +
-	"\x11DenseVectorsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12Q\n" +
-	"\x05value\x18\x02 \x01(\v2;.qdrant.cloud.serverless.space.dataset.v1.DenseVectorConfigR\x05value:\x028\x01\x1a~\n" +
-	"\x12SparseVectorsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12R\n" +
-	"\x05value\x18\x02 \x01(\v2<.qdrant.cloud.serverless.space.dataset.v1.SparseVectorConfigR\x05value:\x028\x01J\x04\b\x03\x10\x04\"\xd5\x01\n" +
-	"\x11DenseVectorConfig\x12\x18\n" +
-	"\x04size\x18\x01 \x01(\x04B\x04\xe2A\x01\x03R\x04size\x12\\\n" +
-	"\bdistance\x18\x02 \x01(\x0e22.qdrant.cloud.serverless.space.dataset.v1.DistanceB\f\xe2A\x01\x03\xbaH\x05\x82\x01\x02\x10\x01R\bdistance\x12&\n" +
-	"\vmultivector\x18\x03 \x01(\bB\x04\xe2A\x01\x03R\vmultivector\x12\x1a\n" +
-	"\x05model\x18\x05 \x01(\tB\x04\xe2A\x01\x03R\x05modelJ\x04\b\x04\x10\x05\"U\n" +
-	"\x12SparseVectorConfig\x12\x1d\n" +
-	"\ause_idf\x18\x01 \x01(\bB\x04\xe2A\x01\x03R\x06useIdf\x12\x1a\n" +
-	"\x05model\x18\x03 \x01(\tB\x04\xe2A\x01\x03R\x05modelJ\x04\b\x02\x10\x03\"\xd0\x05\n" +
+	"\aversion\x18\b \x01(\tB\x04\xe2A\x01\x03R\aversion\x12t\n" +
+	"\rvector_models\x18\t \x03(\v2I.qdrant.cloud.serverless.space.dataset.v1.SampleDataset.VectorModelsEntryB\x04\xe2A\x01\x03R\fvectorModels\x1a?\n" +
+	"\x11VectorModelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd0\x05\n" +
 	"\x11SampleDatasetLoad\x12\x1c\n" +
 	"\x02id\x18\x01 \x01(\tB\f\xe2A\x01\x03\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12?\n" +
 	"\n" +
@@ -1258,13 +1003,7 @@ const file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDesc = "" +
 	"\bduration\x18\x01 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x88\x01\x01\x12\x1f\n" +
 	"\bprogress\x18\x02 \x01(\tH\x01R\bprogress\x88\x01\x01B\v\n" +
 	"\t_durationB\v\n" +
-	"\t_progress*x\n" +
-	"\bDistance\x12\x18\n" +
-	"\x14DISTANCE_UNSPECIFIED\x10\x00\x12\x13\n" +
-	"\x0fDISTANCE_COSINE\x10\x01\x12\x13\n" +
-	"\x0fDISTANCE_EUCLID\x10\x02\x12\x10\n" +
-	"\fDISTANCE_DOT\x10\x03\x12\x16\n" +
-	"\x12DISTANCE_MANHATTAN\x10\x04*\xbf\x02\n" +
+	"\t_progress*\xbf\x02\n" +
 	"\x17SampleDatasetLoadStatus\x12*\n" +
 	"&SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED\x10\x00\x12&\n" +
 	"\"SAMPLE_DATASET_LOAD_STATUS_RUNNING\x10\x01\x12%\n" +
@@ -1308,61 +1047,53 @@ func file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescGZIP() [
 	return file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDescData
 }
 
-var file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_goTypes = []any{
-	(Distance)(0),                          // 0: qdrant.cloud.serverless.space.dataset.v1.Distance
-	(SampleDatasetLoadStatus)(0),           // 1: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadStatus
-	(*ListSampleDatasetsRequest)(nil),      // 2: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsRequest
-	(*ListSampleDatasetsResponse)(nil),     // 3: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsResponse
-	(*ListSampleDatasetLoadsRequest)(nil),  // 4: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetLoadsRequest
-	(*ListSampleDatasetLoadsResponse)(nil), // 5: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetLoadsResponse
-	(*GetSampleDatasetLoadRequest)(nil),    // 6: qdrant.cloud.serverless.space.dataset.v1.GetSampleDatasetLoadRequest
-	(*GetSampleDatasetLoadResponse)(nil),   // 7: qdrant.cloud.serverless.space.dataset.v1.GetSampleDatasetLoadResponse
-	(*LoadSampleDatasetRequest)(nil),       // 8: qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetRequest
-	(*LoadSampleDatasetResponse)(nil),      // 9: qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetResponse
-	(*SampleDataset)(nil),                  // 10: qdrant.cloud.serverless.space.dataset.v1.SampleDataset
-	(*CollectionConfig)(nil),               // 11: qdrant.cloud.serverless.space.dataset.v1.CollectionConfig
-	(*DenseVectorConfig)(nil),              // 12: qdrant.cloud.serverless.space.dataset.v1.DenseVectorConfig
-	(*SparseVectorConfig)(nil),             // 13: qdrant.cloud.serverless.space.dataset.v1.SparseVectorConfig
-	(*SampleDatasetLoad)(nil),              // 14: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad
-	(*SampleDatasetLoadStats)(nil),         // 15: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadStats
-	nil,                                    // 16: qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.DenseVectorsEntry
-	nil,                                    // 17: qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.SparseVectorsEntry
-	(*timestamppb.Timestamp)(nil),          // 18: google.protobuf.Timestamp
-	(*v1.Caller)(nil),                      // 19: qdrant.cloud.common.v1.Caller
-	(*durationpb.Duration)(nil),            // 20: google.protobuf.Duration
+	(SampleDatasetLoadStatus)(0),           // 0: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadStatus
+	(*ListSampleDatasetsRequest)(nil),      // 1: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsRequest
+	(*ListSampleDatasetsResponse)(nil),     // 2: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsResponse
+	(*ListSampleDatasetLoadsRequest)(nil),  // 3: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetLoadsRequest
+	(*ListSampleDatasetLoadsResponse)(nil), // 4: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetLoadsResponse
+	(*GetSampleDatasetLoadRequest)(nil),    // 5: qdrant.cloud.serverless.space.dataset.v1.GetSampleDatasetLoadRequest
+	(*GetSampleDatasetLoadResponse)(nil),   // 6: qdrant.cloud.serverless.space.dataset.v1.GetSampleDatasetLoadResponse
+	(*LoadSampleDatasetRequest)(nil),       // 7: qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetRequest
+	(*LoadSampleDatasetResponse)(nil),      // 8: qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetResponse
+	(*SampleDataset)(nil),                  // 9: qdrant.cloud.serverless.space.dataset.v1.SampleDataset
+	(*SampleDatasetLoad)(nil),              // 10: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad
+	(*SampleDatasetLoadStats)(nil),         // 11: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadStats
+	nil,                                    // 12: qdrant.cloud.serverless.space.dataset.v1.SampleDataset.VectorModelsEntry
+	(*serverless.CollectionConfig)(nil),    // 13: qdrant.serverless.CollectionConfig
+	(*timestamppb.Timestamp)(nil),          // 14: google.protobuf.Timestamp
+	(*v1.Caller)(nil),                      // 15: qdrant.cloud.common.v1.Caller
+	(*durationpb.Duration)(nil),            // 16: google.protobuf.Duration
 }
 var file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_depIdxs = []int32{
-	10, // 0: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsResponse.items:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDataset
-	14, // 1: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetLoadsResponse.items:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad
-	14, // 2: qdrant.cloud.serverless.space.dataset.v1.GetSampleDatasetLoadResponse.sample_dataset_load:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad
-	14, // 3: qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetResponse.sample_dataset_load:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad
-	11, // 4: qdrant.cloud.serverless.space.dataset.v1.SampleDataset.collection_config:type_name -> qdrant.cloud.serverless.space.dataset.v1.CollectionConfig
-	16, // 5: qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.dense_vectors:type_name -> qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.DenseVectorsEntry
-	17, // 6: qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.sparse_vectors:type_name -> qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.SparseVectorsEntry
-	0,  // 7: qdrant.cloud.serverless.space.dataset.v1.DenseVectorConfig.distance:type_name -> qdrant.cloud.serverless.space.dataset.v1.Distance
-	18, // 8: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad.created_at:type_name -> google.protobuf.Timestamp
-	1,  // 9: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad.status:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadStatus
-	18, // 10: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad.deleted_at:type_name -> google.protobuf.Timestamp
-	19, // 11: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad.created_by:type_name -> qdrant.cloud.common.v1.Caller
-	15, // 12: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad.stats:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadStats
-	20, // 13: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadStats.duration:type_name -> google.protobuf.Duration
-	12, // 14: qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.DenseVectorsEntry.value:type_name -> qdrant.cloud.serverless.space.dataset.v1.DenseVectorConfig
-	13, // 15: qdrant.cloud.serverless.space.dataset.v1.CollectionConfig.SparseVectorsEntry.value:type_name -> qdrant.cloud.serverless.space.dataset.v1.SparseVectorConfig
-	2,  // 16: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.ListSampleDatasets:input_type -> qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsRequest
-	4,  // 17: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.ListSampleDatasetLoads:input_type -> qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetLoadsRequest
-	6,  // 18: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.GetSampleDatasetLoad:input_type -> qdrant.cloud.serverless.space.dataset.v1.GetSampleDatasetLoadRequest
-	8,  // 19: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.LoadSampleDataset:input_type -> qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetRequest
-	3,  // 20: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.ListSampleDatasets:output_type -> qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsResponse
-	5,  // 21: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.ListSampleDatasetLoads:output_type -> qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetLoadsResponse
-	7,  // 22: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.GetSampleDatasetLoad:output_type -> qdrant.cloud.serverless.space.dataset.v1.GetSampleDatasetLoadResponse
-	9,  // 23: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.LoadSampleDataset:output_type -> qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetResponse
-	20, // [20:24] is the sub-list for method output_type
-	16, // [16:20] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	9,  // 0: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsResponse.items:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDataset
+	10, // 1: qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetLoadsResponse.items:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad
+	10, // 2: qdrant.cloud.serverless.space.dataset.v1.GetSampleDatasetLoadResponse.sample_dataset_load:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad
+	10, // 3: qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetResponse.sample_dataset_load:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad
+	13, // 4: qdrant.cloud.serverless.space.dataset.v1.SampleDataset.collection_config:type_name -> qdrant.serverless.CollectionConfig
+	12, // 5: qdrant.cloud.serverless.space.dataset.v1.SampleDataset.vector_models:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDataset.VectorModelsEntry
+	14, // 6: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 7: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad.status:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadStatus
+	14, // 8: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad.deleted_at:type_name -> google.protobuf.Timestamp
+	15, // 9: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad.created_by:type_name -> qdrant.cloud.common.v1.Caller
+	11, // 10: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoad.stats:type_name -> qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadStats
+	16, // 11: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetLoadStats.duration:type_name -> google.protobuf.Duration
+	1,  // 12: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.ListSampleDatasets:input_type -> qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsRequest
+	3,  // 13: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.ListSampleDatasetLoads:input_type -> qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetLoadsRequest
+	5,  // 14: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.GetSampleDatasetLoad:input_type -> qdrant.cloud.serverless.space.dataset.v1.GetSampleDatasetLoadRequest
+	7,  // 15: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.LoadSampleDataset:input_type -> qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetRequest
+	2,  // 16: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.ListSampleDatasets:output_type -> qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsResponse
+	4,  // 17: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.ListSampleDatasetLoads:output_type -> qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetLoadsResponse
+	6,  // 18: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.GetSampleDatasetLoad:output_type -> qdrant.cloud.serverless.space.dataset.v1.GetSampleDatasetLoadResponse
+	8,  // 19: qdrant.cloud.serverless.space.dataset.v1.SampleDatasetService.LoadSampleDataset:output_type -> qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetResponse
+	16, // [16:20] is the sub-list for method output_type
+	12, // [12:16] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_init() }
@@ -1372,14 +1103,14 @@ func file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_init() {
 	}
 	file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[2].OneofWrappers = []any{}
 	file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[3].OneofWrappers = []any{}
-	file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[13].OneofWrappers = []any{}
+	file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDesc), len(file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   16,
+			NumEnums:      1,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
