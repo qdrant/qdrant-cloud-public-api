@@ -1,0 +1,398 @@
+syntax = "proto3";
+
+package qdrant.cloud.serverless.space.dataset.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "qdrant/cloud/common/v1/common.proto";
+import "qdrant/cloud/event/v1/events.proto";
+import "qdrant/cloud/facade/mcp/v1/mcp_options.proto";
+import "qdrant/cloud/facade/v1/facade_options.proto";
+// SampleDatasetService is the API used to load prebuilt sample datasets into serverless spaces.
+service SampleDatasetService {
+  // The API version of this service.
+  option (qdrant.cloud.common.v1.api_version) = {
+    major: 1
+    minor: 0
+    patch: 0
+  };
+  // Lists the sample datasets that can be loaded into the space identified by the given ID.
+  // Only datasets that are available in the region of the space are returned.
+  // The response is not paginated: the catalog holds only a few datasets.
+  // Required permissions:
+  // - read:serverless_sample_datasets
+  rpc ListSampleDatasets(ListSampleDatasetsRequest) returns (ListSampleDatasetsResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_sample_datasets";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/sample-datasets"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List the sample datasets that can be loaded into a serverless space."
+      title: "List sample datasets"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_space_sample_datasets"};
+  }
+  // Lists the sample dataset loads of the space identified by the given ID.
+  // Only loads created in the last 30 days are returned.
+  // Required permissions:
+  // - read:serverless_sample_datasets
+  rpc ListSampleDatasetLoads(ListSampleDatasetLoadsRequest) returns (ListSampleDatasetLoadsResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_sample_datasets";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/sample-dataset-loads"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "List the sample dataset loads of a serverless space with their status and progress."
+      title: "List sample dataset loads"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "list_space_sample_dataset_loads"};
+  }
+  // Gets a sample dataset load in the space identified by the given ID.
+  // Required permissions:
+  // - read:serverless_sample_datasets
+  rpc GetSampleDatasetLoad(GetSampleDatasetLoadRequest) returns (GetSampleDatasetLoadResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "read:serverless_sample_datasets";
+    // gRPC Gateway REST call
+    option (google.api.http) = {get: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/sample-dataset-loads/{sample_dataset_load_id}"};
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "sample_dataset_load_id"
+      field_expression: "sample_dataset_load_id"
+    };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Get a sample dataset load of a serverless space with its status and progress."
+      title: "Get sample dataset load"
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "get_space_sample_dataset_load"};
+  }
+  // Loads a sample dataset into a new collection in the space identified by the given ID.
+  // The load is asynchronous: the response returns when the load is accepted.
+  // Use GetSampleDatasetLoad to follow its status.
+  // Required permissions:
+  // - write:serverless_sample_datasets
+  rpc LoadSampleDataset(LoadSampleDatasetRequest) returns (LoadSampleDatasetResponse) {
+    // permissions
+    option (qdrant.cloud.common.v1.permissions) = "write:serverless_sample_datasets";
+    // gRPC Gateway REST call
+    option (google.api.http) = {
+      post: "/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/sample-datasets/{sample_dataset_id}/load"
+      body: "*"
+    };
+    // events
+    option (qdrant.cloud.event.v1.event_options) = {
+      event_type: EVENT_TYPE_ACTION
+      action_type: "load"
+      resource_type: "serverless-sample-dataset"
+      resource_id_field: "req.sample_dataset_id"
+      resource_url_template: "/accounts/{req.account_id}/serverless-spaces/{req.space_id}/sample-datasets"
+      additional_context_fields: {
+        key: "space_id"
+        value: "req.space_id"
+      }
+      additional_context_fields: {
+        key: "collection_name"
+        value: "req.collection_name"
+      }
+    };
+    // log fields
+    option (common.v1.log_fields) = {
+      name: "space_id"
+      field_expression: "space_id"
+    };
+    option (common.v1.log_fields) = {
+      name: "sample_dataset_id"
+      field_expression: "sample_dataset_id"
+    };
+    option (qdrant.cloud.facade.v1.facade) = {
+      description: "Load a sample dataset into a new collection in a serverless space. The load is asynchronous."
+      title: "Load sample dataset"
+      allow_mutation: true
+    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "load_space_sample_dataset"};
+  }
+}
+
+// ListSampleDatasetsRequest is the request for the ListSampleDatasets function.
+message ListSampleDatasetsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+}
+
+// ListSampleDatasetsResponse is the response from the ListSampleDatasets function.
+message ListSampleDatasetsResponse {
+  // The sample datasets that can be loaded into the space.
+  // All items are returned in one response (no pagination), because the catalog
+  // holds only a few datasets.
+  repeated SampleDataset items = 1;
+}
+
+// ListSampleDatasetLoadsRequest is the request for the ListSampleDatasetLoads function.
+message ListSampleDatasetLoadsRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // Maximum number of items to return.
+  // If not specified, all items are returned.
+  optional int32 page_size = 10 [(buf.validate.field).int32 = {
+    gt: 0
+    lte: 250
+  }];
+  // A page token, received from a previous call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters provided to the request must match
+  // the call that provided the page token.
+  optional string page_token = 11 [(buf.validate.field).string.min_len = 1];
+}
+
+// ListSampleDatasetLoadsResponse is the response from the ListSampleDatasetLoads function.
+message ListSampleDatasetLoadsResponse {
+  // The actual sample dataset loads in this list.
+  repeated SampleDatasetLoad items = 1;
+  // The total number of items available (useful in relation with pagination).
+  // This field is fill out when pagination is used (aka in the request `page_size` was provided).
+  optional int32 total_size = 10 [(buf.validate.field).int32.gte = 0];
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  optional string next_page_token = 11 [(buf.validate.field).string.min_len = 1];
+}
+
+// GetSampleDatasetLoadRequest is the request for the GetSampleDatasetLoad function.
+message GetSampleDatasetLoadRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the sample dataset load (in GUID format).
+  // This is a required field.
+  string sample_dataset_load_id = 3 [(buf.validate.field).string = {uuid: true}];
+}
+
+// GetSampleDatasetLoadResponse is the response from the GetSampleDatasetLoad function.
+message GetSampleDatasetLoadResponse {
+  // The actual sample dataset load.
+  SampleDatasetLoad sample_dataset_load = 1;
+}
+
+// LoadSampleDatasetRequest is the request for the LoadSampleDataset function.
+message LoadSampleDatasetRequest {
+  // The identifier of the account (in GUID format).
+  // This is a required field.
+  string account_id = 1 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the space (in GUID format).
+  // This space should be part of the provided account.
+  // This is a required field.
+  string space_id = 2 [(buf.validate.field).string = {uuid: true}];
+  // The identifier of the sample dataset, for example `midjourney-styles`.
+  // This is a required field.
+  string sample_dataset_id = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 63
+    pattern: "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"
+  }];
+  // The name of the new collection.
+  // No collection with this name may exist in the space.
+  // This is a required field.
+  string collection_name = 4 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 255
+    pattern: "^[a-zA-Z0-9-_.]+$"
+  }];
+}
+
+// LoadSampleDatasetResponse is the response from the LoadSampleDataset function.
+message LoadSampleDatasetResponse {
+  // The sample dataset load that was started.
+  SampleDatasetLoad sample_dataset_load = 1;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// A SampleDataset is a prebuilt dataset that can be loaded into a new collection.
+// All fields in this message are read-only.
+message SampleDataset {
+  // Unique identifier for the sample dataset, for example `midjourney-styles`.
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The display name of the sample dataset.
+  string name = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // A description of the content of the sample dataset.
+  string description = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The configuration of the collection that a load creates.
+  CollectionConfig collection_config = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The number of points in the sample dataset.
+  uint64 point_count = 5 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (common.v1.unit) = UNIT_COUNT
+  ];
+  // The total storage size of the loaded collection, in bytes.
+  // It counts against SpaceQuotaSnapshot.effective_max_size_per_collection_bytes.
+  uint64 size_bytes = 6 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (common.v1.unit) = UNIT_BYTES
+  ];
+  // The indexed storage size of the loaded collection, in bytes.
+  // It counts against SpaceQuotaSnapshot.effective_max_indexed_size_per_collection_bytes.
+  uint64 indexed_size_bytes = 7 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (common.v1.unit) = UNIT_BYTES
+  ];
+  // The version of the sample dataset that a load uses.
+  string version = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// CollectionConfig is the configuration of the collection that a sample dataset load creates.
+// It mirrors qdrant.serverless.CollectionConfig, without the payload indexes.
+// All fields in this message are read-only.
+message CollectionConfig {
+  // The dense vectors of the collection, keyed by vector name.
+  // The empty name "" is the default (unnamed) vector.
+  map<string, DenseVectorConfig> dense_vectors = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The sparse vectors of the collection, keyed by vector name.
+  map<string, SparseVectorConfig> sparse_vectors = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// DenseVectorConfig is the configuration of a dense vector.
+// It mirrors qdrant.serverless.DenseVectorConfig, without the precision tier.
+// All fields in this message are read-only.
+message DenseVectorConfig {
+  // The number of dimensions of the vector.
+  uint64 size = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The distance function used to compare vectors.
+  Distance distance = 2 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+  // Whether each point stores several sub-vectors, compared with max-sim.
+  bool multivector = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The model that made the vectors, for example `sentence-transformers/all-MiniLM-L6-v2`.
+  // Use the same model to make query vectors.
+  string model = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// SparseVectorConfig is the configuration of a sparse vector.
+// It mirrors qdrant.serverless.SparseVectorConfig, without the precision tier.
+// All fields in this message are read-only.
+message SparseVectorConfig {
+  // Whether the IDF modifier is applied at query time.
+  bool use_idf = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The model that made the vectors, for example `Qdrant/bm25`.
+  // Use the same model to make query vectors.
+  string model = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Distance represents the distance function of a dense vector.
+// It mirrors qdrant.serverless.Distance.
+enum Distance {
+  // The distance is unknown or not specified. This is the default value.
+  DISTANCE_UNSPECIFIED = 0;
+  // Cosine similarity.
+  DISTANCE_COSINE = 1;
+  // Euclidean distance.
+  DISTANCE_EUCLID = 2;
+  // Dot product.
+  DISTANCE_DOT = 3;
+  // Manhattan distance.
+  DISTANCE_MANHATTAN = 4;
+}
+
+// buf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS
+// A SampleDatasetLoad represents the status of a sample dataset load into a new collection.
+// All fields in this message are read-only.
+message SampleDatasetLoad {
+  // Unique identifier for the sample dataset load (in GUID format).
+  string id = 1 [
+    (buf.validate.field).string = {uuid: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+  // The timestamp when the sample dataset load was created.
+  google.protobuf.Timestamp created_at = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The identifier of the account (in GUID format).
+  string account_id = 3 [
+    (buf.validate.field).string = {uuid: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+  // The identifier of the space (in GUID format).
+  string space_id = 4 [
+    (buf.validate.field).string = {uuid: true},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+  // The identifier of the sample dataset.
+  string sample_dataset_id = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The version of the sample dataset that this load uses.
+  string sample_dataset_version = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The name of the new collection.
+  string collection_name = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The current status of the sample dataset load.
+  SampleDatasetLoadStatus status = 8 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+  // Descriptive message explaining why the load failed, for example "collection limit".
+  // Empty when the load did not fail.
+  string reason = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The timestamp when the sample dataset load was deleted (or when deletion started).
+  google.protobuf.Timestamp deleted_at = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The caller who initiated the sample dataset load.
+  // This is a read-only field and will be available after a sample dataset load is created.
+  common.v1.Caller created_by = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Summary stats for this load (duration, mid-copy progress).
+  // Populated by the control plane from the regional operator status.
+  SampleDatasetLoadStats stats = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// SampleDatasetLoadStats summarizes sample dataset load progress.
+// All fields are read-only; values appear as the regional operator reports them.
+message SampleDatasetLoadStats {
+  // Wall-clock time from first load work until the load finished
+  // (succeeded or failed).
+  optional google.protobuf.Duration duration = 1;
+  // Humanized mid-copy progress string, e.g. "35.2/75.4 MiB (46%)".
+  // Present while the load is running; may remain after completion.
+  optional string progress = 2;
+}
+
+// SampleDatasetLoadStatus represents the current status of a sample dataset load.
+enum SampleDatasetLoadStatus {
+  // The status is unknown or not specified. This is the default value.
+  SAMPLE_DATASET_LOAD_STATUS_UNSPECIFIED = 0;
+  // The sample dataset load is running.
+  SAMPLE_DATASET_LOAD_STATUS_RUNNING = 1;
+  // The sample dataset load failed to complete successfully.
+  SAMPLE_DATASET_LOAD_STATUS_FAILED = 2;
+  // The sample dataset load completed successfully.
+  SAMPLE_DATASET_LOAD_STATUS_SUCCEEDED = 3;
+  // There was an error syncing the sample dataset load in the space's region.
+  SAMPLE_DATASET_LOAD_STATUS_FAILED_TO_SYNC = 4;
+  // The sample dataset load is missing in the space's region.
+  SAMPLE_DATASET_LOAD_STATUS_NOT_FOUND = 5;
+  // The sample dataset load is skipped.
+  SAMPLE_DATASET_LOAD_STATUS_SKIPPED = 6;
+}
