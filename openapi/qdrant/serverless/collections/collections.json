@@ -742,13 +742,14 @@
         }
       },
       "Tokenizer": {
-        "description": "Full-text tokenizer. Same values as the Qdrant server API.\n\n- `prefix`: index every prefix of each token.\n- `whitespace`: split on whitespace (default).\n- `word`: split on word boundaries.\n- `multilingual`: language-aware tokenization.",
+        "description": "Full-text tokenizer. Same values as the Qdrant server API.\n\n- `prefix`: index every prefix of each token.\n- `whitespace`: split on whitespace (default).\n- `word`: split on word boundaries.\n- `multilingual`: language-aware tokenization.\n- `code`: split source code into identifiers and their camelCase / snake_case subwords.",
         "type": "string",
         "enum": [
           "prefix",
           "whitespace",
           "word",
-          "multilingual"
+          "multilingual",
+          "code"
         ],
         "default": "whitespace"
       },

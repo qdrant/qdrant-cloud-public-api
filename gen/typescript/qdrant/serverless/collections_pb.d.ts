@@ -1115,6 +1115,13 @@ export enum Tokenizer {
    * @generated from enum value: MULTILINGUAL = 4;
    */
   MULTILINGUAL = 4,
+
+  /**
+   * Split source code into identifiers and their camelCase / snake_case subwords.
+   *
+   * @generated from enum value: CODE = 5;
+   */
+  CODE = 5,
 }
 
 /**

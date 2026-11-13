@@ -31,6 +31,7 @@ class Tokenizer(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     WHITESPACE: _ClassVar[Tokenizer]
     WORD: _ClassVar[Tokenizer]
     MULTILINGUAL: _ClassVar[Tokenizer]
+    CODE: _ClassVar[Tokenizer]
 
 class TextScoringType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -63,6 +64,7 @@ PREFIX: Tokenizer
 WHITESPACE: Tokenizer
 WORD: Tokenizer
 MULTILINGUAL: Tokenizer
+CODE: Tokenizer
 TEXT_SCORING_TYPE_UNSPECIFIED: TextScoringType
 BM25: TextScoringType
 COLLECTION_STATUS_UNSPECIFIED: CollectionStatus

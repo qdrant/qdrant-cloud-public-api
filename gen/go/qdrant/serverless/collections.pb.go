@@ -160,6 +160,8 @@ const (
 	Tokenizer_WORD Tokenizer = 3
 	// Language-aware tokenization.
 	Tokenizer_MULTILINGUAL Tokenizer = 4
+	// Split source code into identifiers and their camelCase / snake_case subwords.
+	Tokenizer_CODE Tokenizer = 5
 )
 
 // Enum value maps for Tokenizer.
@@ -170,6 +172,7 @@ var (
 		2: "WHITESPACE",
 		3: "WORD",
 		4: "MULTILINGUAL",
+		5: "CODE",
 	}
 	Tokenizer_value = map[string]int32{
 		"TOKENIZER_UNSPECIFIED": 0,
@@ -177,6 +180,7 @@ var (
 		"WHITESPACE":            2,
 		"WORD":                  3,
 		"MULTILINGUAL":          4,
+		"CODE":                  5,
 	}
 )
 
@@ -2346,7 +2350,7 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\n" +
 	"\x06MEDIUM\x10\x02\x12\b\n" +
 	"\x04HIGH\x10\x03\x12\b\n" +
-	"\x04FULL\x10\x04*^\n" +
+	"\x04FULL\x10\x04*h\n" +
 	"\tTokenizer\x12\x19\n" +
 	"\x15TOKENIZER_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
@@ -2354,7 +2358,8 @@ const file_qdrant_serverless_collections_proto_rawDesc = "" +
 	"\n" +
 	"WHITESPACE\x10\x02\x12\b\n" +
 	"\x04WORD\x10\x03\x12\x10\n" +
-	"\fMULTILINGUAL\x10\x04*>\n" +
+	"\fMULTILINGUAL\x10\x04\x12\b\n" +
+	"\x04CODE\x10\x05*>\n" +
 	"\x0fTextScoringType\x12!\n" +
 	"\x1dTEXT_SCORING_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04BM25\x10\x01*L\n" +
