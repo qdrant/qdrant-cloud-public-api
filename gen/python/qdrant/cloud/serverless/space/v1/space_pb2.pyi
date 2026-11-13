@@ -20,6 +20,12 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class LimitType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    LIMIT_TYPE_UNSPECIFIED: _ClassVar[LimitType]
+    LIMIT_TYPE_HARD: _ClassVar[LimitType]
+    LIMIT_TYPE_SOFT: _ClassVar[LimitType]
+
 class SpaceStatePhase(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     SPACE_STATE_PHASE_UNSPECIFIED: _ClassVar[SpaceStatePhase]
@@ -27,11 +33,38 @@ class SpaceStatePhase(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     SPACE_STATE_PHASE_READY: _ClassVar[SpaceStatePhase]
     SPACE_STATE_PHASE_DISABLED: _ClassVar[SpaceStatePhase]
     SPACE_STATE_PHASE_DELETING: _ClassVar[SpaceStatePhase]
+
+class SpaceAccessMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SPACE_ACCESS_MODE_UNSPECIFIED: _ClassVar[SpaceAccessMode]
+    SPACE_ACCESS_MODE_FULL: _ClassVar[SpaceAccessMode]
+    SPACE_ACCESS_MODE_WRITES_BLOCKED: _ClassVar[SpaceAccessMode]
+    SPACE_ACCESS_MODE_BLOCKED: _ClassVar[SpaceAccessMode]
+
+class LimitUsageLevel(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    LIMIT_USAGE_LEVEL_UNSPECIFIED: _ClassVar[LimitUsageLevel]
+    LIMIT_USAGE_LEVEL_UNLIMITED: _ClassVar[LimitUsageLevel]
+    LIMIT_USAGE_LEVEL_OK: _ClassVar[LimitUsageLevel]
+    LIMIT_USAGE_LEVEL_THRESHOLD_REACHED: _ClassVar[LimitUsageLevel]
+    LIMIT_USAGE_LEVEL_LIMIT_REACHED: _ClassVar[LimitUsageLevel]
+LIMIT_TYPE_UNSPECIFIED: LimitType
+LIMIT_TYPE_HARD: LimitType
+LIMIT_TYPE_SOFT: LimitType
 SPACE_STATE_PHASE_UNSPECIFIED: SpaceStatePhase
 SPACE_STATE_PHASE_PROCESSING: SpaceStatePhase
 SPACE_STATE_PHASE_READY: SpaceStatePhase
 SPACE_STATE_PHASE_DISABLED: SpaceStatePhase
 SPACE_STATE_PHASE_DELETING: SpaceStatePhase
+SPACE_ACCESS_MODE_UNSPECIFIED: SpaceAccessMode
+SPACE_ACCESS_MODE_FULL: SpaceAccessMode
+SPACE_ACCESS_MODE_WRITES_BLOCKED: SpaceAccessMode
+SPACE_ACCESS_MODE_BLOCKED: SpaceAccessMode
+LIMIT_USAGE_LEVEL_UNSPECIFIED: LimitUsageLevel
+LIMIT_USAGE_LEVEL_UNLIMITED: LimitUsageLevel
+LIMIT_USAGE_LEVEL_OK: LimitUsageLevel
+LIMIT_USAGE_LEVEL_THRESHOLD_REACHED: LimitUsageLevel
+LIMIT_USAGE_LEVEL_LIMIT_REACHED: LimitUsageLevel
 
 class ListSpacesRequest(_message.Message):
     __slots__ = ("account_id", "cloud_region_id", "page_size", "page_token")
@@ -168,20 +201,24 @@ class Space(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_region_id: _Optional[str] = ..., labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., cost_allocation_label: _Optional[str] = ..., configuration: _Optional[_Union[SpaceConfiguration, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_updated_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., state: _Optional[_Union[SpaceState, _Mapping]] = ...) -> None: ...
 
 class SpaceConfiguration(_message.Message):
-    __slots__ = ("last_modified_at", "allowed_ip_source_ranges", "allowed_origins", "max_collections_per_space", "collection_settings", "searcher_settings")
+    __slots__ = ("last_modified_at", "allowed_ip_source_ranges", "allowed_origins", "max_collections_per_space", "collection_settings", "searcher_settings", "storage_limit", "monthly_spend_limit")
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     ALLOWED_IP_SOURCE_RANGES_FIELD_NUMBER: _ClassVar[int]
     ALLOWED_ORIGINS_FIELD_NUMBER: _ClassVar[int]
     MAX_COLLECTIONS_PER_SPACE_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_SETTINGS_FIELD_NUMBER: _ClassVar[int]
     SEARCHER_SETTINGS_FIELD_NUMBER: _ClassVar[int]
+    STORAGE_LIMIT_FIELD_NUMBER: _ClassVar[int]
+    MONTHLY_SPEND_LIMIT_FIELD_NUMBER: _ClassVar[int]
     last_modified_at: _timestamp_pb2.Timestamp
     allowed_ip_source_ranges: _containers.RepeatedScalarFieldContainer[str]
     allowed_origins: _containers.RepeatedScalarFieldContainer[str]
     max_collections_per_space: int
     collection_settings: CollectionSettings
     searcher_settings: SearcherSettings
-    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., allowed_origins: _Optional[_Iterable[str]] = ..., max_collections_per_space: _Optional[int] = ..., collection_settings: _Optional[_Union[CollectionSettings, _Mapping]] = ..., searcher_settings: _Optional[_Union[SearcherSettings, _Mapping]] = ...) -> None: ...
+    storage_limit: StorageLimit
+    monthly_spend_limit: SpendLimit
+    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., allowed_origins: _Optional[_Iterable[str]] = ..., max_collections_per_space: _Optional[int] = ..., collection_settings: _Optional[_Union[CollectionSettings, _Mapping]] = ..., searcher_settings: _Optional[_Union[SearcherSettings, _Mapping]] = ..., storage_limit: _Optional[_Union[StorageLimit, _Mapping]] = ..., monthly_spend_limit: _Optional[_Union[SpendLimit, _Mapping]] = ...) -> None: ...
 
 class CollectionSettings(_message.Message):
     __slots__ = ("platform_max_size", "max_size", "max_indexed_size", "platform_max_indexed_size", "size_warning_threshold_percent")
@@ -207,15 +244,71 @@ class SearcherSettings(_message.Message):
     max_workers: int
     def __init__(self, min_idle_timeout: _Optional[_Union[datetime.timedelta, _duration_pb2.Duration, _Mapping]] = ..., platform_max_workers: _Optional[int] = ..., max_workers: _Optional[int] = ...) -> None: ...
 
+class StorageLimit(_message.Message):
+    __slots__ = ("max_size", "type", "alert_threshold_percent")
+    MAX_SIZE_FIELD_NUMBER: _ClassVar[int]
+    TYPE_FIELD_NUMBER: _ClassVar[int]
+    ALERT_THRESHOLD_PERCENT_FIELD_NUMBER: _ClassVar[int]
+    max_size: int
+    type: LimitType
+    alert_threshold_percent: int
+    def __init__(self, max_size: _Optional[int] = ..., type: _Optional[_Union[LimitType, str]] = ..., alert_threshold_percent: _Optional[int] = ...) -> None: ...
+
+class SpendLimit(_message.Message):
+    __slots__ = ("max_amount_millicents", "type", "alert_threshold_percent", "currency")
+    MAX_AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
+    TYPE_FIELD_NUMBER: _ClassVar[int]
+    ALERT_THRESHOLD_PERCENT_FIELD_NUMBER: _ClassVar[int]
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    max_amount_millicents: int
+    type: LimitType
+    alert_threshold_percent: int
+    currency: str
+    def __init__(self, max_amount_millicents: _Optional[int] = ..., type: _Optional[_Union[LimitType, str]] = ..., alert_threshold_percent: _Optional[int] = ..., currency: _Optional[str] = ...) -> None: ...
+
 class SpaceState(_message.Message):
-    __slots__ = ("phase", "reason", "endpoint")
+    __slots__ = ("phase", "reason", "endpoint", "limits")
     PHASE_FIELD_NUMBER: _ClassVar[int]
     REASON_FIELD_NUMBER: _ClassVar[int]
     ENDPOINT_FIELD_NUMBER: _ClassVar[int]
+    LIMITS_FIELD_NUMBER: _ClassVar[int]
     phase: SpaceStatePhase
     reason: str
     endpoint: SpaceEndpoint
-    def __init__(self, phase: _Optional[_Union[SpaceStatePhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[SpaceEndpoint, _Mapping]] = ...) -> None: ...
+    limits: SpaceLimitsStatus
+    def __init__(self, phase: _Optional[_Union[SpaceStatePhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[SpaceEndpoint, _Mapping]] = ..., limits: _Optional[_Union[SpaceLimitsStatus, _Mapping]] = ...) -> None: ...
+
+class SpaceLimitsStatus(_message.Message):
+    __slots__ = ("access_mode", "storage", "monthly_spend")
+    ACCESS_MODE_FIELD_NUMBER: _ClassVar[int]
+    STORAGE_FIELD_NUMBER: _ClassVar[int]
+    MONTHLY_SPEND_FIELD_NUMBER: _ClassVar[int]
+    access_mode: SpaceAccessMode
+    storage: StorageLimitStatus
+    monthly_spend: SpendLimitStatus
+    def __init__(self, access_mode: _Optional[_Union[SpaceAccessMode, str]] = ..., storage: _Optional[_Union[StorageLimitStatus, _Mapping]] = ..., monthly_spend: _Optional[_Union[SpendLimitStatus, _Mapping]] = ...) -> None: ...
+
+class StorageLimitStatus(_message.Message):
+    __slots__ = ("used_size", "level")
+    USED_SIZE_FIELD_NUMBER: _ClassVar[int]
+    LEVEL_FIELD_NUMBER: _ClassVar[int]
+    used_size: int
+    level: LimitUsageLevel
+    def __init__(self, used_size: _Optional[int] = ..., level: _Optional[_Union[LimitUsageLevel, str]] = ...) -> None: ...
+
+class SpendLimitStatus(_message.Message):
+    __slots__ = ("used_amount_millicents", "level", "period_start", "period_end", "currency")
+    USED_AMOUNT_MILLICENTS_FIELD_NUMBER: _ClassVar[int]
+    LEVEL_FIELD_NUMBER: _ClassVar[int]
+    PERIOD_START_FIELD_NUMBER: _ClassVar[int]
+    PERIOD_END_FIELD_NUMBER: _ClassVar[int]
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    used_amount_millicents: int
+    level: LimitUsageLevel
+    period_start: _timestamp_pb2.Timestamp
+    period_end: _timestamp_pb2.Timestamp
+    currency: str
+    def __init__(self, used_amount_millicents: _Optional[int] = ..., level: _Optional[_Union[LimitUsageLevel, str]] = ..., period_start: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., period_end: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., currency: _Optional[str] = ...) -> None: ...
 
 class SpaceEndpoint(_message.Message):
     __slots__ = ("url",)

@@ -1233,6 +1233,16 @@
       },
       "description": "GetBackupScheduleResponse is the response from the GetBackupSchedule function."
     },
+    "v1LimitType": {
+      "type": "string",
+      "enum": [
+        "LIMIT_TYPE_UNSPECIFIED",
+        "LIMIT_TYPE_HARD",
+        "LIMIT_TYPE_SOFT"
+      ],
+      "default": "LIMIT_TYPE_UNSPECIFIED",
+      "description": "LimitType defines what happens when usage reaches 100% of a limit.\n\n - LIMIT_TYPE_UNSPECIFIED: The limit type is unspecified.\nOn write, the server treats it as LIMIT_TYPE_HARD and always returns an explicit value.\n - LIMIT_TYPE_HARD: Operations are rejected once usage reaches the limit.\nWhich operations are rejected depends on the limit (see StorageLimit and SpendLimit).\n - LIMIT_TYPE_SOFT: An alert is sent once usage reaches the limit. All operations keep working."
+    },
     "v1ListBackupRestoresResponse": {
       "type": "object",
       "properties": {
@@ -1388,6 +1398,14 @@
         "searcherSettings": {
           "$ref": "#/definitions/v1SearcherSettings",
           "description": "Search-worker settings for this space.\nPlatform worker ceilings are derived from the account's quota; the worker count is writable via UpdateSpace."
+        },
+        "storageLimit": {
+          "$ref": "#/definitions/v1StorageLimit",
+          "description": "Optional limit on the total storage of the space.\nWhen unset, storage is unlimited. New spaces have no storage limit.\nThis field is writable via UpdateSpace (update_mask path \"configuration.storage_limit\").\nTo remove the limit, include the path in the update_mask and leave the field unset."
+        },
+        "monthlySpendLimit": {
+          "$ref": "#/definitions/v1SpendLimit",
+          "description": "Optional limit on the monthly spend of the space for searches and writes combined.\nStorage cost is not part of this limit.\nWhen unset, spend is unlimited. New spaces have no spend limit.\nThis field is writable via UpdateSpace (update_mask path \"configuration.monthly_spend_limit\").\nTo remove the limit, include the path in the update_mask and leave the field unset."
         }
       },
       "description": "A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment."
@@ -1409,6 +1427,51 @@
         }
       },
       "description": "Represents the space details associated with a backup.\nThe identity fields (name, cloud_region_id) reflect the latest space state.\nThe configuration field is immutable and represents the values at backup time."
+    },
+    "v1SpendLimit": {
+      "type": "object",
+      "properties": {
+        "maxAmountMillicents": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Maximum spend per period, in millicents of `currency`.\nFor example, 5000000 is 50 USD.\nIt may be set below the current spend, in which case it takes effect immediately.\nThis is a required field."
+        },
+        "type": {
+          "$ref": "#/definitions/v1LimitType",
+          "description": "What happens when spend reaches max_amount_millicents. Defaults to LIMIT_TYPE_HARD when unset.\nHard limit: all read and write operations (including deletes) are rejected until the next period starts.\nOperations resume at the start of the next period, or right away when the limit is raised,\nswitched to a soft limit, or removed.\nSoft limit: an alert is sent and all operations keep working."
+        },
+        "alertThresholdPercent": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Percentage of max_amount_millicents at which an alert is sent.\nValid range: 1 to 99. Defaults to 80 when unset."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of max_amount_millicents, as a 3-letter ISO 4217 code.\nThis is a read-only field. Currently always \"USD\".",
+          "readOnly": true
+        }
+      },
+      "description": "SpendLimit caps the monthly spend of a space for searches and writes combined.\nStorage cost is not part of this limit.\nThe spend period is the calendar month in UTC."
+    },
+    "v1StorageLimit": {
+      "type": "object",
+      "properties": {
+        "maxSize": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Maximum total storage of the space, in bytes.\nIt may be set below the current usage, in which case it takes effect immediately.\nThis is a required field."
+        },
+        "type": {
+          "$ref": "#/definitions/v1LimitType",
+          "description": "What happens when storage reaches max_size. Defaults to LIMIT_TYPE_HARD when unset.\nHard limit: upserts are rejected, while searches and deletes keep working.\nWrites resume once storage drops below max_size, or when the limit is raised,\nswitched to a soft limit, or removed.\nSoft limit: an alert is sent and all operations keep working."
+        },
+        "alertThresholdPercent": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Percentage of max_size at which an alert is sent.\nValid range: 1 to 99. Defaults to 80 when unset."
+        }
+      },
+      "description": "StorageLimit caps the total storage of a space."
     },
     "v1UpdateBackupScheduleResponse": {
       "type": "object",
