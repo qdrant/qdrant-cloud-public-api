@@ -7,6 +7,7 @@ on:
 
 jobs:
   publish-packages:
+    environment: release
     name: Publish Release Packages
     runs-on: ubuntu-latest
 
@@ -18,6 +19,41 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Require the release commit to be on main
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          main=$(git rev-parse --verify "origin/main^{commit}")
+          picked_from_main() {
+            local commit=$1 merges parent source tree want
+            merges=$(git rev-list --no-walk --count --min-parents=2 "$commit") || return 1
+            [ "$merges" = 0 ] || return 1
+            parent=$(git rev-parse --verify --quiet "$commit^") || return 1
+            source=$(git log -1 --format=%B "$commit" | sed -n 's/^(cherry picked from commit \([0-9a-f]\{40\}\))$/\1/p' | tail -n 1) || return 1
+            [ -n "$source" ] || return 1
+            git merge-base --is-ancestor "$source" "$main" || return 1
+            tree=$(git --attr-source="$parent" merge-tree --write-tree --no-messages --merge-base="$source^" "$parent" "$source") || return 1
+            want=$(git rev-parse --verify "$commit^{tree}") || return 1
+            [ "$tree" = "$want" ]
+          }
+          on_main=0
+          git merge-base --is-ancestor HEAD "$main" || on_main=$?
+          if [ "$on_main" != 0 ]; then
+            [ "$on_main" = 1 ]
+            commits=$(git rev-list "$main..HEAD")
+            [ -n "$commits" ]
+            rejected=""
+            for commit in $commits; do
+              picked_from_main "$commit" || rejected="$rejected $(git rev-parse --short "$commit")"
+            done
+            if [ -n "$rejected" ]; then
+              echo "::error::$(git rev-parse --short HEAD) has commits that are not on main:$rejected. Releases are cut from main, hotfixes use git cherry-pick -x of commits already on main, without changes"
+              exit 1
+            fi
+          fi
 
       - name: Publish packages
         uses: ./.github/actions/publish-packages
