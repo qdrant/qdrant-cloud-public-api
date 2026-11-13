@@ -1746,6 +1746,38 @@ export enum SpaceAlertType {
    * @generated from enum value: SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED = 5;
    */
   COLLECTION_INDEXED_STORAGE_OVERUTILIZED = 5,
+
+  /**
+   * Space storage is at or above the alert threshold of the storage limit
+   * (alert_threshold_percent of configuration.storage_limit.max_size).
+   *
+   * @generated from enum value: SPACE_ALERT_TYPE_STORAGE_LIMIT_THRESHOLD_REACHED = 6;
+   */
+  STORAGE_LIMIT_THRESHOLD_REACHED = 6,
+
+  /**
+   * Space storage is at or above the storage limit.
+   * With a hard limit, upserts are rejected until storage drops below the limit.
+   *
+   * @generated from enum value: SPACE_ALERT_TYPE_STORAGE_LIMIT_REACHED = 7;
+   */
+  STORAGE_LIMIT_REACHED = 7,
+
+  /**
+   * Space spend in the current period is at or above the alert threshold of the monthly spend limit
+   * (alert_threshold_percent of configuration.monthly_spend_limit.max_amount_millicents).
+   *
+   * @generated from enum value: SPACE_ALERT_TYPE_SPEND_LIMIT_THRESHOLD_REACHED = 8;
+   */
+  SPEND_LIMIT_THRESHOLD_REACHED = 8,
+
+  /**
+   * Space spend in the current period is at or above the monthly spend limit.
+   * With a hard limit, all read and write operations are rejected until the next period starts.
+   *
+   * @generated from enum value: SPACE_ALERT_TYPE_SPEND_LIMIT_REACHED = 9;
+   */
+  SPEND_LIMIT_REACHED = 9,
 }
 
 /**
