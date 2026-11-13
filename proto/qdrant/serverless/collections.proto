@@ -83,6 +83,8 @@ enum Tokenizer {
   WORD = 3;
   // Language-aware tokenization.
   MULTILINGUAL = 4;
+  // Split source code into identifiers and their camelCase / snake_case subwords.
+  CODE = 5;
 }
 
 // Exact match on string values, e.g. `color: "red"`.
