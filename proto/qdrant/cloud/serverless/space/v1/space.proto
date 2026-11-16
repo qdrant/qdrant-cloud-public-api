@@ -18,8 +18,8 @@ service SpaceService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 2
-    minor: 1
-    patch: 1
+    minor: 2
+    patch: 0
   };
   // ListSpaces returns all spaces for the authenticated user
   // Required Permissions:
@@ -519,6 +519,17 @@ message SpaceConfiguration {
   // Search-worker settings for this space.
   // Platform worker ceilings are derived from the account's quota; the worker count is writable via UpdateSpace.
   SearcherSettings searcher_settings = 17;
+  // Optional limit on the total storage of the space.
+  // When unset, storage is unlimited. New spaces have no storage limit.
+  // This field is writable via UpdateSpace (update_mask path "configuration.storage_limit").
+  // To remove the limit, include the path in the update_mask and leave the field unset.
+  optional StorageLimit storage_limit = 18;
+  // Optional limit on the monthly spend of the space for searches and writes combined.
+  // Storage cost is not part of this limit.
+  // When unset, spend is unlimited. New spaces have no spend limit.
+  // This field is writable via UpdateSpace (update_mask path "configuration.monthly_spend_limit").
+  // To remove the limit, include the path in the update_mask and leave the field unset.
+  optional SpendLimit monthly_spend_limit = 19;
   // Removed: platform_max_storage_bytes (13), max_storage_bytes (14).
   // Replaced by collection_settings.
   reserved 13, 14;
@@ -579,6 +590,73 @@ message SearcherSettings {
   optional uint64 max_workers = 3 [(buf.validate.field).uint64 = {gte: 1}];
 }
 
+// LimitType defines what happens when usage reaches 100% of a limit.
+enum LimitType {
+  // The limit type is unspecified.
+  // On write, the server treats it as LIMIT_TYPE_HARD and always returns an explicit value.
+  LIMIT_TYPE_UNSPECIFIED = 0;
+  // Operations are rejected once usage reaches the limit.
+  // Which operations are rejected depends on the limit (see StorageLimit and SpendLimit).
+  LIMIT_TYPE_HARD = 1;
+  // An alert is sent once usage reaches the limit. All operations keep working.
+  LIMIT_TYPE_SOFT = 2;
+}
+
+// StorageLimit caps the total storage of a space.
+message StorageLimit {
+  // Maximum total storage of the space, in bytes.
+  // It may be set below the current usage, in which case it takes effect immediately.
+  // This is a required field.
+  uint64 max_size = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (common.v1.unit) = UNIT_BYTES
+  ];
+  // What happens when storage reaches max_size. Defaults to LIMIT_TYPE_HARD when unset.
+  // Hard limit: upserts are rejected, while searches and deletes keep working.
+  // Writes resume once storage drops below max_size, or when the limit is raised,
+  // switched to a soft limit, or removed.
+  // Soft limit: an alert is sent and all operations keep working.
+  LimitType type = 2 [(buf.validate.field).enum.defined_only = true];
+  // Percentage of max_size at which an alert is sent.
+  // Valid range: 1 to 99. Defaults to 80 when unset.
+  optional uint32 alert_threshold_percent = 3 [
+    (buf.validate.field).uint32 = {
+      gte: 1
+      lte: 99
+    },
+    (common.v1.unit) = UNIT_PERCENT
+  ];
+}
+
+// SpendLimit caps the monthly spend of a space for searches and writes combined.
+// Storage cost is not part of this limit.
+// The spend period is the calendar month in UTC.
+message SpendLimit {
+  // Maximum spend per period, in millicents of `currency`.
+  // For example, 5000000 is 50 USD.
+  // It may be set below the current spend, in which case it takes effect immediately.
+  // This is a required field.
+  uint64 max_amount_millicents = 1 [(buf.validate.field).uint64.gt = 0];
+  // What happens when spend reaches max_amount_millicents. Defaults to LIMIT_TYPE_HARD when unset.
+  // Hard limit: all read and write operations (including deletes) are rejected until the next period starts.
+  // Operations resume at the start of the next period, or right away when the limit is raised,
+  // switched to a soft limit, or removed.
+  // Soft limit: an alert is sent and all operations keep working.
+  LimitType type = 2 [(buf.validate.field).enum.defined_only = true];
+  // Percentage of max_amount_millicents at which an alert is sent.
+  // Valid range: 1 to 99. Defaults to 80 when unset.
+  optional uint32 alert_threshold_percent = 3 [
+    (buf.validate.field).uint32 = {
+      gte: 1
+      lte: 99
+    },
+    (common.v1.unit) = UNIT_PERCENT
+  ];
+  // The currency of max_amount_millicents, as a 3-letter ISO 4217 code.
+  // This is a read-only field. Currently always "USD".
+  string currency = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
 // SpaceStatePhase defines the operational phases of a Qdrant serverless space.
 enum SpaceStatePhase {
   // Unspecified phase.
@@ -608,6 +686,92 @@ message SpaceState {
   // The URL endpoint where clients can connect to and interact with the space.
   // Not set if the space is not yet ready or is disabled.
   optional SpaceEndpoint endpoint = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Usage of the space against its storage and spend limits, and which operations are currently allowed.
+  // Usage is refreshed about every 5 minutes, and limits are enforced on the refreshed values.
+  SpaceLimitsStatus limits = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// SpaceAccessMode defines which operations a space currently accepts, after applying its limits.
+// When several limits are reached, the most restrictive mode applies.
+enum SpaceAccessMode {
+  // The access mode is unspecified.
+  SPACE_ACCESS_MODE_UNSPECIFIED = 0;
+  // All operations are accepted.
+  SPACE_ACCESS_MODE_FULL = 1;
+  // Upserts are rejected. Searches and deletes are accepted.
+  // Set when a hard storage limit is reached.
+  SPACE_ACCESS_MODE_WRITES_BLOCKED = 2;
+  // All read and write operations, including deletes, are rejected.
+  // Set when a hard spend limit is reached.
+  SPACE_ACCESS_MODE_BLOCKED = 3;
+}
+
+// LimitUsageLevel defines how current usage relates to a limit.
+enum LimitUsageLevel {
+  // The usage level is unspecified.
+  LIMIT_USAGE_LEVEL_UNSPECIFIED = 0;
+  // No limit is set.
+  LIMIT_USAGE_LEVEL_UNLIMITED = 1;
+  // Usage is below the alert threshold.
+  LIMIT_USAGE_LEVEL_OK = 2;
+  // Usage is at or above the alert threshold, but below the limit.
+  LIMIT_USAGE_LEVEL_THRESHOLD_REACHED = 3;
+  // Usage is at or above the limit.
+  LIMIT_USAGE_LEVEL_LIMIT_REACHED = 4;
+}
+
+// SpaceLimitsStatus reports the usage of a space against its limits.
+// All fields in this message are read-only.
+message SpaceLimitsStatus {
+  // The operations the space currently accepts.
+  SpaceAccessMode access_mode = 1 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+  // Storage usage against the storage limit.
+  StorageLimitStatus storage = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Spend in the current period against the monthly spend limit.
+  SpendLimitStatus monthly_spend = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// StorageLimitStatus reports the storage usage of a space against its storage limit.
+// All fields in this message are read-only.
+message StorageLimitStatus {
+  // Current total storage of the space, in bytes.
+  // Reported also when no storage limit is set.
+  uint64 used_size = 1 [
+    (buf.validate.field).uint64.gte = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (common.v1.unit) = UNIT_BYTES
+  ];
+  // How the current usage relates to the storage limit.
+  LimitUsageLevel level = 2 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+}
+
+// SpendLimitStatus reports the spend of a space in the current period against its monthly spend limit.
+// All fields in this message are read-only.
+message SpendLimitStatus {
+  // Spend for searches and writes in the current period, in millicents of `currency`.
+  // Reported also when no spend limit is set.
+  uint64 used_amount_millicents = 1 [
+    (buf.validate.field).uint64.gte = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+  // How the current spend relates to the spend limit.
+  LimitUsageLevel level = 2 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+  // Start of the current period (inclusive), the first day of the month at 00:00 UTC.
+  google.protobuf.Timestamp period_start = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // End of the current period (exclusive), the first day of the next month at 00:00 UTC.
+  // When a hard spend limit is reached, operations resume at this time.
+  google.protobuf.Timestamp period_end = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // The currency of used_amount_millicents, as a 3-letter ISO 4217 code. Currently always "USD".
+  string currency = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Endpoint information to access the qdrant space (aka serverless database).

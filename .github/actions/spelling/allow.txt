@@ -33,6 +33,7 @@ snapclass
 stackit
 timeseries
 upsert
+upserts
 vcpu
 vultr
 Mastercard

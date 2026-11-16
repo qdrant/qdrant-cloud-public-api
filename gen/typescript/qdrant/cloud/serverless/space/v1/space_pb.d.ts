@@ -826,6 +826,27 @@ export declare type SpaceConfiguration = Message<"qdrant.cloud.serverless.space.
    * @generated from field: qdrant.cloud.serverless.space.v1.SearcherSettings searcher_settings = 17;
    */
   searcherSettings?: SearcherSettings | undefined;
+
+  /**
+   * Optional limit on the total storage of the space.
+   * When unset, storage is unlimited. New spaces have no storage limit.
+   * This field is writable via UpdateSpace (update_mask path "configuration.storage_limit").
+   * To remove the limit, include the path in the update_mask and leave the field unset.
+   *
+   * @generated from field: optional qdrant.cloud.serverless.space.v1.StorageLimit storage_limit = 18;
+   */
+  storageLimit?: StorageLimit | undefined;
+
+  /**
+   * Optional limit on the monthly spend of the space for searches and writes combined.
+   * Storage cost is not part of this limit.
+   * When unset, spend is unlimited. New spaces have no spend limit.
+   * This field is writable via UpdateSpace (update_mask path "configuration.monthly_spend_limit").
+   * To remove the limit, include the path in the update_mask and leave the field unset.
+   *
+   * @generated from field: optional qdrant.cloud.serverless.space.v1.SpendLimit monthly_spend_limit = 19;
+   */
+  monthlySpendLimit?: SpendLimit | undefined;
 };
 
 export declare type SpaceConfigurationValid = SpaceConfiguration;
@@ -941,6 +962,103 @@ export declare type SearcherSettingsValid = SearcherSettings;
 export declare const SearcherSettingsSchema: GenMessage<SearcherSettings, {validType: SearcherSettingsValid}>;
 
 /**
+ * StorageLimit caps the total storage of a space.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.StorageLimit
+ */
+export declare type StorageLimit = Message<"qdrant.cloud.serverless.space.v1.StorageLimit"> & {
+  /**
+   * Maximum total storage of the space, in bytes.
+   * It may be set below the current usage, in which case it takes effect immediately.
+   * This is a required field.
+   *
+   * @generated from field: uint64 max_size = 1;
+   */
+  maxSize: bigint;
+
+  /**
+   * What happens when storage reaches max_size. Defaults to LIMIT_TYPE_HARD when unset.
+   * Hard limit: upserts are rejected, while searches and deletes keep working.
+   * Writes resume once storage drops below max_size, or when the limit is raised,
+   * switched to a soft limit, or removed.
+   * Soft limit: an alert is sent and all operations keep working.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.LimitType type = 2;
+   */
+  type: LimitType;
+
+  /**
+   * Percentage of max_size at which an alert is sent.
+   * Valid range: 1 to 99. Defaults to 80 when unset.
+   *
+   * @generated from field: optional uint32 alert_threshold_percent = 3;
+   */
+  alertThresholdPercent?: number | undefined;
+};
+
+export declare type StorageLimitValid = StorageLimit;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.StorageLimit.
+ * Use `create(StorageLimitSchema)` to create a new message.
+ */
+export declare const StorageLimitSchema: GenMessage<StorageLimit, {validType: StorageLimitValid}>;
+
+/**
+ * SpendLimit caps the monthly spend of a space for searches and writes combined.
+ * Storage cost is not part of this limit.
+ * The spend period is the calendar month in UTC.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.SpendLimit
+ */
+export declare type SpendLimit = Message<"qdrant.cloud.serverless.space.v1.SpendLimit"> & {
+  /**
+   * Maximum spend per period, in millicents of `currency`.
+   * For example, 5000000 is 50 USD.
+   * It may be set below the current spend, in which case it takes effect immediately.
+   * This is a required field.
+   *
+   * @generated from field: uint64 max_amount_millicents = 1;
+   */
+  maxAmountMillicents: bigint;
+
+  /**
+   * What happens when spend reaches max_amount_millicents. Defaults to LIMIT_TYPE_HARD when unset.
+   * Hard limit: all read and write operations (including deletes) are rejected until the next period starts.
+   * Operations resume at the start of the next period, or right away when the limit is raised,
+   * switched to a soft limit, or removed.
+   * Soft limit: an alert is sent and all operations keep working.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.LimitType type = 2;
+   */
+  type: LimitType;
+
+  /**
+   * Percentage of max_amount_millicents at which an alert is sent.
+   * Valid range: 1 to 99. Defaults to 80 when unset.
+   *
+   * @generated from field: optional uint32 alert_threshold_percent = 3;
+   */
+  alertThresholdPercent?: number | undefined;
+
+  /**
+   * The currency of max_amount_millicents, as a 3-letter ISO 4217 code.
+   * This is a read-only field. Currently always "USD".
+   *
+   * @generated from field: string currency = 4;
+   */
+  currency: string;
+};
+
+export declare type SpendLimitValid = SpendLimit;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.SpendLimit.
+ * Use `create(SpendLimitSchema)` to create a new message.
+ */
+export declare const SpendLimitSchema: GenMessage<SpendLimit, {validType: SpendLimitValid}>;
+
+/**
  * SpaceState represents the operational state of a space in the Qdrant serverless environment.
  * It provides status information, error details (if any), and endpoint access information.
  * All fields in this message are read-only.
@@ -970,6 +1088,14 @@ export declare type SpaceState = Message<"qdrant.cloud.serverless.space.v1.Space
    * @generated from field: optional qdrant.cloud.serverless.space.v1.SpaceEndpoint endpoint = 7;
    */
   endpoint?: SpaceEndpoint | undefined;
+
+  /**
+   * Usage of the space against its storage and spend limits, and which operations are currently allowed.
+   * Usage is refreshed about every 5 minutes, and limits are enforced on the refreshed values.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.SpaceLimitsStatus limits = 8;
+   */
+  limits?: SpaceLimitsStatus | undefined;
 };
 
 export declare type SpaceStateValid = SpaceState;
@@ -979,6 +1105,127 @@ export declare type SpaceStateValid = SpaceState;
  * Use `create(SpaceStateSchema)` to create a new message.
  */
 export declare const SpaceStateSchema: GenMessage<SpaceState, {validType: SpaceStateValid}>;
+
+/**
+ * SpaceLimitsStatus reports the usage of a space against its limits.
+ * All fields in this message are read-only.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.SpaceLimitsStatus
+ */
+export declare type SpaceLimitsStatus = Message<"qdrant.cloud.serverless.space.v1.SpaceLimitsStatus"> & {
+  /**
+   * The operations the space currently accepts.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.SpaceAccessMode access_mode = 1;
+   */
+  accessMode: SpaceAccessMode;
+
+  /**
+   * Storage usage against the storage limit.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.StorageLimitStatus storage = 2;
+   */
+  storage?: StorageLimitStatus | undefined;
+
+  /**
+   * Spend in the current period against the monthly spend limit.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.SpendLimitStatus monthly_spend = 3;
+   */
+  monthlySpend?: SpendLimitStatus | undefined;
+};
+
+export declare type SpaceLimitsStatusValid = SpaceLimitsStatus;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.SpaceLimitsStatus.
+ * Use `create(SpaceLimitsStatusSchema)` to create a new message.
+ */
+export declare const SpaceLimitsStatusSchema: GenMessage<SpaceLimitsStatus, {validType: SpaceLimitsStatusValid}>;
+
+/**
+ * StorageLimitStatus reports the storage usage of a space against its storage limit.
+ * All fields in this message are read-only.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.StorageLimitStatus
+ */
+export declare type StorageLimitStatus = Message<"qdrant.cloud.serverless.space.v1.StorageLimitStatus"> & {
+  /**
+   * Current total storage of the space, in bytes.
+   * Reported also when no storage limit is set.
+   *
+   * @generated from field: uint64 used_size = 1;
+   */
+  usedSize: bigint;
+
+  /**
+   * How the current usage relates to the storage limit.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.LimitUsageLevel level = 2;
+   */
+  level: LimitUsageLevel;
+};
+
+export declare type StorageLimitStatusValid = StorageLimitStatus;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.StorageLimitStatus.
+ * Use `create(StorageLimitStatusSchema)` to create a new message.
+ */
+export declare const StorageLimitStatusSchema: GenMessage<StorageLimitStatus, {validType: StorageLimitStatusValid}>;
+
+/**
+ * SpendLimitStatus reports the spend of a space in the current period against its monthly spend limit.
+ * All fields in this message are read-only.
+ *
+ * @generated from message qdrant.cloud.serverless.space.v1.SpendLimitStatus
+ */
+export declare type SpendLimitStatus = Message<"qdrant.cloud.serverless.space.v1.SpendLimitStatus"> & {
+  /**
+   * Spend for searches and writes in the current period, in millicents of `currency`.
+   * Reported also when no spend limit is set.
+   *
+   * @generated from field: uint64 used_amount_millicents = 1;
+   */
+  usedAmountMillicents: bigint;
+
+  /**
+   * How the current spend relates to the spend limit.
+   *
+   * @generated from field: qdrant.cloud.serverless.space.v1.LimitUsageLevel level = 2;
+   */
+  level: LimitUsageLevel;
+
+  /**
+   * Start of the current period (inclusive), the first day of the month at 00:00 UTC.
+   *
+   * @generated from field: google.protobuf.Timestamp period_start = 3;
+   */
+  periodStart?: Timestamp | undefined;
+
+  /**
+   * End of the current period (exclusive), the first day of the next month at 00:00 UTC.
+   * When a hard spend limit is reached, operations resume at this time.
+   *
+   * @generated from field: google.protobuf.Timestamp period_end = 4;
+   */
+  periodEnd?: Timestamp | undefined;
+
+  /**
+   * The currency of used_amount_millicents, as a 3-letter ISO 4217 code. Currently always "USD".
+   *
+   * @generated from field: string currency = 5;
+   */
+  currency: string;
+};
+
+export declare type SpendLimitStatusValid = SpendLimitStatus;
+
+/**
+ * Describes the message qdrant.cloud.serverless.space.v1.SpendLimitStatus.
+ * Use `create(SpendLimitStatusSchema)` to create a new message.
+ */
+export declare const SpendLimitStatusSchema: GenMessage<SpendLimitStatus, {validType: SpendLimitStatusValid}>;
 
 /**
  * Endpoint information to access the qdrant space (aka serverless database).
@@ -1004,6 +1251,41 @@ export declare type SpaceEndpointValid = SpaceEndpoint;
  * Use `create(SpaceEndpointSchema)` to create a new message.
  */
 export declare const SpaceEndpointSchema: GenMessage<SpaceEndpoint, {validType: SpaceEndpointValid}>;
+
+/**
+ * LimitType defines what happens when usage reaches 100% of a limit.
+ *
+ * @generated from enum qdrant.cloud.serverless.space.v1.LimitType
+ */
+export enum LimitType {
+  /**
+   * The limit type is unspecified.
+   * On write, the server treats it as LIMIT_TYPE_HARD and always returns an explicit value.
+   *
+   * @generated from enum value: LIMIT_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Operations are rejected once usage reaches the limit.
+   * Which operations are rejected depends on the limit (see StorageLimit and SpendLimit).
+   *
+   * @generated from enum value: LIMIT_TYPE_HARD = 1;
+   */
+  HARD = 1,
+
+  /**
+   * An alert is sent once usage reaches the limit. All operations keep working.
+   *
+   * @generated from enum value: LIMIT_TYPE_SOFT = 2;
+   */
+  SOFT = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.space.v1.LimitType.
+ */
+export declare const LimitTypeSchema: GenEnum<LimitType>;
 
 /**
  * SpaceStatePhase defines the operational phases of a Qdrant serverless space.
@@ -1051,6 +1333,96 @@ export enum SpaceStatePhase {
  * Describes the enum qdrant.cloud.serverless.space.v1.SpaceStatePhase.
  */
 export declare const SpaceStatePhaseSchema: GenEnum<SpaceStatePhase>;
+
+/**
+ * SpaceAccessMode defines which operations a space currently accepts, after applying its limits.
+ * When several limits are reached, the most restrictive mode applies.
+ *
+ * @generated from enum qdrant.cloud.serverless.space.v1.SpaceAccessMode
+ */
+export enum SpaceAccessMode {
+  /**
+   * The access mode is unspecified.
+   *
+   * @generated from enum value: SPACE_ACCESS_MODE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * All operations are accepted.
+   *
+   * @generated from enum value: SPACE_ACCESS_MODE_FULL = 1;
+   */
+  FULL = 1,
+
+  /**
+   * Upserts are rejected. Searches and deletes are accepted.
+   * Set when a hard storage limit is reached.
+   *
+   * @generated from enum value: SPACE_ACCESS_MODE_WRITES_BLOCKED = 2;
+   */
+  WRITES_BLOCKED = 2,
+
+  /**
+   * All read and write operations, including deletes, are rejected.
+   * Set when a hard spend limit is reached.
+   *
+   * @generated from enum value: SPACE_ACCESS_MODE_BLOCKED = 3;
+   */
+  BLOCKED = 3,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.space.v1.SpaceAccessMode.
+ */
+export declare const SpaceAccessModeSchema: GenEnum<SpaceAccessMode>;
+
+/**
+ * LimitUsageLevel defines how current usage relates to a limit.
+ *
+ * @generated from enum qdrant.cloud.serverless.space.v1.LimitUsageLevel
+ */
+export enum LimitUsageLevel {
+  /**
+   * The usage level is unspecified.
+   *
+   * @generated from enum value: LIMIT_USAGE_LEVEL_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * No limit is set.
+   *
+   * @generated from enum value: LIMIT_USAGE_LEVEL_UNLIMITED = 1;
+   */
+  UNLIMITED = 1,
+
+  /**
+   * Usage is below the alert threshold.
+   *
+   * @generated from enum value: LIMIT_USAGE_LEVEL_OK = 2;
+   */
+  OK = 2,
+
+  /**
+   * Usage is at or above the alert threshold, but below the limit.
+   *
+   * @generated from enum value: LIMIT_USAGE_LEVEL_THRESHOLD_REACHED = 3;
+   */
+  THRESHOLD_REACHED = 3,
+
+  /**
+   * Usage is at or above the limit.
+   *
+   * @generated from enum value: LIMIT_USAGE_LEVEL_LIMIT_REACHED = 4;
+   */
+  LIMIT_REACHED = 4,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.space.v1.LimitUsageLevel.
+ */
+export declare const LimitUsageLevelSchema: GenEnum<LimitUsageLevel>;
 
 /**
  * SpaceService provides operations for managing spaces.

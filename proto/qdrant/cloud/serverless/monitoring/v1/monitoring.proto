@@ -17,7 +17,7 @@ service MonitoringService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 2
-    minor: 3
+    minor: 4
     patch: 0
   };
   // Gets the summary metrics of a space in the account identified by the given ID.
@@ -767,6 +767,18 @@ enum SpaceAlertType {
   // Collection indexed storage usage is over the size warning threshold
   // (size_warning_threshold_percent of the effective maximum indexed size).
   SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED = 5;
+  // Space storage is at or above the alert threshold of the storage limit
+  // (alert_threshold_percent of configuration.storage_limit.max_size).
+  SPACE_ALERT_TYPE_STORAGE_LIMIT_THRESHOLD_REACHED = 6;
+  // Space storage is at or above the storage limit.
+  // With a hard limit, upserts are rejected until storage drops below the limit.
+  SPACE_ALERT_TYPE_STORAGE_LIMIT_REACHED = 7;
+  // Space spend in the current period is at or above the alert threshold of the monthly spend limit
+  // (alert_threshold_percent of configuration.monthly_spend_limit.max_amount_millicents).
+  SPACE_ALERT_TYPE_SPEND_LIMIT_THRESHOLD_REACHED = 8;
+  // Space spend in the current period is at or above the monthly spend limit.
+  // With a hard limit, all read and write operations are rejected until the next period starts.
+  SPACE_ALERT_TYPE_SPEND_LIMIT_REACHED = 9;
 }
 
 // SpaceAlertSeverity is the tier used by the UI to render badge color and announce severity to

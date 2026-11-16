@@ -219,6 +219,18 @@ const (
 	// Collection indexed storage usage is over the size warning threshold
 	// (size_warning_threshold_percent of the effective maximum indexed size).
 	SpaceAlertType_SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED SpaceAlertType = 5
+	// Space storage is at or above the alert threshold of the storage limit
+	// (alert_threshold_percent of configuration.storage_limit.max_size).
+	SpaceAlertType_SPACE_ALERT_TYPE_STORAGE_LIMIT_THRESHOLD_REACHED SpaceAlertType = 6
+	// Space storage is at or above the storage limit.
+	// With a hard limit, upserts are rejected until storage drops below the limit.
+	SpaceAlertType_SPACE_ALERT_TYPE_STORAGE_LIMIT_REACHED SpaceAlertType = 7
+	// Space spend in the current period is at or above the alert threshold of the monthly spend limit
+	// (alert_threshold_percent of configuration.monthly_spend_limit.max_amount_millicents).
+	SpaceAlertType_SPACE_ALERT_TYPE_SPEND_LIMIT_THRESHOLD_REACHED SpaceAlertType = 8
+	// Space spend in the current period is at or above the monthly spend limit.
+	// With a hard limit, all read and write operations are rejected until the next period starts.
+	SpaceAlertType_SPACE_ALERT_TYPE_SPEND_LIMIT_REACHED SpaceAlertType = 9
 )
 
 // Enum value maps for SpaceAlertType.
@@ -230,6 +242,10 @@ var (
 		3: "SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE",
 		4: "SPACE_ALERT_TYPE_SPACE_UNHEALTHY",
 		5: "SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED",
+		6: "SPACE_ALERT_TYPE_STORAGE_LIMIT_THRESHOLD_REACHED",
+		7: "SPACE_ALERT_TYPE_STORAGE_LIMIT_REACHED",
+		8: "SPACE_ALERT_TYPE_SPEND_LIMIT_THRESHOLD_REACHED",
+		9: "SPACE_ALERT_TYPE_SPEND_LIMIT_REACHED",
 	}
 	SpaceAlertType_value = map[string]int32{
 		"SPACE_ALERT_TYPE_UNSPECIFIED":                             0,
@@ -238,6 +254,10 @@ var (
 		"SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE":           3,
 		"SPACE_ALERT_TYPE_SPACE_UNHEALTHY":                         4,
 		"SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED": 5,
+		"SPACE_ALERT_TYPE_STORAGE_LIMIT_THRESHOLD_REACHED":         6,
+		"SPACE_ALERT_TYPE_STORAGE_LIMIT_REACHED":                   7,
+		"SPACE_ALERT_TYPE_SPEND_LIMIT_THRESHOLD_REACHED":           8,
+		"SPACE_ALERT_TYPE_SPEND_LIMIT_REACHED":                     9,
 	}
 )
 
@@ -2388,14 +2408,18 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x0fSpaceAlertState\x12!\n" +
 	"\x1dSPACE_ALERT_STATE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18SPACE_ALERT_STATE_FIRING\x10\x01\x12\x1e\n" +
-	"\x1aSPACE_ALERT_STATE_RESOLVED\x10\x02*\xab\x02\n" +
+	"\x1aSPACE_ALERT_STATE_RESOLVED\x10\x02*\xeb\x03\n" +
 	"\x0eSpaceAlertType\x12 \n" +
 	"\x1cSPACE_ALERT_TYPE_UNSPECIFIED\x10\x00\x124\n" +
 	"0SPACE_ALERT_TYPE_COLLECTION_STORAGE_OVERUTILIZED\x10\x01\x12)\n" +
 	"%SPACE_ALERT_TYPE_TOO_MANY_COLLECTIONS\x10\x02\x122\n" +
 	".SPACE_ALERT_TYPE_SPACE_API_KEY_ABOUT_TO_EXPIRE\x10\x03\x12$\n" +
 	" SPACE_ALERT_TYPE_SPACE_UNHEALTHY\x10\x04\x12<\n" +
-	"8SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED\x10\x05*\x9e\x01\n" +
+	"8SPACE_ALERT_TYPE_COLLECTION_INDEXED_STORAGE_OVERUTILIZED\x10\x05\x124\n" +
+	"0SPACE_ALERT_TYPE_STORAGE_LIMIT_THRESHOLD_REACHED\x10\x06\x12*\n" +
+	"&SPACE_ALERT_TYPE_STORAGE_LIMIT_REACHED\x10\a\x122\n" +
+	".SPACE_ALERT_TYPE_SPEND_LIMIT_THRESHOLD_REACHED\x10\b\x12(\n" +
+	"$SPACE_ALERT_TYPE_SPEND_LIMIT_REACHED\x10\t*\x9e\x01\n" +
 	"\x12SpaceAlertSeverity\x12$\n" +
 	" SPACE_ALERT_SEVERITY_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19SPACE_ALERT_SEVERITY_INFO\x10\x01\x12 \n" +
@@ -2439,7 +2463,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\bspace_id\x12\x02id\"\x18\n" +
 	"\n" +
 	"account_id\x12\n" +
-	"account_id(\x012 Alerts for this serverless space\x82\xd3\xe4\x93\x02C\x12A/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts\x1a\bµ\x18\x04\b\x02\x10\x03B\xda\x02\n" +
+	"account_id(\x012 Alerts for this serverless space\x82\xd3\xe4\x93\x02C\x12A/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts\x1a\bµ\x18\x04\b\x02\x10\x04B\xda\x02\n" +
 	")com.qdrant.cloud.serverless.monitoring.v1B\x0fMonitoringProtoP\x01Zcgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/monitoring/v1;monitoringv1\xa2\x02\x04QCSM\xaa\x02%Qdrant.Cloud.Serverless.Monitoring.V1\xca\x02%Qdrant\\Cloud\\Serverless\\Monitoring\\V1\xe2\x021Qdrant\\Cloud\\Serverless\\Monitoring\\V1\\GPBMetadata\xea\x02)Qdrant::Cloud::Serverless::Monitoring::V1b\x06proto3"
 
 var (

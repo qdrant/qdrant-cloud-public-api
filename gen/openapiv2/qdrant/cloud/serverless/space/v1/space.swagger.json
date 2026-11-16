@@ -648,6 +648,28 @@
       },
       "description": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes."
     },
+    "v1LimitType": {
+      "type": "string",
+      "enum": [
+        "LIMIT_TYPE_UNSPECIFIED",
+        "LIMIT_TYPE_HARD",
+        "LIMIT_TYPE_SOFT"
+      ],
+      "default": "LIMIT_TYPE_UNSPECIFIED",
+      "description": "LimitType defines what happens when usage reaches 100% of a limit.\n\n - LIMIT_TYPE_UNSPECIFIED: The limit type is unspecified.\nOn write, the server treats it as LIMIT_TYPE_HARD and always returns an explicit value.\n - LIMIT_TYPE_HARD: Operations are rejected once usage reaches the limit.\nWhich operations are rejected depends on the limit (see StorageLimit and SpendLimit).\n - LIMIT_TYPE_SOFT: An alert is sent once usage reaches the limit. All operations keep working."
+    },
+    "v1LimitUsageLevel": {
+      "type": "string",
+      "enum": [
+        "LIMIT_USAGE_LEVEL_UNSPECIFIED",
+        "LIMIT_USAGE_LEVEL_UNLIMITED",
+        "LIMIT_USAGE_LEVEL_OK",
+        "LIMIT_USAGE_LEVEL_THRESHOLD_REACHED",
+        "LIMIT_USAGE_LEVEL_LIMIT_REACHED"
+      ],
+      "default": "LIMIT_USAGE_LEVEL_UNSPECIFIED",
+      "description": "LimitUsageLevel defines how current usage relates to a limit.\n\n - LIMIT_USAGE_LEVEL_UNSPECIFIED: The usage level is unspecified.\n - LIMIT_USAGE_LEVEL_UNLIMITED: No limit is set.\n - LIMIT_USAGE_LEVEL_OK: Usage is below the alert threshold.\n - LIMIT_USAGE_LEVEL_THRESHOLD_REACHED: Usage is at or above the alert threshold, but below the limit.\n - LIMIT_USAGE_LEVEL_LIMIT_REACHED: Usage is at or above the limit."
+    },
     "v1ListSpacesResponse": {
       "type": "object",
       "properties": {
@@ -788,6 +810,17 @@
       },
       "description": "Space represents a space in the Qdrant serverless environment.\nIt can be used to store collections which can hold points."
     },
+    "v1SpaceAccessMode": {
+      "type": "string",
+      "enum": [
+        "SPACE_ACCESS_MODE_UNSPECIFIED",
+        "SPACE_ACCESS_MODE_FULL",
+        "SPACE_ACCESS_MODE_WRITES_BLOCKED",
+        "SPACE_ACCESS_MODE_BLOCKED"
+      ],
+      "default": "SPACE_ACCESS_MODE_UNSPECIFIED",
+      "description": "SpaceAccessMode defines which operations a space currently accepts, after applying its limits.\nWhen several limits are reached, the most restrictive mode applies.\n\n - SPACE_ACCESS_MODE_UNSPECIFIED: The access mode is unspecified.\n - SPACE_ACCESS_MODE_FULL: All operations are accepted.\n - SPACE_ACCESS_MODE_WRITES_BLOCKED: Upserts are rejected. Searches and deletes are accepted.\nSet when a hard storage limit is reached.\n - SPACE_ACCESS_MODE_BLOCKED: All read and write operations, including deletes, are rejected.\nSet when a hard spend limit is reached."
+    },
     "v1SpaceConfiguration": {
       "type": "object",
       "properties": {
@@ -824,6 +857,14 @@
         "searcherSettings": {
           "$ref": "#/definitions/v1SearcherSettings",
           "description": "Search-worker settings for this space.\nPlatform worker ceilings are derived from the account's quota; the worker count is writable via UpdateSpace."
+        },
+        "storageLimit": {
+          "$ref": "#/definitions/v1StorageLimit",
+          "description": "Optional limit on the total storage of the space.\nWhen unset, storage is unlimited. New spaces have no storage limit.\nThis field is writable via UpdateSpace (update_mask path \"configuration.storage_limit\").\nTo remove the limit, include the path in the update_mask and leave the field unset."
+        },
+        "monthlySpendLimit": {
+          "$ref": "#/definitions/v1SpendLimit",
+          "description": "Optional limit on the monthly spend of the space for searches and writes combined.\nStorage cost is not part of this limit.\nWhen unset, spend is unlimited. New spaces have no spend limit.\nThis field is writable via UpdateSpace (update_mask path \"configuration.monthly_spend_limit\").\nTo remove the limit, include the path in the update_mask and leave the field unset."
         }
       },
       "description": "A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment."
@@ -838,6 +879,27 @@
         }
       },
       "description": "Endpoint information to access the qdrant space (aka serverless database).\nAll fields in this message are a read-only field."
+    },
+    "v1SpaceLimitsStatus": {
+      "type": "object",
+      "properties": {
+        "accessMode": {
+          "$ref": "#/definitions/v1SpaceAccessMode",
+          "description": "The operations the space currently accepts.",
+          "readOnly": true
+        },
+        "storage": {
+          "$ref": "#/definitions/v1StorageLimitStatus",
+          "description": "Storage usage against the storage limit.",
+          "readOnly": true
+        },
+        "monthlySpend": {
+          "$ref": "#/definitions/v1SpendLimitStatus",
+          "description": "Spend in the current period against the monthly spend limit.",
+          "readOnly": true
+        }
+      },
+      "description": "SpaceLimitsStatus reports the usage of a space against its limits.\nAll fields in this message are read-only."
     },
     "v1SpaceState": {
       "type": "object",
@@ -856,6 +918,11 @@
           "$ref": "#/definitions/v1SpaceEndpoint",
           "description": "The URL endpoint where clients can connect to and interact with the space.\nNot set if the space is not yet ready or is disabled.",
           "readOnly": true
+        },
+        "limits": {
+          "$ref": "#/definitions/v1SpaceLimitsStatus",
+          "description": "Usage of the space against its storage and spend limits, and which operations are currently allowed.\nUsage is refreshed about every 5 minutes, and limits are enforced on the refreshed values.",
+          "readOnly": true
         }
       },
       "description": "SpaceState represents the operational state of a space in the Qdrant serverless environment.\nIt provides status information, error details (if any), and endpoint access information.\nAll fields in this message are read-only."
@@ -871,6 +938,102 @@
       ],
       "default": "SPACE_STATE_PHASE_UNSPECIFIED",
       "description": "SpaceStatePhase defines the operational phases of a Qdrant serverless space.\n\n - SPACE_STATE_PHASE_UNSPECIFIED: Unspecified phase.\n - SPACE_STATE_PHASE_PROCESSING: The Space is being created, updated, or undergoing maintenance.\n - SPACE_STATE_PHASE_READY: The Space is fully operational and available for use.\n - SPACE_STATE_PHASE_DISABLED: The Space has been temporarily or permanently disabled.\n - SPACE_STATE_PHASE_DELETING: The Space is being deleted."
+    },
+    "v1SpendLimit": {
+      "type": "object",
+      "properties": {
+        "maxAmountMillicents": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Maximum spend per period, in millicents of `currency`.\nFor example, 5000000 is 50 USD.\nIt may be set below the current spend, in which case it takes effect immediately.\nThis is a required field."
+        },
+        "type": {
+          "$ref": "#/definitions/v1LimitType",
+          "description": "What happens when spend reaches max_amount_millicents. Defaults to LIMIT_TYPE_HARD when unset.\nHard limit: all read and write operations (including deletes) are rejected until the next period starts.\nOperations resume at the start of the next period, or right away when the limit is raised,\nswitched to a soft limit, or removed.\nSoft limit: an alert is sent and all operations keep working."
+        },
+        "alertThresholdPercent": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Percentage of max_amount_millicents at which an alert is sent.\nValid range: 1 to 99. Defaults to 80 when unset."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of max_amount_millicents, as a 3-letter ISO 4217 code.\nThis is a read-only field. Currently always \"USD\".",
+          "readOnly": true
+        }
+      },
+      "description": "SpendLimit caps the monthly spend of a space for searches and writes combined.\nStorage cost is not part of this limit.\nThe spend period is the calendar month in UTC."
+    },
+    "v1SpendLimitStatus": {
+      "type": "object",
+      "properties": {
+        "usedAmountMillicents": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Spend for searches and writes in the current period, in millicents of `currency`.\nReported also when no spend limit is set.",
+          "readOnly": true
+        },
+        "level": {
+          "$ref": "#/definitions/v1LimitUsageLevel",
+          "description": "How the current spend relates to the spend limit.",
+          "readOnly": true
+        },
+        "periodStart": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of the current period (inclusive), the first day of the month at 00:00 UTC.",
+          "readOnly": true
+        },
+        "periodEnd": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of the current period (exclusive), the first day of the next month at 00:00 UTC.\nWhen a hard spend limit is reached, operations resume at this time.",
+          "readOnly": true
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency of used_amount_millicents, as a 3-letter ISO 4217 code. Currently always \"USD\".",
+          "readOnly": true
+        }
+      },
+      "description": "SpendLimitStatus reports the spend of a space in the current period against its monthly spend limit.\nAll fields in this message are read-only."
+    },
+    "v1StorageLimit": {
+      "type": "object",
+      "properties": {
+        "maxSize": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Maximum total storage of the space, in bytes.\nIt may be set below the current usage, in which case it takes effect immediately.\nThis is a required field."
+        },
+        "type": {
+          "$ref": "#/definitions/v1LimitType",
+          "description": "What happens when storage reaches max_size. Defaults to LIMIT_TYPE_HARD when unset.\nHard limit: upserts are rejected, while searches and deletes keep working.\nWrites resume once storage drops below max_size, or when the limit is raised,\nswitched to a soft limit, or removed.\nSoft limit: an alert is sent and all operations keep working."
+        },
+        "alertThresholdPercent": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Percentage of max_size at which an alert is sent.\nValid range: 1 to 99. Defaults to 80 when unset."
+        }
+      },
+      "description": "StorageLimit caps the total storage of a space."
+    },
+    "v1StorageLimitStatus": {
+      "type": "object",
+      "properties": {
+        "usedSize": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Current total storage of the space, in bytes.\nReported also when no storage limit is set.",
+          "readOnly": true
+        },
+        "level": {
+          "$ref": "#/definitions/v1LimitUsageLevel",
+          "description": "How the current usage relates to the storage limit.",
+          "readOnly": true
+        }
+      },
+      "description": "StorageLimitStatus reports the storage usage of a space against its storage limit.\nAll fields in this message are read-only."
     },
     "v1SuggestSpaceNameResponse": {
       "type": "object",
