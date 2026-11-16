@@ -4,6 +4,7 @@ hotspot
 lon
 OOD
 OOM
+sev
 stopword
 stopwords
 totp
