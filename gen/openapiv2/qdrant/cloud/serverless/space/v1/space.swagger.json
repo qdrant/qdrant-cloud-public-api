@@ -945,7 +945,7 @@
         "maxAmountMillicents": {
           "type": "string",
           "format": "uint64",
-          "description": "Maximum spend per period, in millicents of `currency`.\nFor example, 5000000 is 50 USD.\nIt may be set below the current spend, in which case it takes effect immediately.\nThis is a required field."
+          "description": "Maximum spend per period, in millicents of `currency`.\nA millicent is 1/1000 of a cent (0.00001 USD), so 1 USD is 100000 millicents\nand 5000000 is 50 USD.\nIt may be set below the current spend, in which case it takes effect immediately.\nThis is a required field."
         },
         "type": {
           "$ref": "#/definitions/v1LimitType",
@@ -970,7 +970,7 @@
         "usedAmountMillicents": {
           "type": "string",
           "format": "uint64",
-          "description": "Spend for searches and writes in the current period, in millicents of `currency`.\nReported also when no spend limit is set.",
+          "description": "Spend for searches and writes in the current period, in millicents of `currency`.\nA millicent is 1/1000 of a cent (0.00001 USD), so 1 USD is 100000 millicents.\nReported also when no spend limit is set.",
           "readOnly": true
         },
         "level": {

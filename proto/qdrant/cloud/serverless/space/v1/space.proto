@@ -19,7 +19,7 @@ service SpaceService {
   option (qdrant.cloud.common.v1.api_version) = {
     major: 2
     minor: 2
-    patch: 0
+    patch: 1
   };
   // ListSpaces returns all spaces for the authenticated user
   // Required Permissions:
@@ -633,7 +633,8 @@ message StorageLimit {
 // The spend period is the calendar month in UTC.
 message SpendLimit {
   // Maximum spend per period, in millicents of `currency`.
-  // For example, 5000000 is 50 USD.
+  // A millicent is 1/1000 of a cent (0.00001 USD), so 1 USD is 100000 millicents
+  // and 5000000 is 50 USD.
   // It may be set below the current spend, in which case it takes effect immediately.
   // This is a required field.
   uint64 max_amount_millicents = 1 [(buf.validate.field).uint64.gt = 0];
@@ -755,6 +756,7 @@ message StorageLimitStatus {
 // All fields in this message are read-only.
 message SpendLimitStatus {
   // Spend for searches and writes in the current period, in millicents of `currency`.
+  // A millicent is 1/1000 of a cent (0.00001 USD), so 1 USD is 100000 millicents.
   // Reported also when no spend limit is set.
   uint64 used_amount_millicents = 1 [
     (buf.validate.field).uint64.gte = 0,

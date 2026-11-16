@@ -1014,7 +1014,8 @@ export declare const StorageLimitSchema: GenMessage<StorageLimit, {validType: St
 export declare type SpendLimit = Message<"qdrant.cloud.serverless.space.v1.SpendLimit"> & {
   /**
    * Maximum spend per period, in millicents of `currency`.
-   * For example, 5000000 is 50 USD.
+   * A millicent is 1/1000 of a cent (0.00001 USD), so 1 USD is 100000 millicents
+   * and 5000000 is 50 USD.
    * It may be set below the current spend, in which case it takes effect immediately.
    * This is a required field.
    *
@@ -1183,6 +1184,7 @@ export declare const StorageLimitStatusSchema: GenMessage<StorageLimitStatus, {v
 export declare type SpendLimitStatus = Message<"qdrant.cloud.serverless.space.v1.SpendLimitStatus"> & {
   /**
    * Spend for searches and writes in the current period, in millicents of `currency`.
+   * A millicent is 1/1000 of a cent (0.00001 USD), so 1 USD is 100000 millicents.
    * Reported also when no spend limit is set.
    *
    * @generated from field: uint64 used_amount_millicents = 1;

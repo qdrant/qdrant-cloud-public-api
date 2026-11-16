@@ -1568,7 +1568,8 @@ func (x *StorageLimit) GetAlertThresholdPercent() uint32 {
 type SpendLimit struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Maximum spend per period, in millicents of `currency`.
-	// For example, 5000000 is 50 USD.
+	// A millicent is 1/1000 of a cent (0.00001 USD), so 1 USD is 100000 millicents
+	// and 5000000 is 50 USD.
 	// It may be set below the current spend, in which case it takes effect immediately.
 	// This is a required field.
 	MaxAmountMillicents uint64 `protobuf:"varint,1,opt,name=max_amount_millicents,json=maxAmountMillicents,proto3" json:"max_amount_millicents,omitempty"`
@@ -1851,6 +1852,7 @@ func (x *StorageLimitStatus) GetLevel() LimitUsageLevel {
 type SpendLimitStatus struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Spend for searches and writes in the current period, in millicents of `currency`.
+	// A millicent is 1/1000 of a cent (0.00001 USD), so 1 USD is 100000 millicents.
 	// Reported also when no spend limit is set.
 	UsedAmountMillicents uint64 `protobuf:"varint,1,opt,name=used_amount_millicents,json=usedAmountMillicents,proto3" json:"used_amount_millicents,omitempty"`
 	// How the current spend relates to the spend limit.
@@ -2151,7 +2153,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1bLIMIT_USAGE_LEVEL_UNLIMITED\x10\x01\x12\x18\n" +
 	"\x14LIMIT_USAGE_LEVEL_OK\x10\x02\x12'\n" +
 	"#LIMIT_USAGE_LEVEL_THRESHOLD_REACHED\x10\x03\x12#\n" +
-	"\x1fLIMIT_USAGE_LEVEL_LIMIT_REACHED\x10\x042\xd0\x1a\n" +
+	"\x1fLIMIT_USAGE_LEVEL_LIMIT_REACHED\x10\x042\xd2\x1a\n" +
 	"\fSpaceService\x12\xc9\x02\n" +
 	"\n" +
 	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"\xcf\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19V\n" +
@@ -2199,7 +2201,8 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"\xd0\x01\x8a\xb5\x18\x00\x8a\xb2\x19V\n" +
 	"@Suggest a unique human-friendly name for a new serverless space.\x12\x12Suggest space name\xaa\xb8\x19\x14\n" +
 	"\x12suggest_space_nameʾ\x19\x12\n" +
-	"\x10suggestSpaceName\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\bµ\x18\x04\b\x02\x10\x02B\xb2\x02\n" +
+	"\x10suggestSpaceName\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\n" +
+	"µ\x18\x06\b\x02\x10\x02\x18\x01B\xb2\x02\n" +
 	"$com.qdrant.cloud.serverless.space.v1B\n" +
 	"SpaceProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/v1;spacev1\xa2\x02\x04QCSS\xaa\x02 Qdrant.Cloud.Serverless.Space.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Space\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Space\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Space::V1b\x06proto3"
 
