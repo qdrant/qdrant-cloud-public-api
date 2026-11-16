@@ -333,6 +333,10 @@
             "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeSnapshotClass"
           },
           "description": "Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only."
+        },
+        "tenancy": {
+          "$ref": "#/definitions/v1CloudProviderRegionTenancy",
+          "description": "Which accounts can create clusters in this region.\nUnspecified for hybrid cloud regions. Unspecified on a managed cloud region means shared."
         }
       },
       "description": "CloudProviderRegion represents a cloud provider region."
@@ -350,6 +354,16 @@
         }
       },
       "description": "CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region."
+    },
+    "v1CloudProviderRegionTenancy": {
+      "type": "string",
+      "enum": [
+        "CLOUD_PROVIDER_REGION_TENANCY_UNSPECIFIED",
+        "CLOUD_PROVIDER_REGION_TENANCY_SHARED",
+        "CLOUD_PROVIDER_REGION_TENANCY_DEDICATED"
+      ],
+      "default": "CLOUD_PROVIDER_REGION_TENANCY_UNSPECIFIED",
+      "description": "CloudProviderRegionTenancy defines which accounts can create clusters in a cloud provider region.\n\n - CLOUD_PROVIDER_REGION_TENANCY_UNSPECIFIED: The tenancy is not specified. This is always the case for a hybrid cloud region.\nOn a managed cloud region, treat it as shared.\n - CLOUD_PROVIDER_REGION_TENANCY_SHARED: The region is shared by all accounts.\n - CLOUD_PROVIDER_REGION_TENANCY_DEDICATED: The region runs on infrastructure dedicated to the requesting account.\nOnly accounts with access to the region can see it and create clusters in it."
     },
     "v1GetCloudProviderRegionResponse": {
       "type": "object",

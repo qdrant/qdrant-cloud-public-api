@@ -2,7 +2,7 @@
 // @generated from file qdrant/cloud/platform/v1/platform.proto (package qdrant.cloud.platform.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { HybridCloudEnvironmentStorageClass, HybridCloudEnvironmentVolumeSnapshotClass } from "../../hybrid/v1/hybrid_cloud_pb.js";
 
@@ -437,6 +437,14 @@ export declare type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.Clou
    * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 12;
    */
   volumeSnapshotClasses: HybridCloudEnvironmentVolumeSnapshotClass[];
+
+  /**
+   * Which accounts can create clusters in this region.
+   * Unspecified for hybrid cloud regions. Unspecified on a managed cloud region means shared.
+   *
+   * @generated from field: qdrant.cloud.platform.v1.CloudProviderRegionTenancy tenancy = 14;
+   */
+  tenancy: CloudProviderRegionTenancy;
 };
 
 export declare type CloudProviderRegionValid = CloudProviderRegion;
@@ -475,6 +483,41 @@ export declare type CloudProviderRegionCapabilitiesValid = CloudProviderRegionCa
  * Use `create(CloudProviderRegionCapabilitiesSchema)` to create a new message.
  */
 export declare const CloudProviderRegionCapabilitiesSchema: GenMessage<CloudProviderRegionCapabilities, {validType: CloudProviderRegionCapabilitiesValid}>;
+
+/**
+ * CloudProviderRegionTenancy defines which accounts can create clusters in a cloud provider region.
+ *
+ * @generated from enum qdrant.cloud.platform.v1.CloudProviderRegionTenancy
+ */
+export enum CloudProviderRegionTenancy {
+  /**
+   * The tenancy is not specified. This is always the case for a hybrid cloud region.
+   * On a managed cloud region, treat it as shared.
+   *
+   * @generated from enum value: CLOUD_PROVIDER_REGION_TENANCY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The region is shared by all accounts.
+   *
+   * @generated from enum value: CLOUD_PROVIDER_REGION_TENANCY_SHARED = 1;
+   */
+  SHARED = 1,
+
+  /**
+   * The region runs on infrastructure dedicated to the requesting account.
+   * Only accounts with access to the region can see it and create clusters in it.
+   *
+   * @generated from enum value: CLOUD_PROVIDER_REGION_TENANCY_DEDICATED = 2;
+   */
+  DEDICATED = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.platform.v1.CloudProviderRegionTenancy.
+ */
+export declare const CloudProviderRegionTenancySchema: GenEnum<CloudProviderRegionTenancy>;
 
 /**
  * PlatformService is the API used to query for cloud provider & regional information for the dedicated clusters in the platform.

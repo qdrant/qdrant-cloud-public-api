@@ -13,7 +13,7 @@ service PlatformService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Lists all available cloud providers globally (not account-specific).
@@ -276,6 +276,9 @@ message CloudProviderRegion {
   repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass storage_classes = 11;
   // Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
   repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 12;
+  // Which accounts can create clusters in this region.
+  // Unspecified for hybrid cloud regions. Unspecified on a managed cloud region means shared.
+  CloudProviderRegionTenancy tenancy = 14 [(buf.validate.field).enum.defined_only = true];
 }
 
 // CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region.
@@ -284,4 +287,16 @@ message CloudProviderRegionCapabilities {
   bool volume_snapshot = 1;
   // Whether volume expansion is supported.
   bool volume_expansion = 2;
+}
+
+// CloudProviderRegionTenancy defines which accounts can create clusters in a cloud provider region.
+enum CloudProviderRegionTenancy {
+  // The tenancy is not specified. This is always the case for a hybrid cloud region.
+  // On a managed cloud region, treat it as shared.
+  CLOUD_PROVIDER_REGION_TENANCY_UNSPECIFIED = 0;
+  // The region is shared by all accounts.
+  CLOUD_PROVIDER_REGION_TENANCY_SHARED = 1;
+  // The region runs on infrastructure dedicated to the requesting account.
+  // Only accounts with access to the region can see it and create clusters in it.
+  CLOUD_PROVIDER_REGION_TENANCY_DEDICATED = 2;
 }
