@@ -2263,7 +2263,7 @@ func (x *AccountSettings) GetMfaRequired() bool {
 	return false
 }
 
-// SupportTerms represents the uptime commitments that apply to an account.
+// SupportTerms represents the uptime and support first-response commitments that apply to an account.
 // The values are the effective terms: the defaults of the account's support tier,
 // with any terms negotiated for the account (an account override) applied on top.
 type SupportTerms struct {
@@ -2273,8 +2273,20 @@ type SupportTerms struct {
 	// The uptime commitment for Multi-AZ clusters, in percent (e.g. 99.95).
 	// Unset when Multi-AZ doesn't apply to the account.
 	MultiAzUptimePercent *float64 `protobuf:"fixed64,2,opt,name=multi_az_uptime_percent,json=multiAzUptimePercent,proto3,oneof" json:"multi_az_uptime_percent,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// The effective first-response commitment for Severity 1, in minutes.
+	// Unset when no response-time commitment applies.
+	Sev1FirstResponseMinutes *uint32 `protobuf:"varint,3,opt,name=sev1_first_response_minutes,json=sev1FirstResponseMinutes,proto3,oneof" json:"sev1_first_response_minutes,omitempty"`
+	// The effective first-response commitment for Severity 2, in minutes.
+	// Unset when no response-time commitment applies.
+	Sev2FirstResponseMinutes *uint32 `protobuf:"varint,4,opt,name=sev2_first_response_minutes,json=sev2FirstResponseMinutes,proto3,oneof" json:"sev2_first_response_minutes,omitempty"`
+	// The effective first-response commitment for Severity 3, in minutes.
+	// Unset when no response-time commitment applies.
+	Sev3FirstResponseMinutes *uint32 `protobuf:"varint,5,opt,name=sev3_first_response_minutes,json=sev3FirstResponseMinutes,proto3,oneof" json:"sev3_first_response_minutes,omitempty"`
+	// The effective first-response commitment for Severity 4, in minutes.
+	// Unset when no response-time commitment applies.
+	Sev4FirstResponseMinutes *uint32 `protobuf:"varint,6,opt,name=sev4_first_response_minutes,json=sev4FirstResponseMinutes,proto3,oneof" json:"sev4_first_response_minutes,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *SupportTerms) Reset() {
@@ -2317,6 +2329,34 @@ func (x *SupportTerms) GetUptimePercent() float64 {
 func (x *SupportTerms) GetMultiAzUptimePercent() float64 {
 	if x != nil && x.MultiAzUptimePercent != nil {
 		return *x.MultiAzUptimePercent
+	}
+	return 0
+}
+
+func (x *SupportTerms) GetSev1FirstResponseMinutes() uint32 {
+	if x != nil && x.Sev1FirstResponseMinutes != nil {
+		return *x.Sev1FirstResponseMinutes
+	}
+	return 0
+}
+
+func (x *SupportTerms) GetSev2FirstResponseMinutes() uint32 {
+	if x != nil && x.Sev2FirstResponseMinutes != nil {
+		return *x.Sev2FirstResponseMinutes
+	}
+	return 0
+}
+
+func (x *SupportTerms) GetSev3FirstResponseMinutes() uint32 {
+	if x != nil && x.Sev3FirstResponseMinutes != nil {
+		return *x.Sev3FirstResponseMinutes
+	}
+	return 0
+}
+
+func (x *SupportTerms) GetSev4FirstResponseMinutes() uint32 {
+	if x != nil && x.Sev4FirstResponseMinutes != nil {
+		return *x.Sev4FirstResponseMinutes
 	}
 	return 0
 }
@@ -2472,11 +2512,19 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04nameB\t\n" +
 	"\a_domain\"4\n" +
 	"\x0fAccountSettings\x12!\n" +
-	"\fmfa_required\x18\x01 \x01(\bR\vmfaRequired\"\xbf\x01\n" +
+	"\fmfa_required\x18\x01 \x01(\bR\vmfaRequired\"\xf3\x04\n" +
 	"\fSupportTerms\x12>\n" +
 	"\x0euptime_percent\x18\x01 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@!\x00\x00\x00\x00\x00\x00\x00\x00R\ruptimePercent\x12S\n" +
-	"\x17multi_az_uptime_percent\x18\x02 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@!\x00\x00\x00\x00\x00\x00\x00\x00H\x00R\x14multiAzUptimePercent\x88\x01\x01B\x1a\n" +
-	"\x18_multi_az_uptime_percent*\xcb\x01\n" +
+	"\x17multi_az_uptime_percent\x18\x02 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@!\x00\x00\x00\x00\x00\x00\x00\x00H\x00R\x14multiAzUptimePercent\x88\x01\x01\x12K\n" +
+	"\x1bsev1_first_response_minutes\x18\x03 \x01(\rB\a\xbaH\x04*\x02 \x00H\x01R\x18sev1FirstResponseMinutes\x88\x01\x01\x12K\n" +
+	"\x1bsev2_first_response_minutes\x18\x04 \x01(\rB\a\xbaH\x04*\x02 \x00H\x02R\x18sev2FirstResponseMinutes\x88\x01\x01\x12K\n" +
+	"\x1bsev3_first_response_minutes\x18\x05 \x01(\rB\a\xbaH\x04*\x02 \x00H\x03R\x18sev3FirstResponseMinutes\x88\x01\x01\x12K\n" +
+	"\x1bsev4_first_response_minutes\x18\x06 \x01(\rB\a\xbaH\x04*\x02 \x00H\x04R\x18sev4FirstResponseMinutes\x88\x01\x01B\x1a\n" +
+	"\x18_multi_az_uptime_percentB\x1e\n" +
+	"\x1c_sev1_first_response_minutesB\x1e\n" +
+	"\x1c_sev2_first_response_minutesB\x1e\n" +
+	"\x1c_sev3_first_response_minutesB\x1e\n" +
+	"\x1c_sev4_first_response_minutes*\xcb\x01\n" +
 	"\x13AccountInviteStatus\x12%\n" +
 	"!ACCOUNT_INVITE_STATUS_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dACCOUNT_INVITE_STATUS_PENDING\x10\x01\x12\"\n" +
@@ -2546,7 +2594,7 @@ const file_qdrant_cloud_account_v1_account_proto_rawDesc = "" +
 	";Suggest a list of companies based on partial name or email.\x12\x11Suggest companies\xaa\xb8\x19\x13\n" +
 	"\x11suggest_companies\x82\xd3\xe4\x93\x02!\x12\x1f/api/account/v1/suggest-company\x12\xb4\x02\n" +
 	"\x16GetAccountSupportTerms\x126.qdrant.cloud.account.v1.GetAccountSupportTermsRequest\x1a7.qdrant.cloud.account.v1.GetAccountSupportTermsResponse\"\xa8\x01\x8a\xb5\x18\fread:account\x8a\xb2\x19Y\n" +
-	"<Gets the uptime and support terms that apply to the account.\x12\x19Get account support terms\x82\xd3\xe4\x93\x025\x123/api/account/v1/accounts/{account_id}/support-terms\x1a\bµ\x18\x04\b\x01\x10\x02B\xfe\x01\n" +
+	"<Gets the uptime and support terms that apply to the account.\x12\x19Get account support terms\x82\xd3\xe4\x93\x025\x123/api/account/v1/accounts/{account_id}/support-terms\x1a\bµ\x18\x04\b\x01\x10\x03B\xfe\x01\n" +
 	"\x1bcom.qdrant.cloud.account.v1B\fAccountProtoP\x01ZRgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/account/v1;accountv1\xa2\x02\x03QCA\xaa\x02\x17Qdrant.Cloud.Account.V1\xca\x02\x17Qdrant\\Cloud\\Account\\V1\xe2\x02#Qdrant\\Cloud\\Account\\V1\\GPBMetadata\xea\x02\x1aQdrant::Cloud::Account::V1b\x06proto3"
 
 var (
