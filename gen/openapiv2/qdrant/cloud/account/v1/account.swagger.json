@@ -1159,9 +1159,29 @@
           "type": "number",
           "format": "double",
           "description": "The uptime commitment for Multi-AZ clusters, in percent (e.g. 99.95).\nUnset when Multi-AZ doesn't apply to the account."
+        },
+        "sev1FirstResponseMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The effective first-response commitment for Severity 1, in minutes.\nUnset when no response-time commitment applies."
+        },
+        "sev2FirstResponseMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The effective first-response commitment for Severity 2, in minutes.\nUnset when no response-time commitment applies."
+        },
+        "sev3FirstResponseMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The effective first-response commitment for Severity 3, in minutes.\nUnset when no response-time commitment applies."
+        },
+        "sev4FirstResponseMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The effective first-response commitment for Severity 4, in minutes.\nUnset when no response-time commitment applies."
         }
       },
-      "description": "SupportTerms represents the uptime commitments that apply to an account.\nThe values are the effective terms: the defaults of the account's support tier,\nwith any terms negotiated for the account (an account override) applied on top."
+      "description": "SupportTerms represents the uptime and support first-response commitments that apply to an account.\nThe values are the effective terms: the defaults of the account's support tier,\nwith any terms negotiated for the account (an account override) applied on top."
     },
     "v1UpdateAccountResponse": {
       "type": "object",

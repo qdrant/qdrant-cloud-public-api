@@ -18,7 +18,7 @@ service AccountService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 2
+    minor: 3
     patch: 0
   };
   // Lists all accounts associated with the authenticated actor.
@@ -904,7 +904,7 @@ message AccountSettings {
   bool mfa_required = 1;
 }
 
-// SupportTerms represents the uptime commitments that apply to an account.
+// SupportTerms represents the uptime and support first-response commitments that apply to an account.
 // The values are the effective terms: the defaults of the account's support tier,
 // with any terms negotiated for the account (an account override) applied on top.
 message SupportTerms {
@@ -919,4 +919,16 @@ message SupportTerms {
     gt: 0
     lte: 100
   }];
+  // The effective first-response commitment for Severity 1, in minutes.
+  // Unset when no response-time commitment applies.
+  optional uint32 sev1_first_response_minutes = 3 [(buf.validate.field).uint32.gt = 0];
+  // The effective first-response commitment for Severity 2, in minutes.
+  // Unset when no response-time commitment applies.
+  optional uint32 sev2_first_response_minutes = 4 [(buf.validate.field).uint32.gt = 0];
+  // The effective first-response commitment for Severity 3, in minutes.
+  // Unset when no response-time commitment applies.
+  optional uint32 sev3_first_response_minutes = 5 [(buf.validate.field).uint32.gt = 0];
+  // The effective first-response commitment for Severity 4, in minutes.
+  // Unset when no response-time commitment applies.
+  optional uint32 sev4_first_response_minutes = 6 [(buf.validate.field).uint32.gt = 0];
 }
