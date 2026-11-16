@@ -18,6 +18,7 @@ memmap
 meterings
 midjourney
 milli
+millicent
 millicents
 millicore
 millicores
