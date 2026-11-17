@@ -5,6 +5,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 import type { FieldMask, Timestamp } from "@bufbuild/protobuf/wkt";
+import type { KeyValue, KeyValueValid } from "../../common/v1/common_pb.js";
 
 /**
  * Describes the file qdrant/cloud/payment/v1/payment.proto.
@@ -689,6 +690,14 @@ export declare type PaymentMethod = Message<"qdrant.cloud.payment.v1.PaymentMeth
    * @generated from field: optional qdrant.cloud.payment.v1.MarketplaceDetails marketplace_details = 12;
    */
   marketplaceDetails?: MarketplaceDetails | undefined;
+
+  /**
+   * List of labels for a payment method.
+   * This is a read-only field.
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue labels = 13;
+   */
+  labels: KeyValue[];
 };
 
 /**
@@ -792,6 +801,14 @@ export declare type PaymentMethodValid = Message<"qdrant.cloud.payment.v1.Paymen
    * @generated from field: optional qdrant.cloud.payment.v1.MarketplaceDetails marketplace_details = 12;
    */
   marketplaceDetails?: MarketplaceDetailsValid | undefined;
+
+  /**
+   * List of labels for a payment method.
+   * This is a read-only field.
+   *
+   * @generated from field: repeated qdrant.cloud.common.v1.KeyValue labels = 13;
+   */
+  labels: KeyValueValid[];
 };
 
 /**

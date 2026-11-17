@@ -420,6 +420,15 @@
             "marketplaceDetails": {
               "$ref": "#/definitions/v1MarketplaceDetails",
               "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for marketplace payment provider types."
+            },
+            "labels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/v1KeyValue"
+              },
+              "description": "List of labels for a payment method.\nThis is a read-only field.",
+              "readOnly": true
             }
           },
           "description": "The payment method to create.\nThis is a required field.",
@@ -499,6 +508,15 @@
             "marketplaceDetails": {
               "$ref": "#/definitions/v1MarketplaceDetails",
               "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for marketplace payment provider types."
+            },
+            "labels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/v1KeyValue"
+              },
+              "description": "List of labels for a payment method.\nThis is a read-only field.",
+              "readOnly": true
             }
           },
           "description": "The payment method to update.",
@@ -667,6 +685,20 @@
       },
       "title": "GetStripeCheckoutSessionResponse is the response from the GetStripeCheckoutSession function"
     },
+    "v1KeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "The key part of a key-value pair"
+        },
+        "value": {
+          "type": "string",
+          "title": "The value part of a key-value pair"
+        }
+      },
+      "description": "KeyValue is a key-value tuple (used in e.g. node selectors / annotations)\nThe message represents an object for Kubernetes."
+    },
     "v1ListPaymentMethodsResponse": {
       "type": "object",
       "properties": {
@@ -752,6 +784,15 @@
         "marketplaceDetails": {
           "$ref": "#/definitions/v1MarketplaceDetails",
           "description": "Represents the payment method details, such as card information.\nThis field is optional and only available for marketplace payment provider types."
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1KeyValue"
+          },
+          "description": "List of labels for a payment method.\nThis is a read-only field.",
+          "readOnly": true
         }
       },
       "title": "Represents a payment method.\nbuf:lint:ignore QDRANT_CLOUD_REQUIRED_ENTITY_FIELDS"
