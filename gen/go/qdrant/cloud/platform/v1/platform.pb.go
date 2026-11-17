@@ -27,61 +27,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// CloudProviderRegionTenancy defines which accounts can create clusters in a cloud provider region.
-type CloudProviderRegionTenancy int32
-
-const (
-	// The tenancy is not specified. This is always the case for a hybrid cloud region.
-	// On a managed cloud region, treat it as shared.
-	CloudProviderRegionTenancy_CLOUD_PROVIDER_REGION_TENANCY_UNSPECIFIED CloudProviderRegionTenancy = 0
-	// The region is shared by all accounts.
-	CloudProviderRegionTenancy_CLOUD_PROVIDER_REGION_TENANCY_SHARED CloudProviderRegionTenancy = 1
-	// The region runs on infrastructure dedicated to the requesting account.
-	// Only accounts with access to the region can see it and create clusters in it.
-	CloudProviderRegionTenancy_CLOUD_PROVIDER_REGION_TENANCY_DEDICATED CloudProviderRegionTenancy = 2
-)
-
-// Enum value maps for CloudProviderRegionTenancy.
-var (
-	CloudProviderRegionTenancy_name = map[int32]string{
-		0: "CLOUD_PROVIDER_REGION_TENANCY_UNSPECIFIED",
-		1: "CLOUD_PROVIDER_REGION_TENANCY_SHARED",
-		2: "CLOUD_PROVIDER_REGION_TENANCY_DEDICATED",
-	}
-	CloudProviderRegionTenancy_value = map[string]int32{
-		"CLOUD_PROVIDER_REGION_TENANCY_UNSPECIFIED": 0,
-		"CLOUD_PROVIDER_REGION_TENANCY_SHARED":      1,
-		"CLOUD_PROVIDER_REGION_TENANCY_DEDICATED":   2,
-	}
-)
-
-func (x CloudProviderRegionTenancy) Enum() *CloudProviderRegionTenancy {
-	p := new(CloudProviderRegionTenancy)
-	*p = x
-	return p
-}
-
-func (x CloudProviderRegionTenancy) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (CloudProviderRegionTenancy) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_platform_v1_platform_proto_enumTypes[0].Descriptor()
-}
-
-func (CloudProviderRegionTenancy) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_platform_v1_platform_proto_enumTypes[0]
-}
-
-func (x CloudProviderRegionTenancy) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use CloudProviderRegionTenancy.Descriptor instead.
-func (CloudProviderRegionTenancy) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP(), []int{0}
-}
-
 // ListCloudProvidersRequest is the request for the ListCloudProviders function.
 type ListCloudProvidersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -774,9 +719,9 @@ type CloudProviderRegion struct {
 	StorageClasses []*v1.HybridCloudEnvironmentStorageClass `protobuf:"bytes,11,rep,name=storage_classes,json=storageClasses,proto3" json:"storage_classes,omitempty"`
 	// Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
 	VolumeSnapshotClasses []*v1.HybridCloudEnvironmentVolumeSnapshotClass `protobuf:"bytes,12,rep,name=volume_snapshot_classes,json=volumeSnapshotClasses,proto3" json:"volume_snapshot_classes,omitempty"`
-	// Which accounts can create clusters in this region.
-	// Unspecified for hybrid cloud regions. Unspecified on a managed cloud region means shared.
-	Tenancy       CloudProviderRegionTenancy `protobuf:"varint,14,opt,name=tenancy,proto3,enum=qdrant.cloud.platform.v1.CloudProviderRegionTenancy" json:"tenancy,omitempty"`
+	// Whether only the requesting account can create clusters in this region.
+	// Always true for hybrid cloud regions. False means the region is shared by all accounts.
+	Dedicated     bool `protobuf:"varint,14,opt,name=dedicated,proto3" json:"dedicated,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -888,11 +833,11 @@ func (x *CloudProviderRegion) GetVolumeSnapshotClasses() []*v1.HybridCloudEnviro
 	return nil
 }
 
-func (x *CloudProviderRegion) GetTenancy() CloudProviderRegionTenancy {
+func (x *CloudProviderRegion) GetDedicated() bool {
 	if x != nil {
-		return x.Tenancy
+		return x.Dedicated
 	}
-	return CloudProviderRegionTenancy_CLOUD_PROVIDER_REGION_TENANCY_UNSPECIFIED
+	return false
 }
 
 // CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region.
@@ -989,7 +934,7 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
 	"\tfree_tier\x18\x03 \x01(\bR\bfreeTier\x12\x1c\n" +
-	"\tavailable\x18\x04 \x01(\bR\tavailableJ\x04\b\x05\x10\x06\"\xc6\x06\n" +
+	"\tavailable\x18\x04 \x01(\bR\tavailableJ\x04\b\x05\x10\x06\"\x8a\x06\n" +
 	"\x13CloudProviderRegion\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
@@ -1002,8 +947,8 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\tnamespace\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tnamespace\x88\x01\x01\x12]\n" +
 	"\fcapabilities\x18\t \x01(\v29.qdrant.cloud.platform.v1.CloudProviderRegionCapabilitiesR\fcapabilities\x12c\n" +
 	"\x0fstorage_classes\x18\v \x03(\v2:.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClassR\x0estorageClasses\x12y\n" +
-	"\x17volume_snapshot_classes\x18\f \x03(\v2A.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClassR\x15volumeSnapshotClasses\x12X\n" +
-	"\atenancy\x18\x0e \x01(\x0e24.qdrant.cloud.platform.v1.CloudProviderRegionTenancyB\b\xbaH\x05\x82\x01\x02\x10\x01R\atenancyB\x13\n" +
+	"\x17volume_snapshot_classes\x18\f \x03(\v2A.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClassR\x15volumeSnapshotClasses\x12\x1c\n" +
+	"\tdedicated\x18\x0e \x01(\bR\tdedicatedB\x13\n" +
 	"\x11_country_iso_codeB\x1a\n" +
 	"\x18_geographical_sub_regionB\f\n" +
 	"\n" +
@@ -1011,11 +956,7 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\x10\vJ\x04\b\r\x10\x0e\"u\n" +
 	"\x1fCloudProviderRegionCapabilities\x12'\n" +
 	"\x0fvolume_snapshot\x18\x01 \x01(\bR\x0evolumeSnapshot\x12)\n" +
-	"\x10volume_expansion\x18\x02 \x01(\bR\x0fvolumeExpansion*\xa2\x01\n" +
-	"\x1aCloudProviderRegionTenancy\x12-\n" +
-	")CLOUD_PROVIDER_REGION_TENANCY_UNSPECIFIED\x10\x00\x12(\n" +
-	"$CLOUD_PROVIDER_REGION_TENANCY_SHARED\x10\x01\x12+\n" +
-	"'CLOUD_PROVIDER_REGION_TENANCY_DEDICATED\x10\x022\xe8\x14\n" +
+	"\x10volume_expansion\x18\x02 \x01(\bR\x0fvolumeExpansion2\xe8\x14\n" +
 	"\x0fPlatformService\x12\xe9\x02\n" +
 	"\x18ListGlobalCloudProviders\x129.qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest\x1a:.qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse\"\xd5\x01\x98\xb5\x18\x00\x8a\xb2\x19\x83\x01\n" +
 	"dLists all available cloud providers globally (not account-specific). Authentication is not required.\x12\x1bList global cloud providers\xaa\xb8\x19\x1d\n" +
@@ -1055,56 +996,53 @@ func file_qdrant_cloud_platform_v1_platform_proto_rawDescGZIP() []byte {
 	return file_qdrant_cloud_platform_v1_platform_proto_rawDescData
 }
 
-var file_qdrant_cloud_platform_v1_platform_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_qdrant_cloud_platform_v1_platform_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_qdrant_cloud_platform_v1_platform_proto_goTypes = []any{
-	(CloudProviderRegionTenancy)(0),                      // 0: qdrant.cloud.platform.v1.CloudProviderRegionTenancy
-	(*ListCloudProvidersRequest)(nil),                    // 1: qdrant.cloud.platform.v1.ListCloudProvidersRequest
-	(*ListCloudProvidersResponse)(nil),                   // 2: qdrant.cloud.platform.v1.ListCloudProvidersResponse
-	(*ListGlobalCloudProvidersRequest)(nil),              // 3: qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest
-	(*ListGlobalCloudProvidersResponse)(nil),             // 4: qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse
-	(*ListGlobalCloudProviderRegionsRequest)(nil),        // 5: qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest
-	(*ListGlobalCloudProviderRegionsResponse)(nil),       // 6: qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse
-	(*GetGlobalCloudProviderRegionRequest)(nil),          // 7: qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionRequest
-	(*GetGlobalCloudProviderRegionResponse)(nil),         // 8: qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse
-	(*ListCloudProviderRegionsRequest)(nil),              // 9: qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
-	(*ListCloudProviderRegionsResponse)(nil),             // 10: qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse
-	(*GetCloudProviderRegionRequest)(nil),                // 11: qdrant.cloud.platform.v1.GetCloudProviderRegionRequest
-	(*GetCloudProviderRegionResponse)(nil),               // 12: qdrant.cloud.platform.v1.GetCloudProviderRegionResponse
-	(*CloudProvider)(nil),                                // 13: qdrant.cloud.platform.v1.CloudProvider
-	(*CloudProviderRegion)(nil),                          // 14: qdrant.cloud.platform.v1.CloudProviderRegion
-	(*CloudProviderRegionCapabilities)(nil),              // 15: qdrant.cloud.platform.v1.CloudProviderRegionCapabilities
-	(*v1.HybridCloudEnvironmentStorageClass)(nil),        // 16: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass
-	(*v1.HybridCloudEnvironmentVolumeSnapshotClass)(nil), // 17: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass
+	(*ListCloudProvidersRequest)(nil),                    // 0: qdrant.cloud.platform.v1.ListCloudProvidersRequest
+	(*ListCloudProvidersResponse)(nil),                   // 1: qdrant.cloud.platform.v1.ListCloudProvidersResponse
+	(*ListGlobalCloudProvidersRequest)(nil),              // 2: qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest
+	(*ListGlobalCloudProvidersResponse)(nil),             // 3: qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse
+	(*ListGlobalCloudProviderRegionsRequest)(nil),        // 4: qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest
+	(*ListGlobalCloudProviderRegionsResponse)(nil),       // 5: qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse
+	(*GetGlobalCloudProviderRegionRequest)(nil),          // 6: qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionRequest
+	(*GetGlobalCloudProviderRegionResponse)(nil),         // 7: qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse
+	(*ListCloudProviderRegionsRequest)(nil),              // 8: qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
+	(*ListCloudProviderRegionsResponse)(nil),             // 9: qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse
+	(*GetCloudProviderRegionRequest)(nil),                // 10: qdrant.cloud.platform.v1.GetCloudProviderRegionRequest
+	(*GetCloudProviderRegionResponse)(nil),               // 11: qdrant.cloud.platform.v1.GetCloudProviderRegionResponse
+	(*CloudProvider)(nil),                                // 12: qdrant.cloud.platform.v1.CloudProvider
+	(*CloudProviderRegion)(nil),                          // 13: qdrant.cloud.platform.v1.CloudProviderRegion
+	(*CloudProviderRegionCapabilities)(nil),              // 14: qdrant.cloud.platform.v1.CloudProviderRegionCapabilities
+	(*v1.HybridCloudEnvironmentStorageClass)(nil),        // 15: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass
+	(*v1.HybridCloudEnvironmentVolumeSnapshotClass)(nil), // 16: qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass
 }
 var file_qdrant_cloud_platform_v1_platform_proto_depIdxs = []int32{
-	13, // 0: qdrant.cloud.platform.v1.ListCloudProvidersResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProvider
-	13, // 1: qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProvider
-	14, // 2: qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProviderRegion
-	14, // 3: qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse.region:type_name -> qdrant.cloud.platform.v1.CloudProviderRegion
-	14, // 4: qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProviderRegion
-	14, // 5: qdrant.cloud.platform.v1.GetCloudProviderRegionResponse.region:type_name -> qdrant.cloud.platform.v1.CloudProviderRegion
-	15, // 6: qdrant.cloud.platform.v1.CloudProviderRegion.capabilities:type_name -> qdrant.cloud.platform.v1.CloudProviderRegionCapabilities
-	16, // 7: qdrant.cloud.platform.v1.CloudProviderRegion.storage_classes:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass
-	17, // 8: qdrant.cloud.platform.v1.CloudProviderRegion.volume_snapshot_classes:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass
-	0,  // 9: qdrant.cloud.platform.v1.CloudProviderRegion.tenancy:type_name -> qdrant.cloud.platform.v1.CloudProviderRegionTenancy
-	3,  // 10: qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders:input_type -> qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest
-	1,  // 11: qdrant.cloud.platform.v1.PlatformService.ListCloudProviders:input_type -> qdrant.cloud.platform.v1.ListCloudProvidersRequest
-	5,  // 12: qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions:input_type -> qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest
-	7,  // 13: qdrant.cloud.platform.v1.PlatformService.GetGlobalCloudProviderRegion:input_type -> qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionRequest
-	9,  // 14: qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions:input_type -> qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
-	11, // 15: qdrant.cloud.platform.v1.PlatformService.GetCloudProviderRegion:input_type -> qdrant.cloud.platform.v1.GetCloudProviderRegionRequest
-	4,  // 16: qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders:output_type -> qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse
-	2,  // 17: qdrant.cloud.platform.v1.PlatformService.ListCloudProviders:output_type -> qdrant.cloud.platform.v1.ListCloudProvidersResponse
-	6,  // 18: qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions:output_type -> qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse
-	8,  // 19: qdrant.cloud.platform.v1.PlatformService.GetGlobalCloudProviderRegion:output_type -> qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse
-	10, // 20: qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions:output_type -> qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse
-	12, // 21: qdrant.cloud.platform.v1.PlatformService.GetCloudProviderRegion:output_type -> qdrant.cloud.platform.v1.GetCloudProviderRegionResponse
-	16, // [16:22] is the sub-list for method output_type
-	10, // [10:16] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	12, // 0: qdrant.cloud.platform.v1.ListCloudProvidersResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProvider
+	12, // 1: qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProvider
+	13, // 2: qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProviderRegion
+	13, // 3: qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse.region:type_name -> qdrant.cloud.platform.v1.CloudProviderRegion
+	13, // 4: qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse.items:type_name -> qdrant.cloud.platform.v1.CloudProviderRegion
+	13, // 5: qdrant.cloud.platform.v1.GetCloudProviderRegionResponse.region:type_name -> qdrant.cloud.platform.v1.CloudProviderRegion
+	14, // 6: qdrant.cloud.platform.v1.CloudProviderRegion.capabilities:type_name -> qdrant.cloud.platform.v1.CloudProviderRegionCapabilities
+	15, // 7: qdrant.cloud.platform.v1.CloudProviderRegion.storage_classes:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass
+	16, // 8: qdrant.cloud.platform.v1.CloudProviderRegion.volume_snapshot_classes:type_name -> qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass
+	2,  // 9: qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders:input_type -> qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest
+	0,  // 10: qdrant.cloud.platform.v1.PlatformService.ListCloudProviders:input_type -> qdrant.cloud.platform.v1.ListCloudProvidersRequest
+	4,  // 11: qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions:input_type -> qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsRequest
+	6,  // 12: qdrant.cloud.platform.v1.PlatformService.GetGlobalCloudProviderRegion:input_type -> qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionRequest
+	8,  // 13: qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions:input_type -> qdrant.cloud.platform.v1.ListCloudProviderRegionsRequest
+	10, // 14: qdrant.cloud.platform.v1.PlatformService.GetCloudProviderRegion:input_type -> qdrant.cloud.platform.v1.GetCloudProviderRegionRequest
+	3,  // 15: qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviders:output_type -> qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse
+	1,  // 16: qdrant.cloud.platform.v1.PlatformService.ListCloudProviders:output_type -> qdrant.cloud.platform.v1.ListCloudProvidersResponse
+	5,  // 17: qdrant.cloud.platform.v1.PlatformService.ListGlobalCloudProviderRegions:output_type -> qdrant.cloud.platform.v1.ListGlobalCloudProviderRegionsResponse
+	7,  // 18: qdrant.cloud.platform.v1.PlatformService.GetGlobalCloudProviderRegion:output_type -> qdrant.cloud.platform.v1.GetGlobalCloudProviderRegionResponse
+	9,  // 19: qdrant.cloud.platform.v1.PlatformService.ListCloudProviderRegions:output_type -> qdrant.cloud.platform.v1.ListCloudProviderRegionsResponse
+	11, // 20: qdrant.cloud.platform.v1.PlatformService.GetCloudProviderRegion:output_type -> qdrant.cloud.platform.v1.GetCloudProviderRegionResponse
+	15, // [15:21] is the sub-list for method output_type
+	9,  // [9:15] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_platform_v1_platform_proto_init() }
@@ -1118,14 +1056,13 @@ func file_qdrant_cloud_platform_v1_platform_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_platform_v1_platform_proto_rawDesc), len(file_qdrant_cloud_platform_v1_platform_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      0,
 			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_qdrant_cloud_platform_v1_platform_proto_goTypes,
 		DependencyIndexes: file_qdrant_cloud_platform_v1_platform_proto_depIdxs,
-		EnumInfos:         file_qdrant_cloud_platform_v1_platform_proto_enumTypes,
 		MessageInfos:      file_qdrant_cloud_platform_v1_platform_proto_msgTypes,
 	}.Build()
 	File_qdrant_cloud_platform_v1_platform_proto = out.File
