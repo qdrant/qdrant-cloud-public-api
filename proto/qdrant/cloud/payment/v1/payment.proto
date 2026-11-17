@@ -470,6 +470,12 @@ message PaymentMethod {
   // Represents the payment method details, such as card information.
   // This field is optional and only available for marketplace payment provider types.
   optional MarketplaceDetails marketplace_details = 12;
+  // List of labels for a payment method.
+  // This is a read-only field.
+  repeated common.v1.KeyValue labels = 13 [
+    (buf.validate.field).repeated = {max_items: 10},
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
 // Represents the payment method availability status for an account.
