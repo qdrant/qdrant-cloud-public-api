@@ -324,9 +324,17 @@ class AccountSettings(_message.Message):
     def __init__(self, mfa_required: _Optional[bool] = ...) -> None: ...
 
 class SupportTerms(_message.Message):
-    __slots__ = ("uptime_percent", "multi_az_uptime_percent")
+    __slots__ = ("uptime_percent", "multi_az_uptime_percent", "sev1_first_response_minutes", "sev2_first_response_minutes", "sev3_first_response_minutes", "sev4_first_response_minutes")
     UPTIME_PERCENT_FIELD_NUMBER: _ClassVar[int]
     MULTI_AZ_UPTIME_PERCENT_FIELD_NUMBER: _ClassVar[int]
+    SEV1_FIRST_RESPONSE_MINUTES_FIELD_NUMBER: _ClassVar[int]
+    SEV2_FIRST_RESPONSE_MINUTES_FIELD_NUMBER: _ClassVar[int]
+    SEV3_FIRST_RESPONSE_MINUTES_FIELD_NUMBER: _ClassVar[int]
+    SEV4_FIRST_RESPONSE_MINUTES_FIELD_NUMBER: _ClassVar[int]
     uptime_percent: float
     multi_az_uptime_percent: float
-    def __init__(self, uptime_percent: _Optional[float] = ..., multi_az_uptime_percent: _Optional[float] = ...) -> None: ...
+    sev1_first_response_minutes: int
+    sev2_first_response_minutes: int
+    sev3_first_response_minutes: int
+    sev4_first_response_minutes: int
+    def __init__(self, uptime_percent: _Optional[float] = ..., multi_az_uptime_percent: _Optional[float] = ..., sev1_first_response_minutes: _Optional[int] = ..., sev2_first_response_minutes: _Optional[int] = ..., sev3_first_response_minutes: _Optional[int] = ..., sev4_first_response_minutes: _Optional[int] = ...) -> None: ...
