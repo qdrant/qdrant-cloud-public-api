@@ -25,6 +25,12 @@ class Aggregator(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     AGGREGATOR_MAX: _ClassVar[Aggregator]
     AGGREGATOR_MIN: _ClassVar[Aggregator]
 
+class SpaceCollectionMetricsOrder(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED: _ClassVar[SpaceCollectionMetricsOrder]
+    SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC: _ClassVar[SpaceCollectionMetricsOrder]
+    SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC: _ClassVar[SpaceCollectionMetricsOrder]
+
 class InferenceMetricsInterval(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     INFERENCE_METRICS_INTERVAL_UNSPECIFIED: _ClassVar[InferenceMetricsInterval]
@@ -62,6 +68,9 @@ AGGREGATOR_SUM: Aggregator
 AGGREGATOR_AVG: Aggregator
 AGGREGATOR_MAX: Aggregator
 AGGREGATOR_MIN: Aggregator
+SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED: SpaceCollectionMetricsOrder
+SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC: SpaceCollectionMetricsOrder
+SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC: SpaceCollectionMetricsOrder
 INFERENCE_METRICS_INTERVAL_UNSPECIFIED: InferenceMetricsInterval
 INFERENCE_METRICS_INTERVAL_DAY: InferenceMetricsInterval
 INFERENCE_METRICS_INTERVAL_WEEK: InferenceMetricsInterval
@@ -85,12 +94,13 @@ SPACE_ALERT_SEVERITY_WARNING: SpaceAlertSeverity
 SPACE_ALERT_SEVERITY_CRITICAL: SpaceAlertSeverity
 
 class GetSpaceSummaryMetricsRequest(_message.Message):
-    __slots__ = ("account_id", "space_id", "collection_name", "collection_name_contains", "totals_only", "page_size", "page_token")
+    __slots__ = ("account_id", "space_id", "collection_name", "collection_name_contains", "totals_only", "order_by", "page_size", "page_token")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     SPACE_ID_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
     COLLECTION_NAME_CONTAINS_FIELD_NUMBER: _ClassVar[int]
     TOTALS_ONLY_FIELD_NUMBER: _ClassVar[int]
+    ORDER_BY_FIELD_NUMBER: _ClassVar[int]
     PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
     PAGE_TOKEN_FIELD_NUMBER: _ClassVar[int]
     account_id: str
@@ -98,9 +108,10 @@ class GetSpaceSummaryMetricsRequest(_message.Message):
     collection_name: str
     collection_name_contains: str
     totals_only: bool
+    order_by: SpaceCollectionMetricsOrder
     page_size: int
     page_token: str
-    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., collection_name: _Optional[str] = ..., collection_name_contains: _Optional[str] = ..., totals_only: _Optional[bool] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
+    def __init__(self, account_id: _Optional[str] = ..., space_id: _Optional[str] = ..., collection_name: _Optional[str] = ..., collection_name_contains: _Optional[str] = ..., totals_only: _Optional[bool] = ..., order_by: _Optional[_Union[SpaceCollectionMetricsOrder, str]] = ..., page_size: _Optional[int] = ..., page_token: _Optional[str] = ...) -> None: ...
 
 class GetSpaceSummaryMetricsResponse(_message.Message):
     __slots__ = ("items", "quota", "totals", "total_size", "next_page_token")

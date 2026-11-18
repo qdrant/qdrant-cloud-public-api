@@ -264,6 +264,19 @@
             "type": "boolean"
           },
           {
+            "name": "orderBy",
+            "description": "The order of `items`.\nIf unspecified, items are ordered by collection name, ascending.\nOrdering by a metric returns the largest collections first, so a single page\n(for example `page_size: 5`) answers \"which collections are the largest\" without\nreading every page. Ties are ordered by collection name, ascending.\nPages are not stable while metric values change: a later page may skip or repeat a\ncollection whose value moved between calls.\nThis is an optional field.\n\n - SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED: Unspecified: ordered by collection name, ascending.\n - SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC: Ordered by `point_count`, largest first.\n - SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC: Ordered by `used_storage_bytes`, largest first.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED",
+              "SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC",
+              "SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC"
+            ],
+            "default": "SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED"
+          },
+          {
             "name": "pageSize",
             "description": "Maximum number of collection metrics to return.\nIf not specified, a default of 100 is used (also the maximum).",
             "in": "query",
@@ -718,6 +731,16 @@
         }
       },
       "description": "SpaceCollectionMetrics contains a metric overview for a single collection."
+    },
+    "v1SpaceCollectionMetricsOrder": {
+      "type": "string",
+      "enum": [
+        "SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED",
+        "SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC",
+        "SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC"
+      ],
+      "default": "SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED",
+      "description": "SpaceCollectionMetricsOrder is the order of per-collection items in\nGetSpaceSummaryMetrics.\n\n - SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED: Unspecified: ordered by collection name, ascending.\n - SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC: Ordered by `point_count`, largest first.\n - SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC: Ordered by `used_storage_bytes`, largest first."
     },
     "v1SpaceCollectionUsageMetrics": {
       "type": "object",

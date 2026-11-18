@@ -69,6 +69,20 @@ export declare type GetSpaceSummaryMetricsRequest = Message<"qdrant.cloud.server
   totalsOnly: boolean;
 
   /**
+   * The order of `items`.
+   * If unspecified, items are ordered by collection name, ascending.
+   * Ordering by a metric returns the largest collections first, so a single page
+   * (for example `page_size: 5`) answers "which collections are the largest" without
+   * reading every page. Ties are ordered by collection name, ascending.
+   * Pages are not stable while metric values change: a later page may skip or repeat a
+   * collection whose value moved between calls.
+   * This is an optional field.
+   *
+   * @generated from field: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetricsOrder order_by = 6;
+   */
+  orderBy: SpaceCollectionMetricsOrder;
+
+  /**
    * Maximum number of collection metrics to return.
    * If not specified, a default of 100 is used (also the maximum).
    *
@@ -1622,6 +1636,40 @@ export enum Aggregator {
  * Describes the enum qdrant.cloud.serverless.monitoring.v1.Aggregator.
  */
 export declare const AggregatorSchema: GenEnum<Aggregator>;
+
+/**
+ * SpaceCollectionMetricsOrder is the order of per-collection items in
+ * GetSpaceSummaryMetrics.
+ *
+ * @generated from enum qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetricsOrder
+ */
+export enum SpaceCollectionMetricsOrder {
+  /**
+   * Unspecified: ordered by collection name, ascending.
+   *
+   * @generated from enum value: SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Ordered by `point_count`, largest first.
+   *
+   * @generated from enum value: SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC = 1;
+   */
+  POINT_COUNT_DESC = 1,
+
+  /**
+   * Ordered by `used_storage_bytes`, largest first.
+   *
+   * @generated from enum value: SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC = 2;
+   */
+  USED_STORAGE_BYTES_DESC = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetricsOrder.
+ */
+export declare const SpaceCollectionMetricsOrderSchema: GenEnum<SpaceCollectionMetricsOrder>;
 
 /**
  * InferenceMetricsInterval defines the histogram bucket size for inference metrics.
