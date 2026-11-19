@@ -17,7 +17,7 @@ service MonitoringService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 2
-    minor: 4
+    minor: 5
     patch: 0
   };
   // Gets the summary metrics of a space in the account identified by the given ID.
@@ -237,6 +237,15 @@ message GetSpaceSummaryMetricsRequest {
   // empty; `page_size` and `page_token` are ignored.
   // Use it when only space-level figures are needed.
   bool totals_only = 5;
+  // The order of `items`.
+  // If unspecified, items are ordered by collection name, ascending.
+  // Ordering by a metric returns the largest collections first, so a single page
+  // (for example `page_size: 5`) answers "which collections are the largest" without
+  // reading every page. Ties are ordered by collection name, ascending.
+  // Pages are not stable while metric values change: a later page may skip or repeat a
+  // collection whose value moved between calls.
+  // This is an optional field.
+  SpaceCollectionMetricsOrder order_by = 6 [(buf.validate.field).enum.defined_only = true];
   // Maximum number of collection metrics to return.
   // If not specified, a default of 100 is used (also the maximum).
   optional int32 page_size = 20 [(buf.validate.field).int32 = {
@@ -726,6 +735,17 @@ enum Aggregator {
   AGGREGATOR_MAX = 3;
   // MIN aggregation function.
   AGGREGATOR_MIN = 4;
+}
+
+// SpaceCollectionMetricsOrder is the order of per-collection items in
+// GetSpaceSummaryMetrics.
+enum SpaceCollectionMetricsOrder {
+  // Unspecified: ordered by collection name, ascending.
+  SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED = 0;
+  // Ordered by `point_count`, largest first.
+  SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC = 1;
+  // Ordered by `used_storage_bytes`, largest first.
+  SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC = 2;
 }
 
 // InferenceMetricsInterval defines the histogram bucket size for inference metrics.

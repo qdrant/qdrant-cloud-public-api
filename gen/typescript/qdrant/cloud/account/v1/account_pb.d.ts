@@ -1329,7 +1329,7 @@ export declare type AccountSettingsValid = AccountSettings;
 export declare const AccountSettingsSchema: GenMessage<AccountSettings, {validType: AccountSettingsValid}>;
 
 /**
- * SupportTerms represents the uptime commitments that apply to an account.
+ * SupportTerms represents the uptime and support first-response commitments that apply to an account.
  * The values are the effective terms: the defaults of the account's support tier,
  * with any terms negotiated for the account (an account override) applied on top.
  *
@@ -1350,6 +1350,38 @@ export declare type SupportTerms = Message<"qdrant.cloud.account.v1.SupportTerms
    * @generated from field: optional double multi_az_uptime_percent = 2;
    */
   multiAzUptimePercent?: number | undefined;
+
+  /**
+   * The effective first-response commitment for Severity 1, in minutes.
+   * Unset when no response-time commitment applies.
+   *
+   * @generated from field: optional uint32 sev1_first_response_minutes = 3;
+   */
+  sev1FirstResponseMinutes?: number | undefined;
+
+  /**
+   * The effective first-response commitment for Severity 2, in minutes.
+   * Unset when no response-time commitment applies.
+   *
+   * @generated from field: optional uint32 sev2_first_response_minutes = 4;
+   */
+  sev2FirstResponseMinutes?: number | undefined;
+
+  /**
+   * The effective first-response commitment for Severity 3, in minutes.
+   * Unset when no response-time commitment applies.
+   *
+   * @generated from field: optional uint32 sev3_first_response_minutes = 5;
+   */
+  sev3FirstResponseMinutes?: number | undefined;
+
+  /**
+   * The effective first-response commitment for Severity 4, in minutes.
+   * Unset when no response-time commitment applies.
+   *
+   * @generated from field: optional uint32 sev4_first_response_minutes = 6;
+   */
+  sev4FirstResponseMinutes?: number | undefined;
 };
 
 export declare type SupportTermsValid = SupportTerms;

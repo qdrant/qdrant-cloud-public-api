@@ -90,6 +90,60 @@ func (Aggregator) EnumDescriptor() ([]byte, []int) {
 	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{0}
 }
 
+// SpaceCollectionMetricsOrder is the order of per-collection items in
+// GetSpaceSummaryMetrics.
+type SpaceCollectionMetricsOrder int32
+
+const (
+	// Unspecified: ordered by collection name, ascending.
+	SpaceCollectionMetricsOrder_SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED SpaceCollectionMetricsOrder = 0
+	// Ordered by `point_count`, largest first.
+	SpaceCollectionMetricsOrder_SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC SpaceCollectionMetricsOrder = 1
+	// Ordered by `used_storage_bytes`, largest first.
+	SpaceCollectionMetricsOrder_SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC SpaceCollectionMetricsOrder = 2
+)
+
+// Enum value maps for SpaceCollectionMetricsOrder.
+var (
+	SpaceCollectionMetricsOrder_name = map[int32]string{
+		0: "SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED",
+		1: "SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC",
+		2: "SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC",
+	}
+	SpaceCollectionMetricsOrder_value = map[string]int32{
+		"SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED":             0,
+		"SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC":        1,
+		"SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC": 2,
+	}
+)
+
+func (x SpaceCollectionMetricsOrder) Enum() *SpaceCollectionMetricsOrder {
+	p := new(SpaceCollectionMetricsOrder)
+	*p = x
+	return p
+}
+
+func (x SpaceCollectionMetricsOrder) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SpaceCollectionMetricsOrder) Descriptor() protoreflect.EnumDescriptor {
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[1].Descriptor()
+}
+
+func (SpaceCollectionMetricsOrder) Type() protoreflect.EnumType {
+	return &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[1]
+}
+
+func (x SpaceCollectionMetricsOrder) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SpaceCollectionMetricsOrder.Descriptor instead.
+func (SpaceCollectionMetricsOrder) EnumDescriptor() ([]byte, []int) {
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{1}
+}
+
 // InferenceMetricsInterval defines the histogram bucket size for inference metrics.
 type InferenceMetricsInterval int32
 
@@ -131,11 +185,11 @@ func (x InferenceMetricsInterval) String() string {
 }
 
 func (InferenceMetricsInterval) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[1].Descriptor()
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[2].Descriptor()
 }
 
 func (InferenceMetricsInterval) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[1]
+	return &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[2]
 }
 
 func (x InferenceMetricsInterval) Number() protoreflect.EnumNumber {
@@ -144,7 +198,7 @@ func (x InferenceMetricsInterval) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use InferenceMetricsInterval.Descriptor instead.
 func (InferenceMetricsInterval) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{2}
 }
 
 // SpaceAlertState mirrors the backend state of a space alert. It is used both as
@@ -185,11 +239,11 @@ func (x SpaceAlertState) String() string {
 }
 
 func (SpaceAlertState) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[2].Descriptor()
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[3].Descriptor()
 }
 
 func (SpaceAlertState) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[2]
+	return &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[3]
 }
 
 func (x SpaceAlertState) Number() protoreflect.EnumNumber {
@@ -198,7 +252,7 @@ func (x SpaceAlertState) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SpaceAlertState.Descriptor instead.
 func (SpaceAlertState) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{2}
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{3}
 }
 
 // SpaceAlertType is the category of a space alert. Mirrors the backend alert types.
@@ -272,11 +326,11 @@ func (x SpaceAlertType) String() string {
 }
 
 func (SpaceAlertType) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[3].Descriptor()
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[4].Descriptor()
 }
 
 func (SpaceAlertType) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[3]
+	return &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[4]
 }
 
 func (x SpaceAlertType) Number() protoreflect.EnumNumber {
@@ -285,7 +339,7 @@ func (x SpaceAlertType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SpaceAlertType.Descriptor instead.
 func (SpaceAlertType) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{3}
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{4}
 }
 
 // SpaceAlertSeverity is the tier used by the UI to render badge color and announce severity to
@@ -331,11 +385,11 @@ func (x SpaceAlertSeverity) String() string {
 }
 
 func (SpaceAlertSeverity) Descriptor() protoreflect.EnumDescriptor {
-	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[4].Descriptor()
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[5].Descriptor()
 }
 
 func (SpaceAlertSeverity) Type() protoreflect.EnumType {
-	return &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[4]
+	return &file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes[5]
 }
 
 func (x SpaceAlertSeverity) Number() protoreflect.EnumNumber {
@@ -344,7 +398,7 @@ func (x SpaceAlertSeverity) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SpaceAlertSeverity.Descriptor instead.
 func (SpaceAlertSeverity) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{4}
+	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{5}
 }
 
 // GetSpaceSummaryMetricsRequest is the request for the GetSpaceSummaryMetrics function.
@@ -369,6 +423,15 @@ type GetSpaceSummaryMetricsRequest struct {
 	// empty; `page_size` and `page_token` are ignored.
 	// Use it when only space-level figures are needed.
 	TotalsOnly bool `protobuf:"varint,5,opt,name=totals_only,json=totalsOnly,proto3" json:"totals_only,omitempty"`
+	// The order of `items`.
+	// If unspecified, items are ordered by collection name, ascending.
+	// Ordering by a metric returns the largest collections first, so a single page
+	// (for example `page_size: 5`) answers "which collections are the largest" without
+	// reading every page. Ties are ordered by collection name, ascending.
+	// Pages are not stable while metric values change: a later page may skip or repeat a
+	// collection whose value moved between calls.
+	// This is an optional field.
+	OrderBy SpaceCollectionMetricsOrder `protobuf:"varint,6,opt,name=order_by,json=orderBy,proto3,enum=qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetricsOrder" json:"order_by,omitempty"`
 	// Maximum number of collection metrics to return.
 	// If not specified, a default of 100 is used (also the maximum).
 	PageSize *int32 `protobuf:"varint,20,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -455,6 +518,13 @@ func (x *GetSpaceSummaryMetricsRequest) GetTotalsOnly() bool {
 		return x.TotalsOnly
 	}
 	return false
+}
+
+func (x *GetSpaceSummaryMetricsRequest) GetOrderBy() SpaceCollectionMetricsOrder {
+	if x != nil {
+		return x.OrderBy
+	}
+	return SpaceCollectionMetricsOrder_SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED
 }
 
 func (x *GetSpaceSummaryMetricsRequest) GetPageSize() int32 {
@@ -2201,7 +2271,7 @@ var File_qdrant_cloud_serverless_monitoring_v1_monitoring_proto protoreflect.Fil
 
 const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
-	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xbf\x03\n" +
+	"6qdrant/cloud/serverless/monitoring/v1/monitoring.proto\x12%qdrant.cloud.serverless.monitoring.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#qdrant/cloud/common/v1/common.proto\x1a4qdrant/cloud/facade/graphql/v1/graphql_options.proto\x1a,qdrant/cloud/facade/mcp/v1/mcp_options.proto\x1a+qdrant/cloud/facade/v1/facade_options.proto\"\xa8\x04\n" +
 	"\x1dGetSpaceSummaryMetricsRequest\x12'\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\taccountId\x12#\n" +
@@ -2209,7 +2279,8 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x0fcollection_name\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x0ecollectionName\x12Y\n" +
 	"\x18collection_name_contains\x18\x04 \x01(\tB\x1d\xbaH\x1ar\x18\x10\x01\x18\xff\x012\x11^[a-zA-Z0-9-_.]+$H\x00R\x16collectionNameContains\x12\x1f\n" +
 	"\vtotals_only\x18\x05 \x01(\bR\n" +
-	"totalsOnly\x12+\n" +
+	"totalsOnly\x12g\n" +
+	"\border_by\x18\x06 \x01(\x0e2B.qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetricsOrderB\b\xbaH\x05\x82\x01\x02\x10\x01R\aorderBy\x12+\n" +
 	"\tpage_size\x18\x14 \x01(\x05B\t\xbaH\x06\x1a\x04\x18d \x00H\x01R\bpageSize\x88\x01\x01\x12+\n" +
 	"\n" +
 	"page_token\x18\x15 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tpageToken\x88\x01\x01B\x13\n" +
@@ -2399,7 +2470,11 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x0eAGGREGATOR_SUM\x10\x01\x12\x12\n" +
 	"\x0eAGGREGATOR_AVG\x10\x02\x12\x12\n" +
 	"\x0eAGGREGATOR_MAX\x10\x03\x12\x12\n" +
-	"\x0eAGGREGATOR_MIN\x10\x04*\xb5\x01\n" +
+	"\x0eAGGREGATOR_MIN\x10\x04*\xbe\x01\n" +
+	"\x1bSpaceCollectionMetricsOrder\x12.\n" +
+	"*SPACE_COLLECTION_METRICS_ORDER_UNSPECIFIED\x10\x00\x123\n" +
+	"/SPACE_COLLECTION_METRICS_ORDER_POINT_COUNT_DESC\x10\x01\x12:\n" +
+	"6SPACE_COLLECTION_METRICS_ORDER_USED_STORAGE_BYTES_DESC\x10\x02*\xb5\x01\n" +
 	"\x18InferenceMetricsInterval\x12*\n" +
 	"&INFERENCE_METRICS_INTERVAL_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eINFERENCE_METRICS_INTERVAL_DAY\x10\x01\x12#\n" +
@@ -2463,7 +2538,7 @@ const file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\bspace_id\x12\x02id\"\x18\n" +
 	"\n" +
 	"account_id\x12\n" +
-	"account_id(\x012 Alerts for this serverless space\x82\xd3\xe4\x93\x02C\x12A/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts\x1a\bµ\x18\x04\b\x02\x10\x04B\xda\x02\n" +
+	"account_id(\x012 Alerts for this serverless space\x82\xd3\xe4\x93\x02C\x12A/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/alerts\x1a\bµ\x18\x04\b\x02\x10\x05B\xda\x02\n" +
 	")com.qdrant.cloud.serverless.monitoring.v1B\x0fMonitoringProtoP\x01Zcgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/monitoring/v1;monitoringv1\xa2\x02\x04QCSM\xaa\x02%Qdrant.Cloud.Serverless.Monitoring.V1\xca\x02%Qdrant\\Cloud\\Serverless\\Monitoring\\V1\xe2\x021Qdrant\\Cloud\\Serverless\\Monitoring\\V1\\GPBMetadata\xea\x02)Qdrant::Cloud::Serverless::Monitoring::V1b\x06proto3"
 
 var (
@@ -2478,94 +2553,96 @@ func file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescGZIP() [
 	return file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDescData
 }
 
-var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
 var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_goTypes = []any{
 	(Aggregator)(0),                          // 0: qdrant.cloud.serverless.monitoring.v1.Aggregator
-	(InferenceMetricsInterval)(0),            // 1: qdrant.cloud.serverless.monitoring.v1.InferenceMetricsInterval
-	(SpaceAlertState)(0),                     // 2: qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
-	(SpaceAlertType)(0),                      // 3: qdrant.cloud.serverless.monitoring.v1.SpaceAlertType
-	(SpaceAlertSeverity)(0),                  // 4: qdrant.cloud.serverless.monitoring.v1.SpaceAlertSeverity
-	(*GetSpaceSummaryMetricsRequest)(nil),    // 5: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest
-	(*GetSpaceSummaryMetricsResponse)(nil),   // 6: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse
-	(*GetSpaceUsageMetricsRequest)(nil),      // 7: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest
-	(*GetSpaceUsageMetricsResponse)(nil),     // 8: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse
-	(*GetSpaceInferenceMetricsRequest)(nil),  // 9: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest
-	(*GetSpaceInferenceMetricsResponse)(nil), // 10: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse
-	(*SpaceCollectionInferenceMetrics)(nil),  // 11: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics
-	(*SpaceInferenceModelMetrics)(nil),       // 12: qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics
-	(*ListSpaceAlertsRequest)(nil),           // 13: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest
-	(*ListSpaceAlertsResponse)(nil),          // 14: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse
-	(*SpaceAlert)(nil),                       // 15: qdrant.cloud.serverless.monitoring.v1.SpaceAlert
-	(*SpaceQuotaSnapshot)(nil),               // 16: qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot
-	(*SpaceCollectionMetrics)(nil),           // 17: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics
-	(*SpaceMetricOverview)(nil),              // 18: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
-	(*IntervalAverage)(nil),                  // 19: qdrant.cloud.serverless.monitoring.v1.IntervalAverage
-	(*SpaceCollectionUsageMetrics)(nil),      // 20: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics
-	(*SpaceSummaryTotals)(nil),               // 21: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals
-	(*SpaceUsageTotals)(nil),                 // 22: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals
-	(*Metric)(nil),                           // 23: qdrant.cloud.serverless.monitoring.v1.Metric
-	(*timestamppb.Timestamp)(nil),            // 24: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),              // 25: google.protobuf.Duration
+	(SpaceCollectionMetricsOrder)(0),         // 1: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetricsOrder
+	(InferenceMetricsInterval)(0),            // 2: qdrant.cloud.serverless.monitoring.v1.InferenceMetricsInterval
+	(SpaceAlertState)(0),                     // 3: qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
+	(SpaceAlertType)(0),                      // 4: qdrant.cloud.serverless.monitoring.v1.SpaceAlertType
+	(SpaceAlertSeverity)(0),                  // 5: qdrant.cloud.serverless.monitoring.v1.SpaceAlertSeverity
+	(*GetSpaceSummaryMetricsRequest)(nil),    // 6: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest
+	(*GetSpaceSummaryMetricsResponse)(nil),   // 7: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse
+	(*GetSpaceUsageMetricsRequest)(nil),      // 8: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest
+	(*GetSpaceUsageMetricsResponse)(nil),     // 9: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse
+	(*GetSpaceInferenceMetricsRequest)(nil),  // 10: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest
+	(*GetSpaceInferenceMetricsResponse)(nil), // 11: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse
+	(*SpaceCollectionInferenceMetrics)(nil),  // 12: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics
+	(*SpaceInferenceModelMetrics)(nil),       // 13: qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics
+	(*ListSpaceAlertsRequest)(nil),           // 14: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest
+	(*ListSpaceAlertsResponse)(nil),          // 15: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse
+	(*SpaceAlert)(nil),                       // 16: qdrant.cloud.serverless.monitoring.v1.SpaceAlert
+	(*SpaceQuotaSnapshot)(nil),               // 17: qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot
+	(*SpaceCollectionMetrics)(nil),           // 18: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics
+	(*SpaceMetricOverview)(nil),              // 19: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	(*IntervalAverage)(nil),                  // 20: qdrant.cloud.serverless.monitoring.v1.IntervalAverage
+	(*SpaceCollectionUsageMetrics)(nil),      // 21: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics
+	(*SpaceSummaryTotals)(nil),               // 22: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals
+	(*SpaceUsageTotals)(nil),                 // 23: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals
+	(*Metric)(nil),                           // 24: qdrant.cloud.serverless.monitoring.v1.Metric
+	(*timestamppb.Timestamp)(nil),            // 25: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),              // 26: google.protobuf.Duration
 }
 var file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_depIdxs = []int32{
-	17, // 0: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics
-	16, // 1: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.quota:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot
-	21, // 2: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.totals:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals
-	24, // 3: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.since:type_name -> google.protobuf.Timestamp
-	24, // 4: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.until:type_name -> google.protobuf.Timestamp
-	0,  // 5: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.aggregator:type_name -> qdrant.cloud.serverless.monitoring.v1.Aggregator
-	20, // 6: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics
-	16, // 7: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.quota:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot
-	22, // 8: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.totals:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals
-	24, // 9: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.since:type_name -> google.protobuf.Timestamp
-	24, // 10: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.until:type_name -> google.protobuf.Timestamp
-	1,  // 11: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.interval:type_name -> qdrant.cloud.serverless.monitoring.v1.InferenceMetricsInterval
-	11, // 12: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics
-	12, // 13: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics.models:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics
-	23, // 14: qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics.values:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	2,  // 15: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest.state:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
-	15, // 16: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlert
-	3,  // 17: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.type:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertType
-	4,  // 18: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.severity:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertSeverity
-	24, // 19: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.last_firing_at:type_name -> google.protobuf.Timestamp
-	2,  // 20: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.state:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
-	18, // 21: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
-	18, // 22: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
-	18, // 23: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
-	19, // 24: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview.avg:type_name -> qdrant.cloud.serverless.monitoring.v1.IntervalAverage
-	25, // 25: qdrant.cloud.serverless.monitoring.v1.IntervalAverage.interval:type_name -> google.protobuf.Duration
-	23, // 26: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 27: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 28: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 29: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.point_count:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 30: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.used_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 31: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.current_searcher_workers:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 32: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.used_indexed_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	18, // 33: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
-	18, // 34: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
-	18, // 35: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
-	23, // 36: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 37: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 38: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 39: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.point_count:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 40: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.used_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 41: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.current_searcher_workers:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	23, // 42: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.used_indexed_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
-	24, // 43: qdrant.cloud.serverless.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
-	5,  // 44: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest
-	7,  // 45: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest
-	9,  // 46: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest
-	13, // 47: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:input_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest
-	6,  // 48: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse
-	8,  // 49: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse
-	10, // 50: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse
-	14, // 51: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:output_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse
-	48, // [48:52] is the sub-list for method output_type
-	44, // [44:48] is the sub-list for method input_type
-	44, // [44:44] is the sub-list for extension type_name
-	44, // [44:44] is the sub-list for extension extendee
-	0,  // [0:44] is the sub-list for field type_name
+	1,  // 0: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest.order_by:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetricsOrder
+	18, // 1: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics
+	17, // 2: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.quota:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot
+	22, // 3: qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse.totals:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals
+	25, // 4: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.since:type_name -> google.protobuf.Timestamp
+	25, // 5: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.until:type_name -> google.protobuf.Timestamp
+	0,  // 6: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest.aggregator:type_name -> qdrant.cloud.serverless.monitoring.v1.Aggregator
+	21, // 7: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics
+	17, // 8: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.quota:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceQuotaSnapshot
+	23, // 9: qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse.totals:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals
+	25, // 10: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.since:type_name -> google.protobuf.Timestamp
+	25, // 11: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.until:type_name -> google.protobuf.Timestamp
+	2,  // 12: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest.interval:type_name -> qdrant.cloud.serverless.monitoring.v1.InferenceMetricsInterval
+	12, // 13: qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics
+	13, // 14: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionInferenceMetrics.models:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics
+	24, // 15: qdrant.cloud.serverless.monitoring.v1.SpaceInferenceModelMetrics.values:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	3,  // 16: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest.state:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
+	16, // 17: qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse.items:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlert
+	4,  // 18: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.type:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertType
+	5,  // 19: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.severity:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertSeverity
+	25, // 20: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.last_firing_at:type_name -> google.protobuf.Timestamp
+	3,  // 21: qdrant.cloud.serverless.monitoring.v1.SpaceAlert.state:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceAlertState
+	19, // 22: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	19, // 23: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	19, // 24: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionMetrics.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	20, // 25: qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview.avg:type_name -> qdrant.cloud.serverless.monitoring.v1.IntervalAverage
+	26, // 26: qdrant.cloud.serverless.monitoring.v1.IntervalAverage.interval:type_name -> google.protobuf.Duration
+	24, // 27: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 28: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 29: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 30: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.point_count:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 31: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.used_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 32: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.current_searcher_workers:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 33: qdrant.cloud.serverless.monitoring.v1.SpaceCollectionUsageMetrics.used_indexed_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	19, // 34: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	19, // 35: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	19, // 36: qdrant.cloud.serverless.monitoring.v1.SpaceSummaryTotals.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.SpaceMetricOverview
+	24, // 37: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.search_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 38: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.write_requests:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 39: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.search_latency:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 40: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.point_count:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 41: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.used_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 42: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.current_searcher_workers:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	24, // 43: qdrant.cloud.serverless.monitoring.v1.SpaceUsageTotals.used_indexed_storage_bytes:type_name -> qdrant.cloud.serverless.monitoring.v1.Metric
+	25, // 44: qdrant.cloud.serverless.monitoring.v1.Metric.timestamp:type_name -> google.protobuf.Timestamp
+	6,  // 45: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsRequest
+	8,  // 46: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsRequest
+	10, // 47: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:input_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsRequest
+	14, // 48: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:input_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsRequest
+	7,  // 49: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceSummaryMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceSummaryMetricsResponse
+	9,  // 50: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceUsageMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceUsageMetricsResponse
+	11, // 51: qdrant.cloud.serverless.monitoring.v1.MonitoringService.GetSpaceInferenceMetrics:output_type -> qdrant.cloud.serverless.monitoring.v1.GetSpaceInferenceMetricsResponse
+	15, // 52: qdrant.cloud.serverless.monitoring.v1.MonitoringService.ListSpaceAlerts:output_type -> qdrant.cloud.serverless.monitoring.v1.ListSpaceAlertsResponse
+	49, // [49:53] is the sub-list for method output_type
+	45, // [45:49] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_init() }
@@ -2600,7 +2677,7 @@ func file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc), len(file_qdrant_cloud_serverless_monitoring_v1_monitoring_proto_rawDesc)),
-			NumEnums:      5,
+			NumEnums:      6,
 			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
