@@ -666,6 +666,10 @@
           "type": "number",
           "format": "double",
           "description": "The discount applied as a percentage (e.g., 12.5)."
+        },
+        "spaceName": {
+          "type": "string",
+          "description": "The name of the serverless space at the time of the request.\nEmpty when the space can no longer be resolved (for example, it was deleted and its name is unknown)."
         }
       },
       "description": "UsageBreakdownSpace represents the usage of one serverless billable item for a single\nserverless space within a month."
