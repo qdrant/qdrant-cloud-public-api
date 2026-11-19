@@ -437,6 +437,14 @@ export declare type CloudProviderRegion = Message<"qdrant.cloud.platform.v1.Clou
    * @generated from field: repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 12;
    */
   volumeSnapshotClasses: HybridCloudEnvironmentVolumeSnapshotClass[];
+
+  /**
+   * Whether only the requesting account can create clusters in this region.
+   * Always true for hybrid cloud regions. False means the region is shared by all accounts.
+   *
+   * @generated from field: bool dedicated = 14;
+   */
+  dedicated: boolean;
 };
 
 export declare type CloudProviderRegionValid = CloudProviderRegion;

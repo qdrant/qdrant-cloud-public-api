@@ -333,6 +333,10 @@
             "$ref": "#/definitions/v1HybridCloudEnvironmentVolumeSnapshotClass"
           },
           "description": "Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only."
+        },
+        "dedicated": {
+          "type": "boolean",
+          "description": "Whether only the requesting account can create clusters in this region.\nAlways true for hybrid cloud regions. False means the region is shared by all accounts."
         }
       },
       "description": "CloudProviderRegion represents a cloud provider region."

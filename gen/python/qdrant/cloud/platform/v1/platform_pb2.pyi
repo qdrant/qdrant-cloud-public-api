@@ -103,7 +103,7 @@ class CloudProvider(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: _Optional[bool] = ..., available: _Optional[bool] = ...) -> None: ...
 
 class CloudProviderRegion(_message.Message):
-    __slots__ = ("id", "name", "free_tier", "available", "provider", "country_iso_code", "geographical_sub_region", "namespace", "capabilities", "storage_classes", "volume_snapshot_classes")
+    __slots__ = ("id", "name", "free_tier", "available", "provider", "country_iso_code", "geographical_sub_region", "namespace", "capabilities", "storage_classes", "volume_snapshot_classes", "dedicated")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     FREE_TIER_FIELD_NUMBER: _ClassVar[int]
@@ -115,6 +115,7 @@ class CloudProviderRegion(_message.Message):
     CAPABILITIES_FIELD_NUMBER: _ClassVar[int]
     STORAGE_CLASSES_FIELD_NUMBER: _ClassVar[int]
     VOLUME_SNAPSHOT_CLASSES_FIELD_NUMBER: _ClassVar[int]
+    DEDICATED_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     free_tier: bool
@@ -126,7 +127,8 @@ class CloudProviderRegion(_message.Message):
     capabilities: CloudProviderRegionCapabilities
     storage_classes: _containers.RepeatedCompositeFieldContainer[_hybrid_cloud_pb2.HybridCloudEnvironmentStorageClass]
     volume_snapshot_classes: _containers.RepeatedCompositeFieldContainer[_hybrid_cloud_pb2.HybridCloudEnvironmentVolumeSnapshotClass]
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: _Optional[bool] = ..., available: _Optional[bool] = ..., provider: _Optional[str] = ..., country_iso_code: _Optional[str] = ..., geographical_sub_region: _Optional[str] = ..., namespace: _Optional[str] = ..., capabilities: _Optional[_Union[CloudProviderRegionCapabilities, _Mapping]] = ..., storage_classes: _Optional[_Iterable[_Union[_hybrid_cloud_pb2.HybridCloudEnvironmentStorageClass, _Mapping]]] = ..., volume_snapshot_classes: _Optional[_Iterable[_Union[_hybrid_cloud_pb2.HybridCloudEnvironmentVolumeSnapshotClass, _Mapping]]] = ...) -> None: ...
+    dedicated: bool
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., free_tier: _Optional[bool] = ..., available: _Optional[bool] = ..., provider: _Optional[str] = ..., country_iso_code: _Optional[str] = ..., geographical_sub_region: _Optional[str] = ..., namespace: _Optional[str] = ..., capabilities: _Optional[_Union[CloudProviderRegionCapabilities, _Mapping]] = ..., storage_classes: _Optional[_Iterable[_Union[_hybrid_cloud_pb2.HybridCloudEnvironmentStorageClass, _Mapping]]] = ..., volume_snapshot_classes: _Optional[_Iterable[_Union[_hybrid_cloud_pb2.HybridCloudEnvironmentVolumeSnapshotClass, _Mapping]]] = ..., dedicated: _Optional[bool] = ...) -> None: ...
 
 class CloudProviderRegionCapabilities(_message.Message):
     __slots__ = ("volume_snapshot", "volume_expansion")

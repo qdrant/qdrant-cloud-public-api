@@ -13,7 +13,7 @@ service PlatformService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 0
+    minor: 1
     patch: 0
   };
   // Lists all available cloud providers globally (not account-specific).
@@ -276,6 +276,9 @@ message CloudProviderRegion {
   repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClass storage_classes = 11;
   // Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
   repeated qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClass volume_snapshot_classes = 12;
+  // Whether only the requesting account can create clusters in this region.
+  // Always true for hybrid cloud regions. False means the region is shared by all accounts.
+  bool dedicated = 14;
 }
 
 // CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region.

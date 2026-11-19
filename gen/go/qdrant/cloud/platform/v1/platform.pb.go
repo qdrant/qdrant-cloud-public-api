@@ -719,8 +719,11 @@ type CloudProviderRegion struct {
 	StorageClasses []*v1.HybridCloudEnvironmentStorageClass `protobuf:"bytes,11,rep,name=storage_classes,json=storageClasses,proto3" json:"storage_classes,omitempty"`
 	// Volume snapshot classes available in this region. This will be set in case of Hybrid cloud only.
 	VolumeSnapshotClasses []*v1.HybridCloudEnvironmentVolumeSnapshotClass `protobuf:"bytes,12,rep,name=volume_snapshot_classes,json=volumeSnapshotClasses,proto3" json:"volume_snapshot_classes,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Whether only the requesting account can create clusters in this region.
+	// Always true for hybrid cloud regions. False means the region is shared by all accounts.
+	Dedicated     bool `protobuf:"varint,14,opt,name=dedicated,proto3" json:"dedicated,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CloudProviderRegion) Reset() {
@@ -830,6 +833,13 @@ func (x *CloudProviderRegion) GetVolumeSnapshotClasses() []*v1.HybridCloudEnviro
 	return nil
 }
 
+func (x *CloudProviderRegion) GetDedicated() bool {
+	if x != nil {
+		return x.Dedicated
+	}
+	return false
+}
+
 // CloudProviderRegionCapabilities represents storage capabilities available in a cloud provider region.
 type CloudProviderRegionCapabilities struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -924,7 +934,7 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x03R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
 	"\tfree_tier\x18\x03 \x01(\bR\bfreeTier\x12\x1c\n" +
-	"\tavailable\x18\x04 \x01(\bR\tavailableJ\x04\b\x05\x10\x06\"\xec\x05\n" +
+	"\tavailable\x18\x04 \x01(\bR\tavailableJ\x04\b\x05\x10\x06\"\x8a\x06\n" +
 	"\x13CloudProviderRegion\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
@@ -937,7 +947,8 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\tnamespace\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\tnamespace\x88\x01\x01\x12]\n" +
 	"\fcapabilities\x18\t \x01(\v29.qdrant.cloud.platform.v1.CloudProviderRegionCapabilitiesR\fcapabilities\x12c\n" +
 	"\x0fstorage_classes\x18\v \x03(\v2:.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentStorageClassR\x0estorageClasses\x12y\n" +
-	"\x17volume_snapshot_classes\x18\f \x03(\v2A.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClassR\x15volumeSnapshotClassesB\x13\n" +
+	"\x17volume_snapshot_classes\x18\f \x03(\v2A.qdrant.cloud.hybrid.v1.HybridCloudEnvironmentVolumeSnapshotClassR\x15volumeSnapshotClasses\x12\x1c\n" +
+	"\tdedicated\x18\x0e \x01(\bR\tdedicatedB\x13\n" +
 	"\x11_country_iso_codeB\x1a\n" +
 	"\x18_geographical_sub_regionB\f\n" +
 	"\n" +
@@ -945,7 +956,7 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\x10\vJ\x04\b\r\x10\x0e\"u\n" +
 	"\x1fCloudProviderRegionCapabilities\x12'\n" +
 	"\x0fvolume_snapshot\x18\x01 \x01(\bR\x0evolumeSnapshot\x12)\n" +
-	"\x10volume_expansion\x18\x02 \x01(\bR\x0fvolumeExpansion2\xe6\x14\n" +
+	"\x10volume_expansion\x18\x02 \x01(\bR\x0fvolumeExpansion2\xe8\x14\n" +
 	"\x0fPlatformService\x12\xe9\x02\n" +
 	"\x18ListGlobalCloudProviders\x129.qdrant.cloud.platform.v1.ListGlobalCloudProvidersRequest\x1a:.qdrant.cloud.platform.v1.ListGlobalCloudProvidersResponse\"\xd5\x01\x98\xb5\x18\x00\x8a\xb2\x19\x83\x01\n" +
 	"dLists all available cloud providers globally (not account-specific). Authentication is not required.\x12\x1bList global cloud providers\xaa\xb8\x19\x1d\n" +
@@ -970,7 +981,7 @@ const file_qdrant_cloud_platform_v1_platform_proto_rawDesc = "" +
 	"\x11cloud_provider_id\x12\x11cloud_provider_id\xba\xb5\x18\x16\n" +
 	"\tregion_id\x12\tregion_id\x8a\xb2\x19\x80\x01\n" +
 	"cGets a specific cloud provider region in the account identified by the given ID and cloud provider.\x12\x19Get cloud provider region\xaa\xb8\x19\x1b\n" +
-	"\x19get_cloud_provider_region\x82\xd3\xe4\x93\x02`\x12^/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}\x1a\x06µ\x18\x02\b\x01B\x86\x02\n" +
+	"\x19get_cloud_provider_region\x82\xd3\xe4\x93\x02`\x12^/api/platform/v1/accounts/{account_id}/cloud-providers/{cloud_provider_id}/regions/{region_id}\x1a\bµ\x18\x04\b\x01\x10\x01B\x86\x02\n" +
 	"\x1ccom.qdrant.cloud.platform.v1B\rPlatformProtoP\x01ZTgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/platform/v1;platformv1\xa2\x02\x03QCP\xaa\x02\x18Qdrant.Cloud.Platform.V1\xca\x02\x18Qdrant\\Cloud\\Platform\\V1\xe2\x02$Qdrant\\Cloud\\Platform\\V1\\GPBMetadata\xea\x02\x1bQdrant::Cloud::Platform::V1b\x06proto3"
 
 var (
