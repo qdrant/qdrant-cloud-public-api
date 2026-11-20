@@ -1204,14 +1204,15 @@ export enum UpdatesStatus {
   UPDATES_STATUS_UNSPECIFIED = 0,
 
   /**
-   * Every acknowledged write is applied and visible to search.
+   * Every acknowledged write is applied and durable. Search picks up the
+   * latest writes within seconds, once the search workers next reload.
    *
    * @generated from enum value: APPLIED = 1;
    */
   APPLIED = 1,
 
   /**
-   * Some acknowledged writes are still queued and not yet visible to search.
+   * Some acknowledged writes are still queued and not yet applied.
    *
    * @generated from enum value: PENDING = 2;
    */
