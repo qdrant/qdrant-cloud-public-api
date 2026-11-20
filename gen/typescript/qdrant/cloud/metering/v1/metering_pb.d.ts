@@ -1331,6 +1331,14 @@ export declare type UsageBreakdownSpace = Message<"qdrant.cloud.metering.v1.Usag
    * @generated from field: optional double discount_amount_percent = 10;
    */
   discountAmountPercent?: number | undefined;
+
+  /**
+   * The name of the serverless space at the time of the request.
+   * Empty when the space can no longer be resolved (for example, it was deleted and its name is unknown).
+   *
+   * @generated from field: string space_name = 11;
+   */
+  spaceName: string;
 };
 
 /**
@@ -1410,6 +1418,14 @@ export declare type UsageBreakdownSpaceValid = Message<"qdrant.cloud.metering.v1
    * @generated from field: optional double discount_amount_percent = 10;
    */
   discountAmountPercent?: number | undefined;
+
+  /**
+   * The name of the serverless space at the time of the request.
+   * Empty when the space can no longer be resolved (for example, it was deleted and its name is unknown).
+   *
+   * @generated from field: string space_name = 11;
+   */
+  spaceName: string;
 };
 
 /**

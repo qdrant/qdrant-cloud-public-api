@@ -1523,8 +1523,11 @@ type UsageBreakdownSpace struct {
 	DiscountAmountMillicents *int64 `protobuf:"varint,9,opt,name=discount_amount_millicents,json=discountAmountMillicents,proto3,oneof" json:"discount_amount_millicents,omitempty"`
 	// The discount applied as a percentage (e.g., 12.5).
 	DiscountAmountPercent *float64 `protobuf:"fixed64,10,opt,name=discount_amount_percent,json=discountAmountPercent,proto3,oneof" json:"discount_amount_percent,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// The name of the serverless space at the time of the request.
+	// Empty when the space can no longer be resolved (for example, it was deleted and its name is unknown).
+	SpaceName     string `protobuf:"bytes,11,opt,name=space_name,json=spaceName,proto3" json:"space_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UsageBreakdownSpace) Reset() {
@@ -1625,6 +1628,13 @@ func (x *UsageBreakdownSpace) GetDiscountAmountPercent() float64 {
 		return *x.DiscountAmountPercent
 	}
 	return 0
+}
+
+func (x *UsageBreakdownSpace) GetSpaceName() string {
+	if x != nil {
+		return x.SpaceName
+	}
+	return ""
 }
 
 var File_qdrant_cloud_metering_v1_metering_proto protoreflect.FileDescriptor
@@ -1765,7 +1775,7 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x06configB\x18\n" +
 	"\x16_cost_allocation_labelB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
-	"\x18_discount_amount_percent\"\xfe\x05\n" +
+	"\x18_discount_amount_percent\"\xa6\x06\n" +
 	"\x13UsageBreakdownSpace\x12#\n" +
 	"\bspace_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aspaceId\x12A\n" +
 	"\n" +
@@ -1779,7 +1789,9 @@ const file_qdrant_cloud_metering_v1_metering_proto_rawDesc = "" +
 	"\x04unit\x18\b \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04unit\x12J\n" +
 	"\x1adiscount_amount_millicents\x18\t \x01(\x03B\a\xbaH\x04\"\x02(\x00H\x00R\x18discountAmountMillicents\x88\x01\x01\x12T\n" +
 	"\x17discount_amount_percent\x18\n" +
-	" \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x01R\x15discountAmountPercent\x88\x01\x01:w\xbaHt\x1ar\n" +
+	" \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\x00\x00\x00Y@)\x00\x00\x00\x00\x00\x00\x00\x00H\x01R\x15discountAmountPercent\x88\x01\x01\x12&\n" +
+	"\n" +
+	"space_name\x18\v \x01(\tB\a\xbaH\x04r\x02\x18@R\tspaceName:w\xbaHt\x1ar\n" +
 	",usage_breakdown_space.end_time_gt_start_time\x12!end_time must be after start_time\x1a\x1fthis.end_time > this.start_timeB\x1d\n" +
 	"\x1b_discount_amount_millicentsB\x1a\n" +
 	"\x18_discount_amount_percent2\xf6\t\n" +
