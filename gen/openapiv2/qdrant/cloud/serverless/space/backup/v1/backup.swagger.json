@@ -1406,6 +1406,12 @@
         "monthlySpendLimit": {
           "$ref": "#/definitions/v1SpendLimit",
           "description": "Optional limit on the monthly spend of the space for searches and writes combined.\nStorage cost is not part of this limit.\nWhen unset, spend is unlimited. New spaces have no spend limit.\nThis field is writable via UpdateSpace (update_mask path \"configuration.monthly_spend_limit\").\nTo remove the limit, include the path in the update_mask and leave the field unset."
+        },
+        "maxApiKeysPerSpace": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Platform-enforced limit on the number of API keys for this space, derived from the account's quota and platform defaults.\nThis is a read-only field. A value of 0 means unlimited.",
+          "readOnly": true
         }
       },
       "description": "A SpaceConfiguration represents the configuration of a space in the Qdrant serverless environment."

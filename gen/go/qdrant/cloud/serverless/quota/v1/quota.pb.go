@@ -94,8 +94,7 @@ type AccountQuota struct {
 	// Platform limit: maximum indexed size in bytes per collection (copied into each Space.configuration.collection_settings).
 	// A value of 0 means unlimited.
 	PlatformMaxIndexedSizePerCollection uint64 `protobuf:"varint,9,opt,name=platform_max_indexed_size_per_collection,json=platformMaxIndexedSizePerCollection,proto3" json:"platform_max_indexed_size_per_collection,omitempty"`
-	// Platform limit: maximum API keys per space. A space can override this
-	// limit, so the limit that applies to a single space can differ.
+	// Platform limit: maximum API keys per space (copied into each Space.configuration).
 	// A value of 0 means unlimited.
 	MaxApiKeysPerSpace uint64 `protobuf:"varint,10,opt,name=max_api_keys_per_space,json=maxApiKeysPerSpace,proto3" json:"max_api_keys_per_space,omitempty"`
 	unknownFields      protoimpl.UnknownFields

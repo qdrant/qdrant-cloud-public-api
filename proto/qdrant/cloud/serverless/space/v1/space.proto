@@ -18,7 +18,7 @@ service SpaceService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 2
-    minor: 2
+    minor: 3
     patch: 1
   };
   // ListSpaces returns all spaces for the authenticated user
@@ -530,6 +530,12 @@ message SpaceConfiguration {
   // This field is writable via UpdateSpace (update_mask path "configuration.monthly_spend_limit").
   // To remove the limit, include the path in the update_mask and leave the field unset.
   optional SpendLimit monthly_spend_limit = 19;
+  // Platform-enforced limit on the number of API keys for this space, derived from the account's quota and platform defaults.
+  // This is a read-only field. A value of 0 means unlimited.
+  uint64 max_api_keys_per_space = 20 [
+    (buf.validate.field).uint64.gte = 0,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
   // Removed: platform_max_storage_bytes (13), max_storage_bytes (14).
   // Replaced by collection_settings.
   reserved 13, 14;

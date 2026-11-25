@@ -847,6 +847,14 @@ export declare type SpaceConfiguration = Message<"qdrant.cloud.serverless.space.
    * @generated from field: optional qdrant.cloud.serverless.space.v1.SpendLimit monthly_spend_limit = 19;
    */
   monthlySpendLimit?: SpendLimit | undefined;
+
+  /**
+   * Platform-enforced limit on the number of API keys for this space, derived from the account's quota and platform defaults.
+   * This is a read-only field. A value of 0 means unlimited.
+   *
+   * @generated from field: uint64 max_api_keys_per_space = 20;
+   */
+  maxApiKeysPerSpace: bigint;
 };
 
 export declare type SpaceConfigurationValid = SpaceConfiguration;

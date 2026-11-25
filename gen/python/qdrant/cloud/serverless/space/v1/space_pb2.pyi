@@ -201,7 +201,7 @@ class Space(_message.Message):
     def __init__(self, id: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., account_id: _Optional[str] = ..., name: _Optional[str] = ..., deleted_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., cloud_region_id: _Optional[str] = ..., labels: _Optional[_Iterable[_Union[_common_pb2.KeyValue, _Mapping]]] = ..., cost_allocation_label: _Optional[str] = ..., configuration: _Optional[_Union[SpaceConfiguration, _Mapping]] = ..., created_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., last_updated_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., deleted_by: _Optional[_Union[_common_pb2.Caller, _Mapping]] = ..., state: _Optional[_Union[SpaceState, _Mapping]] = ...) -> None: ...
 
 class SpaceConfiguration(_message.Message):
-    __slots__ = ("last_modified_at", "allowed_ip_source_ranges", "allowed_origins", "max_collections_per_space", "collection_settings", "searcher_settings", "storage_limit", "monthly_spend_limit")
+    __slots__ = ("last_modified_at", "allowed_ip_source_ranges", "allowed_origins", "max_collections_per_space", "collection_settings", "searcher_settings", "storage_limit", "monthly_spend_limit", "max_api_keys_per_space")
     LAST_MODIFIED_AT_FIELD_NUMBER: _ClassVar[int]
     ALLOWED_IP_SOURCE_RANGES_FIELD_NUMBER: _ClassVar[int]
     ALLOWED_ORIGINS_FIELD_NUMBER: _ClassVar[int]
@@ -210,6 +210,7 @@ class SpaceConfiguration(_message.Message):
     SEARCHER_SETTINGS_FIELD_NUMBER: _ClassVar[int]
     STORAGE_LIMIT_FIELD_NUMBER: _ClassVar[int]
     MONTHLY_SPEND_LIMIT_FIELD_NUMBER: _ClassVar[int]
+    MAX_API_KEYS_PER_SPACE_FIELD_NUMBER: _ClassVar[int]
     last_modified_at: _timestamp_pb2.Timestamp
     allowed_ip_source_ranges: _containers.RepeatedScalarFieldContainer[str]
     allowed_origins: _containers.RepeatedScalarFieldContainer[str]
@@ -218,7 +219,8 @@ class SpaceConfiguration(_message.Message):
     searcher_settings: SearcherSettings
     storage_limit: StorageLimit
     monthly_spend_limit: SpendLimit
-    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., allowed_origins: _Optional[_Iterable[str]] = ..., max_collections_per_space: _Optional[int] = ..., collection_settings: _Optional[_Union[CollectionSettings, _Mapping]] = ..., searcher_settings: _Optional[_Union[SearcherSettings, _Mapping]] = ..., storage_limit: _Optional[_Union[StorageLimit, _Mapping]] = ..., monthly_spend_limit: _Optional[_Union[SpendLimit, _Mapping]] = ...) -> None: ...
+    max_api_keys_per_space: int
+    def __init__(self, last_modified_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., allowed_ip_source_ranges: _Optional[_Iterable[str]] = ..., allowed_origins: _Optional[_Iterable[str]] = ..., max_collections_per_space: _Optional[int] = ..., collection_settings: _Optional[_Union[CollectionSettings, _Mapping]] = ..., searcher_settings: _Optional[_Union[SearcherSettings, _Mapping]] = ..., storage_limit: _Optional[_Union[StorageLimit, _Mapping]] = ..., monthly_spend_limit: _Optional[_Union[SpendLimit, _Mapping]] = ..., max_api_keys_per_space: _Optional[int] = ...) -> None: ...
 
 class CollectionSettings(_message.Message):
     __slots__ = ("platform_max_size", "max_size", "max_indexed_size", "platform_max_indexed_size", "size_warning_threshold_percent")

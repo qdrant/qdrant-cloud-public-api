@@ -92,8 +92,7 @@ export declare type AccountQuota = Message<"qdrant.cloud.serverless.quota.v1.Acc
   platformMaxIndexedSizePerCollection: bigint;
 
   /**
-   * Platform limit: maximum API keys per space. A space can override this
-   * limit, so the limit that applies to a single space can differ.
+   * Platform limit: maximum API keys per space (copied into each Space.configuration).
    * A value of 0 means unlimited.
    *
    * @generated from field: uint64 max_api_keys_per_space = 10;
