@@ -90,6 +90,14 @@ export declare type AccountQuota = Message<"qdrant.cloud.serverless.quota.v1.Acc
    * @generated from field: uint64 platform_max_indexed_size_per_collection = 9;
    */
   platformMaxIndexedSizePerCollection: bigint;
+
+  /**
+   * Platform limit: maximum API keys per space (copied into each Space.configuration).
+   * A value of 0 means unlimited.
+   *
+   * @generated from field: uint64 max_api_keys_per_space = 10;
+   */
+  maxApiKeysPerSpace: bigint;
 };
 
 export declare type AccountQuotaValid = AccountQuota;

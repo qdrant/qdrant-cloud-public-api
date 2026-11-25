@@ -18,7 +18,7 @@ class GetQuotasRequest(_message.Message):
     def __init__(self, account_id: _Optional[str] = ...) -> None: ...
 
 class AccountQuota(_message.Message):
-    __slots__ = ("account_id", "max_spaces", "max_collections_per_space", "used_spaces", "platform_max_size_per_collection", "platform_max_workers_per_collection", "platform_max_indexed_size_per_collection")
+    __slots__ = ("account_id", "max_spaces", "max_collections_per_space", "used_spaces", "platform_max_size_per_collection", "platform_max_workers_per_collection", "platform_max_indexed_size_per_collection", "max_api_keys_per_space")
     ACCOUNT_ID_FIELD_NUMBER: _ClassVar[int]
     MAX_SPACES_FIELD_NUMBER: _ClassVar[int]
     MAX_COLLECTIONS_PER_SPACE_FIELD_NUMBER: _ClassVar[int]
@@ -26,6 +26,7 @@ class AccountQuota(_message.Message):
     PLATFORM_MAX_SIZE_PER_COLLECTION_FIELD_NUMBER: _ClassVar[int]
     PLATFORM_MAX_WORKERS_PER_COLLECTION_FIELD_NUMBER: _ClassVar[int]
     PLATFORM_MAX_INDEXED_SIZE_PER_COLLECTION_FIELD_NUMBER: _ClassVar[int]
+    MAX_API_KEYS_PER_SPACE_FIELD_NUMBER: _ClassVar[int]
     account_id: str
     max_spaces: int
     max_collections_per_space: int
@@ -33,7 +34,8 @@ class AccountQuota(_message.Message):
     platform_max_size_per_collection: int
     platform_max_workers_per_collection: int
     platform_max_indexed_size_per_collection: int
-    def __init__(self, account_id: _Optional[str] = ..., max_spaces: _Optional[int] = ..., max_collections_per_space: _Optional[int] = ..., used_spaces: _Optional[int] = ..., platform_max_size_per_collection: _Optional[int] = ..., platform_max_workers_per_collection: _Optional[int] = ..., platform_max_indexed_size_per_collection: _Optional[int] = ...) -> None: ...
+    max_api_keys_per_space: int
+    def __init__(self, account_id: _Optional[str] = ..., max_spaces: _Optional[int] = ..., max_collections_per_space: _Optional[int] = ..., used_spaces: _Optional[int] = ..., platform_max_size_per_collection: _Optional[int] = ..., platform_max_workers_per_collection: _Optional[int] = ..., platform_max_indexed_size_per_collection: _Optional[int] = ..., max_api_keys_per_space: _Optional[int] = ...) -> None: ...
 
 class GetQuotasResponse(_message.Message):
     __slots__ = ("quota",)

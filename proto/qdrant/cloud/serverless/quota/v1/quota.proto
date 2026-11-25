@@ -13,7 +13,7 @@ import "qdrant/cloud/facade/v1/facade_options.proto";
 service QuotaService {
   option (qdrant.cloud.common.v1.api_version) = {
     major: 1
-    minor: 2
+    minor: 3
     patch: 0
   };
 
@@ -61,6 +61,9 @@ message AccountQuota {
   // Platform limit: maximum indexed size in bytes per collection (copied into each Space.configuration.collection_settings).
   // A value of 0 means unlimited.
   uint64 platform_max_indexed_size_per_collection = 9 [(buf.validate.field).uint64.gte = 0];
+  // Platform limit: maximum API keys per space (copied into each Space.configuration).
+  // A value of 0 means unlimited.
+  uint64 max_api_keys_per_space = 10 [(buf.validate.field).uint64.gte = 0];
   // Removed: platform_max_storage_bytes_per_space (4), used_storage_bytes (6).
   // Replaced by per-collection size limits (platform_max_size_per_collection).
   reserved 4, 6;

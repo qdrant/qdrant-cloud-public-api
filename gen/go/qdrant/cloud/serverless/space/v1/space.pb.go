@@ -1237,8 +1237,11 @@ type SpaceConfiguration struct {
 	// This field is writable via UpdateSpace (update_mask path "configuration.monthly_spend_limit").
 	// To remove the limit, include the path in the update_mask and leave the field unset.
 	MonthlySpendLimit *SpendLimit `protobuf:"bytes,19,opt,name=monthly_spend_limit,json=monthlySpendLimit,proto3,oneof" json:"monthly_spend_limit,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Platform-enforced limit on the number of API keys for this space, derived from the account's quota and platform defaults.
+	// This is a read-only field. A value of 0 means unlimited.
+	MaxApiKeysPerSpace uint64 `protobuf:"varint,20,opt,name=max_api_keys_per_space,json=maxApiKeysPerSpace,proto3" json:"max_api_keys_per_space,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *SpaceConfiguration) Reset() {
@@ -1325,6 +1328,13 @@ func (x *SpaceConfiguration) GetMonthlySpendLimit() *SpendLimit {
 		return x.MonthlySpendLimit
 	}
 	return nil
+}
+
+func (x *SpaceConfiguration) GetMaxApiKeysPerSpace() uint64 {
+	if x != nil {
+		return x.MaxApiKeysPerSpace
+	}
+	return 0
 }
 
 // CollectionSettings configures per-collection size limits for a space.
@@ -2069,7 +2079,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"deleted_by\x18\x10 \x01(\v2\x1e.qdrant.cloud.common.v1.CallerB\x04\xe2A\x01\x03R\tdeletedBy\x12H\n" +
 	"\x05state\x18d \x01(\v2,.qdrant.cloud.serverless.space.v1.SpaceStateB\x04\xe2A\x01\x03R\x05state:\xa8\x01\xbaH\xa4\x01\x1a\xa1\x01\n" +
 	"\bspace.id\x12\x1avalue must be a valid UUID\x1aythis.id.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$') || !has(this.created_at)B\x18\n" +
-	"\x16_cost_allocation_label\"\xf0\x06\n" +
+	"\x16_cost_allocation_label\"\xb1\a\n" +
 	"\x12SpaceConfiguration\x12J\n" +
 	"\x10last_modified_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe2A\x01\x03R\x0elastModifiedAt\x12H\n" +
 	"\x18allowed_ip_source_ranges\x18\v \x03(\tB\x0f\xbaH\f\x92\x01\t\x10(\"\x05r\x03\xf0\x01\x01R\x15allowedIpSourceRanges\x12\x91\x01\n" +
@@ -2079,7 +2089,8 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x13collection_settings\x18\x10 \x01(\v24.qdrant.cloud.serverless.space.v1.CollectionSettingsR\x12collectionSettings\x12_\n" +
 	"\x11searcher_settings\x18\x11 \x01(\v22.qdrant.cloud.serverless.space.v1.SearcherSettingsR\x10searcherSettings\x12X\n" +
 	"\rstorage_limit\x18\x12 \x01(\v2..qdrant.cloud.serverless.space.v1.StorageLimitH\x00R\fstorageLimit\x88\x01\x01\x12a\n" +
-	"\x13monthly_spend_limit\x18\x13 \x01(\v2,.qdrant.cloud.serverless.space.v1.SpendLimitH\x01R\x11monthlySpendLimit\x88\x01\x01B\x10\n" +
+	"\x13monthly_spend_limit\x18\x13 \x01(\v2,.qdrant.cloud.serverless.space.v1.SpendLimitH\x01R\x11monthlySpendLimit\x88\x01\x01\x12?\n" +
+	"\x16max_api_keys_per_space\x18\x14 \x01(\x04B\v\xe2A\x01\x03\xbaH\x042\x02(\x00R\x12maxApiKeysPerSpaceB\x10\n" +
 	"\x0e_storage_limitB\x16\n" +
 	"\x14_monthly_spend_limitJ\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0fR\x1aplatform_max_storage_bytesR\x11max_storage_bytes\"\x90\x03\n" +
 	"\x12CollectionSettings\x127\n" +
@@ -2202,7 +2213,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"@Suggest a unique human-friendly name for a new serverless space.\x12\x12Suggest space name\xaa\xb8\x19\x14\n" +
 	"\x12suggest_space_nameʾ\x19\x12\n" +
 	"\x10suggestSpaceName\x82\xd3\xe4\x93\x02>\x12</api/serverless/v1/accounts/{account_id}/spaces/suggest-name\x1a\n" +
-	"µ\x18\x06\b\x02\x10\x02\x18\x01B\xb2\x02\n" +
+	"µ\x18\x06\b\x02\x10\x03\x18\x01B\xb2\x02\n" +
 	"$com.qdrant.cloud.serverless.space.v1B\n" +
 	"SpaceProtoP\x01ZYgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/v1;spacev1\xa2\x02\x04QCSS\xaa\x02 Qdrant.Cloud.Serverless.Space.V1\xca\x02 Qdrant\\Cloud\\Serverless\\Space\\V1\xe2\x02,Qdrant\\Cloud\\Serverless\\Space\\V1\\GPBMetadata\xea\x02$Qdrant::Cloud::Serverless::Space::V1b\x06proto3"
 
