@@ -118,7 +118,7 @@
         "maxApiKeysPerSpace": {
           "type": "string",
           "format": "uint64",
-          "description": "Platform limit: maximum API keys per space. A space can override this\nlimit, so the limit that applies to a single space can differ.\nDefaults to 20. A value of 0 means unlimited."
+          "description": "Platform limit: maximum API keys per space. A space can override this\nlimit, so the limit that applies to a single space can differ.\nA value of 0 means unlimited."
         }
       },
       "description": "AccountQuota represents the serverless platform limits and aggregated usage for an account."

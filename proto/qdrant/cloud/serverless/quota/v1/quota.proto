@@ -63,7 +63,7 @@ message AccountQuota {
   uint64 platform_max_indexed_size_per_collection = 9 [(buf.validate.field).uint64.gte = 0];
   // Platform limit: maximum API keys per space. A space can override this
   // limit, so the limit that applies to a single space can differ.
-  // Defaults to 20. A value of 0 means unlimited.
+  // A value of 0 means unlimited.
   uint64 max_api_keys_per_space = 10 [(buf.validate.field).uint64.gte = 0];
   // Removed: platform_max_storage_bytes_per_space (4), used_storage_bytes (6).
   // Replaced by per-collection size limits (platform_max_size_per_collection).
