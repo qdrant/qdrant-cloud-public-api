@@ -344,3 +344,33 @@ class ListCollectionsResponse(_message.Message):
     next_offset_token: str
     time: float
     def __init__(self, collections: _Optional[_Iterable[_Union[CollectionSummary, _Mapping]]] = ..., next_offset_token: _Optional[str] = ..., time: _Optional[float] = ...) -> None: ...
+
+class CreatePayloadIndexRequest(_message.Message):
+    __slots__ = ("collection_name", "field_name", "config")
+    COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
+    FIELD_NAME_FIELD_NUMBER: _ClassVar[int]
+    CONFIG_FIELD_NUMBER: _ClassVar[int]
+    collection_name: str
+    field_name: str
+    config: PayloadIndexConfig
+    def __init__(self, collection_name: _Optional[str] = ..., field_name: _Optional[str] = ..., config: _Optional[_Union[PayloadIndexConfig, _Mapping]] = ...) -> None: ...
+
+class CreatePayloadIndexResponse(_message.Message):
+    __slots__ = ("time",)
+    TIME_FIELD_NUMBER: _ClassVar[int]
+    time: float
+    def __init__(self, time: _Optional[float] = ...) -> None: ...
+
+class DeletePayloadIndexRequest(_message.Message):
+    __slots__ = ("collection_name", "field_name")
+    COLLECTION_NAME_FIELD_NUMBER: _ClassVar[int]
+    FIELD_NAME_FIELD_NUMBER: _ClassVar[int]
+    collection_name: str
+    field_name: str
+    def __init__(self, collection_name: _Optional[str] = ..., field_name: _Optional[str] = ...) -> None: ...
+
+class DeletePayloadIndexResponse(_message.Message):
+    __slots__ = ("time",)
+    TIME_FIELD_NUMBER: _ClassVar[int]
+    time: float
+    def __init__(self, time: _Optional[float] = ...) -> None: ...
