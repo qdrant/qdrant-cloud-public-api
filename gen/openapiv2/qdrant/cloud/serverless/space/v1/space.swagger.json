@@ -821,6 +821,16 @@
       "default": "SPACE_ACCESS_MODE_UNSPECIFIED",
       "description": "SpaceAccessMode defines which operations a space currently accepts, after applying its limits.\nWhen several limits are reached, the most restrictive mode applies.\n\n - SPACE_ACCESS_MODE_UNSPECIFIED: The access mode is unspecified.\n - SPACE_ACCESS_MODE_FULL: All operations are accepted.\n - SPACE_ACCESS_MODE_WRITES_BLOCKED: Upserts are rejected. Searches and deletes are accepted.\nSet when a hard storage limit is reached.\n - SPACE_ACCESS_MODE_BLOCKED: All read and write operations, including deletes, are rejected.\nSet when a hard spend limit is reached."
     },
+    "v1SpaceBlockReason": {
+      "type": "string",
+      "enum": [
+        "SPACE_BLOCK_REASON_UNSPECIFIED",
+        "SPACE_BLOCK_REASON_SPEND_LIMIT",
+        "SPACE_BLOCK_REASON_PAYMENT"
+      ],
+      "default": "SPACE_BLOCK_REASON_UNSPECIFIED",
+      "description": "SpaceBlockReason defines why a space is blocked.\n\n - SPACE_BLOCK_REASON_UNSPECIFIED: The reason is unspecified.\n - SPACE_BLOCK_REASON_SPEND_LIMIT: A hard monthly spend limit is reached.\n - SPACE_BLOCK_REASON_PAYMENT: The account is suspended for an unpaid balance.\nSet when both this and a spend limit apply, because it is the one the customer must act on."
+    },
     "v1SpaceConfiguration": {
       "type": "object",
       "properties": {
@@ -902,6 +912,11 @@
         "monthlySpend": {
           "$ref": "#/definitions/v1SpendLimitStatus",
           "description": "Spend in the current period against the monthly spend limit.",
+          "readOnly": true
+        },
+        "blockReason": {
+          "$ref": "#/definitions/v1SpaceBlockReason",
+          "description": "Why the space is blocked. Set only when access_mode is SPACE_ACCESS_MODE_BLOCKED.",
           "readOnly": true
         }
       },

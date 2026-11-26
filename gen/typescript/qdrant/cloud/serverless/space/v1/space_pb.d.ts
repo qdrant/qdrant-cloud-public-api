@@ -1142,6 +1142,13 @@ export declare type SpaceLimitsStatus = Message<"qdrant.cloud.serverless.space.v
    * @generated from field: qdrant.cloud.serverless.space.v1.SpendLimitStatus monthly_spend = 3;
    */
   monthlySpend?: SpendLimitStatus | undefined;
+
+  /**
+   * Why the space is blocked. Set only when access_mode is SPACE_ACCESS_MODE_BLOCKED.
+   *
+   * @generated from field: optional qdrant.cloud.serverless.space.v1.SpaceBlockReason block_reason = 4;
+   */
+  blockReason?: SpaceBlockReason | undefined;
 };
 
 export declare type SpaceLimitsStatusValid = SpaceLimitsStatus;
@@ -1386,6 +1393,40 @@ export enum SpaceAccessMode {
  * Describes the enum qdrant.cloud.serverless.space.v1.SpaceAccessMode.
  */
 export declare const SpaceAccessModeSchema: GenEnum<SpaceAccessMode>;
+
+/**
+ * SpaceBlockReason defines why a space is blocked.
+ *
+ * @generated from enum qdrant.cloud.serverless.space.v1.SpaceBlockReason
+ */
+export enum SpaceBlockReason {
+  /**
+   * The reason is unspecified.
+   *
+   * @generated from enum value: SPACE_BLOCK_REASON_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * A hard monthly spend limit is reached.
+   *
+   * @generated from enum value: SPACE_BLOCK_REASON_SPEND_LIMIT = 1;
+   */
+  SPEND_LIMIT = 1,
+
+  /**
+   * The account is suspended for an unpaid balance.
+   * Set when both this and a spend limit apply, because it is the one the customer must act on.
+   *
+   * @generated from enum value: SPACE_BLOCK_REASON_PAYMENT = 2;
+   */
+  PAYMENT = 2,
+}
+
+/**
+ * Describes the enum qdrant.cloud.serverless.space.v1.SpaceBlockReason.
+ */
+export declare const SpaceBlockReasonSchema: GenEnum<SpaceBlockReason>;
 
 /**
  * LimitUsageLevel defines how current usage relates to a limit.

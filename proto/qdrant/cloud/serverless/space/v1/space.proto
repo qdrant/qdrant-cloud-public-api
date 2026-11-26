@@ -18,8 +18,8 @@ service SpaceService {
   // The API version of this service.
   option (qdrant.cloud.common.v1.api_version) = {
     major: 2
-    minor: 3
-    patch: 1
+    minor: 4
+    patch: 0
   };
   // ListSpaces returns all spaces for the authenticated user
   // Required Permissions:
@@ -713,6 +713,17 @@ enum SpaceAccessMode {
   SPACE_ACCESS_MODE_BLOCKED = 3;
 }
 
+// SpaceBlockReason defines why a space is blocked.
+enum SpaceBlockReason {
+  // The reason is unspecified.
+  SPACE_BLOCK_REASON_UNSPECIFIED = 0;
+  // A hard monthly spend limit is reached.
+  SPACE_BLOCK_REASON_SPEND_LIMIT = 1;
+  // The account is suspended for an unpaid balance.
+  // Set when both this and a spend limit apply, because it is the one the customer must act on.
+  SPACE_BLOCK_REASON_PAYMENT = 2;
+}
+
 // LimitUsageLevel defines how current usage relates to a limit.
 enum LimitUsageLevel {
   // The usage level is unspecified.
@@ -739,6 +750,11 @@ message SpaceLimitsStatus {
   StorageLimitStatus storage = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   // Spend in the current period against the monthly spend limit.
   SpendLimitStatus monthly_spend = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Why the space is blocked. Set only when access_mode is SPACE_ACCESS_MODE_BLOCKED.
+  optional SpaceBlockReason block_reason = 4 [
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
 // StorageLimitStatus reports the storage usage of a space against its storage limit.

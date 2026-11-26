@@ -41,6 +41,12 @@ class SpaceAccessMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     SPACE_ACCESS_MODE_WRITES_BLOCKED: _ClassVar[SpaceAccessMode]
     SPACE_ACCESS_MODE_BLOCKED: _ClassVar[SpaceAccessMode]
 
+class SpaceBlockReason(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SPACE_BLOCK_REASON_UNSPECIFIED: _ClassVar[SpaceBlockReason]
+    SPACE_BLOCK_REASON_SPEND_LIMIT: _ClassVar[SpaceBlockReason]
+    SPACE_BLOCK_REASON_PAYMENT: _ClassVar[SpaceBlockReason]
+
 class LimitUsageLevel(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     LIMIT_USAGE_LEVEL_UNSPECIFIED: _ClassVar[LimitUsageLevel]
@@ -60,6 +66,9 @@ SPACE_ACCESS_MODE_UNSPECIFIED: SpaceAccessMode
 SPACE_ACCESS_MODE_FULL: SpaceAccessMode
 SPACE_ACCESS_MODE_WRITES_BLOCKED: SpaceAccessMode
 SPACE_ACCESS_MODE_BLOCKED: SpaceAccessMode
+SPACE_BLOCK_REASON_UNSPECIFIED: SpaceBlockReason
+SPACE_BLOCK_REASON_SPEND_LIMIT: SpaceBlockReason
+SPACE_BLOCK_REASON_PAYMENT: SpaceBlockReason
 LIMIT_USAGE_LEVEL_UNSPECIFIED: LimitUsageLevel
 LIMIT_USAGE_LEVEL_UNLIMITED: LimitUsageLevel
 LIMIT_USAGE_LEVEL_OK: LimitUsageLevel
@@ -281,14 +290,16 @@ class SpaceState(_message.Message):
     def __init__(self, phase: _Optional[_Union[SpaceStatePhase, str]] = ..., reason: _Optional[str] = ..., endpoint: _Optional[_Union[SpaceEndpoint, _Mapping]] = ..., limits: _Optional[_Union[SpaceLimitsStatus, _Mapping]] = ...) -> None: ...
 
 class SpaceLimitsStatus(_message.Message):
-    __slots__ = ("access_mode", "storage", "monthly_spend")
+    __slots__ = ("access_mode", "storage", "monthly_spend", "block_reason")
     ACCESS_MODE_FIELD_NUMBER: _ClassVar[int]
     STORAGE_FIELD_NUMBER: _ClassVar[int]
     MONTHLY_SPEND_FIELD_NUMBER: _ClassVar[int]
+    BLOCK_REASON_FIELD_NUMBER: _ClassVar[int]
     access_mode: SpaceAccessMode
     storage: StorageLimitStatus
     monthly_spend: SpendLimitStatus
-    def __init__(self, access_mode: _Optional[_Union[SpaceAccessMode, str]] = ..., storage: _Optional[_Union[StorageLimitStatus, _Mapping]] = ..., monthly_spend: _Optional[_Union[SpendLimitStatus, _Mapping]] = ...) -> None: ...
+    block_reason: SpaceBlockReason
+    def __init__(self, access_mode: _Optional[_Union[SpaceAccessMode, str]] = ..., storage: _Optional[_Union[StorageLimitStatus, _Mapping]] = ..., monthly_spend: _Optional[_Union[SpendLimitStatus, _Mapping]] = ..., block_reason: _Optional[_Union[SpaceBlockReason, str]] = ...) -> None: ...
 
 class StorageLimitStatus(_message.Message):
     __slots__ = ("used_size", "level")
