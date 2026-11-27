@@ -362,16 +362,9 @@ service ClusterService {
       description: "Unsuspends a cluster in the account identified by the given ID."
       title: "Unsuspend cluster"
       allow_mutation: true
+      destructive_hint: false
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
-      name: "unsuspend_cluster"
-      confirmation: {
-        title: "Unsuspend cluster"
-        message: "An AI agent wants to unsuspend cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. It starts again and is charged as a running cluster."
-        lookup_method: "GetCluster"
-        lookup_field: "cluster"
-      }
-    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "unsuspend_cluster"};
   }
   // Enables JWT Role Based Access Control (RBAC) for a cluster (version 1.9+ is required) in the managed cloud environments
   // in the account identified by the given ID.

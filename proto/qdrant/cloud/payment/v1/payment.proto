@@ -253,14 +253,9 @@ service PaymentService {
       description: "Records a cloud marketplace entitlement for the specified account. This is typically used when a user purchases a subscription through a cloud marketplace (like AWS, GCP, or Azure) and the entitlement needs to be recorded in the payment system."
       title: "Record cloud marketplace entitlement"
       allow_mutation: true
+      destructive_hint: false
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
-      name: "record_cloud_marketplace_entitlement"
-      confirmation: {
-        title: "Record marketplace entitlement"
-        message: "An AI agent wants to record cloud marketplace entitlement {req.entitlement_id} for account {req.account_id}. This changes how the account is billed."
-      }
-    };
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "record_cloud_marketplace_entitlement"};
   }
 }
 

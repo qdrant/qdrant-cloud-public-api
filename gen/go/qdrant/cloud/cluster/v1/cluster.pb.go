@@ -5773,7 +5773,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1aClusterBackupSupportStatus\x12-\n" +
 	")CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED\x10\x01\x12/\n" +
-	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xea@\n" +
+	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xa2?\n" +
 	"\x0eClusterService\x12\x80\x03\n" +
 	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"\x92\x02\x8a\xb5\x18\rread:clusters\x8a\xb2\x19\x9e\x01\n" +
 	"\x8c\x01List all clusters in an account. Use list_accounts first if the account ID is unknown. Returns cluster IDs, names, state, and endpoint URLs.\x12\rList clusters\xaa\xb8\x19\x0f\n" +
@@ -5846,15 +5846,13 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"=Suspends a cluster in the account identified by the given ID.\x12\x0fSuspend cluster8\x01\xaa\xb8\x19\xd4\x01\n" +
 	"\x0fsuspend_cluster\x1a\xc0\x01\n" +
 	"\x0fSuspend cluster\x12\x97\x01An AI agent wants to suspend cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. It stops serving requests until it is unsuspended.\x1a\n" +
-	"GetCluster\"\acluster\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend\x12\x90\x05\n" +
-	"\x10UnsuspendCluster\x120.qdrant.cloud.cluster.v1.UnsuspendClusterRequest\x1a1.qdrant.cloud.cluster.v1.UnsuspendClusterResponse\"\x96\x04\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"GetCluster\"\acluster\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend\x12\xc8\x03\n" +
+	"\x10UnsuspendCluster\x120.qdrant.cloud.cluster.v1.UnsuspendClusterRequest\x1a1.qdrant.cloud.cluster.v1.UnsuspendClusterResponse\"\xce\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18\\\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\tunsuspend\x8a\xb2\x19V\n" +
-	"?Unsuspends a cluster in the account identified by the given ID.\x12\x11Unsuspend cluster8\x01\xaa\xb8\x19\xdc\x01\n" +
-	"\x11unsuspend_cluster\x1a\xc6\x01\n" +
-	"\x11Unsuspend cluster\x12\x9b\x01An AI agent wants to unsuspend cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. It starts again and is charged as a running cluster.\x1a\n" +
-	"GetCluster\"\acluster\x82\xd3\xe4\x93\x02G\"E/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/unsuspend\x12\xc8\a\n" +
+	"cluster_id\xca\xf3\x18\\\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\tunsuspend\x8a\xb2\x19X\n" +
+	"?Unsuspends a cluster in the account identified by the given ID.\x12\x11Unsuspend cluster(\x008\x01\xaa\xb8\x19\x13\n" +
+	"\x11unsuspend_cluster\x82\xd3\xe4\x93\x02G\"E/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/unsuspend\x12\xc8\a\n" +
 	"\x14EnableClusterJwtRbac\x124.qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest\x1a5.qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse\"\xc2\x06\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
