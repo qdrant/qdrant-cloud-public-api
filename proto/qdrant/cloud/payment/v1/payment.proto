@@ -254,7 +254,13 @@ service PaymentService {
       title: "Record cloud marketplace entitlement"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "record_cloud_marketplace_entitlement"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "record_cloud_marketplace_entitlement"
+      confirmation: {
+        title: "Record marketplace entitlement"
+        message: "An AI agent wants to record cloud marketplace entitlement {req.entitlement_id} for account {req.account_id}. This changes how the account is billed."
+      }
+    };
   }
 }
 

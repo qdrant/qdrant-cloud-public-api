@@ -154,7 +154,15 @@ service BackupService {
       title: "Delete backup"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_space_backup"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "delete_space_backup"
+      confirmation: {
+        title: "Delete space backup"
+        message: "An AI agent wants to delete backup {resource.name} ({req.backup_id}) of space {resource.space_id} in account {req.account_id}. This cannot be undone."
+        lookup_method: "GetBackup"
+        lookup_field: "backup"
+      }
+    };
   }
   // Lists all backup restores for spaces in the account identified by the given ID.
   // Required permissions:
@@ -226,7 +234,15 @@ service BackupService {
       title: "Restore backup"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "restore_space_backup"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "restore_space_backup"
+      confirmation: {
+        title: "Restore space backup"
+        message: "An AI agent wants to restore backup {resource.name} ({req.backup_id}) to space {resource.space_id} in account {req.account_id}. The data goes back to the state of the backup: changes made since are lost."
+        lookup_method: "GetBackup"
+        lookup_field: "backup"
+      }
+    };
   }
   // Lists all backup schedules in the account identified by the given ID.
   // Required permissions:
@@ -390,7 +406,13 @@ service BackupService {
       title: "Update backup schedule"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_space_backup_schedule"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "update_space_backup_schedule"
+      confirmation: {
+        title: "Update space backup schedule"
+        message: "An AI agent wants to update backup schedule {req.backup_schedule.name} ({req.backup_schedule.id}) of space {req.backup_schedule.space_id} in account {req.backup_schedule.account_id}. Without an update mask, every field is replaced with the values sent."
+      }
+    };
   }
   // Deletes a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -425,7 +447,17 @@ service BackupService {
       title: "Delete backup schedule"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_space_backup_schedule"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "delete_space_backup_schedule"
+      confirmation: {
+        title: "Delete space backup schedule"
+        message: "An AI agent wants to delete backup schedule {req.backup_schedule_id} in account {req.account_id}. No new backups are taken on this schedule."
+        notes: {
+          field: "delete_backups"
+          text: "The backups it created will be deleted as well. This cannot be undone."
+        }
+      }
+    };
   }
 }
 

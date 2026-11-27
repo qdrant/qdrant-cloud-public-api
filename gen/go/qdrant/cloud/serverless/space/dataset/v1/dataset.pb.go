@@ -1272,7 +1272,7 @@ const file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDesc = "" +
 	"$SAMPLE_DATASET_LOAD_STATUS_SUCCEEDED\x10\x03\x12-\n" +
 	")SAMPLE_DATASET_LOAD_STATUS_FAILED_TO_SYNC\x10\x04\x12(\n" +
 	"$SAMPLE_DATASET_LOAD_STATUS_NOT_FOUND\x10\x05\x12&\n" +
-	"\"SAMPLE_DATASET_LOAD_STATUS_SKIPPED\x10\x062\xa1\x11\n" +
+	"\"SAMPLE_DATASET_LOAD_STATUS_SKIPPED\x10\x062\xde\x12\n" +
 	"\x14SampleDatasetService\x12\xaf\x03\n" +
 	"\x12ListSampleDatasets\x12C.qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsRequest\x1aD.qdrant.cloud.serverless.space.dataset.v1.ListSampleDatasetsResponse\"\x8d\x02\x8a\xb5\x18\x1fread:serverless_sample_datasets\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\x8a\xb2\x19\\\n" +
@@ -1286,14 +1286,15 @@ const file_qdrant_cloud_serverless_space_dataset_v1_dataset_proto_rawDesc = "" +
 	"\bspace_id\x12\bspace_id\xba\xb5\x180\n" +
 	"\x16sample_dataset_load_id\x12\x16sample_dataset_load_id\x8a\xb2\x19h\n" +
 	"MGet a sample dataset load of a serverless space with its status and progress.\x12\x17Get sample dataset load\xaa\xb8\x19\x1f\n" +
-	"\x1dget_space_sample_dataset_load\x82\xd3\xe4\x93\x02j\x12h/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/sample-dataset-loads/{sample_dataset_load_id}\x12\xd9\x05\n" +
-	"\x11LoadSampleDataset\x12B.qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetRequest\x1aC.qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetResponse\"\xba\x04\x8a\xb5\x18 write:serverless_sample_datasets\xba\xb5\x18\x14\n" +
+	"\x1dget_space_sample_dataset_load\x82\xd3\xe4\x93\x02j\x12h/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/sample-dataset-loads/{sample_dataset_load_id}\x12\x96\a\n" +
+	"\x11LoadSampleDataset\x12B.qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetRequest\x1aC.qdrant.cloud.serverless.space.dataset.v1.LoadSampleDatasetResponse\"\xf7\x05\x8a\xb5\x18 write:serverless_sample_datasets\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xba\xb5\x18&\n" +
 	"\x11sample_dataset_id\x12\x11sample_dataset_id\xca\xf3\x18\xc9\x01\b\x04\x12\x19serverless-sample-dataset\"\x15req.sample_dataset_id*K/accounts/{req.account_id}/serverless-spaces/{req.space_id}/sample-datasets2\x04loadR&\n" +
 	"\x0fcollection_name\x12\x13req.collection_nameR\x18\n" +
 	"\bspace_id\x12\freq.space_id\x8a\xb2\x19u\n" +
-	"\\Load a sample dataset into a new collection in a serverless space. The load is asynchronous.\x12\x13Load sample dataset8\x01\xaa\xb8\x19\x1b\n" +
-	"\x19load_space_sample_dataset\x82\xd3\xe4\x93\x02h:\x01*\"c/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/sample-datasets/{sample_dataset_id}/load\x1a\x06µ\x18\x02\b\x01B\xe8\x02\n" +
+	"\\Load a sample dataset into a new collection in a serverless space. The load is asynchronous.\x12\x13Load sample dataset8\x01\xaa\xb8\x19\xd7\x01\n" +
+	"\x19load_space_sample_dataset\x1a\xb9\x01\n" +
+	"\x13Load sample dataset\x12\xa1\x01An AI agent wants to load sample dataset {req.sample_dataset_id} into a new collection {req.collection_name} in space {req.space_id} in account {req.account_id}.\x82\xd3\xe4\x93\x02h:\x01*\"c/api/serverless/v1/accounts/{account_id}/spaces/{space_id}/sample-datasets/{sample_dataset_id}/load\x1a\x06µ\x18\x02\b\x01B\xe8\x02\n" +
 	",com.qdrant.cloud.serverless.space.dataset.v1B\fDatasetProtoP\x01Zcgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/dataset/v1;datasetv1\xa2\x02\x05QCSSD\xaa\x02(Qdrant.Cloud.Serverless.Space.Dataset.V1\xca\x02(Qdrant\\Cloud\\Serverless\\Space\\Dataset\\V1\xe2\x024Qdrant\\Cloud\\Serverless\\Space\\Dataset\\V1\\GPBMetadata\xea\x02-Qdrant::Cloud::Serverless::Space::Dataset::V1b\x06proto3"
 
 var (

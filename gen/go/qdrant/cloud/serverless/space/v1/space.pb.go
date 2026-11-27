@@ -2164,7 +2164,7 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\x1bLIMIT_USAGE_LEVEL_UNLIMITED\x10\x01\x12\x18\n" +
 	"\x14LIMIT_USAGE_LEVEL_OK\x10\x02\x12'\n" +
 	"#LIMIT_USAGE_LEVEL_THRESHOLD_REACHED\x10\x03\x12#\n" +
-	"\x1fLIMIT_USAGE_LEVEL_LIMIT_REACHED\x10\x042\xd2\x1a\n" +
+	"\x1fLIMIT_USAGE_LEVEL_LIMIT_REACHED\x10\x042\x9a\x1e\n" +
 	"\fSpaceService\x12\xc9\x02\n" +
 	"\n" +
 	"ListSpaces\x123.qdrant.cloud.serverless.space.v1.ListSpacesRequest\x1a4.qdrant.cloud.serverless.space.v1.ListSpacesResponse\"\xcf\x01\x8a\xb5\x18\x16read:serverless_spaces\x8a\xb2\x19V\n" +
@@ -2195,20 +2195,23 @@ const file_qdrant_cloud_serverless_space_v1_space_proto_rawDesc = "" +
 	"\n" +
 	"space_name\x12\x0ereq.space_name\x8a\xb2\x19H\n" +
 	"*Create a new space from an existing backup\x12\x18Create space from backup8\x01\xaa\xb8\x19\x1a\n" +
-	"\x18create_space_from_backup\x82\xd3\xe4\x93\x02H:\x01*\"C/api/serverless/v1/accounts/{account_id}/backups/{backup_id}/spaces\x12\xf1\x04\n" +
-	"\vUpdateSpace\x124.qdrant.cloud.serverless.space.v1.UpdateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.UpdateSpaceResponse\"\xf4\x03\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x14\n" +
+	"\x18create_space_from_backup\x82\xd3\xe4\x93\x02H:\x01*\"C/api/serverless/v1/accounts/{account_id}/backups/{backup_id}/spaces\x12\xde\x06\n" +
+	"\vUpdateSpace\x124.qdrant.cloud.serverless.space.v1.UpdateSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.UpdateSpaceResponse\"\xe1\x05\x8a\xb5\x18\x17write:serverless_spaces\x92\xb5\x18\x10space.account_id\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace.idʵ\x18}\n" +
 	"7/qdrant.cloud.serverless.space.v1.SpaceService/GetSpace\x12\x1e\n" +
 	"\n" +
 	"account_id\x12\x10space.account_id\x12\x14\n" +
 	"\bspace_id\x12\bspace.id\x1a\x05space\"\x05space\xca\xf3\x18e\b\x02\x12\x10serverless-space\"\freq.space.id*A/accounts/{req.space.account_id}/serverless-spaces/{req.space.id}\x8a\xb2\x19b\n" +
-	"PUpdates a space in the account identified by the given ID. Required Permissions:\x12\fUpdate space8\x01\xaa\xb8\x19\x0e\n" +
-	"\fupdate_space\x82\xd3\xe4\x93\x02E:\x01*\x1a@/api/serverless/v1/accounts/{space.account_id}/spaces/{space.id}\x12\xdc\x03\n" +
-	"\vDeleteSpace\x124.qdrant.cloud.serverless.space.v1.DeleteSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.DeleteSpaceResponse\"\xdf\x02\x8a\xb5\x18\x18delete:serverless_spaces\xba\xb5\x18\x14\n" +
+	"PUpdates a space in the account identified by the given ID. Required Permissions:\x12\fUpdate space8\x01\xaa\xb8\x19\xfa\x01\n" +
+	"\fupdate_space\x1a\xe9\x01\n" +
+	"\fUpdate space\x12\xd8\x01An AI agent wants to update space {req.space.name} ({req.space.id}) in account {req.space.account_id}. Configuration changes can change its price. Without an update mask, every field is replaced with the values sent.\x82\xd3\xe4\x93\x02E:\x01*\x1a@/api/serverless/v1/accounts/{space.account_id}/spaces/{space.id}\x12\xb7\x05\n" +
+	"\vDeleteSpace\x124.qdrant.cloud.serverless.space.v1.DeleteSpaceRequest\x1a5.qdrant.cloud.serverless.space.v1.DeleteSpaceResponse\"\xba\x04\x8a\xb5\x18\x18delete:serverless_spaces\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xca\xf3\x18\x85\x01\b\x03\x12\x10serverless-space\"\freq.space_id*;/accounts/{req.account_id}/serverless-spaces/{req.space_id}R$\n" +
 	"\x0edelete_backups\x12\x12req.delete_backups\x8a\xb2\x19I\n" +
-	"7DeleteSpace removes a space by ID Required Permissions:\x12\fDelete space8\x01\xaa\xb8\x19\x0e\n" +
-	"\fdelete_space\x82\xd3\xe4\x93\x02<*:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xdc\x02\n" +
+	"7DeleteSpace removes a space by ID Required Permissions:\x12\fDelete space8\x01\xaa\xb8\x19\xe8\x01\n" +
+	"\fdelete_space\x1a\xd7\x01\n" +
+	"\fDelete space\x12vAn AI agent wants to delete space {resource.name} ({req.space_id}) in account {req.account_id}. This cannot be undone.\x1a\bGetSpace\"\x05space*>\n" +
+	"\x0edelete_backups\x12,The space's backups will be deleted as well.\x82\xd3\xe4\x93\x02<*:/api/serverless/v1/accounts/{account_id}/spaces/{space_id}\x12\xdc\x02\n" +
 	"\x10SuggestSpaceName\x129.qdrant.cloud.serverless.space.v1.SuggestSpaceNameRequest\x1a:.qdrant.cloud.serverless.space.v1.SuggestSpaceNameResponse\"\xd0\x01\x8a\xb5\x18\x00\x8a\xb2\x19V\n" +
 	"@Suggest a unique human-friendly name for a new serverless space.\x12\x12Suggest space name\xaa\xb8\x19\x14\n" +
 	"\x12suggest_space_nameʾ\x19\x12\n" +

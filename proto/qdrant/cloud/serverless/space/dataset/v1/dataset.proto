@@ -126,7 +126,13 @@ service SampleDatasetService {
       title: "Load sample dataset"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "load_space_sample_dataset"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "load_space_sample_dataset"
+      confirmation: {
+        title: "Load sample dataset"
+        message: "An AI agent wants to load sample dataset {req.sample_dataset_id} into a new collection {req.collection_name} in space {req.space_id} in account {req.account_id}."
+      }
+    };
   }
 }
 

@@ -59,17 +59,20 @@ export declare const McpToolOptionsSchema: GenMessage<McpToolOptions, {validType
  * call with the user's answer. Only an accepted, checked form for the same
  * arguments invokes the RPC.
  *
- * Placeholders in message and notes: {req.<field>} is a request field and
- * {resource.<field>} a field of the looked-up resource (snake_case proto
- * field names, as in qdrant.cloud.event.v1.event_options templates). A
- * placeholder without a value is replaced by an empty string.
+ * Placeholders in message and notes: {req.<path>} is a request field and
+ * {resource.<path>} a field of the looked-up resource. A path is one or more
+ * snake_case proto field names separated by dots, for example
+ * {req.cluster_id} or {req.cluster.name}, as in
+ * qdrant.cloud.event.v1.event_options templates. A placeholder without a
+ * value (unset field, failed lookup) is removed and repeated spaces are
+ * collapsed, so do not quote placeholders.
  *
  * Example:
  *  option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
  *    name: "delete_cluster"
  *    confirmation: {
  *      title: "Delete cluster"
- *      message: "Delete cluster \"{resource.name}\" ({req.cluster_id}) in account {req.account_id}? This cannot be undone."
+ *      message: "An AI agent wants to delete cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. This cannot be undone."
  *      lookup_method: "GetCluster"
  *      lookup_field: "cluster"
  *      notes: {field: "delete_backups" text: "Its backups will be deleted as well."}
@@ -98,7 +101,9 @@ export declare type McpConfirmation = Message<"qdrant.cloud.facade.mcp.v1.McpCon
   /**
    * Optional read-only RPC of the same service that returns the resource,
    * called as the caller, so the message can name it. Its request fields are
-   * filled from the request fields of the same name. When the lookup fails,
+   * filled from the top-level request fields of the same name, so it fits
+   * RPCs that take identifiers (Delete*, Restart*, ...), not Update* RPCs that
+   * take the resource itself (use {req.<resource>.<field>} there). When the lookup fails,
    * {resource.*} placeholders are empty.
    *
    * @generated from field: string lookup_method = 3;

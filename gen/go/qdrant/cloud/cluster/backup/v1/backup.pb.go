@@ -2613,7 +2613,7 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\x1fBACKUP_RESTORE_STATUS_SUCCEEDED\x10\x03\x12(\n" +
 	"$BACKUP_RESTORE_STATUS_FAILED_TO_SYNC\x10\x04\x12#\n" +
 	"\x1fBACKUP_RESTORE_STATUS_NOT_FOUND\x10\x05\x12!\n" +
-	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xc85\n" +
+	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xff?\n" +
 	"\rBackupService\x12\x97\x04\n" +
 	"\vListBackups\x122.qdrant.cloud.cluster.backup.v1.ListBackupsRequest\x1a3.qdrant.cloud.cluster.backup.v1.ListBackupsResponse\"\x9e\x03\x8a\xb5\x18\fread:backups\xba\xb5\x18\x18\n" +
 	"\n" +
@@ -2641,31 +2641,35 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x12\x15req.backup.cluster_id\x8a\xb2\x19O\n" +
 	"<Creates a backup for the cluster identified by the given ID.\x12\rCreate backup8\x01\xaa\xb8\x19\x0f\n" +
-	"\rcreate_backup\x82\xd3\xe4\x93\x02@:\x01*\";/api/cluster/backup/v1/accounts/{backup.account_id}/backups\x12\xe9\x04\n" +
-	"\fUpdateBackup\x123.qdrant.cloud.cluster.backup.v1.UpdateBackupRequest\x1a4.qdrant.cloud.cluster.backup.v1.UpdateBackupResponse\"\xed\x03\x8a\xb5\x18\rwrite:backups\x92\xb5\x18\x11backup.account_id\xba\xb5\x18\x16\n" +
+	"\rcreate_backup\x82\xd3\xe4\x93\x02@:\x01*\";/api/cluster/backup/v1/accounts/{backup.account_id}/backups\x12\x8c\x06\n" +
+	"\fUpdateBackup\x123.qdrant.cloud.cluster.backup.v1.UpdateBackupRequest\x1a4.qdrant.cloud.cluster.backup.v1.UpdateBackupResponse\"\x90\x05\x8a\xb5\x18\rwrite:backups\x92\xb5\x18\x11backup.account_id\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup.id\xca\xf3\x18\x9a\x01\b\x02\x12\x06backup\"\rreq.backup.id*Z/accounts/{req.backup.account_id}/clusters/{req.backup.cluster_id}/backups/{req.backup.id}R#\n" +
 	"\n" +
 	"cluster_id\x12\x15req.backup.cluster_id\x8a\xb2\x19\xa4\x01\n" +
-	"\x90\x01Updates a backup in the account identified by the given ID. Only the display name can be changed; every other field is read-only and is ignored.\x12\rUpdate backup8\x01\xaa\xb8\x19\x0f\n" +
-	"\rupdate_backup\x82\xd3\xe4\x93\x02L:\x01*2G/api/cluster/backup/v1/accounts/{backup.account_id}/backups/{backup.id}\x12\xf9\x03\n" +
-	"\fDeleteBackup\x123.qdrant.cloud.cluster.backup.v1.DeleteBackupRequest\x1a4.qdrant.cloud.cluster.backup.v1.DeleteBackupResponse\"\xfd\x02\x8a\xb5\x18\x0edelete:backups\xba\xb5\x18\x16\n" +
+	"\x90\x01Updates a backup in the account identified by the given ID. Only the display name can be changed; every other field is read-only and is ignored.\x12\rUpdate backup8\x01\xaa\xb8\x19\xb1\x01\n" +
+	"\rupdate_backup\x1a\x9f\x01\n" +
+	"\rUpdate backup\x12\x8d\x01An AI agent wants to update backup {req.backup.name} ({req.backup.id}) of cluster {req.backup.cluster_id} in account {req.backup.account_id}.\x82\xd3\xe4\x93\x02L:\x01*2G/api/cluster/backup/v1/accounts/{backup.account_id}/backups/{backup.id}\x12\x83\a\n" +
+	"\fDeleteBackup\x123.qdrant.cloud.cluster.backup.v1.DeleteBackupRequest\x1a4.qdrant.cloud.cluster.backup.v1.DeleteBackupResponse\"\x87\x06\x8a\xb5\x18\x0edelete:backups\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\xca\xf3\x18\x9f\x01\b\x03\x12\x06backup\"\rreq.backup_id*Y/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backups/{req.backup_id}R)\n" +
 	"\n" +
 	"cluster_id\x12\x1bresp-md.qc-event-cluster-id\x8a\xb2\x19N\n" +
-	";Deletes a backup in the account identified by the given ID.\x12\rDelete backup8\x01\xaa\xb8\x19\x0f\n" +
-	"\rdelete_backup\x82\xd3\xe4\x93\x02B*@/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}\x12\xf8\x02\n" +
+	";Deletes a backup in the account identified by the given ID.\x12\rDelete backup8\x01\xaa\xb8\x19\x98\x03\n" +
+	"\rdelete_backup\x1a\x86\x03\n" +
+	"\rDelete backup\x12\x99\x01An AI agent wants to delete backup {resource.name} ({req.backup_id}) of cluster {resource.cluster_id} in account {req.account_id}. This cannot be undone.\x1a\tGetBackup\"\x06backup*\xc5\x01\n" +
+	"\x05force\x12\xbb\x01Force is set: for a hybrid cloud cluster, the backup is removed from Qdrant Cloud without waiting for the cloud agent, and leftover files in the object storage must be cleaned up by hand.\x82\xd3\xe4\x93\x02B*@/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}\x12\xf8\x02\n" +
 	"\x12ListBackupRestores\x129.qdrant.cloud.cluster.backup.v1.ListBackupRestoresRequest\x1a:.qdrant.cloud.cluster.backup.v1.ListBackupRestoresResponse\"\xea\x01\x8a\xb5\x18\fread:backups\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\x8a\xb2\x19\\\n" +
 	"DLists all backup restores in the account identified by the given ID.\x12\x14List backup restores\xaa\xb8\x19\x16\n" +
-	"\x14list_backup_restores\x82\xd3\xe4\x93\x02>\x12</api/cluster/backup/v1/accounts/{account_id}/backup_restores\x12\x91\x04\n" +
-	"\rRestoreBackup\x124.qdrant.cloud.cluster.backup.v1.RestoreBackupRequest\x1a5.qdrant.cloud.cluster.backup.v1.RestoreBackupResponse\"\x92\x03\x8a\xb5\x18\x0frestore:backups\xba\xb5\x18\x16\n" +
+	"\x14list_backup_restores\x82\xd3\xe4\x93\x02>\x12</api/cluster/backup/v1/accounts/{account_id}/backup_restores\x12\x94\x06\n" +
+	"\rRestoreBackup\x124.qdrant.cloud.cluster.backup.v1.RestoreBackupRequest\x1a5.qdrant.cloud.cluster.backup.v1.RestoreBackupResponse\"\x95\x05\x8a\xb5\x18\x0frestore:backups\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\xca\xf3\x18\xa8\x01\b\x04\x12\x06backup\"\rreq.backup_id*Y/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backups/{req.backup_id}2\arestoreR)\n" +
 	"\n" +
 	"cluster_id\x12\x1bresp-md.qc-event-cluster-id\x8a\xb2\x19P\n" +
-	"<Restores a backup in the account identified by the given ID.\x12\x0eRestore backup8\x01\xaa\xb8\x19\x10\n" +
-	"\x0erestore_backup\x82\xd3\xe4\x93\x02J\"H/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/restore\x12\xba\x04\n" +
+	"<Restores a backup in the account identified by the given ID.\x12\x0eRestore backup8\x01\xaa\xb8\x19\x92\x02\n" +
+	"\x0erestore_backup\x1a\xff\x01\n" +
+	"\x0eRestore backup\x12\xd9\x01An AI agent wants to restore backup {resource.name} ({req.backup_id}) to cluster {resource.cluster_id} in account {req.account_id}. The cluster's data goes back to the state of the backup: changes made since are lost.\x1a\tGetBackup\"\x06backup\x82\xd3\xe4\x93\x02J\"H/api/cluster/backup/v1/accounts/{account_id}/backups/{backup_id}/restore\x12\xba\x04\n" +
 	"\x13ListBackupSchedules\x12:.qdrant.cloud.cluster.backup.v1.ListBackupSchedulesRequest\x1a;.qdrant.cloud.cluster.backup.v1.ListBackupSchedulesResponse\"\xa9\x03\x8a\xb5\x18\x15read:backup_schedules\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
@@ -2693,8 +2697,8 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x12\x1ereq.backup_schedule.cluster_id\x8a\xb2\x19`\n" +
 	"DCreates a backup schedule in the account identified by the given ID.\x12\x16Create backup schedule8\x01\xaa\xb8\x19\x18\n" +
-	"\x16create_backup_schedule\x82\xd3\xe4\x93\x02R:\x01*\"M/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules\x12\xd5\a\n" +
-	"\x14UpdateBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse\"\xc1\x06\x8a\xb5\x18\x16write:backup_schedules\x92\xb5\x18\x1abackup_schedule.account_id\xba\xb5\x18(\n" +
+	"\x16create_backup_schedule\x82\xd3\xe4\x93\x02R:\x01*\"M/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules\x12\xd7\t\n" +
+	"\x14UpdateBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.UpdateBackupScheduleResponse\"\xc3\b\x8a\xb5\x18\x16write:backup_schedules\x92\xb5\x18\x1abackup_schedule.account_id\xba\xb5\x18(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule.id\xba\xb5\x18(\n" +
 	"\n" +
 	"cluster_id\x12\x1abackup_schedule.cluster_idʵ\x18\xe1\x01\n" +
@@ -2706,15 +2710,18 @@ const file_qdrant_cloud_cluster_backup_v1_backup_proto_rawDesc = "" +
 	"cluster_id\x12\x1abackup_schedule.cluster_id\x1a\x0fbackup_schedule\"\x0fbackup_schedule\xca\xf3\x18\xd9\x01\b\x02\x12\x0fbackup-schedule\"\x16req.backup_schedule.id*~/accounts/{req.backup_schedule.account_id}/clusters/{req.backup_schedule.cluster_id}/backup_schedules/{req.backup_schedule.id}R,\n" +
 	"\n" +
 	"cluster_id\x12\x1ereq.backup_schedule.cluster_id\x8a\xb2\x19`\n" +
-	"DUpdates a backup schedule in the account identified by the given ID.\x12\x16Update backup schedule8\x01\xaa\xb8\x19\x18\n" +
-	"\x16update_backup_schedule\x82\xd3\xe4\x93\x02g:\x01*\x1ab/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\xa3\x05\n" +
-	"\x14DeleteBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse\"\x8f\x04\x8a\xb5\x18\x17delete:backup_schedules\xba\xb5\x18(\n" +
+	"DUpdates a backup schedule in the account identified by the given ID.\x12\x16Update backup schedule8\x01\xaa\xb8\x19\x99\x02\n" +
+	"\x16update_backup_schedule\x1a\xfe\x01\n" +
+	"\x16Update backup schedule\x12\xe3\x01An AI agent wants to update backup schedule {req.backup_schedule.id} of cluster {req.backup_schedule.cluster_id} in account {req.backup_schedule.account_id}. Without an update mask, every field is replaced with the values sent.\x82\xd3\xe4\x93\x02g:\x01*\x1ab/api/cluster/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\xa8\a\n" +
+	"\x14DeleteBackupSchedule\x12;.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleRequest\x1a<.qdrant.cloud.cluster.backup.v1.DeleteBackupScheduleResponse\"\x94\x06\x8a\xb5\x18\x17delete:backup_schedules\xba\xb5\x18(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule_id\xca\xf3\x18\xe9\x01\b\x03\x12\x0fbackup-schedule\"\x16req.backup_schedule_id*k/accounts/{req.account_id}/clusters/{resp-md.qc-event-cluster-id}/backup_schedules/{req.backup_schedule_id}R)\n" +
 	"\n" +
 	"cluster_id\x12\x1bresp-md.qc-event-cluster-idR$\n" +
 	"\x0edelete_backups\x12\x12req.delete_backups\x8a\xb2\x19`\n" +
-	"DDeletes a backup schedule in the account identified by the given ID.\x12\x16Delete backup schedule8\x01\xaa\xb8\x19\x18\n" +
-	"\x16delete_backup_schedule\x82\xd3\xe4\x93\x02T*R/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\x06µ\x18\x02\b\x01B\xa8\x02\n" +
+	"DDeletes a backup schedule in the account identified by the given ID.\x12\x16Delete backup schedule8\x01\xaa\xb8\x19\x9c\x02\n" +
+	"\x16delete_backup_schedule\x1a\x81\x02\n" +
+	"\x16Delete backup schedule\x12\x8c\x01An AI agent wants to delete backup schedule {req.backup_schedule_id} in account {req.account_id}. No new backups are taken on this schedule.*X\n" +
+	"\x0edelete_backups\x12FThe backups it created will be deleted as well. This cannot be undone.\x82\xd3\xe4\x93\x02T*R/api/cluster/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\x06µ\x18\x02\b\x01B\xa8\x02\n" +
 	"\"com.qdrant.cloud.cluster.backup.v1B\vBackupProtoP\x01ZXgithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/cluster/backup/v1;backupv1\xa2\x02\x04QCCB\xaa\x02\x1eQdrant.Cloud.Cluster.Backup.V1\xca\x02\x1eQdrant\\Cloud\\Cluster\\Backup\\V1\xe2\x02*Qdrant\\Cloud\\Cluster\\Backup\\V1\\GPBMetadata\xea\x02\"Qdrant::Cloud::Cluster::Backup::V1b\x06proto3"
 
 var (

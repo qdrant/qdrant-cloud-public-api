@@ -199,7 +199,13 @@ service SpaceService {
       title: "Update space"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_space"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "update_space"
+      confirmation: {
+        title: "Update space"
+        message: "An AI agent wants to update space {req.space.name} ({req.space.id}) in account {req.space.account_id}. Configuration changes can change its price. Without an update mask, every field is replaced with the values sent."
+      }
+    };
   }
   // DeleteSpace removes a space by ID
   // Required Permissions:
@@ -230,7 +236,19 @@ service SpaceService {
       title: "Delete space"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_space"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "delete_space"
+      confirmation: {
+        title: "Delete space"
+        message: "An AI agent wants to delete space {resource.name} ({req.space_id}) in account {req.account_id}. This cannot be undone."
+        lookup_method: "GetSpace"
+        lookup_field: "space"
+        notes: {
+          field: "delete_backups"
+          text: "The space's backups will be deleted as well."
+        }
+      }
+    };
   }
   // Suggests a unique and human-friendly name for a new space in the specified account.
   // This can be used by clients to pre-fill the name field when creating a new space.
