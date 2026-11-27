@@ -125,6 +125,7 @@ service SampleDatasetService {
       description: "Load a sample dataset into a new collection in a serverless space. The load is asynchronous."
       title: "Load sample dataset"
       allow_mutation: true
+      destructive_hint: false
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "load_space_sample_dataset"};
   }

@@ -5773,7 +5773,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1aClusterBackupSupportStatus\x12-\n" +
 	")CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED\x10\x01\x12/\n" +
-	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xd04\n" +
+	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xa2?\n" +
 	"\x0eClusterService\x12\x80\x03\n" +
 	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"\x92\x02\x8a\xb5\x18\rread:clusters\x8a\xb2\x19\x9e\x01\n" +
 	"\x8c\x01List all clusters in an account. Use list_accounts first if the account ID is unknown. Returns cluster IDs, names, state, and endpoint URLs.\x12\rList clusters\xaa\xb8\x19\x0f\n" +
@@ -5805,8 +5805,8 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\fcluster_name\x12\fcluster_name\xca\xf3\x18t\b\x01\x12\acluster\"\x0fresp.cluster.id*5/accounts/{req.account_id}/clusters/{resp.cluster.id}R\x1f\n" +
 	"\x0efrom_backup_id\x12\rreq.backup_id\x8a\xb2\x19L\n" +
 	",Create a new cluster from an existing backup\x12\x1aCreate cluster from backup8\x01\xaa\xb8\x19\x1c\n" +
-	"\x1acreate_cluster_from_backup\x82\xd3\xe4\x93\x02D\"B/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters\x12\xcf\x04\n" +
-	"\rUpdateCluster\x12-.qdrant.cloud.cluster.v1.UpdateClusterRequest\x1a..qdrant.cloud.cluster.v1.UpdateClusterResponse\"\xde\x03\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xba\xb5\x18\x18\n" +
+	"\x1acreate_cluster_from_backup\x82\xd3\xe4\x93\x02D\"B/api/cluster/v1/accounts/{account_id}/backups/{backup_id}/clusters\x12\xae\a\n" +
+	"\rUpdateCluster\x12-.qdrant.cloud.cluster.v1.UpdateClusterRequest\x1a..qdrant.cloud.cluster.v1.UpdateClusterResponse\"\xbd\x06\x8a\xb5\x18\x0ewrite:clusters\x92\xb5\x18\x12cluster.account_id\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster.idʵ\x18\x82\x01\n" +
@@ -5816,39 +5816,51 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster.id\x1a\acluster\"\acluster\xca\xf3\x18Y\b\x02\x12\acluster\"\x0ereq.cluster.id*</accounts/{req.cluster.account_id}/clusters/{req.cluster.id}\x8a\xb2\x19P\n" +
-	"<Updates a cluster in the account identified by the given ID.\x12\x0eUpdate cluster8\x01\xaa\xb8\x19\x10\n" +
-	"\x0eupdate_cluster\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xc6\x03\n" +
-	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\xd5\x02\x8a\xb5\x18\x0fdelete:clusters\xba\xb5\x18\x18\n" +
+	"<Updates a cluster in the account identified by the given ID.\x12\x0eUpdate cluster8\x01\xaa\xb8\x19\xee\x02\n" +
+	"\x0eupdate_cluster\x1a\xdb\x02\n" +
+	"\x0eUpdate cluster\x12\xf6\x01An AI agent wants to update cluster {req.cluster.name} ({req.cluster.id}) in account {req.cluster.account_id}. Configuration changes can restart its nodes and change its price. Without an update mask, every field is replaced with the values sent.*P\n" +
+	"\x1eallow_additional_disk_decrease\x12.The additional disk may be reduced or removed.\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xef\x06\n" +
+	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\xfe\x05\x8a\xb5\x18\x0fdelete:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\xca\xf3\x18w\b\x03\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}R$\n" +
 	"\x0edelete_backups\x12\x12req.delete_backups\x8a\xb2\x19P\n" +
-	"<Deletes a cluster in the account identified by the given ID.\x12\x0eDelete cluster8\x01\xaa\xb8\x19\x10\n" +
-	"\x0edelete_cluster\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xb6\x03\n" +
-	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"\xc2\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"<Deletes a cluster in the account identified by the given ID.\x12\x0eDelete cluster8\x01\xaa\xb8\x19\xb8\x03\n" +
+	"\x0edelete_cluster\x1a\xa5\x03\n" +
+	"\x0eDelete cluster\x12zAn AI agent wants to delete cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. This cannot be undone.\x1a\n" +
+	"GetCluster\"\acluster*@\n" +
+	"\x0edelete_backups\x12.The cluster's backups will be deleted as well.*\xbf\x01\n" +
+	"\x05force\x12\xb5\x01Force is set: for a hybrid cloud cluster, the cluster is removed from Qdrant Cloud without waiting for the cloud agent, and leftover Kubernetes resources must be cleaned up by hand.\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xf2\x04\n" +
+	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"\xfe\x03\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\xca\xf3\x18Z\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\arestart\x8a\xb2\x19R\n" +
-	"=Restarts a cluster in the account identified by the given ID.\x12\x0fRestart cluster8\x01\xaa\xb8\x19\x11\n" +
-	"\x0frestart_cluster\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart\x12\xb6\x03\n" +
-	"\x0eSuspendCluster\x12..qdrant.cloud.cluster.v1.SuspendClusterRequest\x1a/.qdrant.cloud.cluster.v1.SuspendClusterResponse\"\xc2\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"=Restarts a cluster in the account identified by the given ID.\x12\x0fRestart cluster8\x01\xaa\xb8\x19\xcc\x01\n" +
+	"\x0frestart_cluster\x1a\xb8\x01\n" +
+	"\x0fRestart cluster\x12\x8f\x01An AI agent wants to restart cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. Requests can fail while its nodes restart.\x1a\n" +
+	"GetCluster\"\acluster\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/restart\x12\xfa\x04\n" +
+	"\x0eSuspendCluster\x12..qdrant.cloud.cluster.v1.SuspendClusterRequest\x1a/.qdrant.cloud.cluster.v1.SuspendClusterResponse\"\x86\x04\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\xca\xf3\x18Z\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\asuspend\x8a\xb2\x19R\n" +
-	"=Suspends a cluster in the account identified by the given ID.\x12\x0fSuspend cluster8\x01\xaa\xb8\x19\x11\n" +
-	"\x0fsuspend_cluster\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend\x12\xc6\x03\n" +
-	"\x10UnsuspendCluster\x120.qdrant.cloud.cluster.v1.UnsuspendClusterRequest\x1a1.qdrant.cloud.cluster.v1.UnsuspendClusterResponse\"\xcc\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"=Suspends a cluster in the account identified by the given ID.\x12\x0fSuspend cluster8\x01\xaa\xb8\x19\xd4\x01\n" +
+	"\x0fsuspend_cluster\x1a\xc0\x01\n" +
+	"\x0fSuspend cluster\x12\x97\x01An AI agent wants to suspend cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. It stops serving requests until it is unsuspended.\x1a\n" +
+	"GetCluster\"\acluster\x82\xd3\xe4\x93\x02E\"C/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/suspend\x12\xc8\x03\n" +
+	"\x10UnsuspendCluster\x120.qdrant.cloud.cluster.v1.UnsuspendClusterRequest\x1a1.qdrant.cloud.cluster.v1.UnsuspendClusterResponse\"\xce\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
-	"cluster_id\xca\xf3\x18\\\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\tunsuspend\x8a\xb2\x19V\n" +
-	"?Unsuspends a cluster in the account identified by the given ID.\x12\x11Unsuspend cluster8\x01\xaa\xb8\x19\x13\n" +
-	"\x11unsuspend_cluster\x82\xd3\xe4\x93\x02G\"E/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/unsuspend\x12\x80\x06\n" +
-	"\x14EnableClusterJwtRbac\x124.qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest\x1a5.qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse\"\xfa\x04\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
+	"cluster_id\xca\xf3\x18\\\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\tunsuspend\x8a\xb2\x19X\n" +
+	"?Unsuspends a cluster in the account identified by the given ID.\x12\x11Unsuspend cluster(\x008\x01\xaa\xb8\x19\x13\n" +
+	"\x11unsuspend_cluster\x82\xd3\xe4\x93\x02G\"E/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/unsuspend\x12\xc8\a\n" +
+	"\x14EnableClusterJwtRbac\x124.qdrant.cloud.cluster.v1.EnableClusterJwtRbacRequest\x1a5.qdrant.cloud.cluster.v1.EnableClusterJwtRbacResponse\"\xc2\x06\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\xca\xf3\x18c\b\x04\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}2\x10enabled-jwt-rbac\x8a\xb2\x19\xf5\x02\n" +
-	"\xd7\x02Enables JWT Role Based Access Control (RBAC) for a cluster (version 1.9+ is required) in the managed cloud environments in the account identified by the given ID. This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value. If enabled, you can generate JWT tokens with fine-grained rules for access control.\x12\x17Enable cluster jwt rbac8\x01\xaa\xb8\x19\x19\n" +
-	"\x17enable_cluster_jwt_rbac\x82\xd3\xe4\x93\x02H\"F/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/enable-jwt\x12\xa8\x03\n" +
+	"\xd7\x02Enables JWT Role Based Access Control (RBAC) for a cluster (version 1.9+ is required) in the managed cloud environments in the account identified by the given ID. This can be executed once and cannot be undone, see Cluster.State.jwt_rbac for the actual value. If enabled, you can generate JWT tokens with fine-grained rules for access control.\x12\x17Enable cluster jwt rbac8\x01\xaa\xb8\x19\xe0\x01\n" +
+	"\x17enable_cluster_jwt_rbac\x1a\xc4\x01\n" +
+	"\x0fEnable JWT RBAC\x12\x9b\x01An AI agent wants to enable JWT role based access control on cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. This cannot be undone.\x1a\n" +
+	"GetCluster\"\acluster\x82\xd3\xe4\x93\x02H\"F/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}/enable-jwt\x12\xa8\x03\n" +
 	"\x12SuggestClusterName\x122.qdrant.cloud.cluster.v1.SuggestClusterNameRequest\x1a3.qdrant.cloud.cluster.v1.SuggestClusterNameResponse\"\xa8\x02\x8a\xb5\x18\x00\x8a\xb2\x19\xc2\x01\n" +
 	"\xa9\x01Suggests a unique and human-friendly name for a new cluster in the specified account. This can be used by clients to pre-fill the name field when creating a new cluster.\x12\x14Suggest cluster name\xaa\xb8\x19\x16\n" +
 	"\x14suggest_cluster_name\x82\xd3\xe4\x93\x02=\x12;/api/cluster/v1/accounts/{account_id}/clusters/suggest-name\x12\xf3\x02\n" +

@@ -142,7 +142,13 @@ service AccountService {
       title: "Update account"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_account"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "update_account"
+      confirmation: {
+        title: "Update account"
+        message: "An AI agent wants to update account {req.account.name} ({req.account.id}). Without an update mask, every field is replaced with the values sent."
+      }
+    };
   }
   // Deletes an account identified by the given ID.
   // Required permissions:
@@ -293,7 +299,15 @@ service AccountService {
       title: "Delete account invite"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_account_invite"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "delete_account_invite"
+      confirmation: {
+        title: "Delete account invite"
+        message: "An AI agent wants to delete the invite of {resource.user_email} to account {req.account_id}. The invite link stops working."
+        lookup_method: "GetAccountInvite"
+        lookup_field: "account_invite"
+      }
+    };
   }
   // Accepts an account invite.
   // The authenticated user's email address must match the email address specified in

@@ -33,6 +33,15 @@ export declare type McpToolOptions = Message<"qdrant.cloud.facade.mcp.v1.McpTool
    * @generated from field: optional qdrant.cloud.facade.mcp.v1.McpUiView ui_view = 2;
    */
   uiView?: McpUiView | undefined;
+
+  /**
+   * Optional user confirmation: the gateway asks the user (not the agent)
+   * to confirm the call through an MCP form elicitation before invoking the
+   * RPC. Only allowed on RPCs that are not read-only.
+   *
+   * @generated from field: optional qdrant.cloud.facade.mcp.v1.McpConfirmation confirmation = 3;
+   */
+  confirmation?: McpConfirmation | undefined;
 };
 
 export declare type McpToolOptionsValid = McpToolOptions;
@@ -42,6 +51,129 @@ export declare type McpToolOptionsValid = McpToolOptions;
  * Use `create(McpToolOptionsSchema)` to create a new message.
  */
 export declare const McpToolOptionsSchema: GenMessage<McpToolOptions, {validType: McpToolOptionsValid}>;
+
+/**
+ * McpConfirmation configures the confirmation the user is asked for before a
+ * tool changes something. The gateway uses the multi round-trip requests of
+ * MCP 2026-07-28: the first call returns a form, and the client retries the
+ * call with the user's answer. Only an accepted, checked form for the same
+ * arguments invokes the RPC.
+ *
+ * Placeholders in message and notes: {req.<path>} is a request field and
+ * {resource.<path>} a field of the looked-up resource. A path is one or more
+ * snake_case proto field names separated by dots, for example
+ * {req.cluster_id} or {req.cluster.name}, as in
+ * qdrant.cloud.event.v1.event_options templates. The path must end at a
+ * singular scalar field (string, bool, number or enum), rendered as in
+ * protojson (enum value names, true/false). A placeholder without a value
+ * (unset string, failed lookup) is removed and repeated spaces are
+ * collapsed, so do not quote placeholders.
+ *
+ * Example:
+ *  option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+ *    name: "delete_cluster"
+ *    confirmation: {
+ *      title: "Delete cluster"
+ *      message: "An AI agent wants to delete cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. This cannot be undone."
+ *      lookup_method: "GetCluster"
+ *      lookup_field: "cluster"
+ *      notes: {field: "delete_backups" text: "Its backups will be deleted as well."}
+ *    }
+ *  };
+ *
+ * @generated from message qdrant.cloud.facade.mcp.v1.McpConfirmation
+ */
+export declare type McpConfirmation = Message<"qdrant.cloud.facade.mcp.v1.McpConfirmation"> & {
+  /**
+   * Form title, also the label of its confirm checkbox, for example
+   * "Delete cluster".
+   *
+   * @generated from field: string title = 1;
+   */
+  title: string;
+
+  /**
+   * Message shown to the user. Should name the resource and say what cannot
+   * be undone.
+   *
+   * @generated from field: string message = 2;
+   */
+  message: string;
+
+  /**
+   * Optional read-only RPC of the same service that returns the resource,
+   * called as the caller, so the message can name it. Its request fields are
+   * filled from the top-level request fields of the same name, so it fits
+   * RPCs that take identifiers (Delete*, Restart*, ...), not Update* RPCs that
+   * take the resource itself (use {req.<resource>.<field>} there). When the lookup fails,
+   * {resource.*} placeholders are empty.
+   *
+   * @generated from field: string lookup_method = 3;
+   */
+  lookupMethod: string;
+
+  /**
+   * Field of the lookup response that holds the resource, for example
+   * "cluster". Required with lookup_method.
+   *
+   * @generated from field: string lookup_field = 4;
+   */
+  lookupField: string;
+
+  /**
+   * Sentences appended to the message when a bool request field is true.
+   *
+   * @generated from field: repeated qdrant.cloud.facade.mcp.v1.McpConfirmationNote notes = 5;
+   */
+  notes: McpConfirmationNote[];
+
+  /**
+   * When true, the tool is refused for clients that cannot answer the
+   * confirmation (protocol before 2026-07-28 or no form elicitation).
+   * When false, those clients call the tool without a confirmation.
+   *
+   * @generated from field: bool required = 6;
+   */
+  required: boolean;
+};
+
+export declare type McpConfirmationValid = McpConfirmation;
+
+/**
+ * Describes the message qdrant.cloud.facade.mcp.v1.McpConfirmation.
+ * Use `create(McpConfirmationSchema)` to create a new message.
+ */
+export declare const McpConfirmationSchema: GenMessage<McpConfirmation, {validType: McpConfirmationValid}>;
+
+/**
+ * McpConfirmationNote is a sentence added to the confirmation message when a
+ * bool request field is true.
+ *
+ * @generated from message qdrant.cloud.facade.mcp.v1.McpConfirmationNote
+ */
+export declare type McpConfirmationNote = Message<"qdrant.cloud.facade.mcp.v1.McpConfirmationNote"> & {
+  /**
+   * Proto name of a bool request field, for example "delete_backups".
+   *
+   * @generated from field: string field = 1;
+   */
+  field: string;
+
+  /**
+   * The sentence; may use the same placeholders as the message.
+   *
+   * @generated from field: string text = 2;
+   */
+  text: string;
+};
+
+export declare type McpConfirmationNoteValid = McpConfirmationNote;
+
+/**
+ * Describes the message qdrant.cloud.facade.mcp.v1.McpConfirmationNote.
+ * Use `create(McpConfirmationNoteSchema)` to create a new message.
+ */
+export declare const McpConfirmationNoteSchema: GenMessage<McpConfirmationNote, {validType: McpConfirmationNoteValid}>;
 
 /**
  * McpUiView selects the MCP Apps view for a tool and configures it.

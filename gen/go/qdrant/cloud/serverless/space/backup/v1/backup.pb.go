@@ -2439,7 +2439,7 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x1fBACKUP_RESTORE_STATUS_SUCCEEDED\x10\x03\x12(\n" +
 	"$BACKUP_RESTORE_STATUS_FAILED_TO_SYNC\x10\x04\x12#\n" +
 	"\x1fBACKUP_RESTORE_STATUS_NOT_FOUND\x10\x05\x12!\n" +
-	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xdc6\n" +
+	"\x1dBACKUP_RESTORE_STATUS_SKIPPED\x10\x062\xc7>\n" +
 	"\rBackupService\x12\xd3\x04\n" +
 	"\vListBackups\x12;.qdrant.cloud.serverless.space.backup.v1.ListBackupsRequest\x1a<.qdrant.cloud.serverless.space.backup.v1.ListBackupsResponse\"\xc8\x03\x8a\xb5\x18\x17read:serverless_backups\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\xba\xb5\x18(\n" +
@@ -2461,12 +2461,13 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\bspace_id\x12\x0fbackup.space_id\xca\xf3\x18\xaa\x01\b\x01\x12\x11serverless-backup\"\x0eresp.backup.id*b/accounts/{req.backup.account_id}/serverless-spaces/{req.backup.space_id}/backups/{resp.backup.id}R\x1f\n" +
 	"\bspace_id\x12\x13req.backup.space_id\x8a\xb2\x19O\n" +
 	"<Creates a backup for the cluster identified by the given ID.\x12\rCreate backup8\x01\xaa\xb8\x19\x15\n" +
-	"\x13create_space_backup\x82\xd3\xe4\x93\x02C:\x01*\">/api/serverless/backup/v1/accounts/{backup.account_id}/backups\x12\xad\x04\n" +
-	"\fDeleteBackup\x12<.qdrant.cloud.serverless.space.backup.v1.DeleteBackupRequest\x1a=.qdrant.cloud.serverless.space.backup.v1.DeleteBackupResponse\"\x9f\x03\x8a\xb5\x18\x19delete:serverless_backups\xba\xb5\x18\x16\n" +
+	"\x13create_space_backup\x82\xd3\xe4\x93\x02C:\x01*\">/api/serverless/backup/v1/accounts/{backup.account_id}/backups\x12\xf1\x05\n" +
+	"\fDeleteBackup\x12<.qdrant.cloud.serverless.space.backup.v1.DeleteBackupRequest\x1a=.qdrant.cloud.serverless.space.backup.v1.DeleteBackupResponse\"\xe3\x04\x8a\xb5\x18\x19delete:serverless_backups\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\xca\xf3\x18\xad\x01\b\x03\x12\x11serverless-backup\"\rreq.backup_id*`/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backups/{req.backup_id}R%\n" +
 	"\bspace_id\x12\x19resp-md.qc-event-space-id\x8a\xb2\x19N\n" +
-	";Deletes a backup in the account identified by the given ID.\x12\rDelete backup8\x01\xaa\xb8\x19\x15\n" +
-	"\x13delete_space_backup\x82\xd3\xe4\x93\x02E*C/api/serverless/backup/v1/accounts/{account_id}/backups/{backup_id}\x12\xf2\x04\n" +
+	";Deletes a backup in the account identified by the given ID.\x12\rDelete backup8\x01\xaa\xb8\x19\xd8\x01\n" +
+	"\x13delete_space_backup\x1a\xc0\x01\n" +
+	"\x13Delete space backup\x12\x95\x01An AI agent wants to delete backup {resource.name} ({req.backup_id}) of space {resource.space_id} in account {req.account_id}. This cannot be undone.\x1a\tGetBackup\"\x06backup\x82\xd3\xe4\x93\x02E*C/api/serverless/backup/v1/accounts/{account_id}/backups/{backup_id}\x12\xf2\x04\n" +
 	"\x12ListBackupRestores\x12B.qdrant.cloud.serverless.space.backup.v1.ListBackupRestoresRequest\x1aC.qdrant.cloud.serverless.space.backup.v1.ListBackupRestoresResponse\"\xd2\x03\x8a\xb5\x18\x17read:serverless_backups\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\x8a\xb2\x19i\n" +
 	"KList serverless space backup restores with optional filters and pagination.\x12\x1aList space backup restores\xaa\xb8\x19\x1c\n" +
@@ -2476,12 +2477,13 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\bspace_id\x12\x02id\"\x18\n" +
 	"\n" +
 	"account_id\x12\n" +
-	"account_id(\x0129The backup restores associated with this serverless space\x82\xd3\xe4\x93\x02A\x12?/api/serverless/backup/v1/accounts/{account_id}/backup_restores\x12\xb1\x04\n" +
-	"\rRestoreBackup\x12=.qdrant.cloud.serverless.space.backup.v1.RestoreBackupRequest\x1a>.qdrant.cloud.serverless.space.backup.v1.RestoreBackupResponse\"\xa0\x03\x8a\xb5\x18\x1arestore:serverless_backups\xba\xb5\x18\x16\n" +
+	"account_id(\x0129The backup restores associated with this serverless space\x82\xd3\xe4\x93\x02A\x12?/api/serverless/backup/v1/accounts/{account_id}/backup_restores\x12\xac\x06\n" +
+	"\rRestoreBackup\x12=.qdrant.cloud.serverless.space.backup.v1.RestoreBackupRequest\x1a>.qdrant.cloud.serverless.space.backup.v1.RestoreBackupResponse\"\x9b\x05\x8a\xb5\x18\x1arestore:serverless_backups\xba\xb5\x18\x16\n" +
 	"\tbackup_id\x12\tbackup_id\xca\xf3\x18\xb6\x01\b\x04\x12\x11serverless-backup\"\rreq.backup_id*`/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backups/{req.backup_id}2\arestoreR%\n" +
 	"\bspace_id\x12\x19resp-md.qc-event-space-id\x8a\xb2\x19<\n" +
-	"(Restores a backup to its original space.\x12\x0eRestore backup8\x01\xaa\xb8\x19\x16\n" +
-	"\x14restore_space_backup\x82\xd3\xe4\x93\x02M\"K/api/serverless/backup/v1/accounts/{account_id}/backups/{backup_id}/restore\x12\x85\x05\n" +
+	"(Restores a backup to its original space.\x12\x0eRestore backup8\x01\xaa\xb8\x19\x90\x02\n" +
+	"\x14restore_space_backup\x1a\xf7\x01\n" +
+	"\x14Restore space backup\x12\xcb\x01An AI agent wants to restore backup {resource.name} ({req.backup_id}) to space {resource.space_id} in account {req.account_id}. The data goes back to the state of the backup: changes made since are lost.\x1a\tGetBackup\"\x06backup\x82\xd3\xe4\x93\x02M\"K/api/serverless/backup/v1/accounts/{account_id}/backups/{backup_id}/restore\x12\x85\x05\n" +
 	"\x13ListBackupSchedules\x12C.qdrant.cloud.serverless.space.backup.v1.ListBackupSchedulesRequest\x1aD.qdrant.cloud.serverless.space.backup.v1.ListBackupSchedulesResponse\"\xe2\x03\x8a\xb5\x18 read:serverless_backup_schedules\xba\xb5\x18\x14\n" +
 	"\bspace_id\x12\bspace_id\x8a\xb2\x19k\n" +
 	"LList serverless space backup schedules with optional filters and pagination.\x12\x1bList space backup schedules\xaa\xb8\x19\x1d\n" +
@@ -2502,8 +2504,9 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\bspace_id\x12\x18backup_schedule.space_id\xca\xf3\x18\xea\x01\b\x01\x12\x1aserverless-backup-schedule\"\x17resp.backup_schedule.id*\x86\x01/accounts/{req.backup_schedule.account_id}/serverless-spaces/{req.backup_schedule.space_id}/backup_schedules/{resp.backup_schedule.id}R(\n" +
 	"\bspace_id\x12\x1creq.backup_schedule.space_id\x8a\xb2\x19`\n" +
 	"DCreates a backup schedule in the account identified by the given ID.\x12\x16Create backup schedule8\x01\xaa\xb8\x19\x1e\n" +
-	"\x1ccreate_space_backup_schedule\x82\xd3\xe4\x93\x02U:\x01*\"P/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules\x12\x8b\b\n" +
-	"\x14UpdateBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleResponse\"\xe5\x06\x8a\xb5\x18!write:serverless_backup_schedules\x92\xb5\x18\x1abackup_schedule.account_id\xba\xb5\x18(\n" +
+	"\x1ccreate_space_backup_schedule\x82\xd3\xe4\x93\x02U:\x01*\"P/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules\x12\xac\n" +
+	"\n" +
+	"\x14UpdateBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.UpdateBackupScheduleResponse\"\x86\t\x8a\xb5\x18!write:serverless_backup_schedules\x92\xb5\x18\x1abackup_schedule.account_id\xba\xb5\x18(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule.id\xba\xb5\x18$\n" +
 	"\bspace_id\x12\x18backup_schedule.space_idʵ\x18\xe6\x01\n" +
 	"H/qdrant.cloud.serverless.space.backup.v1.BackupService/GetBackupSchedule\x12(\n" +
@@ -2512,14 +2515,17 @@ const file_qdrant_cloud_serverless_space_backup_v1_backup_proto_rawDesc = "" +
 	"\x12backup_schedule_id\x12\x12backup_schedule.id\x12$\n" +
 	"\bspace_id\x12\x18backup_schedule.space_id\x1a\x0fbackup_schedule\"\x0fbackup_schedule\xca\xf3\x18\xe8\x01\b\x02\x12\x1aserverless-backup-schedule\"\x16req.backup_schedule.id*\x85\x01/accounts/{req.backup_schedule.account_id}/serverless-spaces/{req.backup_schedule.space_id}/backup_schedules/{req.backup_schedule.id}R(\n" +
 	"\bspace_id\x12\x1creq.backup_schedule.space_id\x8a\xb2\x19`\n" +
-	"DUpdates a backup schedule in the account identified by the given ID.\x12\x16Update backup schedule8\x01\xaa\xb8\x19\x1e\n" +
-	"\x1cupdate_space_backup_schedule\x82\xd3\xe4\x93\x02j:\x01*\x1ae/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\xd7\x05\n" +
-	"\x14DeleteBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleResponse\"\xb1\x04\x8a\xb5\x18\"delete:serverless_backup_schedules\xba\xb5\x18(\n" +
+	"DUpdates a backup schedule in the account identified by the given ID.\x12\x16Update backup schedule8\x01\xaa\xb8\x19\xbe\x02\n" +
+	"\x1cupdate_space_backup_schedule\x1a\x9d\x02\n" +
+	"\x1cUpdate space backup schedule\x12\xfc\x01An AI agent wants to update backup schedule {req.backup_schedule.name} ({req.backup_schedule.id}) of space {req.backup_schedule.space_id} in account {req.backup_schedule.account_id}. Without an update mask, every field is replaced with the values sent.\x82\xd3\xe4\x93\x02j:\x01*\x1ae/api/serverless/backup/v1/accounts/{backup_schedule.account_id}/backup_schedules/{backup_schedule.id}\x12\xe2\a\n" +
+	"\x14DeleteBackupSchedule\x12D.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleRequest\x1aE.qdrant.cloud.serverless.space.backup.v1.DeleteBackupScheduleResponse\"\xbc\x06\x8a\xb5\x18\"delete:serverless_backup_schedules\xba\xb5\x18(\n" +
 	"\x12backup_schedule_id\x12\x12backup_schedule_id\xca\xf3\x18\xf7\x01\b\x03\x12\x1aserverless-backup-schedule\"\x16req.backup_schedule_id*r/accounts/{req.account_id}/serverless-spaces/{resp-md.qc-event-space-id}/backup_schedules/{req.backup_schedule_id}R$\n" +
 	"\x0edelete_backups\x12\x12req.delete_backupsR%\n" +
 	"\bspace_id\x12\x19resp-md.qc-event-space-id\x8a\xb2\x19`\n" +
-	"DDeletes a backup schedule in the account identified by the given ID.\x12\x16Delete backup schedule8\x01\xaa\xb8\x19\x1e\n" +
-	"\x1cdelete_space_backup_schedule\x82\xd3\xe4\x93\x02W*U/api/serverless/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\x06µ\x18\x02\b\x03B\xe0\x02\n" +
+	"DDeletes a backup schedule in the account identified by the given ID.\x12\x16Delete backup schedule8\x01\xaa\xb8\x19\xa8\x02\n" +
+	"\x1cdelete_space_backup_schedule\x1a\x87\x02\n" +
+	"\x1cDelete space backup schedule\x12\x8c\x01An AI agent wants to delete backup schedule {req.backup_schedule_id} in account {req.account_id}. No new backups are taken on this schedule.*X\n" +
+	"\x0edelete_backups\x12FThe backups it created will be deleted as well. This cannot be undone.\x82\xd3\xe4\x93\x02W*U/api/serverless/backup/v1/accounts/{account_id}/backup_schedules/{backup_schedule_id}\x1a\x06µ\x18\x02\b\x03B\xe0\x02\n" +
 	"+com.qdrant.cloud.serverless.space.backup.v1B\vBackupProtoP\x01Zagithub.com/qdrant/qdrant-cloud-public-api/gen/go/qdrant/cloud/serverless/space/backup/v1;backupv1\xa2\x02\x05QCSSB\xaa\x02'Qdrant.Cloud.Serverless.Space.Backup.V1\xca\x02'Qdrant\\Cloud\\Serverless\\Space\\Backup\\V1\xe2\x023Qdrant\\Cloud\\Serverless\\Space\\Backup\\V1\\GPBMetadata\xea\x02,Qdrant::Cloud::Serverless::Space::Backup::V1b\x06proto3"
 
 var (

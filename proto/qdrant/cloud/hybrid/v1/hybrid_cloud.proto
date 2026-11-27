@@ -140,7 +140,13 @@ service HybridCloudService {
       title: "Update hybrid cloud environment"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_hybrid_cloud_environment"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "update_hybrid_cloud_environment"
+      confirmation: {
+        title: "Update hybrid cloud environment"
+        message: "An AI agent wants to update hybrid cloud environment {req.hybrid_cloud_environment.name} ({req.hybrid_cloud_environment.id}) in account {req.hybrid_cloud_environment.account_id}. Without an update mask, every field is replaced with the values sent."
+      }
+    };
   }
   // Deletes a hybrid cloud environment in the account identified by the given ID.
   // Required permissions:
@@ -167,7 +173,15 @@ service HybridCloudService {
       title: "Delete hybrid cloud environment"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_hybrid_cloud_environment"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "delete_hybrid_cloud_environment"
+      confirmation: {
+        title: "Delete hybrid cloud environment"
+        message: "An AI agent wants to delete hybrid cloud environment {resource.name} ({req.hybrid_cloud_environment_id}) in account {req.account_id}. This cannot be undone."
+        lookup_method: "GetHybridCloudEnvironment"
+        lookup_field: "hybrid_cloud_environment"
+      }
+    };
   }
   // Generates the commands that should be executed against a kubernetes cluster to
   // bootstrap it to the hybrid cloud environment. The operation can be invoked multiple times,
@@ -204,7 +218,15 @@ service HybridCloudService {
       title: "Generate bootstrap commands"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "generate_bootstrap_commands"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "generate_bootstrap_commands"
+      confirmation: {
+        title: "Generate bootstrap commands"
+        message: "An AI agent wants to generate bootstrap commands for hybrid cloud environment {resource.name} ({req.hybrid_cloud_environment_id}) in account {req.account_id}. Each call creates a new Qdrant Cloud access token and new registry credentials."
+        lookup_method: "GetHybridCloudEnvironment"
+        lookup_field: "hybrid_cloud_environment"
+      }
+    };
   }
 }
 

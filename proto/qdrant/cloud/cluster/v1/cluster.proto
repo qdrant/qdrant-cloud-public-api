@@ -206,7 +206,17 @@ service ClusterService {
       title: "Update cluster"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_cluster"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "update_cluster"
+      confirmation: {
+        title: "Update cluster"
+        message: "An AI agent wants to update cluster {req.cluster.name} ({req.cluster.id}) in account {req.cluster.account_id}. Configuration changes can restart its nodes and change its price. Without an update mask, every field is replaced with the values sent."
+        notes: {
+          field: "allow_additional_disk_decrease"
+          text: "The additional disk may be reduced or removed."
+        }
+      }
+    };
   }
   // Deletes a cluster in the account identified by the given ID.
   // Required permissions:
@@ -237,7 +247,23 @@ service ClusterService {
       title: "Delete cluster"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_cluster"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "delete_cluster"
+      confirmation: {
+        title: "Delete cluster"
+        message: "An AI agent wants to delete cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. This cannot be undone."
+        lookup_method: "GetCluster"
+        lookup_field: "cluster"
+        notes: {
+          field: "delete_backups"
+          text: "The cluster's backups will be deleted as well."
+        }
+        notes: {
+          field: "force"
+          text: "Force is set: for a hybrid cloud cluster, the cluster is removed from Qdrant Cloud without waiting for the cloud agent, and leftover Kubernetes resources must be cleaned up by hand."
+        }
+      }
+    };
   }
   // Restarts a cluster in the account identified by the given ID.
   // Required permissions:
@@ -265,7 +291,15 @@ service ClusterService {
       title: "Restart cluster"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "restart_cluster"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "restart_cluster"
+      confirmation: {
+        title: "Restart cluster"
+        message: "An AI agent wants to restart cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. Requests can fail while its nodes restart."
+        lookup_method: "GetCluster"
+        lookup_field: "cluster"
+      }
+    };
   }
   // Suspends a cluster in the account identified by the given ID.
   // Required permissions:
@@ -293,7 +327,15 @@ service ClusterService {
       title: "Suspend cluster"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "suspend_cluster"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "suspend_cluster"
+      confirmation: {
+        title: "Suspend cluster"
+        message: "An AI agent wants to suspend cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. It stops serving requests until it is unsuspended."
+        lookup_method: "GetCluster"
+        lookup_field: "cluster"
+      }
+    };
   }
   // Unsuspends a cluster in the account identified by the given ID.
   // Required permissions:
@@ -320,6 +362,7 @@ service ClusterService {
       description: "Unsuspends a cluster in the account identified by the given ID."
       title: "Unsuspend cluster"
       allow_mutation: true
+      destructive_hint: false
     };
     option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "unsuspend_cluster"};
   }
@@ -352,7 +395,15 @@ service ClusterService {
       title: "Enable cluster jwt rbac"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "enable_cluster_jwt_rbac"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "enable_cluster_jwt_rbac"
+      confirmation: {
+        title: "Enable JWT RBAC"
+        message: "An AI agent wants to enable JWT role based access control on cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. This cannot be undone."
+        lookup_method: "GetCluster"
+        lookup_field: "cluster"
+      }
+    };
   }
   // Suggests a unique and human-friendly name for a new cluster in the specified account.
   // This can be used by clients to pre-fill the name field when creating a new cluster.

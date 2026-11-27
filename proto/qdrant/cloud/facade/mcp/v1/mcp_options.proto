@@ -41,6 +41,77 @@ message McpToolOptions {
   // support the MCP Apps UI extension. Only allowed on
   // read-only RPCs.
   optional McpUiView ui_view = 2;
+  // Optional user confirmation: the gateway asks the user (not the agent)
+  // to confirm the call through an MCP form elicitation before invoking the
+  // RPC. Only allowed on RPCs that are not read-only.
+  optional McpConfirmation confirmation = 3;
+}
+
+// McpConfirmation configures the confirmation the user is asked for before a
+// tool changes something. The gateway uses the multi round-trip requests of
+// MCP 2026-07-28: the first call returns a form, and the client retries the
+// call with the user's answer. Only an accepted, checked form for the same
+// arguments invokes the RPC.
+//
+// Placeholders in message and notes: {req.<path>} is a request field and
+// {resource.<path>} a field of the looked-up resource. A path is one or more
+// snake_case proto field names separated by dots, for example
+// {req.cluster_id} or {req.cluster.name}, as in
+// qdrant.cloud.event.v1.event_options templates. The path must end at a
+// singular scalar field (string, bool, number or enum), rendered as in
+// protojson (enum value names, true/false). A placeholder without a value
+// (unset string, failed lookup) is removed and repeated spaces are
+// collapsed, so do not quote placeholders.
+//
+// Example:
+//  option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+//    name: "delete_cluster"
+//    confirmation: {
+//      title: "Delete cluster"
+//      message: "An AI agent wants to delete cluster {resource.name} ({req.cluster_id}) in account {req.account_id}. This cannot be undone."
+//      lookup_method: "GetCluster"
+//      lookup_field: "cluster"
+//      notes: {field: "delete_backups" text: "Its backups will be deleted as well."}
+//    }
+//  };
+message McpConfirmation {
+  // Form title, also the label of its confirm checkbox, for example
+  // "Delete cluster".
+  string title = 1 [(buf.validate.field).string.min_len = 1];
+  // Message shown to the user. Should name the resource and say what cannot
+  // be undone.
+  string message = 2 [(buf.validate.field).string.min_len = 1];
+  // Optional read-only RPC of the same service that returns the resource,
+  // called as the caller, so the message can name it. Its request fields are
+  // filled from the top-level request fields of the same name, so it fits
+  // RPCs that take identifiers (Delete*, Restart*, ...), not Update* RPCs that
+  // take the resource itself (use {req.<resource>.<field>} there). When the lookup fails,
+  // {resource.*} placeholders are empty.
+  string lookup_method = 3 [(buf.validate.field).string.pattern = "^([A-Z][A-Za-z0-9]*)?$"];
+  // Field of the lookup response that holds the resource, for example
+  // "cluster". Required with lookup_method.
+  string lookup_field = 4 [(buf.validate.field).string.pattern = "^([a-z][a-z0-9_]*)?$"];
+  // Sentences appended to the message when a bool request field is true.
+  repeated McpConfirmationNote notes = 5;
+  // When true, the tool is refused for clients that cannot answer the
+  // confirmation (protocol before 2026-07-28 or no form elicitation).
+  // When false, those clients call the tool without a confirmation.
+  bool required = 6;
+
+  option (buf.validate.message).cel = {
+    id: "mcp_confirmation.lookup_field"
+    message: "lookup_field is required with lookup_method, and only allowed with it"
+    expression: "(this.lookup_method == '') == (this.lookup_field == '')"
+  };
+}
+
+// McpConfirmationNote is a sentence added to the confirmation message when a
+// bool request field is true.
+message McpConfirmationNote {
+  // Proto name of a bool request field, for example "delete_backups".
+  string field = 1 [(buf.validate.field).string.pattern = "^[a-z][a-z0-9_]*$"];
+  // The sentence; may use the same placeholders as the message.
+  string text = 2 [(buf.validate.field).string.min_len = 1];
 }
 
 // McpUiView selects the MCP Apps view for a tool and configures it.

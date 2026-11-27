@@ -160,7 +160,13 @@ service BackupService {
       title: "Update backup"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_backup"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "update_backup"
+      confirmation: {
+        title: "Update backup"
+        message: "An AI agent wants to update backup {req.backup.name} ({req.backup.id}) of cluster {req.backup.cluster_id} in account {req.backup.account_id}."
+      }
+    };
   }
   // Deletes a backup in the account identified by the given ID.
   // Required permissions:
@@ -191,7 +197,19 @@ service BackupService {
       title: "Delete backup"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_backup"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "delete_backup"
+      confirmation: {
+        title: "Delete backup"
+        message: "An AI agent wants to delete backup {resource.name} ({req.backup_id}) of cluster {resource.cluster_id} in account {req.account_id}. This cannot be undone."
+        lookup_method: "GetBackup"
+        lookup_field: "backup"
+        notes: {
+          field: "force"
+          text: "Force is set: for a hybrid cloud cluster, the backup is removed from Qdrant Cloud without waiting for the cloud agent, and leftover files in the object storage must be cleaned up by hand."
+        }
+      }
+    };
   }
   // Lists all backup restores in the account identified by the given ID.
   // Required permissions:
@@ -242,7 +260,15 @@ service BackupService {
       title: "Restore backup"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "restore_backup"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "restore_backup"
+      confirmation: {
+        title: "Restore backup"
+        message: "An AI agent wants to restore backup {resource.name} ({req.backup_id}) to cluster {resource.cluster_id} in account {req.account_id}. The cluster's data goes back to the state of the backup: changes made since are lost."
+        lookup_method: "GetBackup"
+        lookup_field: "backup"
+      }
+    };
   }
   // Lists all backup schedules in the account identified by the given ID.
   // Required permissions:
@@ -406,7 +432,13 @@ service BackupService {
       title: "Update backup schedule"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_backup_schedule"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "update_backup_schedule"
+      confirmation: {
+        title: "Update backup schedule"
+        message: "An AI agent wants to update backup schedule {req.backup_schedule.id} of cluster {req.backup_schedule.cluster_id} in account {req.backup_schedule.account_id}. Without an update mask, every field is replaced with the values sent."
+      }
+    };
   }
   // Deletes a backup schedule in the account identified by the given ID.
   // Required permissions:
@@ -441,7 +473,17 @@ service BackupService {
       title: "Delete backup schedule"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_backup_schedule"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "delete_backup_schedule"
+      confirmation: {
+        title: "Delete backup schedule"
+        message: "An AI agent wants to delete backup schedule {req.backup_schedule_id} in account {req.account_id}. No new backups are taken on this schedule."
+        notes: {
+          field: "delete_backups"
+          text: "The backups it created will be deleted as well. This cannot be undone."
+        }
+      }
+    };
   }
 }
 

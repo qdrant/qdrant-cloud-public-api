@@ -383,7 +383,13 @@ service IAMService {
       title: "Update role"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "update_role"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "update_role"
+      confirmation: {
+        title: "Update role"
+        message: "An AI agent wants to update role {req.role.name} ({req.role.id}) in account {req.role.account_id}. Permission changes apply to every user with this role. Without an update mask, every field is replaced with the values sent."
+      }
+    };
   }
   // Deletes a role in the account identified by the given ID.
   // Note: The role_type must be ROLE_TYPE_CUSTOM.
@@ -411,7 +417,15 @@ service IAMService {
       title: "Delete role"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_role"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "delete_role"
+      confirmation: {
+        title: "Delete role"
+        message: "An AI agent wants to delete role {resource.name} ({req.role_id}) in account {req.account_id}. Users with this role lose its permissions. This cannot be undone."
+        lookup_method: "GetRole"
+        lookup_field: "role"
+      }
+    };
   }
   // Lists the effective permissions for the authenticated user in the account identified by the given ID.
   // Required permissions:

@@ -3322,7 +3322,7 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\x19USER_MFA_METHOD_TYPE_TOTP\x10\x01\x12&\n" +
 	"\"USER_MFA_METHOD_TYPE_RECOVERY_CODE\x10\x02\x12*\n" +
 	"&USER_MFA_METHOD_TYPE_WEBAUTHN_PLATFORM\x10\x03\x12)\n" +
-	"%USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING\x10\x042\xb89\n" +
+	"%USER_MFA_METHOD_TYPE_WEBAUTHN_ROAMING\x10\x042\xed<\n" +
 	"\n" +
 	"IAMService\x12\xfc\x01\n" +
 	"\x14GetAuthenticatedUser\x120.qdrant.cloud.iam.v1.GetAuthenticatedUserRequest\x1a1.qdrant.cloud.iam.v1.GetAuthenticatedUserResponse\"\x7f\x8a\xb5\x18\x00\x92\xb5\x18\x00\xa2\xb5\x18\x01\x01\x8a\xb2\x196\n" +
@@ -3376,9 +3376,9 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\trole_name\x12\trole.name\xca\xf3\x18^\b\x01\x12\x04role\"\fresp.role.id*4/accounts/{req.role.account_id}/roles/{resp.role.id}Z\x10\n" +
 	"\x04role\x12\breq.role\x8a\xb2\x19y\n" +
 	"hCreates a role for the account identified by the given ID. Note: The role_type must be ROLE_TYPE_CUSTOM.\x12\vCreate role8\x01\xaa\xb8\x19\r\n" +
-	"\vcreate_role\x82\xd3\xe4\x93\x021:\x01*\",/api/iam/v1/accounts/{role.account_id}/roles\x12\xd2\x04\n" +
+	"\vcreate_role\x82\xd3\xe4\x93\x021:\x01*\",/api/iam/v1/accounts/{role.account_id}/roles\x12\xc5\x06\n" +
 	"\n" +
-	"UpdateRole\x12&.qdrant.cloud.iam.v1.UpdateRoleRequest\x1a'.qdrant.cloud.iam.v1.UpdateRoleResponse\"\xf2\x03\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xba\xb5\x18\x12\n" +
+	"UpdateRole\x12&.qdrant.cloud.iam.v1.UpdateRoleRequest\x1a'.qdrant.cloud.iam.v1.UpdateRoleResponse\"\xe5\x05\x8a\xb5\x18\vwrite:roles\x92\xb5\x18\x0frole.account_id\xba\xb5\x18\x12\n" +
 	"\arole_id\x12\arole.idʵ\x18h\n" +
 	"'/qdrant.cloud.iam.v1.IAMService/GetRole\x12\x1d\n" +
 	"\n" +
@@ -3386,13 +3386,15 @@ const file_qdrant_cloud_iam_v1_iam_proto_rawDesc = "" +
 	"\arole_id\x12\arole.id\x1a\x04role\"\x04role\xca\xf3\x18|\b\x02\x12\x04role\"\vreq.role.id*3/accounts/{req.role.account_id}/roles/{req.role.id}Z\x10\n" +
 	"\x04role\x12\breq.roleZ\x1e\n" +
 	"\vupdate_mask\x12\x0freq.update_mask\x8a\xb2\x19x\n" +
-	"gUpdates a role in the account identified by the given ID. Note: The role_type must be ROLE_TYPE_CUSTOM.\x12\vUpdate role8\x01\xaa\xb8\x19\r\n" +
-	"\vupdate_role\x82\xd3\xe4\x93\x02;:\x01*\x1a6/api/iam/v1/accounts/{role.account_id}/roles/{role.id}\x12\x95\x03\n" +
+	"gUpdates a role in the account identified by the given ID. Note: The role_type must be ROLE_TYPE_CUSTOM.\x12\vUpdate role8\x01\xaa\xb8\x19\xff\x01\n" +
+	"\vupdate_role\x1a\xef\x01\n" +
+	"\vUpdate role\x12\xdf\x01An AI agent wants to update role {req.role.name} ({req.role.id}) in account {req.role.account_id}. Permission changes apply to every user with this role. Without an update mask, every field is replaced with the values sent.\x82\xd3\xe4\x93\x02;:\x01*\x1a6/api/iam/v1/accounts/{role.account_id}/roles/{role.id}\x12\xd7\x04\n" +
 	"\n" +
-	"DeleteRole\x12&.qdrant.cloud.iam.v1.DeleteRoleRequest\x1a'.qdrant.cloud.iam.v1.DeleteRoleResponse\"\xb5\x02\x8a\xb5\x18\fdelete:roles\xba\xb5\x18\x12\n" +
+	"DeleteRole\x12&.qdrant.cloud.iam.v1.DeleteRoleRequest\x1a'.qdrant.cloud.iam.v1.DeleteRoleResponse\"\xf7\x03\x8a\xb5\x18\fdelete:roles\xba\xb5\x18\x12\n" +
 	"\arole_id\x12\arole_id\xca\xf3\x18E\b\x03\x12\x04role\"\vreq.role_id*./accounts/{req.account_id}/roles/{req.role_id}\x8a\xb2\x19x\n" +
-	"gDeletes a role in the account identified by the given ID. Note: The role_type must be ROLE_TYPE_CUSTOM.\x12\vDelete role8\x01\xaa\xb8\x19\r\n" +
-	"\vdelete_role\x82\xd3\xe4\x93\x023*1/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xf5\x02\n" +
+	"gDeletes a role in the account identified by the given ID. Note: The role_type must be ROLE_TYPE_CUSTOM.\x12\vDelete role8\x01\xaa\xb8\x19\xce\x01\n" +
+	"\vdelete_role\x1a\xbe\x01\n" +
+	"\vDelete role\x12\x9f\x01An AI agent wants to delete role {resource.name} ({req.role_id}) in account {req.account_id}. Users with this role lose its permissions. This cannot be undone.\x1a\aGetRole\"\x04role\x82\xd3\xe4\x93\x023*1/api/iam/v1/accounts/{account_id}/roles/{role_id}\x12\xf5\x02\n" +
 	"\x18ListEffectivePermissions\x124.qdrant.cloud.iam.v1.ListEffectivePermissionsRequest\x1a5.qdrant.cloud.iam.v1.ListEffectivePermissionsResponse\"\xeb\x01\x8a\xb5\x18\x00\x8a\xb2\x19\x83\x01\n" +
 	"eLists the effective permissions for the authenticated user in the account identified by the given ID.\x12\x1aList effective permissions\xaa\xb8\x19\x1c\n" +
 	"\x1alist_effective_permissions\x82\xd3\xe4\x93\x029\x127/api/iam/v1/accounts/{account_id}/effective-permissions\x12\xaa\x03\n" +
