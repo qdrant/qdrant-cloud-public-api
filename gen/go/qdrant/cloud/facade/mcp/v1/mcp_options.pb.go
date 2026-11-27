@@ -77,7 +77,7 @@ func (x TimeseriesView_ChartType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TimeseriesView_ChartType.Descriptor instead.
 func (TimeseriesView_ChartType) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{2, 0}
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{4, 0}
 }
 
 // Axis is the y-axis a series is plotted against.
@@ -130,7 +130,7 @@ func (x TimeseriesSeries_Axis) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TimeseriesSeries_Axis.Descriptor instead.
 func (TimeseriesSeries_Axis) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{3, 0}
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{5, 0}
 }
 
 // Subject is the kind of resource the dashboard is about.
@@ -183,7 +183,7 @@ func (x HealthView_Subject) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use HealthView_Subject.Descriptor instead.
 func (HealthView_Subject) EnumDescriptor() ([]byte, []int) {
-	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{4, 0}
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{6, 0}
 }
 
 // McpToolOptions holds MCP-only tool metadata that does not apply to GraphQL
@@ -195,7 +195,11 @@ type McpToolOptions struct {
 	// Optional MCP Apps view, rendered next to the tool result by hosts that
 	// support the MCP Apps UI extension. Only allowed on
 	// read-only RPCs.
-	UiView        *McpUiView `protobuf:"bytes,2,opt,name=ui_view,json=uiView,proto3,oneof" json:"ui_view,omitempty"`
+	UiView *McpUiView `protobuf:"bytes,2,opt,name=ui_view,json=uiView,proto3,oneof" json:"ui_view,omitempty"`
+	// Optional user confirmation: the gateway asks the user (not the agent)
+	// to confirm the call through an MCP form elicitation before invoking the
+	// RPC. Only allowed on RPCs that are not read-only.
+	Confirmation  *McpConfirmation `protobuf:"bytes,3,opt,name=confirmation,proto3,oneof" json:"confirmation,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -244,6 +248,190 @@ func (x *McpToolOptions) GetUiView() *McpUiView {
 	return nil
 }
 
+func (x *McpToolOptions) GetConfirmation() *McpConfirmation {
+	if x != nil {
+		return x.Confirmation
+	}
+	return nil
+}
+
+// McpConfirmation configures the confirmation the user is asked for before a
+// tool changes something. The gateway uses the multi round-trip requests of
+// MCP 2026-07-28: the first call returns a form, and the client retries the
+// call with the user's answer. Only an accepted, checked form for the same
+// arguments invokes the RPC.
+//
+// Placeholders in message and notes: {req.<field>} is a request field and
+// {resource.<field>} a field of the looked-up resource (snake_case proto
+// field names, as in qdrant.cloud.event.v1.event_options templates). A
+// placeholder without a value is replaced by an empty string.
+//
+// Example:
+//
+//	option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+//	  name: "delete_cluster"
+//	  confirmation: {
+//	    title: "Delete cluster"
+//	    message: "Delete cluster \"{resource.name}\" ({req.cluster_id}) in account {req.account_id}? This cannot be undone."
+//	    lookup_method: "GetCluster"
+//	    lookup_field: "cluster"
+//	    notes: {field: "delete_backups" text: "Its backups will be deleted as well."}
+//	  }
+//	};
+type McpConfirmation struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Form title, also the label of its confirm checkbox, for example
+	// "Delete cluster".
+	Title string `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	// Message shown to the user. Should name the resource and say what cannot
+	// be undone.
+	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	// Optional read-only RPC of the same service that returns the resource,
+	// called as the caller, so the message can name it. Its request fields are
+	// filled from the request fields of the same name. When the lookup fails,
+	// {resource.*} placeholders are empty.
+	LookupMethod string `protobuf:"bytes,3,opt,name=lookup_method,json=lookupMethod,proto3" json:"lookup_method,omitempty"`
+	// Field of the lookup response that holds the resource, for example
+	// "cluster". Required with lookup_method.
+	LookupField string `protobuf:"bytes,4,opt,name=lookup_field,json=lookupField,proto3" json:"lookup_field,omitempty"`
+	// Sentences appended to the message when a bool request field is true.
+	Notes []*McpConfirmationNote `protobuf:"bytes,5,rep,name=notes,proto3" json:"notes,omitempty"`
+	// When true, the tool is refused for clients that cannot answer the
+	// confirmation (protocol before 2026-07-28 or no form elicitation).
+	// When false, those clients call the tool without a confirmation.
+	Required      bool `protobuf:"varint,6,opt,name=required,proto3" json:"required,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *McpConfirmation) Reset() {
+	*x = McpConfirmation{}
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *McpConfirmation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*McpConfirmation) ProtoMessage() {}
+
+func (x *McpConfirmation) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use McpConfirmation.ProtoReflect.Descriptor instead.
+func (*McpConfirmation) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *McpConfirmation) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *McpConfirmation) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *McpConfirmation) GetLookupMethod() string {
+	if x != nil {
+		return x.LookupMethod
+	}
+	return ""
+}
+
+func (x *McpConfirmation) GetLookupField() string {
+	if x != nil {
+		return x.LookupField
+	}
+	return ""
+}
+
+func (x *McpConfirmation) GetNotes() []*McpConfirmationNote {
+	if x != nil {
+		return x.Notes
+	}
+	return nil
+}
+
+func (x *McpConfirmation) GetRequired() bool {
+	if x != nil {
+		return x.Required
+	}
+	return false
+}
+
+// McpConfirmationNote is a sentence added to the confirmation message when a
+// bool request field is true.
+type McpConfirmationNote struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Proto name of a bool request field, for example "delete_backups".
+	Field string `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
+	// The sentence; may use the same placeholders as the message.
+	Text          string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *McpConfirmationNote) Reset() {
+	*x = McpConfirmationNote{}
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *McpConfirmationNote) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*McpConfirmationNote) ProtoMessage() {}
+
+func (x *McpConfirmationNote) ProtoReflect() protoreflect.Message {
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use McpConfirmationNote.ProtoReflect.Descriptor instead.
+func (*McpConfirmationNote) Descriptor() ([]byte, []int) {
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *McpConfirmationNote) GetField() string {
+	if x != nil {
+		return x.Field
+	}
+	return ""
+}
+
+func (x *McpConfirmationNote) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
 // McpUiView selects the MCP Apps view for a tool and configures it.
 type McpUiView struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -260,7 +448,7 @@ type McpUiView struct {
 
 func (x *McpUiView) Reset() {
 	*x = McpUiView{}
-	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -272,7 +460,7 @@ func (x *McpUiView) String() string {
 func (*McpUiView) ProtoMessage() {}
 
 func (x *McpUiView) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[1]
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -285,7 +473,7 @@ func (x *McpUiView) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use McpUiView.ProtoReflect.Descriptor instead.
 func (*McpUiView) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{1}
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *McpUiView) GetKind() isMcpUiView_Kind {
@@ -353,7 +541,7 @@ type TimeseriesView struct {
 
 func (x *TimeseriesView) Reset() {
 	*x = TimeseriesView{}
-	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[2]
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -365,7 +553,7 @@ func (x *TimeseriesView) String() string {
 func (*TimeseriesView) ProtoMessage() {}
 
 func (x *TimeseriesView) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[2]
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -378,7 +566,7 @@ func (x *TimeseriesView) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimeseriesView.ProtoReflect.Descriptor instead.
 func (*TimeseriesView) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{2}
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *TimeseriesView) GetTitle() string {
@@ -431,7 +619,7 @@ type TimeseriesSeries struct {
 
 func (x *TimeseriesSeries) Reset() {
 	*x = TimeseriesSeries{}
-	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[3]
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -443,7 +631,7 @@ func (x *TimeseriesSeries) String() string {
 func (*TimeseriesSeries) ProtoMessage() {}
 
 func (x *TimeseriesSeries) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[3]
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -456,7 +644,7 @@ func (x *TimeseriesSeries) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimeseriesSeries.ProtoReflect.Descriptor instead.
 func (*TimeseriesSeries) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{3}
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TimeseriesSeries) GetField() string {
@@ -496,7 +684,7 @@ type HealthView struct {
 
 func (x *HealthView) Reset() {
 	*x = HealthView{}
-	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[4]
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -508,7 +696,7 @@ func (x *HealthView) String() string {
 func (*HealthView) ProtoMessage() {}
 
 func (x *HealthView) ProtoReflect() protoreflect.Message {
-	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[4]
+	mi := &file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -521,7 +709,7 @@ func (x *HealthView) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HealthView.ProtoReflect.Descriptor instead.
 func (*HealthView) Descriptor() ([]byte, []int) {
-	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{4}
+	return file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *HealthView) GetSubject() HealthView_Subject {
@@ -562,12 +750,25 @@ var File_qdrant_cloud_facade_mcp_v1_mcp_options_proto protoreflect.FileDescripto
 
 const file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDesc = "" +
 	"\n" +
-	",qdrant/cloud/facade/mcp/v1/mcp_options.proto\x12\x1aqdrant.cloud.facade.mcp.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\x90\x01\n" +
+	",qdrant/cloud/facade/mcp/v1/mcp_options.proto\x12\x1aqdrant.cloud.facade.mcp.v1\x1a\x1bbuf/validate/validate.proto\x1a google/protobuf/descriptor.proto\"\xf7\x01\n" +
 	"\x0eMcpToolOptions\x12-\n" +
 	"\x04name\x18\x01 \x01(\tB\x19\xbaH\x16r\x14\x10\x012\x10^[A-Za-z0-9_-]+$R\x04name\x12C\n" +
-	"\aui_view\x18\x02 \x01(\v2%.qdrant.cloud.facade.mcp.v1.McpUiViewH\x00R\x06uiView\x88\x01\x01B\n" +
+	"\aui_view\x18\x02 \x01(\v2%.qdrant.cloud.facade.mcp.v1.McpUiViewH\x00R\x06uiView\x88\x01\x01\x12T\n" +
+	"\fconfirmation\x18\x03 \x01(\v2+.qdrant.cloud.facade.mcp.v1.McpConfirmationH\x01R\fconfirmation\x88\x01\x01B\n" +
 	"\n" +
-	"\b_ui_view\"\xaa\x01\n" +
+	"\b_ui_viewB\x0f\n" +
+	"\r_confirmation\"\xe3\x03\n" +
+	"\x0fMcpConfirmation\x12\x1d\n" +
+	"\x05title\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05title\x12!\n" +
+	"\amessage\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\amessage\x12B\n" +
+	"\rlookup_method\x18\x03 \x01(\tB\x1d\xbaH\x1ar\x182\x16^([A-Z][A-Za-z0-9]*)?$R\flookupMethod\x12>\n" +
+	"\flookup_field\x18\x04 \x01(\tB\x1b\xbaH\x18r\x162\x14^([a-z][a-z0-9_]*)?$R\vlookupField\x12E\n" +
+	"\x05notes\x18\x05 \x03(\v2/.qdrant.cloud.facade.mcp.v1.McpConfirmationNoteR\x05notes\x12\x1a\n" +
+	"\brequired\x18\x06 \x01(\bR\brequired:\xa6\x01\xbaH\xa2\x01\x1a\x9f\x01\n" +
+	"\x1dmcp_confirmation.lookup_field\x12Elookup_field is required with lookup_method, and only allowed with it\x1a7(this.lookup_method == '') == (this.lookup_field == '')\"b\n" +
+	"\x13McpConfirmationNote\x12.\n" +
+	"\x05field\x18\x01 \x01(\tB\x18\xbaH\x15r\x132\x11^[a-z][a-z0-9_]*$R\x05field\x12\x1b\n" +
+	"\x04text\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04text\"\xaa\x01\n" +
 	"\tMcpUiView\x12L\n" +
 	"\n" +
 	"timeseries\x18\x01 \x01(\v2*.qdrant.cloud.facade.mcp.v1.TimeseriesViewH\x00R\n" +
@@ -621,33 +822,37 @@ func file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDescGZIP() []byte {
 }
 
 var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_goTypes = []any{
 	(TimeseriesView_ChartType)(0),      // 0: qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartType
 	(TimeseriesSeries_Axis)(0),         // 1: qdrant.cloud.facade.mcp.v1.TimeseriesSeries.Axis
 	(HealthView_Subject)(0),            // 2: qdrant.cloud.facade.mcp.v1.HealthView.Subject
 	(*McpToolOptions)(nil),             // 3: qdrant.cloud.facade.mcp.v1.McpToolOptions
-	(*McpUiView)(nil),                  // 4: qdrant.cloud.facade.mcp.v1.McpUiView
-	(*TimeseriesView)(nil),             // 5: qdrant.cloud.facade.mcp.v1.TimeseriesView
-	(*TimeseriesSeries)(nil),           // 6: qdrant.cloud.facade.mcp.v1.TimeseriesSeries
-	(*HealthView)(nil),                 // 7: qdrant.cloud.facade.mcp.v1.HealthView
-	(*descriptorpb.MethodOptions)(nil), // 8: google.protobuf.MethodOptions
+	(*McpConfirmation)(nil),            // 4: qdrant.cloud.facade.mcp.v1.McpConfirmation
+	(*McpConfirmationNote)(nil),        // 5: qdrant.cloud.facade.mcp.v1.McpConfirmationNote
+	(*McpUiView)(nil),                  // 6: qdrant.cloud.facade.mcp.v1.McpUiView
+	(*TimeseriesView)(nil),             // 7: qdrant.cloud.facade.mcp.v1.TimeseriesView
+	(*TimeseriesSeries)(nil),           // 8: qdrant.cloud.facade.mcp.v1.TimeseriesSeries
+	(*HealthView)(nil),                 // 9: qdrant.cloud.facade.mcp.v1.HealthView
+	(*descriptorpb.MethodOptions)(nil), // 10: google.protobuf.MethodOptions
 }
 var file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_depIdxs = []int32{
-	4, // 0: qdrant.cloud.facade.mcp.v1.McpToolOptions.ui_view:type_name -> qdrant.cloud.facade.mcp.v1.McpUiView
-	5, // 1: qdrant.cloud.facade.mcp.v1.McpUiView.timeseries:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesView
-	7, // 2: qdrant.cloud.facade.mcp.v1.McpUiView.health:type_name -> qdrant.cloud.facade.mcp.v1.HealthView
-	6, // 3: qdrant.cloud.facade.mcp.v1.TimeseriesView.series:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesSeries
-	0, // 4: qdrant.cloud.facade.mcp.v1.TimeseriesView.chart_type:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartType
-	1, // 5: qdrant.cloud.facade.mcp.v1.TimeseriesSeries.axis:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesSeries.Axis
-	2, // 6: qdrant.cloud.facade.mcp.v1.HealthView.subject:type_name -> qdrant.cloud.facade.mcp.v1.HealthView.Subject
-	8, // 7: qdrant.cloud.facade.mcp.v1.mcp_tool:extendee -> google.protobuf.MethodOptions
-	3, // 8: qdrant.cloud.facade.mcp.v1.mcp_tool:type_name -> qdrant.cloud.facade.mcp.v1.McpToolOptions
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	8, // [8:9] is the sub-list for extension type_name
-	7, // [7:8] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	6,  // 0: qdrant.cloud.facade.mcp.v1.McpToolOptions.ui_view:type_name -> qdrant.cloud.facade.mcp.v1.McpUiView
+	4,  // 1: qdrant.cloud.facade.mcp.v1.McpToolOptions.confirmation:type_name -> qdrant.cloud.facade.mcp.v1.McpConfirmation
+	5,  // 2: qdrant.cloud.facade.mcp.v1.McpConfirmation.notes:type_name -> qdrant.cloud.facade.mcp.v1.McpConfirmationNote
+	7,  // 3: qdrant.cloud.facade.mcp.v1.McpUiView.timeseries:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesView
+	9,  // 4: qdrant.cloud.facade.mcp.v1.McpUiView.health:type_name -> qdrant.cloud.facade.mcp.v1.HealthView
+	8,  // 5: qdrant.cloud.facade.mcp.v1.TimeseriesView.series:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesSeries
+	0,  // 6: qdrant.cloud.facade.mcp.v1.TimeseriesView.chart_type:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesView.ChartType
+	1,  // 7: qdrant.cloud.facade.mcp.v1.TimeseriesSeries.axis:type_name -> qdrant.cloud.facade.mcp.v1.TimeseriesSeries.Axis
+	2,  // 8: qdrant.cloud.facade.mcp.v1.HealthView.subject:type_name -> qdrant.cloud.facade.mcp.v1.HealthView.Subject
+	10, // 9: qdrant.cloud.facade.mcp.v1.mcp_tool:extendee -> google.protobuf.MethodOptions
+	3,  // 10: qdrant.cloud.facade.mcp.v1.mcp_tool:type_name -> qdrant.cloud.facade.mcp.v1.McpToolOptions
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	10, // [10:11] is the sub-list for extension type_name
+	9,  // [9:10] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_init() }
@@ -656,7 +861,7 @@ func file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_init() {
 		return
 	}
 	file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[0].OneofWrappers = []any{}
-	file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[1].OneofWrappers = []any{
+	file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_msgTypes[3].OneofWrappers = []any{
 		(*McpUiView_Timeseries)(nil),
 		(*McpUiView_Health)(nil),
 	}
@@ -666,7 +871,7 @@ func file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDesc), len(file_qdrant_cloud_facade_mcp_v1_mcp_options_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 1,
 			NumServices:   0,
 		},

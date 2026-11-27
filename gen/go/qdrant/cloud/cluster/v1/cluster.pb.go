@@ -5773,7 +5773,7 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"\x1aClusterBackupSupportStatus\x12-\n" +
 	")CLUSTER_BACKUP_SUPPORT_STATUS_UNSPECIFIED\x10\x00\x12+\n" +
 	"'CLUSTER_BACKUP_SUPPORT_STATUS_SUPPORTED\x10\x01\x12/\n" +
-	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xd04\n" +
+	"+CLUSTER_BACKUP_SUPPORT_STATUS_NOT_SUPPORTED\x10\x022\xfb7\n" +
 	"\x0eClusterService\x12\x80\x03\n" +
 	"\fListClusters\x12,.qdrant.cloud.cluster.v1.ListClustersRequest\x1a-.qdrant.cloud.cluster.v1.ListClustersResponse\"\x92\x02\x8a\xb5\x18\rread:clusters\x8a\xb2\x19\x9e\x01\n" +
 	"\x8c\x01List all clusters in an account. Use list_accounts first if the account ID is unknown. Returns cluster IDs, names, state, and endpoint URLs.\x12\rList clusters\xaa\xb8\x19\x0f\n" +
@@ -5817,14 +5817,18 @@ const file_qdrant_cloud_cluster_v1_cluster_proto_rawDesc = "" +
 	"cluster_id\x12\n" +
 	"cluster.id\x1a\acluster\"\acluster\xca\xf3\x18Y\b\x02\x12\acluster\"\x0ereq.cluster.id*</accounts/{req.cluster.account_id}/clusters/{req.cluster.id}\x8a\xb2\x19P\n" +
 	"<Updates a cluster in the account identified by the given ID.\x12\x0eUpdate cluster8\x01\xaa\xb8\x19\x10\n" +
-	"\x0eupdate_cluster\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xc6\x03\n" +
-	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\xd5\x02\x8a\xb5\x18\x0fdelete:clusters\xba\xb5\x18\x18\n" +
+	"\x0eupdate_cluster\x82\xd3\xe4\x93\x02H:\x01*\x1aC/api/cluster/v1/accounts/{cluster.account_id}/clusters/{cluster.id}\x12\xf1\x06\n" +
+	"\rDeleteCluster\x12-.qdrant.cloud.cluster.v1.DeleteClusterRequest\x1a..qdrant.cloud.cluster.v1.DeleteClusterResponse\"\x80\x06\x8a\xb5\x18\x0fdelete:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +
 	"cluster_id\xca\xf3\x18w\b\x03\x12\acluster\"\x0ereq.cluster_id*4/accounts/{req.account_id}/clusters/{req.cluster_id}R$\n" +
 	"\x0edelete_backups\x12\x12req.delete_backups\x8a\xb2\x19P\n" +
-	"<Deletes a cluster in the account identified by the given ID.\x12\x0eDelete cluster8\x01\xaa\xb8\x19\x10\n" +
-	"\x0edelete_cluster\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xb6\x03\n" +
+	"<Deletes a cluster in the account identified by the given ID.\x12\x0eDelete cluster8\x01\xaa\xb8\x19\xba\x03\n" +
+	"\x0edelete_cluster\x1a\xa7\x03\n" +
+	"\x0eDelete cluster\x12|An AI agent wants to delete cluster \"{resource.name}\" ({req.cluster_id}) in account {req.account_id}. This cannot be undone.\x1a\n" +
+	"GetCluster\"\acluster*@\n" +
+	"\x0edelete_backups\x12.The cluster's backups will be deleted as well.*\xbf\x01\n" +
+	"\x05force\x12\xb5\x01Force is set: for a hybrid cloud cluster, the cluster is removed from Qdrant Cloud without waiting for the cloud agent, and leftover Kubernetes resources must be cleaned up by hand.\x82\xd3\xe4\x93\x02=*;/api/cluster/v1/accounts/{account_id}/clusters/{cluster_id}\x12\xb6\x03\n" +
 	"\x0eRestartCluster\x12..qdrant.cloud.cluster.v1.RestartClusterRequest\x1a/.qdrant.cloud.cluster.v1.RestartClusterResponse\"\xc2\x02\x8a\xb5\x18\x0ewrite:clusters\xba\xb5\x18\x18\n" +
 	"\n" +
 	"cluster_id\x12\n" +

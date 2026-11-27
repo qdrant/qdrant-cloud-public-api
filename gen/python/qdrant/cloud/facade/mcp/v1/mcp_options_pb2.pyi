@@ -12,12 +12,38 @@ MCP_TOOL_FIELD_NUMBER: _ClassVar[int]
 mcp_tool: _descriptor.FieldDescriptor
 
 class McpToolOptions(_message.Message):
-    __slots__ = ("name", "ui_view")
+    __slots__ = ("name", "ui_view", "confirmation")
     NAME_FIELD_NUMBER: _ClassVar[int]
     UI_VIEW_FIELD_NUMBER: _ClassVar[int]
+    CONFIRMATION_FIELD_NUMBER: _ClassVar[int]
     name: str
     ui_view: McpUiView
-    def __init__(self, name: _Optional[str] = ..., ui_view: _Optional[_Union[McpUiView, _Mapping]] = ...) -> None: ...
+    confirmation: McpConfirmation
+    def __init__(self, name: _Optional[str] = ..., ui_view: _Optional[_Union[McpUiView, _Mapping]] = ..., confirmation: _Optional[_Union[McpConfirmation, _Mapping]] = ...) -> None: ...
+
+class McpConfirmation(_message.Message):
+    __slots__ = ("title", "message", "lookup_method", "lookup_field", "notes", "required")
+    TITLE_FIELD_NUMBER: _ClassVar[int]
+    MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    LOOKUP_METHOD_FIELD_NUMBER: _ClassVar[int]
+    LOOKUP_FIELD_FIELD_NUMBER: _ClassVar[int]
+    NOTES_FIELD_NUMBER: _ClassVar[int]
+    REQUIRED_FIELD_NUMBER: _ClassVar[int]
+    title: str
+    message: str
+    lookup_method: str
+    lookup_field: str
+    notes: _containers.RepeatedCompositeFieldContainer[McpConfirmationNote]
+    required: bool
+    def __init__(self, title: _Optional[str] = ..., message: _Optional[str] = ..., lookup_method: _Optional[str] = ..., lookup_field: _Optional[str] = ..., notes: _Optional[_Iterable[_Union[McpConfirmationNote, _Mapping]]] = ..., required: _Optional[bool] = ...) -> None: ...
+
+class McpConfirmationNote(_message.Message):
+    __slots__ = ("field", "text")
+    FIELD_FIELD_NUMBER: _ClassVar[int]
+    TEXT_FIELD_NUMBER: _ClassVar[int]
+    field: str
+    text: str
+    def __init__(self, field: _Optional[str] = ..., text: _Optional[str] = ...) -> None: ...
 
 class McpUiView(_message.Message):
     __slots__ = ("timeseries", "health")

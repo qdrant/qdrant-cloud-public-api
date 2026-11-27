@@ -237,7 +237,23 @@ service ClusterService {
       title: "Delete cluster"
       allow_mutation: true
     };
-    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {name: "delete_cluster"};
+    option (qdrant.cloud.facade.mcp.v1.mcp_tool) = {
+      name: "delete_cluster"
+      confirmation: {
+        title: "Delete cluster"
+        message: "An AI agent wants to delete cluster \"{resource.name}\" ({req.cluster_id}) in account {req.account_id}. This cannot be undone."
+        lookup_method: "GetCluster"
+        lookup_field: "cluster"
+        notes: {
+          field: "delete_backups"
+          text: "The cluster's backups will be deleted as well."
+        }
+        notes: {
+          field: "force"
+          text: "Force is set: for a hybrid cloud cluster, the cluster is removed from Qdrant Cloud without waiting for the cloud agent, and leftover Kubernetes resources must be cleaned up by hand."
+        }
+      }
+    };
   }
   // Restarts a cluster in the account identified by the given ID.
   // Required permissions:
