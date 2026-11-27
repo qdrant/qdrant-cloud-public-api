@@ -26,6 +26,7 @@ multivector
 nvidia
 oneof
 openshift
+placeholders
 PII
 protobuf
 qdrant
