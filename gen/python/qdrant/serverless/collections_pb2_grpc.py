@@ -38,6 +38,16 @@ class CollectionsServiceStub(object):
                 request_serializer=qdrant_dot_serverless_dot_collections__pb2.ListCollectionsRequest.SerializeToString,
                 response_deserializer=qdrant_dot_serverless_dot_collections__pb2.ListCollectionsResponse.FromString,
                 _registered_method=True)
+        self.CreatePayloadIndex = channel.unary_unary(
+                '/qdrant.serverless.CollectionsService/CreatePayloadIndex',
+                request_serializer=qdrant_dot_serverless_dot_collections__pb2.CreatePayloadIndexRequest.SerializeToString,
+                response_deserializer=qdrant_dot_serverless_dot_collections__pb2.CreatePayloadIndexResponse.FromString,
+                _registered_method=True)
+        self.DeletePayloadIndex = channel.unary_unary(
+                '/qdrant.serverless.CollectionsService/DeletePayloadIndex',
+                request_serializer=qdrant_dot_serverless_dot_collections__pb2.DeletePayloadIndexRequest.SerializeToString,
+                response_deserializer=qdrant_dot_serverless_dot_collections__pb2.DeletePayloadIndexResponse.FromString,
+                _registered_method=True)
 
 
 class CollectionsServiceServicer(object):
@@ -75,6 +85,23 @@ class CollectionsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreatePayloadIndex(self, request, context):
+        """Indexes a payload field of an existing collection, replacing an index of
+        another kind. Returns once the request is accepted: filters on the field are
+        refused until every segment has the index, and GetCollection reports the
+        progress in `updates`.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeletePayloadIndex(self, request, context):
+        """Removes a payload field's index from an existing collection.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_CollectionsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -97,6 +124,16 @@ def add_CollectionsServiceServicer_to_server(servicer, server):
                     servicer.ListCollections,
                     request_deserializer=qdrant_dot_serverless_dot_collections__pb2.ListCollectionsRequest.FromString,
                     response_serializer=qdrant_dot_serverless_dot_collections__pb2.ListCollectionsResponse.SerializeToString,
+            ),
+            'CreatePayloadIndex': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreatePayloadIndex,
+                    request_deserializer=qdrant_dot_serverless_dot_collections__pb2.CreatePayloadIndexRequest.FromString,
+                    response_serializer=qdrant_dot_serverless_dot_collections__pb2.CreatePayloadIndexResponse.SerializeToString,
+            ),
+            'DeletePayloadIndex': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeletePayloadIndex,
+                    request_deserializer=qdrant_dot_serverless_dot_collections__pb2.DeletePayloadIndexRequest.FromString,
+                    response_serializer=qdrant_dot_serverless_dot_collections__pb2.DeletePayloadIndexResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -211,6 +248,60 @@ class CollectionsService(object):
             '/qdrant.serverless.CollectionsService/ListCollections',
             qdrant_dot_serverless_dot_collections__pb2.ListCollectionsRequest.SerializeToString,
             qdrant_dot_serverless_dot_collections__pb2.ListCollectionsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreatePayloadIndex(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.serverless.CollectionsService/CreatePayloadIndex',
+            qdrant_dot_serverless_dot_collections__pb2.CreatePayloadIndexRequest.SerializeToString,
+            qdrant_dot_serverless_dot_collections__pb2.CreatePayloadIndexResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeletePayloadIndex(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/qdrant.serverless.CollectionsService/DeletePayloadIndex',
+            qdrant_dot_serverless_dot_collections__pb2.DeletePayloadIndexRequest.SerializeToString,
+            qdrant_dot_serverless_dot_collections__pb2.DeletePayloadIndexResponse.FromString,
             options,
             channel_credentials,
             insecure,

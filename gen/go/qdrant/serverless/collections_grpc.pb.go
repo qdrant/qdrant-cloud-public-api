@@ -19,10 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CollectionsService_CreateCollection_FullMethodName = "/qdrant.serverless.CollectionsService/CreateCollection"
-	CollectionsService_DeleteCollection_FullMethodName = "/qdrant.serverless.CollectionsService/DeleteCollection"
-	CollectionsService_GetCollection_FullMethodName    = "/qdrant.serverless.CollectionsService/GetCollection"
-	CollectionsService_ListCollections_FullMethodName  = "/qdrant.serverless.CollectionsService/ListCollections"
+	CollectionsService_CreateCollection_FullMethodName   = "/qdrant.serverless.CollectionsService/CreateCollection"
+	CollectionsService_DeleteCollection_FullMethodName   = "/qdrant.serverless.CollectionsService/DeleteCollection"
+	CollectionsService_GetCollection_FullMethodName      = "/qdrant.serverless.CollectionsService/GetCollection"
+	CollectionsService_ListCollections_FullMethodName    = "/qdrant.serverless.CollectionsService/ListCollections"
+	CollectionsService_CreatePayloadIndex_FullMethodName = "/qdrant.serverless.CollectionsService/CreatePayloadIndex"
+	CollectionsService_DeletePayloadIndex_FullMethodName = "/qdrant.serverless.CollectionsService/DeletePayloadIndex"
 )
 
 // CollectionsServiceClient is the client API for CollectionsService service.
@@ -42,6 +44,13 @@ type CollectionsServiceClient interface {
 	GetCollection(ctx context.Context, in *GetCollectionRequest, opts ...grpc.CallOption) (*GetCollectionResponse, error)
 	// Lists the caller's collections.
 	ListCollections(ctx context.Context, in *ListCollectionsRequest, opts ...grpc.CallOption) (*ListCollectionsResponse, error)
+	// Indexes a payload field of an existing collection, replacing an index of
+	// another kind. Returns once the request is accepted: filters on the field are
+	// refused until every segment has the index, and GetCollection reports the
+	// progress in `updates`.
+	CreatePayloadIndex(ctx context.Context, in *CreatePayloadIndexRequest, opts ...grpc.CallOption) (*CreatePayloadIndexResponse, error)
+	// Removes a payload field's index from an existing collection.
+	DeletePayloadIndex(ctx context.Context, in *DeletePayloadIndexRequest, opts ...grpc.CallOption) (*DeletePayloadIndexResponse, error)
 }
 
 type collectionsServiceClient struct {
@@ -92,6 +101,26 @@ func (c *collectionsServiceClient) ListCollections(ctx context.Context, in *List
 	return out, nil
 }
 
+func (c *collectionsServiceClient) CreatePayloadIndex(ctx context.Context, in *CreatePayloadIndexRequest, opts ...grpc.CallOption) (*CreatePayloadIndexResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreatePayloadIndexResponse)
+	err := c.cc.Invoke(ctx, CollectionsService_CreatePayloadIndex_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *collectionsServiceClient) DeletePayloadIndex(ctx context.Context, in *DeletePayloadIndexRequest, opts ...grpc.CallOption) (*DeletePayloadIndexResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeletePayloadIndexResponse)
+	err := c.cc.Invoke(ctx, CollectionsService_DeletePayloadIndex_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CollectionsServiceServer is the server API for CollectionsService service.
 // All implementations must embed UnimplementedCollectionsServiceServer
 // for forward compatibility.
@@ -109,6 +138,13 @@ type CollectionsServiceServer interface {
 	GetCollection(context.Context, *GetCollectionRequest) (*GetCollectionResponse, error)
 	// Lists the caller's collections.
 	ListCollections(context.Context, *ListCollectionsRequest) (*ListCollectionsResponse, error)
+	// Indexes a payload field of an existing collection, replacing an index of
+	// another kind. Returns once the request is accepted: filters on the field are
+	// refused until every segment has the index, and GetCollection reports the
+	// progress in `updates`.
+	CreatePayloadIndex(context.Context, *CreatePayloadIndexRequest) (*CreatePayloadIndexResponse, error)
+	// Removes a payload field's index from an existing collection.
+	DeletePayloadIndex(context.Context, *DeletePayloadIndexRequest) (*DeletePayloadIndexResponse, error)
 	mustEmbedUnimplementedCollectionsServiceServer()
 }
 
@@ -130,6 +166,12 @@ func (UnimplementedCollectionsServiceServer) GetCollection(context.Context, *Get
 }
 func (UnimplementedCollectionsServiceServer) ListCollections(context.Context, *ListCollectionsRequest) (*ListCollectionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListCollections not implemented")
+}
+func (UnimplementedCollectionsServiceServer) CreatePayloadIndex(context.Context, *CreatePayloadIndexRequest) (*CreatePayloadIndexResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreatePayloadIndex not implemented")
+}
+func (UnimplementedCollectionsServiceServer) DeletePayloadIndex(context.Context, *DeletePayloadIndexRequest) (*DeletePayloadIndexResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeletePayloadIndex not implemented")
 }
 func (UnimplementedCollectionsServiceServer) mustEmbedUnimplementedCollectionsServiceServer() {}
 func (UnimplementedCollectionsServiceServer) testEmbeddedByValue()                            {}
@@ -224,6 +266,42 @@ func _CollectionsService_ListCollections_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CollectionsService_CreatePayloadIndex_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePayloadIndexRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CollectionsServiceServer).CreatePayloadIndex(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CollectionsService_CreatePayloadIndex_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CollectionsServiceServer).CreatePayloadIndex(ctx, req.(*CreatePayloadIndexRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CollectionsService_DeletePayloadIndex_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePayloadIndexRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CollectionsServiceServer).DeletePayloadIndex(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CollectionsService_DeletePayloadIndex_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CollectionsServiceServer).DeletePayloadIndex(ctx, req.(*DeletePayloadIndexRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CollectionsService_ServiceDesc is the grpc.ServiceDesc for CollectionsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -246,6 +324,14 @@ var CollectionsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCollections",
 			Handler:    _CollectionsService_ListCollections_Handler,
+		},
+		{
+			MethodName: "CreatePayloadIndex",
+			Handler:    _CollectionsService_CreatePayloadIndex_Handler,
+		},
+		{
+			MethodName: "DeletePayloadIndex",
+			Handler:    _CollectionsService_DeletePayloadIndex_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

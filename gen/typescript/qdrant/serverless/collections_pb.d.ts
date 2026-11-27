@@ -980,6 +980,141 @@ export declare type ListCollectionsResponseValid = ListCollectionsResponse;
 export declare const ListCollectionsResponseSchema: GenMessage<ListCollectionsResponse, {validType: ListCollectionsResponseValid}>;
 
 /**
+ * Names the field to index and how.
+ *
+ * @generated from message qdrant.serverless.CreatePayloadIndexRequest
+ */
+export declare type CreatePayloadIndexRequest = Message<"qdrant.serverless.CreatePayloadIndexRequest"> & {
+  /**
+   * Tenant-facing name of the collection.
+   *
+   * @generated from field: string collection_name = 1;
+   */
+  collectionName: string;
+
+  /**
+   * The payload field to index, as a JSON path, e.g. `user_id` or `meta.tags`.
+   *
+   * @generated from field: string field_name = 2;
+   */
+  fieldName: string;
+
+  /**
+   * The kind of filter the field supports.
+   *
+   * @generated from field: qdrant.serverless.PayloadIndexConfig config = 3;
+   */
+  config?: PayloadIndexConfig | undefined;
+};
+
+/**
+ * Names the field to index and how.
+ *
+ * @generated from message qdrant.serverless.CreatePayloadIndexRequest
+ */
+export declare type CreatePayloadIndexRequestValid = Message<"qdrant.serverless.CreatePayloadIndexRequest"> & {
+  /**
+   * Tenant-facing name of the collection.
+   *
+   * @generated from field: string collection_name = 1;
+   */
+  collectionName: string;
+
+  /**
+   * The payload field to index, as a JSON path, e.g. `user_id` or `meta.tags`.
+   *
+   * @generated from field: string field_name = 2;
+   */
+  fieldName: string;
+
+  /**
+   * The kind of filter the field supports.
+   *
+   * @generated from field: qdrant.serverless.PayloadIndexConfig config = 3;
+   */
+  config: PayloadIndexConfigValid;
+};
+
+/**
+ * Describes the message qdrant.serverless.CreatePayloadIndexRequest.
+ * Use `create(CreatePayloadIndexRequestSchema)` to create a new message.
+ */
+export declare const CreatePayloadIndexRequestSchema: GenMessage<CreatePayloadIndexRequest, {validType: CreatePayloadIndexRequestValid}>;
+
+/**
+ * Result of an accepted index creation.
+ *
+ * @generated from message qdrant.serverless.CreatePayloadIndexResponse
+ */
+export declare type CreatePayloadIndexResponse = Message<"qdrant.serverless.CreatePayloadIndexResponse"> & {
+  /**
+   * Time spent to process
+   *
+   * @generated from field: double time = 1;
+   */
+  time: number;
+};
+
+export declare type CreatePayloadIndexResponseValid = CreatePayloadIndexResponse;
+
+/**
+ * Describes the message qdrant.serverless.CreatePayloadIndexResponse.
+ * Use `create(CreatePayloadIndexResponseSchema)` to create a new message.
+ */
+export declare const CreatePayloadIndexResponseSchema: GenMessage<CreatePayloadIndexResponse, {validType: CreatePayloadIndexResponseValid}>;
+
+/**
+ * Names the field whose index to remove.
+ *
+ * @generated from message qdrant.serverless.DeletePayloadIndexRequest
+ */
+export declare type DeletePayloadIndexRequest = Message<"qdrant.serverless.DeletePayloadIndexRequest"> & {
+  /**
+   * Tenant-facing name of the collection.
+   *
+   * @generated from field: string collection_name = 1;
+   */
+  collectionName: string;
+
+  /**
+   * The indexed payload field, as a JSON path.
+   *
+   * @generated from field: string field_name = 2;
+   */
+  fieldName: string;
+};
+
+export declare type DeletePayloadIndexRequestValid = DeletePayloadIndexRequest;
+
+/**
+ * Describes the message qdrant.serverless.DeletePayloadIndexRequest.
+ * Use `create(DeletePayloadIndexRequestSchema)` to create a new message.
+ */
+export declare const DeletePayloadIndexRequestSchema: GenMessage<DeletePayloadIndexRequest, {validType: DeletePayloadIndexRequestValid}>;
+
+/**
+ * Result of an accepted index removal.
+ *
+ * @generated from message qdrant.serverless.DeletePayloadIndexResponse
+ */
+export declare type DeletePayloadIndexResponse = Message<"qdrant.serverless.DeletePayloadIndexResponse"> & {
+  /**
+   * Time spent to process
+   *
+   * @generated from field: double time = 1;
+   */
+  time: number;
+};
+
+export declare type DeletePayloadIndexResponseValid = DeletePayloadIndexResponse;
+
+/**
+ * Describes the message qdrant.serverless.DeletePayloadIndexResponse.
+ * Use `create(DeletePayloadIndexResponseSchema)` to create a new message.
+ */
+export declare const DeletePayloadIndexResponseSchema: GenMessage<DeletePayloadIndexResponse, {validType: DeletePayloadIndexResponseValid}>;
+
+/**
  * Distance metric used to compare dense vectors.
  *
  * @generated from enum qdrant.serverless.Distance
@@ -1271,6 +1406,29 @@ export declare const CollectionsService: GenService<{
     methodKind: "unary";
     input: typeof ListCollectionsRequestSchema;
     output: typeof ListCollectionsResponseSchema;
+  },
+  /**
+   * Indexes a payload field of an existing collection, replacing an index of
+   * another kind. Returns once the request is accepted: filters on the field are
+   * refused until every segment has the index, and GetCollection reports the
+   * progress in `updates`.
+   *
+   * @generated from rpc qdrant.serverless.CollectionsService.CreatePayloadIndex
+   */
+  createPayloadIndex: {
+    methodKind: "unary";
+    input: typeof CreatePayloadIndexRequestSchema;
+    output: typeof CreatePayloadIndexResponseSchema;
+  },
+  /**
+   * Removes a payload field's index from an existing collection.
+   *
+   * @generated from rpc qdrant.serverless.CollectionsService.DeletePayloadIndex
+   */
+  deletePayloadIndex: {
+    methodKind: "unary";
+    input: typeof DeletePayloadIndexRequestSchema;
+    output: typeof DeletePayloadIndexResponseSchema;
   },
 }>;
 

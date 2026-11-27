@@ -28,3 +28,18 @@ export const getCollection: typeof CollectionsService["method"]["getCollection"]
  * @generated from rpc qdrant.serverless.CollectionsService.ListCollections
  */
 export const listCollections: typeof CollectionsService["method"]["listCollections"];
+/**
+ * Indexes a payload field of an existing collection, replacing an index of
+ * another kind. Returns once the request is accepted: filters on the field are
+ * refused until every segment has the index, and GetCollection reports the
+ * progress in `updates`.
+ *
+ * @generated from rpc qdrant.serverless.CollectionsService.CreatePayloadIndex
+ */
+export const createPayloadIndex: typeof CollectionsService["method"]["createPayloadIndex"];
+/**
+ * Removes a payload field's index from an existing collection.
+ *
+ * @generated from rpc qdrant.serverless.CollectionsService.DeletePayloadIndex
+ */
+export const deletePayloadIndex: typeof CollectionsService["method"]["deletePayloadIndex"];
