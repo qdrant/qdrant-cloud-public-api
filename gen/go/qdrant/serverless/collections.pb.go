@@ -321,9 +321,10 @@ const (
 	// Placeholder required by proto3; never sent. An undetermined state is
 	// reported by omitting `updates` instead.
 	UpdatesStatus_UPDATES_STATUS_UNSPECIFIED UpdatesStatus = 0
-	// Every acknowledged write is applied and visible to search.
+	// Every acknowledged write is applied and durable. Search picks up the
+	// latest writes within seconds, once the search workers next reload.
 	UpdatesStatus_APPLIED UpdatesStatus = 1
-	// Some acknowledged writes are still queued and not yet visible to search.
+	// Some acknowledged writes are still queued and not yet applied.
 	UpdatesStatus_PENDING UpdatesStatus = 2
 )
 
